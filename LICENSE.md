@@ -1,3 +1,6 @@
+# Individual projects are licensed as per the projects' requirements.
+All custom code prepared by [https://github.com/justathoughtor2/](justathoughtor2) is licensed under the GNU GPLv3, as indicated below.
+
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
