@@ -1,15 +1,15 @@
-2016/02/06 15:00:21 Starting cygwin install, version 2.873
-2016/02/06 15:00:21 User has backup/restore rights
-2016/02/06 15:00:21 Current Directory: D:\atomicApe\dist
-2016/02/06 15:00:21 Could not open service McShield for query, start and stop. McAfee may not be installed, or we don't have access.
-2016/02/06 15:00:23 source: network install
-2016/02/06 15:00:25 root: D:\atomicApe\cygwin system
-2016/02/06 15:00:27 Selected local directory: D:\atomicApe\dist
-2016/02/06 15:00:28 net: Direct
+2016/02/06 15:10:33 Starting cygwin install, version 2.873
+2016/02/06 15:10:33 User has backup/restore rights
+2016/02/06 15:10:33 Current Directory: D:\atomicApe\dist
+2016/02/06 15:10:33 Could not open service McShield for query, start and stop. McAfee may not be installed, or we don't have access.
+2016/02/06 15:10:36 source: network install
+2016/02/06 15:10:37 root: D:\atomicApe\cygwin system
+2016/02/06 15:10:39 Selected local directory: D:\atomicApe\dist
+2016/02/06 15:10:40 net: Direct
 Loaded cached mirror list
 get_url_to_membuf http://cygwin.com/mirrors.lst
 getUrlToStream http://cygwin.com/mirrors.lst
-2016/02/06 15:00:32 site: http://cygwin.mirror.constant.com/
+2016/02/06 15:10:42 site: http://cygwin.mirror.constant.com/
 get_url_to_membuf http://cygwin.mirror.constant.com/x86/setup.xz.sig
 getUrlToStream http://cygwin.mirror.constant.com/x86/setup.xz.sig
 getUrlToStream failed!
@@ -23,4 +23,4 @@ getUrlToStream http://cygwin.mirror.constant.com/x86/setup.bz2.sig
 get_url_to_membuf http://cygwin.mirror.constant.com/x86/setup.bz2
 getUrlToStream http://cygwin.mirror.constant.com/x86/setup.bz2
 .ini setup_version is 2.873, our setup_version is 2.873
-2016/02/06 15:01:18 Ending cygwin install
+2016/02/06 15:18:10 Ending cygwin install

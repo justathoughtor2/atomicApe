@@ -1437,3 +1437,13 @@ You might want to upgrade to get the latest features and bug fixes.
 2016/02/06 15:00:28 net: Direct
 2016/02/06 15:00:32 site: http://cygwin.mirror.constant.com/
 2016/02/06 15:01:18 Ending cygwin install
+2016/02/06 15:10:33 Starting cygwin install, version 2.873
+2016/02/06 15:10:33 User has backup/restore rights
+2016/02/06 15:10:33 Current Directory: D:\atomicApe\dist
+2016/02/06 15:10:33 Could not open service McShield for query, start and stop. McAfee may not be installed, or we don't have access.
+2016/02/06 15:10:36 source: network install
+2016/02/06 15:10:37 root: D:\atomicApe\cygwin system
+2016/02/06 15:10:39 Selected local directory: D:\atomicApe\dist
+2016/02/06 15:10:40 net: Direct
+2016/02/06 15:10:42 site: http://cygwin.mirror.constant.com/
+2016/02/06 15:18:10 Ending cygwin install
