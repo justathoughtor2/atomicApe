@@ -9,6 +9,7 @@
 ~h
 # Command Line History (newest to oldest):
 :exit
+:quit
 
 # Search String History (newest to oldest):
 
@@ -21,17 +22,117 @@
 # Registers:
 
 # File marks:
-'0  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
-'1  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+'0  20  40  /cygdrive/d/atomicApe/.git/COMMIT_EDITMSG
+'1  17  0  /cygdrive/d/atomicApe/.git/COMMIT_EDITMSG
+'2  2  0  /cygdrive/d/atomicApe/.git/COMMIT_EDITMSG
+'3  1  0  /cygdrive/d/atomicApe/.git/COMMIT_EDITMSG
+'4  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
+'5  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
 
 # Jumplist (newest first):
+-'  20  40  /cygdrive/d/atomicApe/.git/COMMIT_EDITMSG
+-'  17  0  /cygdrive/d/atomicApe/.git/COMMIT_EDITMSG
+-'  2  0  /cygdrive/d/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/d/atomicApe/.git/COMMIT_EDITMSG
 -'  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
 -'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
 -'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
 -'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
 -'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  0  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+-'  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
 
 # History of marks within files (newest to oldest):
+
+> /cygdrive/d/atomicApe/.git/COMMIT_EDITMSG
+	"	20	40
+	^	1	65
+	.	1	64
+	+	1	64
 
 > /cygdrive/d/atomicApe/.git/MERGE_MSG
 	"	1	58
