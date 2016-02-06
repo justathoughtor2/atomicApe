@@ -6,14 +6,3 @@ cygwin/home/bananas/UwAmp/www/*
 
 # .ssh directory
 cygwin/home/bananas/.ssh
-
-# Keep other directories
-cygwin/home/bananas/.oh-my-zsh/*
-!cygwin/home/bananas/.oh-my-zsh/*.sh
-!cygwin/home/bananas/.oh-my-zsh/*/**
-cygwin/usr/local/etc/babun/home/oh-my-zsh/.oh-my-zsh/*
-!cygwin/usr/local/etc/babun/home/oh-my-zsh/.oh-my-zsh/*.sh
-!cygwin/usr/local/etc/babun/home/oh-my-zsh/.oh-my-zsh/*/**
-cygwin/usr/local/etc/babun/source/*
-!cygwin/usr/local/etc/babun/source/*.groovy
-!cygwin/usr/local/etc/babun/source/*/**
