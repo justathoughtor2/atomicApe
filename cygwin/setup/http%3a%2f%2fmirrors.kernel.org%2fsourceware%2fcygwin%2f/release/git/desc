@@ -1,0 +1,17 @@
+git
+sdesc: "Distributed version control system"
+ldesc: "Git is a free and open source distributed version control system
+designed to handle everything from small to very large projects with speed and
+efficiency. Git is easy to learn and has a tiny footprint with lightning fast
+performance. It outclasses SCM tools like Subversion, CVS, Perforce, and
+ClearCase with features like cheap local branching, convenient staging areas,
+and multiple workflows."
+category: Devel
+requires: bash cygwin libcurl4 libexpat1 libgcc1 libiconv2 libintl8 libopenssl100 perl perl-Error perl-TermReadKey perl_base python zlib0 cygutils less openssh rsync
+version: 2.7.0-1
+install: x86/release/git/git-2.7.0-1.tar.xz 4828752 565dc7e319e606bdd089884af7a0df9b55da8821c55e46c705fc63ac997f26d486e0232e98f06b01ca26120025eec749e0fe42195f94cf4e6d58a24bf02352f5
+source: x86/release/git/git-2.7.0-1-src.tar.xz 5613544 29d27a433d3d14f63d8903bcf0394c585b5d5adbbb6d681b919e9ddf642a399694699d2774a3024b61612cc55825197380aaf5d025a97cc945dd5a100c3db8a0
+[prev]
+version: 2.6.2-1
+install: x86/release/git/git-2.6.2-1.tar.xz 4809032 fe1121670c406f44cf07055d9a89521f167bdb9b56bcefcad1a476966b257451fbbf9531b9a80a8c0b3882c5cd29ea3561d547faaa118b6ff9dacb276d707581
+source: x86/release/git/git-2.6.2-1-src.tar.xz 5526136 a56bd0f33a976597b6ca5afbbd6c1d232f62efac4daa96d822c01270ae878176bd482436f3730f58ea1190de09077c5b819a357d502386be1bdae7c976e3915a

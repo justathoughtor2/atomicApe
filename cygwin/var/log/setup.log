@@ -1318,3 +1318,122 @@ You might want to upgrade to get the latest features and bug fixes.
 2016/02/05 08:43:00 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/wget.sh"
 2016/02/05 08:43:01 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/zsh-profile.sh"
 2016/02/05 08:43:02 Ending cygwin install
+2016/02/06 14:47:17 Starting cygwin install, version 2.870
+2016/02/06 14:47:17 User has backup/restore rights
+2016/02/06 14:47:18 io_stream_cygfile: fopen(/etc/setup/setup.rc) failed 2 No such file or directory
+2016/02/06 14:47:18 Current Directory: D:\atomicApe\dist
+2016/02/06 14:47:18 Could not open service McShield for query, start and stop. McAfee may not be installed, or we don't have access.
+2016/02/06 14:47:21 source: network install
+2016/02/06 14:48:03 root: D:\atomicApe\cygwin system
+2016/02/06 14:48:08 Selected local directory: D:\atomicApe\dist
+2016/02/06 14:48:09 net: Direct
+2016/02/06 14:48:17 site: http://cygwin.mirror.constant.com/
+2016/02/06 14:48:20 mbox Warning: The current ini file is from a newer version of setup-x86.exe. If you have any trouble installing, please download a fresh version from http://www.cygwin.com/setup-x86.exe
+2016/02/06 14:48:30 mbox note: This setup is version 2.870, but setup.ini claims version 2.873 is available.
+You might want to upgrade to get the latest features and bug fixes.
+2016/02/06 14:49:05 Adding required dependency gcc-g++: Selecting version 4.9.3-1 for installation.
+2016/02/06 14:49:05 Adding required dependency libfontconfig1: Selecting version 2.11.1-3 for installation.
+2016/02/06 14:49:05 Adding required dependency libfreetype6: Selecting version 2.5.5-2 for installation.
+2016/02/06 14:49:05 Adding required dependency libgcrypt20: Selecting version 1.6.4-1 for installation.
+2016/02/06 14:49:05 Adding required dependency libgpg-error0: Selecting version 1.19-1 for installation.
+2016/02/06 14:49:05 Adding required dependency libICE6: Selecting version 1.0.9-1 for installation.
+2016/02/06 14:49:05 Adding required dependency libjbig2: Selecting version 2.0-14 for installation.
+2016/02/06 14:49:05 Adding required dependency libjpeg8: Selecting version 1.4.2-1 for installation.
+2016/02/06 14:49:05 Adding required dependency liblcms1: Selecting version 1.19-5 for installation.
+2016/02/06 14:49:05 Adding required dependency libmng1: Selecting version 1.0.10-4 for installation.
+2016/02/06 14:49:05 Adding required dependency libpng16: Selecting version 1.6.20-1 for installation.
+2016/02/06 14:49:05 Adding required dependency libQtDesigner4: Selecting version 4.8.7-1 for installation.
+2016/02/06 14:49:05 Adding required dependency libQtHelp4: Selecting version 4.8.7-1 for installation.
+2016/02/06 14:49:05 Adding required dependency libQtNetwork4: Selecting version 4.8.7-1 for installation.
+2016/02/06 14:49:05 Adding required dependency libQtOpenGL4: Selecting version 4.8.7-1 for installation.
+2016/02/06 14:49:05 Adding required dependency libQtSql4: Selecting version 4.8.7-1 for installation.
+2016/02/06 14:49:05 Adding required dependency libQtXmlPatterns4: Selecting version 4.8.7-1 for installation.
+2016/02/06 14:49:05 Adding required dependency libSM6: Selecting version 1.2.2-1 for installation.
+2016/02/06 14:49:05 Adding required dependency libsybdb5: Selecting version 0.91.112-1 for installation.
+2016/02/06 14:49:05 Adding required dependency libtiff6: Selecting version 4.0.6-1 for installation.
+2016/02/06 14:49:05 Adding required dependency libXcursor1: Selecting version 1.1.14-1 for installation.
+2016/02/06 14:49:05 Adding required dependency libXfixes3: Selecting version 5.0.1-1 for installation.
+2016/02/06 14:49:05 Adding required dependency libXi6: Selecting version 1.7.6-1 for installation.
+2016/02/06 14:49:05 Adding required dependency libXinerama1: Selecting version 1.1.3-1 for installation.
+2016/02/06 14:49:05 Adding required dependency libXrandr2: Selecting version 1.5.0-1 for installation.
+2016/02/06 14:49:05 Adding required dependency libXrender1: Selecting version 0.9.9-1 for installation.
+2016/02/06 14:49:05 Adding required dependency ruby: Selecting version 2.2.4-1 for installation.
+2016/02/06 14:49:05 Adding required dependency rubygems: Selecting version 2.4.8-1 for installation.
+2016/02/06 14:49:11 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/gcc/gcc-g++/gcc-g++-4.9.3-1.tar.xz
+2016/02/06 14:49:15 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/git/git-2.7.0-1.tar.xz
+2016/02/06 14:49:16 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libICE/libICE6/libICE6-1.0.9-1.tar.xz
+2016/02/06 14:49:18 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/qt4/libQtDesigner4/libQtDesigner4-4.8.7-1.tar.xz
+2016/02/06 14:49:19 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/qt4/libQtHelp4/libQtHelp4-4.8.7-1.tar.xz
+2016/02/06 14:49:20 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/qt4/libQtNetwork4/libQtNetwork4-4.8.7-1.tar.xz
+2016/02/06 14:49:21 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/qt4/libQtOpenGL4/libQtOpenGL4-4.8.7-1.tar.xz
+2016/02/06 14:49:22 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/qt4/libQtSql4/libQtSql4-4.8.7-1.tar.xz
+2016/02/06 14:49:25 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/qt4/libQtXmlPatterns4/libQtXmlPatterns4-4.8.7-1.tar.xz
+2016/02/06 14:49:26 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libSM/libSM6/libSM6-1.2.2-1.tar.xz
+2016/02/06 14:49:26 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libXcursor/libXcursor1/libXcursor1-1.1.14-1.tar.bz2
+2016/02/06 14:49:26 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libXfixes/libXfixes3/libXfixes3-5.0.1-1.tar.bz2
+2016/02/06 14:49:27 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libXi/libXi6/libXi6-1.7.6-1.tar.xz
+2016/02/06 14:49:27 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libXinerama/libXinerama1/libXinerama1-1.1.3-1.tar.bz2
+2016/02/06 14:49:27 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libXrandr/libXrandr2/libXrandr2-1.5.0-1.tar.xz
+2016/02/06 14:49:28 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libXrender/libXrender1/libXrender1-0.9.9-1.tar.xz
+2016/02/06 14:49:28 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/fontconfig/libfontconfig1/libfontconfig1-2.11.1-3.tar.xz
+2016/02/06 14:49:29 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/freetype2/libfreetype6/libfreetype6-2.5.5-2.tar.xz
+2016/02/06 14:49:30 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libgcrypt/libgcrypt20/libgcrypt20-1.6.4-1.tar.xz
+2016/02/06 14:49:31 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libgpg-error/libgpg-error0/libgpg-error0-1.19-1.tar.xz
+2016/02/06 14:49:31 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/jbigkit/libjbig2/libjbig2-2.0-14.tar.xz
+2016/02/06 14:49:31 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libjpeg-turbo/libjpeg8/libjpeg8-1.4.2-1.tar.xz
+2016/02/06 14:49:32 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/lcms/liblcms1/liblcms1-1.19-5.tar.xz
+2016/02/06 14:49:33 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libmng/libmng1/libmng1-1.0.10-4.tar.xz
+2016/02/06 14:49:33 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libpng/libpng16/libpng16-1.6.20-1.tar.xz
+2016/02/06 14:49:34 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/freetds/libsybdb5/libsybdb5-0.91.112-1.tar.xz
+2016/02/06 14:49:34 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/tiff/libtiff6/libtiff6-4.0.6-1.tar.xz
+2016/02/06 14:49:35 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/mintty/mintty-2.2.3-0.tar.xz
+2016/02/06 14:49:55 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/ruby/ruby-2.2.4-1.tar.xz
+2016/02/06 14:49:56 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/rubygems/rubygems-2.4.8-1.tar.xz
+2016/02/06 14:49:59 Running preremove script for  mintty
+2016/02/06 14:49:59 Uninstalling mintty
+2016/02/06 14:49:59 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/gcc/gcc-g++/gcc-g++-4.9.3-1.tar.xz
+2016/02/06 14:50:44 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/git/git-2.7.0-1.tar.xz
+2016/02/06 14:53:40 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libICE/libICE6/libICE6-1.0.9-1.tar.xz
+2016/02/06 14:53:44 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/qt4/libQtDesigner4/libQtDesigner4-4.8.7-1.tar.xz
+2016/02/06 14:53:46 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/qt4/libQtHelp4/libQtHelp4-4.8.7-1.tar.xz
+2016/02/06 14:53:47 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/qt4/libQtNetwork4/libQtNetwork4-4.8.7-1.tar.xz
+2016/02/06 14:53:48 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/qt4/libQtOpenGL4/libQtOpenGL4-4.8.7-1.tar.xz
+2016/02/06 14:53:48 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/qt4/libQtSql4/libQtSql4-4.8.7-1.tar.xz
+2016/02/06 14:53:48 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/qt4/libQtXmlPatterns4/libQtXmlPatterns4-4.8.7-1.tar.xz
+2016/02/06 14:53:50 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libSM/libSM6/libSM6-1.2.2-1.tar.xz
+2016/02/06 14:53:51 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libXcursor/libXcursor1/libXcursor1-1.1.14-1.tar.bz2
+2016/02/06 14:53:51 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libXfixes/libXfixes3/libXfixes3-5.0.1-1.tar.bz2
+2016/02/06 14:53:52 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libXi/libXi6/libXi6-1.7.6-1.tar.xz
+2016/02/06 14:53:52 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libXinerama/libXinerama1/libXinerama1-1.1.3-1.tar.bz2
+2016/02/06 14:53:52 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libXrandr/libXrandr2/libXrandr2-1.5.0-1.tar.xz
+2016/02/06 14:53:52 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libXrender/libXrender1/libXrender1-0.9.9-1.tar.xz
+2016/02/06 14:53:53 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/fontconfig/libfontconfig1/libfontconfig1-2.11.1-3.tar.xz
+2016/02/06 14:53:55 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/freetype2/libfreetype6/libfreetype6-2.5.5-2.tar.xz
+2016/02/06 14:53:56 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libgcrypt/libgcrypt20/libgcrypt20-1.6.4-1.tar.xz
+2016/02/06 14:53:57 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libgpg-error/libgpg-error0/libgpg-error0-1.19-1.tar.xz
+2016/02/06 14:53:58 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/jbigkit/libjbig2/libjbig2-2.0-14.tar.xz
+2016/02/06 14:53:58 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libjpeg-turbo/libjpeg8/libjpeg8-1.4.2-1.tar.xz
+2016/02/06 14:53:58 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/lcms/liblcms1/liblcms1-1.19-5.tar.xz
+2016/02/06 14:53:58 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libmng/libmng1/libmng1-1.0.10-4.tar.xz
+2016/02/06 14:53:58 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/libpng/libpng16/libpng16-1.6.20-1.tar.xz
+2016/02/06 14:53:59 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/freetds/libsybdb5/libsybdb5-0.91.112-1.tar.xz
+2016/02/06 14:54:00 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/tiff/libtiff6/libtiff6-4.0.6-1.tar.xz
+2016/02/06 14:54:00 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/mintty/mintty-2.2.3-0.tar.xz
+2016/02/06 14:54:01 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/ruby/ruby-2.2.4-1.tar.xz
+2016/02/06 14:54:28 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/rubygems/rubygems-2.4.8-1.tar.xz
+2016/02/06 14:54:36 Changing gid back to original
+2016/02/06 14:54:36 running: D:\atomicApe\cygwin\bin\dash.exe "/etc/postinstall/0p_000_autorebase.dash"
+2016/02/06 14:55:43 running: D:\atomicApe\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/mintty.sh"
+2016/02/06 14:56:14 Changing gid to Administrators
+2016/02/06 14:57:42 note: Installation Complete
+2016/02/06 14:57:42 Ending cygwin install
+2016/02/06 15:00:21 Starting cygwin install, version 2.873
+2016/02/06 15:00:21 User has backup/restore rights
+2016/02/06 15:00:21 Current Directory: D:\atomicApe\dist
+2016/02/06 15:00:21 Could not open service McShield for query, start and stop. McAfee may not be installed, or we don't have access.
+2016/02/06 15:00:23 source: network install
+2016/02/06 15:00:25 root: D:\atomicApe\cygwin system
+2016/02/06 15:00:27 Selected local directory: D:\atomicApe\dist
+2016/02/06 15:00:28 net: Direct
+2016/02/06 15:00:32 site: http://cygwin.mirror.constant.com/
+2016/02/06 15:01:18 Ending cygwin install

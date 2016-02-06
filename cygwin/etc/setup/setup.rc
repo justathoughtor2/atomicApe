@@ -1,5 +1,5 @@
 last-cache
-	F:/atomicApe/babun//dist
+	D:\atomicApe\dist
 mirrors-lst
 	http://cygwin.mirror.constant.com/;cygwin.mirror.constant.com;United States;New Jersey
 	http://mirror.devback.com/cygwin/;mirror.devback.com;Europe;Netherlands
@@ -18,7 +18,6 @@ mirrors-lst
 	http://lug.mtu.edu/cygwin/;lug.mtu.edu;United States;Michigan
 	ftp://mirror.cs.vt.edu/pub/cygwin/cygwin/;mirror.cs.vt.edu;United States;Virginia
 	http://mirror.cs.vt.edu/pub/cygwin/cygwin/;mirror.cs.vt.edu;United States;Virginia
-	http://ftp.daum.net/cygwin/;ftp.daum.net;Asia;Korea
 	http://cygwin.mirror.gtcomm.net/;cygwin.mirror.gtcomm.net;Canada;Quebec
 	ftp://mirrors.netix.net/cygwin/;mirrors.netix.net;Europe;Bulgaria
 	http://mirrors.netix.net/cygwin/;mirrors.netix.net;Europe;Bulgaria
@@ -32,8 +31,6 @@ mirrors-lst
 	http://cygwin.mirror.uk.sargasso.net/;cygwin.mirror.uk.sargasso.net;Europe;UK
 	ftp://mirrors.sonic.net/cygwin/;mirrors.sonic.net;United States;California
 	http://mirrors.sonic.net/cygwin/;mirrors.sonic.net;United States;California
-	ftp://mirror.steadfast.net/cygwin/;mirror.steadfast.net;United States;Illinois
-	http://mirror.steadfast.net/cygwin/;mirror.steadfast.net;United States;Illinois
 	ftp://mirrors.syringanetworks.net/cygwin/;mirrors.syringanetworks.net;United States;Idaho
 	http://mirrors.syringanetworks.net/cygwin/;mirrors.syringanetworks.net;United States;Idaho
 	http://sourceware.mirrors.tds.net/pub/sourceware.org/cygwin/;sourceware.mirrors.tds.net;United States;Wisconsin
@@ -53,7 +50,6 @@ mirrors-lst
 	ftp://cygwin.osuosl.org/pub/cygwin/;cygwin.osuosl.org;United States;Oregon
 	http://cygwin.osuosl.org/;cygwin.osuosl.org;United States;Oregon
 	http://mirror.team-cymru.org/cygwin/;mirror.team-cymru.org;United States;Illinois
-	ftp://gd.tuwien.ac.at/gnu/cygwin/;gd.tuwien.ac.at;Europe;Austria
 	http://gd.tuwien.ac.at/gnu/cygwin/;gd.tuwien.ac.at;Europe;Austria
 	ftp://mirror.easyname.at/cygwin/;mirror.easyname.at;Europe;Austria
 	http://mirror.easyname.at/cygwin/;mirror.easyname.at;Europe;Austria
@@ -90,6 +86,7 @@ mirrors-lst
 	ftp://ftp.heanet.ie/pub/cygwin/;ftp.heanet.ie;Europe;Ireland
 	http://ftp.heanet.ie/pub/cygwin/;ftp.heanet.ie;Europe;Ireland
 	http://mirror.isoc.org.il/pub/cygwin/;mirror.isoc.org.il;Asia;Israel
+	ftp://ftp.iitm.ac.in/cygwin/;ftp.iitm.ac.in;Asia;India
 	http://ftp.iitm.ac.in/cygwin/;ftp.iitm.ac.in;Asia;India
 	http://mirror.pkill.info/cygwin/;mirror.pkill.info;Asia;Hong Kong
 	http://cygwin.asis.io/;cygwin.asis.io;Asia;Iran
@@ -127,10 +124,9 @@ mirrors-lst
 	ftp://ftp.yzu.edu.tw/cygwin/;ftp.yzu.edu.tw;Asia;Taiwan
 	http://ftp.yzu.edu.tw/cygwin/;ftp.yzu.edu.tw;Asia;Taiwan
 	ftp://cygwin.ip-connect.vn.ua/mirror/cygwin.com/;cygwin.ip-connect.vn.ua;Europe;Ukraine
-	http://cygwin.ip-connect.vn.ua/;cygwin.ip-connect.vn.ua;Europe;Ukraine
 	ftp://ftp.is.co.za/mirrors/cygwin/;ftp.is.co.za;Africa;South Africa
 last-mirror
-	http://mirrors.kernel.org/sourceware/cygwin/
+	http://cygwin.mirror.constant.com/
 net-method
 	Direct
 last-action
