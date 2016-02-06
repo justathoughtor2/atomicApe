@@ -2,6 +2,10 @@ header {
   margin: 0;
 }
 
+.container {
+  max-width: 800px;
+}
+
 .main_container {
   background-image: url('../images/background.png');
   width: 100%;
@@ -10,7 +14,7 @@ header {
 
 .sub_container {
   width: 90%;
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
