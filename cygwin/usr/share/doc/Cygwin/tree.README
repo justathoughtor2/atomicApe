@@ -1,0 +1,73 @@
+tree
+------------------------------------------
+
+Display graphical directory tree
+
+Display an indented directory tree, using the same color assignments
+as ls, via the LS_COLORS environment variable.
+
+An example:
+  tree -C -L 2 -T "Tree listing" -H "http://example.com" --charset=utf8 -o index.html
+
+Runtime requirements:
+  cygwin
+
+Build requirements:
+  cygwin
+
+Canonical homepage:
+  http://mama.indstate.edu/users/ice/tree
+  http://packages.debian.org/tree
+
+Canonical download:
+  See above
+
+Version control repository:
+
+Mailing list:
+
+Forum / Wiki:
+
+IRC channel:
+
+Upstream contact:
+  Author: Steve Baker <ice@mama.indstate.edu>
+  Bugs:
+
+License:
+  GPL-2+
+
+Language:
+  C
+
+------------------------------------
+
+Build instructions:
+  You may need cygbuild.sourceforge.net to build *src.tar.bz2 archive
+  unpack tree-1.7.0-1-src.tar.bz2
+    if you use setup to install this src package, it will be
+    unpacked under /usr/src automatically
+  cd /usr/src
+  ./tree*.sh all
+
+This will create:
+  tree-1.7.0-1.tar.xz
+  tree-1.7.0-1-src.tar.xz
+
+-------------------------------------------
+
+Files included in the binary distro:
+  See Cygwin package archive
+
+------------------
+
+Port Notes:
+
+----- version 1.7.0-1 -----
+- New upstream release 2014-06-12 Jari Aalto
+
+----- version 1.6.0-1 -----
+- Initial release 2012-09-30 Jari Aalto
+
+Cygwin port maintained by: Jari Aalto <jari.aalto@cante.net>
+Copyright (C) 2012-2014 Jari Aalto; Licensed under GPL v2 or later

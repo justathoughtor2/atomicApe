@@ -1,0 +1,73 @@
+#!/bin/zsh
+
+ME=`basename $0`
+batfile=/zsh.bat
+iconpath=/cygwin.ico
+shortcutname="Cygwin Zsh"
+
+all_opt=""
+do_desktop=""
+do_menu=""
+
+#rootpath=`regtool get '/machine/SOFTWARE/Cygnus Solutions/Cygwin/mounts v2/\//native'`
+rootpath=`mount | grep ' / ' | awk '{ print $1 }' | tr / '\\\\'`
+rootdrive=`echo "$rootpath" | sed 's/\(.:\).*/\1/'`
+
+CreateZshBat()
+{
+  echo "Creating $batfile ..."
+# Create the zsh.bat file
+
+ cat > $batfile <<EOF
+@echo off
+$rootdrive
+chdir $rootpath\bin
+zsh -l -i
+EOF
+
+ chmod a+rx $batfile
+}
+
+CreateDesktop()
+{
+ echo "Creating Desktop Icon..."
+ mkshortcut -D $all_opt --icon $iconpath --name "$shortcutname" --arguments="$rootpath" $batfile
+}
+
+CreateMenu()
+{
+ echo "Creating Menu Item..."
+ mkshortcut -P $all_opt --icon $iconpath --name "$shortcutname" --arguments="$rootpath" $batfile
+}
+
+Usage()
+{
+  cat << EOF
+Usage: $ME {-A} {-D} {-P} {-h|--help}
+  -A|--allusers      creates item for All Users instead of just current user
+  -D|--desktop       creates a Desktop icon for running $batfile
+  -P|--smprograms    creates a Program menu item for running $batfile
+  -h|--help          prints usage
+EOF
+  exit 2
+}
+
+# main
+
+while [ $# != 0 ]
+do
+ case "$1" in
+-A|--allusers)   all_opt="--allusers" ;;
+-D|--desktop)    do_desktop="1" ;;
+-P|--smprograms) do_menu="1" ;;
+-h|--help)       Usage ;;
+ esac
+ shift 
+done
+
+CreateZshBat
+
+[ "$do_desktop" != "" ] && CreateDesktop
+[ "$do_menu" != "" ] && CreateMenu
+
+exit 0

@@ -1,0 +1,16 @@
+perl-DBD-mysql
+sdesc: "Perl distribution DBD-mysql"
+ldesc: "Perl distribution DBD-mysql, providing Perl modules:
+Bundle::DBD::mysql DBD::mysql DBD::mysql::GetInfo DBD::mysql::db
+DBD::mysql::dr DBD::mysql::st.
+
+A MySQL driver for the Perl5 Database Interface (DBI)."
+category: Perl
+requires: libgcc1 libmysqlclient18 libssp0 perl_base perl-DBI cygwin
+version: 4.033-1
+install: x86/release/perl-DBD-mysql/perl-DBD-mysql-4.033-1.tar.xz 123228 4bdf64f97ec548c977969eb1e66f09785be4595149e085a3b2a84396c28ef0c3990de697091831489a38eebdd3d3706d799ec9ef5d8f37acf62a2682d0b364a5
+source: x86/release/perl-DBD-mysql/perl-DBD-mysql-4.033-1-src.tar.xz 148820 71607c7ccd305f467d5937685ade619daeb383b16c0007afa664d528864c5c1d90bc3fc945a1e521434255f0e8f4253216b00c4a85435e9712d168698dc9d63b
+[prev]
+version: 4.032-1
+install: x86/release/perl-DBD-mysql/perl-DBD-mysql-4.032-1.tar.xz 121636 96681b89a4d1811afd3d96967fd35814df7be3ad7f6714a52212181acfb09a5dfbfa0bc3bc9ab83a990aedc0796a531fcf65a1c58a3e15e1fea57f0d0bb5dc80
+source: x86/release/perl-DBD-mysql/perl-DBD-mysql-4.032-1-src.tar.xz 148780 e14c24f8e136e0bbc8120190e64edd59ff53cfd5d6d567edffcfadeb55e43fa623f48f9153f60d56e3e4ee01ef18b7f62a8f3e229b88af080b54af975855536f

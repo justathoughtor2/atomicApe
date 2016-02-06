@@ -1,0 +1,15 @@
+mysqld
+sdesc: "MySQL database server"
+ldesc: "MySQL delivers a very fast, multi-threaded, multi-user, and robust
+SQL (Structured Query Language) database server.  The client components are
+stable, but the daemon should be considered experimental and not ready for
+mission-critical deployment."
+category: Database
+requires: bash crypt cygwin libgcc1 libopenssl100 libstdc++6 libwrap0 perl perl-DBI perl_base zlib0 perl-DBD-mysql
+version: 5.5.45-1
+install: x86/release/mysql/mysqld/mysqld-5.5.45-1.tar.xz 3408136 700ecf7ef42cf1d6272c251038e4cf8112235af696900d194f93f83bff9ff23b16f371196300cfbc04dacabcc007549c31ca954a62896b849275a619a68249c4
+source: x86/release/mysql/mysql-5.5.45-1-src.tar.xz 20933360 ff692911877fe74696e71cf80da4baacd61b02eb070bd68b6fc55953de497fd452f82b8a92802a29a2a4fdff1360e1fd750bf1f36437d62bd01f8361e7f8df99
+[prev]
+version: 5.5.41-2
+install: x86/release/mysql/mysqld/mysqld-5.5.41-2.tar.xz 3373004 6ce235a79e4bdb54d205a5e876ded61248450d03138162177713521eab35951d47f867110d0cfb2f984fae704f8b1337e924b2ae84db94b71c46557d5b573227
+source: x86/release/mysql/mysql-5.5.41-2-src.tar.xz 20835352 d264a730a28711ac7f91b9148fee1223ba660b974684488a3c0ca1d7b27326b837e58a8eddacdc226cf32dc54a49a74383c4bf1c4975895adb968a1bca6b6329

@@ -1,0 +1,17 @@
+{
+  "root": "F:\\atomicApe\\babun\\cygwin\\home\\bananas\\.forever",
+  "pidPath": "F:\\atomicApe\\babun\\cygwin\\home\\bananas\\.forever\\pids",
+  "sockPath": "F:\\atomicApe\\babun\\cygwin\\home\\bananas\\.forever\\sock",
+  "loglength": 100,
+  "logstream": false,
+  "columns": [
+    "uid",
+    "command",
+    "script",
+    "forever",
+    "pid",
+    "id",
+    "logfile",
+    "uptime"
+  ]
+}

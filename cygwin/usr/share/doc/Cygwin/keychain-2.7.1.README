@@ -1,0 +1,85 @@
+keychain
+------------------------------------------
+
+Key manager for OpenSSH
+
+Keychain is an OpenSSH key manager, typically run from
+~/.bash_profile. When keychain is run, it checks for a running
+ssh-agent, otherwise it starts one. It saves the ssh-agent environment
+variables to ~/.keychain/$HOSTNAME-sh, so that subsequent logins
+and non-interactive shells such as cron jobs can source the file and
+make passwordless ssh connections. In addition, when keychain runs, it
+verifies that the key files specified on the command-line are known to
+ssh-agent, otherwise it loads them, prompting you for a password if
+necessary.
+
+Runtime requirements:
+  openssh
+  bash
+  grep
+  gawk
+  coreutils (uname whoami)
+  cygwin (kill ps)
+
+Build requirements:
+  cygwin
+
+Canonical homepage:
+  http://freecode.com/projects/keychain
+  https://github.com/funtoo/keychain
+  http://packages.debian.org/keychain
+  http://packages.gentoo.org/package/net-misc/keychain
+
+  NOT RELATED:
+  http://code.google.com/p/keychain
+
+Canonical download:
+  http://www.funtoo.org/archive/keychain/
+
+Version control repository:
+  https://github.com/funtoo/keychain
+  git clone git://github.com/funtoo/keychain.git
+
+Mailing list:
+
+Forum / Wiki:
+
+IRC channel:
+
+Upstream contact:
+  Maintainer: drobbins@funtoo.org <drobbins@funtoo.org>
+  Bugs: https://github.com/funtoo/keychain/issues
+
+License:
+  GPL
+
+Language:
+  Bourne Shell
+
+------------------------------------------
+
+Build instructions:
+  unpack keychain-*-src.tar.bz2
+    if you use setup to install this source package, it will be
+    unpacked under /usr/src automatically
+  cd /usr/src
+  ./keychain*.sh all
+
+------------------------------------------
+
+Files included in the binary distribution:
+  See Cygwin package archive
+
+------------------------------------------
+
+Port Notes:
+
+----- version 2.7.1-1 -----
+- New maintainer 2012-10-10 Jari Aalto
+
+---------- keychain-2.6.8-1 -- 11/08/2006 -----------
+- New Maintainer Jonathan C. Allen
+
+Cygwin port maintained by: Jari Aalto <jari.aalto@cante.net>
+Copyright (C) 2012 Jari Aalto; Licensed under GPL v2 or later
+Copyright (C) 2006-2012 Jonathan C. Allen

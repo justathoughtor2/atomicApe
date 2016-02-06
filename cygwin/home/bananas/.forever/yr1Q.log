@@ -1,0 +1,9 @@
+[0mGET / [32m200 [0m2038.628 ms - 6498[0m
+[0mGET /stylesheets/style.css [32m200 [0m27.652 ms - 550[0m
+[0mGET /bower_components/tether/dist/css/tether.css [32m200 [0m41.000 ms - 277[0m
+[0mGET /bower_components/bootstrap/dist/css/bootstrap.min.css [32m200 [0m43.264 ms - 103825[0m
+[0mGET /bower_components/tether/dist/js/tether.min.js [32m200 [0m44.744 ms - 23217[0m
+[0mGET /bower_components/jquery/dist/jquery.min.js [32m200 [0m53.405 ms - 85589[0m
+[0mGET /javascripts/loading.js [32m200 [0m25.389 ms - 136[0m
+[0mGET /bower_components/bootstrap/dist/js/bootstrap.min.js [32m200 [0m60.184 ms - 44826[0m
+[0mGET /stylesheets/EaLoading.png [32m200 [0m5.972 ms - 46943[0m

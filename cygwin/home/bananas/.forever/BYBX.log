@@ -1,0 +1,10 @@
+Migrations: Up to date at version 004
+Ghost is running in development... 
+Listening on 127.0.0.1:2368 
+Url configured as: http://localhost:2368 
+Ctrl+C to shut down
+[0mGET / [32m200 [0m157.342 ms - -[0m
+[0mGET /assets/js/jquery.fitvids.js?v=8b66e7fbc0 [32m200 [0m5.631 ms - -[0m
+[0mGET /assets/js/index.js?v=8b66e7fbc0 [32m200 [0m5.930 ms - -[0m
+[0mGET /assets/css/screen.css?v=8b66e7fbc0 [32m200 [0m6.452 ms - -[0m
+error: Forever detected script exited with code: 1

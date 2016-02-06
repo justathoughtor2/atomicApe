@@ -1,5 +1,6 @@
 # Individual projects are licensed as per the projects' requirements.
-All custom code prepared by [justathoughtor2](https://github.com/justathoughtor2) is licensed under the GNU GPLv3, as indicated below.
+## All custom code prepared by [justathoughtor2](https://github.com/justathoughtor2) is licensed under the GNU GPLv3, as indicated below.
+You may contact justathoughtor2 with any questions or comments at [bananas@atomicape.xyz](mailto:bananas@atomicape.xyz).
 
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007

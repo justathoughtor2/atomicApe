@@ -1,0 +1,51 @@
+automake1.12
+========================================================================
+Provides the latest version of automake in the 1.12.x series
+
+Build requirements (these or newer):
+  cygwin-1.7.22-1
+  perl
+  coreutils
+  m4
+  texinfo
+  cygport-0.12.3
+  autoconf2.5
+  autoconf
+  make-3.82.90-1
+
+Canonical homepage:
+  http://www.gnu.org/software/automake/
+
+Canonical download:
+  ftp://ftp.gnu.org/pub/gnu/automake/
+
+License:
+  GPL
+
+Language:
+  perl, m4
+
+========================================================================
+
+Port Notes:
+
+----- 1.12.6-2 -- 2013 Jul 29 ----
+* Updated to latest upstream release
+* Rely on cygport to autogenerate setup.hints
+* Update config.sub/config.guess to latest standard (supports
+  cygwin64)
+* Use 'alternatives' only for documentation; rely on wrapper
+  to handle the tools themselves.
+* First cygwin64 release
+
+----- 1.12.5-1 -- 2012 Dec 05 ----
+* Updated to latest upstream release
+* Includes patch to address PEP3147 (http://www.python.org/dev/peps/pep-3147/)
+  http://cygwin.com/ml/cygwin-apps/2012-06/msg00091.html
+  Reported by Yaakov Selkowitz
+
+----- 1.12.3-1 -- 2012 Aug 31 ----
+* First release of the automake-1.12 series
+
+========================================================================
+Cygwin port maintained by: Chuck Wilson <cygwin@cygwin.com>

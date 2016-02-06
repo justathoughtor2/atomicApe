@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuremap [
+<!ELEMENT configuremap (configure)+>
+<!ELEMENT configure (#PCDATA)>
+<!ATTLIST configure name CDATA #REQUIRED>
+<!ATTLIST configure value CDATA #REQUIRED>
+]>
+<configuremap>
+  <configure name="CC" value="gcc -std=gnu99 -std=gnu99"/>
+  <configure name="CFLAGS" value="-fopenmp -g -O2 -Wall -fexceptions -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16"/>
+  <configure name="CODER_PATH" value="/ImageMagick-6.8.8/lib/ImageMagick-6.8.8/modules-Q16/coders"/>
+  <configure name="CONFIGURE_PATH" value="/ImageMagick-6.8.8/etc/ImageMagick-6/"/>
+  <configure name="CONFIGURE" value="./configure  '--disable-installed' '--enable-delegate-build' '--enable-shared' '--disable-static' '--without-rsvg' '--without-gslib' '--without-gvc' '--without-wmf' '--without-frozenpaths' '--prefix=/ImageMagick-6.8.8'"/>
+  <configure name="COPYRIGHT" value="Copyright (C) 1999-2014 ImageMagick Studio LLC"/>
+  <configure name="CPPFLAGS" value="-I/ImageMagick-6.8.8/include/ImageMagick-6"/>
+  <configure name="CXXFLAGS" value="-g -O2"/>
+  <configure name="CXX" value="g++"/>
+  <configure name="DEFS" value="-DHAVE_CONFIG_H"/>
+  <configure name="DELEGATES" value="mpeg ps"/>
+  <configure name="DISTCHECK_CONFIG_FLAGS" value="--disable-deprecated --disable-installed --with-quantum-depth=16 --with-umem=no --with-autotrace=no --with-gslib=no --with-fontpath= --with-gvc=no --with-mupdf=no --with-rsvg=no --with-wmf=no --with-perl=no"/>
+  <configure name="DOCUMENTATION_PATH" value="/ImageMagick-6.8.8/share/doc/ImageMagick-6"/>
+  <configure name="EXEC-PREFIX" value="/ImageMagick-6.8.8"/>
+  <configure name="EXECUTABLE_PATH" value="/ImageMagick-6.8.8/bin"/>
+  <configure name="FEATURES" value="DPC OpenMP"/>
+  <configure name="FILTER_PATH" value="/ImageMagick-6.8.8/lib/ImageMagick-6.8.8/modules-Q16/filters"/>
+  <configure name="HOST" value="i686-pc-cygwin"/>
+  <configure name="INCLUDE_PATH" value="/ImageMagick-6.8.8/include/ImageMagick-6"/>
+  <configure name="LDFLAGS" value="-L/ImageMagick-6.8.8/lib -L/home/Cristy/ImageMagick-6.8.8-3/magick -L/home/Cristy/ImageMagick-6.8.8-3/wand"/>
+  <configure name="LIBRARY_PATH" value="/ImageMagick-6.8.8/lib/ImageMagick-6.8.8"/>
+  <configure name="LIBS" value="-lgdi32 -lm -lgomp"/>
+  <configure name="LIB_VERSION_NUMBER" value="6,8,8,3"/>
+  <configure name="LIB_VERSION" value="0x688"/>
+  <configure name="NAME" value="ImageMagick"/>
+  <configure name="PCFLAGS" value="-fopenmp -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16"/>
+  <configure name="PREFIX" value="/ImageMagick-6.8.8"/>
+  <configure name="QuantumDepth" value="16"/>
+  <configure name="RELEASE_DATE" value="2014-01-27"/>
+  <configure name="SHAREARCH_PATH" value="/ImageMagick-6.8.8/lib/ImageMagick-6.8.8/config-Q16"/>
+  <configure name="SHARE_PATH" value="/ImageMagick-6.8.8/share/ImageMagick-6"/>
+  <configure name="SVN_REVISION" value="14654" />
+  <configure name="TARGET_CPU" value="i686"/>
+  <configure name="TARGET_OS" value="cygwin"/>
+  <configure name="TARGET_VENDOR" value="pc"/>
+  <configure name="VERSION" value="6.8.8"/>
+  <configure name="WEBSITE" value="http://www.imagemagick.org"/>
+</configuremap>

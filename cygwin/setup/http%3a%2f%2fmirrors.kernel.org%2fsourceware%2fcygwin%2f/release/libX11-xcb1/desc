@@ -1,0 +1,12 @@
+libX11-xcb1
+sdesc: "X.Org X11 XCB interface (runtime)"
+ldesc: "X.Org X11 core library"
+category: Libs
+requires: cygwin
+version: 1.6.3-1
+install: x86/release/libX11/libX11-xcb1/libX11-xcb1-1.6.3-1.tar.xz 2244 421733f7d0871ca550a12ff404de059620e298baad7fe4b43980c08a04d5ca81d64cb7f8c9342e72a8e210b129a8bd7347640837ed4fe6040a0f4e73e963e4a8
+source: x86/release/libX11/libX11-1.6.3-1-src.tar.xz 2363896 cf27e335066fec165b885fd1f7fcd9cf8ae15d5350c1a804376190e40faf8e36bc2c750891efb3140d27643f19041abe696b540db30848bdb79bc033d1e2086f
+[prev]
+version: 1.6.2-2
+install: x86/release/libX11/libX11-xcb1/libX11-xcb1-1.6.2-2.tar.xz 2308 3e475b63c3f0ff0c557b5b9fcc6164250cd2903a635073aed7535c6ca970b02851da845043c6947a774a76ae94d4a5b4db7d9773a722c425e5cb5158287854df
+source: x86/release/libX11/libX11-1.6.2-2-src.tar.xz 2339984 3f66f73982be1abb9f900920627cd87dec2fa7d2021d3ab1250162577917458cf0de880cc03ab761becaa9ec411247c3ac75679278cfed0da8fa601adb491b80

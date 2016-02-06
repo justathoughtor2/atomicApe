@@ -1,0 +1,79 @@
+#!/bin/bash
+# IMPORTANT NOTE!
+# DO NOT MODIFY THIS FILE -> IT WILL BE OVERWRITTEN ON UPDATE
+# If you want to some options modify the following file: ~/.babunrc
+source "/usr/local/etc/babun.instance"
+
+export CYGWIN_VERSION=x86
+export CYGWIN="nodosfilewarning mintty"
+export TERM=xterm-256color
+export CYGWIN_HOME="$( /usr/bin/cygpath.exe -ma '/' )"
+export BABUN_HOME="$( echo "$CYGWIN_HOME" | /usr/bin/sed.exe "s#/cygwin##g" )"
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias emacs=emacs-nox
+alias open='cygstart'
+unset GREP_OPTIONS
+
+# User Agent section -> especially for @aalmiray :)
+# List of user agents: http://www.useragentstring.com/pages/useragentstring.php
+export USER_AGENT="Mozilla/5.0 (Windows; U; MSIE 9.0; WIndows NT 9.0; en-US))"
+
+alias wget='wget --user-agent="$USER_AGENT"'
+alias curl='curl -A "$USER_AGENT"'
+
+# clipboard handling
+if [ -e /dev/clipboard ]; then
+   alias pbcopy='cat >/dev/clipboard'
+   alias pbpaste='cat /dev/clipboard'
+fi
+
+export BABUN_BRANCH=release
+
+export LANG="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
+export DISABLE_CHECK_ON_STARTUP="false"
+export CHECK_TIMEOUT_IN_SECS=4
+
+# otherwise vim will not find /etc/vimrc
+export VIM=/etc
+
+alias vi=vim
+
+# Fake 'sudo' command
+# (see http://superuser.com/questions/122418/theres-no-sudo-command-in-cygwin)
+if [ ! -e /usr/bin/sudo ]; then
+/bin/cat <<EOF > /usr/bin/sudo
+#!/bin/bash
+"\$@"
+EOF
+/bin/chmod ug+x /usr/bin/sudo
+fi
+
+# set PATH so it includes user's private bin if it exists
+HOME_LOCAL_BIN="$homedir/.local/bin"
+HOME_BIN="$homedir/bin"
+
+if [ ! -d "$HOME_LOCAL_BIN" ] ; then
+    mkdir -p "$HOME_LOCAL_BIN"
+fi
+
+if [ ! -d "$HOME_BIN" ] ; then
+	ln -s "$HOME_LOCAL_BIN" "$HOME_BIN"
+fi
+
+PATH="$HOME_LOCAL_BIN:$PATH"
+
+#
+# IMPORTANT -> THIS HAS TO BE LOCATED AT THE END OF THIS SCRIPT
+# install babun to user's home folder if it does not exist
+#
+if [[ ! -f "$homedir/.babunrc" ]]; then
+	echo "Installing babun to user home"
+	babun install
+fi

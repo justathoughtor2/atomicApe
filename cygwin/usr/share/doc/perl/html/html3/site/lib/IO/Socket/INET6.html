@@ -1,0 +1,278 @@
+<?xml version="1.0" ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<!-- saved from url=(0017)http://localhost/ -->
+<title>IO::Socket::INET6 - Object interface for AF_INET/AF_INET6 domain sockets</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:ASSI@cygwin.nonet" />
+</head>
+
+<body id="_podtop_">
+<table border="0" width="100%" cellspacing="0" cellpadding="3">
+<tr><td class="_podblock_" style="background-color: #cccccc; color: #000" valign="middle">
+<big><strong><span class="_podblock_">&nbsp;IO::Socket::INET6 - Object interface for AF_INET/AF_INET6 domain sockets</span></strong></big>
+</td></tr>
+</table>
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#SYNOPSIS">SYNOPSIS</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a></li>
+  <li><a href="#CONSTRUCTOR">CONSTRUCTOR</a>
+    <ul>
+      <li><a href="#METHODS">METHODS</a></li>
+    </ul>
+  </li>
+  <li><a href="#REPOSITORY">REPOSITORY</a></li>
+  <li><a href="#SEE-ALSO">SEE ALSO</a></li>
+  <li><a href="#AUTHOR">AUTHOR</a></li>
+  <li><a href="#COPYRIGHT">COPYRIGHT</a></li>
+</ul>
+
+<a href="#_podtop_"><h1 id="NAME">NAME</h1></a>
+
+<p>IO::Socket::INET6 - Object interface for AF_INET/AF_INET6 domain sockets</p>
+
+<a href="#_podtop_"><h1 id="SYNOPSIS">SYNOPSIS</h1></a>
+
+<pre><code>    use IO::Socket::INET6;</code></pre>
+
+<a href="#_podtop_"><h1 id="DESCRIPTION">DESCRIPTION</h1></a>
+
+<p><code>IO::Socket::INET6</code> provides an object interface to creating and using sockets in either AF_INET or AF_INET6 domains. It is built upon the <a href="../../lib/perl5/5.22/i686-cygwin-threads-64int/IO/Socket.html">IO::Socket</a> interface and inherits all the methods defined by <a href="../../lib/perl5/5.22/i686-cygwin-threads-64int/IO/Socket.html">IO::Socket</a>.</p>
+
+<a href="#_podtop_"><h1 id="CONSTRUCTOR">CONSTRUCTOR</h1></a>
+
+<dl>
+
+<dt id="new-ARGS">new ( [ARGS] )</dt>
+<dd>
+
+<p>Creates an <code>IO::Socket::INET6</code> object, which is a reference to a newly created symbol (see the <code>Symbol</code> package). <code>new</code> optionally takes arguments, these arguments are in key-value pairs.</p>
+
+<p>In addition to the key-value pairs accepted by <a href="../../lib/perl5/5.22/i686-cygwin-threads-64int/IO/Socket.html">IO::Socket</a>, <code>IO::Socket::INET6</code> provides.</p>
+
+<pre><code>    Domain      Address family               AF_INET | AF_INET6 | AF_UNSPEC (default)
+    PeerAddr    Remote host address          &lt;hostname&gt;[:&lt;port&gt;]
+    PeerHost    Synonym for PeerAddr
+    PeerPort    Remote port or service       &lt;service&gt;[(&lt;no&gt;)] | &lt;no&gt;
+    PeerFlow    Remote flow information
+    PeerScope   Remote address scope
+    LocalAddr   Local host bind address      hostname[:port]
+    LocalHost   Synonym for LocalAddr
+    LocalPort   Local host bind port         &lt;service&gt;[(&lt;no&gt;)] | &lt;no&gt;
+    LocalFlow   Local host flow information
+    LocalScope  Local host address scope
+    Proto       Protocol name (or number)    &quot;tcp&quot; | &quot;udp&quot; | ...
+    Type        Socket type                  SOCK_STREAM | SOCK_DGRAM | ...
+    Listen      Queue size for listen
+    ReuseAddr   Set SO_REUSEADDR before binding
+    Reuse       Set SO_REUSEADDR before binding (deprecated, prefer ReuseAddr)
+    ReusePort   Set SO_REUSEPORT before binding
+    Broadcast   Set SO_BROADCAST before binding
+    Timeout     Timeout value for various operations
+    MultiHomed  Try all addresses for multi-homed hosts
+    Blocking    Determine if connection will be blocking mode</code></pre>
+
+<p>If <code>Listen</code> is defined then a listen socket is created, else if the socket type, which is derived from the protocol, is SOCK_STREAM then connect() is called.</p>
+
+<p>Although it is not illegal, the use of <code>MultiHomed</code> on a socket which is in non-blocking mode is of little use. This is because the first connect will never fail with a timeout as the connect call will not block.</p>
+
+<p>The <code>PeerAddr</code> can be a hostname, the IPv6-address on the &quot;2001:800:40:2a05::10&quot; form , or the IPv4-address on the &quot;213.34.234.245&quot; form. The <code>PeerPort</code> can be a number or a symbolic service name. The service name might be followed by a number in parenthesis which is used if the service is not known by the system. The <code>PeerPort</code> specification can also be embedded in the <code>PeerAddr</code> by preceding it with a &quot;:&quot;, and closing the IPv6 address on brackets &quot;[]&quot; if necessary: &quot;124.678.12.34:23&quot;,&quot;[2a05:345f::10]:23&quot;,&quot;any.server.com:23&quot;.</p>
+
+<p>If <code>Domain</code> is not given, AF_UNSPEC is assumed, that is, both AF_INET and AF_INET6 will be both considered when resolving DNS names. AF_INET6 has priority. If you guess you are in trouble not reaching the peer,(the service is not available via AF_INET6 but AF_INET) you can either try Multihomed (try any address/family until reach) or concrete your address <code>family</code> (AF_INET, AF_INET6).</p>
+
+<p>If <code>Proto</code> is not given and you specify a symbolic <code>PeerPort</code> port, then the constructor will try to derive <code>Proto</code> from the service name. As a last resort <code>Proto</code> &quot;tcp&quot; is assumed. The <code>Type</code> parameter will be deduced from <code>Proto</code> if not specified.</p>
+
+<p>If the constructor is only passed a single argument, it is assumed to be a <code>PeerAddr</code> specification.</p>
+
+<p>If <code>Blocking</code> is set to 0, the connection will be in nonblocking mode. If not specified it defaults to 1 (blocking mode).</p>
+
+<p>Examples:</p>
+
+<pre><code>   $sock = IO::Socket::INET6-&gt;new(PeerAddr =&gt; &#39;www.perl.org&#39;,
+                                 PeerPort =&gt; &#39;http(80)&#39;,
+                                 Proto    =&gt; &#39;tcp&#39;);</code></pre>
+
+<p>Suppose either you have no IPv6 connectivity or www.perl.org has no http service on IPv6. Then,</p>
+
+<p>(Trying all address/families until reach)</p>
+
+<pre><code>   $sock = IO::Socket::INET6-&gt;new(PeerAddr =&gt; &#39;www.perl.org&#39;,
+                                 PeerPort =&gt; &#39;http(80)&#39;,
+                                 Multihomed =&gt; 1 ,
+                                 Proto    =&gt; &#39;tcp&#39;);</code></pre>
+
+<p>(Concrete to IPv4 protocol)</p>
+
+<pre><code>   $sock = IO::Socket::INET6-&gt;new(PeerAddr =&gt; &#39;www.perl.org&#39;,
+                                 PeerPort =&gt; &#39;http(80)&#39;,
+                                 Domain =&gt; AF_INET ,
+                                 Proto    =&gt; &#39;tcp&#39;);
+
+
+   $sock = IO::Socket::INET6-&gt;new(PeerAddr =&gt; &#39;localhost:smtp(25)&#39;);
+
+   $sock = IO::Socket::INET6-&gt;new(Listen    =&gt; 5,
+                                 LocalAddr =&gt; &#39;localhost&#39;,
+                                 LocalPort =&gt; 9000,
+                                 Proto     =&gt; &#39;tcp&#39;);
+
+   $sock = IO::Socket::INET6-&gt;new(&#39;[::1]:25&#39;);
+
+   $sock = IO::Socket::INET6-&gt;new(PeerPort  =&gt; 9999,
+                                 PeerAddr  =&gt; Socket6::inet_ntop(AF_INET6,in6addr_broadcast),
+                                 Proto     =&gt; udp,
+                                 LocalAddr =&gt; &#39;localhost&#39;,
+                                 Broadcast =&gt; 1 )
+                             or die &quot;Can&#39;t bind : $@\n&quot;;
+
+ NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE</code></pre>
+
+<p>As of VERSION 1.18 all IO::Socket objects have autoflush turned on by default. This was not the case with earlier releases.</p>
+
+<pre><code> NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE</code></pre>
+
+</dd>
+</dl>
+
+<h2 id="METHODS">METHODS</h2>
+
+<dl>
+
+<dt id="accept">accept ()</dt>
+<dd>
+
+<p>See <a href="../../lib/perl5/5.22/i686-cygwin-threads-64int/IO/Socket/INET.html">IO::Socket::INET</a>.</p>
+
+</dd>
+<dt id="bind">bind ()</dt>
+<dd>
+
+<p>See <a href="../../lib/perl5/5.22/i686-cygwin-threads-64int/IO/Socket/INET.html">IO::Socket::INET</a>.</p>
+
+</dd>
+<dt id="configure">configure ()</dt>
+<dd>
+
+<p>This function exists in this module, but I (= Shlomi Fish) don&#39;t know what it does, or understand it. It&#39;s also not tested anywhere. I&#39;ll be happy to be enlightened.</p>
+
+</dd>
+<dt id="connect">connect ()</dt>
+<dd>
+
+<p>See <a href="../../lib/perl5/5.22/i686-cygwin-threads-64int/IO/Socket/INET.html">IO::Socket::INET</a>.</p>
+
+</dd>
+<dt id="sockaddr">sockaddr ()</dt>
+<dd>
+
+<p>Return the address part of the sockaddr structure for the socket</p>
+
+</dd>
+<dt id="sockdomain">sockdomain()</dt>
+<dd>
+
+<p>Returns the domain of the socket - AF_INET or AF_INET6 or whatever.</p>
+
+</dd>
+<dt id="sockport">sockport ()</dt>
+<dd>
+
+<p>Return the port number that the socket is using on the local host</p>
+
+</dd>
+<dt id="sockhost">sockhost ()</dt>
+<dd>
+
+<p>Return the address part of the sockaddr structure for the socket in a text form (&quot;2001:800:40:2a05::10&quot; or &quot;245.245.13.27&quot;)</p>
+
+</dd>
+<dt id="sockflow">sockflow ()</dt>
+<dd>
+
+<p>Return the flow information part of the sockaddr structure for the socket</p>
+
+</dd>
+<dt id="sockscope">sockscope ()</dt>
+<dd>
+
+<p>Return the scope identification part of the sockaddr structure for the socket</p>
+
+</dd>
+<dt id="peeraddr">peeraddr ()</dt>
+<dd>
+
+<p>Return the address part of the sockaddr structure for the socket on the peer host</p>
+
+</dd>
+<dt id="peerport">peerport ()</dt>
+<dd>
+
+<p>Return the port number for the socket on the peer host.</p>
+
+</dd>
+<dt id="peerhost">peerhost ()</dt>
+<dd>
+
+<p>Return the address part of the sockaddr structure for the socket on the peer host in a text form (&quot;2001:800:40:2a05::10&quot; or &quot;245.245.13.27&quot;)</p>
+
+</dd>
+<dt id="peerflow">peerflow ()</dt>
+<dd>
+
+<p>Return the flow information part of the sockaddr structure for the socket on the peer host</p>
+
+</dd>
+<dt id="peerscope">peerscope ()</dt>
+<dd>
+
+<p>Return the scope identification part of the sockaddr structure for the socket on the peer host</p>
+
+</dd>
+</dl>
+
+<a href="#_podtop_"><h1 id="REPOSITORY">REPOSITORY</h1></a>
+
+<p>The Subversion repository for this module carrying complete version history and other information is:</p>
+
+<p><a href="http://svn.berlios.de/svnroot/repos/web-cpan/IO-Socket-INET6/">http://svn.berlios.de/svnroot/repos/web-cpan/IO-Socket-INET6/</a></p>
+
+<a href="#_podtop_"><h1 id="SEE-ALSO">SEE ALSO</h1></a>
+
+<p><a href="../../lib/perl5/5.22/i686-cygwin-threads-64int/Socket.html">Socket</a>,<a>Socket6</a>, <a href="../../lib/perl5/5.22/i686-cygwin-threads-64int/IO/Socket.html">IO::Socket</a></p>
+
+<a href="#_podtop_"><h1 id="AUTHOR">AUTHOR</h1></a>
+
+<p>This program is based on <a href="../../lib/perl5/5.22/i686-cygwin-threads-64int/IO/Socket/INET.html">IO::Socket::INET</a> by Graham Barr &lt;gbarr@pobox.com&gt; and currently maintained by the Perl Porters.</p>
+
+<p>Modified by Rafael Martinez Torres &lt;rafael.martinez@novagnet.com&gt; and Euro6IX project.</p>
+
+<p>Modified further by Shlomi Fish &lt;shlomif@iglu.org.il&gt;, while disclaiming all copyrights.</p>
+
+<a href="#_podtop_"><h1 id="COPYRIGHT">COPYRIGHT</h1></a>
+
+<p>Copyright (c) 2003- Rafael Martinez Torres &lt;rafael.martinez@novagnet.com&gt;.</p>
+
+<p>Copyright (c) 2003- Euro6IX project.</p>
+
+<p>Copyright (c) 1996-8 Graham Barr &lt;gbarr@pobox.com&gt;.</p>
+
+<p>All rights reserved.</p>
+
+<p>This program is free software; you can redistribute it and/or modify it under the same terms as Perl itself.</p>
+
+<table border="0" width="100%" cellspacing="0" cellpadding="3">
+<tr><td class="_podblock_" style="background-color: #cccccc; color: #000" valign="middle">
+<big><strong><span class="_podblock_">&nbsp;IO::Socket::INET6 - Object interface for AF_INET/AF_INET6 domain sockets</span></strong></big>
+</td></tr>
+</table>
+
+</body>
+
+</html>
+
+

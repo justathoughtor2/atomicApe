@@ -1,0 +1,13 @@
+#! /bin/sh
+# Postinstall script for cron
+
+# Create and set mode if necessary
+mkdir -p -m 755  /var/cron
+mkdir -p -m 1777 /var/cron/tabs
+
+# Link sendmail to a poor man's mailer if sendmail does not exist.
+# Handle the .exe mess. Test both cases, the first could be dangling.
+[ -e /usr/sbin/sendmail -o -L /usr/sbin/sendmail  ] ||
+  ln -sf /usr/bin/cronlog /usr/sbin/sendmail
+  
+

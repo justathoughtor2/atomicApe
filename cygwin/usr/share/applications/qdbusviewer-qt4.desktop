@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=Qt4 D-Bus Viewer
+Exec=qdbusviewer-qt4
+TryExec=qdbusviewer-qt4
+Type=Application
+Icon=qdbusviewer-qt4.png
+Categories=Development;Debugger;Qt;

@@ -1,0 +1,21 @@
+libwrap0
+sdesc: "Tools providing host-based access restrictions on tcp services (runtime)"
+ldesc: "This package provides facilities for monitoring and
+filtering incoming requests for the SSHD, SYSTAT, FINGER, FTP,
+TELNET, RLOGIN, RSH, EXEC, TFTP, TALK, and other network services.
+
+The package provides a tiny daemon wrapper program that can be installed
+without any changes to existing software or to existing configuration
+files.  The wrappers report the name of the client host and of the
+requested service; the wrappers do not exchange information with the
+client or server applications, and impose no overhead on the actual
+conversation between the client and server applications."
+category: Net
+requires: cygwin
+version: 7.6-22
+install: x86/release/tcp_wrappers/libwrap0/libwrap0-7.6-22.tar.xz 12760 a093c9ddbd300e8894193df6605eb56d73cc6025ed272ec00200362eff50f1e4d8ab0aaa2fb5d552f03e878834a04a0f30779f8104c479d0190614b848cce7bc
+source: x86/release/tcp_wrappers/tcp_wrappers-7.6-22-src.tar.xz 132696 5e87a5448c0e52af60a8ac8c35fd894b707eec7fef36427e741dfa8e4aa9d73e854b957368641739aad3c1fc8011276ed3357cff1722cb3dc1ff3968d421e2c7
+[prev]
+version: 7.6-21
+install: x86/release/tcp_wrappers/libwrap0/libwrap0-7.6-21.tar.bz2 14460 d2ba63a0117e03b2ce890113c2864a9856af17fd2369d8e5cd9addacf3d1298cc51de591d30cc47542a55fb28daa4cf01b62caca72c5ac5b5f3f59b5dd90ae03
+source: x86/release/tcp_wrappers/tcp_wrappers-7.6-21-src.tar.bz2 138674 bfe1912cc810059c5ccfd16d0d5ccfe913b4c835f33c51d425ea2ab5f1066e2fceacf7933a06c55d42c9d044ebf0fc675ffb2661f4b1b8a670fe495dceb29913

@@ -1,0 +1,16 @@
+libQtScript4
+sdesc: "Qt4 Script library (runtime)"
+ldesc: "Qt is a cross-platform application framework for desktop and
+embedded development. Qt enables programmers to create advanced GUI
+applications once and deploy them to Windows, Mac OS X and Linux without
+rewriting the source code. Companies using Qt can leverage software
+investments made on one platform across many others."
+category: Libs
+requires: cygwin libgcc1 libQtCore4 libstdc++6
+version: 4.8.7-1
+install: x86/release/qt4/libQtScript4/libQtScript4-4.8.7-1.tar.xz 737080 38246d61530abd269a0216d2156c36b1f0b88000d6b16bc626d95e50cee78403a5f1e13547c07cbd57600dc44e0b8d3e5e44fb86c48d283a85a56bea6942f314
+source: x86/release/qt4/qt4-4.8.7-1-src.tar.xz 237993912 f620acb9b6cd377d4c1cc46172288ad9b86fdf8eeaa0625ba24cadcefd9013acdb4a3e0a85fc7681a8899440592214f7d4512526f760eb868db6422f93a9dc93
+[prev]
+version: 4.8.6-8
+install: x86/release/qt4/libQtScript4/libQtScript4-4.8.6-8.tar.xz 737068 883db6692149a51a5f784aa394062824b9e066c6154803525b3364f8b5456eb5238c9c586932318e0c292ef4f4c366bd85dc4f453c1c8e31dd1b5beb8f227286
+source: x86/release/qt4/qt4-4.8.6-8-src.tar.xz 239307312 484fe5cc7d721e53ee6dda3873726229d5171dcab441ae662226ae009e5d39e0f7d26e19647590b37be91783c2cfa866e0890673653a4a5e9423cc082677e024

@@ -1,0 +1,143 @@
+[Thu Feb 04 19:14:03.693794 2016] [ssl:warn] [pid 4164:tid 672] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Feb 04 19:14:04.033627 2016] [mpm_winnt:notice] [pid 4164:tid 672] AH00455: Apache/2.4.10 (Win32) OpenSSL/1.0.1h PHP/5.4.31 configured -- resuming normal operations
+[Thu Feb 04 19:14:04.033627 2016] [mpm_winnt:notice] [pid 4164:tid 672] AH00456: Apache Haus VC9 Server built: Jul 15 2014 20:34:18
+[Thu Feb 04 19:14:04.033627 2016] [core:notice] [pid 4164:tid 672] AH00094: Command line: 'F:\\atomicApe\\UwAmp\\bin\\apache\\bin\\httpd.exe -d F:/atomicApe/UwAmp/bin/apache -f F:\\atomicApe\\UwAmp\\bin\\apache\\conf\\httpd.conf'
+[Thu Feb 04 19:14:04.041632 2016] [mpm_winnt:notice] [pid 4164:tid 672] AH00418: Parent: Created child process 12304
+AH00548: NameVirtualHost has no effect and will be removed in the next release F:/atomicApe/UwAmp/bin/apache/conf/httpd.conf:264
+[Thu Feb 04 19:14:05.266943 2016] [ssl:warn] [pid 12304:tid 700] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Feb 04 19:14:05.326539 2016] [mpm_winnt:notice] [pid 12304:tid 700] AH00354: Child: Starting 64 worker threads.
+[Thu Feb 04 19:23:40.015846 2016] [mpm_winnt:crit] [pid 12304:tid 700] AH02538: Child: Parent process exited abruptly. Child process is ending
+[Thu Feb 04 20:53:19.479993 2016] [core:warn] [pid 7936:tid 720] AH00098: pid file F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Feb 04 20:53:19.665260 2016] [ssl:warn] [pid 7936:tid 720] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Feb 04 20:53:20.197766 2016] [mpm_winnt:notice] [pid 7936:tid 720] AH00455: Apache/2.4.10 (Win32) OpenSSL/1.0.1h PHP/5.4.31 configured -- resuming normal operations
+[Thu Feb 04 20:53:20.197766 2016] [mpm_winnt:notice] [pid 7936:tid 720] AH00456: Apache Haus VC9 Server built: Jul 15 2014 20:34:18
+[Thu Feb 04 20:53:20.197766 2016] [core:notice] [pid 7936:tid 720] AH00094: Command line: 'F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\bin\\apache\\bin\\httpd.exe -d F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache -f F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\bin\\apache\\conf\\httpd.conf'
+[Thu Feb 04 20:53:20.213777 2016] [mpm_winnt:notice] [pid 7936:tid 720] AH00418: Parent: Created child process 10352
+AH00548: NameVirtualHost has no effect and will be removed in the next release F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache/conf/httpd.conf:264
+[Thu Feb 04 20:53:22.341877 2016] [ssl:warn] [pid 10352:tid 760] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Feb 04 20:53:22.563877 2016] [mpm_winnt:notice] [pid 10352:tid 760] AH00354: Child: Starting 64 worker threads.
+[Thu Feb 04 20:54:26.224785 2016] [mpm_winnt:crit] [pid 10352:tid 760] AH02538: Child: Parent process exited abruptly. Child process is ending
+[Thu Feb 04 20:54:26.224785 2016] [mpm_winnt:warn] [pid 10352:tid 1404] (OS 995)The I/O operation has been aborted because of either a thread exit or an application request.  : AH00341: winnt_accept: Asynchronous AcceptEx failed.
+[Thu Feb 04 20:54:26.224785 2016] [mpm_winnt:warn] [pid 10352:tid 968] (OS 995)The I/O operation has been aborted because of either a thread exit or an application request.  : AH00341: winnt_accept: Asynchronous AcceptEx failed.
+AH00112: Warning: DocumentRoot [F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache/www] does not exist
+[Thu Feb 04 20:54:33.709497 2016] [core:warn] [pid 2216:tid 692] AH00098: pid file F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Feb 04 20:54:33.886799 2016] [ssl:warn] [pid 2216:tid 692] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Feb 04 20:54:34.159202 2016] [mpm_winnt:notice] [pid 2216:tid 692] AH00455: Apache/2.4.10 (Win32) OpenSSL/1.0.1h PHP/5.4.31 configured -- resuming normal operations
+[Thu Feb 04 20:54:34.159202 2016] [mpm_winnt:notice] [pid 2216:tid 692] AH00456: Apache Haus VC9 Server built: Jul 15 2014 20:34:18
+[Thu Feb 04 20:54:34.159202 2016] [core:notice] [pid 2216:tid 692] AH00094: Command line: 'F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\bin\\apache\\bin\\httpd.exe -d F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache -f F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\bin\\apache\\conf\\httpd.conf'
+[Thu Feb 04 20:54:34.174212 2016] [mpm_winnt:notice] [pid 2216:tid 692] AH00418: Parent: Created child process 11684
+AH00548: NameVirtualHost has no effect and will be removed in the next release F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache/conf/httpd.conf:264
+AH00112: Warning: DocumentRoot [F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache/www] does not exist
+AH00112: Warning: DocumentRoot [F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache/www] does not exist
+[Thu Feb 04 20:54:37.087641 2016] [ssl:warn] [pid 11684:tid 648] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Feb 04 20:54:37.416270 2016] [mpm_winnt:notice] [pid 11684:tid 648] AH00354: Child: Starting 64 worker threads.
+[Thu Feb 04 20:54:44.711053 2016] [mpm_winnt:crit] [pid 11684:tid 648] AH02538: Child: Parent process exited abruptly. Child process is ending
+[Thu Feb 04 20:55:46.386616 2016] [core:warn] [pid 5244:tid 692] AH00098: pid file F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Feb 04 20:55:46.555803 2016] [ssl:warn] [pid 5244:tid 692] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Feb 04 20:55:46.596832 2016] [mpm_winnt:notice] [pid 5244:tid 692] AH00455: Apache/2.4.10 (Win32) OpenSSL/1.0.1h PHP/5.4.31 configured -- resuming normal operations
+[Thu Feb 04 20:55:46.596832 2016] [mpm_winnt:notice] [pid 5244:tid 692] AH00456: Apache Haus VC9 Server built: Jul 15 2014 20:34:18
+[Thu Feb 04 20:55:46.596832 2016] [core:notice] [pid 5244:tid 692] AH00094: Command line: 'F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\bin\\apache\\bin\\httpd.exe -d F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache -f F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\bin\\apache\\conf\\httpd.conf'
+[Thu Feb 04 20:55:46.604825 2016] [mpm_winnt:notice] [pid 5244:tid 692] AH00418: Parent: Created child process 6428
+AH00548: NameVirtualHost has no effect and will be removed in the next release F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache/conf/httpd.conf:264
+[Thu Feb 04 20:55:47.360271 2016] [ssl:warn] [pid 6428:tid 808] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Feb 04 20:55:47.403302 2016] [mpm_winnt:notice] [pid 6428:tid 808] AH00354: Child: Starting 64 worker threads.
+[Thu Feb 04 20:57:25.641812 2016] [mpm_winnt:crit] [pid 6428:tid 808] AH02538: Child: Parent process exited abruptly. Child process is ending
+[Thu Feb 04 20:57:50.386353 2016] [core:warn] [pid 6080:tid 716] AH00098: pid file F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Feb 04 20:57:50.550556 2016] [ssl:warn] [pid 6080:tid 716] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Feb 04 20:57:50.591573 2016] [mpm_winnt:notice] [pid 6080:tid 716] AH00455: Apache/2.4.10 (Win32) OpenSSL/1.0.1h PHP/5.4.31 configured -- resuming normal operations
+[Thu Feb 04 20:57:50.591573 2016] [mpm_winnt:notice] [pid 6080:tid 716] AH00456: Apache Haus VC9 Server built: Jul 15 2014 20:34:18
+[Thu Feb 04 20:57:50.591573 2016] [core:notice] [pid 6080:tid 716] AH00094: Command line: 'F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\bin\\apache\\bin\\httpd.exe -d F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache -f F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\bin\\apache\\conf\\httpd.conf'
+[Thu Feb 04 20:57:50.599579 2016] [mpm_winnt:notice] [pid 6080:tid 716] AH00418: Parent: Created child process 2164
+AH00548: NameVirtualHost has no effect and will be removed in the next release F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache/conf/httpd.conf:264
+[Thu Feb 04 20:57:51.359484 2016] [ssl:warn] [pid 2164:tid 836] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Feb 04 20:57:51.402846 2016] [mpm_winnt:notice] [pid 2164:tid 836] AH00354: Child: Starting 64 worker threads.
+[Thu Feb 04 20:58:24.813486 2016] [:error] [pid 2164:tid 1604] [client ::1:50568] PHP Warning:  opendir(../../www,../../www): The system cannot find the file specified. (code: 2) in F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php on line 133
+[Thu Feb 04 20:58:24.813486 2016] [:error] [pid 2164:tid 1604] [client ::1:50568] PHP Stack trace:
+[Thu Feb 04 20:58:24.813486 2016] [:error] [pid 2164:tid 1604] [client ::1:50568] PHP   1. {main}() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:0
+[Thu Feb 04 20:58:24.813486 2016] [:error] [pid 2164:tid 1604] [client ::1:50568] PHP   2. opendir() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:133
+[Thu Feb 04 20:58:24.813486 2016] [:error] [pid 2164:tid 1604] [client ::1:50568] PHP Warning:  opendir(../../www): failed to open dir: No such file or directory in F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php on line 133
+[Thu Feb 04 20:58:24.813486 2016] [:error] [pid 2164:tid 1604] [client ::1:50568] PHP Stack trace:
+[Thu Feb 04 20:58:24.813486 2016] [:error] [pid 2164:tid 1604] [client ::1:50568] PHP   1. {main}() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:0
+[Thu Feb 04 20:58:24.813486 2016] [:error] [pid 2164:tid 1604] [client ::1:50568] PHP   2. opendir() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:133
+[Thu Feb 04 20:58:24.815488 2016] [:error] [pid 2164:tid 1604] [client ::1:50568] PHP Warning:  readdir() expects parameter 1 to be resource, boolean given in F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php on line 135
+[Thu Feb 04 20:58:24.815488 2016] [:error] [pid 2164:tid 1604] [client ::1:50568] PHP Stack trace:
+[Thu Feb 04 20:58:24.815488 2016] [:error] [pid 2164:tid 1604] [client ::1:50568] PHP   1. {main}() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:0
+[Thu Feb 04 20:58:24.815488 2016] [:error] [pid 2164:tid 1604] [client ::1:50568] PHP   2. readdir() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:135
+[Thu Feb 04 20:58:24.815488 2016] [:error] [pid 2164:tid 1604] [client ::1:50568] PHP Warning:  closedir() expects parameter 1 to be resource, boolean given in F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php on line 144
+[Thu Feb 04 20:58:24.815488 2016] [:error] [pid 2164:tid 1604] [client ::1:50568] PHP Stack trace:
+[Thu Feb 04 20:58:24.815488 2016] [:error] [pid 2164:tid 1604] [client ::1:50568] PHP   1. {main}() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:0
+[Thu Feb 04 20:58:24.815488 2016] [:error] [pid 2164:tid 1604] [client ::1:50568] PHP   2. closedir() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:144
+[Thu Feb 04 20:59:26.226038 2016] [mpm_winnt:crit] [pid 2164:tid 836] AH02538: Child: Parent process exited abruptly. Child process is ending
+[Thu Feb 04 20:59:28.908497 2016] [core:warn] [pid 12124:tid 636] AH00098: pid file F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Feb 04 20:59:29.071151 2016] [ssl:warn] [pid 12124:tid 636] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Feb 04 20:59:29.113180 2016] [mpm_winnt:notice] [pid 12124:tid 636] AH00455: Apache/2.4.10 (Win32) OpenSSL/1.0.1h PHP/5.4.31 configured -- resuming normal operations
+[Thu Feb 04 20:59:29.113180 2016] [mpm_winnt:notice] [pid 12124:tid 636] AH00456: Apache Haus VC9 Server built: Jul 15 2014 20:34:18
+[Thu Feb 04 20:59:29.113180 2016] [core:notice] [pid 12124:tid 636] AH00094: Command line: 'F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\bin\\apache\\bin\\httpd.exe -d F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache -f F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\bin\\apache\\conf\\httpd.conf'
+[Thu Feb 04 20:59:29.121183 2016] [mpm_winnt:notice] [pid 12124:tid 636] AH00418: Parent: Created child process 8420
+AH00548: NameVirtualHost has no effect and will be removed in the next release F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache/conf/httpd.conf:264
+[Thu Feb 04 20:59:29.888973 2016] [ssl:warn] [pid 8420:tid 792] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Feb 04 20:59:29.932993 2016] [mpm_winnt:notice] [pid 8420:tid 792] AH00354: Child: Starting 64 worker threads.
+[Thu Feb 04 20:59:44.364259 2016] [:error] [pid 8420:tid 1548] [client ::1:50618] script 'F:/atomicApe/babun/cygwin/home/bananas/UwAmp/wwwindex.php' not found or unable to stat
+[Thu Feb 04 20:59:49.556566 2016] [:error] [pid 8420:tid 1548] [client ::1:50634] PHP Warning:  opendir(../../www,../../www): The system cannot find the file specified. (code: 2) in F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php on line 133
+[Thu Feb 04 20:59:49.556566 2016] [:error] [pid 8420:tid 1548] [client ::1:50634] PHP Stack trace:
+[Thu Feb 04 20:59:49.556566 2016] [:error] [pid 8420:tid 1548] [client ::1:50634] PHP   1. {main}() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:0
+[Thu Feb 04 20:59:49.556566 2016] [:error] [pid 8420:tid 1548] [client ::1:50634] PHP   2. opendir() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:133
+[Thu Feb 04 20:59:49.556566 2016] [:error] [pid 8420:tid 1548] [client ::1:50634] PHP Warning:  opendir(../../www): failed to open dir: No such file or directory in F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php on line 133
+[Thu Feb 04 20:59:49.557567 2016] [:error] [pid 8420:tid 1548] [client ::1:50634] PHP Stack trace:
+[Thu Feb 04 20:59:49.557567 2016] [:error] [pid 8420:tid 1548] [client ::1:50634] PHP   1. {main}() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:0
+[Thu Feb 04 20:59:49.557567 2016] [:error] [pid 8420:tid 1548] [client ::1:50634] PHP   2. opendir() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:133
+[Thu Feb 04 20:59:49.557567 2016] [:error] [pid 8420:tid 1548] [client ::1:50634] PHP Warning:  readdir() expects parameter 1 to be resource, boolean given in F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php on line 135
+[Thu Feb 04 20:59:49.557567 2016] [:error] [pid 8420:tid 1548] [client ::1:50634] PHP Stack trace:
+[Thu Feb 04 20:59:49.557567 2016] [:error] [pid 8420:tid 1548] [client ::1:50634] PHP   1. {main}() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:0
+[Thu Feb 04 20:59:49.557567 2016] [:error] [pid 8420:tid 1548] [client ::1:50634] PHP   2. readdir() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:135
+[Thu Feb 04 20:59:49.557567 2016] [:error] [pid 8420:tid 1548] [client ::1:50634] PHP Warning:  closedir() expects parameter 1 to be resource, boolean given in F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php on line 144
+[Thu Feb 04 20:59:49.557567 2016] [:error] [pid 8420:tid 1548] [client ::1:50634] PHP Stack trace:
+[Thu Feb 04 20:59:49.557567 2016] [:error] [pid 8420:tid 1548] [client ::1:50634] PHP   1. {main}() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:0
+[Thu Feb 04 20:59:49.557567 2016] [:error] [pid 8420:tid 1548] [client ::1:50634] PHP   2. closedir() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:144
+[Thu Feb 04 21:00:15.478050 2016] [mpm_winnt:crit] [pid 8420:tid 792] AH02538: Child: Parent process exited abruptly. Child process is ending
+[Thu Feb 04 21:00:18.386151 2016] [core:warn] [pid 5200:tid 752] AH00098: pid file F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Feb 04 21:00:18.692995 2016] [ssl:warn] [pid 5200:tid 752] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Feb 04 21:00:18.735029 2016] [mpm_winnt:notice] [pid 5200:tid 752] AH00455: Apache/2.4.10 (Win32) OpenSSL/1.0.1h PHP/5.4.31 configured -- resuming normal operations
+[Thu Feb 04 21:00:18.735029 2016] [mpm_winnt:notice] [pid 5200:tid 752] AH00456: Apache Haus VC9 Server built: Jul 15 2014 20:34:18
+[Thu Feb 04 21:00:18.735029 2016] [core:notice] [pid 5200:tid 752] AH00094: Command line: 'F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\bin\\apache\\bin\\httpd.exe -d F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache -f F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\bin\\apache\\conf\\httpd.conf'
+[Thu Feb 04 21:00:18.743049 2016] [mpm_winnt:notice] [pid 5200:tid 752] AH00418: Parent: Created child process 856
+AH00548: NameVirtualHost has no effect and will be removed in the next release F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache/conf/httpd.conf:264
+[Thu Feb 04 21:00:19.509820 2016] [ssl:warn] [pid 856:tid 660] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Feb 04 21:00:19.551849 2016] [mpm_winnt:notice] [pid 856:tid 660] AH00354: Child: Starting 64 worker threads.
+[Thu Feb 04 21:00:23.851915 2016] [:error] [pid 856:tid 1416] [client ::1:50660] PHP Warning:  opendir(../../www,../../www): The system cannot find the file specified. (code: 2) in F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php on line 133
+[Thu Feb 04 21:00:23.851915 2016] [:error] [pid 856:tid 1416] [client ::1:50660] PHP Stack trace:
+[Thu Feb 04 21:00:23.851915 2016] [:error] [pid 856:tid 1416] [client ::1:50660] PHP   1. {main}() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:0
+[Thu Feb 04 21:00:23.851915 2016] [:error] [pid 856:tid 1416] [client ::1:50660] PHP   2. opendir() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:133
+[Thu Feb 04 21:00:23.852915 2016] [:error] [pid 856:tid 1416] [client ::1:50660] PHP Warning:  opendir(../../www): failed to open dir: No such file or directory in F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php on line 133
+[Thu Feb 04 21:00:23.852915 2016] [:error] [pid 856:tid 1416] [client ::1:50660] PHP Stack trace:
+[Thu Feb 04 21:00:23.852915 2016] [:error] [pid 856:tid 1416] [client ::1:50660] PHP   1. {main}() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:0
+[Thu Feb 04 21:00:23.852915 2016] [:error] [pid 856:tid 1416] [client ::1:50660] PHP   2. opendir() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:133
+[Thu Feb 04 21:00:23.852915 2016] [:error] [pid 856:tid 1416] [client ::1:50660] PHP Warning:  readdir() expects parameter 1 to be resource, boolean given in F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php on line 135
+[Thu Feb 04 21:00:23.852915 2016] [:error] [pid 856:tid 1416] [client ::1:50660] PHP Stack trace:
+[Thu Feb 04 21:00:23.852915 2016] [:error] [pid 856:tid 1416] [client ::1:50660] PHP   1. {main}() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:0
+[Thu Feb 04 21:00:23.852915 2016] [:error] [pid 856:tid 1416] [client ::1:50660] PHP   2. readdir() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:135
+[Thu Feb 04 21:00:23.852915 2016] [:error] [pid 856:tid 1416] [client ::1:50660] PHP Warning:  closedir() expects parameter 1 to be resource, boolean given in F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php on line 144
+[Thu Feb 04 21:00:23.852915 2016] [:error] [pid 856:tid 1416] [client ::1:50660] PHP Stack trace:
+[Thu Feb 04 21:00:23.852915 2016] [:error] [pid 856:tid 1416] [client ::1:50660] PHP   1. {main}() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:0
+[Thu Feb 04 21:00:23.852915 2016] [:error] [pid 856:tid 1416] [client ::1:50660] PHP   2. closedir() F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\phpapps\\uwamp\\index.php:144
+[Thu Feb 04 21:03:35.266691 2016] [mpm_winnt:crit] [pid 856:tid 660] AH02538: Child: Parent process exited abruptly. Child process is ending
+[Thu Feb 04 21:03:41.386604 2016] [core:warn] [pid 440:tid 684] AH00098: pid file F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Feb 04 21:03:41.562760 2016] [ssl:warn] [pid 440:tid 684] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Feb 04 21:03:41.605801 2016] [mpm_winnt:notice] [pid 440:tid 684] AH00455: Apache/2.4.10 (Win32) OpenSSL/1.0.1h PHP/5.4.31 configured -- resuming normal operations
+[Thu Feb 04 21:03:41.605801 2016] [mpm_winnt:notice] [pid 440:tid 684] AH00456: Apache Haus VC9 Server built: Jul 15 2014 20:34:18
+[Thu Feb 04 21:03:41.605801 2016] [core:notice] [pid 440:tid 684] AH00094: Command line: 'F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\bin\\apache\\bin\\httpd.exe -d F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache -f F:\\atomicApe\\babun\\cygwin\\home\\bananas\\UwAmp\\bin\\apache\\conf\\httpd.conf'
+[Thu Feb 04 21:03:41.612805 2016] [mpm_winnt:notice] [pid 440:tid 684] AH00418: Parent: Created child process 6484
+AH00548: NameVirtualHost has no effect and will be removed in the next release F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache/conf/httpd.conf:264
+[Thu Feb 04 21:03:42.381669 2016] [ssl:warn] [pid 6484:tid 764] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Feb 04 21:03:42.426920 2016] [mpm_winnt:notice] [pid 6484:tid 764] AH00354: Child: Starting 64 worker threads.
+[Thu Feb 04 22:33:33.351903 2016] [mpm_winnt:crit] [pid 6484:tid 764] AH02538: Child: Parent process exited abruptly. Child process is ending
+[Fri Feb 05 08:48:50.952014 2016] [core:warn] [pid 15208:tid 616] AH00098: pid file F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Fri Feb 05 08:48:51.125640 2016] [ssl:warn] [pid 15208:tid 616] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Fri Feb 05 08:48:51.824174 2016] [mpm_winnt:notice] [pid 15208:tid 616] AH00455: Apache/2.4.10 (Win32) OpenSSL/1.0.1h PHP/5.4.31 configured -- resuming normal operations
+[Fri Feb 05 08:48:51.824174 2016] [mpm_winnt:notice] [pid 15208:tid 616] AH00456: Apache Haus VC9 Server built: Jul 15 2014 20:34:18
+[Fri Feb 05 08:48:51.824174 2016] [core:notice] [pid 15208:tid 616] AH00094: Command line: 'F:\\atomicApe\\babun\\cygwin\\home\\bananas\\uwamp\\bin\\apache\\bin\\httpd.exe -d F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache -f F:\\atomicApe\\babun\\cygwin\\home\\bananas\\uwamp\\bin\\apache\\conf\\httpd.conf'
+[Fri Feb 05 08:48:51.831171 2016] [mpm_winnt:notice] [pid 15208:tid 616] AH00418: Parent: Created child process 7516
+AH00548: NameVirtualHost has no effect and will be removed in the next release F:/atomicApe/babun/cygwin/home/bananas/UwAmp/bin/apache/conf/httpd.conf:264
+[Fri Feb 05 08:48:53.566321 2016] [ssl:warn] [pid 7516:tid 604] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Fri Feb 05 08:48:53.605665 2016] [mpm_winnt:notice] [pid 7516:tid 604] AH00354: Child: Starting 64 worker threads.
+[Fri Feb 05 08:48:53.705582 2016] [mpm_winnt:crit] [pid 7516:tid 604] AH02538: Child: Parent process exited abruptly. Child process is ending

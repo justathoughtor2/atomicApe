@@ -1,0 +1,107 @@
+{
+  "name": "atom-package-manager",
+  "description": "Atom package manager",
+  "version": "1.5.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atom/apm.git"
+  },
+  "bugs": {
+    "url": "https://github.com/atom/apm/issues"
+  },
+  "main": "./lib/apm.js",
+  "bin": {
+    "apm": "./bin/apm"
+  },
+  "scripts": {
+    "prepublish": "grunt prepublish",
+    "install": "node ./script/download-node.js",
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "asar-require": "0.2.0",
+    "async": "~0.2.8",
+    "colors": "~0.6.1",
+    "exit": "0.1.2",
+    "first-mate": "^5.0",
+    "fs-plus": "2.x",
+    "git-utils": "^4.0",
+    "keytar": "^3.0",
+    "mv": "2.0.0",
+    "ncp": "~0.5.1",
+    "npm": "2.13.3",
+    "open": "0.0.4",
+    "plist": "git+https://github.com/nathansobo/node-plist.git",
+    "q": "~0.9.7",
+    "read": "~1.0.5",
+    "season": ">=5.0.5 <6.0",
+    "temp": "~0.7.0",
+    "underscore-plus": "1.x",
+    "wordwrap": "0.0.2",
+    "wrench": "~1.5.1",
+    "yargs": "^3.23.0"
+  },
+  "devDependencies": {
+    "jasmine-focused": ">=1.0.7 <2.0",
+    "grunt": "~0.4.1",
+    "grunt-contrib-coffee": "~0.12.0",
+    "grunt-cli": "~0.1.8",
+    "grunt-shell": "~0.2.2",
+    "express": "~3.2.3",
+    "grunt-coffeelint": "0.0.13",
+    "coffee-script": "^1.8.0"
+  },
+  "gitHead": "92048258141eab66958f680b309937269a382c03",
+  "homepage": "https://github.com/atom/apm#readme",
+  "_id": "atom-package-manager@1.5.0",
+  "_shasum": "a887de28f7e21033b186b2214b6f99da83b4c817",
+  "_from": "atom-package-manager@1.5.0",
+  "_npmVersion": "3.3.12",
+  "_nodeVersion": "5.1.0",
+  "_npmUser": {
+    "name": "thedaniel",
+    "email": "danielwh@gmail.com"
+  },
+  "dist": {
+    "shasum": "a887de28f7e21033b186b2214b6f99da83b4c817",
+    "tarball": "http://registry.npmjs.org/atom-package-manager/-/atom-package-manager-1.5.0.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "benogle",
+      "email": "ogle.ben@gmail.com"
+    },
+    {
+      "name": "izuzak",
+      "email": "izuzak@gmail.com"
+    },
+    {
+      "name": "kevinsawicki",
+      "email": "kevinsawicki@gmail.com"
+    },
+    {
+      "name": "maxbrunsfeld",
+      "email": "maxbrunsfeld@gmail.com"
+    },
+    {
+      "name": "nathansobo",
+      "email": "nathan@github.com"
+    },
+    {
+      "name": "probablycorey",
+      "email": "probablycorey@gmail.com"
+    },
+    {
+      "name": "thedaniel",
+      "email": "danielwh@gmail.com"
+    },
+    {
+      "name": "zcbenz",
+      "email": "zcbenz@gmail.com"
+    }
+  ],
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/atom-package-manager/-/atom-package-manager-1.5.0.tgz",
+  "readme": "ERROR: No README data found!"
+}

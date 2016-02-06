@@ -1,0 +1,14 @@
+zip
+sdesc: "Info-ZIP compression utility"
+ldesc: "Zip is a compression and file packaging utility.  It is compatible
+with PKZIP 2.04g for MSDOS systems.  There is a companion to zip called unzip
+which handles decompression."
+category: Archive
+requires: libbz2_1 libgcc1 cygwin
+version: 3.0-12
+install: x86/release/zip/zip-3.0-12.tar.xz 211748 a1999c2685e2d610af30517f8d27871839a300d6393b9fe0f8a0869a84ecb538a9bb031a333b06bd69335b7a05c36efc0b05e65274554f864efe1cb02696337f
+source: x86/release/zip/zip-3.0-12-src.tar.xz 1121700 62f6232cf748d4c9af958ab5402df00d3a8e0f3df97e4d766134e1973527939a9932861d51a5903eae7b257962cd9cc7e6eb0eb873a616ef2139ec2f93327d3c
+[prev]
+version: 3.0-11
+install: x86/release/zip/zip-3.0-11.tar.bz2 264648 e5c60672b9350cb7e1ac7871febc62df320b76a3282ada0e17819d229a6fd7de3a36918f058307aed7e4b4483dcf8e03992557886e76bd423f2695bff6b60b9c
+source: x86/release/zip/zip-3.0-11-src.tar.bz2 1976705 123e54b8028feb822c456949819e33683b55abb3b1533c2a7d0ba1e9dc38399075127224885fb01a74a4ba34a34ef71670607a74125cbe37775eb9b081761736

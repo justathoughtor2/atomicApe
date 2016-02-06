@@ -1,0 +1,14 @@
+httpd
+sdesc: "Apache HTTP Server"
+ldesc: "The Apache HTTP Server Project is a collaborative software
+development effort aimed at creating a robust, commercial-grade, featureful,
+and freely-available source code implementation of an HTTP (Web) server."
+category: Web
+requires: cygwin libapr1 libaprutil1 libgcc1 libpcre1 zlib0
+version: 2.4.18-1
+install: x86/release/httpd/httpd-2.4.18-1.tar.xz 948604 4f3d0be98eb7edb088b3b54dd0054d5d139e79a91ac92806dffddf22dc30a7e4ac430baa7e60794b31cd1adaf6f3b4b72dd4028efbc8775872b0f6619799ccf7
+source: x86/release/httpd/httpd-2.4.18-1-src.tar.xz 5187320 cd2d18c71d676d127a6867c8b887b103d9753965f07cc0ddd6ad2d6e81c48b068b1926cab7bc76129ecefcae7d5c7721f8d750d2a9f965ec530c2abc5cb0e620
+[prev]
+version: 2.4.16-1
+install: x86/release/httpd/httpd-2.4.16-1.tar.xz 939996 9ac122f6bcc9381bb0dabcab39e2a5c6e5d0176d1dc7fdd379d46c9587f59734af2abf5ddc402abbf7ab3f87383b0de89670a36f0abddab9ab66c33bb7db1495
+source: x86/release/httpd/httpd-2.4.16-1-src.tar.xz 5107328 d1f0f21c4c550dae2559fccc1bf776fef1a9fcc81e98a8008db6fdec16073554501018cc46032fbf11eccc9ec2e193f97680ca00479986f382bb7e2e55abf725

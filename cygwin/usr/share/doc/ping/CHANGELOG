@@ -1,0 +1,34 @@
+
+			P I N G . C
+ 
+Using the InterNet Control Message Protocol (ICMP) "ECHO" facility,
+measure round-trip-delays and packet loss across network paths.
+
+Author -
+	Mike Muuss
+	U. S. Army Ballistic Research Laboratory
+	December, 1983
+Modified at Uc Berkeley
+
+Changed argument to inet_ntoa() to be struct in_addr instead of u_long
+DFM BRL 1992
+
+Changed inet_ntoa, ntohl and header files to compile under 
+Cygwin 1.5.12-1 and  gcc 3.3.3.
+Added calculation of Median and ttl field print out.
+ Lino Tinoco <lino.m.tinoco(at)telecom.pt>
+ 2005/01/09
+
+Added header files and casts to compile without warning on 
+cygwin 1.7.9 with gcc-4.8.2
+Simplified Makefile and repacked with cygport
+ Marco Atzeri
+ 2014/05/02 
+
+Status -
+	Public Domain.  Distribution Unlimited.
+
+Bugs -
+	More statistics could always be gathered.
+	This program has to run SUID to ROOT to access the ICMP socket.
+

@@ -1,0 +1,18 @@
+libglapi0
+sdesc: "OpenGL internal API library (runtime)"
+ldesc: "Mesa is an open-source implementation of the OpenGL specification,
+a system for rendering interactive 3D graphics.
+
+Complete documentation on OpenGL usage and configuration can be found here:
+
+http://x.cygwin.com/docs/ug/using-glx.html
+"
+category: Libs
+requires: cygwin libgcc1
+version: 11.0.9-1
+install: x86/release/mesa/libglapi0/libglapi0-11.0.9-1.tar.xz 40716 03f4162bb2b1775e24c599cb22efc656fcaff0b0d38aeb681a519490a161b460e747058fa67720f1eedd6ac93a43fda82d8a1e75cddf03e51910fad80b90b9a3
+source: x86/release/mesa/mesa-11.0.9-1-src.tar.xz 7303404 b5a9095609d1d6abb9abfd3ce4a258a7c23a45ec1b4de76311d3837794c7852258bead9b49034012e957137927d3578eb96168fc0c4d653e0d00d2a04d991ef4
+[prev]
+version: 11.0.6-1
+install: x86/release/mesa/libglapi0/libglapi0-11.0.6-1.tar.xz 40752 38f76eb6d8e856b5dbcb3265839368c7b83c14269bc74ed03381622eef7be5f23e1a18e39bccd9d239df659e28dcdbbde63921fe0dd8bfa32818fba2df692531
+source: x86/release/mesa/mesa-11.0.6-1-src.tar.xz 7293628 462c776edb790ef9f8cbc12dbc72e34ceca0bbf5c29eadd0d7f841df2071cb73dcbf85a19cb3f49af7509ed50b241d8a1ebb9f3aa5b1920dcbc8441c8350eb6b

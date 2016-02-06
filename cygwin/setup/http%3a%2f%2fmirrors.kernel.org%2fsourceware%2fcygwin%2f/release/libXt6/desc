@@ -1,0 +1,12 @@
+libXt6
+sdesc: "X.Org X Toolkit library"
+ldesc: "X.Org X Toolkit library"
+category: Libs
+requires: cygwin libICE6 libSM6 libX11_6
+version: 1.1.5-1
+install: x86/release/libXt/libXt6/libXt6-1.1.5-1.tar.xz 304652 74fc1bbb8e97f681541c1195f77edaf2d5e754633bce2a4110a72e8b5678aa03ac3c64fdce428bfa7b751d71aaf2ad5192262986bdc7f5e18a86f00c90fddeae
+source: x86/release/libXt/libXt-1.1.5-1-src.tar.xz 773084 4eef065cb70a82345eaea6760c5a0770ee4384979bbced7c3e0f368a8b56f1de2f3507b5571e1eb0b3be8d3c4a71d1c765b4dad2ccea9577daedb31163e46639
+[prev]
+version: 1.1.4-2
+install: x86/release/libXt/libXt6/libXt6-1.1.4-2.tar.xz 1550440 6ed315dd26b9b5f159dab7bfb0a40a50a93a1e7af871de91beede6a6487f88ab1473491651859fb81a4955253d980164a735c45ff6dc0a94d3fce08ab66cab17
+source: x86/release/libXt/libXt-1.1.4-2-src.tar.xz 764476 1acc5a10c2d496b613d2c4a6f257860d291eb4b3f2f2ab0cf904589df5ce72578ae95d8772ced7c8b028b9a9f5d7cb67cd98f6817bfb3c31c8d3ea19e6e47b6d

@@ -1,0 +1,1320 @@
+2015/06/23 11:02:09 Starting cygwin install, version 2.870
+2015/06/23 11:02:09 User has backup/restore rights
+2015/06/23 11:02:09 Current Directory: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages
+2015/06/23 11:02:09 Could not open service McShield for query, start and stop. McAfee may not be installed, or we don't have access.
+2015/06/23 11:02:09 root: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin system
+2015/06/23 11:02:09 Selected local directory: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages
+2015/06/23 11:02:09 io_stream_cygfile: fopen(/etc/setup/installed.db) failed 2 No such file or directory
+2015/06/23 11:02:10 io_stream_cygfile: fopen(/etc/setup/timestamp) failed 2 No such file or directory
+2015/06/23 11:02:11 Added manual package alternatives
+2015/06/23 11:02:11 Added manual package aspell
+2015/06/23 11:02:11 Added manual package aspell-en
+2015/06/23 11:02:11 Added manual package attr
+2015/06/23 11:02:11 Added manual package automake
+2015/06/23 11:02:11 Added manual package base-cygwin
+2015/06/23 11:02:11 Added manual package base-files
+2015/06/23 11:02:11 Added manual package bash
+2015/06/23 11:02:11 Added manual package bc
+2015/06/23 11:02:11 Added manual package bzip2
+2015/06/23 11:02:11 Added manual package coreutils
+2015/06/23 11:02:11 Added manual package cron
+2015/06/23 11:02:11 Added manual package crypt
+2015/06/23 11:02:11 Added manual package csih
+2015/06/23 11:02:11 Added manual package ctags
+2015/06/23 11:02:11 Added manual package curl
+2015/06/23 11:02:11 Added manual package cygutils
+2015/06/23 11:02:11 Added manual package cygwin
+2015/06/23 11:02:11 Added manual package diffutils
+2015/06/23 11:02:11 Added manual package dos2unix
+2015/06/23 11:02:11 Added manual package editrights
+2015/06/23 11:02:11 Added manual package findutils
+2015/06/23 11:02:11 Added manual package gawk
+2015/06/23 11:02:11 Added manual package gcc-core
+2015/06/23 11:02:11 Added manual package gettext
+2015/06/23 11:02:11 Added manual package git
+2015/06/23 11:02:11 Added manual package git-svn
+2015/06/23 11:02:11 Added manual package gnutls
+2015/06/23 11:02:11 Added manual package grep
+2015/06/23 11:02:11 Added manual package groff
+2015/06/23 11:02:11 Added manual package gzip
+2015/06/23 11:02:11 Added manual package hostname
+2015/06/23 11:02:11 Added manual package ipc-utils
+2015/06/23 11:02:11 Added manual package keychain
+2015/06/23 11:02:11 Added manual package less
+2015/06/23 11:02:11 Added manual package libevent-devel
+2015/06/23 11:02:11 Added manual package libevent2.0_5
+2015/06/23 11:02:11 Added manual package libncurses-devel
+2015/06/23 11:02:11 Added manual package links
+2015/06/23 11:02:11 Added manual package login
+2015/06/23 11:02:11 Added manual package make
+2015/06/23 11:02:11 Added manual package man
+2015/06/23 11:02:11 Added manual package mc
+2015/06/23 11:02:11 Added manual package mintty
+2015/06/23 11:02:11 Added manual package nano
+2015/06/23 11:02:11 Added manual package nc
+2015/06/23 11:02:11 Added manual package ncurses
+2015/06/23 11:02:11 Added manual package ncursesw
+2015/06/23 11:02:11 Added manual package openssh
+2015/06/23 11:02:11 Added manual package openssl
+2015/06/23 11:02:11 Added manual package pcre
+2015/06/23 11:02:11 Added manual package perl
+2015/06/23 11:02:11 Added manual package perl_vendor
+2015/06/23 11:02:11 Added manual package ping
+2015/06/23 11:02:11 Added manual package pkg-config
+2015/06/23 11:02:11 Added manual package procps
+2015/06/23 11:02:11 Added manual package readline
+2015/06/23 11:02:11 Added manual package rebase
+2015/06/23 11:02:11 Added manual package rsync
+2015/06/23 11:02:11 Added manual package run
+2015/06/23 11:02:11 Added manual package sed
+2015/06/23 11:02:11 Added manual package shutdown
+2015/06/23 11:02:11 Added manual package subversion
+2015/06/23 11:02:11 Added manual package tar
+2015/06/23 11:02:11 Added manual package terminfo
+2015/06/23 11:02:11 Added manual package time
+2015/06/23 11:02:11 Added manual package tree
+2015/06/23 11:02:11 Added manual package unzip
+2015/06/23 11:02:11 Added manual package util-linux
+2015/06/23 11:02:11 Added manual package vim
+2015/06/23 11:02:11 Added manual package wget
+2015/06/23 11:02:11 Added manual package which
+2015/06/23 11:02:11 Added manual package zsh
+2015/06/23 11:02:11 Adding required dependency autoconf: Selecting version 13-1 for installation.
+2015/06/23 11:02:11 Adding required dependency autoconf2.1: Selecting version 2.13-12 for installation.
+2015/06/23 11:02:11 Adding required dependency autoconf2.5: Selecting version 2.69-3 for installation.
+2015/06/23 11:02:11 Adding required dependency automake1.10: Selecting version 1.10.3-2 for installation.
+2015/06/23 11:02:11 Adding required dependency automake1.11: Selecting version 1.11.6-2 for installation.
+2015/06/23 11:02:11 Adding required dependency automake1.12: Selecting version 1.12.6-2 for installation.
+2015/06/23 11:02:11 Adding required dependency automake1.13: Selecting version 1.13.4-1 for installation.
+2015/06/23 11:02:11 Adding required dependency automake1.14: Selecting version 1.14.1-2 for installation.
+2015/06/23 11:02:11 Adding required dependency automake1.4: Selecting version 1.4p6-11 for installation.
+2015/06/23 11:02:11 Adding required dependency automake1.5: Selecting version 1.5-11 for installation.
+2015/06/23 11:02:11 Adding required dependency automake1.6: Selecting version 1.6.3-12 for installation.
+2015/06/23 11:02:11 Adding required dependency automake1.7: Selecting version 1.7.9-11 for installation.
+2015/06/23 11:02:11 Adding required dependency automake1.8: Selecting version 1.8.5-11 for installation.
+2015/06/23 11:02:11 Adding required dependency automake1.9: Selecting version 1.9.6-11 for installation.
+2015/06/23 11:02:11 Adding required dependency binutils: Selecting version 2.25-1 for installation.
+2015/06/23 11:02:11 Adding required dependency ca-certificates: Selecting version 2.3-1 for installation.
+2015/06/23 11:02:11 Adding required dependency cygrunsrv: Selecting version 1.62-1 for installation.
+2015/06/23 11:02:11 Adding required dependency cygwin-devel: Selecting version 1.7.35-1 for installation.
+2015/06/23 11:02:11 Adding required dependency gamin: Selecting version 0.1.10-15 for installation.
+2015/06/23 11:02:11 Adding required dependency gsettings-desktop-schemas: Selecting version 3.14.1-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libapr1: Selecting version 1.4.8-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libaprutil1: Selecting version 1.5.4-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libaspell15: Selecting version 0.60.6.1-3 for installation.
+2015/06/23 11:02:11 Adding required dependency libatomic1: Selecting version 4.9.2-3 for installation.
+2015/06/23 11:02:11 Adding required dependency libattr1: Selecting version 2.4.46-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libblkid1: Selecting version 2.25.2-2 for installation.
+2015/06/23 11:02:11 Adding required dependency libbz2_1: Selecting version 1.0.6-2 for installation.
+2015/06/23 11:02:11 Adding required dependency libcharset1: Selecting version 1.14-3 for installation.
+2015/06/23 11:02:11 Adding required dependency libcloog-isl4: Selecting version 0.18.0-2 for installation.
+2015/06/23 11:02:11 Adding required dependency libcom_err2: Selecting version 1.42.12-2 for installation.
+2015/06/23 11:02:11 Adding required dependency libcurl4: Selecting version 7.41.0-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libdb4.8: Selecting version 4.8.30-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libedit0: Selecting version 20130712-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libexpat1: Selecting version 2.1.0-3 for installation.
+2015/06/23 11:02:11 Adding required dependency libext2fs2: Selecting version 1.42.12-2 for installation.
+2015/06/23 11:02:11 Adding required dependency libfam0: Selecting version 0.1.10-15 for installation.
+2015/06/23 11:02:11 Adding required dependency libffi6: Selecting version 3.2.1-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libgcc1: Selecting version 4.9.2-3 for installation.
+2015/06/23 11:02:11 Adding required dependency libgdbm4: Selecting version 1.8.3-20 for installation.
+2015/06/23 11:02:11 Adding required dependency libglib2.0_0: Selecting version 2.42.2-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libgmp10: Selecting version 6.0.0a-2 for installation.
+2015/06/23 11:02:11 Adding required dependency libgnutls28: Selecting version 3.2.21-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libgomp1: Selecting version 4.9.2-3 for installation.
+2015/06/23 11:02:11 Adding required dependency libgssapi_krb5_2: Selecting version 1.13.1-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libguile17: Selecting version 1.8.8-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libhogweed2: Selecting version 2.7-2 for installation.
+2015/06/23 11:02:11 Adding required dependency libiconv: Selecting version 1.14-3 for installation.
+2015/06/23 11:02:11 Adding required dependency libiconv-devel: Selecting version 1.14-3 for installation.
+2015/06/23 11:02:11 Adding required dependency libiconv2: Selecting version 1.14-3 for installation.
+2015/06/23 11:02:11 Adding required dependency libidn11: Selecting version 1.29-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libintl-devel: Selecting version 0.19.4-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libintl8: Selecting version 0.19.4-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libiodbc2: Selecting version 3.52.8-2 for installation.
+2015/06/23 11:02:11 Adding required dependency libisl10: Selecting version 0.11.1-2 for installation.
+2015/06/23 11:02:11 Adding required dependency libk5crypto3: Selecting version 1.13.1-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libkrb5support0: Selecting version 1.13.1-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libkrb5_3: Selecting version 1.13.1-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libltdl7: Selecting version 2.4.6-1 for installation.
+2015/06/23 11:02:11 Adding required dependency liblzma5: Selecting version 5.0.8-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libmetalink3: Selecting version 0.1.2-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libmpc3: Selecting version 1.0.3-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libmpfr4: Selecting version 3.1.2-2 for installation.
+2015/06/23 11:02:11 Adding required dependency libmysqlclient18: Selecting version 5.5.41-2 for installation.
+2015/06/23 11:02:11 Adding required dependency libncurses10: Selecting version 5.9-20150307-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libncursesw10: Selecting version 5.9-20150307-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libneon27: Selecting version 0.30.1-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libnettle4: Selecting version 2.7-2 for installation.
+2015/06/23 11:02:11 Adding required dependency libopenldap2_4_2: Selecting version 2.4.40-2 for installation.
+2015/06/23 11:02:11 Adding required dependency libopts25: Selecting version 5.18.4-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libp11-kit0: Selecting version 0.20.7-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libpcre1: Selecting version 8.36-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libpcre16_0: Selecting version 8.36-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libpcre32_0: Selecting version 8.36-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libpcreposix0: Selecting version 8.36-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libpipeline1: Selecting version 1.3.0-3 for installation.
+2015/06/23 11:02:11 Adding required dependency libpopt0: Selecting version 1.16-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libpq5: Selecting version 9.4.1-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libproxy1: Selecting version 0.4.11-3 for installation.
+2015/06/23 11:02:11 Adding required dependency libquadmath0: Selecting version 4.9.2-3 for installation.
+2015/06/23 11:02:11 Adding required dependency libreadline-devel: Selecting version 6.3.8-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libsasl2_3: Selecting version 2.1.26-9 for installation.
+2015/06/23 11:02:11 Adding required dependency libserf1_0: Selecting version 1.3.8-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libsigsegv2: Selecting version 2.10-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libsmartcols1: Selecting version 2.25.2-2 for installation.
+2015/06/23 11:02:11 Adding required dependency libsqlite3_0: Selecting version 3.8.8.3-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libssh2_1: Selecting version 1.5.0-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libssp0: Selecting version 4.9.2-3 for installation.
+2015/06/23 11:02:11 Adding required dependency libstdc++6: Selecting version 4.9.2-3 for installation.
+2015/06/23 11:02:11 Adding required dependency libtasn1_6: Selecting version 4.2-1 for installation.
+2015/06/23 11:02:11 Adding required dependency libuuid-devel: Selecting version 2.25.2-2 for installation.
+2015/06/23 11:02:11 Adding required dependency libuuid1: Selecting version 2.25.2-2 for installation.
+2015/06/23 11:02:11 Adding required dependency libxml2: Selecting version 2.9.2-1 for installation.
+2015/06/23 11:02:11 Adding required dependency lynx: Selecting version 2.8.7-1 for installation.
+2015/06/23 11:02:11 Adding required dependency m4: Selecting version 1.4.17-1 for installation.
+2015/06/23 11:02:11 Adding required dependency openssl-devel: Selecting version 1.0.2a-1 for installation.
+2015/06/23 11:02:11 Adding required dependency p11-kit: Selecting version 0.20.7-1 for installation.
+2015/06/23 11:02:11 Adding required dependency p11-kit-trust: Selecting version 0.20.7-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Archive-Zip: Selecting version 1.46-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-B-Generate: Selecting version 1.50-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Capture-Tiny: Selecting version 0.28-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Carp: Selecting version 1.3301-2 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Compress-Bzip2: Selecting version 2.22-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Config-Tiny: Selecting version 2.22-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-CPAN-Reporter: Selecting version 1.2011-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Data-Alias: Selecting version 1.18-2 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Devel-Autoflush: Selecting version 0.06-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Digest-HMAC: Selecting version 1.03-4 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Digest-SHA: Selecting version 5.95-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Encode-Locale: Selecting version 1.04-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Error: Selecting version 0.17023-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-File-Copy-Recursive: Selecting version 0.38-4 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-File-HomeDir: Selecting version 1.00-2 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-File-Listing: Selecting version 6.04-4 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-File-pushd: Selecting version 1.009-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-HTML-Parser: Selecting version 3.71-2 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-HTTP-Cookies: Selecting version 6.01-4 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-HTTP-Daemon: Selecting version 6.01-4 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-HTTP-Date: Selecting version 6.02-4 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-HTTP-Message: Selecting version 6.06-2 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-HTTP-Negotiate: Selecting version 6.01-4 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-IO-CaptureOutput: Selecting version 1.1104-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-IO-Socket-INET6: Selecting version 2.72-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-IO-String: Selecting version 1.08-4 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-IO-Tty: Selecting version 1.12-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-IPC-Cmd: Selecting version 0.92-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-IPC-Run: Selecting version 0.94-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-libwww-perl: Selecting version 6.13-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-LWP-MediaTypes: Selecting version 6.02-4 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Module-ScanDeps: Selecting version 1.18-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Module-Signature: Selecting version 0.73-2 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Net-DNS: Selecting version 0.83-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Net-HTTP: Selecting version 6.07-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Net-IP: Selecting version 1.26-2 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-PadWalker: Selecting version 2.0-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-PAR-Dist: Selecting version 0.49-2 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Pod-Coverage: Selecting version 0.23-2 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Pod-Escapes: Selecting version 1.07-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Pod-Simple: Selecting version 3.30-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Probe-Perl: Selecting version 0.03-2 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Proc-ProcessTable: Selecting version 0.51-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Socket6: Selecting version 0.25-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Tee: Selecting version 0.14-4 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Term-ReadLine-Gnu: Selecting version 1.26-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Term-ReadLine-Perl: Selecting version 1.0303-4 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-TermReadKey: Selecting version 2.32-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Test-NoWarnings: Selecting version 1.04-3 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Test-Pod: Selecting version 1.48-2 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Test-Pod-Coverage: Selecting version 1.10-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Test-Reporter: Selecting version 1.60-2 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Test-Reporter-Transport-Metabase: Selecting version 1.999008-4 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-Test-Simple: Selecting version 1.001014-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-URI: Selecting version 1.67-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-WWW-RobotRules: Selecting version 6.02-4 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-XML-LibXML: Selecting version 2.0118-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-XML-NamespaceSupport: Selecting version 1.11-4 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-XML-Parser: Selecting version 2.44-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-XML-SAX: Selecting version 0.99-4 for installation.
+2015/06/23 11:02:11 Adding required dependency perl-YAML: Selecting version 1.14-1 for installation.
+2015/06/23 11:02:11 Adding required dependency perl_autorebase: Selecting version 5.14.4-3 for installation.
+2015/06/23 11:02:11 Adding required dependency perl_base: Selecting version 5.14.4-3 for installation.
+2015/06/23 11:02:11 Adding required dependency popt: Selecting version 1.16-1 for installation.
+2015/06/23 11:02:11 Adding required dependency python: Selecting version 2.7.8-1 for installation.
+2015/06/23 11:02:11 Adding required dependency shared-mime-info: Selecting version 1.3-3 for installation.
+2015/06/23 11:02:11 Adding required dependency subversion-perl: Selecting version 1.8.11-1 for installation.
+2015/06/23 11:02:11 Adding required dependency texinfo: Selecting version 5.2-3 for installation.
+2015/06/23 11:02:11 Adding required dependency vim-common: Selecting version 7.4.663-1 for installation.
+2015/06/23 11:02:11 Adding required dependency w32api-headers: Selecting version 3.3.0-2 for installation.
+2015/06/23 11:02:11 Adding required dependency w32api-runtime: Selecting version 3.3.0-1 for installation.
+2015/06/23 11:02:11 Adding required dependency windows-default-manifest: Selecting version 6.4-1 for installation.
+2015/06/23 11:02:11 Adding required dependency xxd: Selecting version 7.4.663-1 for installation.
+2015/06/23 11:02:11 Adding required dependency xz: Selecting version 5.0.8-1 for installation.
+2015/06/23 11:02:11 Adding required dependency zlib-devel: Selecting version 1.2.8-3 for installation.
+2015/06/23 11:02:11 Adding required dependency zlib0: Selecting version 1.2.8-3 for installation.
+2015/06/23 11:02:11 Adding required dependency _update-info-dir: Selecting version 01372-1 for installation.
+2015/06/23 11:02:17 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/_update-info-dir/_update-info-dir-01372-1.tar.bz2
+2015/06/23 11:02:17 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/alternatives/alternatives-1.3.30c-10.tar.bz2
+2015/06/23 11:02:17 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/aspell/aspell-0.60.6.1-3.tar.xz
+2015/06/23 11:02:18 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/aspell-en/aspell-en-7.1.0-2.tar.bz2
+2015/06/23 11:02:19 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/attr/attr-2.4.46-1.tar.bz2
+2015/06/23 11:02:19 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/autoconf/autoconf-13-1.tar.bz2
+2015/06/23 11:02:19 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/autoconf2.1/autoconf2.1-2.13-12.tar.bz2
+2015/06/23 11:02:19 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/autoconf2.5/autoconf2.5-2.69-3.tar.xz
+2015/06/23 11:02:19 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/automake/automake-9-1.tar.bz2
+2015/06/23 11:02:20 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/automake1.10/automake1.10-1.10.3-2.tar.bz2
+2015/06/23 11:02:20 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/automake1.11/automake1.11-1.11.6-2.tar.bz2
+2015/06/23 11:02:21 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/automake1.12/automake1.12-1.12.6-2.tar.bz2
+2015/06/23 11:02:22 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/automake1.13/automake1.13-1.13.4-1.tar.bz2
+2015/06/23 11:02:23 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/automake1.14/automake1.14-1.14.1-2.tar.xz
+2015/06/23 11:02:24 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/automake1.4/automake1.4-1.4p6-11.tar.bz2
+2015/06/23 11:02:25 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/automake1.5/automake1.5-1.5-11.tar.bz2
+2015/06/23 11:02:26 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/automake1.6/automake1.6-1.6.3-12.tar.bz2
+2015/06/23 11:02:26 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/automake1.7/automake1.7-1.7.9-11.tar.bz2
+2015/06/23 11:02:27 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/automake1.8/automake1.8-1.8.5-11.tar.bz2
+2015/06/23 11:02:28 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/automake1.9/automake1.9-1.9.6-11.tar.bz2
+2015/06/23 11:02:28 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/base-cygwin/base-cygwin-3.8-1.tar.xz
+2015/06/23 11:02:28 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/base-files/base-files-4.2-3.tar.xz
+2015/06/23 11:02:29 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/bash/bash-4.3.33-1.tar.xz
+2015/06/23 11:02:30 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/bc/bc-1.06.95-2.tar.xz
+2015/06/23 11:02:31 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/binutils/binutils-2.25-1.tar.xz
+2015/06/23 11:02:36 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/bzip2/bzip2-1.0.6-2.tar.bz2
+2015/06/23 11:02:36 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/ca-certificates/ca-certificates-2.3-1.tar.xz
+2015/06/23 11:02:36 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/coreutils/coreutils-8.23-4.tar.xz
+2015/06/23 11:02:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/cron/cron-4.1-60.tar.xz
+2015/06/23 11:02:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/crypt/crypt-1.2-1.tar.bz2
+2015/06/23 11:02:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/csih/csih-0.9.8-6.tar.xz
+2015/06/23 11:02:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/ctags/ctags-5.8-1.tar.bz2
+2015/06/23 11:02:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/curl/curl-7.41.0-1.tar.xz
+2015/06/23 11:02:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/cygrunsrv/cygrunsrv-1.62-1.tar.xz
+2015/06/23 11:02:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/cygutils/cygutils-1.4.14-1.tar.bz2
+2015/06/23 11:02:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/cygwin/cygwin-1.7.35-1.tar.xz
+2015/06/23 11:02:39 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/cygwin/cygwin-devel/cygwin-devel-1.7.35-1.tar.xz
+2015/06/23 11:02:42 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/dash/dash-0.5.8-3.tar.xz
+2015/06/23 11:02:42 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/diffutils/diffutils-3.3-2.tar.xz
+2015/06/23 11:02:42 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/dos2unix/dos2unix-7.2-1.tar.xz
+2015/06/23 11:02:43 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/editrights/editrights-1.03-1.tar.xz
+2015/06/23 11:02:43 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/file/file-5.22-1.tar.xz
+2015/06/23 11:02:43 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/findutils/findutils-4.5.12-1.tar.xz
+2015/06/23 11:02:45 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/gamin/gamin-0.1.10-15.tar.xz
+2015/06/23 11:02:45 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/gawk/gawk-4.1.1-1.tar.xz
+2015/06/23 11:02:46 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/gcc/gcc-core/gcc-core-4.9.2-3.tar.xz
+2015/06/23 11:02:51 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/gettext/gettext-0.19.4-1.tar.xz
+2015/06/23 11:02:51 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/git/git-2.1.4-1.tar.xz
+2015/06/23 11:02:57 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/git/git-svn/git-svn-2.1.4-1.tar.xz
+2015/06/23 11:02:57 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/gnutls/gnutls-3.2.21-1.tar.xz
+2015/06/23 11:02:57 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/grep/grep-2.21-2.tar.xz
+2015/06/23 11:02:58 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/groff/groff-1.22.3-1.tar.xz
+2015/06/23 11:03:02 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/gsettings-desktop-schemas/gsettings-desktop-schemas-3.14.1-1.tar.xz
+2015/06/23 11:03:05 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/gzip/gzip-1.6-1.tar.xz
+2015/06/23 11:03:05 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/hostname/hostname-3.13-1.tar.bz2
+2015/06/23 11:03:05 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/texinfo/info/info-5.2-3.tar.xz
+2015/06/23 11:03:06 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/ipc-utils/ipc-utils-1.0-1.tar.bz2
+2015/06/23 11:03:06 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/keychain/keychain-2.7.1-1.tar.bz2
+2015/06/23 11:03:06 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/less/less-458-2.tar.xz
+2015/06/23 11:03:06 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/libapr1/libapr1-1.4.8-1.tar.bz2
+2015/06/23 11:03:06 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/libaprutil1/libaprutil1-1.5.4-1.tar.xz
+2015/06/23 11:03:06 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/aspell/libaspell15/libaspell15-0.60.6.1-3.tar.xz
+2015/06/23 11:03:06 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/gcc/libatomic1/libatomic1-4.9.2-3.tar.xz
+2015/06/23 11:03:06 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/attr/libattr1/libattr1-2.4.46-1.tar.bz2
+2015/06/23 11:03:06 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/util-linux/libblkid1/libblkid1-2.25.2-2.tar.xz
+2015/06/23 11:03:07 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/bzip2/libbz2_1/libbz2_1-1.0.6-2.tar.bz2
+2015/06/23 11:03:07 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/libiconv/libcharset1/libcharset1-1.14-3.tar.xz
+2015/06/23 11:03:07 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/cloog-isl/libcloog-isl4/libcloog-isl4-0.18.0-2.tar.bz2
+2015/06/23 11:03:07 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/e2fsprogs/libcom_err2/libcom_err2-1.42.12-2.tar.xz
+2015/06/23 11:03:07 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/curl/libcurl4/libcurl4-7.41.0-1.tar.xz
+2015/06/23 11:03:07 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/db4.8/libdb4.8/libdb4.8-4.8.30-1.tar.bz2
+2015/06/23 11:03:07 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/libedit/libedit0/libedit0-20130712-1.tar.xz
+2015/06/23 11:03:07 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/libevent/libevent-devel/libevent-devel-2.0.21-1.tar.bz2
+2015/06/23 11:03:07 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/libevent/libevent2.0_5/libevent2.0_5-2.0.21-1.tar.bz2
+2015/06/23 11:03:07 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/expat/libexpat1/libexpat1-2.1.0-3.tar.bz2
+2015/06/23 11:03:07 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/e2fsprogs/libext2fs2/libext2fs2-1.42.12-2.tar.xz
+2015/06/23 11:03:07 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/gamin/libfam0/libfam0-0.1.10-15.tar.xz
+2015/06/23 11:03:07 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/libffi/libffi6/libffi6-3.2.1-1.tar.xz
+2015/06/23 11:03:07 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/gcc/libgcc1/libgcc1-4.9.2-3.tar.xz
+2015/06/23 11:03:07 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/gdbm/libgdbm4/libgdbm4-1.8.3-20.tar.bz2
+2015/06/23 11:03:07 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/glib2.0/libglib2.0_0/libglib2.0_0-2.42.2-1.tar.xz
+2015/06/23 11:03:09 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/gmp/libgmp10/libgmp10-6.0.0a-2.tar.xz
+2015/06/23 11:03:09 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/gnutls/libgnutls28/libgnutls28-3.2.21-1.tar.xz
+2015/06/23 11:03:09 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/gcc/libgomp1/libgomp1-4.9.2-3.tar.xz
+2015/06/23 11:03:09 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/krb5/libgssapi_krb5_2/libgssapi_krb5_2-1.13.1-1.tar.xz
+2015/06/23 11:03:09 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/guile/libguile17/libguile17-1.8.8-1.tar.xz
+2015/06/23 11:03:09 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/nettle/libhogweed2/libhogweed2-2.7-2.tar.xz
+2015/06/23 11:03:09 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/libiconv/libiconv-1.14-3.tar.xz
+2015/06/23 11:03:09 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/libiconv/libiconv-devel/libiconv-devel-1.14-3.tar.xz
+2015/06/23 11:03:10 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/libiconv/libiconv2/libiconv2-1.14-3.tar.xz
+2015/06/23 11:03:10 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/libidn/libidn11/libidn11-1.29-1.tar.xz
+2015/06/23 11:03:10 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/gettext/libintl-devel/libintl-devel-0.19.4-1.tar.xz
+2015/06/23 11:03:10 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/gettext/libintl8/libintl8-0.19.4-1.tar.xz
+2015/06/23 11:03:10 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/libiodbc/libiodbc2/libiodbc2-3.52.8-2.tar.bz2
+2015/06/23 11:03:10 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/isl/libisl10/libisl10-0.11.1-2.tar.bz2
+2015/06/23 11:03:11 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/krb5/libk5crypto3/libk5crypto3-1.13.1-1.tar.xz
+2015/06/23 11:03:11 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/krb5/libkrb5_3/libkrb5_3-1.13.1-1.tar.xz
+2015/06/23 11:03:11 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/krb5/libkrb5support0/libkrb5support0-1.13.1-1.tar.xz
+2015/06/23 11:03:11 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/libtool/libltdl7/libltdl7-2.4.6-1.tar.xz
+2015/06/23 11:03:11 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/xz/liblzma5/liblzma5-5.0.8-1.tar.xz
+2015/06/23 11:03:11 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/libmetalink/libmetalink3/libmetalink3-0.1.2-1.tar.bz2
+2015/06/23 11:03:11 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/mpclib/libmpc3/libmpc3-1.0.3-1.tar.xz
+2015/06/23 11:03:11 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/mpfr/libmpfr4/libmpfr4-3.1.2-2.tar.xz
+2015/06/23 11:03:11 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/mysql/libmysqlclient18/libmysqlclient18-5.5.41-2.tar.xz
+2015/06/23 11:03:11 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/ncurses/libncurses-devel/libncurses-devel-5.9-20150307-1.tar.xz
+2015/06/23 11:03:14 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/ncurses/libncurses10/libncurses10-5.9-20150307-1.tar.xz
+2015/06/23 11:03:14 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/ncurses/libncursesw10/libncursesw10-5.9-20150307-1.tar.xz
+2015/06/23 11:03:14 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/neon/libneon27/libneon27-0.30.1-1.tar.xz
+2015/06/23 11:03:14 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/nettle/libnettle4/libnettle4-2.7-2.tar.xz
+2015/06/23 11:03:14 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/openldap/libopenldap2_4_2/libopenldap2_4_2-2.4.40-2.tar.xz
+2015/06/23 11:03:14 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/openssl/libopenssl100/libopenssl100-1.0.2a-1.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/autogen/libopts25/libopts25-5.18.4-1.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/p11-kit/libp11-kit0/libp11-kit0-0.20.7-1.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/pcre/libpcre1/libpcre1-8.36-1.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/pcre/libpcre16_0/libpcre16_0-8.36-1.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/pcre/libpcre32_0/libpcre32_0-8.36-1.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/pcre/libpcreposix0/libpcreposix0-8.36-1.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/libpipeline/libpipeline1/libpipeline1-1.3.0-3.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/postgresql/libpq5/libpq5-9.4.1-1.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/libproxy/libproxy1/libproxy1-0.4.11-3.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/gcc/libquadmath0/libquadmath0-4.9.2-3.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/readline/libreadline-devel/libreadline-devel-6.3.8-1.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/readline/libreadline7/libreadline7-6.3.8-1.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/cyrus-sasl/libsasl2_3/libsasl2_3-2.1.26-9.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/serf/libserf1_0/libserf1_0-1.3.8-1.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/libsigsegv/libsigsegv2/libsigsegv2-2.10-1.tar.bz2
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/util-linux/libsmartcols1/libsmartcols1-2.25.2-2.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/sqlite3/libsqlite3_0/libsqlite3_0-3.8.8.3-1.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/libssh2/libssh2_1/libssh2_1-1.5.0-1.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/gcc/libssp0/libssp0-4.9.2-3.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/gcc/libstdc++6/libstdc++6-4.9.2-3.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/libtasn1/libtasn1_6/libtasn1_6-4.2-1.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/util-linux/libuuid-devel/libuuid-devel-2.25.2-2.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/util-linux/libuuid1/libuuid1-2.25.2-2.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/libxml2/libxml2-2.9.2-1.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/links/links-2.8-2.tar.xz
+2015/06/23 11:03:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/login/login-1.11-1.tar.xz
+2015/06/23 11:03:16 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/lynx/lynx-2.8.7-1.tar.bz2
+2015/06/23 11:03:17 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/m4/m4-1.4.17-1.tar.xz
+2015/06/23 11:03:17 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/make/make-4.1-1.tar.xz
+2015/06/23 11:03:18 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/man-db/man-db-2.6.7-2.tar.xz
+2015/06/23 11:03:18 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/mc/mc-4.8.14-1.tar.xz
+2015/06/23 11:03:20 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/mintty/mintty-1.1.3-1.tar.bz2
+2015/06/23 11:03:20 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/nano/nano-2.4.0-1.tar.xz
+2015/06/23 11:03:21 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/nc/nc-1.107-3.tar.bz2
+2015/06/23 11:03:21 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/ncurses/ncurses-5.9-20150307-1.tar.xz
+2015/06/23 11:03:21 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/openssh/openssh-6.8p1-1.tar.xz
+2015/06/23 11:03:21 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/openssl/openssl-1.0.2a-1.tar.xz
+2015/06/23 11:03:22 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/openssl/openssl-devel/openssl-devel-1.0.2a-1.tar.xz
+2015/06/23 11:03:26 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/p11-kit/p11-kit-0.20.7-1.tar.xz
+2015/06/23 11:03:27 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/p11-kit/p11-kit-trust/p11-kit-trust-0.20.7-1.tar.xz
+2015/06/23 11:03:27 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/pcre/pcre-8.36-1.tar.xz
+2015/06/23 11:03:27 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl/perl-5.14.4-3.tar.xz
+2015/06/23 11:03:35 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Archive-Zip/perl-Archive-Zip-1.46-1.tar.xz
+2015/06/23 11:03:35 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-B-Generate/perl-B-Generate-1.50-1.tar.xz
+2015/06/23 11:03:35 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-CPAN-Reporter/perl-CPAN-Reporter-1.2011-1.tar.xz
+2015/06/23 11:03:35 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Capture-Tiny/perl-Capture-Tiny-0.28-1.tar.xz
+2015/06/23 11:03:35 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Carp/perl-Carp-1.3301-2.tar.xz
+2015/06/23 11:03:35 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Compress-Bzip2/perl-Compress-Bzip2-2.22-1.tar.xz
+2015/06/23 11:03:35 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Config-Tiny/perl-Config-Tiny-2.22-1.tar.xz
+2015/06/23 11:03:35 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Data-Alias/perl-Data-Alias-1.18-2.tar.xz
+2015/06/23 11:03:35 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Devel-Autoflush/perl-Devel-Autoflush-0.06-1.tar.xz
+2015/06/23 11:03:35 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Digest-HMAC/perl-Digest-HMAC-1.03-4.tar.xz
+2015/06/23 11:03:35 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Digest-SHA/perl-Digest-SHA-5.95-1.tar.xz
+2015/06/23 11:03:35 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Encode-Locale/perl-Encode-Locale-1.04-1.tar.xz
+2015/06/23 11:03:35 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Error/perl-Error-0.17023-1.tar.xz
+2015/06/23 11:03:35 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-File-Copy-Recursive/perl-File-Copy-Recursive-0.38-4.tar.xz
+2015/06/23 11:03:35 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-File-HomeDir/perl-File-HomeDir-1.00-2.tar.xz
+2015/06/23 11:03:35 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-File-Listing/perl-File-Listing-6.04-4.tar.xz
+2015/06/23 11:03:35 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-File-pushd/perl-File-pushd-1.009-1.tar.xz
+2015/06/23 11:03:35 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-HTML-Parser/perl-HTML-Parser-3.71-2.tar.xz
+2015/06/23 11:03:37 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-HTTP-Cookies/perl-HTTP-Cookies-6.01-4.tar.xz
+2015/06/23 11:03:37 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-HTTP-Daemon/perl-HTTP-Daemon-6.01-4.tar.xz
+2015/06/23 11:03:37 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-HTTP-Date/perl-HTTP-Date-6.02-4.tar.xz
+2015/06/23 11:03:37 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-HTTP-Message/perl-HTTP-Message-6.06-2.tar.xz
+2015/06/23 11:03:37 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-HTTP-Negotiate/perl-HTTP-Negotiate-6.01-4.tar.xz
+2015/06/23 11:03:37 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-IO-CaptureOutput/perl-IO-CaptureOutput-1.1104-1.tar.xz
+2015/06/23 11:03:37 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-IO-Socket-INET6/perl-IO-Socket-INET6-2.72-1.tar.xz
+2015/06/23 11:03:37 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-IO-String/perl-IO-String-1.08-4.tar.xz
+2015/06/23 11:03:37 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-IO-Tty/perl-IO-Tty-1.12-1.tar.xz
+2015/06/23 11:03:37 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-IPC-Cmd/perl-IPC-Cmd-0.92-1.tar.xz
+2015/06/23 11:03:37 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-IPC-Run/perl-IPC-Run-0.94-1.tar.xz
+2015/06/23 11:03:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-LWP-MediaTypes/perl-LWP-MediaTypes-6.02-4.tar.xz
+2015/06/23 11:03:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Module-ScanDeps/perl-Module-ScanDeps-1.18-1.tar.xz
+2015/06/23 11:03:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Module-Signature/perl-Module-Signature-0.73-2.tar.xz
+2015/06/23 11:03:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Net-DNS/perl-Net-DNS-0.83-1.tar.xz
+2015/06/23 11:03:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Net-HTTP/perl-Net-HTTP-6.07-1.tar.xz
+2015/06/23 11:03:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Net-IP/perl-Net-IP-1.26-2.tar.xz
+2015/06/23 11:03:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-PAR-Dist/perl-PAR-Dist-0.49-2.tar.xz
+2015/06/23 11:03:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-PadWalker/perl-PadWalker-2.0-1.tar.xz
+2015/06/23 11:03:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Pod-Coverage/perl-Pod-Coverage-0.23-2.tar.xz
+2015/06/23 11:03:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Pod-Escapes/perl-Pod-Escapes-1.07-1.tar.xz
+2015/06/23 11:03:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Pod-Simple/perl-Pod-Simple-3.30-1.tar.xz
+2015/06/23 11:03:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Probe-Perl/perl-Probe-Perl-0.03-2.tar.xz
+2015/06/23 11:03:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Proc-ProcessTable/perl-Proc-ProcessTable-0.51-1.tar.xz
+2015/06/23 11:03:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Socket6/perl-Socket6-0.25-1.tar.xz
+2015/06/23 11:03:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Tee/perl-Tee-0.14-4.tar.xz
+2015/06/23 11:03:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Term-ReadLine-Gnu/perl-Term-ReadLine-Gnu-1.26-1.tar.xz
+2015/06/23 11:03:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Term-ReadLine-Perl/perl-Term-ReadLine-Perl-1.0303-4.tar.xz
+2015/06/23 11:03:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-TermReadKey/perl-TermReadKey-2.32-1.tar.xz
+2015/06/23 11:03:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Test-NoWarnings/perl-Test-NoWarnings-1.04-3.tar.xz
+2015/06/23 11:03:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Test-Pod/perl-Test-Pod-1.48-2.tar.xz
+2015/06/23 11:03:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Test-Pod-Coverage/perl-Test-Pod-Coverage-1.10-1.tar.xz
+2015/06/23 11:03:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Test-Reporter/perl-Test-Reporter-1.60-2.tar.xz
+2015/06/23 11:03:38 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Test-Reporter-Transport-Metabase/perl-Test-Reporter-Transport-Metabase-1.999008-4.tar.xz
+2015/06/23 11:03:39 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-Test-Simple/perl-Test-Simple-1.001014-1.tar.xz
+2015/06/23 11:03:39 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-URI/perl-URI-1.67-1.tar.xz
+2015/06/23 11:03:39 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-WWW-RobotRules/perl-WWW-RobotRules-6.02-4.tar.xz
+2015/06/23 11:03:39 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-XML-LibXML/perl-XML-LibXML-2.0118-1.tar.xz
+2015/06/23 11:03:40 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-XML-NamespaceSupport/perl-XML-NamespaceSupport-1.11-4.tar.xz
+2015/06/23 11:03:40 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-XML-Parser/perl-XML-Parser-2.44-1.tar.xz
+2015/06/23 11:03:41 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-XML-SAX/perl-XML-SAX-0.99-4.tar.xz
+2015/06/23 11:03:42 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-YAML/perl-YAML-1.14-1.tar.xz
+2015/06/23 11:03:42 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl-libwww-perl/perl-libwww-perl-6.13-1.tar.xz
+2015/06/23 11:03:42 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl/perl_autorebase/perl_autorebase-5.14.4-3.tar.xz
+2015/06/23 11:03:42 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl/perl_base/perl_base-5.14.4-3.tar.xz
+2015/06/23 11:03:44 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/perl/perl_vendor/perl_vendor-5.14.4-1.tar.xz
+2015/06/23 11:03:44 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/ping/ping-1.0.2-1.tar.xz
+2015/06/23 11:03:44 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/pkg-config/pkg-config-0.28-1.tar.xz
+2015/06/23 11:03:44 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/popt/popt-1.16-1.tar.xz
+2015/06/23 11:03:44 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/procps/procps-3.2.8-4.tar.xz
+2015/06/23 11:03:44 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/python/python-2.7.8-1.tar.xz
+2015/06/23 11:03:52 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/rebase/rebase-4.4.1-1.tar.bz2
+2015/06/23 11:03:52 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/rsync/rsync-3.1.1-1.tar.xz
+2015/06/23 11:03:52 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/run/run-1.3.3-1.tar.xz
+2015/06/23 11:03:52 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/sed/sed-4.2.2-3.tar.bz2
+2015/06/23 11:03:53 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/shared-mime-info/shared-mime-info-1.3-3.tar.xz
+2015/06/23 11:03:53 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/shutdown/shutdown-1.10-1.tar.bz2
+2015/06/23 11:03:53 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/subversion/subversion-1.8.11-1.tar.xz
+2015/06/23 11:03:54 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/subversion/subversion-perl/subversion-perl-1.8.11-1.tar.xz
+2015/06/23 11:03:54 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/tar/tar-1.27.1-1.tar.xz
+2015/06/23 11:03:55 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/ncurses/terminfo/terminfo-5.9-20150307-1.tar.xz
+2015/06/23 11:03:55 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/texinfo/texinfo-5.2-3.tar.xz
+2015/06/23 11:03:56 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/time/time-1.7-4.tar.xz
+2015/06/23 11:03:56 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/tree/tree-1.7.0-1.tar.xz
+2015/06/23 11:03:57 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/tzcode/tzcode-2014j-1.tar.xz
+2015/06/23 11:04:00 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/unzip/unzip-6.0-14.tar.xz
+2015/06/23 11:04:00 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/util-linux/util-linux-2.25.2-2.tar.xz
+2015/06/23 11:04:01 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/vim/vim-7.4.663-1.tar.xz
+2015/06/23 11:04:01 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/vim/vim-common/vim-common-7.4.663-1.tar.xz
+2015/06/23 11:04:08 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/w32api-headers/w32api-headers-3.3.0-2.tar.xz
+2015/06/23 11:04:13 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/w32api-runtime/w32api-runtime-3.3.0-1.tar.xz
+2015/06/23 11:04:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/wget/wget-1.16.3-1.tar.xz
+2015/06/23 11:04:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/which/which-2.20-2.tar.bz2
+2015/06/23 11:04:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/windows-default-manifest/windows-default-manifest-6.4-1.tar.xz
+2015/06/23 11:04:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/vim/xxd/xxd-7.4.663-1.tar.xz
+2015/06/23 11:04:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/xz/xz-5.0.8-1.tar.xz
+2015/06/23 11:04:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/zlib/zlib-devel/zlib-devel-1.2.8-3.tar.xz
+2015/06/23 11:04:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/zlib/zlib0/zlib0-1.2.8-3.tar.xz
+2015/06/23 11:04:15 Extracting from file://C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-packages/mirror.switch.ch/x86/release/zsh/zsh-5.0.6-1.tar.bz2
+2015/06/23 11:04:23 Changing gid back to original
+2015/06/23 11:04:23 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/000-cygwin-post-install.sh"
+2015/06/23 11:04:23 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/update-info-dir.sh"
+2015/06/23 11:04:26 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/coreutils.sh"
+2015/06/23 11:04:26 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/bash.sh"
+2015/06/23 11:04:27 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/autoconf.sh"
+2015/06/23 11:04:27 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/libxml2.sh"
+2015/06/23 11:04:27 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/automake1.4.sh"
+2015/06/23 11:04:27 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/automake1.5.sh"
+2015/06/23 11:04:27 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/automake1.6.sh"
+2015/06/23 11:04:27 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/automake1.7.sh"
+2015/06/23 11:04:27 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/automake1.8.sh"
+2015/06/23 11:04:27 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/automake1.9.sh"
+2015/06/23 11:04:27 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/automake1.10.sh"
+2015/06/23 11:04:27 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/automake1.11.sh"
+2015/06/23 11:04:27 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/automake1.12.sh"
+2015/06/23 11:04:27 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/automake1.13.sh"
+2015/06/23 11:04:27 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/automake.sh"
+2015/06/23 11:04:27 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/base-files-mketc.sh"
+2015/06/23 11:04:28 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/base-files-profile.sh"
+2015/06/23 11:04:29 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/ca-certificates.sh"
+2015/06/23 11:04:31 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/cron.sh"
+2015/06/23 11:04:31 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/libsasl2_3.sh"
+2015/06/23 11:04:31 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/shared-mime-info.sh"
+2015/06/23 11:04:35 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/gsettings-desktop-schemas.sh"
+2015/06/23 11:04:35 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/glib2.0.sh"
+2015/06/23 11:04:36 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/openssh.sh"
+2015/06/23 11:04:36 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/lynx.sh"
+2015/06/23 11:04:36 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/man-db.sh"
+2015/06/23 11:04:36 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/wget.sh"
+2015/06/23 11:04:36 running: C:\Users\ape\jenkins_slave\FSROOT\workspace\babun-release\target\babun-cygwin\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/zsh-profile.sh"
+2015/06/23 11:04:36 Changing gid to Administrators
+2015/06/23 11:04:36 Ending cygwin install
+2016/02/05 08:11:36 Starting cygwin install, version 2.870
+2016/02/05 08:11:36 User has NO backup/restore rights
+2016/02/05 08:11:36 io_stream_cygfile: fopen(/etc/setup/setup.rc) failed 2 No such file or directory
+2016/02/05 08:11:36 Current Directory: F:/atomicApe/babun//dist
+2016/02/05 08:11:36 Could not open Service control manager
+2016/02/05 08:11:36 root: F:/atomicApe/babun/\cygwin user
+2016/02/05 08:11:36 Selected local directory: F:/atomicApe/babun//dist
+2016/02/05 08:11:36 net: Direct
+2016/02/05 08:11:36 site: http://mirrors.kernel.org/sourceware/cygwin/
+2016/02/05 08:11:38 mbox Warning: The current ini file is from a newer version of setup-x86.exe. If you have any trouble installing, please download a fresh version from http://www.cygwin.com/setup-x86.exe
+2016/02/05 08:11:38 unattended_mode is set at mbox: returning default value
+2016/02/05 08:11:43 mbox note: This setup is version 2.870, but setup.ini claims version 2.873 is available.
+You might want to upgrade to get the latest features and bug fixes.
+2016/02/05 08:11:43 unattended_mode is set at mbox: returning default value
+2016/02/05 08:11:43 Adding required dependency automake1.15: Selecting version 1.15-1 for installation.
+2016/02/05 08:11:43 Adding required dependency libargp: Selecting version 20110921-2 for installation.
+2016/02/05 08:11:43 Adding required dependency libisl13: Selecting version 0.14.1-1 for installation.
+2016/02/05 08:11:43 Adding required dependency libnghttp2_14: Selecting version 1.6.0-1 for installation.
+2016/02/05 08:11:43 Adding required dependency libvtv0: Selecting version 4.9.3-1 for installation.
+2016/02/05 08:11:43 Adding required dependency perl-common-sense: Selecting version 3.74-1 for installation.
+2016/02/05 08:11:43 Adding required dependency perl-Config-Perl-V: Selecting version 0.25-1 for installation.
+2016/02/05 08:11:43 Adding required dependency perl-CPAN-DistnameInfo: Selecting version 0.12-5 for installation.
+2016/02/05 08:11:43 Adding required dependency perl-CPAN-Testers-Report: Selecting version 1.999003-2 for installation.
+2016/02/05 08:11:43 Adding required dependency perl-Data-GUID: Selecting version 0.048-2 for installation.
+2016/02/05 08:11:43 Adding required dependency perl-Data-OptList: Selecting version 0.109-2 for installation.
+2016/02/05 08:11:43 Adding required dependency perl-Data-UUID: Selecting version 1.221-1 for installation.
+2016/02/05 08:11:43 Adding required dependency perl-Devel-Symdump: Selecting version 2.15-1 for installation.
+2016/02/05 08:11:43 Adding required dependency perl-File-Which: Selecting version 1.19-1 for installation.
+2016/02/05 08:11:43 Adding required dependency perl-HTML-Tagset: Selecting version 3.20-5 for installation.
+2016/02/05 08:11:43 Adding required dependency perl-IO-HTML: Selecting version 1.001-2 for installation.
+2016/02/05 08:11:43 Adding required dependency perl-IO-Prompt-Tiny: Selecting version 0.003-2 for installation.
+2016/02/05 08:11:43 Adding required dependency perl-JSON: Selecting version 2.90-3 for installation.
+2016/02/05 08:11:43 Adding required dependency perl-JSON-XS: Selecting version 3.01-3 for installation.
+2016/02/05 08:11:43 Adding required dependency perl-Metabase-Client-Simple: Selecting version 0.010-2 for installation.
+2016/02/05 08:11:43 Adding required dependency perl-Metabase-Fact: Selecting version 0.024-2 for installation.
+2016/02/05 08:11:43 Adding required dependency perl-Params-Util: Selecting version 1.07-5 for installation.
+2016/02/05 08:11:43 Adding required dependency perl-Scalar-List-Utils: Selecting version 1.42-2 for installation.
+2016/02/05 08:11:43 Adding required dependency perl-Sub-Exporter: Selecting version 0.987-3 for installation.
+2016/02/05 08:11:43 Adding required dependency perl-Sub-Install: Selecting version 0.928-2 for installation.
+2016/02/05 08:11:43 Adding required dependency perl-Types-Serialiser: Selecting version 1.0-3 for installation.
+2016/02/05 08:11:43 Adding required dependency perl-XML-SAX-Base: Selecting version 1.08-5 for installation.
+2016/02/05 08:11:44 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/_autorebase/_autorebase-001002-1.tar.xz
+2016/02/05 08:11:44 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/_update-info-dir/_update-info-dir-02000-1.tar.xz
+2016/02/05 08:11:45 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/automake1.15/automake1.15-1.15-1.tar.xz
+2016/02/05 08:11:45 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/base-files/base-files-4.2-4.tar.xz
+2016/02/05 08:11:46 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/bash/bash-4.3.42-4.tar.xz
+2016/02/05 08:11:50 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/binutils/binutils-2.25-4.tar.xz
+2016/02/05 08:11:50 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/ca-certificates/ca-certificates-2.6-1.tar.xz
+2016/02/05 08:11:52 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/coreutils/coreutils-8.24-3.tar.xz
+2016/02/05 08:11:52 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/cron/cron-4.1-65.tar.xz
+2016/02/05 08:11:53 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/csih/csih-0.9.9-1.tar.xz
+2016/02/05 08:11:53 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/curl/curl-7.47.0-2.tar.xz
+2016/02/05 08:11:54 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/cygutils/cygutils-1.4.15-2.tar.xz
+2016/02/05 08:11:56 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/cygwin/cygwin-2.4.1-1.tar.xz
+2016/02/05 08:11:57 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/cygwin/cygwin-devel/cygwin-devel-2.4.1-1.tar.xz
+2016/02/05 08:11:57 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/diffutils/diffutils-3.3-3.tar.xz
+2016/02/05 08:11:58 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/dos2unix/dos2unix-7.3.2-1.tar.xz
+2016/02/05 08:11:58 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/file/file-5.25-1.tar.xz
+2016/02/05 08:12:00 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gawk/gawk-4.1.3-1.tar.xz
+2016/02/05 08:12:06 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gcc/gcc-core/gcc-core-4.9.3-1.tar.xz
+2016/02/05 08:12:06 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/getent/getent-2.18.90-4.tar.xz
+2016/02/05 08:12:06 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gettext/gettext-0.19.5.1-2.tar.xz
+2016/02/05 08:12:09 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/git/git-2.7.0-1.tar.xz
+2016/02/05 08:12:09 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/git/git-svn/git-svn-2.7.0-1.tar.xz
+2016/02/05 08:12:10 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gnutls/gnutls-3.3.17-1.tar.xz
+2016/02/05 08:12:13 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gsettings-desktop-schemas/gsettings-desktop-schemas-3.18.1-1.tar.xz
+2016/02/05 08:12:14 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/texinfo/info/info-6.0-1.tar.xz
+2016/02/05 08:12:14 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/less/less-481-1.tar.xz
+2016/02/05 08:12:15 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/libapr1/libapr1-1.5.2-2.tar.xz
+2016/02/05 08:12:15 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/libaprutil1/libaprutil1-1.5.4-2.tar.xz
+2016/02/05 08:12:15 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/libargp/libargp-20110921-2.tar.bz2
+2016/02/05 08:12:16 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gcc/libatomic1/libatomic1-4.9.3-1.tar.xz
+2016/02/05 08:12:16 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/curl/libcurl4/libcurl4-7.47.0-2.tar.xz
+2016/02/05 08:12:17 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/libevent/libevent-devel/libevent-devel-2.0.22-1.tar.xz
+2016/02/05 08:12:17 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/libevent/libevent2.0_5/libevent2.0_5-2.0.22-1.tar.xz
+2016/02/05 08:12:17 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gcc/libgcc1/libgcc1-4.9.3-1.tar.xz
+2016/02/05 08:12:20 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/glib2.0/libglib2.0_0/libglib2.0_0-2.46.2-2.tar.xz
+2016/02/05 08:12:20 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gmp/libgmp10/libgmp10-6.1.0-3p1.tar.xz
+2016/02/05 08:12:21 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gnutls/libgnutls28/libgnutls28-3.3.17-1.tar.xz
+2016/02/05 08:12:21 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gcc/libgomp1/libgomp1-4.9.3-1.tar.xz
+2016/02/05 08:12:22 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/krb5/libgssapi_krb5_2/libgssapi_krb5_2-1.13.2-4.tar.xz
+2016/02/05 08:12:22 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gettext/libintl-devel/libintl-devel-0.19.5.1-2.tar.xz
+2016/02/05 08:12:22 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gettext/libintl8/libintl8-0.19.5.1-2.tar.xz
+2016/02/05 08:12:23 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/isl/libisl13/libisl13-0.14.1-1.tar.xz
+2016/02/05 08:12:23 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/krb5/libk5crypto3/libk5crypto3-1.13.2-4.tar.xz
+2016/02/05 08:12:24 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/krb5/libkrb5_3/libkrb5_3-1.13.2-4.tar.xz
+2016/02/05 08:12:24 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/krb5/libkrb5support0/libkrb5support0-1.13.2-4.tar.xz
+2016/02/05 08:12:24 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/libtool/libltdl7/libltdl7-2.4.6-2.tar.xz
+2016/02/05 08:12:25 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/xz/liblzma5/liblzma5-5.2.2-1.tar.xz
+2016/02/05 08:12:25 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/mpfr/libmpfr4/libmpfr4-3.1.3-1.tar.xz
+2016/02/05 08:12:26 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/mysql/libmysqlclient18/libmysqlclient18-5.5.45-1.tar.xz
+2016/02/05 08:12:27 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/ncurses/libncurses-devel/libncurses-devel-6.0-2.20160123.tar.xz
+2016/02/05 08:12:27 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/ncurses/libncurses10/libncurses10-5.9-20150530-1.tar.xz
+2016/02/05 08:12:28 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/ncurses/libncursesw10/libncursesw10-6.0-2.20160123.tar.xz
+2016/02/05 08:12:29 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/nghttp2/libnghttp2_14/libnghttp2_14-1.6.0-1.tar.xz
+2016/02/05 08:12:29 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/openldap/libopenldap2_4_2/libopenldap2_4_2-2.4.42-1.tar.xz
+2016/02/05 08:12:30 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/openssl/libopenssl100/libopenssl100-1.0.2f-1.tar.xz
+2016/02/05 08:12:31 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/p11-kit/libp11-kit0/libp11-kit0-0.22.1-1.tar.xz
+2016/02/05 08:12:31 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/pcre/libpcre1/libpcre1-8.38-1.tar.xz
+2016/02/05 08:12:32 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/pcre/libpcre16_0/libpcre16_0-8.38-1.tar.xz
+2016/02/05 08:12:32 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/pcre/libpcre32_0/libpcre32_0-8.38-1.tar.xz
+2016/02/05 08:12:32 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/pcre/libpcreposix0/libpcreposix0-8.38-1.tar.xz
+2016/02/05 08:12:33 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/libpipeline/libpipeline1/libpipeline1-1.4.0-1.tar.xz
+2016/02/05 08:12:33 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/postgresql/libpq5/libpq5-9.4.5-1.tar.xz
+2016/02/05 08:12:33 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/libproxy/libproxy1/libproxy1-0.4.11-5.tar.xz
+2016/02/05 08:12:34 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gcc/libquadmath0/libquadmath0-4.9.3-1.tar.xz
+2016/02/05 08:12:34 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/libsigsegv/libsigsegv2/libsigsegv2-2.10-2.tar.xz
+2016/02/05 08:12:35 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/sqlite3/libsqlite3_0/libsqlite3_0-3.10.1-1.tar.xz
+2016/02/05 08:12:35 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gcc/libssp0/libssp0-4.9.3-1.tar.xz
+2016/02/05 08:12:36 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gcc/libstdc++6/libstdc++6-4.9.3-1.tar.xz
+2016/02/05 08:12:36 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/libtasn1/libtasn1_6/libtasn1_6-4.7-1.tar.xz
+2016/02/05 08:12:36 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gcc/libvtv0/libvtv0-4.9.3-1.tar.xz
+2016/02/05 08:12:37 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/libxml2/libxml2-2.9.3-1.tar.xz
+2016/02/05 08:12:38 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/m4/m4-1.4.17-2.tar.xz
+2016/02/05 08:12:38 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/man-db/man/man-2.7.4-1.tar.xz
+2016/02/05 08:12:39 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/man-db/man-db-2.7.4-1.tar.xz
+2016/02/05 08:12:40 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/mc/mc-4.8.15-1.tar.xz
+2016/02/05 08:12:41 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/mintty/mintty-2.2.2-0.tar.xz
+2016/02/05 08:12:41 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/nano/nano-2.4.1-1.tar.xz
+2016/02/05 08:12:42 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/ncurses/ncurses-6.0-2.20160123.tar.xz
+2016/02/05 08:12:42 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/ncurses/ncursesw/ncursesw-6.0-2.20160123.tar.xz
+2016/02/05 08:12:43 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/openssh/openssh-7.1p2-1.tar.xz
+2016/02/05 08:12:44 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/openssl/openssl-1.0.2f-1.tar.xz
+2016/02/05 08:12:46 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/openssl/openssl-devel/openssl-devel-1.0.2f-1.tar.xz
+2016/02/05 08:12:47 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/p11-kit/p11-kit-0.22.1-1.tar.xz
+2016/02/05 08:12:47 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/p11-kit/p11-kit-trust/p11-kit-trust-0.22.1-1.tar.xz
+2016/02/05 08:12:48 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/pcre/pcre-8.38-1.tar.xz
+2016/02/05 08:12:50 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl/perl-5.22.1-1.tar.xz
+2016/02/05 08:12:50 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Archive-Zip/perl-Archive-Zip-1.56-1.tar.xz
+2016/02/05 08:12:51 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-B-Generate/perl-B-Generate-1.53-2.tar.xz
+2016/02/05 08:12:51 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-CPAN-DistnameInfo/perl-CPAN-DistnameInfo-0.12-5.tar.xz
+2016/02/05 08:12:51 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-CPAN-Reporter/perl-CPAN-Reporter-1.2015-1.tar.xz
+2016/02/05 08:12:51 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-CPAN-Testers-Report/perl-CPAN-Testers-Report-1.999003-2.tar.xz
+2016/02/05 08:12:52 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Capture-Tiny/perl-Capture-Tiny-0.30-2.tar.xz
+2016/02/05 08:12:52 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Compress-Bzip2/perl-Compress-Bzip2-2.24-1.tar.xz
+2016/02/05 08:12:52 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Config-Perl-V/perl-Config-Perl-V-0.25-1.tar.xz
+2016/02/05 08:12:53 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Config-Tiny/perl-Config-Tiny-2.23-1.tar.xz
+2016/02/05 08:12:53 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Data-Alias/perl-Data-Alias-1.20-1.tar.xz
+2016/02/05 08:12:53 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Data-GUID/perl-Data-GUID-0.048-2.tar.xz
+2016/02/05 08:12:54 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Data-OptList/perl-Data-OptList-0.109-2.tar.xz
+2016/02/05 08:12:54 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Data-UUID/perl-Data-UUID-1.221-1.tar.xz
+2016/02/05 08:12:54 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Devel-Autoflush/perl-Devel-Autoflush-0.06-2.tar.xz
+2016/02/05 08:12:55 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Devel-Symdump/perl-Devel-Symdump-2.15-1.tar.xz
+2016/02/05 08:12:55 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Digest-HMAC/perl-Digest-HMAC-1.03-5.tar.xz
+2016/02/05 08:12:56 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Digest-SHA/perl-Digest-SHA-5.95-2.tar.xz
+2016/02/05 08:12:56 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Encode-Locale/perl-Encode-Locale-1.05-1.tar.xz
+2016/02/05 08:12:56 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Error/perl-Error-0.17024-1.tar.xz
+2016/02/05 08:12:57 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-File-Copy-Recursive/perl-File-Copy-Recursive-0.38-5.tar.xz
+2016/02/05 08:12:57 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-File-HomeDir/perl-File-HomeDir-1.00-3.tar.xz
+2016/02/05 08:12:57 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-File-Listing/perl-File-Listing-6.04-5.tar.xz
+2016/02/05 08:12:58 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-File-Which/perl-File-Which-1.19-1.tar.xz
+2016/02/05 08:12:58 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-File-pushd/perl-File-pushd-1.009-2.tar.xz
+2016/02/05 08:12:58 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-HTML-Parser/perl-HTML-Parser-3.72-1.tar.xz
+2016/02/05 08:12:58 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-HTML-Tagset/perl-HTML-Tagset-3.20-5.tar.xz
+2016/02/05 08:12:59 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-HTTP-Cookies/perl-HTTP-Cookies-6.01-5.tar.xz
+2016/02/05 08:12:59 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-HTTP-Daemon/perl-HTTP-Daemon-6.01-5.tar.xz
+2016/02/05 08:13:00 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-HTTP-Date/perl-HTTP-Date-6.02-5.tar.xz
+2016/02/05 08:13:00 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-HTTP-Message/perl-HTTP-Message-6.11-1.tar.xz
+2016/02/05 08:13:01 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-HTTP-Negotiate/perl-HTTP-Negotiate-6.01-5.tar.xz
+2016/02/05 08:13:01 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-IO-CaptureOutput/perl-IO-CaptureOutput-1.1104-2.tar.xz
+2016/02/05 08:13:02 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-IO-HTML/perl-IO-HTML-1.001-2.tar.xz
+2016/02/05 08:13:02 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-IO-Prompt-Tiny/perl-IO-Prompt-Tiny-0.003-2.tar.xz
+2016/02/05 08:13:02 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-IO-Socket-INET6/perl-IO-Socket-INET6-2.72-2.tar.xz
+2016/02/05 08:13:03 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-IO-String/perl-IO-String-1.08-5.tar.xz
+2016/02/05 08:13:03 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-IO-Tty/perl-IO-Tty-1.12-2.tar.xz
+2016/02/05 08:13:03 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-IPC-Cmd/perl-IPC-Cmd-0.92-2.tar.xz
+2016/02/05 08:13:04 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-IPC-Run/perl-IPC-Run-0.94-2.tar.xz
+2016/02/05 08:13:04 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-JSON/perl-JSON-2.90-3.tar.xz
+2016/02/05 08:13:06 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-JSON-XS/perl-JSON-XS-3.01-3.tar.xz
+2016/02/05 08:13:07 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-LWP-MediaTypes/perl-LWP-MediaTypes-6.02-5.tar.xz
+2016/02/05 08:13:07 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Metabase-Client-Simple/perl-Metabase-Client-Simple-0.010-2.tar.xz
+2016/02/05 08:13:07 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Metabase-Fact/perl-Metabase-Fact-0.024-2.tar.xz
+2016/02/05 08:13:08 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Module-ScanDeps/perl-Module-ScanDeps-1.20-1.tar.xz
+2016/02/05 08:13:08 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Module-Signature/perl-Module-Signature-0.79-1.tar.xz
+2016/02/05 08:13:10 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Net-DNS/perl-Net-DNS-1.04-1.tar.xz
+2016/02/05 08:13:10 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Net-HTTP/perl-Net-HTTP-6.09-1.tar.xz
+2016/02/05 08:13:10 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Net-IP/perl-Net-IP-1.26-3.tar.xz
+2016/02/05 08:13:10 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-PAR-Dist/perl-PAR-Dist-0.49-3.tar.xz
+2016/02/05 08:13:11 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-PadWalker/perl-PadWalker-2.2-1.tar.xz
+2016/02/05 08:13:11 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Params-Util/perl-Params-Util-1.07-5.tar.xz
+2016/02/05 08:13:11 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Pod-Coverage/perl-Pod-Coverage-0.23-3.tar.xz
+2016/02/05 08:13:12 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Pod-Escapes/perl-Pod-Escapes-1.07-2.tar.xz
+2016/02/05 08:13:12 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Pod-Simple/perl-Pod-Simple-3.32-1.tar.xz
+2016/02/05 08:13:13 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Probe-Perl/perl-Probe-Perl-0.03-3.tar.xz
+2016/02/05 08:13:14 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Proc-ProcessTable/perl-Proc-ProcessTable-0.53-1.tar.xz
+2016/02/05 08:13:14 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Scalar-List-Utils/perl-Scalar-List-Utils-1.42-2.tar.xz
+2016/02/05 08:13:15 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Socket6/perl-Socket6-0.25-2.tar.xz
+2016/02/05 08:13:15 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Sub-Exporter/perl-Sub-Exporter-0.987-3.tar.xz
+2016/02/05 08:13:15 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Sub-Install/perl-Sub-Install-0.928-2.tar.xz
+2016/02/05 08:13:15 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Tee/perl-Tee-0.14-5.tar.xz
+2016/02/05 08:13:16 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Term-ReadLine-Gnu/perl-Term-ReadLine-Gnu-1.28-1.tar.xz
+2016/02/05 08:13:16 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Term-ReadLine-Perl/perl-Term-ReadLine-Perl-1.0303-5.tar.xz
+2016/02/05 08:13:16 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-TermReadKey/perl-TermReadKey-2.33-1.tar.xz
+2016/02/05 08:13:17 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Test-NoWarnings/perl-Test-NoWarnings-1.04-4.tar.xz
+2016/02/05 08:13:17 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Test-Pod/perl-Test-Pod-1.51-1.tar.xz
+2016/02/05 08:13:17 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Test-Pod-Coverage/perl-Test-Pod-Coverage-1.10-2.tar.xz
+2016/02/05 08:13:18 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Test-Reporter/perl-Test-Reporter-1.62-2.tar.xz
+2016/02/05 08:13:18 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Test-Reporter-Transport-Metabase/perl-Test-Reporter-Transport-Metabase-1.999009-2.tar.xz
+2016/02/05 08:13:18 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Test-Simple/perl-Test-Simple-1.001014-2.tar.xz
+2016/02/05 08:13:19 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Types-Serialiser/perl-Types-Serialiser-1.0-3.tar.xz
+2016/02/05 08:13:19 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-URI/perl-URI-1.71-1.tar.xz
+2016/02/05 08:13:19 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-WWW-RobotRules/perl-WWW-RobotRules-6.02-5.tar.xz
+2016/02/05 08:13:21 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-XML-LibXML/perl-XML-LibXML-2.0123-1.tar.xz
+2016/02/05 08:13:21 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-XML-NamespaceSupport/perl-XML-NamespaceSupport-1.11-5.tar.xz
+2016/02/05 08:13:21 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-XML-Parser/perl-XML-Parser-2.44-2.tar.xz
+2016/02/05 08:13:22 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-XML-SAX/perl-XML-SAX-0.99-5.tar.xz
+2016/02/05 08:13:22 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-XML-SAX-Base/perl-XML-SAX-Base-1.08-5.tar.xz
+2016/02/05 08:13:23 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-YAML/perl-YAML-1.15-2.tar.xz
+2016/02/05 08:13:23 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-common-sense/perl-common-sense-3.74-1.tar.xz
+2016/02/05 08:13:24 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-libwww-perl/perl-libwww-perl-6.15-1.tar.xz
+2016/02/05 08:13:24 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl/perl_autorebase/perl_autorebase-5.22.1-1.tar.xz
+2016/02/05 08:13:25 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl/perl_base/perl_base-5.22.1-1.tar.xz
+2016/02/05 08:13:26 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/pkg-config/pkg-config-0.29-1.tar.xz
+2016/02/05 08:13:26 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/procps/procps-3.2.8-5.tar.xz
+2016/02/05 08:13:31 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/python/python-2.7.10-1.tar.xz
+2016/02/05 08:13:32 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/rsync/rsync-3.1.2-1.tar.xz
+2016/02/05 08:13:32 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/run/run-1.3.4-2.tar.xz
+2016/02/05 08:13:33 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/shared-mime-info/shared-mime-info-1.5-1.tar.xz
+2016/02/05 08:13:35 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/subversion/subversion-1.9.3-1.tar.xz
+2016/02/05 08:13:36 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/subversion/subversion-perl/subversion-perl-1.9.3-1.tar.xz
+2016/02/05 08:13:37 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/tar/tar-1.28-1.tar.xz
+2016/02/05 08:13:37 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/ncurses/terminfo/terminfo-6.0-2.20160123.tar.xz
+2016/02/05 08:13:38 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/texinfo/texinfo-6.0-1.tar.xz
+2016/02/05 08:13:38 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/time/time-1.7.2-1.tar.xz
+2016/02/05 08:13:39 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/tzcode/tzcode-2016a-1.tar.xz
+2016/02/05 08:13:40 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/unzip/unzip-6.0-15.tar.xz
+2016/02/05 08:13:41 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/vim/vim-7.4.1179-1.tar.xz
+2016/02/05 08:13:43 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/vim/vim-common/vim-common-7.4.1179-1.tar.xz
+2016/02/05 08:13:44 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/vim/vim-minimal/vim-minimal-7.4.1179-1.tar.xz
+2016/02/05 08:13:46 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/w32api-headers/w32api-headers-4.0.4-1.tar.xz
+2016/02/05 08:13:46 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/w32api-runtime/w32api-runtime-4.0.4-1.tar.xz
+2016/02/05 08:13:47 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/wget/wget-1.17.1-1.tar.xz
+2016/02/05 08:13:48 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/vim/xxd/xxd-7.4.1179-1.tar.xz
+2016/02/05 08:13:49 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/xz/xz-5.2.2-1.tar.xz
+2016/02/05 08:13:50 Downloaded F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/zsh/zsh-5.1.1-1.tar.bz2
+2016/02/05 08:13:57 Running preremove script for  _update-info-dir
+2016/02/05 08:13:57 Running preremove script for  base-files
+2016/02/05 08:13:57 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/preremove/base-files.sh"
+2016/02/05 08:13:58 Running preremove script for  bash
+2016/02/05 08:13:58 Running preremove script for  binutils
+2016/02/05 08:13:58 Running preremove script for  ca-certificates
+2016/02/05 08:13:58 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/preremove/ca-certificates.sh"
+2016/02/05 08:13:58 Running preremove script for  coreutils
+2016/02/05 08:13:58 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/preremove/coreutils.sh"
+2016/02/05 08:13:58 Running preremove script for  cron
+2016/02/05 08:13:58 Running preremove script for  csih
+2016/02/05 08:13:58 Running preremove script for  curl
+2016/02/05 08:13:58 Running preremove script for  cygutils
+2016/02/05 08:13:58 Running preremove script for  cygwin
+2016/02/05 08:13:58 Running preremove script for  cygwin-devel
+2016/02/05 08:13:58 Running preremove script for  diffutils
+2016/02/05 08:13:58 Running preremove script for  dos2unix
+2016/02/05 08:13:58 Running preremove script for  file
+2016/02/05 08:13:58 Running preremove script for  gawk
+2016/02/05 08:13:58 Running preremove script for  gcc-core
+2016/02/05 08:13:58 Running preremove script for  gettext
+2016/02/05 08:13:58 Running preremove script for  git
+2016/02/05 08:13:58 Running preremove script for  git-svn
+2016/02/05 08:13:58 Running preremove script for  gnutls
+2016/02/05 08:13:58 Running preremove script for  gsettings-desktop-schemas
+2016/02/05 08:13:58 Running preremove script for  info
+2016/02/05 08:13:58 Running preremove script for  less
+2016/02/05 08:13:58 Running preremove script for  libapr1
+2016/02/05 08:13:58 Running preremove script for  libaprutil1
+2016/02/05 08:13:58 Running preremove script for  libatomic1
+2016/02/05 08:13:58 Running preremove script for  libcurl4
+2016/02/05 08:13:58 Running preremove script for  libevent-devel
+2016/02/05 08:13:58 Running preremove script for  libevent2.0_5
+2016/02/05 08:13:58 Running preremove script for  libgcc1
+2016/02/05 08:13:58 Running preremove script for  libglib2.0_0
+2016/02/05 08:13:58 Running preremove script for  libgmp10
+2016/02/05 08:13:58 Running preremove script for  libgnutls28
+2016/02/05 08:13:58 Running preremove script for  libgomp1
+2016/02/05 08:13:58 Running preremove script for  libgssapi_krb5_2
+2016/02/05 08:13:58 Running preremove script for  libintl-devel
+2016/02/05 08:13:58 Running preremove script for  libintl8
+2016/02/05 08:13:58 Running preremove script for  libk5crypto3
+2016/02/05 08:13:58 Running preremove script for  libkrb5_3
+2016/02/05 08:13:58 Running preremove script for  libkrb5support0
+2016/02/05 08:13:58 Running preremove script for  libltdl7
+2016/02/05 08:13:58 Running preremove script for  liblzma5
+2016/02/05 08:13:58 Running preremove script for  libmpfr4
+2016/02/05 08:13:58 Running preremove script for  libmysqlclient18
+2016/02/05 08:13:58 Running preremove script for  libncurses-devel
+2016/02/05 08:13:58 Running preremove script for  libncurses10
+2016/02/05 08:13:58 Running preremove script for  libncursesw10
+2016/02/05 08:13:58 Running preremove script for  libopenldap2_4_2
+2016/02/05 08:13:58 Running preremove script for  libopenssl100
+2016/02/05 08:13:58 Running preremove script for  libp11-kit0
+2016/02/05 08:13:58 Running preremove script for  libpcre1
+2016/02/05 08:13:58 Running preremove script for  libpcre16_0
+2016/02/05 08:13:58 Running preremove script for  libpcre32_0
+2016/02/05 08:13:58 Running preremove script for  libpcreposix0
+2016/02/05 08:13:58 Running preremove script for  libpipeline1
+2016/02/05 08:13:58 Running preremove script for  libpq5
+2016/02/05 08:13:58 Running preremove script for  libproxy1
+2016/02/05 08:13:58 Running preremove script for  libquadmath0
+2016/02/05 08:13:58 Running preremove script for  libsigsegv2
+2016/02/05 08:13:58 Running preremove script for  libsqlite3_0
+2016/02/05 08:13:58 Running preremove script for  libssp0
+2016/02/05 08:13:58 Running preremove script for  libstdc++6
+2016/02/05 08:13:58 Running preremove script for  libtasn1_6
+2016/02/05 08:13:58 Running preremove script for  libxml2
+2016/02/05 08:13:58 Running preremove script for  m4
+2016/02/05 08:13:58 Running preremove script for  man
+2016/02/05 08:13:58 Running preremove script for  man-db
+2016/02/05 08:13:58 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/preremove/man-db.sh"
+2016/02/05 08:13:59 Running preremove script for  mc
+2016/02/05 08:13:59 Running preremove script for  mintty
+2016/02/05 08:13:59 Running preremove script for  nano
+2016/02/05 08:13:59 Running preremove script for  ncurses
+2016/02/05 08:13:59 Running preremove script for  ncursesw
+2016/02/05 08:13:59 Running preremove script for  openssh
+2016/02/05 08:13:59 Running preremove script for  openssl
+2016/02/05 08:13:59 Running preremove script for  openssl-devel
+2016/02/05 08:13:59 Running preremove script for  p11-kit
+2016/02/05 08:13:59 Running preremove script for  p11-kit-trust
+2016/02/05 08:13:59 Running preremove script for  pcre
+2016/02/05 08:13:59 Running preremove script for  perl
+2016/02/05 08:13:59 Running preremove script for  perl-Archive-Zip
+2016/02/05 08:13:59 Running preremove script for  perl-B-Generate
+2016/02/05 08:13:59 Running preremove script for  perl-CPAN-Reporter
+2016/02/05 08:13:59 Running preremove script for  perl-Capture-Tiny
+2016/02/05 08:13:59 Running preremove script for  perl-Compress-Bzip2
+2016/02/05 08:13:59 Running preremove script for  perl-Config-Tiny
+2016/02/05 08:13:59 Running preremove script for  perl-Data-Alias
+2016/02/05 08:13:59 Running preremove script for  perl-Devel-Autoflush
+2016/02/05 08:13:59 Running preremove script for  perl-Digest-HMAC
+2016/02/05 08:13:59 Running preremove script for  perl-Digest-SHA
+2016/02/05 08:13:59 Running preremove script for  perl-Encode-Locale
+2016/02/05 08:13:59 Running preremove script for  perl-Error
+2016/02/05 08:13:59 Running preremove script for  perl-File-Copy-Recursive
+2016/02/05 08:13:59 Running preremove script for  perl-File-HomeDir
+2016/02/05 08:13:59 Running preremove script for  perl-File-Listing
+2016/02/05 08:13:59 Running preremove script for  perl-File-pushd
+2016/02/05 08:13:59 Running preremove script for  perl-HTML-Parser
+2016/02/05 08:13:59 Running preremove script for  perl-HTTP-Cookies
+2016/02/05 08:13:59 Running preremove script for  perl-HTTP-Daemon
+2016/02/05 08:13:59 Running preremove script for  perl-HTTP-Date
+2016/02/05 08:13:59 Running preremove script for  perl-HTTP-Message
+2016/02/05 08:13:59 Running preremove script for  perl-HTTP-Negotiate
+2016/02/05 08:13:59 Running preremove script for  perl-IO-CaptureOutput
+2016/02/05 08:13:59 Running preremove script for  perl-IO-Socket-INET6
+2016/02/05 08:13:59 Running preremove script for  perl-IO-String
+2016/02/05 08:13:59 Running preremove script for  perl-IO-Tty
+2016/02/05 08:13:59 Running preremove script for  perl-IPC-Cmd
+2016/02/05 08:13:59 Running preremove script for  perl-IPC-Run
+2016/02/05 08:13:59 Running preremove script for  perl-LWP-MediaTypes
+2016/02/05 08:13:59 Running preremove script for  perl-Module-ScanDeps
+2016/02/05 08:13:59 Running preremove script for  perl-Module-Signature
+2016/02/05 08:13:59 Running preremove script for  perl-Net-DNS
+2016/02/05 08:13:59 Running preremove script for  perl-Net-HTTP
+2016/02/05 08:13:59 Running preremove script for  perl-Net-IP
+2016/02/05 08:13:59 Running preremove script for  perl-PAR-Dist
+2016/02/05 08:13:59 Running preremove script for  perl-PadWalker
+2016/02/05 08:13:59 Running preremove script for  perl-Pod-Coverage
+2016/02/05 08:13:59 Running preremove script for  perl-Pod-Escapes
+2016/02/05 08:13:59 Running preremove script for  perl-Pod-Simple
+2016/02/05 08:13:59 Running preremove script for  perl-Probe-Perl
+2016/02/05 08:13:59 Running preremove script for  perl-Proc-ProcessTable
+2016/02/05 08:13:59 Running preremove script for  perl-Socket6
+2016/02/05 08:13:59 Running preremove script for  perl-Tee
+2016/02/05 08:13:59 Running preremove script for  perl-Term-ReadLine-Gnu
+2016/02/05 08:13:59 Running preremove script for  perl-Term-ReadLine-Perl
+2016/02/05 08:13:59 Running preremove script for  perl-TermReadKey
+2016/02/05 08:13:59 Running preremove script for  perl-Test-NoWarnings
+2016/02/05 08:13:59 Running preremove script for  perl-Test-Pod
+2016/02/05 08:13:59 Running preremove script for  perl-Test-Pod-Coverage
+2016/02/05 08:13:59 Running preremove script for  perl-Test-Reporter
+2016/02/05 08:13:59 Running preremove script for  perl-Test-Reporter-Transport-Metabase
+2016/02/05 08:13:59 Running preremove script for  perl-Test-Simple
+2016/02/05 08:13:59 Running preremove script for  perl-URI
+2016/02/05 08:13:59 Running preremove script for  perl-WWW-RobotRules
+2016/02/05 08:13:59 Running preremove script for  perl-XML-LibXML
+2016/02/05 08:13:59 Running preremove script for  perl-XML-NamespaceSupport
+2016/02/05 08:13:59 Running preremove script for  perl-XML-Parser
+2016/02/05 08:13:59 Running preremove script for  perl-XML-SAX
+2016/02/05 08:13:59 Running preremove script for  perl-YAML
+2016/02/05 08:13:59 Running preremove script for  perl-libwww-perl
+2016/02/05 08:13:59 Running preremove script for  perl_autorebase
+2016/02/05 08:13:59 Running preremove script for  perl_base
+2016/02/05 08:13:59 Running preremove script for  pkg-config
+2016/02/05 08:13:59 Running preremove script for  procps
+2016/02/05 08:13:59 Running preremove script for  python
+2016/02/05 08:13:59 Running preremove script for  rsync
+2016/02/05 08:13:59 Running preremove script for  run
+2016/02/05 08:13:59 Running preremove script for  shared-mime-info
+2016/02/05 08:13:59 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/preremove/shared-mime-info.sh"
+2016/02/05 08:14:10 Running preremove script for  subversion
+2016/02/05 08:14:10 Running preremove script for  subversion-perl
+2016/02/05 08:14:10 Running preremove script for  tar
+2016/02/05 08:14:10 Running preremove script for  terminfo
+2016/02/05 08:14:10 Running preremove script for  texinfo
+2016/02/05 08:14:10 Running preremove script for  time
+2016/02/05 08:14:10 Running preremove script for  tzcode
+2016/02/05 08:14:10 Running preremove script for  unzip
+2016/02/05 08:14:10 Running preremove script for  vim
+2016/02/05 08:14:10 Running preremove script for  vim-common
+2016/02/05 08:14:10 Running preremove script for  w32api-headers
+2016/02/05 08:14:10 Running preremove script for  w32api-runtime
+2016/02/05 08:14:10 Running preremove script for  wget
+2016/02/05 08:14:10 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/preremove/wget.sh"
+2016/02/05 08:14:10 Running preremove script for  xxd
+2016/02/05 08:14:10 Running preremove script for  xz
+2016/02/05 08:14:10 Running preremove script for  zsh
+2016/02/05 08:14:10 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/preremove/zsh.sh"
+2016/02/05 08:14:11 Uninstalling _update-info-dir
+2016/02/05 08:14:11 Uninstalling base-files
+2016/02/05 08:14:12 Uninstalling bash
+2016/02/05 08:14:16 Uninstalling binutils
+2016/02/05 08:14:21 Uninstalling ca-certificates
+2016/02/05 08:14:24 Uninstalling coreutils
+2016/02/05 08:14:34 Uninstalling cron
+2016/02/05 08:14:34 Uninstalling csih
+2016/02/05 08:14:34 Uninstalling curl
+2016/02/05 08:14:35 Uninstalling cygutils
+2016/02/05 08:14:35 Uninstalling cygwin
+2016/02/05 08:14:36 Uninstalling cygwin-devel
+2016/02/05 08:14:40 Uninstalling diffutils
+2016/02/05 08:14:41 Uninstalling dos2unix
+2016/02/05 08:14:43 Uninstalling file
+2016/02/05 08:14:44 Uninstalling gawk
+2016/02/05 08:14:47 Uninstalling gcc-core
+2016/02/05 08:14:54 Uninstalling gettext
+2016/02/05 08:14:55 Uninstalling git
+2016/02/05 08:15:16 Uninstalling git-svn
+2016/02/05 08:15:17 Uninstalling gnutls
+2016/02/05 08:15:18 Uninstalling gsettings-desktop-schemas
+2016/02/05 08:15:21 Uninstalling info
+2016/02/05 08:15:24 Uninstalling less
+2016/02/05 08:15:25 Uninstalling libapr1
+2016/02/05 08:15:25 Uninstalling libaprutil1
+2016/02/05 08:15:25 Uninstalling libatomic1
+2016/02/05 08:15:25 Uninstalling libcurl4
+2016/02/05 08:15:25 Uninstalling libevent-devel
+2016/02/05 08:15:26 Uninstalling libevent2.0_5
+2016/02/05 08:15:26 Uninstalling libgcc1
+2016/02/05 08:15:26 Uninstalling libglib2.0_0
+2016/02/05 08:15:35 Uninstalling libgmp10
+2016/02/05 08:15:35 Uninstalling libgnutls28
+2016/02/05 08:15:37 Uninstalling libgomp1
+2016/02/05 08:15:37 Uninstalling libgssapi_krb5_2
+2016/02/05 08:15:37 Uninstalling libintl-devel
+2016/02/05 08:15:37 Uninstalling libintl8
+2016/02/05 08:15:38 Uninstalling libk5crypto3
+2016/02/05 08:15:38 Uninstalling libkrb5_3
+2016/02/05 08:15:38 Uninstalling libkrb5support0
+2016/02/05 08:15:38 Uninstalling libltdl7
+2016/02/05 08:15:38 Uninstalling liblzma5
+2016/02/05 08:15:38 Uninstalling libmpfr4
+2016/02/05 08:15:38 Uninstalling libmysqlclient18
+2016/02/05 08:15:38 Uninstalling libncurses-devel
+2016/02/05 08:15:57 Uninstalling libncurses10
+2016/02/05 08:15:57 Uninstalling libncursesw10
+2016/02/05 08:15:57 Uninstalling libopenldap2_4_2
+2016/02/05 08:15:57 Uninstalling libopenssl100
+2016/02/05 08:15:58 Uninstalling libp11-kit0
+2016/02/05 08:15:58 Uninstalling libpcre1
+2016/02/05 08:15:58 Uninstalling libpcre16_0
+2016/02/05 08:15:58 Uninstalling libpcre32_0
+2016/02/05 08:15:58 Uninstalling libpcreposix0
+2016/02/05 08:15:58 Uninstalling libpipeline1
+2016/02/05 08:15:58 Uninstalling libpq5
+2016/02/05 08:15:58 Uninstalling libproxy1
+2016/02/05 08:15:58 Uninstalling libquadmath0
+2016/02/05 08:15:58 Uninstalling libsigsegv2
+2016/02/05 08:15:58 Uninstalling libsqlite3_0
+2016/02/05 08:15:58 Uninstalling libssp0
+2016/02/05 08:15:58 Uninstalling libstdc++6
+2016/02/05 08:15:58 Uninstalling libtasn1_6
+2016/02/05 08:15:58 Uninstalling libxml2
+2016/02/05 08:15:58 Uninstalling m4
+2016/02/05 08:15:59 Uninstalling man
+2016/02/05 08:15:59 io_stream_cygfile: fopen(/etc/setup/man.lst.gz) failed 2 No such file or directory
+2016/02/05 08:15:59 Uninstalling man-db
+2016/02/05 08:16:11 Uninstalling mc
+2016/02/05 08:16:23 Uninstalling mintty
+2016/02/05 08:16:23 Uninstalling nano
+2016/02/05 08:16:26 Uninstalling ncurses
+2016/02/05 08:16:27 Uninstalling ncursesw
+2016/02/05 08:16:27 io_stream_cygfile: fopen(/etc/setup/ncursesw.lst.gz) failed 2 No such file or directory
+2016/02/05 08:16:27 Uninstalling openssh
+2016/02/05 08:16:28 Uninstalling openssl
+2016/02/05 08:16:30 Uninstalling openssl-devel
+2016/02/05 08:17:03 Uninstalling p11-kit
+2016/02/05 08:17:04 Uninstalling p11-kit-trust
+2016/02/05 08:17:04 Uninstalling pcre
+2016/02/05 08:17:05 Uninstalling perl
+2016/02/05 08:18:01 Uninstalling perl-Archive-Zip
+2016/02/05 08:18:01 Uninstalling perl-B-Generate
+2016/02/05 08:18:02 Uninstalling perl-CPAN-Reporter
+2016/02/05 08:18:03 Uninstalling perl-Capture-Tiny
+2016/02/05 08:18:03 Uninstalling perl-Compress-Bzip2
+2016/02/05 08:18:04 Uninstalling perl-Config-Tiny
+2016/02/05 08:18:04 Uninstalling perl-Data-Alias
+2016/02/05 08:18:05 Uninstalling perl-Devel-Autoflush
+2016/02/05 08:18:06 Uninstalling perl-Digest-HMAC
+2016/02/05 08:18:06 Uninstalling perl-Digest-SHA
+2016/02/05 08:18:07 Uninstalling perl-Encode-Locale
+2016/02/05 08:18:07 Uninstalling perl-Error
+2016/02/05 08:18:07 Uninstalling perl-File-Copy-Recursive
+2016/02/05 08:18:09 Uninstalling perl-File-HomeDir
+2016/02/05 08:18:09 Uninstalling perl-File-Listing
+2016/02/05 08:18:09 Uninstalling perl-File-pushd
+2016/02/05 08:18:09 Uninstalling perl-HTML-Parser
+2016/02/05 08:18:10 Uninstalling perl-HTTP-Cookies
+2016/02/05 08:18:10 Uninstalling perl-HTTP-Daemon
+2016/02/05 08:18:10 Uninstalling perl-HTTP-Date
+2016/02/05 08:18:10 Uninstalling perl-HTTP-Message
+2016/02/05 08:18:13 Uninstalling perl-HTTP-Negotiate
+2016/02/05 08:18:13 Uninstalling perl-IO-CaptureOutput
+2016/02/05 08:18:14 Uninstalling perl-IO-Socket-INET6
+2016/02/05 08:18:14 Uninstalling perl-IO-String
+2016/02/05 08:18:14 Uninstalling perl-IO-Tty
+2016/02/05 08:18:15 Uninstalling perl-IPC-Cmd
+2016/02/05 08:18:15 Uninstalling perl-IPC-Run
+2016/02/05 08:18:15 Uninstalling perl-LWP-MediaTypes
+2016/02/05 08:18:16 Uninstalling perl-Module-ScanDeps
+2016/02/05 08:18:17 Uninstalling perl-Module-Signature
+2016/02/05 08:18:17 Uninstalling perl-Net-DNS
+2016/02/05 08:18:20 Uninstalling perl-Net-HTTP
+2016/02/05 08:18:20 Uninstalling perl-Net-IP
+2016/02/05 08:18:20 Uninstalling perl-PAR-Dist
+2016/02/05 08:18:21 Uninstalling perl-PadWalker
+2016/02/05 08:18:21 Uninstalling perl-Pod-Coverage
+2016/02/05 08:18:21 Uninstalling perl-Pod-Escapes
+2016/02/05 08:18:21 Uninstalling perl-Pod-Simple
+2016/02/05 08:18:22 Uninstalling perl-Probe-Perl
+2016/02/05 08:18:22 Uninstalling perl-Proc-ProcessTable
+2016/02/05 08:18:24 Uninstalling perl-Socket6
+2016/02/05 08:18:24 Uninstalling perl-Tee
+2016/02/05 08:18:24 Uninstalling perl-Term-ReadLine-Gnu
+2016/02/05 08:18:25 Uninstalling perl-Term-ReadLine-Perl
+2016/02/05 08:18:26 Uninstalling perl-TermReadKey
+2016/02/05 08:18:27 Uninstalling perl-Test-NoWarnings
+2016/02/05 08:18:27 Uninstalling perl-Test-Pod
+2016/02/05 08:18:27 Uninstalling perl-Test-Pod-Coverage
+2016/02/05 08:18:28 Uninstalling perl-Test-Reporter
+2016/02/05 08:18:29 Uninstalling perl-Test-Reporter-Transport-Metabase
+2016/02/05 08:18:29 Uninstalling perl-Test-Simple
+2016/02/05 08:18:30 Uninstalling perl-URI
+2016/02/05 08:18:32 Uninstalling perl-WWW-RobotRules
+2016/02/05 08:18:34 Uninstalling perl-XML-LibXML
+2016/02/05 08:18:36 Uninstalling perl-XML-NamespaceSupport
+2016/02/05 08:18:36 Uninstalling perl-XML-Parser
+2016/02/05 08:18:37 Uninstalling perl-XML-SAX
+2016/02/05 08:18:37 Uninstalling perl-YAML
+2016/02/05 08:18:39 Uninstalling perl-libwww-perl
+2016/02/05 08:18:40 Uninstalling perl_autorebase
+2016/02/05 08:18:40 Uninstalling perl_base
+2016/02/05 08:18:56 Uninstalling pkg-config
+2016/02/05 08:18:56 Uninstalling procps
+2016/02/05 08:18:58 Uninstalling python
+2016/02/05 08:19:41 Uninstalling rsync
+2016/02/05 08:19:41 Uninstalling run
+2016/02/05 08:19:42 Uninstalling shared-mime-info
+2016/02/05 08:19:43 Uninstalling subversion
+2016/02/05 08:19:45 Uninstalling subversion-perl
+2016/02/05 08:19:47 Uninstalling tar
+2016/02/05 08:19:49 Uninstalling terminfo
+2016/02/05 08:19:51 Uninstalling texinfo
+2016/02/05 08:19:59 Uninstalling time
+2016/02/05 08:19:59 Uninstalling tzcode
+2016/02/05 08:20:24 Uninstalling unzip
+2016/02/05 08:20:25 Uninstalling vim
+2016/02/05 08:20:25 Uninstalling vim-common
+2016/02/05 08:20:58 Uninstalling w32api-headers
+2016/02/05 08:21:24 Uninstalling w32api-runtime
+2016/02/05 08:21:31 Uninstalling wget
+2016/02/05 08:21:32 Uninstalling xxd
+2016/02/05 08:21:33 Uninstalling xz
+2016/02/05 08:21:34 Uninstalling zsh
+2016/02/05 08:22:01 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/_autorebase/_autorebase-001002-1.tar.xz
+2016/02/05 08:22:02 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/_update-info-dir/_update-info-dir-02000-1.tar.xz
+2016/02/05 08:22:02 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/automake1.15/automake1.15-1.15-1.tar.xz
+2016/02/05 08:22:18 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/base-files/base-files-4.2-4.tar.xz
+2016/02/05 08:22:19 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/bash/bash-4.3.42-4.tar.xz
+2016/02/05 08:22:41 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/binutils/binutils-2.25-4.tar.xz
+2016/02/05 08:23:05 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/ca-certificates/ca-certificates-2.6-1.tar.xz
+2016/02/05 08:23:07 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/coreutils/coreutils-8.24-3.tar.xz
+2016/02/05 08:23:28 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/cron/cron-4.1-65.tar.xz
+2016/02/05 08:23:30 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/csih/csih-0.9.9-1.tar.xz
+2016/02/05 08:23:30 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/curl/curl-7.47.0-2.tar.xz
+2016/02/05 08:23:32 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/cygutils/cygutils-1.4.15-2.tar.xz
+2016/02/05 08:23:33 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/cygwin/cygwin-2.4.1-1.tar.xz
+2016/02/05 08:23:45 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/cygwin/cygwin-devel/cygwin-devel-2.4.1-1.tar.xz
+2016/02/05 08:24:07 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/diffutils/diffutils-3.3-3.tar.xz
+2016/02/05 08:24:10 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/dos2unix/dos2unix-7.3.2-1.tar.xz
+2016/02/05 08:24:15 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/file/file-5.25-1.tar.xz
+2016/02/05 08:24:20 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gawk/gawk-4.1.3-1.tar.xz
+2016/02/05 08:24:23 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gcc/gcc-core/gcc-core-4.9.3-1.tar.xz
+2016/02/05 08:24:47 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/getent/getent-2.18.90-4.tar.xz
+2016/02/05 08:24:47 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gettext/gettext-0.19.5.1-2.tar.xz
+2016/02/05 08:24:50 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/git/git-2.7.0-1.tar.xz
+2016/02/05 08:27:18 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/git/git-svn/git-svn-2.7.0-1.tar.xz
+2016/02/05 08:27:19 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gnutls/gnutls-3.3.17-1.tar.xz
+2016/02/05 08:27:21 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gsettings-desktop-schemas/gsettings-desktop-schemas-3.18.1-1.tar.xz
+2016/02/05 08:27:27 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/texinfo/info/info-6.0-1.tar.xz
+2016/02/05 08:27:31 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/less/less-481-1.tar.xz
+2016/02/05 08:27:31 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/libapr1/libapr1-1.5.2-2.tar.xz
+2016/02/05 08:27:32 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/libaprutil1/libaprutil1-1.5.4-2.tar.xz
+2016/02/05 08:27:32 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/libargp/libargp-20110921-2.tar.bz2
+2016/02/05 08:27:33 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gcc/libatomic1/libatomic1-4.9.3-1.tar.xz
+2016/02/05 08:27:33 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/curl/libcurl4/libcurl4-7.47.0-2.tar.xz
+2016/02/05 08:27:33 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/libevent/libevent-devel/libevent-devel-2.0.22-1.tar.xz
+2016/02/05 08:27:34 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/libevent/libevent2.0_5/libevent2.0_5-2.0.22-1.tar.xz
+2016/02/05 08:27:34 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gcc/libgcc1/libgcc1-4.9.3-1.tar.xz
+2016/02/05 08:27:35 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/glib2.0/libglib2.0_0/libglib2.0_0-2.46.2-2.tar.xz
+2016/02/05 08:27:48 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gmp/libgmp10/libgmp10-6.1.0-3p1.tar.xz
+2016/02/05 08:27:48 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gnutls/libgnutls28/libgnutls28-3.3.17-1.tar.xz
+2016/02/05 08:27:48 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gcc/libgomp1/libgomp1-4.9.3-1.tar.xz
+2016/02/05 08:27:48 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/krb5/libgssapi_krb5_2/libgssapi_krb5_2-1.13.2-4.tar.xz
+2016/02/05 08:27:49 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gettext/libintl-devel/libintl-devel-0.19.5.1-2.tar.xz
+2016/02/05 08:27:49 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gettext/libintl8/libintl8-0.19.5.1-2.tar.xz
+2016/02/05 08:27:50 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/isl/libisl13/libisl13-0.14.1-1.tar.xz
+2016/02/05 08:27:50 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/krb5/libk5crypto3/libk5crypto3-1.13.2-4.tar.xz
+2016/02/05 08:27:50 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/krb5/libkrb5_3/libkrb5_3-1.13.2-4.tar.xz
+2016/02/05 08:27:50 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/krb5/libkrb5support0/libkrb5support0-1.13.2-4.tar.xz
+2016/02/05 08:27:51 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/libtool/libltdl7/libltdl7-2.4.6-2.tar.xz
+2016/02/05 08:27:51 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/xz/liblzma5/liblzma5-5.2.2-1.tar.xz
+2016/02/05 08:27:51 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/mpfr/libmpfr4/libmpfr4-3.1.3-1.tar.xz
+2016/02/05 08:27:51 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/mysql/libmysqlclient18/libmysqlclient18-5.5.45-1.tar.xz
+2016/02/05 08:27:53 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/ncurses/libncurses-devel/libncurses-devel-6.0-2.20160123.tar.xz
+2016/02/05 08:28:47 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/ncurses/libncurses10/libncurses10-5.9-20150530-1.tar.xz
+2016/02/05 08:28:48 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/ncurses/libncursesw10/libncursesw10-6.0-2.20160123.tar.xz
+2016/02/05 08:28:49 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/nghttp2/libnghttp2_14/libnghttp2_14-1.6.0-1.tar.xz
+2016/02/05 08:28:50 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/openldap/libopenldap2_4_2/libopenldap2_4_2-2.4.42-1.tar.xz
+2016/02/05 08:28:50 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/openssl/libopenssl100/libopenssl100-1.0.2f-1.tar.xz
+2016/02/05 08:28:53 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/p11-kit/libp11-kit0/libp11-kit0-0.22.1-1.tar.xz
+2016/02/05 08:28:53 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/pcre/libpcre1/libpcre1-8.38-1.tar.xz
+2016/02/05 08:28:53 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/pcre/libpcre16_0/libpcre16_0-8.38-1.tar.xz
+2016/02/05 08:28:53 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/pcre/libpcre32_0/libpcre32_0-8.38-1.tar.xz
+2016/02/05 08:28:53 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/pcre/libpcreposix0/libpcreposix0-8.38-1.tar.xz
+2016/02/05 08:28:53 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/libpipeline/libpipeline1/libpipeline1-1.4.0-1.tar.xz
+2016/02/05 08:28:53 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/postgresql/libpq5/libpq5-9.4.5-1.tar.xz
+2016/02/05 08:28:53 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/libproxy/libproxy1/libproxy1-0.4.11-5.tar.xz
+2016/02/05 08:28:54 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gcc/libquadmath0/libquadmath0-4.9.3-1.tar.xz
+2016/02/05 08:28:54 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/libsigsegv/libsigsegv2/libsigsegv2-2.10-2.tar.xz
+2016/02/05 08:28:54 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/sqlite3/libsqlite3_0/libsqlite3_0-3.10.1-1.tar.xz
+2016/02/05 08:28:54 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gcc/libssp0/libssp0-4.9.3-1.tar.xz
+2016/02/05 08:28:54 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/gcc/libstdc++6/libstdc++6-4.9.3-1.tar.xz
+2016/02/05 08:28:55 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/libtasn1/libtasn1_6/libtasn1_6-4.7-1.tar.xz
+2016/02/05 08:28:55 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/libxml2/libxml2-2.9.3-1.tar.xz
+2016/02/05 08:28:56 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/m4/m4-1.4.17-2.tar.xz
+2016/02/05 08:28:59 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/man-db/man-db-2.7.4-1.tar.xz
+2016/02/05 08:29:13 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/mc/mc-4.8.15-1.tar.xz
+2016/02/05 08:29:40 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/mintty/mintty-2.2.2-0.tar.xz
+2016/02/05 08:29:47 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/nano/nano-2.4.1-1.tar.xz
+2016/02/05 08:29:52 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/ncurses/ncurses-6.0-2.20160123.tar.xz
+2016/02/05 08:29:54 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/openssh/openssh-7.1p2-1.tar.xz
+2016/02/05 08:29:59 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/openssl/openssl-1.0.2f-1.tar.xz
+2016/02/05 08:30:02 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/openssl/openssl-devel/openssl-devel-1.0.2f-1.tar.xz
+2016/02/05 08:31:16 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/p11-kit/p11-kit-0.22.1-1.tar.xz
+2016/02/05 08:31:17 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/p11-kit/p11-kit-trust/p11-kit-trust-0.22.1-1.tar.xz
+2016/02/05 08:31:17 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/pcre/pcre-8.38-1.tar.xz
+2016/02/05 08:31:18 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl/perl-5.22.1-1.tar.xz
+2016/02/05 08:32:38 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Archive-Zip/perl-Archive-Zip-1.56-1.tar.xz
+2016/02/05 08:32:39 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-B-Generate/perl-B-Generate-1.53-2.tar.xz
+2016/02/05 08:32:39 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-CPAN-DistnameInfo/perl-CPAN-DistnameInfo-0.12-5.tar.xz
+2016/02/05 08:32:40 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-CPAN-Reporter/perl-CPAN-Reporter-1.2015-1.tar.xz
+2016/02/05 08:32:40 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-CPAN-Testers-Report/perl-CPAN-Testers-Report-1.999003-2.tar.xz
+2016/02/05 08:32:41 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Capture-Tiny/perl-Capture-Tiny-0.30-2.tar.xz
+2016/02/05 08:32:41 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Compress-Bzip2/perl-Compress-Bzip2-2.24-1.tar.xz
+2016/02/05 08:32:42 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Config-Perl-V/perl-Config-Perl-V-0.25-1.tar.xz
+2016/02/05 08:32:42 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Config-Tiny/perl-Config-Tiny-2.23-1.tar.xz
+2016/02/05 08:32:42 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Data-Alias/perl-Data-Alias-1.20-1.tar.xz
+2016/02/05 08:32:43 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Data-GUID/perl-Data-GUID-0.048-2.tar.xz
+2016/02/05 08:32:43 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Data-OptList/perl-Data-OptList-0.109-2.tar.xz
+2016/02/05 08:32:44 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Data-UUID/perl-Data-UUID-1.221-1.tar.xz
+2016/02/05 08:32:44 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Devel-Autoflush/perl-Devel-Autoflush-0.06-2.tar.xz
+2016/02/05 08:32:44 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Devel-Symdump/perl-Devel-Symdump-2.15-1.tar.xz
+2016/02/05 08:32:45 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Digest-HMAC/perl-Digest-HMAC-1.03-5.tar.xz
+2016/02/05 08:32:45 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Digest-SHA/perl-Digest-SHA-5.95-2.tar.xz
+2016/02/05 08:32:46 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Encode-Locale/perl-Encode-Locale-1.05-1.tar.xz
+2016/02/05 08:32:46 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Error/perl-Error-0.17024-1.tar.xz
+2016/02/05 08:32:47 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-File-Copy-Recursive/perl-File-Copy-Recursive-0.38-5.tar.xz
+2016/02/05 08:32:47 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-File-HomeDir/perl-File-HomeDir-1.00-3.tar.xz
+2016/02/05 08:32:48 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-File-Listing/perl-File-Listing-6.04-5.tar.xz
+2016/02/05 08:32:48 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-File-Which/perl-File-Which-1.19-1.tar.xz
+2016/02/05 08:32:48 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-File-pushd/perl-File-pushd-1.009-2.tar.xz
+2016/02/05 08:32:49 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-HTML-Parser/perl-HTML-Parser-3.72-1.tar.xz
+2016/02/05 08:32:51 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-HTML-Tagset/perl-HTML-Tagset-3.20-5.tar.xz
+2016/02/05 08:32:51 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-HTTP-Cookies/perl-HTTP-Cookies-6.01-5.tar.xz
+2016/02/05 08:32:51 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-HTTP-Daemon/perl-HTTP-Daemon-6.01-5.tar.xz
+2016/02/05 08:32:51 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-HTTP-Date/perl-HTTP-Date-6.02-5.tar.xz
+2016/02/05 08:32:51 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-HTTP-Message/perl-HTTP-Message-6.11-1.tar.xz
+2016/02/05 08:32:52 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-HTTP-Negotiate/perl-HTTP-Negotiate-6.01-5.tar.xz
+2016/02/05 08:32:52 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-IO-CaptureOutput/perl-IO-CaptureOutput-1.1104-2.tar.xz
+2016/02/05 08:32:53 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-IO-HTML/perl-IO-HTML-1.001-2.tar.xz
+2016/02/05 08:32:53 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-IO-Prompt-Tiny/perl-IO-Prompt-Tiny-0.003-2.tar.xz
+2016/02/05 08:32:53 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-IO-Socket-INET6/perl-IO-Socket-INET6-2.72-2.tar.xz
+2016/02/05 08:32:54 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-IO-String/perl-IO-String-1.08-5.tar.xz
+2016/02/05 08:32:54 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-IO-Tty/perl-IO-Tty-1.12-2.tar.xz
+2016/02/05 08:32:54 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-IPC-Cmd/perl-IPC-Cmd-0.92-2.tar.xz
+2016/02/05 08:32:55 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-IPC-Run/perl-IPC-Run-0.94-2.tar.xz
+2016/02/05 08:32:55 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-JSON/perl-JSON-2.90-3.tar.xz
+2016/02/05 08:32:56 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-JSON-XS/perl-JSON-XS-3.01-3.tar.xz
+2016/02/05 08:32:56 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-LWP-MediaTypes/perl-LWP-MediaTypes-6.02-5.tar.xz
+2016/02/05 08:32:57 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Metabase-Client-Simple/perl-Metabase-Client-Simple-0.010-2.tar.xz
+2016/02/05 08:32:57 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Metabase-Fact/perl-Metabase-Fact-0.024-2.tar.xz
+2016/02/05 08:32:58 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Module-ScanDeps/perl-Module-ScanDeps-1.20-1.tar.xz
+2016/02/05 08:32:58 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Module-Signature/perl-Module-Signature-0.79-1.tar.xz
+2016/02/05 08:32:59 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Net-DNS/perl-Net-DNS-1.04-1.tar.xz
+2016/02/05 08:33:11 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Net-HTTP/perl-Net-HTTP-6.09-1.tar.xz
+2016/02/05 08:33:14 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Net-IP/perl-Net-IP-1.26-3.tar.xz
+2016/02/05 08:33:14 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-PAR-Dist/perl-PAR-Dist-0.49-3.tar.xz
+2016/02/05 08:33:15 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-PadWalker/perl-PadWalker-2.2-1.tar.xz
+2016/02/05 08:33:15 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Params-Util/perl-Params-Util-1.07-5.tar.xz
+2016/02/05 08:33:15 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Pod-Coverage/perl-Pod-Coverage-0.23-3.tar.xz
+2016/02/05 08:33:15 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Pod-Escapes/perl-Pod-Escapes-1.07-2.tar.xz
+2016/02/05 08:33:15 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Pod-Simple/perl-Pod-Simple-3.32-1.tar.xz
+2016/02/05 08:33:18 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Probe-Perl/perl-Probe-Perl-0.03-3.tar.xz
+2016/02/05 08:33:18 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Proc-ProcessTable/perl-Proc-ProcessTable-0.53-1.tar.xz
+2016/02/05 08:33:19 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Scalar-List-Utils/perl-Scalar-List-Utils-1.42-2.tar.xz
+2016/02/05 08:33:19 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Socket6/perl-Socket6-0.25-2.tar.xz
+2016/02/05 08:33:19 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Sub-Exporter/perl-Sub-Exporter-0.987-3.tar.xz
+2016/02/05 08:33:20 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Sub-Install/perl-Sub-Install-0.928-2.tar.xz
+2016/02/05 08:33:20 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Tee/perl-Tee-0.14-5.tar.xz
+2016/02/05 08:33:20 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Term-ReadLine-Gnu/perl-Term-ReadLine-Gnu-1.28-1.tar.xz
+2016/02/05 08:33:22 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Term-ReadLine-Perl/perl-Term-ReadLine-Perl-1.0303-5.tar.xz
+2016/02/05 08:33:22 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-TermReadKey/perl-TermReadKey-2.33-1.tar.xz
+2016/02/05 08:33:22 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Test-NoWarnings/perl-Test-NoWarnings-1.04-4.tar.xz
+2016/02/05 08:33:23 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Test-Pod/perl-Test-Pod-1.51-1.tar.xz
+2016/02/05 08:33:23 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Test-Pod-Coverage/perl-Test-Pod-Coverage-1.10-2.tar.xz
+2016/02/05 08:33:23 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Test-Reporter/perl-Test-Reporter-1.62-2.tar.xz
+2016/02/05 08:33:23 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Test-Reporter-Transport-Metabase/perl-Test-Reporter-Transport-Metabase-1.999009-2.tar.xz
+2016/02/05 08:33:24 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Test-Simple/perl-Test-Simple-1.001014-2.tar.xz
+2016/02/05 08:33:26 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-Types-Serialiser/perl-Types-Serialiser-1.0-3.tar.xz
+2016/02/05 08:33:26 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-URI/perl-URI-1.71-1.tar.xz
+2016/02/05 08:33:28 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-WWW-RobotRules/perl-WWW-RobotRules-6.02-5.tar.xz
+2016/02/05 08:33:28 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-XML-LibXML/perl-XML-LibXML-2.0123-1.tar.xz
+2016/02/05 08:33:35 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-XML-NamespaceSupport/perl-XML-NamespaceSupport-1.11-5.tar.xz
+2016/02/05 08:33:36 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-XML-Parser/perl-XML-Parser-2.44-2.tar.xz
+2016/02/05 08:33:38 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-XML-SAX/perl-XML-SAX-0.99-5.tar.xz
+2016/02/05 08:33:39 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-XML-SAX-Base/perl-XML-SAX-Base-1.08-5.tar.xz
+2016/02/05 08:33:40 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-YAML/perl-YAML-1.15-2.tar.xz
+2016/02/05 08:33:41 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-common-sense/perl-common-sense-3.74-1.tar.xz
+2016/02/05 08:33:41 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl-libwww-perl/perl-libwww-perl-6.15-1.tar.xz
+2016/02/05 08:33:46 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl/perl_autorebase/perl_autorebase-5.22.1-1.tar.xz
+2016/02/05 08:33:46 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/perl/perl_base/perl_base-5.22.1-1.tar.xz
+2016/02/05 08:33:54 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/pkg-config/pkg-config-0.29-1.tar.xz
+2016/02/05 08:33:55 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/procps/procps-3.2.8-5.tar.xz
+2016/02/05 08:33:56 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/python/python-2.7.10-1.tar.xz
+2016/02/05 08:35:26 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/rsync/rsync-3.1.2-1.tar.xz
+2016/02/05 08:35:26 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/run/run-1.3.4-2.tar.xz
+2016/02/05 08:35:26 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/shared-mime-info/shared-mime-info-1.5-1.tar.xz
+2016/02/05 08:35:28 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/subversion/subversion-1.9.3-1.tar.xz
+2016/02/05 08:35:34 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/subversion/subversion-perl/subversion-perl-1.9.3-1.tar.xz
+2016/02/05 08:35:36 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/tar/tar-1.28-1.tar.xz
+2016/02/05 08:35:39 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/ncurses/terminfo/terminfo-6.0-2.20160123.tar.xz
+2016/02/05 08:35:47 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/texinfo/texinfo-6.0-1.tar.xz
+2016/02/05 08:36:09 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/time/time-1.7.2-1.tar.xz
+2016/02/05 08:36:10 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/tzcode/tzcode-2016a-1.tar.xz
+2016/02/05 08:37:44 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/unzip/unzip-6.0-15.tar.xz
+2016/02/05 08:37:45 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/vim/vim-7.4.1179-1.tar.xz
+2016/02/05 08:37:48 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/vim/vim-common/vim-common-7.4.1179-1.tar.xz
+2016/02/05 08:39:18 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/vim/vim-minimal/vim-minimal-7.4.1179-1.tar.xz
+2016/02/05 08:39:21 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/w32api-headers/w32api-headers-4.0.4-1.tar.xz
+2016/02/05 08:40:23 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/w32api-runtime/w32api-runtime-4.0.4-1.tar.xz
+2016/02/05 08:40:44 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/wget/wget-1.17.1-1.tar.xz
+2016/02/05 08:40:47 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/vim/xxd/xxd-7.4.1179-1.tar.xz
+2016/02/05 08:40:47 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/xz/xz-5.2.2-1.tar.xz
+2016/02/05 08:40:50 Extracting from file://F:/atomicApe/babun//dist/http%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/x86/release/zsh/zsh-5.1.1-1.tar.bz2
+2016/02/05 08:41:46 running: F:\atomicApe\babun\\cygwin\bin\dash.exe "/etc/postinstall/0p_000_autorebase.dash"
+2016/02/05 08:41:49 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/0p_update-info-dir.sh"
+2016/02/05 08:41:56 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/coreutils.sh"
+2016/02/05 08:41:56 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/bash.sh"
+2016/02/05 08:41:57 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/ca-certificates.sh"
+2016/02/05 08:42:03 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/base-files-mketc.sh"
+2016/02/05 08:42:03 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/base-files-profile.sh"
+2016/02/05 08:42:05 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/cron.sh"
+2016/02/05 08:42:05 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/libxml2.sh"
+2016/02/05 08:42:05 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/shared-mime-info.sh"
+2016/02/05 08:42:59 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/gsettings-desktop-schemas.sh"
+2016/02/05 08:43:00 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/glib2.0.sh"
+2016/02/05 08:43:00 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/openssh.sh"
+2016/02/05 08:43:00 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/man-db.sh"
+2016/02/05 08:43:00 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/mintty.sh"
+2016/02/05 08:43:00 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/vim.sh"
+2016/02/05 08:43:00 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/wget.sh"
+2016/02/05 08:43:01 running: F:\atomicApe\babun\\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/zsh-profile.sh"
+2016/02/05 08:43:02 Ending cygwin install

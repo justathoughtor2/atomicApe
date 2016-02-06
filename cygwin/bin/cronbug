@@ -1,0 +1,94 @@
+#! /bin/sh
+# This file is part of the Cygwin cron distribution.
+#
+
+#############################
+# Useful subroutine
+#############################
+request()
+{
+  while true
+  do
+    echo -n "$1 (yes/no) "
+    if read answer; then
+      if [ "${answer}" = "yes" ]; then
+        return 0
+      elif [ "${answer}" = "no" ]; then
+        return 1
+      fi
+    else
+      echo -e "Quitting.\n"
+      exit 1
+    fi
+  done
+}
+
+#############################
+# main
+#############################
+
+echo
+echo 'This script produces an error report for cron.'
+echo 'Please run it while the cron service is running (if possible).'
+echo 'Send cronbug.txt as an attachment to cygwin@cygwin.com'
+echo 'mentioning "cron" in the Subject line' 
+echo 'and describing the problem you observe.'
+
+if request "Do you want to continue?" ;
+    then
+	continue
+    else 
+	exit 0
+fi
+
+export CYGWIN=ntsec
+
+echo -e "\nThe report is written to the file ./cronbug.txt"
+
+exec 1> cronbug.txt
+
+echo -e "\nCurrent version"
+ls -l /usr/share/doc/Cygwin/cron-*.README
+
+echo -e "\nRunning crons:"
+ps -a | fgrep cron || echo 'None'
+
+echo -e "\nSendmail:"
+ls -l /usr/sbin/sendmail* || echo 'None'
+
+echo -e "\nCrontabs:"
+ls -l /var/cron/tabs/*
+ls -n /var/cron/tabs/*
+
+[ -e /etc/crontab ] && ls -l /etc/crontab
+
+echo -e "\ncron.log:"
+[ -e /var/log/cron.log ] && ls -l /var/log/cron.log
+
+echo -e "\ncron.pid:"
+[ -e /var/run/cron.pid ] && ls -l /var/run/cron.pid
+
+echo -e "\nCrontab:"
+crontab -l
+
+if [ -S /dev/log ]; then
+  echo -e "\nSyslog running"
+else
+  echo -e "\nWindows Application Events log:"
+  cronevents
+fi
+
+echo -e "\nCygcheck:"
+cygcheck -srv
+
+exec 1> /dev/tty
+
+if fgrep -e 'cron:' ./cronbug.txt | grep -q -v -e '\(CMD\|STARTUP\|RELOAD\| service st\)' ; then
+	echo -e "\nWARNING: The Windows application log contains cron"
+	echo 'related errors. Lookup the details in ./cronbug.txt'
+fi
+
+if fgrep -iq "multiple cygwin1" ./cronbug.txt ; then
+	echo -e "\nWARNING: You have multiple cygwin.dll in your PATH."
+	echo 'Lookup the details in ./cronbug.txt' 
+fi

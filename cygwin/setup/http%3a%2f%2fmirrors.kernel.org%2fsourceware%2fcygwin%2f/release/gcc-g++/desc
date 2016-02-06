@@ -1,0 +1,18 @@
+gcc-g++
+sdesc: "GNU Compiler Collection (C++)"
+ldesc: "The GNU Compiler Collection includes front ends for C, C++,
+Objective-C, Fortran, Java, Ada, and Go, as well as libraries for these
+languages (libstdc++, libgcj,...)."
+category: Devel
+requires: cygwin libcloog-isl4 libgmp10 libiconv2 libintl8 libisl10 libisl13 libmpc3 libmpfr4 libstdc++6 zlib0 gcc-core
+version: 4.9.3-1
+install: x86/release/gcc/gcc-g++/gcc-g++-4.9.3-1.tar.xz 7714988 47ec5f0920fce77ef9cbaafa6f2f18b8b9335c8e3b27387c4488d8defced9ab55903772a001837f917860aba61d9ac6882cf9be7bf7bffe1f6ccb1f78ec6262b
+source: x86/release/gcc/gcc-4.9.3-1-src.tar.xz 89929992 18e61ea73ac576bcfe8c5cc98a6508cff32002225f0951e6556aedfeab5340f81b32a4df23298ef4e233602d86ac550c589554a4a62d8671cccc3af40ce5d7dd
+[prev]
+version: 4.9.2-3
+install: x86/release/gcc/gcc-g++/gcc-g++-4.9.2-3.tar.xz 7693176 fae169b5a44f19f9162ff0d487e3ab5e3bf0462e3d8fd3ba011e6ff9f207f342dade4434f6d703ac2a38321da522fc7cb38545e0dfd28de880fdd0cb94a8bb56
+source: x86/release/gcc/gcc-4.9.2-3-src.tar.xz 89870272 61e3e28bd8e4c5b1f0df2d618c39b84c840a0f6c50932898366e5fccfc4a7c89e52a82ab44f2850db8777439ee0e2e6e20fc52b9c891d23f06dab3e72f1982e5
+[test]
+version: 5.3.0-1
+install: x86/release/gcc/gcc-g++/gcc-g++-5.3.0-1.tar.xz 9378284 04da4bd1fea58683ff8bdac7056f6ae69c4ca2b8c99ec0eedd4acd9b5bd1928c8af96d82d8dd117985317184b6b9457a8b0c799eb1af93698b55f407b12f37d7
+source: x86/release/gcc/gcc-5.3.0-1-src.tar.xz 95362404 4e5d21fcc273bcace7540ebbfd79def4faca80f7a72b9859819f911ae77f0d6fd06040dd791df92dcdc160c2a0e974d816224efbc89a7d9be51c16491a019ebc

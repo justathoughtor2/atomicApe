@@ -1,0 +1,12 @@
+libICE6
+sdesc: "X.Org Inter Client Exchange Library"
+ldesc: "X.Org Inter Client Exchange Library"
+category: Libs
+requires: cygwin
+version: 1.0.9-1
+install: x86/release/libICE/libICE6/libICE6-1.0.9-1.tar.xz 322652 34e43a79cea6f6e962df5e2798397d400c2d52dcad9f1b52d0dba7a951792e90115f563a59f85191450f7ac0aaff2fdaf1fdf1b84af9799a51fc5b7a5408d5ed
+source: x86/release/libICE/libICE-1.0.9-1-src.tar.xz 386212 0a49952302cf20d2571dc2b73621f7f2a7ee3895404f5e424aced7d059a9f5e9e93192c11ce827615089fe0bb8961f6859bb95907f535c51816b39e02724cdbf
+[prev]
+version: 1.0.8-1
+install: x86/release/libICE/libICE6/libICE6-1.0.8-1.tar.bz2 378564 fdc112b82919f524df4f9968132f3604204500298e30e59572d8623f0dc5c12209b9ece774aa3ae87415bcb6275429e64cea0d7f06932c705d65ce906b32fab8
+source: x86/release/libICE/libICE-1.0.8-1-src.tar.bz2 368719 f47204b5951d9dce75be0f03fc4c01122073283af6a200598b4b6b3945404f258aa48e10c1df047e29b2e7df531c31c43fa85a9753bdcad762a8e131b4487c26

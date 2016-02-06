@@ -1,0 +1,44 @@
+automake
+===========================================================
+Wrapper script for automake and aclocal.
+
+Build requirements:
+  cygwin-1.7.22-1
+  cygport-0.12.3-1
+
+Canonical website:
+  http://www.gentoo.org/
+
+Canonical download:
+  http://sources.gentoo.org/viewcvs.py/gentoo-x86/sys-devel/automake-wrapper/files/
+
+===========================================================
+
+Port Notes:
+----- automake-9-1 -- 2013 Jul 29 -----
+* Update to latest gentoo release
+* Adds support for automake1.14 (and 1.13).
+
+----- automake-7-1 -- 2012 Sep 03 -----
+* Update to latest gentoo release
+* Adds support for automake1.12
+
+----- automake-4-10 -- 2009 May 24 -----
+* Update to latest gentoo release
+* Adds support for automake1.11
+
+----- automake-3-10 -- 19 Oct 2008 -----
+* This version marks the beginning of cygwin-1.7 specific
+  ports. Releases 3-2 thru 3-9 are reserved for
+  cygwin-1.5.
+
+----- automake-3-1 -- 19 Oct 2008 -----
+* Update to latest gentoo release
+
+----- automake-2-1 -- 14 Oct 2006 -----
+First official cygwin release.  Adds support for automake-1.10
+(Thanks to the cygports guys for doing all the hard work).
+
+===========================================================
+Cygwin port maintained by:  Charles Wilson  <cygwin@cygwin.com>
+

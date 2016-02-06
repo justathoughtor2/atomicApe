@@ -1,0 +1,9 @@
+ruby-minitest4
+sdesc: "Ruby testing framework, version 4.x"
+ldesc: "minitest provides a complete suite of testing facilities
+supporting TDD, BDD, mocking, and benchmarking."
+category: Ruby
+requires: cygwin
+version: 4.7.5-1
+install: x86/release/ruby-minitest4/ruby-minitest4-4.7.5-1.tar.xz 32368 be103848158f7b308ace3543566ff0b76ade1da0ee275435928418761d48fa6386359857512805a6c5b8a58c377e5d71529cb6df0a004089aad1fdf9251e90e8
+source: x86/release/ruby-minitest4/ruby-minitest4-4.7.5-1-src.tar.xz 54876 b0bcb2fe4b2ba41cd234bed1263e3d08584825e84661512c0e79d3cde9efe74c85769a02c1d82bf823105db5dc38d693aed6985c3c85a03442ff480aaec0607b

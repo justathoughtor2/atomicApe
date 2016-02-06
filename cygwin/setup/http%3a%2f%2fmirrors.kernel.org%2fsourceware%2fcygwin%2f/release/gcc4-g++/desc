@@ -1,0 +1,7 @@
+gcc4-g++
+sdesc: "Obsolete package"
+ldesc: "Obsolete package"
+category: _obsolete
+requires: gcc-g++
+version: 4.7.3-2
+install: x86/release/_obsolete/gcc4/gcc4-g++/gcc4-g++-4.7.3-2.tar.bz2 139 96084ea2afacf142ff2aa52d66ebeab45eaf3792a5393b5c1f42d199572e1a912501ef5aa2dda0153f60229af378662f99c5e5d4b4619ccdff985c7c38a57b7c

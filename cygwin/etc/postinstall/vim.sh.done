@@ -1,0 +1,15 @@
+if [ ! -f /etc/vimrc ]
+then
+    /usr/bin/mkdir -p /etc
+    /usr/bin/cp /etc/defaults/etc/vimrc /etc/vimrc
+fi
+
+if [ -x /usr/bin/gtk-update-icon-cache.exe ]
+then
+    /usr/bin/gtk-update-icon-cache --force /usr/share/icons/hicolor
+fi
+
+if [ -x /usr/bin/update-desktop-database ]
+then
+    /usr/bin/update-desktop-database /usr/share/applications
+fi

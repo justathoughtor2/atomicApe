@@ -1,0 +1,17 @@
+libgmpxx4
+sdesc: "Library for arbitrary precision arithmetic (C++ runtime)"
+ldesc: "GMP is a free library for arbitrary precision arithmetic,
+operating on signed integers, rational numbers, and floating point
+numbers. There is no practical limit to the precision except the ones
+implied by the available memory in the machine GMP runs on. GMP has a
+rich set of functions, and the functions have a regular interface.
+(C++ runtime)"
+category: Math Libs
+requires: libgcc1 libgmp10 libstdc++6 cygwin
+version: 6.1.0-3p1
+install: x86/release/gmp/libgmpxx4/libgmpxx4-6.1.0-3p1.tar.xz 6444 560a67c28ed15e67db532c670a8c740455ae6d48ee39bf172e9aafff036bb595389b8fe5302bc4e2dc4cea587f6191a5b0a82e25d15921b8cd2bacefb5438530
+source: x86/release/gmp/gmp-6.1.0-3p1-src.tar.xz 1953656 9335337e19e448620c41450955313e8b787811a56d5f39a4499d6bb2c2a828da4596d36fe908546c785d685f572e312abefedc1b85c7a23e0ddf729c4e5f0398
+[prev]
+version: 6.1.0-2p1
+install: x86/release/gmp/libgmpxx4/libgmpxx4-6.1.0-2p1.tar.xz 6444 f8e233b3575e75ae88f1ad71ac6f7d2fd16eb8bcccc82d2b4e81984c14f0a96a7d8640dec35c465b55602bb00c0877f83e55d39bd5f37d028ba9cc6a49959564
+source: x86/release/gmp/gmp-6.1.0-2p1-src.tar.xz 1953424 9df81872af3f0ea8a65e4187b738d05e2b266054fef5f905272aed48703aef286dd572cd390780d788ebfaa9fd0b28113af5b694621f36820be2e3139218ce16

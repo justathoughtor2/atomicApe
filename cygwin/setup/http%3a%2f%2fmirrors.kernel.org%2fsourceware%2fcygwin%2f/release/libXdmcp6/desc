@@ -1,0 +1,12 @@
+libXdmcp6
+sdesc: "X.Org Display Manager Control Protocol library"
+ldesc: "X.Org Display Manager Control Protocol library"
+category: Libs
+requires: cygwin
+version: 1.1.2-1
+install: x86/release/libXdmcp/libXdmcp6/libXdmcp6-1.1.2-1.tar.xz 125572 621bdcce772448759c7dd918ad84ce646b5360b2b670cb61f3ccba5858f5443869b61781c14c59ae9f4c9a3b194574206e5c02ec6c28e87aab274dc96140e62f
+source: x86/release/libXdmcp/libXdmcp-1.1.2-1-src.tar.xz 332884 96efb4620ceb1dcae4e8084db037056096ab913ea72a93a630857d501b4cce99508405d52b698324cd7b22be4f86d36390ca6681bf8493cceb41188fe25f59cd
+[prev]
+version: 1.1.1-1
+install: x86/release/libXdmcp/libXdmcp6/libXdmcp6-1.1.1-1.tar.bz2 137488 0a054a1cf2b4ebca2096f58f415be444713adfc2f9901b3befef57c52b1c222cb28c996943e478d2c973f08ea1e4dd6d9932e5b829c8f08e2517d86f906cb141
+source: x86/release/libXdmcp/libXdmcp-1.1.1-1-src.tar.bz2 313633 cb83d789eff50febbe04439c0c0a5df70d49c71b4764009b5b542f03e68af76546709d290d34337e672d9b45e7a36123950e078de729a5ce7f5f3d95d98da1fc

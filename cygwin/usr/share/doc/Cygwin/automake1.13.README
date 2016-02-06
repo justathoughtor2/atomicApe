@@ -1,0 +1,42 @@
+automake1.13
+========================================================================
+Provides the latest version of automake in the 1.13.x series
+
+Build requirements (these or newer):
+  cygwin-1.7.22-1
+  perl
+  coreutils
+  m4
+  texinfo
+  cygport-0.12.3
+  autoconf2.5
+  autoconf
+  make-3.82.90-1
+
+Canonical homepage:
+  http://www.gnu.org/software/automake/
+
+Canonical download:
+  ftp://ftp.gnu.org/pub/gnu/automake/
+
+License:
+  GPL
+
+Language:
+  perl, m4
+
+========================================================================
+
+Port Notes:
+
+----- 1.13.4-1 -- 2013 Jul 29 ----
+* Updated to latest upstream release
+* Rely on cygport to autogenerate setup.hints
+* Update config.sub/config.guess to latest standard (supports
+  cygwin64)
+* Use 'alternatives' only for documentation; rely on wrapper
+  to handle the tools themselves.
+* First cygwin64 release
+
+========================================================================
+Cygwin port maintained by: Chuck Wilson <cygwin@cygwin.com>

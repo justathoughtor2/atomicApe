@@ -1,0 +1,5 @@
+Ignoring indexes: https://pypi.python.org/simple
+Collecting setuptools
+Collecting pip
+Installing collected packages: setuptools, pip
+Successfully installed pip-6.1.1 setuptools-15.2

@@ -1,0 +1,12 @@
+libX11_6
+sdesc: "X.Org X11 core library (runtime)"
+ldesc: "X.Org X11 core library"
+category: Libs
+requires: libxcb1 cygwin
+version: 1.6.3-1
+install: x86/release/libX11/libX11_6/libX11_6-1.6.3-1.tar.xz 749360 ea8b99cea46cf9808331fcb0b62b3a479a49195e28ec34b1b978df7edd27ca7186430a27ebaad3fbc667895f3f3470c4bc9bcb90c75e4692d7b34f1c3c42b290
+source: x86/release/libX11/libX11-1.6.3-1-src.tar.xz 2363896 cf27e335066fec165b885fd1f7fcd9cf8ae15d5350c1a804376190e40faf8e36bc2c750891efb3140d27643f19041abe696b540db30848bdb79bc033d1e2086f
+[prev]
+version: 1.6.2-2
+install: x86/release/libX11/libX11_6/libX11_6-1.6.2-2.tar.xz 753040 1e242e62c126918eb2d8662101216456de10a896ee73adf031b4c2dfb42a007916a6ef77e5c44169ecd9d1b65f7f57397403c74376d764205e7aa8907c7051d9
+source: x86/release/libX11/libX11-1.6.2-2-src.tar.xz 2339984 3f66f73982be1abb9f900920627cd87dec2fa7d2021d3ab1250162577917458cf0de880cc03ab761becaa9ec411247c3ac75679278cfed0da8fa601adb491b80

@@ -1,0 +1,16 @@
+libxcb-glx0
+sdesc: "X Protocol C-Language Bindings (glx runtime)"
+ldesc: "libxcb provides an interface to the X Window System protocol,
+which replaces the current Xlib interface. Xlib can also use XCB as a transport
+layer, allowing software to make requests and receive responses with both,
+which eases porting to XCB. However, client programs, libraries, and toolkits
+will gain the most benefit from a native XCB port."
+category: Libs
+requires: cygwin libxcb1
+version: 1.11.1-1
+install: x86/release/libxcb/libxcb-glx0/libxcb-glx0-1.11.1-1.tar.xz 11680 dcbdf92359b41b1a5142b651e5f3dac5c12be428cd2970b3538547011891d3acfe6f8a325b2a8d5aff1507dda6b0f5a57d6e238234a0864850c55740d0a178cf
+source: x86/release/libxcb/libxcb-1.11.1-1-src.tar.xz 521916 da358a1fee8b8d0594c9a8552abb34ce568df4247675611bb333f1808e790a556f4489f4f71fb83e55f815f474100f5f346dc94695bb88d11be4f970e44a7c9b
+[prev]
+version: 1.10-1
+install: x86/release/libxcb/libxcb-glx0/libxcb-glx0-1.10-1.tar.xz 11432 3c22034687c9ac3c50c5052b56bdb6621de13f09e23bf39c279333644ce845dcf1c29e8e416e4174653299730e6a191524182f71052e5979e8af540cc3585cd4
+source: x86/release/libxcb/libxcb-1.10-1-src.tar.xz 477716 10dd3ea61fc4d355d6e3e13b24ead990aa4ad0d7a4cdd59d0fcce3345a4101775fb333c50ee13bfcc014e7e747b11d7e55a808edc463a651fa09289b2b5275c3

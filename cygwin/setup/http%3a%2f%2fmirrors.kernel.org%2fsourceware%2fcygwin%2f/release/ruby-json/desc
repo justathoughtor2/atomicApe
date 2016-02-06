@@ -1,0 +1,12 @@
+ruby-json
+sdesc: "Ruby JSON module"
+ldesc: "This is a JSON implementation as a Ruby extension in C."
+category: Ruby
+requires: cygwin ruby
+version: 1.8.2-1
+install: x86/release/ruby-json/ruby-json-1.8.2-1.tar.xz 71760 07da7c7f86b4d3076f4e570ccafd12ceae64e20193cba54bc4f4b2a00db278c9ddf47dc07f0eb71215da14ab25c4f24d976ec1f61c687cdd8151299af36e9e97
+source: x86/release/ruby-json/ruby-json-1.8.2-1-src.tar.xz 150032 eb71def5ddabd7895aa941c0e59f5b778aa18a2bbc4d7c40ef988be7226c8405e765bf7765af406a03bec9196abf8a65e20a7e8d81cb3957041c082b2a9269fb
+[prev]
+version: 1.8.1-1
+install: x86/release/ruby-json/ruby-json-1.8.1-1.tar.xz 71196 5d11416f9a05d47b35d6fa15849dd466321295f6267c40f06861f5ee73c544057faf3d14f00768266990488e4a952e37a71630f993c2c426f20cf4c232b59497
+source: x86/release/ruby-json/ruby-json-1.8.1-1-src.tar.xz 146824 4a4b11704f22bae86dd4df6801a51b442e8a6f5eca1a56c9c31f31f8cc4e8e9bbf17ce4889b2c6eb593ac87acbddf3b3b210e1af001ec8ea4e48e5a6e238c30b

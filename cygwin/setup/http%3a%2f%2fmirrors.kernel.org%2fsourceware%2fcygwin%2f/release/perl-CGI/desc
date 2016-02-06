@@ -1,0 +1,11 @@
+perl-CGI
+sdesc: "Perl HTTP request handler"
+ldesc: "CGI.pm is a stable, complete and mature solution for processing and
+preparing HTTP requests and responses. Major features including processing form
+submissions, file uploads, reading and writing cookies, query string generation
+and manipulation, and processing and preparing HTTP headers."
+category: Perl
+requires: perl-Carp perl-HTML-Parser perl_base cygwin
+version: 4.21-1
+install: x86/release/perl-CGI/perl-CGI-4.21-1.tar.xz 178656 40689fe7b9783e323fa533a835154e486d73eca69fb0f0f630e2b1951725e3867b2d906071c6cecb108b8e649883f4838437053044328623f242570be7d35dad
+source: x86/release/perl-CGI/perl-CGI-4.21-1-src.tar.xz 195972 a71859cadf68d62a7f0d4efa87fe409488d39f65e564132ef047042de52f402bd8d4031db86d6fab1536855b5ca9dc0a91503127cf96b2bfeae0f945fcd4ca83

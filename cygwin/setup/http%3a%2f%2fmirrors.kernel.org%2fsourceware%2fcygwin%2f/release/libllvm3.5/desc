@@ -1,0 +1,15 @@
+libllvm3.5
+sdesc: "LLVM library (runtime)"
+ldesc: "The LLVM Core libraries provide a modern source- and target-
+independent optimizer, along with code generation support for many popular CPUs
+(as well as some less common ones!) These libraries are built around a well
+specified code representation known as the LLVM intermediate representation."
+category: Libs
+requires: cygwin libedit0 libffi6 libgcc1 libncursesw10 libstdc++6 zlib0
+version: 3.5.2-1
+install: x86/release/llvm/libllvm3.5/libllvm3.5-3.5.2-1.tar.xz 5180396 8676a52ba487b0e9a91928cdd887f74915cf5e0a221d9d0aa30b5641633d486f46c73afab5baa10f37e910f912a124c0f37f5c4362db0101f8e2f18e113b527f
+source: x86/release/llvm/llvm-3.5.2-1-src.tar.xz 20152216 8012b703f53a5942385a3a73b67f56a4dd28324cd8b84a7c0f0cdbb3086f3763671e5f55a5ae75a2770458f0065386081b1f567ef4b9dc94b8ff96d9752c7399
+[prev]
+version: 3.5.1-2
+install: x86/release/llvm/libllvm3.5/libllvm3.5-3.5.1-2.tar.xz 5179832 459bf8cf45f33f906ce62a479bbfa4d2cf600d1a7a1d894fd21922912f15c8be025961f83a40b04ffee48fdbc6d730770b3dab8a707f7fac34d7546fe5c92ddd
+source: x86/release/llvm/llvm-3.5.1-2-src.tar.xz 20145348 477246a684480b54f1155b4a89083cad8a45c329884f41032a9ffcc773971a0095a9aef514d8afa8038c4c1a3d3b3907c222852fce6a8f79fb1bc8160deb67e1

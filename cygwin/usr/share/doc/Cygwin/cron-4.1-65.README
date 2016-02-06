@@ -1,0 +1,139 @@
+general
+*******
+This is the Cygwin port of Paul Vixie's cron packaged as version 4.1
+but reporting version 5.0 in syslog and crontab. 
+
+The script /usr/bin/cron-config should be used to install cron 
+as a service. It works on all Windows platforms supported by Cygwin.
+
+common cockpit errors
+*********************
+- The default PATH used in cron is not set by using your personal configuration
+  files and may put Windows directories in front of /usr/bin.
+  Consequently "find", "date" and other commands may refer to Windows versions.
+  PATH can be explicitly specified in a crontab. 
+- More generally the environment will be different from the one under the
+  usual interactive bash.
+  Environment variables can be initialized in a crontab. 
+- Not all DOS drives may be accessible under cron.
+  For network drives it is safer to use //computer/share pathnames.
+    
+setuid
+******
+Cron relies on the Cygwin feature to switch the user context without password
+(setuid). There are three methods to achieve this, please read carefully the
+documentation
+http://cygwin.com/cygwin-ug-net/ntsec.html#ntsec-nopasswd1
+
+The first two methods may not allow accessing network shares. If you
+are the only cron user on your system, a simple alternative is to run
+the cron service under your own account.
+
+The cron-config script will guide you making the choice.
+
+cron & mail
+**********
+Cron normally relies on having a Mail Transfer Agent (e. g. exim or 
+ssmtp) installed and configured to transmit any cron job stdout/stderr
+output to the user. If an e-mail is sent the environment variables
+are placed in the headers. Note that some mail user agents default
+to not displaying them. 
+
+Cron accesses the mailer by calling /usr/sbin/sendmail.
+On Cygwin this is usually a  symlink pointing to the appropriate 
+binary.  This symlink gets created by the MTA's configuration
+scripts (e. g. /usr/bin/exim-config or /usr/bin/ssmtp-config).
+
+If /usr/sbin/sendmail is not properly defined, the cron postinstall script
+will point sendmail to /usr/bin/cronlog. This is a "poor man's mailer" that
+writes the last cron job output to a file.
+The default is to write to $HOME/cron.log (where HOME can be defined in the
+user crontab file).
+However if MAILTO is defined and starts with "/", cronlog writes to 
+the file specified by MAILTO.
+The temporary output of /usr/bin/cronlog is written to /tmp/cron.XXX.log
+and /tmp/cron.XXX.log.err. These files are deleted if all goes well but can 
+provide useful debugging information (e.g. permissions on some network drives).
+
+Feel free to edit cronlog to meet your needs. If you do so, place it
+in a local directory such as /usr/local/bin, to insure that your edits
+will not be wiped out next time you update cron, and change
+/usr/sbin/sendmail accordingly.
+
+security
+********
+- The crontab files as well as /etc/crontab must be readable by the cron
+  daemon. crontab.exe insures that by setting their group to Administrators
+  (more precisely, the first in /etc/group with SID S-1-5-32-544).
+- crontab.exe can be run by anyone, the cron.allow and cron.deny files
+  are not used. The only way to limit the use of cron is to control
+  write/modify access to /var/cron/tabs, /etc/cron.d and /etc/crontab.
+- In addition the cron daemon enforces the following rules when the
+  files are on a NTFS file system and CYGWIN=ntsec (or "smbntsec").
+  - All crontab files as well as /etc/crontab must be writable only
+    by their owner.
+  - The /etc/crontab file and the files in /etc/cron.d must be owned by
+    SYSTEM (more precisely the first user in /etc/passwd with SID S-1-5-18).
+  - The crontab files must be owned by their respective crontab user
+    or by SYSTEM.
+- If you run a crontab command as SYSTEM, make sure either SYSTEM has a
+  home directory in /etc/passwd or HOME is specified in the crontab.
+
+rebuilding
+**********
+All it takes to rebuild and install cron and crontab is to get the
+source package from the Cygwin setup.exe and to run "make install".
+
+debugging
+*********
+To obtain debugging output in /var/log/cron.log:
+    cygrunsrv -I cron -p /usr/sbin/cron -a "-x sch,proc,pars,load,misc,test"
+(if present, the "test" flag causes the command names to be output to
+ sendmail, the commands are not executed)
+Note that this is to debug cron itself, not the commands in a crontab.
+
+problem report
+**************
+Send patches and error reports to <cygwin@cygwin.com>, mentioning cron
+in the subject line. Attach the file produced by /usr/bin/cronbug
+
+
+Changes:
+========
+4.1-6:
+-----
+cron-config: Do not access registry directly
+
+4.1-5:
+-----
+database.c: Add support for /etc/cron.d
+cronevents: New utility.
+/usr/bin/cronbug: Use cronevents.
+
+4.1-4:
+-----
+database.c: Disable checks on FAT and FAT32.
+/usr/bin/cron-config: Improve test for crontab files.
+
+4.1-3:
+-----
+database.c: Fix ownership test on Cygwin.
+/usr/bin/cronlog: Looks up MAILTO
+/usr/bin/cronbug: New.
+
+4.1-2:
+-----
+The postinstall does not attempt to delete /usr/sbin/sendmail.exe
+
+4.1-1:
+--------
+This builds on the pioneering work of Corinna Vinschen who originally ported
+Vixie's cron 3.0.1 to Cygwin.
+
+The original cron_diagnose.sh script is due to Mark Harig. Its features are
+now included in cron-config.
+
+This version requires only a few Cygwin specific patches to run properly,
+see the source package. 
+
+

@@ -1,0 +1,16 @@
+libxcb1
+sdesc: "X Protocol C-Language Bindings (core runtime)"
+ldesc: "libxcb provides an interface to the X Window System protocol,
+which replaces the current Xlib interface. Xlib can also use XCB as a transport
+layer, allowing software to make requests and receive responses with both,
+which eases porting to XCB. However, client programs, libraries, and toolkits
+will gain the most benefit from a native XCB port."
+category: Libs
+requires: cygwin libXau6 libXdmcp6
+version: 1.11.1-1
+install: x86/release/libxcb/libxcb1/libxcb1-1.11.1-1.tar.xz 37296 23f5650c1404d345755b4ae73e4824595137859d88e1695df0e0dde6c936d6db94de5a339ee0a8306497578c74630dcf847188d3ff31125276dcaff93b62032d
+source: x86/release/libxcb/libxcb-1.11.1-1-src.tar.xz 521916 da358a1fee8b8d0594c9a8552abb34ce568df4247675611bb333f1808e790a556f4489f4f71fb83e55f815f474100f5f346dc94695bb88d11be4f970e44a7c9b
+[prev]
+version: 1.10-1
+install: x86/release/libxcb/libxcb1/libxcb1-1.10-1.tar.xz 35872 492d3f740b5dec686387299de9d14bdb669e40f230bcc060ccaefc7b1c3bc8034a9fbdea44e7ad2d77e6a2ddfdcb2b6d37332c411f66937113bab8cb21f33e9e
+source: x86/release/libxcb/libxcb-1.10-1-src.tar.xz 477716 10dd3ea61fc4d355d6e3e13b24ead990aa4ad0d7a4cdd59d0fcce3345a4101775fb333c50ee13bfcc014e7e747b11d7e55a808edc463a651fa09289b2b5275c3

@@ -1,0 +1,8 @@
+libXau6
+sdesc: "X.Org Xauthority library"
+ldesc: "X.Org Xauthority library"
+category: X11
+requires: cygwin
+version: 1.0.8-1
+install: x86/release/libXau/libXau6/libXau6-1.0.8-1.tar.bz2 18985 f27ae4f48101e7e1c1f8284993839556f45e1ec53080bce092fa7337dd1be8af9ae081f23fa3441c60ceb6040d9cafc94d6e0615785aac99244988e79e49666b
+source: x86/release/libXau/libXau-1.0.8-1-src.tar.bz2 297448 54527abdf71b756dddd465783af9c55a20c00f95f5e203bfbb4e3c884354dbfe4d0905baaa891afb7d66a476d71feebf1d9184e39121639cf7bd4952761f132c

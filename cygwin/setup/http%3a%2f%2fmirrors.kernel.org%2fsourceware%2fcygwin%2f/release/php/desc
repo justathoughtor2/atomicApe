@@ -1,0 +1,14 @@
+php
+sdesc: "PHP Hypertext Preprocessor"
+ldesc: "PHP (recursive acronym for 'PHP: Hypertext Preprocessor')
+is a widely-used Open Source general-purpose scripting language that is
+especially suited for Web development and can be embedded into HTML."
+category: Interpreters PHP
+requires: cygwin libedit0 libgcc1 libopenssl100 libpcre1 libxml2 zlib0
+version: 5.6.17-1
+install: x86/release/php/php-5.6.17-1.tar.xz 1507152 2a33bc7f834b0c7332b0c47fd82fc15aeeeb4a4dd475f62569767bb1567aa8acf77c34c410489fda73ad2fc5f779d120a2b5f032f54f050c66464f78bdfc51eb
+source: x86/release/php/php-5.6.17-1-src.tar.xz 11823904 ecbb2a9d914e319338f76361bf51ea928d51bc94693b0426a8aa14a304d4e9516243ba7d1c97d8cf97446ac557f28eb37ceecce36987769513ff6042ce8a9ed9
+[prev]
+version: 5.6.15-1
+install: x86/release/php/php-5.6.15-1.tar.xz 1506444 d082b21dbb7e68b177da91b928f21e01cb7964e8284fd3b45109fefeff467600bc1cb9747a83ff46d8341a093e3668a6e61575cd7b0ea87ab1c41ca299c0d25f
+source: x86/release/php/php-5.6.15-1-src.tar.xz 11817540 912aab23408853c76cd2baaf8c8192b31c46f3e44c3e1e2c7cd5cc19211b7632e11bbe08e9ac6e45448f5ff0e55afa85c8ffc07ef4d391ec1d858009f1343b82

@@ -1,0 +1,16 @@
+libQtXml4
+sdesc: "Qt4 XML library (runtime)"
+ldesc: "Qt is a cross-platform application framework for desktop and
+embedded development. Qt enables programmers to create advanced GUI
+applications once and deploy them to Windows, Mac OS X and Linux without
+rewriting the source code. Companies using Qt can leverage software
+investments made on one platform across many others."
+category: Libs
+requires: cygwin libgcc1 libQtCore4 libstdc++6
+version: 4.8.7-1
+install: x86/release/qt4/libQtXml4/libQtXml4-4.8.7-1.tar.xz 84856 fede10f1bacdcccfa4bf596f934e86064faae3a710fd9041e28f608c06ed190ae41d621f9353db760ed8b901b80a58e4db97850b3f1fade9772b81bb5d691c86
+source: x86/release/qt4/qt4-4.8.7-1-src.tar.xz 237993912 f620acb9b6cd377d4c1cc46172288ad9b86fdf8eeaa0625ba24cadcefd9013acdb4a3e0a85fc7681a8899440592214f7d4512526f760eb868db6422f93a9dc93
+[prev]
+version: 4.8.6-8
+install: x86/release/qt4/libQtXml4/libQtXml4-4.8.6-8.tar.xz 84864 dfc99103b7b39b5b5228862c538d0be80f3b0ff2115c40a4cba98a09d54b8ce9201ae015669827bbcd692f56753e9c059f5d08cb56e7baaba3d01c24035e8318
+source: x86/release/qt4/qt4-4.8.6-8-src.tar.xz 239307312 484fe5cc7d721e53ee6dda3873726229d5171dcab441ae662226ae009e5d39e0f7d26e19647590b37be91783c2cfa866e0890673653a4a5e9423cc082677e024

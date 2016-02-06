@@ -1,0 +1,43 @@
+perl-DBI
+sdesc: "Perl distribution DBI"
+ldesc: "Perl distribution DBI, providing Perl modules:
+Bundle::DBI DBD::DBM DBD::DBM::Statement DBD::DBM::Table DBD::DBM::db
+DBD::DBM::dr DBD::DBM::st DBD::ExampleP DBD::ExampleP::db DBD::ExampleP::dr
+DBD::ExampleP::st DBD::File DBD::File::DataSource::File
+DBD::File::DataSource::Stream DBD::File::Statement DBD::File::Table
+DBD::File::TableSource::FileSystem DBD::File::db DBD::File::dr
+DBD::File::st DBD::Gofer DBD::Gofer::Policy::Base
+DBD::Gofer::Policy::classic DBD::Gofer::Policy::pedantic
+DBD::Gofer::Policy::rush DBD::Gofer::Transport::Base
+DBD::Gofer::Transport::corostream DBD::Gofer::Transport::null
+DBD::Gofer::Transport::pipeone DBD::Gofer::Transport::stream DBD::Gofer::db
+DBD::Gofer::dr DBD::Gofer::st DBD::NullP DBD::NullP::db DBD::NullP::dr
+DBD::NullP::st DBD::Proxy DBD::Proxy::RPC::PlClient DBD::Proxy::db
+DBD::Proxy::dr DBD::Proxy::st DBD::Sponge DBD::Sponge::db DBD::Sponge::dr
+DBD::Sponge::st DBDI DBI DBI::Const::GetInfo::ANSI
+DBI::Const::GetInfo::ODBC DBI::Const::GetInfoReturn DBI::Const::GetInfoType
+DBI::DBD DBI::DBD::Metadata DBI::DBD::SqlEngine
+DBI::DBD::SqlEngine::DataSource DBI::DBD::SqlEngine::Statement
+DBI::DBD::SqlEngine::Table DBI::DBD::SqlEngine::TableSource
+DBI::DBD::SqlEngine::TieMeta DBI::DBD::SqlEngine::TieTables
+DBI::DBD::SqlEngine::db DBI::DBD::SqlEngine::dr DBI::DBD::SqlEngine::st
+DBI::FAQ DBI::Gofer::Execute DBI::Gofer::Request DBI::Gofer::Response
+DBI::Gofer::Serializer::Base DBI::Gofer::Serializer::DataDumper
+DBI::Gofer::Serializer::Storable DBI::Gofer::Transport::Base
+DBI::Gofer::Transport::pipeone DBI::Gofer::Transport::stream DBI::Profile
+DBI::ProfileData DBI::ProfileDumper DBI::ProfileDumper::Apache
+DBI::ProfileSubs DBI::ProxyServer DBI::ProxyServer::db DBI::ProxyServer::dr
+DBI::ProxyServer::st DBI::SQL::Nano DBI::SQL::Nano::Statement_
+DBI::SQL::Nano::Table_ DBI::Util::CacheMemory DBI::Util::_accessor
+DBI::common.
+
+Database independent interface for Perl."
+category: Perl
+requires: libgcc1 libssp0 perl perl_base cygwin
+version: 1.634-1
+install: x86/release/perl-DBI/perl-DBI-1.634-1.tar.xz 725580 9b2403cb0739ff143978da188c431807dc9a0d123d33001cefb3787d8d960a22c4a32ca7f714cfb70e1d29834e4d99d2ede41bc7ead1a08eb8b2174cf379d148
+source: x86/release/perl-DBI/perl-DBI-1.634-1-src.tar.xz 597400 ee153ef554ee191c9899f0c3b79f466d972653050ac1d9de7f46c855c048c936ade2dcca44af39f2423664fd324d10988e4320fc9016be5a7652662ca74ec77a
+[prev]
+version: 1.633-2
+install: x86/release/perl-DBI/perl-DBI-1.633-2.tar.xz 723208 08b8c4d955631429504a15a0a116536610734ba66da6f686c6d654cd33fecc3397c7c47a2f72cabd70ba733818ac503b7ea772d0bcac44719daba510cccdaaa6
+source: x86/release/perl-DBI/perl-DBI-1.633-2-src.tar.xz 594672 dea057658d8e32fdac16f5ca1088824f9bb56d53b0e69a1f2238fe3d82c5047fbd5c2dd001c3a5cc99d964c6934a16a07db7a03b996db3df4b0f3209f16d385c

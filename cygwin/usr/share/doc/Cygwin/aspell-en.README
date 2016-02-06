@@ -1,0 +1,86 @@
+aspell-en
+-------------------------------------------------------------------------------
+GNU Aspell english dictionary
+
+Runtime requirements:
+  cygwin-1.7.18-1
+  +
+  aspell-0.60.6.1-2
+
+Build requirements:
+  cygwin-1.7.18-1
+  cygport-0.11.3-1
+  bash-4.1.10-4
+  gcc4-4.5.3-3
+  binutils-2.23.51-1
+  make-3.82.90-1
+  sed-4.2.1-2
+  gawk-4.0.2-1
+  coreutils-8.15-1
+  findutils-4.5.11-1
+  autoconf2.5-2.69-1
+  autoconf-10-1
+  automake1.12-1.12.5-1
+  automake-7-1
+  libtool-2.4-1
+  pkg-config-0.23b-10
+  lndir-1.0.3-1
+  +
+  aspell-0.60.6.1-2
+
+Canonical homepage:
+  ftp://ftp.gnu.org/gnu/aspell/dict/0index.html
+
+Canonical download:
+  ftp://ftp.gnu.org/gnu/aspell/dict/0index.html
+
+License:
+  /usr/share/doc/aspell/Copyright
+
+Language:
+  -
+
+-------------------------------------------------------------------------------
+
+Build instructions:
+  unpack aspell-<Lang>-<Pack-Ver>-<Cyg-Rel>-src.tar.bz2
+    if you use setup to install this src package, it will be
+ unpacked under /usr/src automatically
+  cd /usr/src
+  cygport aspell-<Lang>.cygport all
+
+This will create:
+  /usr/src/aspell-<Lang>-<Pack-Ver>-<Cyg-Rel>-src.tar.bz2
+  /usr/src/aspell-<Lang>-<Pack-Ver>-<Cyg-Rel>.tar.bz2
+
+Or use 'cygport aspell-<Lang>.cygport prep' to get a patched source directory
+
+To find out the files included in the binary distribution, you can
+use "cygcheck -l aspell-<Lang>", or browse the listing for the appropriate version
+at <http://cygwin.com/packages/>.
+
+-------------------------------------------------------------------------------
+Port Notes:
+
+----- version aspell-en-7.1.0-2 --- Tue 30 Apr 09:23:17 2013 ---
+
+ o Uses cygport for .hint files generation
+
+----- version aspell-en-7.1.0-1 --- Sun 13 Nov 12:59:17 2011 ---
+
+ o Update to latest upstream release
+ o Build now uses aspell-dict.cygclass from cygport
+
+----- version aspell-en-6.0.0-1 --- Tue 18 Dec 00:31:02 2007 ---
+
+ o Maintainer change
+ o Switched to cygport build framework
+
+----- version aspell-en-0.51.0-1
+
+ o Initial version
+
+Cygwin port maintained by: Dr. Volker Zell  <dr.volker.zell@oracle.com>
+Original Cygwin port maintained by: Gareth Pearce <cygwin@cygwin.com>
+
+Please address all questions to the Cygwin mailing list at <cygwin@cygwin.com>

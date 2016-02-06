@@ -1,0 +1,18 @@
+libGL1
+sdesc: "X11 OpenGL library (runtime)"
+ldesc: "Mesa is an open-source implementation of the OpenGL specification,
+a system for rendering interactive 3D graphics.
+
+Complete documentation on OpenGL usage and configuration can be found here:
+
+http://x.cygwin.com/docs/ug/using-glx.html
+"
+category: Libs
+requires: cygwin libexpat1 libgcc1 libglapi0 libX11-xcb1 libX11_6 libxcb-glx0 libxcb1 libXext6 dri-drivers
+version: 11.0.9-1
+install: x86/release/mesa/libGL1/libGL1-11.0.9-1.tar.xz 135112 2244d5c4765be046101a7babdea59f062df16f2964a6d50d8b1de9229e572844ebac1ad8410e23ce8e2731fca58a3ffa1e4bd37a38927b05ce154d9dc6f9dc1f
+source: x86/release/mesa/mesa-11.0.9-1-src.tar.xz 7303404 b5a9095609d1d6abb9abfd3ce4a258a7c23a45ec1b4de76311d3837794c7852258bead9b49034012e957137927d3578eb96168fc0c4d653e0d00d2a04d991ef4
+[prev]
+version: 11.0.6-1
+install: x86/release/mesa/libGL1/libGL1-11.0.6-1.tar.xz 134812 cb8e0bac84c0bf38c7034a58881bb1dc59ca5ac202d845e944f329e8dca929517616dbe943eee55e1be460e872fc07bde9bb3674f31fde9632a4c809b31797b4
+source: x86/release/mesa/mesa-11.0.6-1-src.tar.xz 7293628 462c776edb790ef9f8cbc12dbc72e34ceca0bbf5c29eadd0d7f841df2071cb73dcbf85a19cb3f49af7509ed50b241d8a1ebb9f3aa5b1920dcbc8441c8350eb6b

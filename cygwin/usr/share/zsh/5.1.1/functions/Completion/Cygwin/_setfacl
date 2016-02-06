@@ -1,0 +1,18 @@
+#compdef setfacl
+
+_arguments -C \
+  '(-d)--delete[delete one or more specified ACL entries]' \
+  '(--delete)-d[delete one or more specified ACL entries]' \
+  '(-f)--file[set ACL entries for FILE to ACL entries read from a ACL_FILE]' \
+  '(--file)-f[set ACL entries for FILE to ACL entries read from a ACL_FILE]' \
+  '(-m)--modify[modify one or more specified ACL entries]' \
+  '(--modify)-m[modify one or more specified ACL entries]' \
+  '(-r)--replace[replace mask entry with maximum permissions  needed for the file group class]' \
+  '(--replace)-r[replace mask entry with maximum permissions  needed for the file group class]' \
+  '(-s)--substitute[substitute specified ACL entries for the ACL of FILE]' \
+  '(--substitute)-s[substitute specified ACL entries for the ACL of FILE]' \
+  '(-h)--help[output usage information and exit]' \
+  '(--help)-h[output usage information and exit]' \
+  '(-v)--version[output version information and exit]' \
+  '(--version)-v[output version information and exit]' \
+  '*:file:_files'

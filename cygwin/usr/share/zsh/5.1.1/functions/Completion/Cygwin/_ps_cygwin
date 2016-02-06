@@ -1,0 +1,22 @@
+#compdef ps
+
+_arguments -C \
+  '(-a)--all[show processes of all users]' \
+  '(--all)-a[show processes of all users]' \
+  '(-e)--everyone[show processes of all users]' \
+  '(--everyone)-e[show processes of all users]' \
+  '(-f)--full[show process uids, ppids]' \
+  '(--full)-f[show process uids, ppids]' \
+  '(-l)--long[show process uids, ppids, pgids, winpids]' \
+  '(--long)-l[show process uids, ppids, pgids, winpids]' \
+  '(-s)--summary[show process summary]' \
+  '(--summary)-s[show process summary]' \
+  '(-u)--user[list processes owned by UID]' \
+  '(--user)-u[list processes owned by UID]' \
+  '(-W)--windows[show windows as well as cygwin processes]' \
+  '(--windows)-W[show windows as well as cygwin processes]' \
+  '(-h)--help[output usage information and exit]' \
+  '(--help)-h[output usage information and exit]' \
+  '(-v)--version[output version information and exit]' \
+  '(--version)-v[output version information and exit]' \
+  ':UID:'

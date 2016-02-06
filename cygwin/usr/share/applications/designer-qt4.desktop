@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=Qt4 Designer
+Exec=designer-qt4
+TryExec=designer-qt4
+Type=Application
+Icon=designer-qt4.png
+Categories=Development;GUIDesigner;Qt;

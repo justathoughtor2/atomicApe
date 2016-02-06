@@ -1,0 +1,26 @@
+{
+  "context-menu": {
+    "atom-text-editor": [
+      {
+        "label": "Toggle fake",
+        "command": "fake:toggle"
+      }
+    ]
+  },
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "fake",
+          "submenu": [
+            {
+              "label": "Toggle",
+              "command": "fake:toggle"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,862 @@
+#!/bin/bash
+#set -x
+#set -u
+# ======================================================================
+# This script initializes and possibly starts a cron daemon.
+# It includes numerous tests to insure that the environmnet is sound.
+# On Windows 2003 it is capable of creating a privileged user.
+# ======================================================================
+
+# ======================================================================
+# Routine: getvalue
+# Get a verified non-empty string in variable "value"
+# The second argument can be -s
+# ======================================================================
+getvalue() {
+  while true
+    do
+    if read $2 -p "$1 " value; then
+      echo
+      if [ -n "${value}" ]; then
+	  read $2 -p "Reenter: " verify
+          echo
+	  [ "${verify}" = "${value}" ] && return 0;
+      fi
+    else
+      echo -e "Quitting.\n"
+      exit 1
+    fi
+  done
+} # === End of getvalue() === #
+
+# ======================================================================
+# Routine: request
+# Get a yes/no anwer
+# ======================================================================
+request() {
+  while true
+  do
+    echo -en "$1 (yes/no) "
+    if read answer
+      then
+      if [ "${answer}" = "yes" ]
+        then
+	return 0
+      elif [ "${answer}" = "no" ]
+        then
+        return 1
+      fi
+    else
+      echo -e "Quitting.\n"
+      exit 1
+    fi
+  done
+} # === End of request() === #
+
+#############################
+# get CYGWIN
+#############################
+getcygenv()
+{
+  default=$*
+  while true
+    do
+    echo -n "Enter the value of CYGWIN for the daemon: [${default}] "
+    if read cygenv; then
+      if [ -z "${cygenv}" ]; then
+        cygenv="${default}"
+      fi
+      return
+    else
+      echo -e "Quitting.\n"
+      exit 1
+    fi
+  done
+}
+
+# ======================================================================
+# Routine: check_program
+# Check to see that a specified program ($1) is installed and accessible
+# by this script.  If it is not, then alert the user about which package
+# ($2) should be installed to provide that program.
+# ======================================================================
+check_program() {
+    unset "$1"
+    prog="$1"
+    if [ ! -e "/usr/bin/${prog}" ]; then
+	echo "The '$1' program is not in /usr/bin."
+	echo "This program is included in the \'$2\' package."
+	echo "Please install this package."
+	echo
+        return 1
+    elif [ ! -x "/usr/bin/${prog}" ]; then
+	echo "The '$1' program (/usr/bin/${prog}') is not executable."
+	echo
+	return 1
+    fi
+} # === End of check_program() === #
+
+
+# ======================================================================
+# Routine: sanity_check
+# Check for the set of programs that are used by this script.
+# ======================================================================
+sanity_check() {
+    ret=0
+    # Check for programs that this script uses.
+    check_program awk gawk || ret=1
+    check_program editrights editrights || ret=1
+    check_program ls coreutils || ret=1
+    check_program cygrunsrv cygrunsrv || ret=1 
+    check_program grep grep || ret=1
+    check_program sed sed || ret=1
+    check_program id coreutils || ret=1
+    check_program uname coreutils || ret=1
+    check_program cygcheck cygwin || ret=1
+    check_program getfacl cygwin || ret=1
+    check_program mkpasswd cygwin || ret=1
+    check_program getent cygwin || ret=1
+    return "${ret}"
+} # === End of sanity_check() === #
+
+# ======================================================================
+# Routine: get_NT
+# ======================================================================
+get_NT() {
+    nt2003=""
+    nt=$(uname -s | sed -ne 's/^CYGWIN_NT-\([0-9]*\).*$/\1/p')
+    [ -z "$nt" ] && echo "Unknown system name" && return 1
+    [ "$nt" -gt 5 ] && nt2003=yes
+    return 0
+} # === End of get_NT() === #
+
+
+# ======================================================================
+# Routine: get_system_and_admins_gids
+# Get the ADMINs ids from group and passwd
+# ======================================================================
+get_system_and_admins_ids() {
+    ret=0
+    ADMINSUID=$(getent passwd S-1-5-32-544 | sed -e 's/[^:]*:[^:]*:\([0-9]*\):.*$/\1/')
+    ADMINSGID=$(getent group S-1-5-32-544 | sed -e 's/[^:]*:[^:]*:\([0-9]*\):.*$/\1/')
+    SYSTEMUID=$(getent passwd S-1-5-18 | sed -e 's/[^:]*:[^:]*:\([0-9]*\):.*$/\1/')
+    SYSTEMGID=$(getent group S-1-5-18 | sed -e 's/[^:]*:[^:]*:\([0-9]*\):.*$/\1/')
+
+    if [ -z "$ADMINSGID" ]; then
+		echo "Entry for the ADMINISTRATORS sids was found in group."
+		ret=1;
+    fi
+
+    if [ -z "$SYSTEMUID" ]; then
+		echo "Entry for the SYSTEM sid was not found in passwd."
+		ret=1;
+    fi
+    return "${ret}"
+}  # === get_system_and_admins_ids() === #
+
+
+# ======================================================================
+# Routine: check_user
+# Check that the specified user does no exists more than once in /etc/passwd 
+# ======================================================================
+check_user() {
+  
+ if [ ! -e /etc/passwd ]; then
+     return 0;
+ fi
+ count=$(grep -ic "^$1:" /etc/passwd)
+ if [ "$count" -gt 1 ]; then
+     echo "WARNING: User $1 appears $count times in /etc/passwd."
+     echo "This may confuse the system."
+     echo "Edit /etc/passwd and assign unique user ids."
+     echo
+     return 1;
+ fi
+ return 0
+} # === End of check_user() === #
+
+# ======================================================================
+# Routine: check_dir_perms
+# Check to see that the specified directory ($1) exists and has the
+# permissions ($2).
+# ======================================================================
+check_dir_perms() {
+    if [ ! -e "$1" ]; then
+	echo "Your computer is missing $1".
+	echo
+	return 1
+    fi	
+
+    if ls -ld "$1" | grep -q ^"$2"; then
+	true
+    else
+	echo "The permissions on the directory $1 are not correct."
+	echo "They must match the regexp $2"
+	echo
+	return 1
+    fi
+} # === End of check_dir_perms() === #
+
+
+# ======================================================================
+# Routine: check_access
+# Check to see that the owner and Administrators have
+# proper access to the file or directory.
+# On installations older than Windows 2003, allow access by System
+# ======================================================================
+check_access() {
+    file="$1"
+    perm="$2"
+    msg="$3"
+    notify=0;
+    ls="$(ls -dLln "$file" 2> /dev/null)"
+
+    # If the owner of the file does not have access,
+    # then notify the user.
+    if [ -z "$(echo "$ls" | sed -n /^."$perm"/p)" ]; then
+	notify=1;
+    # If 'Administrators' has owner or group access to the file,
+    # but does not have the desired access, then notify the user.
+    elif [ "$(echo "$ls" | awk '{ print $3 }')" -eq $ADMINSUID \
+	-o \( -z "$nt2003" -a "$(echo "$ls" | awk '{ print $3 }')" -eq $SYSTEMUID \) ]; then
+	true;
+    elif [ "$(echo "$ls" | awk '{ print $4 }')" -eq $ADMINSGID \
+	-o \( -z "$nt2003" -a "$(echo "$ls" | awk '{ print $4 }')" -eq $SYSTEMGID \) ]; then
+	[ -z "$(echo "$ls" | sed -n /^...."$perm"/p)" ] &&  notify=1
+    # Check if there is a group entry for 'Administrators'
+    elif [ -z "$(getfacl -n "$file" | sed -n /^group:$ADMINSGID:$perm/p )" ]; then
+	[ -z "$(echo "$ls" | sed -n /^......."$perm"/p)" ] && notify=1
+    fi
+
+    if [ "$notify" -eq 1 ]; then
+	echo "The owner and the Administrators need";
+	echo "to have $perm permission to $file.";
+	echo "Here are the current permissions:";
+	ls -dlL "${file}";
+	echo;
+	echo "Please change the user and/or group ownership and";
+	echo "permissions of $file.";
+	[ -z "${msg}" ] || echo "${msg}"
+	echo
+	return 1;
+    fi
+} # === End of check_access() === #
+
+# ======================================================================
+# Routine: check_mounts
+# Issue a warning if a user mount matches an argument
+# ======================================================================
+check_mounts() {
+  USERMOUNTS=$(mount | sed -ne 's%^.*\ on\ \(/.*\)\ type\ [^ ]*\ .*(\([^ ]*,\)\?user\(,[^ ]*\)\?).*$%\1%p')
+  ret=0
+  OLD_IFS=$IFS
+  IFS=$'\n'
+  for file in "$@"
+    do
+    for mount in ${USERMOUNTS}
+      do
+      if [ "$file" = "$mount" -o "${file#$mount\/}" != "${file}" ]
+        then
+        ret=1
+        echo "WARNING: The path to $file can be modified by user mount $mount."
+      fi
+    done
+  done
+  IFS=$OLD_IFS
+  return $ret
+} # === End of check_mounts() === #
+
+
+# ======================================================================
+# Routine: check_cron_table
+# Check for the existence of a crontab for the user, and check its
+# permissions and ownership.
+# ======================================================================
+check_cron_table() {
+    cron_table="/var/cron/tabs/${USER}"
+    couldbeFAT=0
+
+    if [ ! -f "$cron_table" ]; then
+	echo "WARNING: Your computer does not appear to have a cron table for ${USER}."
+	echo "Please generate a cron table for ${USER} using 'crontab -e'"
+	echo
+	return 0
+    fi
+
+    fail=0
+    ls="$(ls -ln "$cron_table")"
+    if echo "${ls}" | grep -Eq '^-rw-r--.--'; then
+	true
+    else
+	echo "cron table files need to writable only by the owner,"
+	echo "readable by the owner and he group, and executable by no one."
+	echo "The permissions of your cron table file are set to:"
+	ls -l "$cron_table"
+	echo
+	echo
+	echo "You can set the file permissions with:"
+	echo "	chmod 640 $cron_table"
+	echo
+	fail=1
+    fi
+
+    couldbeFAT=0
+    echo "${ls}" | grep -Eq '^-rw-r--r--' && couldbeFAT=1
+
+    if [ "$(echo "$ls"  | awk '{ print $4 }')" -ne "$ADMINSGID" \
+	-a \( -n "$nt2003" -o "$(echo "$ls" | awk '{ print $4 }')" -ne "$SYSTEMGID" \) \
+	-a "$username" != "$USER" ]; then
+	echo "The group membership of your cron table file should be ADMINISTRATORS."
+	echo "Here is your cron table file listing:"
+	ls -l "$cron_table"
+	echo
+	[ "$couldbeFAT" = 1 ] &&
+	echo "This rule does not apply on FAT/FAT32 file systems."
+	echo "This rule does not apply if the daemon runs with nontsec."   
+	echo 
+	echo "You can change the group membership setting with:"
+	echo "	 chgrp $ADMINSGID $cron_table"
+	echo "Please change your cron table's group membership."
+	echo
+	fail=1
+    fi
+    return "${fail}"
+} # === End of check_cron_table() === #
+
+# ======================================================================
+# Routine: check_myself
+# Check for the existence and accessibility of key files
+# ======================================================================
+check_myself() {
+    ret=0
+    if [ ! -x /usr/sbin/cron ]; then
+	echo "ERROR: You need x access to /usr/sbin/cron.";
+	echo
+	ret=1
+    fi
+    if [ ! -x /var ]; then
+	echo "ERROR: You need x access to /var/run.";
+	echo
+	ret=1
+    fi
+    if [ ! -w /var/run ]; then
+	echo "ERROR: You need w access to /var/run.";
+	echo
+	ret=1
+    fi
+    if [ ! -w /var/log ]; then
+	echo "ERROR: You need w access to /var/log.";
+	echo
+	ret=1
+    fi
+    if [ ! -x /usr/sbin/sendmail ]; then
+	echo "WARNING: /usr/sbin/sendmail does not point to an executable mailer";
+	echo "     such as ssmtp, exim or cronlog."
+	echo "     If the cron job produces any output on stdout or stderr,"
+	echo "     you MUST set MAILTO=\"\" in the crontab file."
+	echo
+    fi
+    if [ ! -x /var/cron ]; then
+	echo "ERROR: You need x access to /var/cron.";
+	echo
+	ret=1
+    fi
+    if [ ! -e "/var/cron/tabs/${USER}" ]; then
+	echo "WARNING: You do not currently have a crontab file."
+	echo
+    elif [ ! -r "/var/cron/tabs/${USER}" ]; then
+	echo "ERROR: Your crontab file is not readable."
+	echo
+	ret=1
+    elif [ -n "$nt" ]; then
+	check_cron_table
+	ret=$?
+    fi
+    return "${ret}"
+} # === End of check_myself() === #
+
+# ======================================================================
+# Routine: get_temp_dir
+# Returns a temporary directory
+# ======================================================================
+
+get_temp_dir() {
+    for dir in "$TEMP" "$TMP" "/tmp" "$HOME"; do
+	if [ -d "$dir" ] && [ -w "$dir" ]; then
+	    TEMP_DIR="$dir"
+            return
+	fi
+    done
+    echo "ERROR: Cannot find a writable temporary directory."
+    TEMP_DIR=/tmp
+} # === End of get_temp_dir() === #
+	
+# ======================================================================
+# Routine: cron_diagnose
+# Checks the environment.
+# "nt" and "username" must be set.
+# ======================================================================
+cron_diagnose() {
+    echo "Running cron_diagnose ..."
+    # Check the integrity of the files in the 'cron' package:
+    if cygcheck -c cron | grep -F -q 'Incomplete'; then
+	echo "'cygcheck -c cron' reports that your cron installation"
+	echo "is incomplete.  Please consider running 'setup.exe' and"
+	echo "selecting 'Reinstall' from the install options."
+	echo
+    return 1
+    fi
+
+    get_system_and_admins_ids || return 1
+
+    if [ "$username" = "$USER" ]
+	then
+	check_myself
+	ret=$?
+	if [ ! "$ret" = 1 ]; then
+	  echo "... no problem found."
+	  echo
+        fi
+	return $ret
+    fi
+
+    ret=0
+    check_mounts /usr/sbin /usr/bin /var/cron/tabs /var/run /var/log /etc/crontab || ret=1
+
+    check_dir_perms /var d..x..x..x || ret=1
+
+    # There is no reason to have t on /var/cron,
+    # but it used to be set that way.  
+    check_dir_perms /var/cron d..x..x..[xt] || ret=1
+ 
+    check_dir_perms /var/cron/tabs drwxrwxrwt || ret=1
+
+    # Check write access to /var/run, to create cron_pid
+    check_access /var/run .w. || ret=1
+
+    # Check write access to /var/log, to create cron.log
+    check_access /var/log .w. || ret=1
+
+    # Check x access to /usr/sbin/cron
+    check_access /usr/sbin/cron ..x || ret=1
+
+    if [ ! -f "/usr/sbin/sendmail" ]; then	
+	echo "WARNING: /usr/sbin/sendmail does not point to an executable mailer";
+	echo "     such as ssmtp or exim, or /usr/bin/cronlog."
+	echo "     If the cron job produces any output on stdout or stderr,"
+	echo "     you MUST set MAILTO=\"\" in the crontab file."
+	echo
+    else
+    	check_access /usr/sbin/sendmail ..x
+    fi
+
+    check_cron_table || ret=1
+
+    if [ ! "$ret" = 1 ]; then
+	echo "... no problem found."
+	echo
+    fi
+    return "${ret}"
+} # === End of cron_diagnose() === #
+
+# ======================================================================
+# Routine: create_user
+# Create a privileged user on Windows 2003
+# Returns the names in variable "win_username" and "cyg_username
+# and the password in "password"
+# ======================================================================
+create_user() {
+    SYSCONFDIR="/etc"
+    first_account=""
+    accounts=""
+    
+    echo
+    echo "Finding or creating a privileged user."
+    for win_username in cyg_server cron_server sshd_server
+    do
+      if net user "${win_username}" 1> /dev/null 2>&1; then
+	  [ -z "${first_account}" ] && first_account="${win_username}"
+	  accounts="${accounts}'${win_username}' "
+      fi
+    done
+    if [ -n "${accounts}" ]; then
+	echo "The following accounts were found: ${accounts}."
+	win_username="${first_account}"
+    else
+	echo "No privileged account could be found."
+	win_username="cyg_server"
+    fi
+    echo "This script plans to use account ${win_username}."
+    if request "Do you want to use another privileged account name?"; then
+	getvalue "Enter the other name:" ""
+	win_username="${value}"
+    fi
+    echo
+    
+    username_in_sam=
+    if net user "${win_username}" >/dev/null 2>&1 ; then
+	missing=
+	echo "Account $win_username already exists. Checking its privileges."
+	for r in SeAssignPrimaryTokenPrivilege SeCreateTokenPrivilege SeServiceLogonRight; do
+	    editrights -u "$win_username" -t "$r" && continue
+	    missing="$missing $r"
+	done
+	if [ -n "$missing" ] ; then
+	    echo "$win_username is missing $missing"
+	    echo "You should choose or create another account."
+	    return 1
+	else
+	    username_in_sam=old
+            echo "INFO: $win_username is a valid privileged account."
+	    for r in SeInteractiveLogonRight ; do
+		editrights -u "$win_username" -t "$r" && \
+		    echo "WARNING: $win_username has privilege $r. This is not recommended." 
+	    done
+	fi
+    fi
+    ret=0
+    if [ -z "$username_in_sam" ]; then
+      echo "Account ${win_username} needs a password. It must match"
+      echo "the rules in force on your system."
+      getvalue "Please enter the password:" "-s"
+      password="${value}"
+      echo
+      net user "${win_username}" "${password}" /add /fullname:"Privileged server" \
+          /comment:'<cygwin home="/var/empty" shell="/bin/false" />' > "${mytemp}/nu.$$" 2>&1 && 
+	username_in_sam=new
+      if [ "${username_in_sam}" != "new" ]; then
+	echo "ERROR: Creating the account '${win_username}' failed!  Reason:"
+	cat "${mytemp}/nu.$$"
+        rm -f "${mytemp}/nu.$$"
+        echo
+	return 2
+      else 
+        rm -f "${mytemp}/nu.$$"
+	echo "Account '${win_username}' has been created with password '${password}'."
+	echo "If you change the password, please keep in mind to change the"
+	echo "password for the exim service, too."
+      fi
+      echo
+    
+      passwd_has_expiry_flags=$(passwd -v | awk '/^passwd /{print ( $3 >= 1.5 ) ? "yes" : "no";}')
+      if [ "${passwd_has_expiry_flags}" != "yes" ]
+	then
+	echo "WARNING: Account ${win_username} has password expiry set to system default."
+	echo "Please check that password never expires or set it to your needs."
+	echo
+      elif ! passwd -e "${win_username}"
+	then
+	echo "WARNING: Setting password expiry for account ${win_username} failed!"
+	echo "Please check that password never expires or set it to your needs."
+	echo
+      fi
+
+      _admingroup="$( mkgroup -l | awk -F: '{if ( $2 == "S-1-5-32-544" ) print $1;}' )"
+      if [ -z "${_admingroup}" ]; then
+	echo "ERROR: Cannot obtain the Administrators group name from 'mkgroup -l'."
+	echo
+	ret=2
+      elif net localgroup "${_admingroup}" | grep -Fixq "${win_username}"; then
+	true
+      else
+	net localgroup "${_admingroup}" "${win_username}" /add > /dev/null 2>&1 && 
+	username_in_admingroup=yes
+	if [ "${username_in_admingroup}" != "yes" ]
+	    then
+	    echo "ERROR: Adding account ${win_username} to group ${_admingroup} failed!"
+	    echo "Please add ${win_username} to group ${_admingroup} before"
+	    echo "starting the smtp service!"
+	    echo
+	    ret=2
+	fi
+      fi
+    
+      editrights -a SeAssignPrimaryTokenPrivilege -u "${win_username}" &&
+      editrights -a SeCreateTokenPrivilege -u "${win_username}" &&
+      editrights -a SeDenyInteractiveLogonRight -u "${win_username}" &&
+      editrights -a SeDenyNetworkLogonRight -u "${win_username}" &&
+      editrights -a SeDenyRemoteInteractiveLogonRight -u "${win_username}" &&
+      editrights -a SeIncreaseQuotaPrivilege -u "${win_username}" &&
+      editrights -a SeServiceLogonRight -u "${win_username}" &&
+      username_got_all_rights="yes"
+      if [ "${username_got_all_rights}" != "yes" ]
+	  then
+	  echo "ERROR: Assigning the appropriate privileges to account '${win_username}' failed!"
+	  echo
+	  ret=2
+      fi
+    fi
+    comment_in_sam=""
+    # Set the /Comment field, existing users may not have it  
+    net user "${win_username}" /comment:'<cygwin home="/var/empty" shell="/bin/false" />' > "${mytemp}/nu.$$" 2>&1 &&
+        comment_in_sam=yes
+    if [ "${comment_in_sam}" != "yes" ]; then
+        echo "ERROR: Setting the shell for '${win_username}' failed!  Reason:"
+        cat "${mytemp}/nu.$$"
+    fi
+    rm -f "${mytemp}/nu.$$"
+ 
+
+    new_entry="$(mkpasswd -l -u "${win_username}" |
+                sed -e 's?\(^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:\).*?\1/var/empty:/bin/false?')"
+    if [ -z "$new_entry" ]; then
+       echo "ERROR: mkpasswd could not find the account $win_username"
+       echo
+       return 2
+    fi
+    cyg_username="${new_entry%%:*}"
+    
+    # If the passwd file exists, get the account sid and see if it's already there.
+    # If so just adopt the old cygwin name and entry. Else add the new entry. 
+    if [ -e  "${SYSCONFDIR}/passwd" ]; then    
+        usersid=$(echo "$new_entry" | sed -e 's?^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*\(,S[-0-9]*:\).*$?\1?')
+        # old_entry can consist of several lines. cyg_username is from the first.    
+    	old_entry="$(grep -i "^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*${usersid}.*$" "${SYSCONFDIR}/passwd")"
+	if [ -z "$old_entry" ]; then 
+	   echo "${new_entry}" >> "${SYSCONFDIR}/passwd" || ret=1
+        else
+	   cyg_username="${old_entry%%:*}"
+        fi
+    fi
+    echo "INFO: The cygwin user name for account ${win_username} is ${cyg_username}."
+    return "${ret}"
+}
+
+# ======================================================================
+# Routine: install_service
+# Install cron as a service.
+# Start the service or start cron as a job.
+# ======================================================================
+install_service() {
+    echo "The cron daemon can run as a service or as a job. The latter is not recommended."
+    service="job"
+    servtest=""
+    password=""
+    # The default is valid for jobs
+    username="$USER"
+
+    cygrunsrv -Q cron > /dev/null 2>&1
+    servtest=$?
+    
+    if [ "${servtest}" = "0" ]; then
+	cronusername="$(cygrunsrv -VQ cron | sed -n -e 's/^Account[ :]*//p')"
+	echo "Cron is already installed as a service under account ${cronusername}."
+        otherpath="$(cygrunsrv -VQ cron | sed -n -e 's/^Service[^(]*(\(.*\))$/\1/p')"
+	if [ -n "$otherpath" ]; then
+	    echo "$otherpath is not for this instance of Cygwin." 
+	    echo "You must remove and reinstall the service to run in this instance."
+        fi
+	if request "Do you want to remove or reinstall it?"; then
+	    if cygrunsrv -R cron; then
+		echo "OK. The cron service was removed."
+		echo
+		otherpath=
+	    fi
+	else
+	    # cron_diagnose needs to know username
+	    domainname=${cronusername%\\*}
+	    win_username=${cronusername#*\\}
+            usersid=$(mkpasswd -l -u "$win_username" | sed -e 's?^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*\(S[-0-9]*\):.*$?\1?')
+	    entry=$(getent passwd "$usersid")
+	    cyg_username=${entry%%:*}
+	    if [ -z "$cyg_username" ]; then
+		echo "Error: cannot find cygwin username for account $cronusername";
+		echo "       Remove the service and reinstall it."
+		exit 1;
+	    fi
+	    username=$cyg_username
+	    service="service"
+	    servtest=no
+	fi
+        if [ -n "$otherpath" ]; then
+	    echo "Quitting due to other install."
+	    exit 1
+        fi	
+    fi
+
+    if [ "${servtest}" = "no" ]; then
+	true
+    elif request "Do you want to install the cron daemon as a service?"; then
+
+	    getcygenv " " 
+
+	    echo 
+            echo "You must decide under what account the cron daemon will run."
+            echo "If you are the only user on this machine, the daemon can run as yourself."
+            echo "   This gives access to all network drives but only allows you as user."
+            if [ -z "$nt2003" ]; then
+                echo "Otherwise cron should run under the local system account".
+                echo "  It will be capable of changing to other users without requiring a"
+                echo "  password, using one of the three methods detailed in"
+                echo "  http://cygwin.com/cygwin-ug-net/ntsec.html#ntsec-nopasswd1"
+            else
+                echo "To run multiple users, cron must change user context without knowing"
+                echo "  the passwords. There are three methods to do that, as explained in"
+                echo "  http://cygwin.com/cygwin-ug-net/ntsec.html#ntsec-nopasswd1"
+		echo "If all the cron users have executed \"passwd -R\" (see man passwd),"
+                echo "  which provides access to network drives, or if you are using the"
+		echo "  cyglsa package, then cron should run under the local system account."
+		echo "Otherwise you need to have or to create a privileged account."
+		echo "  This script will help you do so."
+	    fi
+	    if request "Do you want the cron daemon to run as yourself?"; then
+                cyg_username=$username 
+		if editrights -a SeServiceLogonRight -u "${username}"; then
+		    true
+		else
+		    echo "WARNING: You must get the privilege to logon as a service."
+		fi
+	    else 
+		echo
+		cyg_username=""
+		if [ -n "$nt2003" ]; then
+                    if request "Were the passwords of all cron users saved with \"passwd -R\", or \nare you using the cyglsa package ?"; then
+                        echo "The cron daemon will run as SYSTEM".
+		    elif ! create_user; then
+		        echo "There was a serious problem creating a privileged user."
+		        request "Do you want to proceed anyway?" || exit 1
+                    fi
+		fi
+	    fi
+	    echo
+	
+	    if [ -n "${cyg_username}" ]; then
+		
+		check_user "${cyg_username}"
+
+		if [ -z "${password}" ]
+		    then
+		    getvalue "Please enter the password for user '$cyg_username':" -s
+		    password="${value}"
+		fi
+
+		if cygrunsrv -I cron -p /usr/sbin/cron -e CYGWIN="${cygenv}" -e TMP="/tmp" \
+		    -e TEMP="/tmp" -a "-n" -d "Cron daemon" -u "$cyg_username" -w "$password"
+		    then
+		    service="service"
+		else
+		    service="off"
+		fi
+	    else
+		if cygrunsrv -I cron -p /usr/sbin/cron -e CYGWIN="${cygenv}" \
+		    -a "-n" -d "Cron daemon"
+		    then
+		    service="service"
+		else
+		    service="off"
+		fi
+	    fi
+    fi
+#    echo
+
+    #############################
+    # Run diagnostic
+    #############################
+    if ! cron_diagnose; then
+	echo "There may be serious issues with your environment."
+	echo "You should look into them and run this script again."
+	request "Do you want to continue anyway?" || exit 1
+    fi
+
+    #############################
+    # Start the daemon?
+    #############################
+    if ps -es | grep -Fqi '/usr/sbin/cron'; then
+	echo "INFO: A cron daemon is already running."
+    elif [ "${service}" != "off" ]; then
+	for file in /var/run/cron.pid /var/log/cron.log ; do
+	    chown "${USER}" "${file}" 2>/dev/null
+	    rm -f "${file}"
+	    if [ -f "${file}" ]; then
+		echo "WARNING: ${file} could not be deleted."
+		echo "         Make sure the daemon can write to it."
+		echo
+	    fi
+	done
+
+	if request "Do you want to start the cron daemon as a ${service} now?"; then
+	    if [ "${service}" = "job" ]; then
+                echo "WARNING: The cron daemon will stop when you log off."
+                echo "         To avoid that, launch cron as a service (using cygrunsrv)."
+		/usr/sbin/cron
+	    else
+		cygrunsrv -S cron
+	    fi
+	    [ $? -eq 0 ] && echo "OK. The cron daemon is now running."
+	elif [ "${service}" = "job" ]; then
+	    echo "OK. Type '/usr/sbin/cron' to start the cron daemon job."
+	else
+	    echo "OK. Type 'cygrunsrv -S cron' to start the cron daemon service."
+	    echo "    It will restart automatically at each reboot."
+	fi
+    fi
+    echo
+    echo "In case of problem, examine the log file for cron,"
+    echo -n "/var/log/cron.log, and the "
+    if [ -S "/dev/log" ]; then
+        echo "appropriate syslog file"
+    else
+	echo "Windows event log (using /usr/bin/cronevents)"
+    fi
+    echo "for information about the problem cron is having."
+    echo
+    
+    ls -l /usr/sbin/sendmail | fgrep -q cronlog &&
+        echo -e "Examine also any cron.log file in the HOME directory\n(or the file specified in MAILTO) and cron related files in /tmp.\n" 
+
+    echo "If you cannot fix the problem, then report it to cygwin@cygwin.com."
+    echo "Please run the script /usr/bin/cronbug and ATTACH its output"
+    echo "(the file cronbug.txt) to your e-mail."	
+    echo
+    echo "WARNING: PATH may be set differently under cron than in interactive shells."
+    echo "         Names such as \"find\" and \"date\" may refer to Windows programs."
+    echo 
+
+} # === End of install_service() === #
+
+#=========================
+# Entry point:
+#=========================
+
+# Set PATH to use the Cygwin programs
+PATH=/usr/bin:$PATH
+USER="$(id -un)"
+
+get_system_and_admins_ids
+
+if id -G | grep -qE '(^| )'"$ADMINSGID"'( |$)'
+    then true
+else
+    echo
+#    echo "*************************************************************************************"
+    echo "*************************************************************************************"
+#   echo
+    echo "WARNING: You are not currently in the Local Administrators group."
+    echo "This script will fail to set file ownership and permissions, to create users,"
+    echo "and to create or start services."
+    echo
+    echo "It is recommended that you execute the script from a shell running as Administrator"
+#    echo
+    echo "*************************************************************************************"
+#    echo "*************************************************************************************"
+    if ! request "Do you want to continue?"; then
+        exit
+    fi
+fi
+
+get_temp_dir
+mytemp=$TEMP_DIR
+
+# Take care of obsolete cron_diagnose.sh 
+if expr "$0" : '.*cron_diagnose.sh' > /dev/null; then
+    echo -e "\nINFO: cron_diagnose.sh is now included in cron-config.\n"
+fi
+
+sanity_check || exit 1
+
+get_NT || exit 1
+
+install_service
+
+exit $?
+

@@ -1,0 +1,14 @@
+apache2
+sdesc: "Obsoleted by httpd"
+ldesc: "The apache2 package is obsolete.  Selecting this package for
+installation will cause the httpd package, which replaces this
+one, to be installed instead."
+category: _obsolete
+requires: httpd
+version: 2.4.18-1
+install: x86/release/httpd/apache2/apache2-2.4.18-1.tar.xz 32 034b32f1138322638c7a5b7949a3b184c6a4cdfd003360a496c08c56c2cc645c94fbe9cdf9d84c963af6dda6c442717cd61d7e1cecf7024bd463f6f5196c5527
+source: x86/release/httpd/httpd-2.4.18-1-src.tar.xz 5187320 cd2d18c71d676d127a6867c8b887b103d9753965f07cc0ddd6ad2d6e81c48b068b1926cab7bc76129ecefcae7d5c7721f8d750d2a9f965ec530c2abc5cb0e620
+[prev]
+version: 2.4.16-1
+install: x86/release/httpd/apache2/apache2-2.4.16-1.tar.xz 32 034b32f1138322638c7a5b7949a3b184c6a4cdfd003360a496c08c56c2cc645c94fbe9cdf9d84c963af6dda6c442717cd61d7e1cecf7024bd463f6f5196c5527
+source: x86/release/httpd/httpd-2.4.16-1-src.tar.xz 5107328 d1f0f21c4c550dae2559fccc1bf776fef1a9fcc81e98a8008db6fdec16073554501018cc46032fbf11eccc9ec2e193f97680ca00479986f382bb7e2e55abf725

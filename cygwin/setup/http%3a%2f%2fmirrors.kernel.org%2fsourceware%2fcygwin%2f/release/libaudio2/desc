@@ -1,0 +1,13 @@
+libaudio2
+sdesc: "Network Audio System (runtime library)"
+ldesc: "The Network Audio System is a network-transparent,
+client/server audio system based on X11."
+category: Audio X11
+requires: libXau6 libXt6 cygwin
+version: 1.9.3-1
+install: x86/release/nas/libaudio2/libaudio2-1.9.3-1.tar.bz2 37125 ca6d42b0c6048d760c659dde9d8621dc23483af6ffc1ea16811cc98c3de6b63a055e89b7330aba608490e563a1e8463b7ae8da78591f6d76e3d5ecf7323b87ef
+source: x86/release/nas/nas-1.9.3-1-src.tar.bz2 1486115 e40d697f82e2dc4fef5549fadb591770dd2b557ee9b12bbefbe8ae4063da67f4ace3a24e2d05570e76feedc3dc507d7b62b42120fd451855de0c893cf8c49299
+[prev]
+version: 1.9.2-1
+install: x86/release/nas/libaudio2/libaudio2-1.9.2-1.tar.bz2 37030 4cef39f74fd53f9e1af41554ac74f464f80179a2be105723db4f7467be017e0bff2d89fc18837315172cf0d781af0a45f42955d794ef82b43aa746c1b723e521
+source: x86/release/nas/nas-1.9.2-1-src.tar.bz2 1487870 28a055bce62e03e15cf1d3066bed6ca7e0877f66307dd8a4809150ccd2a86b770d248d2a846d44885965c7183b117f7e244785bae578ae683b3a38bb759889fe

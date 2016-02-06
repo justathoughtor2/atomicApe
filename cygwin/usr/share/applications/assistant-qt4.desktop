@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=Qt4 Assistant
+Exec=assistant-qt4
+TryExec=assistant-qt4
+Type=Application
+Icon=assistant-qt4.png
+Categories=Development;Documentation;Qt;

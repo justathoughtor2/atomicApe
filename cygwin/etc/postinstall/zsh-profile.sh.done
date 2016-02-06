@@ -1,0 +1,39 @@
+#!/bin/sh
+V="5.1.1"
+prefix=/usr
+infodir=${prefix}/share/info
+docdir=${prefix}/share/doc
+manifest=/etc/preremove/zsh-manifest.lst
+
+[ -f ${manifest} ] || (echo "Unable to find manifest file" && exit 0)
+
+while read f; do
+  fSrc1=/etc/defaults/${f}
+  fSrc2=${docdir}/zsh-$V/StartupFiles/${f}
+  fDest=/${f}
+  if [ ! -e ${fDest} -a ! -L ${fDest} ]; then
+    if [ -e ${fSrc1} ]; then
+      /bin/echo "Using the default version of ${fDest} (${fSrc1})"
+      /bin/touch ${fDest}
+      /bin/cp ${fSrc1} ${fDest}
+    else
+      if [ -e ${fSrc2} ]; then
+        /bin/echo "Using the default version of ${fDest} (${fSrc2})"
+        /bin/touch ${fDest}
+        /bin/cp ${fSrc2} ${fDest}
+      else
+        echo "No default ${fDest} available."
+      fi
+    fi
+  else
+    echo "${fDest} already exists, not overwriting."
+  fi
+done < ${manifest}
+
+# Install the .info files
+cd ${infodir}
+for fn in zsh.info ; do
+  /usr/bin/install-info --dir-file=./dir --info-file=${fn}
+done
+
+exit 0

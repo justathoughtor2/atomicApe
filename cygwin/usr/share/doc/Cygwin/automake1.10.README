@@ -1,0 +1,62 @@
+automake1.10
+========================================================================
+Provides the latest version of automake in the 1.10.x series
+
+Build requirements (these or newer):
+  cygwin-1.7.22-1
+  perl
+  coreutils
+  m4
+  texinfo
+  cygport-0.12.3
+  autoconf2.5
+  autoconf
+  make-3.81-2
+
+Canonical homepage:
+  http://www.gnu.org/software/automake/
+
+Canonical download:
+  ftp://ftp.gnu.org/pub/gnu/automake/
+
+License:
+  GPL
+
+Language:
+  perl, m4
+
+========================================================================
+
+Port Notes:
+----- version 1.10.3-2 -- 2013 Jul 29 -----
+* Rely on cygport to autogenerate setup.hints
+* Update config.sub/config.guess to latest standard (supports
+  cygwin64)
+* Use 'alternatives' only for documentation; rely on wrapper
+  to handle the tools themselves.
+* First cygwin64 release
+
+----- version 1.10.3-1 -- 2009 Dec 24 -----
+* Routine update to latest upstream
+
+----- version 1.10.2-10 -- 2009 May 25 -----
+* Routine update to latest upstream
+
+----- version 1.10.1-10 -- 27 Oct 2008 -----
+* This version marks the beginning of cygwin-1.7 specific
+  ports. Releases 1.10.1-2 thru 1.10.1-9 are reserved for
+  cygwin-1.5.
+* Use stock cygport 0.9.2
+* Import fixes from gentoo
+* Ensure distcheck passes when using libtool-2.2 and
+  the LT_OUTPUT macro appears in configure.ac.
+* Ensure /usr/share/aclocal directory is preserved
+
+----- automake1.10-1.10.1-1 -- 19 Feb 2008 ----
+Routine update.
+
+----- automake1.10-1.10-1 -- 14 Oct 2006 ----
+First instance in the 1.10 series.  Uses cygport.
+
+========================================================================
+Cygwin port maintained by: Chuck Wilson <cygwin@cygwin.com>

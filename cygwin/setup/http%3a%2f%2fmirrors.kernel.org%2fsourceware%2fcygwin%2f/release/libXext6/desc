@@ -1,0 +1,12 @@
+libXext6
+sdesc: "X.Org X11 extension library"
+ldesc: "X.Org X11 extension library"
+category: Libs
+requires: libX11_6 cygwin
+version: 1.3.3-1
+install: x86/release/libXext/libXext6/libXext6-1.3.3-1.tar.xz 221508 a3ee101a8f40d6e50745007debd54156be1624544fdec58bb5a450fd2361dba60559932bb968cc5af776254edc97c4aee0c511a951f0f8254765385a03313b97
+source: x86/release/libXext/libXext-1.3.3-1-src.tar.xz 390900 d3dd433973d0f0f76b671c226a4892144cc648a6d63d8b85a65c4cf2d415f53cdbce6af12e6244d78fa32068d695a559c0168a66e596a0a6a7a0225ef9f571ad
+[prev]
+version: 1.3.2-1
+install: x86/release/libXext/libXext6/libXext6-1.3.2-1.tar.bz2 274822 318108495c80fccff375cae4ec8f5fba74f09ef1914cec2d6d380b6ba57cc920497588d1c25169b395fc2a020b23567de206010b5090168dbbdaa724d4b76e7e
+source: x86/release/libXext/libXext-1.3.2-1-src.tar.bz2 381335 8be926cd86cfae5f85afdc342bb9c9944e6ec6766cd5c8acbaa057c7ad99198bb0faed443d7de61b48a29e70d7be1c28045d6cccd6bf243a7cefbc0c70e0ce84

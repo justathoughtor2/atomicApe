@@ -1,0 +1,18 @@
+dri-drivers
+sdesc: "OpenGL DRI drivers"
+ldesc: "Mesa is an open-source implementation of the OpenGL specification,
+a system for rendering interactive 3D graphics.
+
+Complete documentation on OpenGL usage and configuration can be found here:
+
+http://x.cygwin.com/docs/ug/using-glx.html
+"
+category: Libs
+requires: cygwin libexpat1 libgcc1 libglapi0 libllvm3.5 libstdc++6
+version: 11.0.9-1
+install: x86/release/mesa/dri-drivers/dri-drivers-11.0.9-1.tar.xz 1759772 bf33837da5af173cc591c6661f5534393fa958e2b625234180af2454af142ce16c1b4a312355ec2b0c73964342330ce9880e456665cec9d28775f761f5deeda2
+source: x86/release/mesa/mesa-11.0.9-1-src.tar.xz 7303404 b5a9095609d1d6abb9abfd3ce4a258a7c23a45ec1b4de76311d3837794c7852258bead9b49034012e957137927d3578eb96168fc0c4d653e0d00d2a04d991ef4
+[prev]
+version: 11.0.6-1
+install: x86/release/mesa/dri-drivers/dri-drivers-11.0.6-1.tar.xz 1759984 0f1cbb2c77361e8bb065a5798c15db34cddd873aae614c14d0cc8eb1155c8ad1f35ba56e5da37b80a0f12a475d91af61faf4b10ec87f7a7ff94a154bc5f806c0
+source: x86/release/mesa/mesa-11.0.6-1-src.tar.xz 7293628 462c776edb790ef9f8cbc12dbc72e34ceca0bbf5c29eadd0d7f841df2071cb73dcbf85a19cb3f49af7509ed50b241d8a1ebb9f3aa5b1920dcbc8441c8350eb6b

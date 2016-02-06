@@ -1,0 +1,58 @@
+automake1.11
+========================================================================
+Provides the latest version of automake in the 1.11.x series
+
+Build requirements (these or newer):
+  cygwin-1.7.22-1
+  perl
+  coreutils
+  m4
+  texinfo
+  cygport-0.12.3
+  autoconf2.5
+  autoconf
+  make-3.82.90-1
+
+Canonical homepage:
+  http://www.gnu.org/software/automake/
+
+Canonical download:
+  ftp://ftp.gnu.org/pub/gnu/automake/
+
+License:
+  GPL
+
+Language:
+  perl, m4
+
+========================================================================
+
+Port Notes:
+----- automake1.11-1.11.6-2 -- 2013 Jul 29 ----
+* Rely on cygport to autogenerate setup.hints
+* Update config.sub/config.guess to latest standard (supports
+  cygwin64)
+* Use 'alternatives' only for documentation; rely on wrapper
+  to handle the tools themselves.
+* First cygwin64 release
+
+----- automake1.11-1.11.6-1 -- 2012 Aug 31 ----
+* Update to latest upstream release
+* Fixes security issue
+  + CVE-2012-3386: make distcheck vs. o+w permissions
+* Use new cygport(1) capabilities to automatically generate the setup.hint
+ 
+----- automake1.11-1.11.3-1 -- 2012 Mar 31 ----
+* Update to latest upstream release
+* cygport(5) no longer attempts to remove MiKTeX from $PATH -- with the
+  new dependencies, cygwin TeX can no longer be easily avoided, and will
+  take precendence over MiKTeX anyway.
+
+----- automake1.11-1.11.1-1 -- 2009 Dec 23 ----
+* Update to latest upstream release
+
+----- automake1.11-1.11-10 -- 2009 May 24 ----
+First instance in the 1.11 series for cygwin-1.7.
+
+========================================================================
+Cygwin port maintained by: Chuck Wilson <cygwin@cygwin.com>

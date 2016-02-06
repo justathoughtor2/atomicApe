@@ -1,0 +1,15 @@
+unzip
+sdesc: "Info-ZIP decompression utility"
+ldesc: "UnZip is an extraction utility for archives compressed in .zip
+format. Although highly compatible both with PKWARE's PKZIP and PKUNZIP
+utilities for MS-DOS and with Info-ZIP's own Zip program, the primary objective
+is portability and non-MSDOS functionality."
+category: Archive
+requires: bash cygwin libbz2_1 libgcc1
+version: 6.0-15
+install: x86/release/unzip/unzip-6.0-15.tar.xz 181140 770ccf8efac91c302ad165c8247aca829fdce28c91122ccd4031926dd34582f783771320286fcab631a66ba3d990225e4e830729b7dead79b65730c682985112
+source: x86/release/unzip/unzip-6.0-15-src.tar.xz 1390428 5466b5b85eab6c6c84981d1e82ce60f1905fd8e67367d46410d7e39ce26e51e4c6670df81034a0222c310449fe5ca7ebfb9d2bc25e79e3ff4f89ef9339571e8b
+[prev]
+version: 6.0-14
+install: x86/release/unzip/unzip-6.0-14.tar.xz 180912 0fff5b8d7bc18bc3a182384dd418dc6a07c516e4990c0f947b01c010630cea451704f1d4bfd7a5543f3567f5210d2af5afb4a5bc90ce7eb2c0415f23f2786b73
+source: x86/release/unzip/unzip-6.0-14-src.tar.xz 1389304 87b28ef3dd91614b4d4dd4b2a52b65bfa83ea4e3e0a8e48be391783c41c9ae8decaee4d3999b693678cef05dd2a304749af30cbd35278c639ff962454c2a7082

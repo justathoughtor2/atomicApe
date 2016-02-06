@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=Qt4 Linguist
+Exec=linguist-qt4
+TryExec=linguist-qt4
+Type=Application
+Icon=linguist-qt4.png
+Categories=Development;Translation;Qt;

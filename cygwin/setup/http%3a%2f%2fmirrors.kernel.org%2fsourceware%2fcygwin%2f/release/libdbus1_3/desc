@@ -1,0 +1,18 @@
+libdbus1_3
+sdesc: "Freedesktop message bus system"
+ldesc: "D-BUS is a message bus system, a simple way for applications to
+talk to one another.  D-BUS supplies both a system daemon (for events such as
+'new hardware device added' or 'printer queue changed') and a per-login-session
+daemon (for general IPC needs among user applications). Also, the message bus
+is built on top of a general one-to-one message passing framework, which can be
+used by any two apps to communicate directly (without going through the message
+bus daemon)."
+category: Libs
+requires: cygwin
+version: 1.8.16-1
+install: x86/release/dbus/libdbus1_3/libdbus1_3-1.8.16-1.tar.xz 98548 b6db0fe2b5fed766bb3d8655e2bc6fe36d52859ddd6356b6ee1cbfff3e037101f5fda212b5bafea8eabf151dc5d7df0d99f88850e8e990f9d6658acbb0f8872b
+source: x86/release/dbus/dbus-1.8.16-1-src.tar.xz 1869720 c8469515b624d4d8849ece3f7218b4d7be13f37f764a9967a1202cc223f0c841cb96eecba3edddc8ed87bc26219e2c16a62fbeb339b73359a969fe3988061e6d
+[prev]
+version: 1.8.12-1
+install: x86/release/dbus/libdbus1_3/libdbus1_3-1.8.12-1.tar.xz 97292 c2c9e83416c5119e042432a95b6100d136692a3e04e7d438e514d32656059203ba27211ec090a8bb861d328ecb650314ae61ebc45c2c80e06be1886a791c0f35
+source: x86/release/dbus/dbus-1.8.12-1-src.tar.xz 1867860 b77c1391064247e7d8e5d0e844e520447e38b90b5378abf26748eb060f348852abee2553e99a7853cb78622003568ccaadb1316198edc6005069a24b2b9a5f5a

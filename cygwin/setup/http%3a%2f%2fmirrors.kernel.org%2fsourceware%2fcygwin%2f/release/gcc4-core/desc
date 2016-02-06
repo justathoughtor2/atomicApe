@@ -1,0 +1,7 @@
+gcc4-core
+sdesc: "Obsolete package"
+ldesc: "Obsolete package"
+category: _obsolete
+requires: gcc-core
+version: 4.7.3-2
+install: x86/release/_obsolete/gcc4/gcc4-core/gcc4-core-4.7.3-2.tar.bz2 141 649b6ec7d63691019d647f1cc4f32e2e308e5d72bb45ecfe3b4f3d8e0a53f9b81c547ba3773029aae48468034c9ec0ea3a5abdfe2396c8c26e06798a1879df21

@@ -1,0 +1,14 @@
+libffi-devel
+sdesc: "Portable foreign function interface library"
+ldesc: "The libffi library provides a portable, high level programming
+interface to various calling conventions. This allows a programmer to call any
+function specified by a call interface description at run-time."
+category: Libs
+requires: libffi6 cygwin
+version: 3.2.1-1
+install: x86/release/libffi/libffi-devel/libffi-devel-3.2.1-1.tar.xz 17036 88e1e252e16708077ccb7f6f5fca7fdfc8addb77c3407c78d48f9ae4865ede4e9afe7f0c00e6b35b751d9bac40ef8b08f1c4498c7165660996ddf338f477a695
+source: x86/release/libffi/libffi-3.2.1-1-src.tar.xz 942552 85b02f6716fa609a14c1e33f46675dca012dc78ae47d95e605b6714e41bbba8d5ea0ab1a735dbaf28cac2801aafee98dc5c876b390e8e6f318a900e82b425f40
+[prev]
+version: 3.0.13-1
+install: x86/release/libffi/libffi-devel/libffi-devel-3.0.13-1.tar.bz2 57105 de2236434f2fe1a575b6ab360c5fb942a6a940578202a4545126525a4b915a72757b8fac3a2a161a4580653b56b403344d40bb53494c970314082013a37f5120
+source: x86/release/libffi/libffi-3.0.13-1-src.tar.bz2 850179 bd9f911dde76ffd64339a81ea90ef1e243b1985a0f6bc8173307913c454073844249831fd52d3c000eb7679b72fb696a260ae086e08cbb4d4f269c2cb8893862

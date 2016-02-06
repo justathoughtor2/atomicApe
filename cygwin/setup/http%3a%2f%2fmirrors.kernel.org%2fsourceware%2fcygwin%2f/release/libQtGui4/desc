@@ -1,0 +1,16 @@
+libQtGui4
+sdesc: "Qt4 Gui library (runtime)"
+ldesc: "Qt is a cross-platform application framework for desktop and
+embedded development. Qt enables programmers to create advanced GUI
+applications once and deploy them to Windows, Mac OS X and Linux without
+rewriting the source code. Companies using Qt can leverage software
+investments made on one platform across many others."
+category: Libs
+requires: cygwin libaudio2 libfontconfig1 libfreetype6 libgcc1 libglib2.0_0 libICE6 libjpeg8 libmng1 libpng16 libQtCore4 libSM6 libstdc++6 libtiff6 libX11_6 libXcursor1 libXext6 libXfixes3 libXi6 libXinerama1 libXrandr2 libXrender1 zlib0
+version: 4.8.7-1
+install: x86/release/qt4/libQtGui4/libQtGui4-4.8.7-1.tar.xz 3826048 b015f70684509cb52a6c09ea6f8707299d7e12df041a8a04ceba187d078f06e7a13cd058f142b5d98b6f5fcde5492359ecabf3e04da5f7ca34eb80290996daaf
+source: x86/release/qt4/qt4-4.8.7-1-src.tar.xz 237993912 f620acb9b6cd377d4c1cc46172288ad9b86fdf8eeaa0625ba24cadcefd9013acdb4a3e0a85fc7681a8899440592214f7d4512526f760eb868db6422f93a9dc93
+[prev]
+version: 4.8.6-8
+install: x86/release/qt4/libQtGui4/libQtGui4-4.8.6-8.tar.xz 3817040 9996a18c596ecc53629d7614dc2d52d21334a3dffd641c3a490266b6a2819c55294e9d2b5cd2d336739975ef6fac1285fbc90d879cd7f83248fba79e552c62d1
+source: x86/release/qt4/qt4-4.8.6-8-src.tar.xz 239307312 484fe5cc7d721e53ee6dda3873726229d5171dcab441ae662226ae009e5d39e0f7d26e19647590b37be91783c2cfa866e0890673653a4a5e9423cc082677e024

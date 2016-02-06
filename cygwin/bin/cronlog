@@ -1,0 +1,70 @@
+#! /bin/sh
+# This file is part of the Cygwin cron distribution.
+#
+# The script implements a poor man's mailer.
+# If pointed to by /usr/sbin/sendmail, it is used by cron to save the
+# last mail produced for a user into HOME/cron.log
+# HOME can be set in the crontab.
+#
+# You can edit it to suit your needs. If you do so, place it in a directory
+# such as /usr/local/bin to preserve your edits across cron updates.
+# Change /usr/sbin/sendmail accordingly.
+
+# Exit if not called from cron.
+if [ "$*" != "-FCronDaemon -odi -oem -oi -t" ] ; then
+  if [ -L "$0" ]; then 
+    echo "$0 is a link to /usr/bin/cronlog."
+    echo "It is only meant to be called from cron."
+  else
+    echo "$0 is only meant to be called from cron."
+  fi  
+  exit 1
+fi
+
+# Make sure to only use standard utilities
+PATH=/usr/bin 
+# Write to a unique temporary file to avoid mixing outputs from 
+# different cron jobs. 
+# Also will likely be on a local disk, avoiding network drive issues
+DATE=$(date '+%Y%m%d_%H%M%S') 
+if [ -w "/tmp" ]; then
+  FILE="/tmp/cron.$DATE.$$.log"
+elif [ -w "$TMP" ]; then
+  FILE="$TMP/cron.$DATE.$$.log"
+else
+  [ -x "/usr/bin/logger" ] &&
+    logger "/usr/bin/cronlog cannot find a writable directory."
+  exit 1 
+fi
+umask 066
+
+# Redirect stdout and log the errors in the .err file
+exec 1> "$FILE" 2> "${FILE}.err"
+
+echo "This file was written by the /usr/bin/cronlog script on $DATE"
+echo
+cat
+
+# Close the current stdout and redirect it to stderr 
+exec 1>&2
+
+# Move the temp file to destination, use cat instead of mv to 
+# reuse the file if it exists, instead of deleting it.
+# This helps on some network drives.
+
+# MAILTO must start with /
+MAILTO=$(sed -n 's/X-Cron-Env: <MAILTO= *\(\/.*\)>$/\1/p' "$FILE")
+if [ -n "$MAILTO" ]; then
+  cat "$FILE" > "$MAILTO" && rm -f "$FILE"
+else
+  HOME=$(sed -n 's/X-Cron-Env: <HOME=\(.*\)>$/\1/p' "$FILE")
+  if [ -n "$HOME" ]; then
+    cat "$FILE" > "$HOME"/cron.log && rm -f "$FILE"
+  else
+    echo "Cannot get HOME"
+  fi
+fi
+	
+# If there were no errors delete the .err file
+exec 2> /dev/null
+[ -s "${FILE}.err" ] || rm -f "${FILE}.err"
