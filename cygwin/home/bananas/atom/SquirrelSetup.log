@@ -224,3 +224,15 @@
 2016-02-05 21:01:06> Program: Fetching update information, downloading from https://atom.io/api/updates?version=1.4.3
 2016-02-05 21:01:06> CheckForUpdateImpl: Downloading RELEASES file from https://atom.io/api/updates?version=1.4.3
 2016-02-05 21:01:06> FileDownloader: Downloading url: https://atom.io/api/updates/RELEASES?version=1.4.3&id=atom&localVersion=1.4.3&arch=amd64
+2016-02-05 22:30:27> Program: Starting Squirrel Updater: --download https://atom.io/api/updates?version=1.4.3
+2016-02-05 22:30:27> Program: Fetching update information, downloading from https://atom.io/api/updates?version=1.4.3
+2016-02-05 22:30:27> CheckForUpdateImpl: Downloading RELEASES file from https://atom.io/api/updates?version=1.4.3
+2016-02-05 22:30:27> FileDownloader: Downloading url: https://atom.io/api/updates/RELEASES?version=1.4.3&id=atom&localVersion=1.4.3&arch=amd64
+2016-02-05 22:31:15> Program: Starting Squirrel Updater: --download https://atom.io/api/updates?version=1.4.3
+2016-02-05 22:31:15> Program: Fetching update information, downloading from https://atom.io/api/updates?version=1.4.3
+2016-02-05 22:31:15> CheckForUpdateImpl: Downloading RELEASES file from https://atom.io/api/updates?version=1.4.3
+2016-02-05 22:31:15> FileDownloader: Downloading url: https://atom.io/api/updates/RELEASES?version=1.4.3&id=atom&localVersion=1.4.3&arch=amd64
+2016-02-05 22:32:17> Program: Starting Squirrel Updater: --download https://atom.io/api/updates?version=1.4.3
+2016-02-05 22:32:17> Program: Fetching update information, downloading from https://atom.io/api/updates?version=1.4.3
+2016-02-05 22:32:17> CheckForUpdateImpl: Downloading RELEASES file from https://atom.io/api/updates?version=1.4.3
+2016-02-05 22:32:17> FileDownloader: Downloading url: https://atom.io/api/updates/RELEASES?version=1.4.3&id=atom&localVersion=1.4.3&arch=amd64

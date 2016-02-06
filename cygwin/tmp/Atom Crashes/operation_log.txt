@@ -163,3 +163,33 @@ clients terminated :2
 dumps serviced :0
 dumps reported :0
 [15176:9896:0205/223122:VERBOSE1:crash_service_main.cc(89)] Session end. return code is 0
+[9852:584:0205/223216:VERBOSE1:crash_service_main.cc(68)] Session start. cmdline is [--reporter-url=http://54.249.141.255:1127/post --application-name=Atom --v=1]
+[9852:584:0205/223216:VERBOSE1:crash_service.cc(142)] window handle is 004408DA
+[9852:584:0205/223216:VERBOSE1:crash_service.cc(290)] pipe name is \\.\pipe\Atom Crash Service
+dumps at F:\atomicApe\cygwin\tmp\Atom Crashes
+[9852:584:0205/223216:VERBOSE1:crash_service.cc(294)] checkpoint is F:\atomicApe\cygwin\tmp\Atom Crashes\crash_checkpoint.txt
+server is http://54.249.141.255:1127/post
+maximum 128 reports/day
+reporter is electron-crash-service
+[9852:584:0205/223216:VERBOSE1:crash_service_main.cc(84)] Ready to process crash requests
+[9852:4040:0205/223216:VERBOSE1:crash_service.cc(323)] client start. pid = 18072
+[9852:4040:0205/223217:VERBOSE1:crash_service.cc(323)] client start. pid = 17428
+[6968:7924:0205/223217:VERBOSE1:crash_service_main.cc(68)] Session start. cmdline is [--reporter-url=http://54.249.141.255:1127/post --application-name=Atom --v=1]
+[6968:7924:0205/223217:VERBOSE1:crash_service.cc(142)] window handle is 00050324
+[6968:7924:0205/223217:VERBOSE1:crash_service.cc(290)] pipe name is \\.\pipe\Atom Crash Service
+dumps at F:\atomicApe\cygwin\tmp\Atom Crashes
+[6968:7924:0205/223217:VERBOSE1:crash_service.cc(294)] checkpoint is F:\atomicApe\cygwin\tmp\Atom Crashes\crash_checkpoint.txt
+server is http://54.249.141.255:1127/post
+maximum 128 reports/day
+reporter is electron-crash-service
+[6968:7924:0205/223217:ERROR:crash_service.cc(301)] could not start dumper
+[9852:4040:0205/234317:VERBOSE1:crash_service.cc(323)] client start. pid = 18036
+[5136:15272:0205/234317:VERBOSE1:crash_service_main.cc(68)] Session start. cmdline is [--reporter-url=http://54.249.141.255:1127/post --application-name=Atom --v=1]
+[5136:15272:0205/234317:VERBOSE1:crash_service.cc(142)] window handle is 000E0C26
+[5136:15272:0205/234317:VERBOSE1:crash_service.cc(290)] pipe name is \\.\pipe\Atom Crash Service
+dumps at F:\atomicApe\cygwin\tmp\Atom Crashes
+[5136:15272:0205/234317:VERBOSE1:crash_service.cc(294)] checkpoint is F:\atomicApe\cygwin\tmp\Atom Crashes\crash_checkpoint.txt
+server is http://54.249.141.255:1127/post
+maximum 128 reports/day
+reporter is electron-crash-service
+[5136:15272:0205/234317:ERROR:crash_service.cc(301)] could not start dumper
