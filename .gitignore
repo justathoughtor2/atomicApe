@@ -3,3 +3,9 @@ cygwin/home/bananas/jekyll
 cygwin/home/bananas/pelican
 cygwin/home/bananas/ghost
 cygwin/home/bananas/UwAmp/www/*
+
+# .ssh directory
+cygwin/home/bananas/.ssh
+
+# Other .gitignore versions
+*.gitignore
