@@ -1,7 +1,7 @@
 # JVM options
 export JAVA_OPTS="-Xms128m -Xmx256m"
 
-# Modify these lines to set your locale 
+# Modify these lines to set your locale
 export LANG="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
@@ -13,6 +13,9 @@ export LC_ALL="en_US.UTF-8"
 
 # Uncomment this to disable daily auto-update & proxy checks on startup (not recommended!)
 # export DISABLE_CHECK_ON_STARTUP="true"
+
+# Uncomment this line if you don't want the cygdrive plugin to execute at startup
+export DISABLE_PLUGIN_CYGDRIVE="true"
 
 # Uncomment to increase/decrease the check connection timeout
 # export CHECK_TIMEOUT_IN_SECS=4

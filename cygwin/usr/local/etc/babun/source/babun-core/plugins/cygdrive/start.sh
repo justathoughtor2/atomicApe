@@ -4,7 +4,7 @@ source "/usr/local/etc/babun.instance"
 source "$babun_tools/script.sh"
 
 for root_dir in $(find / -maxdepth 1 -type l)
-do		
+do
 	link_target=$(readlink $root_dir)
 
 	if [[ "$link_target" =~ ^\/cygdrive\/.$ ]]; then
@@ -12,11 +12,15 @@ do
 	fi
 done
 
-for cygdrive_dir in $(find /cygdrive/ -maxdepth 1 -type d 2>/dev/null)
-do
-	drive_name=$(basename $cygdrive_dir)
+if ! [[ "$DISABLE_PLUGIN_CYGDRIVE" == "true" ]]; then
 
-	if [[ "$drive_name" != "cygdrive" ]]; then
-		ln -s "$cygdrive_dir" "/$drive_name"
-	fi
-done
+	for cygdrive_dir in $(find /cygdrive/ -maxdepth 1 -type d 2>/dev/null)
+	do
+		drive_name=$(basename $cygdrive_dir)
+
+		if [[ "$drive_name" != "cygdrive" ]]; then
+			ln -s "$cygdrive_dir" "/$drive_name"
+		fi
+	done
+
+fi
