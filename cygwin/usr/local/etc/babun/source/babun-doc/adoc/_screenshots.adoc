@@ -1,0 +1,46 @@
+
+[big]#Startup screen#
+
+image::https://raw.githubusercontent.com/babun/babun.github.io/master/images/screenshots/screen_welcome.png[babun - a Windows shell you will love!, align="center"]
+
+[big]#Pact - package installation#
+
+image::https://raw.githubusercontent.com/babun/babun.github.io/master/images/screenshots/screen_pact_install.png[babun - a Windows shell you will love!, align="center"]
+
+[big]#Pact - package installed#
+
+image::https://raw.githubusercontent.com/babun/babun.github.io/master/images/screenshots/screen_pact_installed.png[babun - a Windows shell you will love!, align="center"]
+
+[big]#Babun oh-my-zsh - auto-update#
+
+image::https://raw.githubusercontent.com/babun/babun.github.io/master/images/screenshots/screen_zsh_update.png[babun - a Windows shell you will love!, align="center"]
+
+
+[big]#VIM syntax highlighting#
+
+image::https://raw.githubusercontent.com/babun/babun.github.io/master/images/screenshots/screen_vim.png[babun - a Windows shell you will love!, align="center"]
+
+[big]#Nano syntax highlighting#
+
+image::https://raw.githubusercontent.com/babun/babun.github.io/master/images/screenshots/screen_nano.png[babun - a Windows shell you will love!, align="center"]
+
+[big]#Git aliases - git lg#
+
+image::https://raw.githubusercontent.com/babun/babun.github.io/master/images/screenshots/screen_git_lg.png[babun - a Windows shell you will love!, align="center"]
+
+[big]#Git aliases - git st#
+
+image::https://raw.githubusercontent.com/babun/babun.github.io/master/images/screenshots/screen_git_st.png[babun - a Windows shell you will love!, align="center"]
+
+[big]#Shell prompt#
+
+image::https://raw.githubusercontent.com/babun/babun.github.io/master/images/screenshots/screen_shell.png[babun - a Windows shell you will love!, align="center"]
+
+[big]#Babun update#
+
+image::https://raw.githubusercontent.com/babun/babun.github.io/master/images/screenshots/screen_update.png[babun - a Windows shell you will love!, align="center"]
+
+[big]#Open Babun here - Context Menu#
+
+image::https://raw.githubusercontent.com/babun/babun.github.io/master/images/screenshots/screen_context_menu.png[babun - a Windows shell you will love!, align="center"]
+

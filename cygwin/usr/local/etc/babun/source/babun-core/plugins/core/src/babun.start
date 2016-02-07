@@ -1,0 +1,6 @@
+#!/bin/bash
+source "/usr/local/etc/babun.instance"
+
+"$babun_plugins/start.sh"
+"$babun_tools/welcome.sh"
+
