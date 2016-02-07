@@ -1,0 +1,17 @@
+Usage: $0 template [command]
+       $0 recipe [command]
+
+Description:
+
+  Create projects from an existing project template and list templates
+  available.
+
+Commands:
+
+  list   list available app templates
+
+Examples:
+
+  $ $0 template list
+  $ $0 create my-app --template hello-world
+  $ $0 create my-app --recipe hello-world

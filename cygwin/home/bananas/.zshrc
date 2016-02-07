@@ -74,6 +74,10 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+# Java
+export JAVA_HOME="~/jdk"
+export PATH="~/jdk/bin:$PATH"
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -82,3 +86,25 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias atom="~/atom.bat"
+alias node="~/node.exe"
+alias npm="~/npm.cmd"
+alias bower="~/bower.cmd"
+alias forever="~/forever.cmd"
+alias phonegap="~/phonegap.cmd"
+alias uwamp="~/UwAmp/UwAmp.exe"
+alias ruby="~/Ruby22/bin/ruby.exe"
+alias gem="~/Ruby22/bin/gem.bat"
+alias erb="~/Ruby22/bin/erb.bat"
+alias irb="~/Ruby22/bin/irb.bat"
+alias jekyll="~/Ruby22/bin/jekyll.bat"
+alias kramdown="~/Ruby22/bin/kramdown.bat"
+alias listen="~/Ruby22/bin/listen.bat"
+alias rake="~/Ruby22/bin/rake.bat"
+alias rdoc="~/Ruby22/bin/rdoc.bat"
+alias ri="~/Ruby22/bin/ri.bat"
+alias rougify="~/Ruby22/bin/rougify.bat"
+alias safe_yaml="~/Ruby22/bin/safe_yaml.bat"
+alias sass="~/Ruby22/bin/sass.bat"
+alias scss="~/Ruby22/bin/scss.bat"
+alias sass-convert="~/sass-conver.bat"
