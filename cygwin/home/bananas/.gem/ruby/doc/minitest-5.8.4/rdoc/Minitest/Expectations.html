@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Minitest::Expectations - minitest-5.8.4 Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-must_be">#must_be</a>
+    
+    <li ><a href="#method-i-must_be_close_to">#must_be_close_to</a>
+    
+    <li ><a href="#method-i-must_be_empty">#must_be_empty</a>
+    
+    <li ><a href="#method-i-must_be_instance_of">#must_be_instance_of</a>
+    
+    <li ><a href="#method-i-must_be_kind_of">#must_be_kind_of</a>
+    
+    <li ><a href="#method-i-must_be_nil">#must_be_nil</a>
+    
+    <li ><a href="#method-i-must_be_same_as">#must_be_same_as</a>
+    
+    <li ><a href="#method-i-must_be_silent">#must_be_silent</a>
+    
+    <li ><a href="#method-i-must_be_within_delta">#must_be_within_delta</a>
+    
+    <li ><a href="#method-i-must_be_within_epsilon">#must_be_within_epsilon</a>
+    
+    <li ><a href="#method-i-must_equal">#must_equal</a>
+    
+    <li ><a href="#method-i-must_include">#must_include</a>
+    
+    <li ><a href="#method-i-must_match">#must_match</a>
+    
+    <li ><a href="#method-i-must_output">#must_output</a>
+    
+    <li ><a href="#method-i-must_raise">#must_raise</a>
+    
+    <li ><a href="#method-i-must_respond_to">#must_respond_to</a>
+    
+    <li ><a href="#method-i-must_throw">#must_throw</a>
+    
+    <li ><a href="#method-i-wont_be">#wont_be</a>
+    
+    <li ><a href="#method-i-wont_be_close_to">#wont_be_close_to</a>
+    
+    <li ><a href="#method-i-wont_be_empty">#wont_be_empty</a>
+    
+    <li ><a href="#method-i-wont_be_instance_of">#wont_be_instance_of</a>
+    
+    <li ><a href="#method-i-wont_be_kind_of">#wont_be_kind_of</a>
+    
+    <li ><a href="#method-i-wont_be_nil">#wont_be_nil</a>
+    
+    <li ><a href="#method-i-wont_be_same_as">#wont_be_same_as</a>
+    
+    <li ><a href="#method-i-wont_be_within_delta">#wont_be_within_delta</a>
+    
+    <li ><a href="#method-i-wont_be_within_epsilon">#wont_be_within_epsilon</a>
+    
+    <li ><a href="#method-i-wont_equal">#wont_equal</a>
+    
+    <li ><a href="#method-i-wont_include">#wont_include</a>
+    
+    <li ><a href="#method-i-wont_match">#wont_match</a>
+    
+    <li ><a href="#method-i-wont_respond_to">#wont_respond_to</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Minitest::Expectations">
+  <h1 id="module-Minitest::Expectations" class="module">
+    module Minitest::Expectations
+  </h1>
+
+  <section class="description">
+    
+<p>It&#39;s where you hide your “assertions”.</p>
+
+<p>Please note, because of the way that expectations are implemented, all
+expectations (eg <a
+href="Expectations.html#method-i-must_equal">#must_equal</a>) are dependent
+upon a thread local variable <code>:current_spec</code>. If your specs rely
+on mixing threads into the specs themselves, you&#39;re better off using
+assertions or the new _(value) wrapper. For example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">it</span> <span class="ruby-string">&quot;should still work in threads&quot;</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">my_threaded_thingy</span> <span class="ruby-keyword">do</span>
+    (<span class="ruby-value">1</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>).<span class="ruby-identifier">must_equal</span> <span class="ruby-value">2</span>         <span class="ruby-comment"># bad</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">2</span>, <span class="ruby-value">1</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>        <span class="ruby-comment"># good</span>
+    <span class="ruby-identifier">_</span>(<span class="ruby-value">1</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">must_equal</span> <span class="ruby-value">2</span>      <span class="ruby-comment"># good</span>
+    <span class="ruby-identifier">value</span>(<span class="ruby-value">1</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">must_equal</span> <span class="ruby-value">2</span>  <span class="ruby-comment"># good, also #expect</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-must_be" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">must_be</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-assert_operator">Minitest::Assertions#assert_operator</a></p>
+
+<pre class="ruby"><span class="ruby-identifier">n</span>.<span class="ruby-identifier">must_be</span> :<span class="ruby-operator">&lt;=</span>, <span class="ruby-value">42</span>
+</pre>
+
+<p>This can also do predicates:</p>
+
+<pre class="ruby"><span class="ruby-identifier">str</span>.<span class="ruby-identifier">must_be</span> :<span class="ruby-identifier">empty?</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="must_be-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 115</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:assert_operator</span>, <span class="ruby-value">:must_be</span>, <span class="ruby-value">:reverse</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-must_be_close_to" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">must_be_close_to</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-assert_in_delta">Minitest::Assertions#assert_in_delta</a></p>
+
+<pre>n.must_be_close_to m [, delta]</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="must_be_close_to-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 46</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:assert_in_delta</span>, <span class="ruby-value">:must_be_close_to</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="Expectations.html#method-i-must_be_within_delta">must_be_within_delta</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-must_be_empty" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">must_be_empty</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-assert_empty">Minitest::Assertions#assert_empty</a>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">collection</span>.<span class="ruby-identifier">must_be_empty</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="must_be_empty-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 28</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:assert_empty</span>, <span class="ruby-value">:must_be_empty</span>, <span class="ruby-value">:unary</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-must_be_instance_of" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">must_be_instance_of</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-assert_instance_of">Minitest::Assertions#assert_instance_of</a></p>
+
+<pre class="ruby"><span class="ruby-identifier">obj</span>.<span class="ruby-identifier">must_be_instance_of</span> <span class="ruby-identifier">klass</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="must_be_instance_of-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 75</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:assert_instance_of</span>, <span class="ruby-value">:must_be_instance_of</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-must_be_kind_of" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">must_be_kind_of</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-assert_kind_of">Minitest::Assertions#assert_kind_of</a></p>
+
+<pre class="ruby"><span class="ruby-identifier">obj</span>.<span class="ruby-identifier">must_be_kind_of</span> <span class="ruby-identifier">mod</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="must_be_kind_of-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 84</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:assert_kind_of</span>, <span class="ruby-value">:must_be_kind_of</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-must_be_nil" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">must_be_nil</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-assert_nil">Minitest::Assertions#assert_nil</a></p>
+
+<pre class="ruby"><span class="ruby-identifier">obj</span>.<span class="ruby-identifier">must_be_nil</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="must_be_nil-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 102</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:assert_nil</span>, <span class="ruby-value">:must_be_nil</span>, <span class="ruby-value">:unary</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-must_be_same_as" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">must_be_same_as</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-assert_same">Minitest::Assertions#assert_same</a></p>
+
+<pre class="ruby"><span class="ruby-identifier">a</span>.<span class="ruby-identifier">must_be_same_as</span> <span class="ruby-identifier">b</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="must_be_same_as-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 151</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:assert_same</span>, <span class="ruby-value">:must_be_same_as</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-must_be_silent" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">must_be_silent</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-assert_silent">Minitest::Assertions#assert_silent</a></p>
+
+<pre>proc { ... }.must_be_silent</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="must_be_silent-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 160</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:assert_silent</span>, <span class="ruby-value">:must_be_silent</span>, <span class="ruby-value">:block</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-must_be_within_delta" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">must_be_within_delta</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Expectations.html#method-i-must_be_close_to">must_be_close_to</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-must_be_within_epsilon" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">must_be_within_epsilon</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-assert_in_epsilon">Minitest::Assertions#assert_in_epsilon</a></p>
+
+<pre>n.must_be_within_epsilon m [, epsilon]</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="must_be_within_epsilon-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 57</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:assert_in_epsilon</span>, <span class="ruby-value">:must_be_within_epsilon</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-must_equal" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">must_equal</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-assert_equal">Minitest::Assertions#assert_equal</a></p>
+
+<pre class="ruby"><span class="ruby-identifier">a</span>.<span class="ruby-identifier">must_equal</span> <span class="ruby-identifier">b</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="must_equal-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 37</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:assert_equal</span>, <span class="ruby-value">:must_equal</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-must_include" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">must_include</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-assert_includes">Minitest::Assertions#assert_includes</a></p>
+
+<pre class="ruby"><span class="ruby-identifier">collection</span>.<span class="ruby-identifier">must_include</span> <span class="ruby-identifier">obj</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="must_include-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 66</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:assert_includes</span>, <span class="ruby-value">:must_include</span>, <span class="ruby-value">:reverse</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-must_match" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">must_match</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-assert_match">Minitest::Assertions#assert_match</a></p>
+
+<pre class="ruby"><span class="ruby-identifier">a</span>.<span class="ruby-identifier">must_match</span> <span class="ruby-identifier">b</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="must_match-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 93</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:assert_match</span>, <span class="ruby-value">:must_match</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-must_output" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">must_output</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-assert_output">Minitest::Assertions#assert_output</a></p>
+
+<pre>proc { ... }.must_output out_or_nil [, err]</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="must_output-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 124</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:assert_output</span>, <span class="ruby-value">:must_output</span>, <span class="ruby-value">:block</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-must_raise" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">must_raise</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-assert_raises">Minitest::Assertions#assert_raises</a></p>
+
+<pre>proc { ... }.must_raise exception</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="must_raise-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 133</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:assert_raises</span>, <span class="ruby-value">:must_raise</span>, <span class="ruby-value">:block</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-must_respond_to" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">must_respond_to</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-assert_respond_to">Minitest::Assertions#assert_respond_to</a></p>
+
+<pre class="ruby"><span class="ruby-identifier">obj</span>.<span class="ruby-identifier">must_respond_to</span> <span class="ruby-identifier">msg</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="must_respond_to-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 142</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:assert_respond_to</span>, <span class="ruby-value">:must_respond_to</span>, <span class="ruby-value">:reverse</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-must_throw" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">must_throw</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-assert_throws">Minitest::Assertions#assert_throws</a></p>
+
+<pre>proc { ... }.must_throw sym</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="must_throw-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 169</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:assert_throws</span>, <span class="ruby-value">:must_throw</span>, <span class="ruby-value">:block</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-wont_be" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">wont_be</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-refute_operator">Minitest::Assertions#refute_operator</a></p>
+
+<pre class="ruby"><span class="ruby-identifier">n</span>.<span class="ruby-identifier">wont_be</span> :<span class="ruby-operator">&lt;=</span>, <span class="ruby-value">42</span>
+</pre>
+
+<p>This can also do predicates:</p>
+
+<pre class="ruby"><span class="ruby-identifier">str</span>.<span class="ruby-identifier">wont_be</span> :<span class="ruby-identifier">empty?</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="wont_be-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 265</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:refute_operator</span>, <span class="ruby-value">:wont_be</span>, <span class="ruby-value">:reverse</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-wont_be_close_to" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">wont_be_close_to</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-refute_in_delta">Minitest::Assertions#refute_in_delta</a></p>
+
+<pre>n.wont_be_close_to m [, delta]</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="wont_be_close_to-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 196</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:refute_in_delta</span>, <span class="ruby-value">:wont_be_close_to</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="Expectations.html#method-i-wont_be_within_delta">wont_be_within_delta</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-wont_be_empty" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">wont_be_empty</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-refute_empty">Minitest::Assertions#refute_empty</a></p>
+
+<pre class="ruby"><span class="ruby-identifier">collection</span>.<span class="ruby-identifier">wont_be_empty</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="wont_be_empty-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 178</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:refute_empty</span>, <span class="ruby-value">:wont_be_empty</span>, <span class="ruby-value">:unary</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-wont_be_instance_of" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">wont_be_instance_of</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-refute_instance_of">Minitest::Assertions#refute_instance_of</a></p>
+
+<pre class="ruby"><span class="ruby-identifier">obj</span>.<span class="ruby-identifier">wont_be_instance_of</span> <span class="ruby-identifier">klass</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="wont_be_instance_of-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 225</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:refute_instance_of</span>, <span class="ruby-value">:wont_be_instance_of</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-wont_be_kind_of" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">wont_be_kind_of</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-refute_kind_of">Minitest::Assertions#refute_kind_of</a></p>
+
+<pre class="ruby"><span class="ruby-identifier">obj</span>.<span class="ruby-identifier">wont_be_kind_of</span> <span class="ruby-identifier">mod</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="wont_be_kind_of-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 234</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:refute_kind_of</span>, <span class="ruby-value">:wont_be_kind_of</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-wont_be_nil" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">wont_be_nil</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-refute_nil">Minitest::Assertions#refute_nil</a></p>
+
+<pre class="ruby"><span class="ruby-identifier">obj</span>.<span class="ruby-identifier">wont_be_nil</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="wont_be_nil-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 252</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:refute_nil</span>, <span class="ruby-value">:wont_be_nil</span>, <span class="ruby-value">:unary</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-wont_be_same_as" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">wont_be_same_as</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-refute_same">Minitest::Assertions#refute_same</a></p>
+
+<pre class="ruby"><span class="ruby-identifier">a</span>.<span class="ruby-identifier">wont_be_same_as</span> <span class="ruby-identifier">b</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="wont_be_same_as-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 283</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:refute_same</span>, <span class="ruby-value">:wont_be_same_as</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-wont_be_within_delta" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">wont_be_within_delta</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Expectations.html#method-i-wont_be_close_to">wont_be_close_to</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-wont_be_within_epsilon" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">wont_be_within_epsilon</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-refute_in_epsilon">Minitest::Assertions#refute_in_epsilon</a></p>
+
+<pre>n.wont_be_within_epsilon m [, epsilon]</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="wont_be_within_epsilon-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 207</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:refute_in_epsilon</span>, <span class="ruby-value">:wont_be_within_epsilon</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-wont_equal" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">wont_equal</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-refute_equal">Minitest::Assertions#refute_equal</a></p>
+
+<pre class="ruby"><span class="ruby-identifier">a</span>.<span class="ruby-identifier">wont_equal</span> <span class="ruby-identifier">b</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="wont_equal-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 187</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:refute_equal</span>, <span class="ruby-value">:wont_equal</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-wont_include" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">wont_include</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-refute_includes">Minitest::Assertions#refute_includes</a></p>
+
+<pre class="ruby"><span class="ruby-identifier">collection</span>.<span class="ruby-identifier">wont_include</span> <span class="ruby-identifier">obj</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="wont_include-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 216</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:refute_includes</span>, <span class="ruby-value">:wont_include</span>, <span class="ruby-value">:reverse</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-wont_match" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">wont_match</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-refute_match">Minitest::Assertions#refute_match</a></p>
+
+<pre class="ruby"><span class="ruby-identifier">a</span>.<span class="ruby-identifier">wont_match</span> <span class="ruby-identifier">b</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="wont_match-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 243</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:refute_match</span>, <span class="ruby-value">:wont_match</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-wont_respond_to" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">wont_respond_to</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>See <a
+href="Assertions.html#method-i-refute_respond_to">Minitest::Assertions#refute_respond_to</a></p>
+
+<pre class="ruby"><span class="ruby-identifier">obj</span>.<span class="ruby-identifier">wont_respond_to</span> <span class="ruby-identifier">msg</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="wont_respond_to-source">
+            <pre><span class="ruby-comment"># File lib/minitest/expectations.rb, line 274</span>
+<span class="ruby-identifier">infect_an_assertion</span> <span class="ruby-value">:refute_respond_to</span>, <span class="ruby-value">:wont_respond_to</span>, <span class="ruby-value">:reverse</span>
+</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

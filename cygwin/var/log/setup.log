@@ -1447,3 +1447,58 @@ You might want to upgrade to get the latest features and bug fixes.
 2016/02/06 15:10:40 net: Direct
 2016/02/06 15:10:42 site: http://cygwin.mirror.constant.com/
 2016/02/06 15:18:10 Ending cygwin install
+2016/02/07 22:53:07 Starting cygwin install, version 2.873
+2016/02/07 22:53:07 User has backup/restore rights
+2016/02/07 22:53:07 Current Directory: D:\atomicApe\dist
+2016/02/07 22:53:07 Could not open service McShield for query, start and stop. McAfee may not be installed, or we don't have access.
+2016/02/07 22:53:10 source: network install
+2016/02/07 22:53:12 root: D:\atomicApe\cygwin system
+2016/02/07 22:53:14 Selected local directory: D:\atomicApe\dist
+2016/02/07 22:53:15 net: Direct
+2016/02/07 22:53:17 site: http://cygwin.mirror.constant.com/
+2016/02/07 22:53:59 Adding required dependency perl-Unicode-Normalize: Selecting version 1.25-1 for installation.
+2016/02/07 22:54:01 Running preremove script for  _autorebase
+2016/02/07 22:54:01 running: D:\atomicApe\cygwin\bin\bash.exe --norc --noprofile "/etc/preremove/_autorebase.sh"
+2016/02/07 22:54:01 Running preremove script for  _update-info-dir
+2016/02/07 22:54:01 Running preremove script for  info
+2016/02/07 22:54:01 Running preremove script for  ruby
+2016/02/07 22:54:01 Running preremove script for  rubygems
+2016/02/07 22:54:01 Running preremove script for  texinfo
+2016/02/07 22:54:01 Uninstalling _autorebase
+2016/02/07 22:54:01 Uninstalling _update-info-dir
+2016/02/07 22:54:01 Uninstalling info
+2016/02/07 22:54:02 Uninstalling ruby
+2016/02/07 22:54:11 Uninstalling rubygems
+2016/02/07 22:54:15 Uninstalling texinfo
+2016/02/07 22:54:22 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/_autorebase/_autorebase-001003-1.tar.xz
+2016/02/07 22:54:22 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/texinfo/info/info-6.1-1.tar.xz
+2016/02/07 22:54:28 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/perl-Unicode-Normalize/perl-Unicode-Normalize-1.25-1.tar.xz
+2016/02/07 22:54:30 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/ruby/ruby-2.2.4-1.tar.xz
+2016/02/07 22:54:59 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/rubygems/rubygems-2.4.8-1.tar.xz
+2016/02/07 22:55:08 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/texinfo/texinfo-6.1-1.tar.xz
+2016/02/07 22:55:24 Changing gid back to original
+2016/02/07 22:55:24 running: D:\atomicApe\cygwin\bin\dash.exe "/etc/postinstall/0p_000_autorebase.dash"
+2016/02/07 22:56:07 running: D:\atomicApe\cygwin\bin\dash.exe "/etc/postinstall/0p_update-info-dir.dash"
+2016/02/07 22:56:14 Changing gid to Administrators
+2016/02/07 22:56:19 note: Installation Complete
+2016/02/07 22:56:19 Ending cygwin install
+2016/02/07 23:06:36 Starting cygwin install, version 2.873
+2016/02/07 23:06:36 User has backup/restore rights
+2016/02/07 23:06:36 Current Directory: D:\atomicApe\dist
+2016/02/07 23:06:36 Could not open service McShield for query, start and stop. McAfee may not be installed, or we don't have access.
+2016/02/07 23:06:38 source: network install
+2016/02/07 23:06:39 root: D:\atomicApe\cygwin system
+2016/02/07 23:06:39 Selected local directory: D:\atomicApe\dist
+2016/02/07 23:06:40 net: Direct
+2016/02/07 23:06:41 site: http://cygwin.mirror.constant.com/
+2016/02/07 23:08:00 Adding required dependency ruby: Selecting already-installed version 2.2.4-1.
+2016/02/07 23:08:00 Adding required dependency ruby-minitest4: Selecting already-installed version 4.7.5-1.
+2016/02/07 23:08:00 Adding required dependency ruby-rake: Selecting already-installed version 10.4.2-1.
+2016/02/07 23:08:00 Adding required dependency ruby-rdoc: Selecting already-installed version 4.2.0-1.
+2016/02/07 23:08:00 Adding required dependency rubygems: Selecting already-installed version 2.4.8-1.
+2016/02/07 23:08:00 Changing gid back to original
+2016/02/07 23:08:00 running: D:\atomicApe\cygwin\bin\dash.exe "/etc/postinstall/0p_000_autorebase.dash"
+2016/02/07 23:08:46 running: D:\atomicApe\cygwin\bin\dash.exe "/etc/postinstall/0p_update-info-dir.dash"
+2016/02/07 23:08:47 Changing gid to Administrators
+2016/02/07 23:08:52 note: Nothing needed to be installed
+2016/02/07 23:08:52 Ending cygwin install

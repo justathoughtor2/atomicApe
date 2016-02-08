@@ -1,45 +1,33 @@
 require "rubygems/version"
-require "rubygems/deprecate"
-
-# If we're being loaded after yaml was already required, then
-# load our yaml + workarounds now.
-Gem.load_yaml if defined? ::YAML
 
 ##
 # A Requirement is a set of one or more version restrictions. It supports a
 # few (<tt>=, !=, >, <, >=, <=, ~></tt>) different restriction operators.
-#
-# See Gem::Version for a description on how versions and requirements work
-# together in RubyGems.
+
+# REFACTOR: The fact that a requirement is singular or plural is kind of
+# awkward. Is Requirement the right name for this? Or should it be one
+# [op, number] pair, and we call the list of requirements something else?
+# Since a Requirement is held by a Dependency, maybe this should be made
+# singular and the list aspect should be pulled up into Dependency?
+
+require "rubygems/version"
+require "rubygems/deprecate"
 
 class Gem::Requirement
+  include Comparable
+
   OPS = { #:nodoc:
     "="  =>  lambda { |v, r| v == r },
     "!=" =>  lambda { |v, r| v != r },
-    ">"  =>  lambda { |v, r| v >  r },
-    "<"  =>  lambda { |v, r| v <  r },
+    ">"  =>  lambda { |v, r| v > r  },
+    "<"  =>  lambda { |v, r| v < r  },
     ">=" =>  lambda { |v, r| v >= r },
     "<=" =>  lambda { |v, r| v <= r },
     "~>" =>  lambda { |v, r| v >= r && v.release < r.bump }
   }
 
   quoted  = OPS.keys.map { |k| Regexp.quote k }.join "|"
-  PATTERN_RAW = "\\s*(#{quoted})?\\s*(#{Gem::Version::VERSION_PATTERN})\\s*" # :nodoc:
-
-  ##
-  # A regular expression that matches a requirement
-
-  PATTERN = /\A#{PATTERN_RAW}\z/
-
-  ##
-  # The default requirement matches any version
-
-  DefaultRequirement = [">=", Gem::Version.new(0)]
-
-  ##
-  # Raised when a bad requirement is encountered
-
-  class BadRequirementError < ArgumentError; end
+  PATTERN = /\A\s*(#{quoted})?\s*(#{Gem::Version::VERSION_PATTERN})\s*\z/
 
   ##
   # Factory method to create a Gem::Requirement object.  Input may be
@@ -65,6 +53,10 @@ class Gem::Requirement
 
   ##
   # A default "version requirement" can surely _only_ be '>= 0'.
+  #--
+  # This comment once said:
+  #
+  # "A default "version requirement" can surely _only_ be '> 0'."
 
   def self.default
     new '>= 0'
@@ -86,14 +78,10 @@ class Gem::Requirement
     return ["=", obj] if Gem::Version === obj
 
     unless PATTERN =~ obj.to_s
-      raise BadRequirementError, "Illformed requirement [#{obj.inspect}]"
+      raise ArgumentError, "Illformed requirement [#{obj.inspect}]"
     end
 
-    if $1 == ">=" && $2 == "0"
-      DefaultRequirement
-    else
-      [$1 || "=", Gem::Version.new($2)]
-    end
+    [$1 || "=", Gem::Version.new($2)]
   end
 
   ##
@@ -113,57 +101,13 @@ class Gem::Requirement
     requirements.compact!
     requirements.uniq!
 
-    if requirements.empty?
-      @requirements = [DefaultRequirement]
-    else
-      @requirements = requirements.map! { |r| self.class.parse r }
-    end
+    requirements << ">= 0" if requirements.empty?
+    @none = (requirements == ">= 0")
+    @requirements = requirements.map! { |r| self.class.parse r }
   end
-
-  ##
-  # Concatenates the +new+ requirements onto this requirement.
-
-  def concat new
-    new = new.flatten
-    new.compact!
-    new.uniq!
-    new = new.map { |r| self.class.parse r }
-
-    @requirements.concat new
-  end
-
-  ##
-  # Formats this requirement for use in a Gem::RequestSet::Lockfile.
-
-  def for_lockfile # :nodoc:
-    return if [DefaultRequirement] == @requirements
-
-    list = requirements.sort_by { |_, version|
-      version
-    }.map { |op, version|
-      "#{op} #{version}"
-    }.uniq
-
-    " (#{list.join ', '})"
-  end
-
-  ##
-  # true if this gem has no requirements.
 
   def none?
-    if @requirements.size == 1
-      @requirements[0] == DefaultRequirement
-    else
-      false
-    end
-  end
-
-  ##
-  # true if the requirement is for only an exact version
-
-  def exact?
-    return false unless @requirements.size == 1
-    @requirements[0][0] == "="
+    @none ||= (to_s == ">= 0")
   end
 
   def as_list # :nodoc:
@@ -199,18 +143,6 @@ class Gem::Requirement
     yaml_initialize coder.tag, coder.map
   end
 
-  def to_yaml_properties # :nodoc:
-    ["@requirements"]
-  end
-
-  def encode_with coder # :nodoc:
-    coder.add 'requirements', @requirements
-  end
-
-  ##
-  # A requirement is a prerelease if any of the versions inside of it
-  # are prereleases
-
   def prerelease?
     requirements.any? { |r| r.last.prerelease? }
   end
@@ -225,8 +157,6 @@ class Gem::Requirement
   # True if +version+ satisfies this Requirement.
 
   def satisfied_by? version
-    raise ArgumentError, "Need a Gem::Version: #{version.inspect}" unless
-      Gem::Version === version
     # #28965: syck has a bug with unquoted '=' YAML.loading as YAML::DefaultKey
     requirements.all? { |op, rv| (OPS[op] || OPS["="]).call version, rv }
   end
@@ -247,13 +177,13 @@ class Gem::Requirement
     as_list.join ", "
   end
 
-  def == other # :nodoc:
-    Gem::Requirement === other and to_s == other.to_s
+  def <=> other # :nodoc:
+    to_s <=> other.to_s
   end
 
   private
 
-  def fix_syck_default_key_in_requirements # :nodoc:
+  def fix_syck_default_key_in_requirements
     Gem.load_yaml
 
     # Fixup the Syck DefaultKey bug
@@ -265,9 +195,11 @@ class Gem::Requirement
   end
 end
 
-class Gem::Version
-  # This is needed for compatibility with older yaml
-  # gemspecs.
+# :stopdoc:
+# Gem::Version::Requirement is used in a lot of old YAML specs. It's aliased
+# here for backwards compatibility. I'd like to remove this, maybe in RubyGems
+# 2.0.
 
-  Requirement = Gem::Requirement # :nodoc:
-end
+::Gem::Version::Requirement = ::Gem::Requirement
+# :startdoc:
+

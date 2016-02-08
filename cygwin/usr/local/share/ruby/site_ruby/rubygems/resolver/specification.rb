@@ -31,14 +31,6 @@ class Gem::Resolver::Specification
   attr_reader :source
 
   ##
-  # The Gem::Specification for this Resolver::Specification.
-  #
-  # Implementers, note that #install updates @spec, so be sure to cache the
-  # Gem::Specification in @spec when overriding.
-
-  attr_reader :spec
-
-  ##
   # The version of the gem for this specification.
 
   attr_reader :version
@@ -56,13 +48,6 @@ class Gem::Resolver::Specification
   end
 
   ##
-  # Fetches development dependencies if the source does not provide them by
-  # default (see APISpecification).
-
-  def fetch_development_dependencies # :nodoc:
-  end
-
-  ##
   # The name and version of the specification.
   #
   # Unlike Gem::Specification#full_name, the platform is not included.
@@ -76,11 +61,8 @@ class Gem::Resolver::Specification
   # install method yields a Gem::Installer instance, which indicates the
   # gem will be installed, or +nil+, which indicates the gem is already
   # installed.
-  #
-  # After installation #spec is updated to point to the just-installed
-  # specification.
 
-  def install options = {}
+  def install options
     require 'rubygems/installer'
 
     destination = options[:install_dir] || Gem.dir
@@ -93,7 +75,7 @@ class Gem::Resolver::Specification
 
     yield installer if block_given?
 
-    @spec = installer.install
+    installer.install
   end
 
   ##
@@ -103,8 +85,5 @@ class Gem::Resolver::Specification
     Gem::Platform.match spec.platform
   end
 
-  def local? # :nodoc:
-    false
-  end
 end
 

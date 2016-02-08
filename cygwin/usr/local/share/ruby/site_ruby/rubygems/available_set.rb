@@ -126,7 +126,7 @@ class Gem::AvailableSet
     dep = req.dependency
 
     match = @set.find_all do |t|
-      dep.match? t.spec
+      dep.matches_spec? t.spec
     end
 
     match.map do |t|

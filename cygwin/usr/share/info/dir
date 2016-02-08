@@ -32,6 +32,7 @@ Compression
 Development
 * Git: (git).                   A fast distributed revision control system
 * Git Man Pages: (gitman).      Manual pages for Git revision control system
+* libffi: (libffi).             Portable foreign-function interface library.
 
 Editors
 * nano: (nano).                 Small and friendly text editor.
@@ -294,7 +295,6 @@ System administration
 * Which: (which).               Show full path of commands.
 
 Texinfo documentation system
-* Info: (info).                 How to use the documentation browsing system.
 * Texinfo: (texinfo).           The GNU documentation format.
 * info stand-alone: (info-stnd).
                                 Read Info documents without Emacs.

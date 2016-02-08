@@ -1,55 +1,55 @@
-arch=i386-cygwin
-sitearch=${arch}
-prefix=/usr
-exec_prefix=/usr
+arch=i386-mingw32
+sitearch=i386-msvcrt
+prefix=C:/Users/Justin/Projects/rubyinstaller/sandbox/ruby22_mingw
+exec_prefix=${prefix}
 bindir=${exec_prefix}/bin
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include
 MAJOR=2
 MINOR=2
 TEENY=0
-ruby_version=
+ruby_version=2.2.0
 RUBY_PROGRAM_VERSION=2.2.4
 RUBY_BASE_NAME=ruby
 RUBY_VERSION_NAME=${RUBY_BASE_NAME}-${ruby_version}
-RUBY_SO_NAME=${RUBY_BASE_NAME}${MAJOR}${MINOR}${TEENY}
+RUBY_SO_NAME=msvcrt-${RUBY_BASE_NAME}${MAJOR}${MINOR}${TEENY}
 RUBY_INSTALL_NAME=${RUBY_BASE_NAME}
 DEFFILE=
-archlibdir=/usr/lib
+archlibdir=${libdir}/${arch}
 sitearchlibdir=${libdir}/${sitearch}
 archincludedir=${includedir}/${arch}
 sitearchincludedir=${includedir}/${sitearch}
 ruby=${bindir}/${RUBY_INSTALL_NAME}.exe
-rubylibprefix=${exec_prefix}/share/ruby/2.2.0
-rubyarchprefix=/usr/lib/ruby/2.2.0
-rubysitearchprefix=${sitearchlibdir}/${RUBY_BASE_NAME}
-rubylibdir=${rubylibprefix}
-vendordir=/usr/share/ruby/vendor_ruby
-sitedir=/usr/local/share/ruby/site_ruby
-vendorlibdir=${vendordir}
-sitelibdir=${sitedir}
-rubyarchdir=${rubyarchprefix}
-vendorarchdir=/usr/lib/ruby/vendor_ruby/2.2.0
-sitearchdir=/usr/local/lib/ruby/site_ruby/2.2.0
-rubyhdrdir=/usr/include/ruby-2.2.0
-vendorhdrdir=/usr/include/ruby-2.2.0/vendor_ruby
-sitehdrdir=/usr/local/include/ruby-2.2.0
-rubyarchhdrdir=/usr/include/ruby-2.2.0
-vendorarchhdrdir=${sitearchincludedir}/${RUBY_VERSION_NAME}/vendor_ruby
-sitearchhdrdir=${sitearchincludedir}/${RUBY_VERSION_NAME}/site_ruby
+rubylibprefix=${libdir}/${RUBY_BASE_NAME}
+rubyarchprefix=${rubylibprefix}/${arch}
+rubysitearchprefix=${rubylibprefix}/${sitearch}
+rubylibdir=${rubylibprefix}/${ruby_version}
+vendordir=${rubylibprefix}/vendor_ruby
+sitedir=${rubylibprefix}/site_ruby
+vendorlibdir=${vendordir}/${ruby_version}
+sitelibdir=${sitedir}/${ruby_version}
+rubyarchdir=${rubylibdir}/${arch}
+vendorarchdir=${vendorlibdir}/${sitearch}
+sitearchdir=${sitelibdir}/${sitearch}
+rubyhdrdir=${includedir}/${RUBY_VERSION_NAME}
+vendorhdrdir=${rubyhdrdir}/vendor_ruby
+sitehdrdir=${rubyhdrdir}/site_ruby
+rubyarchhdrdir=${rubyhdrdir}/${arch}
+vendorarchhdrdir=${vendorhdrdir}/${sitearch}
+sitearchhdrdir=${sitehdrdir}/${sitearch}
 LIBPATH=
 LIBRUBY_A=lib${RUBY_SO_NAME}-static.a
-LIBRUBY_SO=cyg${RUBY_SO_NAME}.dll
+LIBRUBY_SO=${RUBY_SO_NAME}.dll
 LIBRUBY=lib${RUBY_SO_NAME}.dll.a
 LIBRUBYARG_SHARED=-l${RUBY_SO_NAME}
 LIBRUBYARG_STATIC=-l${RUBY_SO_NAME}-static
 LIBRUBYARG=${LIBRUBYARG_SHARED}
-LIBS=-lpthread -lgmp -ldl -lcrypt 
-DLDFLAGS=-Wl,--export-all-symbols -Wl,--enable-auto-image-base,--enable-auto-import
+LIBS=-lshell32 -lws2_32 -liphlpapi -limagehlp -lshlwapi 
+DLDFLAGS= -Wl,--enable-auto-image-base,--enable-auto-import ${DEFFILE}
 
 Name: Ruby
 Description: Object Oriented Script Language
-Version: 2.2.4
+Version: ${ruby_version}
 URL: http://www.ruby-lang.org
 Cflags: -I${rubyarchhdrdir} -I${rubyhdrdir}
 Libs: ${DLDFLAGS} ${LIBRUBYARG_SHARED} ${LIBS}

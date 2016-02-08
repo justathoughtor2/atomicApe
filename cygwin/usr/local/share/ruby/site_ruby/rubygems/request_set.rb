@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'tsort'
 
 ##
@@ -20,21 +21,11 @@ class Gem::RequestSet
   ##
   # Array of gems to install even if already installed
 
-  attr_accessor :always_install
+  attr_reader :always_install
 
   attr_reader :dependencies
 
   attr_accessor :development
-
-  ##
-  # Errors fetching gems during resolution.
-
-  attr_reader :errors
-
-  ##
-  # Set to true if you want to install only direct development dependencies.
-
-  attr_accessor :development_shallow
 
   ##
   # The set of git gems imported via load_gemdeps.
@@ -51,8 +42,6 @@ class Gem::RequestSet
   # When false no remote sets are used for resolving gems.
 
   attr_accessor :remote
-
-  attr_reader :resolver # :nodoc:
 
   ##
   # Sets used for resolution
@@ -84,8 +73,6 @@ class Gem::RequestSet
     @always_install      = []
     @dependency_names    = {}
     @development         = false
-    @development_shallow = false
-    @errors              = []
     @git_set             = nil
     @ignore_dependencies = false
     @install_dir         = Gem.dir
@@ -129,13 +116,12 @@ class Gem::RequestSet
 
   def install options, &block # :yields: request, installer
     if dir = options[:install_dir]
-      requests = install_into dir, false, options, &block
-      return requests
+      return install_into dir, false, options, &block
     end
 
     cache_dir = options[:cache_dir] || Gem.dir
 
-    requests = []
+    specs = []
 
     sorted_requests.each do |req|
       if req.installed? then
@@ -153,30 +139,10 @@ class Gem::RequestSet
 
       yield req, inst if block_given?
 
-      requests << inst.install
+      specs << inst.install
     end
 
-    requests
-  ensure
-    raise if $!
-    return requests if options[:gemdeps]
-
-    specs = requests.map do |request|
-      case request
-      when Gem::Resolver::ActivationRequest then
-        request.spec.spec
-      else
-        request
-      end
-    end
-
-    require 'rubygems/dependency_installer'
-    inst = Gem::DependencyInstaller.new options
-    inst.installed_gems.replace specs
-
-    Gem.done_installing_hooks.each do |hook|
-      hook.call inst, specs
-    end unless Gem.done_installing_hooks.empty?
+    specs
   end
 
   ##
@@ -192,15 +158,15 @@ class Gem::RequestSet
     @install_dir = options[:install_dir] || Gem.dir
     @remote      = options[:domain] != :local
 
-    gem_deps_api = load_gemdeps gemdeps, options[:without_groups]
+    load_gemdeps gemdeps, options[:without_groups]
 
     resolve
 
     if options[:explain]
       puts "Gems to install:"
 
-      specs.sorted_requests.each do |spec|
-        puts "  #{spec.full_name}"
+      specs.map { |s| s.full_name }.sort.each do |s|
+        puts "  #{s}"
       end
 
       if Gem.configuration.really_verbose
@@ -209,11 +175,8 @@ class Gem::RequestSet
     else
       installed = install options, &block
 
-      if options.fetch :lock, true then
-        lockfile =
-          Gem::RequestSet::Lockfile.new self, gemdeps, gem_deps_api.dependencies
-        lockfile.write
-      end
+      lockfile = Gem::RequestSet::Lockfile.new self, gemdeps
+      lockfile.write
 
       installed
     end
@@ -229,7 +192,6 @@ class Gem::RequestSet
 
     installed = []
 
-    options[:development] = false
     options[:install_dir] = dir
     options[:only_install_dir] = true
 
@@ -284,17 +246,12 @@ class Gem::RequestSet
 
     resolver = Gem::Resolver.new @dependencies, set
     resolver.development         = @development
-    resolver.development_shallow = @development_shallow
     resolver.ignore_dependencies = @ignore_dependencies
     resolver.soft_missing        = @soft_missing
 
     @resolver = resolver
 
     @requests = resolver.resolve
-
-    @errors = set.errors
-
-    @requests
   end
 
   ##
@@ -328,17 +285,15 @@ class Gem::RequestSet
       next if dep.type == :development and not @development
 
       match = @requests.find { |r| dep.match? r.spec.name, r.spec.version }
-
-      unless match then
-        next if dep.type == :development and @development_shallow
-        next if @soft_missing
-        raise Gem::DependencyError,
-              "Unresolved dependency found during sorting - #{dep} (requested by #{node.spec.full_name})"
-      end
-
-      begin
-        yield match
-      rescue TSort::Cyclic
+      if match
+        begin
+          yield match
+        rescue TSort::Cyclic
+        end
+      else
+        unless @soft_missing
+          raise Gem::DependencyError, "Unresolved dependency found during sorting - #{dep} (requested by #{node.spec.full_name})"
+        end
       end
     end
   end

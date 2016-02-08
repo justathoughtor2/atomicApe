@@ -1,48 +1,13 @@
-# TODO: the documentation in here is terrible.
-#
-# Each exception needs a brief description and the scenarios where it is
-# likely to be raised
-
 ##
 # Base exception class for RubyGems.  All exception raised by RubyGems are a
 # subclass of this one.
-class Gem::Exception < RuntimeError
-
-  ##
-  #--
-  # TODO: remove in RubyGems 3, nobody sets this
-
-  attr_accessor :source_exception # :nodoc:
-
-end
+class Gem::Exception < RuntimeError; end
 
 class Gem::CommandLineError < Gem::Exception; end
 
 class Gem::DependencyError < Gem::Exception; end
 
 class Gem::DependencyRemovalException < Gem::Exception; end
-
-##
-# Raised by Gem::Resolver when a Gem::Dependency::Conflict reaches the
-# toplevel.  Indicates which dependencies were incompatible through #conflict
-# and #conflicting_dependencies
-
-class Gem::DependencyResolutionError < Gem::Exception
-
-  attr_reader :conflict
-
-  def initialize conflict
-    @conflict = conflict
-    a, b = conflicting_dependencies
-
-    super "conflicting dependencies #{a} and #{b}\n#{@conflict.explanation}"
-  end
-
-  def conflicting_dependencies
-    @conflict.conflicting_dependencies
-  end
-
-end
 
 ##
 # Raised when attempting to uninstall a gem that isn't in GEM_HOME.
@@ -59,18 +24,11 @@ class Gem::EndOfYAMLException < Gem::Exception; end
 
 ##
 # Signals that a file permission error is preventing the user from
-# operating on the given directory.
-
+# installing in the requested directories.
 class Gem::FilePermissionError < Gem::Exception
-
-  attr_reader :directory
-
-  def initialize directory
-    @directory = directory
-
-    super "You don't have write permissions for the #{directory} directory."
+  def initialize(path)
+    super("You don't have write permissions into the #{path} directory.")
   end
-
 end
 
 ##
@@ -79,77 +37,15 @@ class Gem::FormatException < Gem::Exception
   attr_accessor :file_path
 end
 
-class Gem::GemNotFoundException < Gem::Exception; end
-
-##
-# Raised by the DependencyInstaller when a specific gem cannot be found
-
-class Gem::SpecificGemNotFoundException < Gem::GemNotFoundException
-
-  ##
-  # Creates a new SpecificGemNotFoundException for a gem with the given +name+
-  # and +version+.  Any +errors+ encountered when attempting to find the gem
-  # are also stored.
-
-  def initialize(name, version, errors=nil)
-    super "Could not find a valid gem '#{name}' (#{version}) locally or in a repository"
-
+class Gem::GemNotFoundException < Gem::Exception
+  def initialize(msg, name=nil, version=nil, errors=nil)
+    super msg
     @name = name
     @version = version
     @errors = errors
   end
 
-  ##
-  # The name of the gem that could not be found.
-
-  attr_reader :name
-
-  ##
-  # The version of the gem that could not be found.
-
-  attr_reader :version
-
-  ##
-  # Errors encountered attempting to find the gem.
-
-  attr_reader :errors
-
-end
-
-##
-# Raised by Gem::Resolver when dependencies conflict and create the
-# inability to find a valid possible spec for a request.
-
-class Gem::ImpossibleDependenciesError < Gem::Exception
-
-  attr_reader :conflicts
-  attr_reader :request
-
-  def initialize request, conflicts
-    @request   = request
-    @conflicts = conflicts
-
-    super build_message
-  end
-
-  def build_message # :nodoc:
-    requester  = @request.requester
-    requester  = requester ? requester.spec.full_name : 'The user'
-    dependency = @request.dependency
-
-    message = "#{requester} requires #{dependency} but it conflicted:\n"
-
-    @conflicts.each do |_, conflict|
-      message << conflict.explanation
-    end
-
-    message
-  end
-
-  def dependency
-    @request.dependency
-  end
-
+  attr_reader :name, :version, :errors
 end
 
 class Gem::InstallError < Gem::Exception; end
@@ -177,15 +73,6 @@ class Gem::RemoteInstallationSkipped < Gem::Exception; end
 # Represents an error communicating via HTTP.
 class Gem::RemoteSourceException < Gem::Exception; end
 
-##
-# Raised when a gem dependencies file specifies a ruby version that does not
-# match the current version.
-
-class Gem::RubyVersionMismatch < Gem::Exception; end
-
-##
-# Raised by Gem::Validator when something is not right in a gem.
-
 class Gem::VerificationError < Gem::Exception; end
 
 ##
@@ -193,14 +80,7 @@ class Gem::VerificationError < Gem::Exception; end
 # exit_code
 
 class Gem::SystemExitException < SystemExit
-
-  ##
-  # The exit code for the process
-
   attr_accessor :exit_code
-
-  ##
-  # Creates a new SystemExitException with the given +exit_code+
 
   def initialize(exit_code)
     @exit_code = exit_code
@@ -209,62 +89,3 @@ class Gem::SystemExitException < SystemExit
   end
 
 end
-
-##
-# Raised by Resolver when a dependency requests a gem for which
-# there is no spec.
-
-class Gem::UnsatisfiableDependencyError < Gem::Exception
-
-  ##
-  # The unsatisfiable dependency.  This is a
-  # Gem::Resolver::DependencyRequest, not a Gem::Dependency
-
-  attr_reader :dependency
-
-  ##
-  # Errors encountered which may have contributed to this exception
-
-  attr_accessor :errors
-
-  ##
-  # Creates a new UnsatisfiableDependencyError for the unsatisfiable
-  # Gem::Resolver::DependencyRequest +dep+
-
-  def initialize dep, platform_mismatch=nil
-    if platform_mismatch and !platform_mismatch.empty?
-      plats = platform_mismatch.map { |x| x.platform.to_s }.sort.uniq
-      super "Unable to resolve dependency: No match for '#{dep}' on this platform. Found: #{plats.join(', ')}"
-    else
-      if dep.explicit?
-        super "Unable to resolve dependency: user requested '#{dep}'"
-      else
-        super "Unable to resolve dependency: '#{dep.request_context}' requires '#{dep}'"
-      end
-    end
-
-    @dependency = dep
-    @errors     = []
-  end
-
-  ##
-  # The name of the unresolved dependency
-
-  def name
-    @dependency.name
-  end
-
-  ##
-  # The Requirement of the unresolved dependency (not Version).
-
-  def version
-    @dependency.requirement
-  end
-
-end
-
-##
-# Backwards compatible typo'd exception class for early RubyGems 2.0.x
-
-Gem::UnsatisfiableDepedencyError = Gem::UnsatisfiableDependencyError # :nodoc:
-

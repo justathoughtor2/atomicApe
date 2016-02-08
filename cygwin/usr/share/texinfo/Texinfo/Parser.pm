@@ -1,4 +1,4 @@
-# $Id: Parser.pm 6363 2015-06-26 12:36:32Z gavin $
+# $Id: Parser.pm 6991 2016-02-06 12:16:13Z gavin $
 # Parser.pm: parse texinfo code into a tree.
 #
 # Copyright 2010, 2011, 2012, 2013, 2014, 2015 Free Software Foundation, Inc.
@@ -92,7 +92,7 @@ use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
 @EXPORT = qw(
 );
 
-$VERSION = '6.0';
+$VERSION = '6.1';
 
 sub N__($)
 {
@@ -679,8 +679,8 @@ sub parser(;$$)
   $parser->{'close_paragraph_commands'} = {%close_paragraph_commands};
   $parser->{'close_preformatted_commands'} = {%close_preformatted_commands};
   if ($parser->{'INLINE_INSERTCOPYING'}) {
-    delete $parser->{'close_paragraph_commands'}->{'insercopying'};
-    delete $parser->{'close_preformatted_commands'}->{'insercopying'};
+    delete $parser->{'close_paragraph_commands'}->{'insertcopying'};
+    delete $parser->{'close_preformatted_commands'}->{'insertcopying'};
   }
   # a hash is simply concatenated.  It should be like %index_names.
   if (ref($parser->{'indices'}) eq 'HASH') {
@@ -1896,6 +1896,7 @@ sub _merge_text($$$)
     if ($current->{'contents'} and @{$current->{'contents'}}
       and $current->{'contents'}->[-1]->{'type'}
       and ($current->{'contents'}->[-1]->{'type'} eq 'empty_line_after_command'
+         or $current->{'contents'}->[-1]->{'type'} eq 'empty_spaces_after_command'
          or $current->{'contents'}->[-1]->{'type'} eq 'empty_spaces_before_argument'
          or $current->{'contents'}->[-1]->{'type'} eq 'empty_spaces_after_close_brace')) {
       $no_merge_with_following_text = 1;
@@ -2721,7 +2722,7 @@ sub _enter_index_entry($$$$$$$)
     $self->line_warn(sprintf($self->__("entry for index `%s' outside of any node"), 
                              $index_name), $line_nr);
   }
-  #print STDERR "INDEX ENTRY \@$command->{'cmdname'} $index_name($number)\n";
+  #print STDERR "INDEX ENTRY \@$command $index_name($number)\n";
   unless (_ignore_global_commands($self)) {
     push @{$index->{'index_entries'}}, $index_entry;
   }
@@ -3270,6 +3271,16 @@ sub _end_line($$$)
     if ($self->{'misc_commands'}->{$command} =~ /^\d$/) {
       my $args = _parse_line_command_args($self, $current, $line_nr);
       $current->{'extra'}->{'misc_args'} = $args if (defined($args));
+      if ($command eq 'validatemenus') {
+        if ($args and $args->[0]) {
+          my $arg = $args->[0];
+          if ($arg eq 'on') {
+            $self->{'validatemenus'} = 1;
+          } elsif ($arg eq 'off') {
+            $self->{'validatemenus'} = 0;
+          }
+        }
+      }
     } elsif ($self->{'misc_commands'}->{$command} eq 'text') {
       my $text = Texinfo::Convert::Text::convert($current->{'args'}->[0],
                                                  {'code' => 1, 
@@ -3432,9 +3443,6 @@ sub _end_line($$$)
                              undef, $line_nr);
           $current->{'type'} = 'index_entry_command';
         }
-      }
-      if (defined($command_structuring_level{$command})) {
-        $current->{'level'} = $command_structuring_level{$command};
       }
     }
     $current = $current->{'parent'};
@@ -4118,15 +4126,15 @@ sub _parse_texi($;$)
           next if ($found);
         }
 
-        unshift @{$self->{'macro_stack'}}, $expanded_macro;
-        print STDERR "UNSHIFT MACRO_STACK: $expanded_macro->{'args'}->[0]->{'text'}\n"
-          if ($self->{'DEBUG'});
         my $expanded_lines = _text_to_lines($expanded);
         chomp ($expanded_lines->[-1]);
         pop @$expanded_lines if ($expanded_lines->[-1] eq '');
         print STDERR "MACRO EXPANSION LINES: ".join('|', @$expanded_lines)
                                      ."|\nEND LINES MACRO EXPANSION\n" if ($self->{'DEBUG'});
         next if (!@$expanded_lines);
+        unshift @{$self->{'macro_stack'}}, $expanded_macro;
+        print STDERR "UNSHIFT MACRO_STACK: $expanded_macro->{'args'}->[0]->{'text'}\n"
+          if ($self->{'DEBUG'});
         my $new_lines = _complete_line_nr($expanded_lines, 
                             $line_nr->{'line_nr'}, $line_nr->{'file_name'},
                             $expanded_macro->{'args'}->[0]->{'text'}, 1);
@@ -4705,10 +4713,12 @@ sub _parse_texi($;$)
               $misc = { 'cmdname' => $command, 'parent' => $current,
                   'line_nr' => $line_nr };
               push @{$current->{'contents'}}, $misc;
-              if ($self->{'sections_level'} and $root_commands{$command}
-                   and $command ne 'node' and $command ne 'part') {
-                $current->{'contents'}->[-1]->{'extra'}->{'sections_level'}
-                  = $self->{'sections_level'};
+              if ($sectioning_commands{$command}) {
+                if ($self->{'sections_level'}) {
+                  $current->{'contents'}->[-1]->{'extra'}->{'sections_level'}
+                    = $self->{'sections_level'};
+                }
+                $misc->{'level'} = _section_level($misc);
               }
               # def*x
               if ($def_commands{$command}) {
@@ -4787,6 +4797,29 @@ sub _parse_texi($;$)
                 unless ($def_commands{$command});
             }
             $line = _start_empty_line_after_command($line, $current, $misc);
+            if ($command eq 'indent'
+                or $command eq 'noindent') {
+              if ($line !~ /\n/) {
+                my ($new_line, $new_line_nr) =
+                  _new_line($self, $line_nr, undef);
+                $line .= $new_line if (defined($new_line));
+              }
+              $line =~ s/^(\s*)//;
+              if ($1) {
+                $current = _merge_text($self, $current, $1);
+              }
+              if ($line ne ''
+                  and $current->{'contents'}->[-1]->{'type'} eq
+                                                'empty_line_after_command') {
+                $current->{'contents'}->[-1]->{'type'}
+                                              = 'empty_spaces_after_command';
+              }
+              my $paragraph = _begin_paragraph($self, $current, $line_nr);
+              $current = $paragraph if $paragraph;
+              if ($line eq '') {
+                last;
+              }
+            }
           }
           _mark_and_warn_invalid($self, $command, $invalid_parent,
                                  $line_nr, $misc);
@@ -5583,6 +5616,29 @@ sprintf($self->__("fewer than four hex digits in argument for \@U: %s"), $arg),
   return $root;
 }
 
+my $min_level = $command_structuring_level{'chapter'};
+my $max_level = $command_structuring_level{'subsubsection'};
+
+# Return numbered level of an element
+sub _section_level($)
+{
+  my $section = shift;
+  my $level = $command_structuring_level{$section->{'cmdname'}};
+  # correct level according to raise/lowersections
+  if ($section->{'extra'} and $section->{'extra'}->{'sections_level'}) {
+    $level -= $section->{'extra'}->{'sections_level'};
+    if ($level < $min_level) {
+      if ($command_structuring_level{$section->{'cmdname'}} < $min_level) {
+        $level = $command_structuring_level{$section->{'cmdname'}};
+      } else {
+        $level = $min_level;
+      }
+    } elsif ($level > $max_level) {
+      $level = $max_level;
+    }
+  }
+  return $level;
+}
 
 # parse special line @-commands, unmacro, set, clear, clickstyle.
 # Also remove spaces or ignore text, as specified in the misc_commands hash.
@@ -5957,6 +6013,7 @@ sub _parse_line_command_args($$$)
            or $command eq 'xrefautomaticsectiontitle'
            or $command eq 'codequoteundirected'
            or $command eq 'codequotebacktick'
+           or $command eq 'validatemenus'
            or $command eq 'deftypefnnewline') {
     if ($line eq 'on' or $line eq 'off') {
       $args = [$line];

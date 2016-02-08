@@ -1,0 +1,20 @@
+Sun, 07 Feb 2016 23:51:42 -0500
+lib/json/add/bigdecimal.rb	Wed, 20 May 2015 13:32:44 -0400
+lib/json/add/complex.rb	Wed, 20 May 2015 13:32:44 -0400
+lib/json/add/core.rb	Wed, 20 May 2015 13:32:44 -0400
+lib/json/add/date.rb	Wed, 20 May 2015 13:32:44 -0400
+lib/json/add/date_time.rb	Wed, 20 May 2015 13:32:44 -0400
+lib/json/add/exception.rb	Wed, 20 May 2015 13:32:44 -0400
+lib/json/add/ostruct.rb	Wed, 20 May 2015 13:32:44 -0400
+lib/json/add/range.rb	Wed, 20 May 2015 13:32:44 -0400
+lib/json/add/rational.rb	Wed, 20 May 2015 13:32:44 -0400
+lib/json/add/regexp.rb	Wed, 20 May 2015 13:32:44 -0400
+lib/json/add/struct.rb	Wed, 20 May 2015 13:32:44 -0400
+lib/json/add/symbol.rb	Wed, 20 May 2015 13:32:44 -0400
+lib/json/add/time.rb	Wed, 20 May 2015 13:32:44 -0400
+lib/json/common.rb	Wed, 20 May 2015 13:32:44 -0400
+lib/json/ext.rb	Wed, 20 May 2015 13:32:44 -0400
+lib/json/generic_object.rb	Wed, 20 May 2015 13:32:44 -0400
+lib/json/version.rb	Wed, 20 May 2015 13:32:44 -0400
+lib/json.rb	Wed, 20 May 2015 13:32:44 -0400
+README.rdoc	Wed, 20 May 2015 13:32:44 -0400

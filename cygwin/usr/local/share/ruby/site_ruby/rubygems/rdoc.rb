@@ -263,7 +263,7 @@ class Gem::RDoc # :nodoc: all
       Gem::Requirement.new('>= 2.4.0') =~ self.class.rdoc_version
 
     r = new_rdoc
-    verbose { "rdoc #{args.join ' '}" }
+    say "rdoc #{args.join ' '}" if Gem.configuration.really_verbose
 
     Dir.chdir @spec.full_gem_path do
       begin

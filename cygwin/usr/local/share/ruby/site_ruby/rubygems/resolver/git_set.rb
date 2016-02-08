@@ -80,7 +80,7 @@ class Gem::Resolver::GitSet < Gem::Resolver::Set
     prefetch nil
 
     specs.values.select do |spec|
-      req.match? spec
+      req.matches_spec? spec
     end
   end
 

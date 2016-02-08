@@ -6,16 +6,13 @@ class Gem::Resolver::LockSet < Gem::Resolver::Set
   attr_reader :specs # :nodoc:
 
   ##
-  # Creates a new LockSet from the given +sources+
+  # Creates a new LockSet from the given +source+
 
-  def initialize sources
+  def initialize source
     super()
 
-    @sources = sources.map do |source|
-      Gem::Source::Lock.new source
-    end
-
-    @specs   = []
+    @source = Gem::Source::Lock.new source
+    @specs  = []
   end
 
   ##
@@ -28,14 +25,13 @@ class Gem::Resolver::LockSet < Gem::Resolver::Set
   def add name, version, platform # :nodoc:
     version = Gem::Version.new version
 
-    specs = @sources.map do |source|
-      Gem::Resolver::LockSpecification.new self, name, version, source,
+    spec =
+      Gem::Resolver::LockSpecification.new self, name, version, @source,
                                            platform
-    end
 
-    @specs.concat specs
+    @specs << spec
 
-    specs
+    spec
   end
 
   ##
@@ -44,7 +40,7 @@ class Gem::Resolver::LockSet < Gem::Resolver::Set
 
   def find_all req
     @specs.select do |spec|
-      req.match? spec
+      req.matches_spec? spec
     end
   end
 

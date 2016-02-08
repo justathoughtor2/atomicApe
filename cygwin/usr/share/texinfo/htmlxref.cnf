@@ -1,6 +1,6 @@
 # htmlxref.cnf - reference file for free Texinfo manuals on the web.
 
-htmlxrefversion=2015-04-04.16; # UTC
+htmlxrefversion=2015-07-24.22; # UTC
 
 # Copyright 2010, 2011, 2012, 2013, 2014, 2015 Free Software Foundation, Inc.
 # 
@@ -228,6 +228,9 @@ emms		node	${GS}/emms/manual/
 
 findutils	mono	${GS}/findutils/manual/html_mono/find.html
 findutils	node	${GS}/findutils/manual/html_node/find_html
+
+FLEX = http://flex.sourceforge.net
+flex		node	${FLEX}/manual/
 
 gama		mono	${GS}/gama/manual/gama.html
 gama		node	${GS}/gama/manual/html_node/

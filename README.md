@@ -5,7 +5,14 @@ Atom meets Babun in this repository optimized for running various forms of devel
 You may contact justathoughtor2 with any questions or comments at [atomicape@justathoughtor2.com](mailto:atomicape@justathoughtor2.com).
 
 ## Actually running the software
-To start the atomicApe Babun terminal, double click on the file `babun.bat` in the root directory of the unzipped folder. To start Atom, run the command `atom` from within the Babun terminal. Note that this will occupy the terminal until you close Atom, so you might want to open another terminal with ALT+F2 (from within the first terminal). o run GCC, just run `gcc` in the terminal. To run Python or pip, run either `python` or `pip` (respectively). To run Node.js or NPM, run `node` or `npm` (respectively). To run Ruby or RubyGems, run `ruby` or `gem` (respectively). To start UwAmp, run `uwamp`.
+To start the atomicApe Babun terminal, double click on the file `babun.bat` in the root 
+directory of the unzipped folder. To start Atom, run the command `atom` from within the 
+Babun terminal. Note that this will occupy the terminal until you close Atom, so you might 
+want to open another terminal with ALT+F2 (from within the first terminal). To run GCC, just 
+run `gcc` in the terminal. To run Python or pip, run either `python` or `pip` 
+(respectively). To run Node.js or NPM, run `node` or `npm` (respectively). To run Ruby or 
+RubyGems, run `ruby` or `gem` (respectively). To start UwAmp, run `uwamp`; this also 
+occupies the terminal for the duration of the software's run.
 
 ## Currently included software:
 + [Atom v1.4.3](https://atom.io/)

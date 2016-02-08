@@ -1,5 +1,10 @@
-#!/bin/ash
+#!/bin/dash
+export PATH=/bin
 b=/var/cache/rebase
+if [ ! -d ${b} ] ; then
+    echo "Directory ${b} does not exist, trying to re-create."
+    mkdir -p ${b}
+fi
 
 usage () {
   echo "

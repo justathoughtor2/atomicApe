@@ -1,27 +1,116 @@
-$Id: NEWS 6363 2015-06-26 12:36:32Z gavin $
+$Id: NEWS 6991 2016-02-06 12:16:13Z gavin $
 This NEWS file records noteworthy changes, very tersely.
 See the manual for detailed information.
 
   Copyright 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001,
   2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012,
-  2013, 2014, 2015 Free Software Foundation, Inc.
+  2013, 2014, 2015, 2016 Free Software Foundation, Inc.
 
   Copying and distribution of this file, with or without modification,
   are permitted in any medium without royalty provided the copyright
   notice and this notice are preserved.
 
-*** NEWS FOR ALL AUTHORS OF TEXINFO MANUALS ***
-
-As of version 4.2, Texinfo has a command @copying to define the
-copyright and copying permissions for a manual.  If you haven't already,
-please switch to using it in your next release, because the historical
-method of doing copyright permissions using @ifinfo failed to output
-copyright information in the HTML (or XML) formats.  The manual has
-detailed explanations and examples.  For convenience, here's a url to
-one of the relevant sections:
-  http://www.gnu.org/software/texinfo/manual/texinfo/html_node/Document-Permissions.html
-
 -------------------------------------------------------------------------------
+6.1 (06 February 2016)
+
+* Language:
+  . You can now omit the @menu from nodes with other nodes below them in
+    the document structure.  If you use "@validatemenus off" near the 
+    start of a Texinfo file, makeinfo will, where needed, create a menu 
+    for nodes lacking one given explicitly.
+  . An @setfilename line is no longer required at the start of a
+    Texinfo file.  (Be aware, though, that some other tools may require 
+    it, for example Automake.)
+  . For processing with TeX, a comma is automatically provided following
+    a cross-reference command (such as @xref) when needed to separate
+    the page number from following text, so you don't need to add one
+    yourself.  See the `Parts of a Cross Reference' node in the manual
+    for details.  Behavior when followed by punctuation, as always
+    recommended previously, is unchanged.
+
+* texi2any:
+  . Some Perl modules have been rewritten in C to increase speed.
+    If Perl extensions can be created, they are used by default; 
+    otherwise the pure Perl implementations are still used.
+    Disable at build time with "configure --disable-perl-xs".  The 
+    environment variable TEXINFO_XS controls how they are used by 
+    texi2any.
+  . Quotation marks are left out for node names and index entries in
+    Info output where they would have been produced by commands such
+    as @file or @option.
+  . New customization variable INFO_SPECIAL_CHARS_QUOTE to allow use of
+    a quoting mechanism for problematic constructs in Info output, for
+    example node names containing colons or commas.
+  . Commands like @heading are affected by @lowersections and @raisesections
+    again, as was the case before Texinfo 5.0.
+
+* texinfo.tex:
+  . You may explicitly specify a sort key for an index entry by preceding
+    the text of the entry with the @sortas commmand with the sort key 
+    desired as a braced argument.   Additionally, you may choose to
+    ignore all occurences of the characters \, @, <, and - using new 
+    flags you can specify with @set: `txiindexbackslashignore',
+    `txiindexatsignignore', `txiindexlessthanignore', and
+    `txiindexhyphenignore' respectively.
+  . Changes to macro handling to more closely match makeinfo.  Ends of
+    lines are preserved in an argument to a macro taking a single 
+    argument.
+  . By default, suppress heading line on a page with a chapter on it, to
+    avoid having the chapter title repeated.
+  . Use a larger font for arguments in a @deffn line and similar.
+  . The default indices (cp, ky and so on) now don't get a file opened
+    for them unless they are actually used.  This reduces the number of
+    files that a run of TeX produces, and also allows for a greater
+    number of user-defined indices, because you will not bump into TeX's
+    limit of 16 open files at once so soon.
+  . For initials in indices that are non-alphanumeric characters (for
+    example, backslash, or braces), avoid use of a typewriter font.  
+    This gives a more consistent appearance.
+  . Have a stronger preference for breaking a column in an index before
+    a letter heading.
+  . Formatting improvements in tables of contents and indices.  Entries
+    can extend slightly into the margin instead of being broken across 
+    two lines, and text is split more evenly across lines.  Reduce 
+    chance of an orphaned index entry appearing at the top of a column.
+  . Support character encodings beyond ASCII for XeTeX and LuaTeX by
+    reading file input byte-by-byte.
+
+* texi2dvi:
+  . Support for determining the output files using the `-recorder'
+    option to TeX, to help to support more TeX engines.
+
+* info:
+  . New user variables `link-style', `active-link-style', and
+    `match-style' enable customization of how cross-references and search 
+    matches are highlighted.
+  . By default only the node pointers are displayed at the top of a node.
+    Customize this with the `nodeline' variable.
+  . New command M-x tree-search to search all subnodes of a node.
+  . Now tries to find referenced manuals in the same directory as the
+    current file first, before looking in search path.  Customize this
+    with new variable `follow-strategy'.
+  . The `mouse' variable is now off by default, in order not to
+    interfere with the selection of text in a terminal emulator window.
+  . `q' closes a window instead of quitting altogether if there's more
+    than one, for example if a help window is open.
+  . Several bug fixes, including:
+      . one causing the wrong position in a node to be shown when
+        following an "anchor" cross-reference
+      . one causing a test failure in the t/c-u-m-x-scroll-forward.sh
+        test on some platforms
+  . Internal changes to reduce memory use and increase speed of
+    searches, relative to last release
+  . The meaning of the `key-time' variable has changed when its value
+    is 0.  This value meant to wait forever in the last release, but now
+    it means that the next byte must be available immediately.
+
+* Documentation:
+  . The `info.info' file (and `info.texi' source) is no longer
+    distributed with Texinfo.  Now this manual is only in Emacs.
+
+* Distribution:
+  . automake-1.15, gettext-0.19.6.
+
 
 6.0 (26 June 2015)
 * Language:
@@ -636,6 +725,17 @@ one of the relevant sections:
  . gettext 0.11.5, autoconf 2.54, automake 1.7.1.
 
 
+*** NEWS FOR ALL AUTHORS OF TEXINFO MANUALS ***
+
+As of version 4.2, Texinfo has a command @copying to define the
+copyright and copying permissions for a manual.  If you haven't already,
+please switch to using it in your next release, because the historical
+method of doing copyright permissions using @ifinfo failed to output
+copyright information in the HTML (or XML) formats.  The manual has
+detailed explanations and examples.  For convenience, here's a url to
+one of the relevant sections:
+  http://www.gnu.org/software/texinfo/manual/texinfo/html_node/Document-Permissions.html
+
 4.2 (1 April 2002)
 * Language:
   . new command @copying to define copying permissions.  See above.
@@ -980,7 +1080,7 @@ Note that versions 2.6 and 2.7 Beta were only released to a select group.
 * Cleaner built in documentation, and documentation functions.
 
   Use:
-    o `M-x describe-variable' to read a variable's documenation
+    o `M-x describe-variable' to read a variable's documentation
     o `M-x describe-key' to find out what a particular keystroke does.
     o `M-x describe-function' to read a function's documentation.
     o `M-x where-is' to find out what keys invoke a particular function.
@@ -1036,7 +1136,7 @@ Note that versions 2.6 and 2.7 Beta were only released to a select group.
 * When scrolling with C-v, C-M-v, or M-v, only "Page Only" scrolling
   will happen.
 
-* Continous scrolling (along with `]' (info-global-next) and `['
+* Continuous scrolling (along with `]' (info-global-next) and `['
   (info-global-prev) works better.  `]' and `[' accept numeric
   arguments, moving that many nodes in that case.
 
@@ -1069,7 +1169,7 @@ Note that versions 2.6 and 2.7 Beta were only released to a select group.
 				    "Next Only" causes the Next or Prev node to
 				    be selected when you scroll past the bottom
 				    or top of a node.  "Continous" moves
-				    linearly through the files hierchichal
+				    linearly through the files hierarchical
 				    structure.
 
   `scroll-step'	        0	    Controls how scrolling is done for you when
@@ -1097,7 +1197,7 @@ Changes since 2.4 beta:
 * "configure" script now shipped with Info.
 * New function "set-variable" allows users to set various variables.
 * User-settable behaviour on end or beginning of node scrolling.  This
-  supercedes the SPC and DEL changes in 2.3 beta.
+  supersedes the SPC and DEL changes in 2.3 beta.
 
 ________________________________________
 This release of Info is version 2.4 beta.
@@ -1120,7 +1220,7 @@ Changes since 2.2 beta:
 * Screen height changes made quite robust.
 * Interactive function "set-screen-height" implements user height changes.
 * Scrolling on some terminals is faster now.
-* C-l with numeric arguement is fixed.
+* C-l with numeric argument is fixed.
 
 ----------------------------------------
 This release of Info is version 2.2 beta.

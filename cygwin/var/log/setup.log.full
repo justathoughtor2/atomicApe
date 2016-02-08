@@ -1,15 +1,15 @@
-2016/02/06 15:10:33 Starting cygwin install, version 2.873
-2016/02/06 15:10:33 User has backup/restore rights
-2016/02/06 15:10:33 Current Directory: D:\atomicApe\dist
-2016/02/06 15:10:33 Could not open service McShield for query, start and stop. McAfee may not be installed, or we don't have access.
-2016/02/06 15:10:36 source: network install
-2016/02/06 15:10:37 root: D:\atomicApe\cygwin system
-2016/02/06 15:10:39 Selected local directory: D:\atomicApe\dist
-2016/02/06 15:10:40 net: Direct
+2016/02/07 23:06:36 Starting cygwin install, version 2.873
+2016/02/07 23:06:36 User has backup/restore rights
+2016/02/07 23:06:36 Current Directory: D:\atomicApe\dist
+2016/02/07 23:06:36 Could not open service McShield for query, start and stop. McAfee may not be installed, or we don't have access.
+2016/02/07 23:06:38 source: network install
+2016/02/07 23:06:39 root: D:\atomicApe\cygwin system
+2016/02/07 23:06:39 Selected local directory: D:\atomicApe\dist
+2016/02/07 23:06:40 net: Direct
 Loaded cached mirror list
 get_url_to_membuf http://cygwin.com/mirrors.lst
 getUrlToStream http://cygwin.com/mirrors.lst
-2016/02/06 15:10:42 site: http://cygwin.mirror.constant.com/
+2016/02/07 23:06:41 site: http://cygwin.mirror.constant.com/
 get_url_to_membuf http://cygwin.mirror.constant.com/x86/setup.xz.sig
 getUrlToStream http://cygwin.mirror.constant.com/x86/setup.xz.sig
 getUrlToStream failed!
@@ -23,4 +23,42 @@ getUrlToStream http://cygwin.mirror.constant.com/x86/setup.bz2.sig
 get_url_to_membuf http://cygwin.mirror.constant.com/x86/setup.bz2
 getUrlToStream http://cygwin.mirror.constant.com/x86/setup.bz2
 .ini setup_version is 2.873, our setup_version is 2.873
-2016/02/06 15:18:10 Ending cygwin install
+2016/02/07 23:08:00 Adding required dependency ruby: Selecting already-installed version 2.2.4-1.
+2016/02/07 23:08:00 Adding required dependency ruby-minitest4: Selecting already-installed version 4.7.5-1.
+2016/02/07 23:08:00 Adding required dependency ruby-rake: Selecting already-installed version 10.4.2-1.
+2016/02/07 23:08:00 Adding required dependency ruby-rdoc: Selecting already-installed version 4.2.0-1.
+2016/02/07 23:08:00 Adding required dependency rubygems: Selecting already-installed version 2.4.8-1.
+2016/02/07 23:08:00 Changing gid back to original
+Visited: 349 nodes out of 7721 while creating dependency order.
+Dependency order of packages: base-cygwin cygwin dash _autorebase libiconv2 libintl8 libgcc1 libstdc++6 terminfo libncursesw10 info _update-info-dir alternatives libattr1 libgmp10 libreadline7 tzcode coreutils bash libaspell15 crypt libdb4.8 libgdbm4 libssp0 perl_autorebase perl_base perl aspell aspell-en attr sed libsigsegv2 m4 autoconf2.1 autoconf2.5 autoconf libmpfr4 gawk perl-Pod-Simple perl-Unicode-Normalize texinfo automake1.4 automake1.5 automake1.6 automake1.7 automake1.8 automake1.9 liblzma5 xz automake1.10 automake1.11 automake1.12 automake1.13 perl-Carp automake1.14 automake1.15 automake findutils base-files bc zlib0 zlib-devel binutils libbz2_1 bzip2 libffi6 libp11-kit0 libtasn1_6 p11-kit p11-kit-trust ca-certificates editrights libpcre1 grep cron diffutils csih ctags libcom_err2 libkrb5support0 libk5crypto3 libkrb5_3 libgssapi_krb5_2 libidn11 libnghttp2_14 libopenssl100 libsasl2_3 libopenldap2_4_2 libssh2_1 libcurl4 libexpat1 libmetalink3 curl cygrunsrv popt cygutils cygwin-devel dos2unix libglapi0 libedit0 libllvm3.5 dri-drivers file libxml2 shared-mime-info gsettings-desktop-schemas libfam0 libglib2.0_0 gamin libatomic1 libcloog-isl4 libgomp1 libisl10 libisl13 libmpc3 libquadmath0 libvtv0 w32api-headers w32api-runtime windows-default-manifest gcc-core gcc-g++ gcc4-core gcc4-g++ libargp getent gettext perl-Error perl-TermReadKey libsqlite3_0 libcharset1 libiconv-devel libintl-devel libuuid1 libuuid-devel python less openssh rsync git perl-YAML libapr1 perl-Scalar-List-Utils libiodbc2 libmysqlclient18 openssl libpq5 libaprutil1 libserf1_0 libproxy1 libneon27 subversion subversion-perl git-svn libgmpxx4 gmp libnettle4 libhogweed2 libgnutls28 libopts25 gnutls groff gzip hostname ipc-utils keychain libX11-xcb1 libXau6 libXdmcp6 libxcb1 libX11_6 libxcb-glx0 libXext6 libGL1 libICE6 libQtCore4 libdbus1_3 libQtScript4 libQtXml4 libQtDBus4 libSM6 libXt6 libaudio2 libpng16 libfreetype6 libfontconfig1 libjpeg8 liblcms1 libmng1 libjbig2 libtiff6 libXfixes3 libXrender1 libXcursor1 libXi6 libXinerama1 libXrandr2 libQtGui4 libQtNetwork4 libQtOpenGL4 libgpg-error0 libgcrypt20 libsybdb5 libQtSql4 libQtXmlPatterns4 libQtDeclarative4 libQtDesigner4 libQtHelp4 libblkid1 libevent2.0_5 libevent-devel libext2fs2 libffi-devel libgmp-devel libltdl7 libguile17 libiconv libncurses-devel libncurses10 libpcre16_0 libpcre32_0 libpcreposix0 libpipeline1 libpopt0 libreadline-devel libsmartcols1 libwrap0 libyaml0_2 links login lynx make util-linux man-db man mc mintty perl-DBI perl-DBD-mysql mysqld nano nc ncurses ncursesw openssl-devel pcre perl-Archive-Zip perl-B-Generate perl-HTML-Tagset perl-HTML-Parser perl-CGI perl-CPAN-DistnameInfo perl-Capture-Tiny perl-Config-Tiny perl-Devel-Autoflush perl-File-Which perl-File-HomeDir perl-Probe-Perl perl-Test-Reporter perl-CPAN-Reporter perl-Data-UUID perl-Params-Util perl-Sub-Install perl-Data-OptList perl-Sub-Exporter perl-Data-GUID perl-IO-Prompt-Tiny perl-common-sense perl-Types-Serialiser perl-JSON-XS perl-JSON perl-Metabase-Fact perl-CPAN-Testers-Report perl-Compress-Bzip2 perl-Config-Perl-V perl-Data-Alias perl-Devel-Symdump perl-Digest-HMAC perl-Digest-SHA perl-Encode-Locale perl-File-Copy-Recursive perl-HTTP-Date perl-File-Listing perl-File-pushd perl-IO-HTML perl-LWP-MediaTypes perl-URI perl-HTTP-Message perl-HTTP-Cookies perl-HTTP-Daemon perl-HTTP-Negotiate perl-IO-CaptureOutput perl-Socket6 perl-IO-Socket-INET6 perl-IO-String perl-IO-Tty perl-IPC-Cmd perl-IPC-Run perl-Net-HTTP perl-WWW-RobotRules perl-libwww-perl perl-Metabase-Client-Simple perl-Module-ScanDeps perl-Module-Signature perl-Net-DNS perl-Net-IP perl-PAR-Dist perl-PadWalker perl-Pod-Coverage perl-Pod-Escapes perl-Proc-ProcessTable perl-Tee perl-Term-ReadLine-Gnu perl-Term-ReadLine-Perl perl-Test-NoWarnings perl-Test-Pod perl-Test-Pod-Coverage perl-Test-Reporter-Transport-Metabase perl-Test-Simple perl-XML-NamespaceSupport perl-XML-SAX-Base perl-XML-SAX perl-XML-LibXML perl-XML-Parser perl_vendor ping pkg-config procps qt4-devel-tools readline rebase ruby-minitest4 ruby-json ruby-rdoc ruby-rake rubygems ruby run shutdown tar time tree xxd vim-common vim vim-minimal wget which zsh 
+2016/02/07 23:08:00 running: D:\atomicApe\cygwin\bin\dash.exe "/etc/postinstall/0p_000_autorebase.dash"
+Updating package information in /var/cache/rebase/rebase_pkg.
+Updating rebase information for installed dynamic objects in /var/cache/rebase/rebase_lst.
+/bin/rebaselst: 223: /bin/rebaselst: cannot create /var/cache/rebase/rebase_lst: Permission denied
+Updating rebase information for installed executables in /var/cache/rebase/rebase_exe.
+/bin/rebaselst: 209: /bin/rebaselst: cannot create /var/cache/rebase/rebase_exe: Permission denied
+removing /var/cache/rebase/rebase_dyn
+creating empty /var/cache/rebase/rebase_dyn
+touch: setting times of '/var/cache/rebase/rebase_dyn': Invalid argument
+Updating rebase information for user-defined dynamic objects /var/cache/rebase/rebase_user.
+Updating rebase information for user-defined executables /var/cache/rebase/rebase_user_exe.
+Rebasing with list /var/cache/rebase/rebase_all, built from /var/cache/rebase/rebase_lst /var/cache/rebase/rebase_dyn /var/cache/rebase/rebase_user.
+
+The following DLLs couldn't be rebased because they were in use:
+  /usr/lib/zsh/5.1.1/zsh/zutil.dll
+  /usr/lib/zsh/5.1.1/zsh/zle.dll
+  /usr/lib/zsh/5.1.1/zsh/terminfo.dll
+  /usr/lib/zsh/5.1.1/zsh/stat.dll
+  /usr/lib/zsh/5.1.1/zsh/parameter.dll
+  /usr/lib/zsh/5.1.1/zsh/langinfo.dll
+  /usr/lib/zsh/5.1.1/zsh/complist.dll
+  /usr/lib/zsh/5.1.1/zsh/complete.dll
+  /usr/bin/libzsh-5.1.1.dll
+  /usr/bin/cygncursesw-10.dll
+  /usr/bin/cyggcc_s-1.dll
+2016/02/07 23:08:46 running: D:\atomicApe\cygwin\bin\dash.exe "/etc/postinstall/0p_update-info-dir.dash"
+2016/02/07 23:08:47 Changing gid to Administrators
+Program directory for program link: C:\ProgramData\Microsoft\Windows\Start Menu\Programs
+Desktop directory for desktop link: C:\Users\Public\Desktop
+2016/02/07 23:08:52 note: Nothing needed to be installed
+2016/02/07 23:08:52 Ending cygwin install

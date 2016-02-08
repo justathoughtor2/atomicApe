@@ -1,4 +1,4 @@
-# $Id: Common.pm 6363 2015-06-26 12:36:32Z gavin $
+# $Id: Common.pm 6991 2016-02-06 12:16:13Z gavin $
 # Common.pm: definition of commands. Common code of other Texinfo modules.
 #
 # Copyright 2010, 2011, 2012, 2013, 2014, 2015 Free Software Foundation, Inc.
@@ -71,7 +71,7 @@ valid_tree_transformation
 @EXPORT = qw(
 );
 
-$VERSION = '6.0';
+$VERSION = '6.1';
 
 # i18n
 sub N__($)
@@ -127,6 +127,7 @@ our %default_parser_state_configuration = (
                               # as obtained by parsing the @macro
   'merged_indices' => {},     # the key is merged in the value
   'novalidate' => 0,          # same as setting @novalidate.
+  'validatemenus' => 0,       # same as setting @validatemenus.
   'sections_level' => 0,      # modified by raise/lowersections
   'values' => {'txicommandconditionals' => 1},
                               # the key is the name, the value the @set name 
@@ -175,6 +176,7 @@ our %document_settable_unique_at_commands = (
   'fonttextsize' => 11, 
   'footnotestyle' => 'end', 
   'novalidate' => 0,
+  'validatemenus' => 0,
   'oddfootingmarks' => undef,
   'oddheadingmarks' => undef,
   # FIXME not clear here.
@@ -263,7 +265,7 @@ my @variable_string_settables = (
   'MACRO_BODY_IGNORES_LEADING_SPACE', 'CHECK_HTMLXREF',
   'TEXINFO_DTD_VERSION', 'TEXINFO_COLUMN_FOR_DESCRIPTION',
   'TEXINFO_OUTPUT_FORMAT', 'INFO_SPECIAL_CHARS_WARNING',
-  'INDEX_SPECIAL_CHARS_WARNING',
+  'INDEX_SPECIAL_CHARS_WARNING', 'INFO_SPECIAL_CHARS_QUOTE'
 );
 # Not strings. 
 # FIXME To be documented somewhere, but where?
@@ -428,6 +430,7 @@ our %misc_commands = (
   'setshortcontentsaftertitlepage' => 'skipline', # no arg
   'documentencoding'  => 'text', # or 1?
   'novalidate'        => 'skipline', # no arg
+  'validatemenus'     => 1, # on off
   'dircategory'       => 'line', # line. Position with regard 
                                  # with direntry is significant
   'pagesizes'         => 'line', # can have 2 args 
@@ -603,7 +606,7 @@ foreach my $command ('r', 'i', 'b', 'sansserif', 'slanted') {
 }
 
 foreach my $one_arg_command ('U', 'ctrl', 'dmn', 'w', 'key',
-    'titlefont', 'hyphenation', 'anchor', 'errormsg') {
+    'titlefont', 'hyphenation', 'anchor', 'errormsg', 'sortas') {
   $brace_commands{$one_arg_command} = 1;
 }
 
@@ -615,7 +618,7 @@ foreach my $command ('code', 'command', 'env', 'file', 'kbd', 'key', 'option',
 }
 
 
-# Commands that enclose full texts
+# Commands that enclose full texts, that can contain multiple paragraphs.
 our %context_brace_commands;
 foreach my $context_brace_command ('footnote', 'caption',
     'shortcaption', 'math') {

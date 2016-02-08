@@ -10,9 +10,9 @@
 # class no matter if the full yaml library has loaded or not.
 #
 
-module YAML # :nodoc:
+module YAML
   # In newer 1.9.2, there is a Syck toplevel constant instead of it
-  # being underneath YAML. If so, reference it back under YAML as
+  # being underneith YAML. If so, reference it back under YAML as
   # well.
   if defined? ::Syck
     # for tests that change YAML::ENGINE
@@ -29,7 +29,7 @@ module YAML # :nodoc:
   # loaded, so lets define a stub for DefaultKey.
   elsif !defined? YAML::Syck
     module Syck
-      class DefaultKey # :nodoc:
+      class DefaultKey
       end
     end
   end
@@ -46,8 +46,6 @@ module YAML # :nodoc:
       end
     end
   end
-
-  SyntaxError = Error unless defined? SyntaxError
 end
 
 # Sometime in the 1.9 dev cycle, the Syck constant was moved from under YAML

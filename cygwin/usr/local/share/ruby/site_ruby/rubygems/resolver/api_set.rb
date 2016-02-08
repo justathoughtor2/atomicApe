@@ -34,8 +34,6 @@ class Gem::Resolver::APISet < Gem::Resolver::Set
 
     @data   = Hash.new { |h,k| h[k] = [] }
     @source = Gem::Source.new @uri
-
-    @to_fetch = []
   end
 
   ##
@@ -46,10 +44,6 @@ class Gem::Resolver::APISet < Gem::Resolver::Set
     res = []
 
     return res unless @remote
-
-    if @to_fetch.include?(req.name)
-      prefetch_now
-    end
 
     versions(req.name).each do |ver|
       if req.dependency.match? req.name, ver[:number]
@@ -67,13 +61,9 @@ class Gem::Resolver::APISet < Gem::Resolver::Set
   def prefetch reqs
     return unless @remote
     names = reqs.map { |r| r.dependency.name }
-    needed = names - @data.keys - @to_fetch
+    needed = names - @data.keys
 
-    @to_fetch += needed
-  end
-
-  def prefetch_now
-    needed, @to_fetch = @to_fetch, []
+    return if needed.empty?
 
     uri = @dep_uri + "?gems=#{needed.sort.join ','}"
     str = Gem::RemoteFetcher.fetcher.fetch_path uri

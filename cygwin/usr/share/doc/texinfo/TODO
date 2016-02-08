@@ -1,4 +1,4 @@
-$Id: TODO 6252 2015-05-06 17:37:57Z karl $
+$Id: TODO 6661 2015-09-30 13:17:11Z gavin $
 This is the todo list for GNU Texinfo.
 If you are interested in working on any of these, email bug-texinfo@gnu.org.
 
@@ -19,12 +19,10 @@ If you are interested in working on any of these, email bug-texinfo@gnu.org.
     solution, although this is an incompatible change to Info format.
     This would also allow references without any *note and :: in text,
     (pace goptical, Alexandre Becoulet, 18 Jan 2011 00:31:42).
-  - @else for the @if... conditionals.
   - consider doing some @inline version of @set, @ifset, like 
     @inlineset{flag, ...}, @inlineifset{flag, if set} or @inlineifset{flag,
     if set, if not set} in analogy with @inlinefmt.
   - @xindexterm [def] primary [,secondary [,tertiary]]  or some such?
-  - Add a @sortkey command for indices like @findex @sortkey{command} @@command
   - Allow subitems and `see' and `see also' in indices.
   - generalize @vtable/@htable to any defined index.
   - generalize @deffn/etc. with variants that don't make index entries.
@@ -87,11 +85,6 @@ If you are interested in working on any of these, email bug-texinfo@gnu.org.
   - Documentation of the HTML customization is missing.
 
 * Info:
-  - When scrolling through the help text, it should stop at the end, not
-    report "No more nodes" and go back to the beginning.
-  - It would be nice to be able to specify a preferred key to report in
-    the help message, instead of using the last one set; cf. q vs. C-x C-c.
-  - Full-text search across all info files installed on the system.
   - Perhaps comply with LANGUAGE setting on a per-node basis, to allow
     incremental translation of Texinfo files.
   - Display images when running under X, as Emacs 22+ can.
@@ -103,14 +96,16 @@ If you are interested in working on any of these, email bug-texinfo@gnu.org.
   - Global dir file (as in /etc/conf/dir) and texinfo config file
     specifying which info directories to search.  From Dale Mellor.
     http://mail.gnu.org/mailman/private/gnu-prog-discuss/2003q4/000439.html
-  - Steal interface ideas from Lynx: number links, use color, etc.
-    Perhaps code from the pinfo viewer can be reused:
-    http://zeus.polsl.gliwice.pl/~pborys/.
   - More sample .infokey files, so people can choose without writing their own.
   - Incorporate an X-based viewer, perhaps the old GNU xinfo widget
      (http://www.gnu.org/software/xinfo) or saxinfo
      or tkinfo (http://www.math.ucsb.edu/~boldt/tkinfo/).
   - Handle M-n, C-u m, and C-u g like Emacs Info (opening new windows).
+  - A running view mode, to display the next node after the end of the
+    last one, and be able to toggle display of a node's subnodes.  
+    (Could be hard to implement though, because of how much code assumes 
+    that only one node is in a window at once.)
+
 
 * install-info:
   - install-info --dir-file=dir2 --entry=info foo.info installs garbage
@@ -143,7 +138,10 @@ If you are interested in working on any of these, email bug-texinfo@gnu.org.
   - generate txi-??.tex from .po's to make translators' jobs easier.
     From Akim and Karl E.
 
+***********************************************************************
+
 * Ideas that will not be implemented:
+
 - Support general reference card creation.
   [Reference cards are too different from normal Texinfo.]
 
@@ -191,3 +189,6 @@ If you are interested in working on any of these, email bug-texinfo@gnu.org.
   wdiff or ediff may be all we can do.  Merely specifying what should be
   changed is not obvious.  texdiff (http://www.robmar.net/TexDiff) does
   something reasonable for LaTeX, maybe it can be adapted.
+
+- @else for the @if... conditionals.  Using (for example) an @iftex block
+  followed by an @ifnottex block is good enough.

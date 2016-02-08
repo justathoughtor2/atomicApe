@@ -1,4 +1,4 @@
-# $Id: DocBook.pm 6363 2015-06-26 12:36:32Z gavin $
+# $Id: DocBook.pm 6991 2016-02-06 12:16:13Z gavin $
 # DocBook.pm: output tree as DocBook.
 #
 # Copyright 2011, 2012, 2013, 2014, 2015 Free Software Foundation, Inc.
@@ -27,6 +27,7 @@ use Texinfo::Convert::Converter;
 use Texinfo::Common;
 use Texinfo::Convert::Unicode;
 use Texinfo::Convert::Text;
+use Texinfo::Convert::Plaintext;
 # for debugging
 use Texinfo::Convert::Texinfo;
 use Data::Dumper;
@@ -54,7 +55,7 @@ use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
 @EXPORT = qw(
 );
 
-$VERSION = '6.0';
+$VERSION = '6.1';
 
 my $nbsp = '&#'.hex('00A0').';';
 my $mdash = '&#'.hex('2014').';';
@@ -1347,15 +1348,11 @@ sub _convert($$;$)
     # a pending_prepend still there may happen if a quotation is empty.
     delete $self->{'pending_prepend'};
     #$result .= "</$root->{'cmdname'}>\n";
-    if ($self->{'document_context'}->[-1]->{'raw'}) {
-      chomp ($result);
-      chomp ($result);
-    } else {
-      if (exists($docbook_preformatted_formats{$root->{'cmdname'}})) {
-        my $format = pop @{$self->{'document_context'}->[-1]->{'preformatted_stack'}};
-        die "BUG $format ne $docbook_preformatted_formats{$root->{'cmdname'}}"
-         if ($format ne $docbook_preformatted_formats{$root->{'cmdname'}});
-      }
+    if (!$self->{'document_context'}->[-1]->{'raw'}
+        and exists($docbook_preformatted_formats{$root->{'cmdname'}})) {
+      my $format = pop @{$self->{'document_context'}->[-1]->{'preformatted_stack'}};
+      die "BUG $format ne $docbook_preformatted_formats{$root->{'cmdname'}}"
+        if ($format ne $docbook_preformatted_formats{$root->{'cmdname'}});
     }
     if ($self->{'context_block_commands'}->{$root->{'cmdname'}}) {
       pop @{$self->{'document_context'}};
@@ -1411,7 +1408,7 @@ sub _convert($$;$)
 1;
 
 __END__
-# $Id: DocBook.pm 6363 2015-06-26 12:36:32Z gavin $
+# $Id: DocBook.pm 6991 2016-02-06 12:16:13Z gavin $
 # Automatically generated from maintain/template.pod
 
 =head1 NAME

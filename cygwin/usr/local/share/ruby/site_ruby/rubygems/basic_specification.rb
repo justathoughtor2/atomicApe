@@ -15,11 +15,6 @@ class Gem::BasicSpecification
   attr_writer :extension_dir # :nodoc:
 
   ##
-  # Is this specification ignored for activation purposes?
-
-  attr_writer :ignored # :nodoc:
-
-  ##
   # The path this gemspec was loaded from.  This attribute is not persisted.
 
   attr_reader :loaded_from
@@ -58,16 +53,7 @@ class Gem::BasicSpecification
   # Return true if this spec can require +file+.
 
   def contains_requirable_file? file
-    if instance_variable_defined?(:@ignored) or
-       instance_variable_defined?('@ignored') then
-      return false
-    elsif missing_extensions? then
-      @ignored = true
-
-      warn "Ignoring #{full_name} because its extensions are not built.  " +
-           "Try: gem pristine #{full_name}"
-      return false
-    end
+    build_extensions
 
     suffixes = Gem.suffixes
 
@@ -134,11 +120,11 @@ class Gem::BasicSpecification
   # activated.
 
   def full_require_paths
-    full_paths = raw_require_paths.map do |path|
+    full_paths = @require_paths.map do |path|
       File.join full_gem_path, path
     end
 
-    full_paths.unshift extension_dir unless @extensions.nil? || @extensions.empty?
+    full_paths.unshift extension_dir unless @extensions.empty?
 
     full_paths
   end
@@ -190,7 +176,7 @@ class Gem::BasicSpecification
   end
 
   def raw_require_paths # :nodoc:
-    Array(@require_paths)
+    @require_paths
   end
 
   ##
@@ -211,9 +197,13 @@ class Gem::BasicSpecification
   #   spec.require_path = '.'
 
   def require_paths
-    return raw_require_paths if @extensions.nil? || @extensions.empty?
+    return @require_paths if @extensions.empty?
 
-    [extension_dir].concat raw_require_paths
+    relative_extension_dir =
+      File.join '..', '..', 'extensions', Gem::Platform.local.to_s,
+                Gem.extension_api_version, full_name
+
+    [relative_extension_dir].concat @require_paths
   end
 
   ##

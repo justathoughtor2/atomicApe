@@ -5,18 +5,31 @@
 # See LICENSE.txt for permissions.
 #++
 
-require 'rbconfig'
-
 module Gem
-  VERSION = '2.3.0'
+  QUICKLOADER_SUCKAGE = RUBY_VERSION =~ /^1\.9\.1/
+
+  # Only MRI 1.9.2 has the custom prelude.
+  GEM_PRELUDE_SUCKAGE = RUBY_VERSION =~ /^1\.9\.2/ && RUBY_ENGINE == "ruby"
 end
 
-# Must be first since it unloads the prelude from 1.9.2
-require 'rubygems/compatibility'
+if Gem::GEM_PRELUDE_SUCKAGE and defined?(Gem::QuickLoader) then
+  Gem::QuickLoader.remove
+
+  $LOADED_FEATURES.delete Gem::QuickLoader.path_to_full_rubygems_library
+
+  if $LOADED_FEATURES.any? do |path| path.end_with? '/rubygems.rb' end then
+    # TODO path does not exist here
+    raise LoadError, "another rubygems is already loaded from #{path}"
+  end
+
+  class << Gem
+    remove_method :try_activate if Gem.respond_to?(:try_activate, true)
+  end
+end
 
 require 'rubygems/defaults'
-require 'rubygems/deprecate'
-require 'rubygems/errors'
+require 'rbconfig'
+require "rubygems/deprecate"
 
 ##
 # RubyGems is the Ruby standard for publishing and managing third party
@@ -36,9 +49,9 @@ require 'rubygems/errors'
 #
 # Further RubyGems documentation can be found at:
 #
-# * {RubyGems Guides}[http://guides.rubygems.org]
 # * {RubyGems API}[http://rubygems.rubyforge.org/rdoc] (also available from
 #   <tt>gem server</tt>)
+# * {RubyGems Bookshelf}[http://rubygem.org]
 #
 # == RubyGems Plugins
 #
@@ -56,11 +69,11 @@ require 'rubygems/errors'
 # RubyGems defaults are stored in rubygems/defaults.rb.  If you're packaging
 # RubyGems or implementing Ruby you can change RubyGems' defaults.
 #
-# For RubyGems packagers, provide lib/rubygems/defaults/operating_system.rb
-# and override any defaults from lib/rubygems/defaults.rb.
-#
-# For Ruby implementers, provide lib/rubygems/defaults/#{RUBY_ENGINE}.rb and
+# For RubyGems packagers, provide lib/rubygems/operating_system.rb and
 # override any defaults from lib/rubygems/defaults.rb.
+#
+# For Ruby implementers, provide lib/rubygems/#{RUBY_ENGINE}.rb and override
+# any defaults from lib/rubygems/defaults.rb.
 #
 # If you need RubyGems to perform extra work on install or uninstall, your
 # defaults override file can set pre and post install and uninstall hooks.
@@ -70,8 +83,8 @@ require 'rubygems/errors'
 # == Bugs
 #
 # You can submit bugs to the
-# {RubyGems bug tracker}[https://github.com/rubygems/rubygems/issues]
-# on GitHub
+# {RubyGems bug tracker}[http://rubyforge.org/tracker/?atid=575&group_id=126]
+# on RubyForge
 #
 # == Credits
 #
@@ -83,7 +96,7 @@ require 'rubygems/errors'
 # * Chad Fowler  -- chad(at)chadfowler.com
 # * David Black  -- dblack(at)wobblini.net
 # * Paul Brannan -- paul(at)atdesk.com
-# * Jim Weirich   -- jim(at)weirichhouse.org
+# * Jim Weirch   -- jim(at)weirichhouse.org
 #
 # Contributors:
 #
@@ -99,23 +112,59 @@ require 'rubygems/errors'
 # * Daniel Berger      -- djberg96(at)gmail.com
 # * Phil Hagelberg     -- technomancy(at)gmail.com
 # * Ryan Davis         -- ryand-ruby(at)zenspider.com
-# * Evan Phoenix       -- evan(at)fallingsnow.net
-# * Steve Klabnik      -- steve(at)steveklabnik.com
+# * Evan Phoenix       -- evan@phx.io
 #
 # (If your name is missing, PLEASE let us know!)
-#
-# See {LICENSE.txt}[rdoc-ref:lib/rubygems/LICENSE.txt] for permissions.
 #
 # Thanks!
 #
 # -The RubyGems Team
 
-
 module Gem
-  RUBYGEMS_DIR = File.dirname File.expand_path(__FILE__)
+  VERSION = '1.8.30'
 
   ##
-  # An Array of Regexps that match windows Ruby platforms.
+  # Raised when RubyGems is unable to load or activate a gem.  Contains the
+  # name and version requirements of the gem that either conflicts with
+  # already activated gems or that RubyGems is otherwise unable to activate.
+
+  class LoadError < ::LoadError
+    # Name of gem
+    attr_accessor :name
+
+    # Version requirement of gem
+    attr_accessor :requirement
+  end
+
+  # :stopdoc:
+
+  RubyGemsVersion = VERSION
+
+  RbConfigPriorities = %w[
+    EXEEXT RUBY_SO_NAME arch bindir datadir libdir ruby_install_name
+    ruby_version rubylibprefix sitedir sitelibdir vendordir vendorlibdir
+  ]
+
+  unless defined?(ConfigMap)
+    ##
+    # Configuration settings from ::RbConfig
+    ConfigMap = Hash.new do |cm, key|
+      cm[key] = RbConfig::CONFIG[key.to_s]
+    end
+  else
+    RbConfigPriorities.each do |key|
+      ConfigMap[key.to_sym] = RbConfig::CONFIG[key]
+    end
+  end
+
+  RubyGemsPackageVersion = VERSION
+
+  RUBYGEMS_DIR = File.dirname File.expand_path(__FILE__)
+
+  # :startdoc:
+
+  ##
+  # An Array of Regexps that match windows ruby platforms.
 
   WIN_PATTERNS = [
     /bccwin/i,
@@ -126,40 +175,13 @@ module Gem
     /wince/i,
   ]
 
-  GEM_DEP_FILES = %w[
-    gem.deps.rb
-    Gemfile
-    Isolate
-  ]
-
-  ##
-  # Subdirectories in a gem repository
-
-  REPOSITORY_SUBDIRECTORIES = %w[
-    build_info
-    cache
-    doc
-    extensions
-    gems
-    specifications
-  ]
-
-  ##
-  # Subdirectories in a gem repository for default gems
-
-  REPOSITORY_DEFAULT_GEM_SUBDIRECTORIES = %w[
-    gems
-    specifications/default
-  ]
-
+  @@source_index = nil
   @@win_platform = nil
 
   @configuration = nil
   @loaded_specs = {}
-  @path_to_default_spec_map = {}
   @platforms = []
   @ruby = nil
-  @ruby_api_version = nil
   @sources = nil
 
   @post_build_hooks     ||= []
@@ -176,19 +198,13 @@ module Gem
   # activated. Returns false if it can't find the path in a gem.
 
   def self.try_activate path
+    # TODO: deprecate when 1.9.3 comes out.
     # finds the _latest_ version... regardless of loaded specs and their deps
-    # if another gem had a requirement that would mean we shouldn't
-    # activate the latest version, then either it would already be activated
-    # or if it was ambiguous (and thus unresolved) the code in our custom
-    # require will try to activate the more specific version.
 
-    spec = Gem::Specification.find_inactive_by_path path
+    # TODO: use find_all and bork if ambiguous
 
-    unless spec
-      spec = Gem::Specification.find_by_path path
-      return true if spec && spec.activated?
-      return false
-    end
+    spec = Gem::Specification.find_by_path path
+    return false unless spec
 
     begin
       spec.activate
@@ -199,20 +215,77 @@ module Gem
     return true
   end
 
-  def self.needs
-    rs = Gem::RequestSet.new
+  ##
+  # Activates an installed gem matching +dep+.  The gem must satisfy
+  # +requirements+.
+  #
+  # Returns true if the gem is activated, false if it is already
+  # loaded, or an exception otherwise.
+  #
+  # Gem#activate adds the library paths in +dep+ to $LOAD_PATH.  Before a Gem
+  # is activated its required Gems are activated.  If the version information
+  # is omitted, the highest version Gem of the supplied name is loaded.  If a
+  # Gem is not found that meets the version requirements or a required Gem is
+  # not found, a Gem::LoadError is raised.
+  #
+  # More information on version requirements can be found in the
+  # Gem::Requirement and Gem::Version documentation.
 
-    yield rs
+  def self.activate(dep, *requirements)
+    raise ArgumentError, "Deprecated use of Gem.activate(dep)" if
+      Gem::Dependency === dep
 
-    finish_resolve rs
+    Gem::Specification.find_by_name(dep, *requirements).activate
   end
 
-  def self.finish_resolve(request_set=Gem::RequestSet.new)
-    request_set.import Gem::Specification.unresolved_deps.values
+  def self.activate_dep dep, *requirements # :nodoc:
+    dep.to_spec.activate
+  end
 
-    request_set.resolve_current.each do |s|
-      s.full_spec.activate
+  def self.activate_spec spec # :nodoc:
+    spec.activate
+  end
+
+  def self.unresolved_deps
+    @unresolved_deps ||= Hash.new { |h, n| h[n] = Gem::Dependency.new n }
+  end
+
+  ##
+  # An Array of all possible load paths for all versions of all gems in the
+  # Gem installation.
+
+  def self.all_load_paths
+    result = []
+
+    Gem.path.each do |gemdir|
+      each_load_path all_partials(gemdir) do |load_path|
+        result << load_path
+      end
     end
+
+    result
+  end
+
+  ##
+  # Return all the partial paths in +gemdir+.
+
+  def self.all_partials(gemdir)
+    Dir[File.join(gemdir, "gems/*")]
+  end
+
+  private_class_method :all_partials
+
+  ##
+  # See if a given gem is available.
+
+  def self.available?(dep, *requirements)
+    requirements = Gem::Requirement.default if requirements.empty?
+
+    unless dep.respond_to?(:name) and dep.respond_to?(:requirement) then
+      dep = Gem::Dependency.new dep, requirements
+    end
+
+    not dep.matching_specs(true).empty?
   end
 
   ##
@@ -258,6 +331,7 @@ module Gem
   # The path where gem executables are to be installed.
 
   def self.bindir(install_dir=Gem.dir)
+    # TODO: move to Gem::Dirs
     return File.join install_dir, 'bin' unless
       install_dir.to_s == Gem.default_dir.to_s
     Gem.default_bindir
@@ -269,10 +343,11 @@ module Gem
   # mainly used by the unit tests to provide test isolation.
 
   def self.clear_paths
+    @@source_index = nil
     @paths         = nil
     @user_home     = nil
+    @searcher      = nil
     Gem::Specification.reset
-    Gem::Security.reset if defined?(Gem::Security)
   end
 
   ##
@@ -298,12 +373,11 @@ module Gem
   end
 
   ##
-  # The path to the data directory specified by the gem name.  If the
+  # The path the the data directory specified by the gem name.  If the
   # package is not available as a gem, return nil.
 
   def self.datadir(gem_name)
-# TODO: deprecate and move to Gem::Specification
-#       and drop the extra ", gem_name" which is uselessly redundant
+# TODO: deprecate
     spec = @loaded_specs[gem_name]
     return nil if spec.nil?
     File.join spec.full_gem_path, "data", gem_name
@@ -317,21 +391,14 @@ module Gem
     Zlib::Deflate.deflate data
   end
 
-  # Retrieve the PathSupport object that RubyGems uses to
-  # lookup files.
-
   def self.paths
     @paths ||= Gem::PathSupport.new
   end
 
-  # Initialize the filesystem paths to use from +env+.
-  # +env+ is a hash-like object (typically ENV) that
-  # is queried for 'GEM_HOME', 'GEM_PATH', and 'GEM_SPEC_CACHE'
-
   def self.paths=(env)
     clear_paths
     @paths = Gem::PathSupport.new env
-    Gem::Specification.dirs = @paths.path
+    Gem::Specification.dirs = @paths.path # FIX: home is at end
   end
 
   ##
@@ -340,72 +407,56 @@ module Gem
   # FIXME deprecate these once everything else has been done -ebh
 
   def self.dir
+    # TODO: raise "no"
     paths.home
   end
 
   def self.path
+    # TODO: raise "no"
     paths.path
   end
 
-  def self.spec_cache_dir
-    paths.spec_cache_dir
+  ##
+  # Expand each partial gem path with each of the required paths specified
+  # in the Gem spec.  Each expanded path is yielded.
+
+  def self.each_load_path(partials)
+    partials.each do |gp|
+      base = File.basename gp
+      specfn = File.join(dir, "specifications", "#{base}.gemspec")
+      if File.exists? specfn
+        spec = eval(File.read(specfn))
+        spec.require_paths.each do |rp|
+          yield File.join(gp,rp)
+        end
+      else
+        filename = File.join(gp, 'lib')
+        yield(filename) if File.exists? filename
+      end
+    end
   end
 
+  private_class_method :each_load_path
+
+
   ##
-  # Quietly ensure the Gem directory +dir+ contains all the proper
+  # Quietly ensure the named Gem directory contains all the proper
   # subdirectories.  If we can't create a directory due to a permission
   # problem, then we will silently continue.
-  #
-  # If +mode+ is given, missing directories are created with this mode.
-  #
-  # World-writable directories will never be created.
 
-  def self.ensure_gem_subdirectories dir = Gem.dir, mode = nil
-    ensure_subdirectories(dir, mode, REPOSITORY_SUBDIRECTORIES)
-  end
-
-  ##
-  # Quietly ensure the Gem directory +dir+ contains all the proper
-  # subdirectories for handling default gems.  If we can't create a
-  # directory due to a permission problem, then we will silently continue.
-  #
-  # If +mode+ is given, missing directories are created with this mode.
-  #
-  # World-writable directories will never be created.
-
-  def self.ensure_default_gem_subdirectories dir = Gem.dir, mode = nil
-    ensure_subdirectories(dir, mode, REPOSITORY_DEFAULT_GEM_SUBDIRECTORIES)
-  end
-
-  def self.ensure_subdirectories dir, mode, subdirs # :nodoc:
+  def self.ensure_gem_subdirectories dir = Gem.dir
     old_umask = File.umask
     File.umask old_umask | 002
 
     require 'fileutils'
 
-    options = {}
-
-    options[:mode] = mode if mode
-
-    subdirs.each do |name|
+    %w[cache doc gems specifications].each do |name|
       subdir = File.join dir, name
       next if File.exist? subdir
-      FileUtils.mkdir_p subdir, options rescue nil
+      FileUtils.mkdir_p subdir rescue nil # in case of perms issues -- lame
     end
   ensure
     File.umask old_umask
-  end
-
-  ##
-  # The extension API version of ruby.  This includes the static vs non-static
-  # distinction as extensions cannot be shared between the two.
-
-  def self.extension_api_version # :nodoc:
-    if 'no' == RbConfig::CONFIG['ENABLE_SHARED'] then
-      "#{ruby_api_version}-static"
-    else
-      ruby_api_version
-    end
   end
 
   ##
@@ -418,48 +469,18 @@ module Gem
   # $LOAD_PATH for files as well as gems.
   #
   # Note that find_files will return all files even if they are from different
-  # versions of the same gem.  See also find_latest_files
+  # versions of the same gem.
 
   def self.find_files(glob, check_load_path=true)
     files = []
 
-    files = find_files_from_load_path glob if check_load_path
+    if check_load_path
+      files = $LOAD_PATH.map { |load_path|
+        Dir["#{File.expand_path glob, load_path}#{Gem.suffix_pattern}"]
+      }.flatten.select { |file| File.file? file.untaint }
+    end
 
     files.concat Gem::Specification.map { |spec|
-      spec.matches_for_glob("#{glob}#{Gem.suffix_pattern}")
-    }.flatten
-
-    # $LOAD_PATH might contain duplicate entries or reference
-    # the spec dirs directly, so we prune.
-    files.uniq! if check_load_path
-
-    return files
-  end
-
-  def self.find_files_from_load_path glob # :nodoc:
-    $LOAD_PATH.map { |load_path|
-      Dir["#{File.expand_path glob, load_path}#{Gem.suffix_pattern}"]
-    }.flatten.select { |file| File.file? file.untaint }
-  end
-
-  ##
-  # Returns a list of paths matching +glob+ from the latest gems that can be
-  # used by a gem to pick up features from other gems.  For example:
-  #
-  #   Gem.find_latest_files('rdoc/discover').each do |path| load path end
-  #
-  # if +check_load_path+ is true (the default), then find_latest_files also
-  # searches $LOAD_PATH for files as well as gems.
-  #
-  # Unlike find_files, find_latest_files will return only files from the
-  # latest version of a gem.
-
-  def self.find_latest_files(glob, check_load_path=true)
-    files = []
-
-    files = find_files_from_load_path glob if check_load_path
-
-    files.concat Gem::Specification.latest_specs(true).map { |spec|
       spec.matches_for_glob("#{glob}#{Gem.suffix_pattern}")
     }.flatten
 
@@ -510,45 +531,39 @@ module Gem
 
   private_class_method :find_home
 
-  # FIXME deprecate these in 3.0
-
   ##
   # Zlib::GzipReader wrapper that unzips +data+.
 
   def self.gunzip(data)
-    require 'rubygems/util'
-    Gem::Util.gunzip data
+    # TODO: move to utils
+    require 'stringio'
+    require 'zlib'
+    data = StringIO.new data
+
+    Zlib::GzipReader.new(data).read
   end
 
   ##
   # Zlib::GzipWriter wrapper that zips +data+.
 
   def self.gzip(data)
-    require 'rubygems/util'
-    Gem::Util.gzip data
+    # TODO: move to utils
+    require 'stringio'
+    require 'zlib'
+    zipped = StringIO.new
+
+    Zlib::GzipWriter.wrap zipped do |io| io.write data end
+
+    zipped.string
   end
 
   ##
   # A Zlib::Inflate#inflate wrapper
 
   def self.inflate(data)
-    require 'rubygems/util'
-    Gem::Util.inflate data
-  end
-
-  ##
-  # Top level install helper method. Allows you to install gems interactively:
-  #
-  #   % irb
-  #   >> Gem.install "minitest"
-  #   Fetching: minitest-3.0.1.gem (100%)
-  #   => [#<Gem::Specification:0x1013b4528 @name="minitest", ...>]
-
-  def self.install name, version = Gem::Requirement.default
-    require "rubygems/dependency_installer"
-    inst = Gem::DependencyInstaller.new
-    inst.install name, version
-    inst.installed_gems
+    # TODO: move to utils
+    require 'zlib'
+    Zlib::Inflate.inflate data
   end
 
   ##
@@ -557,7 +572,7 @@ module Gem
 
   def self.host
     # TODO: move to utils
-    @host ||= Gem::DEFAULT_HOST
+    @host ||= "https://rubygems.org"
   end
 
   ## Set the default RubyGems API host.
@@ -568,11 +583,61 @@ module Gem
   end
 
   ##
-  # The index to insert activated gem paths into the $LOAD_PATH. The activated
-  # gem's paths are inserted before site lib directory by default.
+  # Return a list of all possible load paths for the latest version for all
+  # gems in the Gem installation.
+
+  def self.latest_load_paths
+    result = []
+
+    Gem.path.each do |gemdir|
+      each_load_path(latest_partials(gemdir)) do |load_path|
+        result << load_path
+      end
+    end
+
+    result
+  end
+
+  ##
+  # Return only the latest partial paths in the given +gemdir+.
+
+  def self.latest_partials(gemdir)
+    latest = {}
+    all_partials(gemdir).each do |gp|
+      base = File.basename gp
+
+      if base.to_s =~ /(.*)-((\d+\.)*\d+)/ then
+        name, version = $1, $2
+        ver = Gem::Version.new(version)
+        if latest[name].nil? || ver > latest[name][0]
+          latest[name] = [ver, gp]
+        end
+      end
+    end
+    latest.collect { |k,v| v[1] }
+  end
+
+  private_class_method :latest_partials
+
+  ##
+  # The index to insert activated gem paths into the $LOAD_PATH.
+  #
+  # Defaults to the site lib directory unless gem_prelude.rb has loaded paths,
+  # then it inserts the activated gem's paths before the gem_prelude.rb paths
+  # so you can override the gem_prelude.rb default $LOAD_PATH paths.
 
   def self.load_path_insert_index
-    index = $LOAD_PATH.index RbConfig::CONFIG['sitelibdir']
+    index = $LOAD_PATH.index ConfigMap[:sitelibdir]
+
+    if QUICKLOADER_SUCKAGE then
+      $LOAD_PATH.each_with_index do |path, i|
+        if path.instance_variables.include?(:@gem_prelude_index) or
+            path.instance_variables.include?('@gem_prelude_index') then
+          index = i
+          break
+        end
+      end
+    end
 
     index
   end
@@ -584,7 +649,6 @@ module Gem
 
   def self.load_yaml
     return if @yaml_loaded
-    return unless defined?(gem)
 
     test_syck = ENV['TEST_SYCK']
 
@@ -636,6 +700,7 @@ module Gem
     file = $1
     lineno = $2.to_i
 
+    # TODO: it is ALWAYS joined! STUPID!
     [file, lineno]
   end
 
@@ -644,6 +709,27 @@ module Gem
 
   def self.marshal_version
     "#{Marshal::MAJOR_VERSION}.#{Marshal::MINOR_VERSION}"
+  end
+
+  ##
+  # Get the appropriate cache path.
+  #
+  # Pass a string to use a different base path, or nil/false (default) for
+  # Gem.dir.
+  #
+
+  def self.cache_dir(custom_dir=false)
+    File.join(custom_dir || Gem.dir, "cache")
+  end
+
+  ##
+  # Given a gem path, find the gem in cache.
+  #
+  # Pass a string as the second argument to use a different base path, or
+  # nil/false (default) for Gem.dir.
+
+  def self.cache_gem(filename, user_dir=false)
+    cache_dir(user_dir).add(filename)
   end
 
   ##
@@ -681,15 +767,6 @@ module Gem
 
   def self.post_install(&hook)
     @post_install_hooks << hook
-  end
-
-  ##
-  # Adds a post-installs hook that will be passed a Gem::DependencyInstaller
-  # and a list of installed specifications when
-  # Gem::DependencyInstaller#install is complete
-
-  def self.done_installing(&hook)
-    @done_installing_hooks << hook
   end
 
   ##
@@ -743,32 +820,98 @@ module Gem
   def self.prefix
     prefix = File.dirname RUBYGEMS_DIR
 
-    if prefix != File.expand_path(RbConfig::CONFIG['sitelibdir']) and
-       prefix != File.expand_path(RbConfig::CONFIG['libdir']) and
+    if prefix != File.expand_path(ConfigMap[:sitelibdir]) and
+       prefix != File.expand_path(ConfigMap[:libdir]) and
        'lib' == File.basename(RUBYGEMS_DIR) then
       prefix
     end
   end
 
   ##
-  # Refresh available gems from disk.
+  # Promotes the load paths of the +gem_name+ over the load paths of
+  # +over_name+.  Useful for allowing one gem to override features in another
+  # using #find_files.
+
+  def self.promote_load_path(gem_name, over_name)
+    gem = Gem.loaded_specs[gem_name]
+    over = Gem.loaded_specs[over_name]
+
+    raise ArgumentError, "gem #{gem_name} is not activated" if gem.nil?
+    raise ArgumentError, "gem #{over_name} is not activated" if over.nil?
+
+    last_gem_path = Gem::Path.path(gem.full_gem_path).add(gem.require_paths.last)
+
+    over_paths = over.require_paths.map do |path|
+      Gem::Path.path(over.full_gem_path).add(path).to_s
+    end
+
+    over_paths.each do |path|
+      $LOAD_PATH.delete path
+    end
+
+    gem = $LOAD_PATH.index(last_gem_path) + 1
+
+    $LOAD_PATH.insert(gem, *over_paths)
+  end
+
+  ##
+  # Refresh source_index from disk and clear searcher.
 
   def self.refresh
     Gem::Specification.reset
+    @source_index = nil
+    @searcher = nil
   end
 
   ##
   # Safely read a file in binary mode on all platforms.
 
   def self.read_binary(path)
-    open path, 'rb+' do |f|
-      f.flock(File::LOCK_EX)
-      f.read
+    File.open path, binary_mode do |f| f.read end
+  end
+
+  ##
+  # Report a load error during activation.  The message of load error
+  # depends on whether it was a version mismatch or if there are not gems of
+  # any version by the requested name.
+
+  def self.report_activate_error(gem)
+    matches = Gem::Specification.find_by_name(gem.name)
+
+    if matches.empty? then
+      error = Gem::LoadError.new(
+          "Could not find RubyGem #{gem.name} (#{gem.requirement})\n")
+    else
+      error = Gem::LoadError.new(
+          "RubyGem version error: " +
+          "#{gem.name}(#{matches.first.version} not #{gem.requirement})\n")
     end
-  rescue Errno::EACCES
-    open path, 'rb' do |f|
-      f.read
+
+    error.name = gem.name
+    error.requirement = gem.requirement
+    raise error
+  end
+
+  private_class_method :report_activate_error
+
+  ##
+  # Full path to +libfile+ in +gemname+.  Searches for the latest gem unless
+  # +requirements+ is given.
+
+  def self.required_location(gemname, libfile, *requirements)
+    requirements = Gem::Requirement.default if requirements.empty?
+
+    matches = Gem::Specification.find_all_by_name gemname, *requirements
+
+    return nil if matches.empty?
+
+    spec = matches.last
+    spec.require_paths.each do |path|
+      result = Gem::Path.path(spec.full_gem_path).add(path, libfile)
+      return result if result.exist?
     end
+
+    nil
   end
 
   ##
@@ -776,8 +919,8 @@ module Gem
 
   def self.ruby
     if @ruby.nil? then
-      @ruby = File.join(RbConfig::CONFIG['bindir'],
-                        "#{RbConfig::CONFIG['ruby_install_name']}#{RbConfig::CONFIG['EXEEXT']}")
+      @ruby = File.join(ConfigMap[:bindir],
+                        "#{ConfigMap[:ruby_install_name]}#{ConfigMap[:EXEEXT]}")
 
       @ruby = "\"#{@ruby}\"" if @ruby =~ /\s/
     end
@@ -785,44 +928,31 @@ module Gem
     @ruby
   end
 
-  ##
-  # Returns a String containing the API compatibility version of Ruby
-
-  def self.ruby_api_version
-    @ruby_api_version ||= RbConfig::CONFIG['ruby_version'].dup
-  end
-
-  ##
-  # Returns the latest release-version specification for the gem +name+.
-
   def self.latest_spec_for name
-    dependency   = Gem::Dependency.new name
-    fetcher      = Gem::SpecFetcher.fetcher
-    spec_tuples, = fetcher.spec_for_dependency dependency
+    dependency  = Gem::Dependency.new name
+    fetcher     = Gem::SpecFetcher.fetcher
+    spec_tuples = fetcher.find_matching dependency
 
-    spec, = spec_tuples.first
+    match = spec_tuples.select { |(n, _, p), _|
+      n == name and Gem::Platform.match p
+    }.sort_by { |(_, version, _), _|
+      version
+    }.last
 
-    spec
+    match and fetcher.fetch_spec(*match)
   end
-
-  ##
-  # Returns the latest release version of RubyGems.
-
-  def self.latest_rubygems_version
-    latest_version_for('rubygems-update') or
-      raise "Can't find 'rubygems-update' in any repo. Check `gem source list`."
-  end
-
-  ##
-  # Returns the version of the latest release-version of gem +name+
 
   def self.latest_version_for name
     spec = latest_spec_for name
     spec and spec.version
   end
 
+  def self.latest_rubygems_version
+    latest_version_for "rubygems-update"
+  end
+
   ##
-  # A Gem::Version for the currently running Ruby.
+  # A Gem::Version for the currently running ruby.
 
   def self.ruby_version
     return @ruby_version if defined? @ruby_version
@@ -838,34 +968,36 @@ module Gem
   end
 
   ##
-  # A Gem::Version for the currently running RubyGems
+  # The GemPathSearcher object used to search for matching installed gems.
 
-  def self.rubygems_version
-    return @rubygems_version if defined? @rubygems_version
-    @rubygems_version = Gem::Version.new Gem::VERSION
+  def self.searcher
+    @searcher ||= Gem::GemPathSearcher.new
   end
 
   ##
-  # Returns an Array of sources to fetch remote gems from. Uses
-  # default_sources if the sources list is empty.
+  # Returns the Gem::SourceIndex of specifications that are in the Gem.path
+
+  def self.source_index
+    @@source_index ||= Gem::Deprecate.skip_during do
+      SourceIndex.new Gem::Specification.dirs
+    end
+  end
+
+  ##
+  # Returns an Array of sources to fetch remote gems from.  If the sources
+  # list is empty, attempts to load the "sources" gem, then uses
+  # default_sources if it is not installed.
 
   def self.sources
-    @sources ||= Gem::SourceList.from(default_sources)
+    @sources ||= default_sources
   end
 
   ##
   # Need to be able to set the sources without calling
   # Gem.sources.replace since that would cause an infinite loop.
-  #
-  # DOC: This comment is not documentation about the method itself, it's
-  # more of a code comment about the implementation.
 
   def self.sources= new_sources
-    if !new_sources
-      @sources = nil
-    else
-      @sources = Gem::SourceList.from(new_sources)
-    end
+    @sources = new_sources
   end
 
   ##
@@ -873,6 +1005,12 @@ module Gem
 
   def self.suffix_pattern
     @suffix_pattern ||= "{#{suffixes.join(',')}}"
+  end
+
+  def self.loaded_path? path
+    # TODO: ruby needs a feature to let us query what's loaded in 1.8 and 1.9
+    re = /(^|\/)#{Regexp.escape path}#{Regexp.union(*Gem.suffixes)}$/
+    $LOADED_FEATURES.any? { |s| s =~ re }
   end
 
   ##
@@ -922,13 +1060,14 @@ module Gem
     paths = nil if paths == [nil]
     paths = paths.first if Array === Array(paths).first
     self.paths = { "GEM_HOME" => home, "GEM_PATH" => paths }
+    # TODO: self.paths = home, paths
   end
 
   ##
   # The home directory for the user.
 
   def self.user_home
-    @user_home ||= find_home.untaint
+    @user_home ||= find_home
   end
 
   ##
@@ -936,17 +1075,16 @@ module Gem
 
   def self.win_platform?
     if @@win_platform.nil? then
-      ruby_platform = RbConfig::CONFIG['host_os']
-      @@win_platform = !!WIN_PATTERNS.find { |r| ruby_platform =~ r }
+      @@win_platform = !!WIN_PATTERNS.find { |r| RUBY_PLATFORM =~ r }
     end
 
     @@win_platform
   end
 
   ##
-  # Load +plugins+ as Ruby files
+  # Load +plugins+ as ruby files
 
-  def self.load_plugin_files plugins # :nodoc:
+  def self.load_plugin_files(plugins)
     plugins.each do |plugin|
 
       # Skip older versions of the GemCutter plugin: Its commands are in
@@ -964,16 +1102,10 @@ module Gem
   end
 
   ##
-  # Find the 'rubygems_plugin' files in the latest installed gems and load
-  # them
+  # Find all 'rubygems_plugin' files in installed gems and load them
 
   def self.load_plugins
-    # Remove this env var by at least 3.0
-    if ENV['RUBYGEMS_LOAD_ALL_PLUGINS']
-      load_plugin_files find_files('rubygems_plugin', false)
-    else
-      load_plugin_files find_latest_files('rubygems_plugin', false)
-    end
+    load_plugin_files find_files('rubygems_plugin', false)
   end
 
   ##
@@ -994,79 +1126,6 @@ module Gem
     load_plugin_files files
   end
 
-  ##
-  # Looks for a gem dependency file at +path+ and activates the gems in the
-  # file if found.  If the file is not found an ArgumentError is raised.
-  #
-  # If +path+ is not given the RUBYGEMS_GEMDEPS environment variable is used,
-  # but if no file is found no exception is raised.
-  #
-  # If '-' is given for +path+ RubyGems searches up from the current working
-  # directory for gem dependency files (gem.deps.rb, Gemfile, Isolate) and
-  # activates the gems in the first one found.
-  #
-  # You can run this automatically when rubygems starts.  To enable, set
-  # the <code>RUBYGEMS_GEMDEPS</code> environment variable to either the path
-  # of your gem dependencies file or "-" to auto-discover in parent
-  # directories.
-  #
-  # NOTE: Enabling automatic discovery on multiuser systems can lead to
-  # execution of arbitrary code when used from directories outside your
-  # control.
-
-  def self.use_gemdeps path = nil
-    raise_exception = path
-
-    path ||= ENV['RUBYGEMS_GEMDEPS']
-    return unless path
-
-    path = path.dup
-
-    if path == "-" then
-      require 'rubygems/util'
-
-      Gem::Util.traverse_parents Dir.pwd do |directory|
-        dep_file = GEM_DEP_FILES.find { |f| File.file?(f) }
-
-        next unless dep_file
-
-        path = File.join directory, dep_file
-        break
-      end
-    end
-
-    path.untaint
-
-    unless File.file? path then
-      return unless raise_exception
-
-      raise ArgumentError, "Unable to find gem dependencies file at #{path}"
-    end
-
-    rs = Gem::RequestSet.new
-    rs.load_gemdeps path
-
-    rs.resolve_current.map do |s|
-      sp = s.full_spec
-      sp.activate
-      sp
-    end
-  rescue Gem::LoadError, Gem::UnsatisfiableDependencyError => e
-    warn e.message
-    warn "You may need to `gem install -g` to install missing gems"
-    warn ""
-  end
-
-  class << self
-    ##
-    # TODO remove with RubyGems 3.0
-
-    alias detect_gemdeps use_gemdeps # :nodoc:
-  end
-
-  # FIX: Almost everywhere else we use the `def self.` way of defining class
-  # methods, and then we switch over to `class << self` here. Pick one or the
-  # other.
   class << self
 
     ##
@@ -1075,80 +1134,15 @@ module Gem
     attr_reader :loaded_specs
 
     ##
-    # Register a Gem::Specification for default gem.
-    #
-    # Two formats for the specification are supported:
-    #
-    # * MRI 2.0 style, where spec.files contains unprefixed require names.
-    #   The spec's filenames will be registered as-is.
-    # * New style, where spec.files contains files prefixed with paths
-    #   from spec.require_paths. The prefixes are stripped before
-    #   registering the spec's filenames. Unprefixed files are omitted.
-    #
-
-    def register_default_spec(spec)
-      new_format = Gem.default_gems_use_full_paths? || spec.require_paths.any? {|path| spec.files.any? {|f| f.start_with? path } }
-
-      if new_format
-        prefix_group = spec.require_paths.map {|f| f + "/"}.join("|")
-        prefix_pattern = /^(#{prefix_group})/
-      end
-
-      spec.files.each do |file|
-        if new_format
-          file = file.sub(prefix_pattern, "")
-          next unless $~
-        end
-
-        @path_to_default_spec_map[file] = spec
-      end
-    end
-
-    ##
-    # Find a Gem::Specification of default gem from +path+
-
-    def find_unresolved_default_spec(path)
-      Gem.suffixes.each do |suffix|
-        spec = @path_to_default_spec_map["#{path}#{suffix}"]
-        return spec if spec
-      end
-      nil
-    end
-
-    ##
-    # Remove needless Gem::Specification of default gem from
-    # unresolved default gem list
-
-    def remove_unresolved_default_spec(spec)
-      spec.files.each do |file|
-        @path_to_default_spec_map.delete(file)
-      end
-    end
-
-    ##
-    # Clear default gem related variables. It is for test
-
-    def clear_default_specs
-      @path_to_default_spec_map.clear
-    end
-
-    ##
-    # The list of hooks to be run after Gem::Installer#install extracts files
-    # and builds extensions
+    # The list of hooks to be run before Gem::Install#install finishes
+    # installation
 
     attr_reader :post_build_hooks
 
     ##
-    # The list of hooks to be run after Gem::Installer#install completes
-    # installation
+    # The list of hooks to be run before Gem::Install#install does any work
 
     attr_reader :post_install_hooks
-
-    ##
-    # The list of hooks to be run after Gem::DependencyInstaller installs a
-    # set of gems
-
-    attr_reader :done_installing_hooks
 
     ##
     # The list of hooks to be run after Gem::Specification.reset is run.
@@ -1156,13 +1150,13 @@ module Gem
     attr_reader :post_reset_hooks
 
     ##
-    # The list of hooks to be run after Gem::Uninstaller#uninstall completes
-    # installation
+    # The list of hooks to be run before Gem::Uninstall#uninstall does any
+    # work
 
     attr_reader :post_uninstall_hooks
 
     ##
-    # The list of hooks to be run before Gem::Installer#install does any work
+    # The list of hooks to be run after Gem::Install#install is finished
 
     attr_reader :pre_install_hooks
 
@@ -1172,10 +1166,13 @@ module Gem
     attr_reader :pre_reset_hooks
 
     ##
-    # The list of hooks to be run before Gem::Uninstaller#uninstall does any
-    # work
+    # The list of hooks to be run after Gem::Uninstall#uninstall is finished
 
     attr_reader :pre_uninstall_hooks
+  end
+
+  def self.cache # :nodoc:
+    source_index
   end
 
   ##
@@ -1183,28 +1180,81 @@ module Gem
 
   MARSHAL_SPEC_DIR = "quick/Marshal.#{Gem.marshal_version}/"
 
-  autoload :ConfigFile,         'rubygems/config_file'
-  autoload :Dependency,         'rubygems/dependency'
-  autoload :DependencyList,     'rubygems/dependency_list'
-  autoload :DependencyResolver, 'rubygems/resolver'
-  autoload :Installer,          'rubygems/installer'
-  autoload :PathSupport,        'rubygems/path_support'
-  autoload :Platform,           'rubygems/platform'
-  autoload :RequestSet,         'rubygems/request_set'
-  autoload :Requirement,        'rubygems/requirement'
-  autoload :Resolver,           'rubygems/resolver'
-  autoload :Source,             'rubygems/source'
-  autoload :SourceList,         'rubygems/source_list'
-  autoload :SpecFetcher,        'rubygems/spec_fetcher'
-  autoload :Specification,      'rubygems/specification'
-  autoload :Version,            'rubygems/version'
+  autoload :Version,         'rubygems/version'
+  autoload :Requirement,     'rubygems/requirement'
+  autoload :Dependency,      'rubygems/dependency'
+  autoload :DependencyList,  'rubygems/dependency_list'
+  autoload :GemPathSearcher, 'rubygems/gem_path_searcher'
+  autoload :SpecFetcher,     'rubygems/spec_fetcher'
+  autoload :Specification,   'rubygems/specification'
+  autoload :Cache,           'rubygems/source_index'
+  autoload :SourceIndex,     'rubygems/source_index'
+  autoload :PathSupport,     'rubygems/path_support'
+  autoload :Platform,        'rubygems/platform'
+  autoload :Builder,         'rubygems/builder'
+  autoload :ConfigFile,      'rubygems/config_file'
+end
 
-  require "rubygems/specification"
+module Kernel
+
+  remove_method :gem if 'method' == defined? gem # from gem_prelude.rb on 1.9
+
+  ##
+  # Use Kernel#gem to activate a specific version of +gem_name+.
+  #
+  # +requirements+ is a list of version requirements that the
+  # specified gem must match, most commonly "= example.version.number".  See
+  # Gem::Requirement for how to specify a version requirement.
+  #
+  # If you will be activating the latest version of a gem, there is no need to
+  # call Kernel#gem, Kernel#require will do the right thing for you.
+  #
+  # Kernel#gem returns true if the gem was activated, otherwise false.  If the
+  # gem could not be found, didn't match the version requirements, or a
+  # different version was already activated, an exception will be raised.
+  #
+  # Kernel#gem should be called *before* any require statements (otherwise
+  # RubyGems may load a conflicting library version).
+  #
+  # In older RubyGems versions, the environment variable GEM_SKIP could be
+  # used to skip activation of specified gems, for example to test out changes
+  # that haven't been installed yet.  Now RubyGems defers to -I and the
+  # RUBYLIB environment variable to skip activation of a gem.
+  #
+  # Example:
+  #
+  #   GEM_SKIP=libA:libB ruby -I../libA -I../libB ./mycode.rb
+
+  def gem(gem_name, *requirements) # :doc:
+    skip_list = (ENV['GEM_SKIP'] || "").split(/:/)
+    raise Gem::LoadError, "skipping #{gem_name}" if skip_list.include? gem_name
+    spec = Gem::Dependency.new(gem_name, *requirements).to_spec
+    spec.activate if spec
+  end
+
+  private :gem
+
+end
+
+##
+# Return the path to the data directory associated with the named package.  If
+# the package is loaded as a gem, return the gem specific data directory.
+# Otherwise return a path to the share area as define by
+# "#{ConfigMap[:datadir]}/#{package_name}".
+
+def RbConfig.datadir(package_name) # :nodoc:
+  warn "#{Gem.location_of_caller.join ':'}:Warning: " \
+    "RbConfig.datadir is deprecated and will be removed on or after " \
+    "August 2011.  " \
+    "Use Gem::datadir."
+
+  require 'rbconfig/datadir'
+
+  Gem.datadir(package_name) || File.join(Gem::ConfigMap[:datadir], package_name)
 end
 
 require 'rubygems/exceptions'
 
-# REFACTOR: This should be pulled out into some kind of hacks file.
 gem_preluded = Gem::GEM_PRELUDE_SUCKAGE and defined? Gem
 unless gem_preluded then # TODO: remove guard after 1.9.2 dropped
   begin
@@ -1218,7 +1268,7 @@ unless gem_preluded then # TODO: remove guard after 1.9.2 dropped
   if defined?(RUBY_ENGINE) then
     begin
       ##
-      # Defaults the Ruby implementation wants to provide for RubyGems
+      # Defaults the ruby implementation wants to provide for RubyGems
 
       require "rubygems/defaults/#{RUBY_ENGINE}"
     rescue LoadError
@@ -1227,11 +1277,29 @@ unless gem_preluded then # TODO: remove guard after 1.9.2 dropped
 end
 
 ##
-# Loads the default specs.
-Gem::Specification.load_defaults
+# Enables the require hook for RubyGems.
 
-require 'rubygems/core_ext/kernel_gem'
-require 'rubygems/core_ext/kernel_require'
+require 'rubygems/custom_require'
 
-Gem.use_gemdeps
-
+module Gem
+  class << self
+    extend Gem::Deprecate
+    deprecate :activate_dep,          "Specification#activate", 2011,  6
+    deprecate :activate_spec,         "Specification#activate", 2011,  6
+    deprecate :cache,                 "Gem::source_index",      2011,  8
+    deprecate :activate,              "Specification#activate", 2011, 10
+    deprecate :all_load_paths,        :none,                    2011, 10
+    deprecate :all_partials,          :none,                    2011, 10
+    deprecate :latest_load_paths,     :none,                    2011, 10
+    deprecate :promote_load_path,     :none,                    2011, 10
+    deprecate :available?,       "Specification::find_by_name", 2011, 11
+    deprecate :cache_dir,           "Specification#cache_dir",  2011, 11
+    deprecate :cache_gem,           "Specification#cache_file", 2011, 11
+    deprecate :default_system_source_cache_dir, :none,          2011, 11
+    deprecate :default_user_source_cache_dir,   :none,          2011, 11
+    deprecate :report_activate_error, :none,                    2011, 11
+    deprecate :required_location,     :none,                    2011, 11
+    deprecate :searcher,              "Specification",          2011, 11
+    deprecate :source_index,          "Specification",          2011, 11
+  end
+end

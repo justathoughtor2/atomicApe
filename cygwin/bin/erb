@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 # Tiny eRuby --- ERB2
 # Copyright (c) 1999-2000,2002 Masatoshi SEKI
 # You can redistribute it and/or modify it under the same terms as Ruby.

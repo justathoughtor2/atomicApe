@@ -352,3 +352,32 @@ clients terminated :2
 dumps serviced :0
 dumps reported :0
 [14452:15220:0206/023015:VERBOSE1:crash_service_main.cc(89)] Session end. return code is 0
+[7360:5528:0207/210142:VERBOSE1:crash_service_main.cc(68)] Session start. cmdline is [--reporter-url=http://54.249.141.255:1127/post --application-name=Atom --v=1]
+[7360:5528:0207/210142:VERBOSE1:crash_service.cc(142)] window handle is 00130226
+[7360:5528:0207/210142:VERBOSE1:crash_service.cc(290)] pipe name is \\.\pipe\Atom Crash Service
+dumps at D:\atomicApe\cygwin\tmp\Atom Crashes
+[7360:5528:0207/210142:VERBOSE1:crash_service.cc(294)] checkpoint is D:\atomicApe\cygwin\tmp\Atom Crashes\crash_checkpoint.txt
+server is http://54.249.141.255:1127/post
+maximum 128 reports/day
+reporter is electron-crash-service
+[7360:5528:0207/210142:VERBOSE1:crash_service_main.cc(84)] Ready to process crash requests
+[7360:948:0207/210142:VERBOSE1:crash_service.cc(323)] client start. pid = 5424
+[7360:948:0207/210142:VERBOSE1:crash_service.cc(323)] client start. pid = 12328
+[9460:11744:0207/210142:VERBOSE1:crash_service_main.cc(68)] Session start. cmdline is [--reporter-url=http://54.249.141.255:1127/post --application-name=Atom --v=1]
+[9460:11744:0207/210142:VERBOSE1:crash_service.cc(142)] window handle is 000E02EC
+[9460:11744:0207/210142:VERBOSE1:crash_service.cc(290)] pipe name is \\.\pipe\Atom Crash Service
+dumps at D:\atomicApe\cygwin\tmp\Atom Crashes
+[9460:11744:0207/210142:VERBOSE1:crash_service.cc(294)] checkpoint is D:\atomicApe\cygwin\tmp\Atom Crashes\crash_checkpoint.txt
+server is http://54.249.141.255:1127/post
+maximum 128 reports/day
+reporter is electron-crash-service
+[9460:11744:0207/210142:ERROR:crash_service.cc(301)] could not start dumper
+[7360:4888:0207/210149:VERBOSE1:crash_service.cc(331)] client end. pid = 12328
+[7360:4888:0207/210149:VERBOSE1:crash_service.cc(331)] client end. pid = 5424
+[7360:4888:0207/210150:VERBOSE1:crash_service.cc(352)] zero clients. exiting
+[7360:5528:0207/210150:VERBOSE1:crash_service.cc(490)] session ending..
+[7360:5528:0207/210150:VERBOSE1:crash_service.cc(495)] clients connected :2
+clients terminated :2
+dumps serviced :0
+dumps reported :0
+[7360:5528:0207/210150:VERBOSE1:crash_service_main.cc(89)] Session end. return code is 0

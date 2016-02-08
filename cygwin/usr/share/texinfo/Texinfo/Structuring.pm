@@ -43,6 +43,7 @@ use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
 # If you do not need this, moving things directly into @EXPORT or @EXPORT_OK
 # will save memory.
 %EXPORT_TAGS = ( 'all' => [ qw(
+  add_missing_menus
   associate_internal_references
   complete_tree_nodes_menus
   elements_directions
@@ -69,7 +70,7 @@ use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
 @EXPORT = qw(
 );
 
-$VERSION = '6.0';
+$VERSION = '6.1';
 
 
 my %types_to_enter;
@@ -155,30 +156,7 @@ $unnumbered_commands{'top'} = 1;
 $unnumbered_commands{'centerchap'} = 1;
 $unnumbered_commands{'part'} = 1;
 
-my $min_level = $command_structuring_level{'chapter'};
-my $max_level = $command_structuring_level{'subsubsection'};
-
-sub _section_level($)
-{
-  my $section = shift;
-  my $level = $command_structuring_level{$section->{'cmdname'}};
-  # correct level according to raise/lowersections
-  if ($section->{'extra'} and $section->{'extra'}->{'sections_level'}) {
-    $level -= $section->{'extra'}->{'sections_level'};
-    if ($level < $min_level) {
-      if ($command_structuring_level{$section->{'cmdname'}} < $min_level) {
-        $level = $command_structuring_level{$section->{'cmdname'}};
-      } else {
-        $level = $min_level;
-      }
-    } elsif ($level > $max_level) {
-      $level = $max_level;
-    }
-  }
-  return $level;
-}
 # sets:
-# 'level'
 # 'number'
 # 'section_childs'
 # 'section_up'
@@ -221,8 +199,11 @@ sub sectioning_structure($$)
           $section_top = $content;
         }
       }
-      my $level = _section_level($content);
-      $content->{'level'} = $level;
+      my $level = $content->{'level'};
+      if (!defined($level)) {
+        warn "bug: level not defined for $content->{'cmdname'}\n";
+        $level = $content->{'level'} = 0;
+      }
 
       if ($previous_section) {
         # new command is below
@@ -438,11 +419,11 @@ sub fill_gaps_in_sectioning($)
       next;
     }
     my $current_section = shift @sections_list;
-    my $current_section_level = _section_level($current_section);
+    my $current_section_level = $current_section->{'level'};
     my $next_section = $sections_list[0];
     
     if (defined($next_section)) {
-      my $next_section_level = _section_level($next_section);
+      my $next_section_level = $next_section->{'level'};
       if ($next_section_level - $current_section_level > 1) {
         my @correct_level_offset_commands = _correct_level($next_section,
                                                           $contents[-1]);
@@ -1683,6 +1664,44 @@ sub _new_block_command($$$)
   return $new_block;
 }
 
+sub add_node_menu_if_missing($$)
+{
+  my $self = shift;
+  my $node = shift;
+  
+  if (!$node->{'extra'}->{'associated_section'}->{'section_childs'}
+      or $node->{'menus'} and @{$node->{'menus'}}) {
+    return;
+  }
+
+  my @node_childs;
+  foreach my $child (@{$node->{'extra'}->{'associated_section'}->{'section_childs'}}) {
+    if ($child->{'extra'} and $child->{'extra'}->{'associated_node'}) {
+      push @node_childs, $child->{'extra'}->{'associated_node'};
+    }
+  }
+
+  if ($#node_childs+1 == 0) {
+    return;
+  }
+
+  my @pending;
+  for my $child (@node_childs) {
+    my $entry = _new_node_menu_entry($self, 
+                                     $child->{'extra'}->{'node_content'});
+    push @pending, $entry;
+  }
+
+  # Add a menu to this node
+  my $section = $node->{'extra'}->{'associated_section'};
+  my $current_menu = _new_block_command (\@pending, $section, 'menu');
+  push @{$section->{'contents'}}, $current_menu;
+  push @{$section->{'contents'}}, {'type' => 'empty_line',
+                                   'text' => "\n", 
+                                   'parent' => $section};
+  push @{$node->{'menus'}}, $current_menu;
+}
+
 sub complete_node_menu($$)
 {
   my $self = shift;
@@ -1779,6 +1798,25 @@ sub complete_node_menu($$)
         push @{$current_menu->{'contents'}}, @pending;
         push @{$current_menu->{'contents'}}, $end if ($end);
       }
+    }
+  }
+}
+
+# This should be called after sectioning_structure
+sub add_missing_menus($$)
+{
+  my $self = shift;
+  my $root = shift;
+  if (!$root->{'type'} or $root->{'type'} ne 'document_root'
+      or !$root->{'contents'}) {
+    return undef;
+  }
+  foreach my $content (@{$root->{'contents'}}) {
+    if ($content->{'cmdname'} and $content->{'cmdname'} eq 'node'
+        and (scalar(@{$content->{'extra'}->{'nodes_manuals'}}) == 1)
+        and $content->{'extra'} 
+        and $content->{'extra'}->{'associated_section'}) {
+      add_node_menu_if_missing($self, $content);
     }
   }
 }
@@ -1984,6 +2022,12 @@ sub _sort_index_entries($$)
   if ($res == 0) {
     $res = ($key1->{'number'} <=> $key2->{'number'});
   }
+  # This may happen if 2 indices are merged as the number is per 
+  # index name.  The @-command should be different though, for 
+  # index names to be different.
+  if ($res == 0) {
+    $res = ($key1->{'index_at_command'} cmp $key2->{'index_at_command'});
+  }
   return $res;
 }
 
@@ -1996,6 +2040,9 @@ sub _sort_index_entries_in_letter($$)
   my $res = ($a cmp $b);
   if ($res == 0) {
     $res = ($key1->{'number'} <=> $key2->{'number'});
+  }
+  if ($res == 0) {
+    $res = ($key1->{'index_at_command'} cmp $key2->{'index_at_command'});
   }
   return $res;
 }

@@ -1,14 +1,23 @@
 #!/bin/dash
+export PATH=/bin
 l=/var/lib/rebase
 b=/var/cache/rebase
 db="${l}/dynpath.d"
 ub="${l}/user.d"
+for d in ${b} ${db} ${ub} ; do
+    if [ ! -d ${d} ] ; then
+	echo "Directory ${d} does not exist, trying to re-create."
+	mkdir -p ${d}
+    fi
+done
+
 BaseAddress=''
 if [ "x86_64" = $( uname -m ) ] ; then
   DefaultBaseAddress=0x400000000
 else
-  DefaultBaseAddress=0x70000000
+  DefaultBaseAddress=0x070000000
 fi    
+
 cleardb="no"
 rebuild="no"
 noaslr="no"
@@ -16,9 +25,9 @@ verbose=""
 pkgdone="no"
 doSuffixes='dll|so|oct|mex'
 exeSuffixes='exe'
+
 dynPaths=$( cat ${db}/* | sort -u )
 dynLocs=''
-
 for d in ${dynPaths} ; do
   [ -d "${d}" ] && dynLocs="${dynLocs} ${d}"
 done
@@ -82,7 +91,7 @@ pkg
 check_file () {
   if [ "$2" = "yes" -a  -e $1 ] ; then
     echo "removing $1"
-    rm $1
+    rm -f $1
   fi
   if [ ! -e "$1" ] ; then
     echo "creating empty $1"
@@ -145,7 +154,7 @@ rebase_do () {
   echo "Rebasing with list ${g}, built from $@."
   cat $@ | grep -vE '^#' | sort -u >"${g}"
   if [ ! -e "/etc/rebase.db.i386" -a ! -e "/etc/rebase.db.x86_64" ] ; then
-    BaseAddress="-b $DefaultBaseAddress"
+    BaseAddress="-b ${DefaultBaseAddress}"
   fi
   rebase ${BaseAddress} ${verbose} -n -s -T "${g}"
   if [ "noaslr" = "yes" ] ; then
@@ -163,10 +172,10 @@ peflags_do () {
 }
 
 rebase_pkg () {
-  if [ "$pkgdone" = "no" ] ; then
+  if [ "${pkgdone}" = "no" ] ; then
     local f g
     g="${b}/rebase_pkg"
-    check_file "${g}" $rebuild
+    check_file "${g}" ${rebuild}
     echo "Updating package information in ${g}."
     for f in $( find /etc/setup -xdev -type f -name '*.lst.gz' -newer "${g}" ) ; do
       echo "\tfrom ${f}..."
@@ -175,9 +184,12 @@ rebase_pkg () {
 EOF
       gzip -d -c "${f}" |
       grep -E "\.(${doSuffixes}|${exeSuffixes})\$" |
-      sed -e '/cygwin1\.dll$/d' -e '/cyglsa.*\.dll$/d' \
-          -e '/sys-root\/mingw/d' -e '/\/d\?ash\.exe$/d' \
-          -e '/\/\(rebase\|peflags\)\.exe$/d' -e 's/^/\//' \
+      sed -e '/\(cygwin1\|cyglsa.*\)\.dll$/d' \
+          -e '/\/\(d\?ash|rebase\|peflags\)\.exe$/d' \
+	  -e '/\/octave\//!{/\(mex\|oct\)$/d}' \
+	  -e '/gnuplot\/demo\/plugin\/.*\.so/d' \
+	  -e '/sys-root\/mingw/d' \
+	  -e 's/^/\//' \
           >>"${g}"
     done
     update_file "${g}"
@@ -204,7 +216,7 @@ rebase_lst () {
   f="${b}/rebase_pkg"
   rebase_pkg
   g="${b}/rebase_lst"
-  check_file "${g}" $rebuild
+  check_file "${g}" ${rebuild}
   if [ "${f}" -nt "${g}" ] ; then
     echo "Updating rebase information for installed dynamic objects in ${g}."
     check_file "${g}" "no"
@@ -221,7 +233,7 @@ rebase_dyn () {
     touch "${g}"
   else
     echo "Looking for dynamic language modules/libraries in:"
-    for d in ${dynLocs} ; do echo "  $d" ; done
+    for d in ${dynLocs} ; do echo "  ${d}" ; done
     echo "Updating rebase information for dynamic language modules/libraries ${g}."
     find ${dynLocs} -xdev -regextype posix-extended -regex ".*\.(${doSuffixes})$" -newer "${g}" >>"${g}"
   fi
@@ -231,10 +243,10 @@ rebase_dyn () {
 rebase_user () {
   local f g
   g="${b}/rebase_user"
-  check_file "${g}" $rebuild
+  check_file "${g}" ${rebuild}
   echo "Updating rebase information for user-defined dynamic objects ${g}."
   for f in $( find ${ub} -xdev -type f -newer "${g}" ) ; do
-    grep -E "\.($doSuffixes)\$" "${f}" >>"${g}"
+    grep -E "\.(${doSuffixes})\$" "${f}" >>"${g}"
   done
   update_file "${g}"
 }
@@ -242,10 +254,10 @@ rebase_user () {
 rebase_user_exe () {
   local g
   g="${b}/rebase_user_exe"
-  check_file "${g}" $rebuild
+  check_file "${g}" ${rebuild}
   echo "Updating rebase information for user-defined executables ${g}."
   for f in $( find ${ub} -xdev -type f -newer "${g}" ) ; do
-    grep -E "\.($exeSuffixes)\$" "${f}" >>"${g}"
+    grep -E "\.(${exeSuffixes})\$" "${f}" >>"${g}"
   done
   update_file "${g}"
 }

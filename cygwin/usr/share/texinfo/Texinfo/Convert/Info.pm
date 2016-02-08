@@ -1,6 +1,6 @@
 # Info.pm: output tree as Info.
 #
-# Copyright 2010, 2011, 2012, 2013, 2014 Free Software Foundation, Inc.
+# Copyright 2010, 2011, 2012, 2013, 2014, 2015 Free Software Foundation, Inc.
 # 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -45,7 +45,7 @@ use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
 @EXPORT = qw(
 );
 
-$VERSION = '6.0';
+$VERSION = '6.1';
 
 my $STDIN_DOCU_NAME = 'stdin';
 
@@ -414,13 +414,22 @@ sub _node($$)
   $result .= $node_begin;
   $self->_add_text_count($node_begin);
   my ($node_text, $byte_count) = $self->_node_line($node);
-  if ($node_text =~ /,/ and $self->get_conf('INFO_SPECIAL_CHARS_WARNING')) {
-    $self->line_warn(sprintf($self->__(
-               "\@node name should not contain `,': %s"), $node_text),
-                             $node->{'line_nr'});
+  my $pre_quote = '';
+  my $post_quote = '';
+  if ($node_text =~ /,/) {
+    if ($self->get_conf('INFO_SPECIAL_CHARS_WARNING')) {
+      $self->line_warn(sprintf($self->__(
+                 "\@node name should not contain `,': %s"), $node_text),
+                               $node->{'line_nr'});
+    }
+    if ($self->get_conf('INFO_SPECIAL_CHARS_QUOTE')) {
+      $pre_quote = "\x{7f}";
+      $post_quote = $pre_quote;
+      $self->{'count_context'}->[-1]->{'bytes'} += 2;
+    }
   }
   $self->{'count_context'}->[-1]->{'bytes'} += $byte_count;
-  $result .= $node_text;
+  $result .= $pre_quote . $node_text . $post_quote;
   foreach my $direction(@directions) {
     if ($node->{'node_'.lc($direction)}) {
       my $node_direction = $node->{'node_'.lc($direction)};

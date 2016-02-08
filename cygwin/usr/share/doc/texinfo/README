@@ -1,9 +1,9 @@
-$Id: README 6252 2015-05-06 17:37:57Z karl $
+$Id: README 6951 2016-01-20 19:57:18Z gavin $
 This is the README file for the GNU Texinfo distribution.  Texinfo is
 the preferred documentation format for GNU software.
 
   Copyright 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001,
-  2002, 2003, 2004, 2009, 2010, 2011, 2012, 2013, 2014, 2015
+  2002, 2003, 2004, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016
   Free Software Foundation, Inc.
 
   Copying and distribution of this file, with or without modification,

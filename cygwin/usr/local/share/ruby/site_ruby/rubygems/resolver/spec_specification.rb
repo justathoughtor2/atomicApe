@@ -4,6 +4,8 @@
 
 class Gem::Resolver::SpecSpecification < Gem::Resolver::Specification
 
+  attr_reader :spec # :nodoc:
+
   ##
   # A SpecSpecification is created for a +set+ for a Gem::Specification in
   # +spec+.  The +source+ is either where the +spec+ came from, or should be
