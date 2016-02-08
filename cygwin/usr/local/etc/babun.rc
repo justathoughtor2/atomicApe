@@ -57,17 +57,26 @@ fi
 
 # set PATH so it includes user's private bin if it exists
 HOME_LOCAL_BIN="$homedir/.local/bin"
-HOME_BIN="$homedir/bin"
+# HOME_BIN="$homedir/bin"
 
 if [ ! -d "$HOME_LOCAL_BIN" ] ; then
     mkdir -p "$HOME_LOCAL_BIN"
 fi
 
-if [ ! -d "$HOME_BIN" ] ; then
-	ln -s "$HOME_LOCAL_BIN" "$HOME_BIN"
-fi
+# if [ ! -d "$HOME_BIN" ] ; then
+# 	ln -s "$HOME_LOCAL_BIN" "$HOME_BIN"
+# fi
 
 PATH="$HOME_LOCAL_BIN:$PATH"
+
+# Link /bin to /usr/bin and link /bin/zsh to /bin/sh
+if [ ! -d "/usr/bin" ]; then
+    ln -s /bin /usr/bin
+fi
+
+if [ ! -f "/bin/sh" ]; then
+    ln -s /bin/zsh /bin/sh
+fi
 
 #
 # IMPORTANT -> THIS HAS TO BE LOCATED AT THE END OF THIS SCRIPT
