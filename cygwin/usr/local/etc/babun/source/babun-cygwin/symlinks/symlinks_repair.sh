@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 #set -e -f -o pipefail -> don't use it, not required
 filename="/etc/postinstall/symlinks_broken.txt"
 

@@ -85,3 +85,4 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias atom="~/atom.bat"
 alias uwamp="~/UwAmp/UwAmp.exe"
+alias fixbabun="~/fixbabun"
