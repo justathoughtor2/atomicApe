@@ -8,12 +8,5 @@ cygwin/home/bananas/phonegap
 # .ssh directory
 cygwin/home/bananas/.ssh
 
-# oh-my-zsh directories and babun source directory must be included!
-!cygwin/home/bananas/.oh-my-zsh
-!cygwin/home/bananas/.oh-my-zsh/**
-!cygwin/usr/local/etc/babun/source
-!cygwin/usr/local/etc/babun/source/**
-!cygwin/usr/local/etc/babun/home/oh-my-zsh/.oh-my-zsh
-!cygwin/usr/local/etc/babun/home/oh-my-zsh/.oh-my-zsh/**
-!cygwin/usr/local/etc/babun/home/external/oh-my-zsh
-!cygwin/usr/local/etc/babun/home/external/oh-my-zsh/**
+# .zsh_history
+cygwin/home/bananas/.zsh_history

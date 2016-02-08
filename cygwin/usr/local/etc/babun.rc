@@ -70,12 +70,19 @@ fi
 PATH="$HOME_LOCAL_BIN:$PATH"
 
 # Link /bin to /usr/bin and link /bin/zsh to /bin/sh
-if [ ! -d "/usr/bin" ]; then
-    ln -s /bin /usr/bin
+if [ -f "/bin/sh" ]; then
+    rm /bin/sh
+    ln -s /bin/zsh /bin/sh
 fi
 
-if [ ! -f "/bin/sh" ]; then
-    ln -s /bin/zsh /bin/sh
+if [ -f "/bin/python" ]; then
+    rm /bin/python
+    ln -s /bin/python2.7 /bin/python
+fi
+
+if [ -f "/bin/python2" ]; then
+    rm /bin/python2
+    ln -s /bin/python2.7 /bin/python2
 fi
 
 #
