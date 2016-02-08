@@ -1,5 +1,7 @@
 #!/usr/bin/sh
 
 # Fix pact and other babun utilities
+dos2unix /usr/local/etc/**
+dos2unix /usr/local/etc/**/**
 dos2unix /usr/local/etc/babun/**
 dos2unix /usr/local/etc/babun/**/**
