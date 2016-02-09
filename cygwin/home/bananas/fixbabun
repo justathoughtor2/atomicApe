@@ -1,6 +1,8 @@
 #!/usr/bin/sh
 
 # Fix pact and other babun utilities
+dos2unix /home/bananas/.pact/**
+dos2unix /usr/share/nano/**
 dos2unix /usr/local/etc/**
 dos2unix /usr/local/etc/**/**
 dos2unix /usr/local/etc/babun/**
