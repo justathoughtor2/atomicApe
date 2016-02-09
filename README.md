@@ -12,11 +12,10 @@ If all goes well, there will be no more errors in pact.
 
 To start Atom, run the command `atom` from within the
 Babun terminal. Note that this will occupy the terminal until you close Atom, so you might 
-want to open another terminal with ALT+F2 (from within the first terminal). To run GCC, just
+want to open another terminal with ALT+F2 (from within the first terminal). To start UwAmp, run `uwamp`; this also
+occupies the terminal for the duration of the software's run. To run GCC, just
 run `gcc` in the terminal. To run Python or pip, run either `python` or `pip`
-(respectively). To run Node.js or NPM, run `node` or `npm` (respectively). To run Ruby or
-RubyGems, run `ruby` or `gem` (respectively). To start UwAmp, run `uwamp`; this also
-occupies the terminal for the duration of the software's run.
+(respectively). To run Ruby or RubyGems, run `ruby` or `gem` (respectively). To run Node.js or NPM, run `node` or `npm` (respectively).
 
 ## Currently included software:
 + [Atom v1.4.3](https://atom.io/)
@@ -25,11 +24,12 @@ occupies the terminal for the duration of the software's run.
 + [GCC v4.9.3](https://gcc.gnu.org/)
 + [Python v2.7.10](https://www.python.org/)
 + [Pelican v3.6.3](http://blog.getpelican.com/)
-+ [Ruby v2.2.4 and RubyGems v2.4.5.1](https://www.ruby-lang.org/en/)
++ [Ruby v2.2.4 and RubyGems v1.8.30](https://www.ruby-lang.org/en/)
 + [Jekyll v3.1.1](https://jekyllrb.com/)
 + [Node.js v4.2.6 and NPM v1.4.9](https://nodejs.org/en/)
 + [Forever v0.15.1](https://github.com/foreverjs/forever)
 + [Bower v1.7.6](https://github.com/bower/bower)
++ [PhoneGap CLI v5.5.0](http://phonegap.com/)
 + [UwAmp v3.0.2](http://www.uwamp.com/en/)
 + [Apache v2.4.10](http://www.apache.org/)
 + [MySQL v5.6.20](https://www.mysql.com/)
