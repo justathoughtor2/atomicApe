@@ -7,3 +7,4 @@ dos2unix /usr/local/etc/**
 dos2unix /usr/local/etc/**/**
 dos2unix /usr/local/etc/babun/**
 dos2unix /usr/local/etc/babun/**/**
+dos2unix /home/bananas/.*
