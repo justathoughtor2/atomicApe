@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Jekyll::URL - jekyll-3.1.1 Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../Object.html">Object</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-escape_path">::escape_path</a>
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-c-unescape_path">::unescape_path</a>
+    
+    <li ><a href="#method-i-generate_url">#generate_url</a>
+    
+    <li ><a href="#method-i-generate_url_from_drop">#generate_url_from_drop</a>
+    
+    <li ><a href="#method-i-generate_url_from_hash">#generate_url_from_hash</a>
+    
+    <li ><a href="#method-i-generated_permalink">#generated_permalink</a>
+    
+    <li ><a href="#method-i-generated_url">#generated_url</a>
+    
+    <li ><a href="#method-i-sanitize_url">#sanitize_url</a>
+    
+    <li ><a href="#method-i-to_s">#to_s</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Jekyll::URL">
+  <h1 id="class-Jekyll::URL" class="class">
+    class Jekyll::URL
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-escape_path" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">escape_path</span><span
+            class="method-args">(path)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Escapes a path to be a valid <a href="URL.html">URL</a> path segment</p>
+
+<p>path - The path to be escaped.</p>
+
+<p>Examples:</p>
+
+<pre class="ruby"><span class="ruby-constant">URL</span>.<span class="ruby-identifier">escape_path</span>(<span class="ruby-string">&quot;/a b&quot;</span>)
+<span class="ruby-comment"># =&gt; &quot;/a%20b&quot;</span>
+</pre>
+
+<p>Returns the escaped path.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="escape_path-source">
+            <pre><span class="ruby-comment"># File lib/jekyll/url.rb, line 108</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">escape_path</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-comment"># Because URI.escape doesn&#39;t escape &#39;?&#39;, &#39;[&#39; and &#39;]&#39; by default,</span>
+  <span class="ruby-comment"># specify unsafe string (except unreserved, sub-delims, &quot;:&quot;, &quot;@&quot; and &quot;/&quot;).</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># URI path segment is defined in RFC 3986 as follows:</span>
+  <span class="ruby-comment">#   segment       = *pchar</span>
+  <span class="ruby-comment">#   pchar         = unreserved / pct-encoded / sub-delims / &quot;:&quot; / &quot;@&quot;</span>
+  <span class="ruby-comment">#   unreserved    = ALPHA / DIGIT / &quot;-&quot; / &quot;.&quot; / &quot;_&quot; / &quot;~&quot;</span>
+  <span class="ruby-comment">#   pct-encoded   = &quot;%&quot; HEXDIG HEXDIG</span>
+  <span class="ruby-comment">#   sub-delims    = &quot;!&quot; / &quot;$&quot; / &quot;&amp;&quot; / &quot;&#39;&quot; / &quot;(&quot; / &quot;)&quot;</span>
+  <span class="ruby-comment">#                 / &quot;*&quot; / &quot;+&quot; / &quot;,&quot; / &quot;;&quot; / &quot;=&quot;</span>
+  <span class="ruby-constant">URI</span>.<span class="ruby-identifier">escape</span>(<span class="ruby-identifier">path</span>, <span class="ruby-regexp">/[^a-zA-Z\d\-._~!$&amp;&#39;()*+,;=:@\/]/</span>).<span class="ruby-identifier">encode</span>(<span class="ruby-string">&#39;utf-8&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(options)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>options - One of :permalink or :template must be supplied.</p>
+
+<pre>:template     - The String used as template for URL generation,
+                for example &quot;/:path/:basename:output_ext&quot;, where
+                a placeholder is prefixed with a colon.
+:placeholders - A hash containing the placeholders which will be
+                replaced when used inside the template. E.g.
+                { &quot;year&quot; =&gt; Time.now.strftime(&quot;%Y&quot;) } would replace
+                the placeholder &quot;:year&quot; with the current year.
+:permalink    - If supplied, no URL will be generated from the
+                template. Instead, the given permalink will be
+                used as URL.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/jekyll/url.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-ivar">@template</span>     = <span class="ruby-identifier">options</span>[<span class="ruby-value">:template</span>]
+  <span class="ruby-ivar">@placeholders</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:placeholders</span>] <span class="ruby-operator">||</span> {}
+  <span class="ruby-ivar">@permalink</span>    = <span class="ruby-identifier">options</span>[<span class="ruby-value">:permalink</span>]
+
+  <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@template</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@permalink</span>).<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;One of :template or :permalink must be supplied.&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-unescape_path" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">unescape_path</span><span
+            class="method-args">(path)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Unescapes a <a href="URL.html">URL</a> path segment</p>
+
+<p>path - The path to be unescaped.</p>
+
+<p>Examples:</p>
+
+<pre class="ruby"><span class="ruby-constant">URL</span>.<span class="ruby-identifier">unescape_path</span>(<span class="ruby-string">&quot;/a%20b&quot;</span>)
+<span class="ruby-comment"># =&gt; &quot;/a b&quot;</span>
+</pre>
+
+<p>Returns the unescaped path.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="unescape_path-source">
+            <pre><span class="ruby-comment"># File lib/jekyll/url.rb, line 132</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">unescape_path</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-constant">URI</span>.<span class="ruby-identifier">unescape</span>(<span class="ruby-identifier">path</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-string">&#39;utf-8&#39;</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-generate_url" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generate_url</span><span
+            class="method-args">(template)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Internal: Generate the <a href="URL.html">URL</a> by replacing all
+placeholders with their respective values in the given template</p>
+
+<p>Returns the unsanitized String <a href="URL.html">URL</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="generate_url-source">
+            <pre><span class="ruby-comment"># File lib/jekyll/url.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">generate_url</span>(<span class="ruby-identifier">template</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@placeholders</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Drops</span><span class="ruby-operator">::</span><span class="ruby-constant">UrlDrop</span>
+    <span class="ruby-identifier">generate_url_from_drop</span>(<span class="ruby-identifier">template</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">generate_url_from_hash</span>(<span class="ruby-identifier">template</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-generate_url_from_drop" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generate_url_from_drop</span><span
+            class="method-args">(template)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="generate_url_from_drop-source">
+            <pre><span class="ruby-comment"># File lib/jekyll/url.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">generate_url_from_drop</span>(<span class="ruby-identifier">template</span>)
+  <span class="ruby-identifier">template</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/:([a-z_]+)/</span>.<span class="ruby-identifier">freeze</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">match</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">replacement</span> = <span class="ruby-ivar">@placeholders</span>.<span class="ruby-identifier">public_send</span>(<span class="ruby-identifier">match</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-string">&#39;:&#39;</span>.<span class="ruby-identifier">freeze</span>, <span class="ruby-string">&#39;&#39;</span>.<span class="ruby-identifier">freeze</span>))
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">replacement</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-string">&#39;&#39;</span>.<span class="ruby-identifier">freeze</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">escape_path</span>(<span class="ruby-identifier">replacement</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\/\//</span>.<span class="ruby-identifier">freeze</span>, <span class="ruby-string">&#39;/&#39;</span>.<span class="ruby-identifier">freeze</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-generate_url_from_hash" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generate_url_from_hash</span><span
+            class="method-args">(template)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="generate_url_from_hash-source">
+            <pre><span class="ruby-comment"># File lib/jekyll/url.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">generate_url_from_hash</span>(<span class="ruby-identifier">template</span>)
+  <span class="ruby-ivar">@placeholders</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-identifier">template</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">result</span>, <span class="ruby-identifier">token</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">break</span> <span class="ruby-identifier">result</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">index</span>(<span class="ruby-string">&#39;:&#39;</span>).<span class="ruby-identifier">nil?</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">token</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-comment"># Remove leading &#39;/&#39; to avoid generating urls with `//`</span>
+      <span class="ruby-identifier">result</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-node">/\/:#{token.first}/</span>, <span class="ruby-string">&#39;&#39;</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">result</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-node">/:#{token.first}/</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">escape_path</span>(<span class="ruby-identifier">token</span>.<span class="ruby-identifier">last</span>))
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-generated_permalink" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generated_permalink</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Generates a <a href="URL.html">URL</a> from the permalink</p>
+
+<p>Returns the _unsanitized String <a href="URL.html">URL</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="generated_permalink-source">
+            <pre><span class="ruby-comment"># File lib/jekyll/url.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">generated_permalink</span>
+  (<span class="ruby-ivar">@generated_permalink</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">generate_url</span>(<span class="ruby-ivar">@permalink</span>)) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@permalink</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-generated_url" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generated_url</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Generates a <a href="URL.html">URL</a> from the template</p>
+
+<p>Returns the unsanitized String <a href="URL.html">URL</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="generated_url-source">
+            <pre><span class="ruby-comment"># File lib/jekyll/url.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">generated_url</span>
+  <span class="ruby-ivar">@generated_url</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">generate_url</span>(<span class="ruby-ivar">@template</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-sanitize_url" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sanitize_url</span><span
+            class="method-args">(str)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns a sanitized String <a href="URL.html">URL</a>, stripping “../../”
+and multiples of “/”, as well as the beginning “/” so we can enforce and
+ensure it.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="sanitize_url-source">
+            <pre><span class="ruby-comment"># File lib/jekyll/url.rb, line 94</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sanitize_url</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-string">&quot;/&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\/{2,}/</span>, <span class="ruby-string">&quot;/&quot;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\.+\/|\A\/+/</span>, <span class="ruby-string">&quot;&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-to_s" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_s</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The generated relative <a href="URL.html">URL</a> of the resource</p>
+
+<p>Returns the String <a href="URL.html">URL</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="to_s-source">
+            <pre><span class="ruby-comment"># File lib/jekyll/url.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
+  <span class="ruby-identifier">sanitize_url</span>(<span class="ruby-identifier">generated_permalink</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">generated_url</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>_syntax-highlighting.scss - jekyll-3.1.1 Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/jquery.js"></script>
+<script src="../../../js/darkfish.js"></script>
+
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="project-metadata">
+    <div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../../../LICENSE.html">LICENSE</a>
+  
+    <li><a href="../../../README_markdown.html">README.markdown</a>
+  
+    <li><a href="../../../lib/jekyll/mime_types.html">mime.types</a>
+  
+    <li><a href="../../../lib/site_template/_includes/footer_html.html">footer.html</a>
+  
+    <li><a href="../../../lib/site_template/_includes/head_html.html">head.html</a>
+  
+    <li><a href="../../../lib/site_template/_includes/header_html.html">header.html</a>
+  
+    <li><a href="../../../lib/site_template/_includes/icon-github_html.html">icon-github.html</a>
+  
+    <li><a href="../../../lib/site_template/_includes/icon-github_svg.html">icon-github.svg</a>
+  
+    <li><a href="../../../lib/site_template/_includes/icon-twitter_html.html">icon-twitter.html</a>
+  
+    <li><a href="../../../lib/site_template/_includes/icon-twitter_svg.html">icon-twitter.svg</a>
+  
+    <li><a href="../../../lib/site_template/_layouts/default_html.html">default.html</a>
+  
+    <li><a href="../../../lib/site_template/_layouts/page_html.html">page.html</a>
+  
+    <li><a href="../../../lib/site_template/_layouts/post_html.html">post.html</a>
+  
+    <li><a href="../../../lib/site_template/_sass/_base_scss.html">_base.scss</a>
+  
+    <li><a href="../../../lib/site_template/_sass/_layout_scss.html">_layout.scss</a>
+  
+    <li><a href="../../../lib/site_template/_sass/_syntax-highlighting_scss.html">_syntax-highlighting.scss</a>
+  
+    <li><a href="../../../lib/site_template/about_md.html">about</a>
+  
+    <li><a href="../../../lib/site_template/css/main_scss.html">main.scss</a>
+  
+    <li><a href="../../../lib/site_template/feed_xml.html">feed.xml</a>
+  
+    <li><a href="../../../lib/site_template/index_html.html">index.html</a>
+  
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-label="Page lib/site_template/_sass/_syntax-highlighting.scss">
+
+<pre class="ruby"><span class="ruby-constant">Syntax</span> <span class="ruby-identifier">highlighting</span> <span class="ruby-identifier">styles</span>
+</pre>
+
+<p>.highlight {</p>
+
+<pre>background: #fff;
+@extend %vertical-rhythm;
+
+.highlighter-rouge &amp; {
+  background: #eef;
+}
+
+.c     { color: #998; font-style: italic } // Comment
+.err   { color: #a61717; background-color: #e3d2d2 } // Error
+.k     { font-weight: bold } // Keyword
+.o     { font-weight: bold } // Operator
+.cm    { color: #998; font-style: italic } // Comment.Multiline
+.cp    { color: #999; font-weight: bold } // Comment.Preproc
+.c1    { color: #998; font-style: italic } // Comment.Single
+.cs    { color: #999; font-weight: bold; font-style: italic } // Comment.Special
+.gd    { color: #000; background-color: #fdd } // Generic.Deleted
+.gd .x { color: #000; background-color: #faa } // Generic.Deleted.Specific
+.ge    { font-style: italic } // Generic.Emph
+.gr    { color: #a00 } // Generic.Error
+.gh    { color: #999 } // Generic.Heading
+.gi    { color: #000; background-color: #dfd } // Generic.Inserted
+.gi .x { color: #000; background-color: #afa } // Generic.Inserted.Specific
+.go    { color: #888 } // Generic.Output
+.gp    { color: #555 } // Generic.Prompt
+.gs    { font-weight: bold } // Generic.Strong
+.gu    { color: #aaa } // Generic.Subheading
+.gt    { color: #a00 } // Generic.Traceback
+.kc    { font-weight: bold } // Keyword.Constant
+.kd    { font-weight: bold } // Keyword.Declaration
+.kp    { font-weight: bold } // Keyword.Pseudo
+.kr    { font-weight: bold } // Keyword.Reserved
+.kt    { color: #458; font-weight: bold } // Keyword.Type
+.m     { color: #099 } // Literal.Number
+.s     { color: #d14 } // Literal.String
+.na    { color: #008080 } // Name.Attribute
+.nb    { color: #0086B3 } // Name.Builtin
+.nc    { color: #458; font-weight: bold } // Name.Class
+.no    { color: #008080 } // Name.Constant
+.ni    { color: #800080 } // Name.Entity
+.ne    { color: #900; font-weight: bold } // Name.Exception
+.nf    { color: #900; font-weight: bold } // Name.Function
+.nn    { color: #555 } // Name.Namespace
+.nt    { color: #000080 } // Name.Tag
+.nv    { color: #008080 } // Name.Variable
+.ow    { font-weight: bold } // Operator.Word
+.w     { color: #bbb } // Text.Whitespace
+.mf    { color: #099 } // Literal.Number.Float
+.mh    { color: #099 } // Literal.Number.Hex
+.mi    { color: #099 } // Literal.Number.Integer
+.mo    { color: #099 } // Literal.Number.Oct
+.sb    { color: #d14 } // Literal.String.Backtick
+.sc    { color: #d14 } // Literal.String.Char
+.sd    { color: #d14 } // Literal.String.Doc
+.s2    { color: #d14 } // Literal.String.Double
+.se    { color: #d14 } // Literal.String.Escape
+.sh    { color: #d14 } // Literal.String.Heredoc
+.si    { color: #d14 } // Literal.String.Interpol
+.sx    { color: #d14 } // Literal.String.Other
+.sr    { color: #009926 } // Literal.String.Regex
+.s1    { color: #d14 } // Literal.String.Single
+.ss    { color: #990073 } // Literal.String.Symbol
+.bp    { color: #999 } // Name.Builtin.Pseudo
+.vc    { color: #008080 } // Name.Variable.Class
+.vg    { color: #008080 } // Name.Variable.Global
+.vi    { color: #008080 } // Name.Variable.Instance
+.il    { color: #099 } // Literal.Number.Integer.Long</pre>
+
+<p>}</p>
+</main>
+
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

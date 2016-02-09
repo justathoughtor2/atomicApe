@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>main.scss - jekyll-3.1.1 Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/jquery.js"></script>
+<script src="../../../js/darkfish.js"></script>
+
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="project-metadata">
+    <div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../../../LICENSE.html">LICENSE</a>
+  
+    <li><a href="../../../README_markdown.html">README.markdown</a>
+  
+    <li><a href="../../../lib/jekyll/mime_types.html">mime.types</a>
+  
+    <li><a href="../../../lib/site_template/_includes/footer_html.html">footer.html</a>
+  
+    <li><a href="../../../lib/site_template/_includes/head_html.html">head.html</a>
+  
+    <li><a href="../../../lib/site_template/_includes/header_html.html">header.html</a>
+  
+    <li><a href="../../../lib/site_template/_includes/icon-github_html.html">icon-github.html</a>
+  
+    <li><a href="../../../lib/site_template/_includes/icon-github_svg.html">icon-github.svg</a>
+  
+    <li><a href="../../../lib/site_template/_includes/icon-twitter_html.html">icon-twitter.html</a>
+  
+    <li><a href="../../../lib/site_template/_includes/icon-twitter_svg.html">icon-twitter.svg</a>
+  
+    <li><a href="../../../lib/site_template/_layouts/default_html.html">default.html</a>
+  
+    <li><a href="../../../lib/site_template/_layouts/page_html.html">page.html</a>
+  
+    <li><a href="../../../lib/site_template/_layouts/post_html.html">post.html</a>
+  
+    <li><a href="../../../lib/site_template/_sass/_base_scss.html">_base.scss</a>
+  
+    <li><a href="../../../lib/site_template/_sass/_layout_scss.html">_layout.scss</a>
+  
+    <li><a href="../../../lib/site_template/_sass/_syntax-highlighting_scss.html">_syntax-highlighting.scss</a>
+  
+    <li><a href="../../../lib/site_template/about_md.html">about</a>
+  
+    <li><a href="../../../lib/site_template/css/main_scss.html">main.scss</a>
+  
+    <li><a href="../../../lib/site_template/feed_xml.html">feed.xml</a>
+  
+    <li><a href="../../../lib/site_template/index_html.html">index.html</a>
+  
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-label="Page lib/site_template/css/main.scss">
+<hr>
+
+<p># Only the main Sass file needs front matter (the dashes are enough)</p>
+<hr>
+
+<p>@charset “utf-8”;</p>
+
+<p>// Our variables $base-font-family: “Helvetica Neue”, Helvetica, Arial,
+sans-serif; $base-font-size:   16px; $base-font-weight: 400;
+$small-font-size:  $base-font-size * 0.875; $base-line-height: 1.5;</p>
+
+<p>$spacing-unit:     30px;</p>
+
+<p>$text-color:       #111; $background-color: fdfdfd; $brand-color:     
+#2a7ae2;</p>
+
+<p>$grey-color:       #828282; $grey-color-light: lighten($grey-color, 40%);
+$grey-color-dark:  darken($grey-color, 25%);</p>
+
+<p>// Width of the content area $content-width:    800px;</p>
+
+<p>$on-palm:          600px; $on-laptop:        800px;</p>
+
+<p>// Use media queries like this: // @include media-query($on-palm) { //    
+.wrapper { //         padding-right: $spacing-unit / 2; //        
+padding-left: $spacing-unit / 2; //     } // } @mixin media-query($device)
+{</p>
+
+<pre>@media screen and (max-width: $device) {
+    @content;
+}</pre>
+
+<p>}</p>
+
+<p>// Import partials from `sass_dir` (defaults to `_sass`) @import</p>
+
+<pre>&quot;base&quot;,
+&quot;layout&quot;,
+&quot;syntax-highlighting&quot;</pre>
+
+<p>;</p>
+</main>
+
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

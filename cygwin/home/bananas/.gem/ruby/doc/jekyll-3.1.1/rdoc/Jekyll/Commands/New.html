@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Jekyll::Commands::New - jekyll-3.1.1 Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../Command.html">Jekyll::Command</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-create_blank_site">::create_blank_site</a>
+    
+    <li ><a href="#method-c-init_with_program">::init_with_program</a>
+    
+    <li ><a href="#method-c-initialized_post_name">::initialized_post_name</a>
+    
+    <li ><a href="#method-c-process">::process</a>
+    
+    <li ><a href="#method-c-scaffold_post_content">::scaffold_post_content</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Jekyll::Commands::New">
+  <h1 id="class-Jekyll::Commands::New" class="class">
+    class Jekyll::Commands::New
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-create_blank_site" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_blank_site</span><span
+            class="method-args">(path)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="create_blank_site-source">
+            <pre><span class="ruby-comment"># File lib/jekyll/commands/new.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_blank_site</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-identifier">path</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir</span>(<span class="ruby-node">%w(_layouts _posts _drafts)</span>)
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">touch</span>(<span class="ruby-string">&quot;index.html&quot;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-init_with_program" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">init_with_program</span><span
+            class="method-args">(prog)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="init_with_program-source">
+            <pre><span class="ruby-comment"># File lib/jekyll/commands/new.rb, line 7</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">init_with_program</span>(<span class="ruby-identifier">prog</span>)
+  <span class="ruby-identifier">prog</span>.<span class="ruby-identifier">command</span>(<span class="ruby-value">:new</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">c</span>.<span class="ruby-identifier">syntax</span> <span class="ruby-string">&#39;new PATH&#39;</span>
+    <span class="ruby-identifier">c</span>.<span class="ruby-identifier">description</span> <span class="ruby-string">&#39;Creates a new Jekyll site scaffold in PATH&#39;</span>
+
+    <span class="ruby-identifier">c</span>.<span class="ruby-identifier">option</span> <span class="ruby-string">&#39;force&#39;</span>, <span class="ruby-string">&#39;--force&#39;</span>, <span class="ruby-string">&#39;Force creation even if PATH already exists&#39;</span>
+    <span class="ruby-identifier">c</span>.<span class="ruby-identifier">option</span> <span class="ruby-string">&#39;blank&#39;</span>, <span class="ruby-string">&#39;--blank&#39;</span>, <span class="ruby-string">&#39;Creates scaffolding but with empty files&#39;</span>
+
+    <span class="ruby-identifier">c</span>.<span class="ruby-identifier">action</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">args</span>, <span class="ruby-identifier">options</span><span class="ruby-operator">|</span>
+      <span class="ruby-constant">Jekyll</span><span class="ruby-operator">::</span><span class="ruby-constant">Commands</span><span class="ruby-operator">::</span><span class="ruby-constant">New</span>.<span class="ruby-identifier">process</span>(<span class="ruby-identifier">args</span>, <span class="ruby-identifier">options</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-initialized_post_name" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">initialized_post_name</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Internal: Gets the filename of the sample post to be created</p>
+
+<p>Returns the filename of the sample post, as a String</p>
+          
+          
+
+          
+          <div class="method-source-code" id="initialized_post_name-source">
+            <pre><span class="ruby-comment"># File lib/jekyll/commands/new.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialized_post_name</span>
+  <span class="ruby-node">&quot;_posts/#{Time.now.strftime(&#39;%Y-%m-%d&#39;)}-welcome-to-jekyll.markdown&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-process" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">process</span><span
+            class="method-args">(args, options = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="process-source">
+            <pre><span class="ruby-comment"># File lib/jekyll/commands/new.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">args</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;You must specify a path.&#39;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span>
+
+  <span class="ruby-identifier">new_blog_path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot; &quot;</span>), <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">pwd</span>)
+  <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-identifier">new_blog_path</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">preserve_source_location?</span>(<span class="ruby-identifier">new_blog_path</span>, <span class="ruby-identifier">options</span>)
+    <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">abort_with</span> <span class="ruby-string">&quot;Conflict:&quot;</span>, <span class="ruby-node">&quot;#{new_blog_path} exists and is not empty.&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-string">&quot;blank&quot;</span>]
+    <span class="ruby-identifier">create_blank_site</span> <span class="ruby-identifier">new_blog_path</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">create_sample_files</span> <span class="ruby-identifier">new_blog_path</span>
+
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">initialized_post_name</span>, <span class="ruby-identifier">new_blog_path</span>), <span class="ruby-string">&quot;w&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">scaffold_post_content</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span> <span class="ruby-node">&quot;New jekyll site installed in #{new_blog_path}.&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-scaffold_post_content" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">scaffold_post_content</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="scaffold_post_content-source">
+            <pre><span class="ruby-comment"># File lib/jekyll/commands/new.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">scaffold_post_content</span>
+  <span class="ruby-constant">ERB</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">scaffold_path</span>, <span class="ruby-identifier">site_template</span>))).<span class="ruby-identifier">result</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

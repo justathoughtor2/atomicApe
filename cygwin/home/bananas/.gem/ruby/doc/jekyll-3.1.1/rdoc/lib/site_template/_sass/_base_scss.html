@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>_base.scss - jekyll-3.1.1 Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/jquery.js"></script>
+<script src="../../../js/darkfish.js"></script>
+
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="project-metadata">
+    <div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../../../LICENSE.html">LICENSE</a>
+  
+    <li><a href="../../../README_markdown.html">README.markdown</a>
+  
+    <li><a href="../../../lib/jekyll/mime_types.html">mime.types</a>
+  
+    <li><a href="../../../lib/site_template/_includes/footer_html.html">footer.html</a>
+  
+    <li><a href="../../../lib/site_template/_includes/head_html.html">head.html</a>
+  
+    <li><a href="../../../lib/site_template/_includes/header_html.html">header.html</a>
+  
+    <li><a href="../../../lib/site_template/_includes/icon-github_html.html">icon-github.html</a>
+  
+    <li><a href="../../../lib/site_template/_includes/icon-github_svg.html">icon-github.svg</a>
+  
+    <li><a href="../../../lib/site_template/_includes/icon-twitter_html.html">icon-twitter.html</a>
+  
+    <li><a href="../../../lib/site_template/_includes/icon-twitter_svg.html">icon-twitter.svg</a>
+  
+    <li><a href="../../../lib/site_template/_layouts/default_html.html">default.html</a>
+  
+    <li><a href="../../../lib/site_template/_layouts/page_html.html">page.html</a>
+  
+    <li><a href="../../../lib/site_template/_layouts/post_html.html">post.html</a>
+  
+    <li><a href="../../../lib/site_template/_sass/_base_scss.html">_base.scss</a>
+  
+    <li><a href="../../../lib/site_template/_sass/_layout_scss.html">_layout.scss</a>
+  
+    <li><a href="../../../lib/site_template/_sass/_syntax-highlighting_scss.html">_syntax-highlighting.scss</a>
+  
+    <li><a href="../../../lib/site_template/about_md.html">about</a>
+  
+    <li><a href="../../../lib/site_template/css/main_scss.html">main.scss</a>
+  
+    <li><a href="../../../lib/site_template/feed_xml.html">feed.xml</a>
+  
+    <li><a href="../../../lib/site_template/index_html.html">index.html</a>
+  
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-label="Page lib/site_template/_sass/_base.scss">
+
+<pre class="ruby"><span class="ruby-constant">Reset</span> <span class="ruby-identifier">some</span> <span class="ruby-identifier">basic</span> <span class="ruby-identifier">elements</span>
+</pre>
+
+<p>body, h1, h2, h3, h4, h5, h6, p, blockquote, pre, hr, dl, dd, ol, ul,
+figure {</p>
+
+<pre>margin: 0;
+padding: 0;</pre>
+
+<p>}</p>
+
+<p>/**</p>
+
+<pre> Basic styling
+/</pre>
+
+<p>body {</p>
+
+<pre>font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
+color: $text-color;
+background-color: $background-color;
+-webkit-text-size-adjust: 100%;
+-webkit-font-feature-settings: &quot;kern&quot; 1;
+-moz-font-feature-settings: &quot;kern&quot; 1;
+-o-font-feature-settings: &quot;kern&quot; 1;
+font-feature-settings: &quot;kern&quot; 1;
+font-kerning: normal;</pre>
+
+<p>}</p>
+
+<p>/**</p>
+
+<pre> Set `margin-bottom` to maintain vertical rhythm
+/</pre>
+
+<p>h1, h2, h3, h4, h5, h6, p, blockquote, pre, ul, ol, dl, figure,
+%vertical-rhythm {</p>
+
+<pre>margin-bottom: $spacing-unit / 2;</pre>
+
+<p>}</p>
+
+<p>/**</p>
+
+<pre> Images
+/</pre>
+
+<p>img {</p>
+
+<pre>max-width: 100%;
+vertical-align: middle;</pre>
+
+<p>}</p>
+
+<p>/**</p>
+
+<pre> Figures
+/</pre>
+
+<p>figure &gt; img {</p>
+
+<pre>display: block;</pre>
+
+<p>}</p>
+
+<p>figcaption {</p>
+
+<pre>font-size: $small-font-size;</pre>
+
+<p>}</p>
+
+<p>/**</p>
+
+<pre> Lists
+/</pre>
+
+<p>ul, ol {</p>
+
+<pre>margin-left: $spacing-unit;</pre>
+
+<p>}</p>
+
+<p>li {</p>
+
+<pre>&gt; ul,
+&gt; ol {
+     margin-bottom: 0;
+}</pre>
+
+<p>}</p>
+
+<p>/**</p>
+
+<pre> Headings
+/</pre>
+
+<p>h1, h2, h3, h4, h5, h6 {</p>
+
+<pre>font-weight: $base-font-weight;</pre>
+
+<p>}</p>
+
+<p>/**</p>
+
+<pre> Links
+/</pre>
+
+<p>a {</p>
+
+<pre>color: $brand-color;
+text-decoration: none;
+
+&amp;:visited {
+    color: darken($brand-color, 15%);
+}
+
+&amp;:hover {
+    color: $text-color;
+    text-decoration: underline;
+}</pre>
+
+<p>}</p>
+
+<p>/**</p>
+
+<pre> Blockquotes
+/</pre>
+
+<p>blockquote {</p>
+
+<pre>color: $grey-color;
+border-left: 4px solid $grey-color-light;
+padding-left: $spacing-unit / 2;
+font-size: 18px;
+letter-spacing: -1px;
+font-style: italic;
+
+&gt; :last-child {
+    margin-bottom: 0;
+}</pre>
+
+<p>}</p>
+
+<p>/**</p>
+
+<pre> Code formatting
+/</pre>
+
+<p>pre, code {</p>
+
+<pre>font-size: 15px;
+border: 1px solid $grey-color-light;
+border-radius: 3px;
+background-color: #eef;</pre>
+
+<p>}</p>
+
+<p>code {</p>
+
+<pre>padding: 1px 5px;</pre>
+
+<p>}</p>
+
+<p>pre {</p>
+
+<pre>padding: 8px 12px;
+overflow-x: auto;
+
+&gt; code {
+    border: 0;
+    padding-right: 0;
+    padding-left: 0;
+}</pre>
+
+<p>}</p>
+
+<p>/**</p>
+
+<pre> Wrapper
+/</pre>
+
+<p>.wrapper {</p>
+
+<pre>max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit} * 2));
+max-width:         calc(#{$content-width} - (#{$spacing-unit} * 2));
+margin-right: auto;
+margin-left: auto;
+padding-right: $spacing-unit;
+padding-left: $spacing-unit;
+@extend %clearfix;
+
+@include media-query($on-laptop) {
+    max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit}));
+    max-width:         calc(#{$content-width} - (#{$spacing-unit}));
+    padding-right: $spacing-unit / 2;
+    padding-left: $spacing-unit / 2;
+}</pre>
+
+<p>}</p>
+
+<p>/**</p>
+
+<pre> Clearfix
+/</pre>
+
+<p>%clearfix {</p>
+
+<pre>&amp;:after {
+    content: &quot;&quot;;
+    display: table;
+    clear: both;
+}</pre>
+
+<p>}</p>
+
+<p>/**</p>
+
+<pre> Icons
+/</pre>
+
+<p>.icon {</p>
+
+<pre>&gt; svg {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+
+    path {
+        fill: $grey-color;
+    }
+}</pre>
+
+<p>}</p>
+</main>
+
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
