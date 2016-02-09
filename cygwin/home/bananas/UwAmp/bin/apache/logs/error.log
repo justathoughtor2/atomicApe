@@ -171,3 +171,9 @@ AH00548: NameVirtualHost has no effect and will be removed in the next release D
 [Mon Feb 08 20:58:16.651290 2016] [ssl:warn] [pid 8016:tid 792] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
 [Mon Feb 08 20:58:16.717864 2016] [mpm_winnt:notice] [pid 8016:tid 792] AH00354: Child: Starting 64 worker threads.
 [Mon Feb 08 21:07:27.607181 2016] [mpm_winnt:crit] [pid 8016:tid 792] AH02538: Child: Parent process exited abruptly. Child process is ending
+[Tue Feb 09 10:46:57.628739 2016] [core:warn] [pid 5584:tid 368] AH00098: pid file E:/atomicApe/cygwin/home/bananas/UwAmp/bin/apache/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Tue Feb 09 10:46:57.847327 2016] [ssl:warn] [pid 5584:tid 368] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Feb 09 10:46:58.846584 2016] [mpm_winnt:notice] [pid 5584:tid 368] AH00455: Apache/2.4.10 (Win32) OpenSSL/1.0.1h PHP/5.4.31 configured -- resuming normal operations
+[Tue Feb 09 10:46:58.846584 2016] [mpm_winnt:notice] [pid 5584:tid 368] AH00456: Apache Haus VC9 Server built: Jul 15 2014 20:34:18
+[Tue Feb 09 10:46:58.846584 2016] [core:notice] [pid 5584:tid 368] AH00094: Command line: 'E:\\atomicApe\\cygwin\\home\\bananas\\UwAmp\\bin\\apache\\bin\\httpd.exe -d E:/atomicApe/cygwin/home/bananas/UwAmp/bin/apache -f E:\\atomicApe\\cygwin\\home\\bananas\\UwAmp\\bin\\apache\\conf\\httpd.conf'
+[Tue Feb 09 10:46:58.893425 2016] [mpm_winnt:notice] [pid 5584:tid 368] AH00418: Parent: Created child process 5748

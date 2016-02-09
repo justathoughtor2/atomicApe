@@ -8,5 +8,8 @@ cygwin/home/bananas/phonegap
 # .ssh directory
 cygwin/home/bananas/.ssh
 
+# .zcompdump files
+cygwin/home/bananas/.zcompdump*
 
-
+# .zsh_history file
+cygwin/home/bananas/.zsh_history

@@ -83,6 +83,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias atom="~/atom.bat"
-alias uwamp="~/UwAmp/UwAmp.exe"
-alias fixbabun="~/fixbabun"
+# alias atom="~/atom.bat"
+# alias uwamp="~/UwAmp/UwAmp.exe"
+# alias fixbabun="~/fixbabun"
