@@ -56,3 +56,15 @@
 ::1 - - [04/Feb/2016:21:52:00 -0500] "GET /wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1 HTTP/1.1" 304 -
 ::1 - - [04/Feb/2016:21:52:00 -0500] "GET /wp-admin/images/spinner.gif HTTP/1.1" 304 -
 ::1 - - [04/Feb/2016:21:52:00 -0500] "GET /wp-admin/images/wordpress-logo.svg?ver=20131107 HTTP/1.1" 304 -
+::1 - - [08/Feb/2016:20:57:32 -0500] "GET / HTTP/1.1" 404 300
+::1 - - [08/Feb/2016:20:57:32 -0500] "GET /favicon.ico HTTP/1.1" 404 311
+::1 - - [08/Feb/2016:20:58:16 -0500] "GET / HTTP/1.1" 404 300
+::1 - - [08/Feb/2016:21:04:42 -0500] "GET / HTTP/1.1" 302 -
+::1 - - [08/Feb/2016:21:04:43 -0500] "GET /wp-admin/setup-config.php HTTP/1.1" 200 8105
+::1 - - [08/Feb/2016:21:04:45 -0500] "GET /wp-includes/css/buttons.min.css?ver=4.4.2 HTTP/1.1" 200 6361
+::1 - - [08/Feb/2016:21:04:45 -0500] "GET /wp-admin/css/install.min.css?ver=4.4.2 HTTP/1.1" 200 5817
+::1 - - [08/Feb/2016:21:04:45 -0500] "GET /wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1 HTTP/1.1" 200 7200
+::1 - - [08/Feb/2016:21:04:45 -0500] "GET /wp-admin/js/language-chooser.min.js?ver=4.4.2 HTTP/1.1" 200 374
+::1 - - [08/Feb/2016:21:04:45 -0500] "GET /wp-includes/js/jquery/jquery.js?ver=1.11.3 HTTP/1.1" 200 95977
+::1 - - [08/Feb/2016:21:04:46 -0500] "GET /wp-admin/images/spinner.gif HTTP/1.1" 200 4162
+::1 - - [08/Feb/2016:21:04:46 -0500] "GET /wp-admin/images/wordpress-logo.svg?ver=20131107 HTTP/1.1" 200 1521
