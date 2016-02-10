@@ -12,6 +12,8 @@ directory of the unzipped folder. After starting the terminal, you may install n
 You should test the command `pact` itself after installing atomicApe. If there are errors registered, run the command `fixbabun` and try again.
 If all goes well, there will be no more errors in pact.
 
+Before you start Brackets after plugging in your flash drive, run the command `fixbrackets` to set up environment variables for the editor. After starting Brackets, open File > Git Settings and select Reset to Defaults. Then restart Brackets and your Git installation will be good to go in Brackets!
+
 To start Brackets, run the command `brackets` from within the
 Babun terminal. Note that this will occupy the terminal until you close Brackets, so you might 
 want to open another terminal with ALT+F2 (from within the first terminal). To start UwAmp, run `uwamp`; this also
