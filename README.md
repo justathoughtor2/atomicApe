@@ -10,15 +10,16 @@ directory of the unzipped folder. After starting the terminal, you may install n
 You should test the command `pact` itself after installing atomicApe. If there are errors registered, run the command `fixbabun` and try again.
 If all goes well, there will be no more errors in pact.
 
-To start Atom, run the command `atom` from within the
-Babun terminal. Note that this will occupy the terminal until you close Atom, so you might 
+To start Brackets, run the command `brackets` from within the
+Babun terminal. Note that this will occupy the terminal until you close Brackets, so you might 
 want to open another terminal with ALT+F2 (from within the first terminal). To start UwAmp, run `uwamp`; this also
 occupies the terminal for the duration of the software's run. To run GCC, just
 run `gcc` in the terminal. To run Python or pip, run either `python` or `pip`
 (respectively). To run Ruby or RubyGems, run `ruby` or `gem` (respectively). To run Node.js or NPM, run `node` or `npm` (respectively).
+To run Phonegap, run `phonegap`; note that the `--local-tunnel` option only works if you run `babun.bat` as an administrator.
 
 ## Currently included software:
-+ [Atom v1.4.3](https://atom.io/)
++ [Brackets v1.6](http://brackets.io/)
 + [Babun v1.2.0](https://github.com/babun/babun)
 + [Cygwin v2.4.1](https://cygwin.com/)
 + [GCC v4.9.3](https://gcc.gnu.org/)
