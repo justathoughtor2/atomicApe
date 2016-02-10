@@ -39,8 +39,8 @@ define(function (require, exports, module) {
         // system
         "debugMode": {                      "type": "boolean",           "value": false             },
         "gitTimeout": {                     "type": "number",            "value": 30                },
-        "gitPath": { "type": "string", "value": "F:\atomicApe\cygwin\bin\git.exe" },
-        "terminalCommand": {                "type": "string",            "value": ""                },
+        "gitPath": { "type": "string", "value": "F:\\atomicApe\\cygwin\\bin\\git.exe" },
+        "terminalCommand": { "type": "string", "value": "F:\\atomicApe\\cygwin\\bin\\mintty.exe" },
         "terminalCommandArgs": {            "type": "string",            "value": ""                }
     };
 

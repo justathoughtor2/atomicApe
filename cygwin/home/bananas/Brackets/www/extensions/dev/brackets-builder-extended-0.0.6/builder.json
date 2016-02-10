@@ -1,11 +1,11 @@
 [
     {
-        "name": "JavaScript", "cmd": "F:\atomicApe\cygwin\bin\node.exe $FILE"
+        "name": "JavaScript", "cmd": "F:\\atomicApe\\cygwin\\bin\\node.exe $FILE"
     },
     {
-        "name": "JavaScript", "cmd": "F:\atomicApe\cygwin\bin\python2.7.exe $FILE"
+        "name": "JavaScript", "cmd": "F:\\atomicApe\\cygwin\\bin\\node.exe $FILE"
     },
     {
-        "name": "JavaScript", "cmd": "F:\atomicApe\cygwin\bin\ruby.exe $FILE"
+        "name": "JavaScript", "cmd": "F:\\atomicApe\\cygwin\\bin\\node.exe $FILE"
     }
 ]

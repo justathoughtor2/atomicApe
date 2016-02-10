@@ -1,6 +1,8 @@
 # Workspaces
 cygwin/home/bananas/workspace/**
+!cygwin/home/bananas/workspace/README.md
 cygwin/home/bananas/UwAmp/www/**
+!cygwin/home/bananas/UwAmp/www/README.md
 
 # .ssh directory
 cygwin/home/bananas/.ssh
