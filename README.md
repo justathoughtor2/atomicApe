@@ -1,4 +1,6 @@
 # atomicApe (encagedApe Edition)
+The encagedApe Edition features Brackets as the code editor instead of Atom. This is an improvement due to the fact that Windows Atom doesn't play nicely with cygpath and Linux-style sh scripts in its APM (Atom Package Manager); but Brackets lets you install extensions via ZIP directly to distribution.
+
 ## Always fresh. Always bananas.
 Brackets meets Babun in this repository optimized for running various forms of development software on a flash drive on Windows. The majority of the software runs without a need for administrative privileges. Download the latest [release](https://github.com/justathoughtor2/atomicApe/releases) and unzip the folder *directly* to `MYDRIVELETTER:\` or run `cd MYDRIVELETTER:\ && git clone -b encaged --single-branch https://github.com/justathoughtor2/atomicApe.git`. Note that the reason the developer recommends using the flash drive directly is due to the Windows pathname character limit.
 
