@@ -1502,3 +1502,89 @@ You might want to upgrade to get the latest features and bug fixes.
 2016/02/07 23:08:47 Changing gid to Administrators
 2016/02/07 23:08:52 note: Nothing needed to be installed
 2016/02/07 23:08:52 Ending cygwin install
+2016/02/09 18:48:51 Starting cygwin install, version 2.873
+2016/02/09 18:48:51 User has backup/restore rights
+2016/02/09 18:48:51 Current Directory: D:\atomicApe\dist
+2016/02/09 18:48:51 Could not open service McShield for query, start and stop. McAfee may not be installed, or we don't have access.
+2016/02/09 18:48:54 source: network install
+2016/02/09 18:48:54 root: D:\atomicApe\cygwin system
+2016/02/09 18:48:55 Selected local directory: D:\atomicApe\dist
+2016/02/09 18:48:56 net: Direct
+2016/02/09 18:48:57 site: http://cygwin.mirror.constant.com/
+2016/02/09 18:49:19 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/corkscrew/corkscrew-2.0-1.tar.bz2
+2016/02/09 18:49:21 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/vim/vim-7.4.1278-1.tar.xz
+2016/02/09 18:49:27 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/vim/vim-common/vim-common-7.4.1278-1.tar.xz
+2016/02/09 18:49:28 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/vim/vim-minimal/vim-minimal-7.4.1278-1.tar.xz
+2016/02/09 18:49:28 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/vim/xxd/xxd-7.4.1278-1.tar.xz
+2016/02/09 18:49:29 Running preremove script for  vim
+2016/02/09 18:49:29 running: D:\atomicApe\cygwin\bin\bash.exe --norc --noprofile "/etc/preremove/vim.sh"
+2016/02/09 18:49:30 Running preremove script for  vim-common
+2016/02/09 18:49:30 Running preremove script for  vim-minimal
+2016/02/09 18:49:30 Running preremove script for  xxd
+2016/02/09 18:49:30 Uninstalling vim
+2016/02/09 18:49:30 Uninstalling vim-common
+2016/02/09 18:50:02 Uninstalling vim-minimal
+2016/02/09 18:50:03 Uninstalling xxd
+2016/02/09 18:50:04 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/corkscrew/corkscrew-2.0-1.tar.bz2
+2016/02/09 18:50:06 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/vim/vim-7.4.1278-1.tar.xz
+2016/02/09 18:50:09 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/vim/vim-common/vim-common-7.4.1278-1.tar.xz
+2016/02/09 18:51:40 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/vim/vim-minimal/vim-minimal-7.4.1278-1.tar.xz
+2016/02/09 18:51:43 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/vim/xxd/xxd-7.4.1278-1.tar.xz
+2016/02/09 18:51:44 Changing gid back to original
+2016/02/09 18:51:44 running: D:\atomicApe\cygwin\bin\dash.exe "/etc/postinstall/0p_000_autorebase.dash"
+2016/02/09 18:53:07 running: D:\atomicApe\cygwin\bin\dash.exe "/etc/postinstall/0p_update-info-dir.dash"
+2016/02/09 18:53:43 running: D:\atomicApe\cygwin\bin\bash.exe --norc --noprofile "/etc/postinstall/vim.sh"
+2016/02/09 18:53:43 Changing gid to Administrators
+2016/02/09 18:54:49 note: Installation Complete
+2016/02/09 18:54:49 Ending cygwin install
+2016/02/09 19:01:52 Starting cygwin install, version 2.873
+2016/02/09 19:01:52 User has backup/restore rights
+2016/02/09 19:01:52 Current Directory: D:\atomicApe\dist
+2016/02/09 19:01:52 Could not open service McShield for query, start and stop. McAfee may not be installed, or we don't have access.
+2016/02/09 19:01:55 source: network install
+2016/02/09 19:01:55 root: D:\atomicApe\cygwin system
+2016/02/09 19:01:56 Selected local directory: D:\atomicApe\dist
+2016/02/09 19:01:56 net: Direct
+2016/02/09 19:01:58 site: http://cygwin.mirror.constant.com/
+2016/02/09 19:02:28 Ending cygwin install
+2016/02/09 19:17:34 Starting cygwin install, version 2.873
+2016/02/09 19:17:34 User has backup/restore rights
+2016/02/09 19:17:34 Current Directory: D:\atomicApe\dist
+2016/02/09 19:17:34 Could not open service McShield for query, start and stop. McAfee may not be installed, or we don't have access.
+2016/02/09 19:17:36 source: network install
+2016/02/09 19:17:36 root: D:\atomicApe\cygwin system
+2016/02/09 19:17:40 root: D:\atomicApe\cygwin system
+2016/02/09 19:17:40 Selected local directory: D:\atomicApe\dist
+2016/02/09 19:17:41 net: Direct
+2016/02/09 19:17:44 site: http://cygwin.mirror.constant.com/
+2016/02/09 19:18:27 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/openssl/openssl-1.0.2f-1.tar.xz
+2016/02/09 19:18:27 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/openssl/openssl-perl/openssl-perl-1.0.2f-1.tar.xz
+2016/02/09 19:18:29 Running preremove script for  openssl
+2016/02/09 19:18:29 Uninstalling openssl
+2016/02/09 19:18:30 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/openssl/openssl-1.0.2f-1.tar.xz
+2016/02/09 19:18:35 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/openssl/openssl-perl/openssl-perl-1.0.2f-1.tar.xz
+2016/02/09 19:18:35 Changing gid back to original
+2016/02/09 19:18:35 running: D:\atomicApe\cygwin\bin\dash.exe "/etc/postinstall/0p_000_autorebase.dash"
+2016/02/09 19:18:44 running: D:\atomicApe\cygwin\bin\dash.exe "/etc/postinstall/0p_update-info-dir.dash"
+2016/02/09 19:19:19 Changing gid to Administrators
+2016/02/09 19:19:23 note: Installation Complete
+2016/02/09 19:19:23 Ending cygwin install
+2016/02/09 20:30:10 Starting cygwin install, version 2.873
+2016/02/09 20:30:10 User has backup/restore rights
+2016/02/09 20:30:10 Current Directory: D:\atomicApe\dist
+2016/02/09 20:30:10 Could not open service McShield for query, start and stop. McAfee may not be installed, or we don't have access.
+2016/02/09 20:30:12 source: network install
+2016/02/09 20:30:14 root: D:\atomicApe\cygwin system
+2016/02/09 20:30:15 Selected local directory: D:\atomicApe\dist
+2016/02/09 20:30:16 net: Direct
+2016/02/09 20:30:20 site: http://cygwin.mirror.constant.com/
+2016/02/09 20:30:48 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/unzip/unzip-6.0-15.tar.xz
+2016/02/09 20:30:48 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/zip/zip-3.0-12.tar.xz
+2016/02/09 20:30:50 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/unzip/unzip-6.0-15.tar.xz
+2016/02/09 20:30:52 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/zip/zip-3.0-12.tar.xz
+2016/02/09 20:30:53 Changing gid back to original
+2016/02/09 20:30:53 running: D:\atomicApe\cygwin\bin\dash.exe "/etc/postinstall/0p_000_autorebase.dash"
+2016/02/09 20:31:05 running: D:\atomicApe\cygwin\bin\dash.exe "/etc/postinstall/0p_update-info-dir.dash"
+2016/02/09 20:31:07 Changing gid to Administrators
+2016/02/09 20:31:33 note: Installation Complete
+2016/02/09 20:31:33 Ending cygwin install

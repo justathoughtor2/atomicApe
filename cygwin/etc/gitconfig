@@ -1,2 +1,4 @@
 [core]
 	longpaths = true
+[http]
+	sslcainfo = /usr/ssl/certs/ca-bundle.crt

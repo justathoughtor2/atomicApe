@@ -1,9 +1,6 @@
-# Blog directories
-cygwin/home/bananas/jekyll
-cygwin/home/bananas/pelican
-cygwin/home/bananas/ghost
-cygwin/home/bananas/UwAmp/www/*
-cygwin/home/bananas/phonegap
+# Workspaces
+cygwin/home/bananas/workspace/**
+cygwin/home/bananas/UwAmp/www/**
 
 # .ssh directory
 cygwin/home/bananas/.ssh
@@ -11,5 +8,5 @@ cygwin/home/bananas/.ssh
 # .zcompdump files
 cygwin/home/bananas/.zcompdump*
 
-# .zsh_history file
-cygwin/home/bananas/.zsh_history
+# .*_history files
+cygwin/home/bananas/.*_history

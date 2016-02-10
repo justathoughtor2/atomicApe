@@ -1,15 +1,15 @@
-2016/02/07 23:06:36 Starting cygwin install, version 2.873
-2016/02/07 23:06:36 User has backup/restore rights
-2016/02/07 23:06:36 Current Directory: D:\atomicApe\dist
-2016/02/07 23:06:36 Could not open service McShield for query, start and stop. McAfee may not be installed, or we don't have access.
-2016/02/07 23:06:38 source: network install
-2016/02/07 23:06:39 root: D:\atomicApe\cygwin system
-2016/02/07 23:06:39 Selected local directory: D:\atomicApe\dist
-2016/02/07 23:06:40 net: Direct
+2016/02/09 20:30:10 Starting cygwin install, version 2.873
+2016/02/09 20:30:10 User has backup/restore rights
+2016/02/09 20:30:10 Current Directory: D:\atomicApe\dist
+2016/02/09 20:30:10 Could not open service McShield for query, start and stop. McAfee may not be installed, or we don't have access.
+2016/02/09 20:30:12 source: network install
+2016/02/09 20:30:14 root: D:\atomicApe\cygwin system
+2016/02/09 20:30:15 Selected local directory: D:\atomicApe\dist
+2016/02/09 20:30:16 net: Direct
 Loaded cached mirror list
 get_url_to_membuf http://cygwin.com/mirrors.lst
 getUrlToStream http://cygwin.com/mirrors.lst
-2016/02/07 23:06:41 site: http://cygwin.mirror.constant.com/
+2016/02/09 20:30:20 site: http://cygwin.mirror.constant.com/
 get_url_to_membuf http://cygwin.mirror.constant.com/x86/setup.xz.sig
 getUrlToStream http://cygwin.mirror.constant.com/x86/setup.xz.sig
 getUrlToStream failed!
@@ -23,16 +23,82 @@ getUrlToStream http://cygwin.mirror.constant.com/x86/setup.bz2.sig
 get_url_to_membuf http://cygwin.mirror.constant.com/x86/setup.bz2
 getUrlToStream http://cygwin.mirror.constant.com/x86/setup.bz2
 .ini setup_version is 2.873, our setup_version is 2.873
-2016/02/07 23:08:00 Adding required dependency ruby: Selecting already-installed version 2.2.4-1.
-2016/02/07 23:08:00 Adding required dependency ruby-minitest4: Selecting already-installed version 4.7.5-1.
-2016/02/07 23:08:00 Adding required dependency ruby-rake: Selecting already-installed version 10.4.2-1.
-2016/02/07 23:08:00 Adding required dependency ruby-rdoc: Selecting already-installed version 4.2.0-1.
-2016/02/07 23:08:00 Adding required dependency rubygems: Selecting already-installed version 2.4.8-1.
-2016/02/07 23:08:00 Changing gid back to original
-Visited: 349 nodes out of 7721 while creating dependency order.
-Dependency order of packages: base-cygwin cygwin dash _autorebase libiconv2 libintl8 libgcc1 libstdc++6 terminfo libncursesw10 info _update-info-dir alternatives libattr1 libgmp10 libreadline7 tzcode coreutils bash libaspell15 crypt libdb4.8 libgdbm4 libssp0 perl_autorebase perl_base perl aspell aspell-en attr sed libsigsegv2 m4 autoconf2.1 autoconf2.5 autoconf libmpfr4 gawk perl-Pod-Simple perl-Unicode-Normalize texinfo automake1.4 automake1.5 automake1.6 automake1.7 automake1.8 automake1.9 liblzma5 xz automake1.10 automake1.11 automake1.12 automake1.13 perl-Carp automake1.14 automake1.15 automake findutils base-files bc zlib0 zlib-devel binutils libbz2_1 bzip2 libffi6 libp11-kit0 libtasn1_6 p11-kit p11-kit-trust ca-certificates editrights libpcre1 grep cron diffutils csih ctags libcom_err2 libkrb5support0 libk5crypto3 libkrb5_3 libgssapi_krb5_2 libidn11 libnghttp2_14 libopenssl100 libsasl2_3 libopenldap2_4_2 libssh2_1 libcurl4 libexpat1 libmetalink3 curl cygrunsrv popt cygutils cygwin-devel dos2unix libglapi0 libedit0 libllvm3.5 dri-drivers file libxml2 shared-mime-info gsettings-desktop-schemas libfam0 libglib2.0_0 gamin libatomic1 libcloog-isl4 libgomp1 libisl10 libisl13 libmpc3 libquadmath0 libvtv0 w32api-headers w32api-runtime windows-default-manifest gcc-core gcc-g++ gcc4-core gcc4-g++ libargp getent gettext perl-Error perl-TermReadKey libsqlite3_0 libcharset1 libiconv-devel libintl-devel libuuid1 libuuid-devel python less openssh rsync git perl-YAML libapr1 perl-Scalar-List-Utils libiodbc2 libmysqlclient18 openssl libpq5 libaprutil1 libserf1_0 libproxy1 libneon27 subversion subversion-perl git-svn libgmpxx4 gmp libnettle4 libhogweed2 libgnutls28 libopts25 gnutls groff gzip hostname ipc-utils keychain libX11-xcb1 libXau6 libXdmcp6 libxcb1 libX11_6 libxcb-glx0 libXext6 libGL1 libICE6 libQtCore4 libdbus1_3 libQtScript4 libQtXml4 libQtDBus4 libSM6 libXt6 libaudio2 libpng16 libfreetype6 libfontconfig1 libjpeg8 liblcms1 libmng1 libjbig2 libtiff6 libXfixes3 libXrender1 libXcursor1 libXi6 libXinerama1 libXrandr2 libQtGui4 libQtNetwork4 libQtOpenGL4 libgpg-error0 libgcrypt20 libsybdb5 libQtSql4 libQtXmlPatterns4 libQtDeclarative4 libQtDesigner4 libQtHelp4 libblkid1 libevent2.0_5 libevent-devel libext2fs2 libffi-devel libgmp-devel libltdl7 libguile17 libiconv libncurses-devel libncurses10 libpcre16_0 libpcre32_0 libpcreposix0 libpipeline1 libpopt0 libreadline-devel libsmartcols1 libwrap0 libyaml0_2 links login lynx make util-linux man-db man mc mintty perl-DBI perl-DBD-mysql mysqld nano nc ncurses ncursesw openssl-devel pcre perl-Archive-Zip perl-B-Generate perl-HTML-Tagset perl-HTML-Parser perl-CGI perl-CPAN-DistnameInfo perl-Capture-Tiny perl-Config-Tiny perl-Devel-Autoflush perl-File-Which perl-File-HomeDir perl-Probe-Perl perl-Test-Reporter perl-CPAN-Reporter perl-Data-UUID perl-Params-Util perl-Sub-Install perl-Data-OptList perl-Sub-Exporter perl-Data-GUID perl-IO-Prompt-Tiny perl-common-sense perl-Types-Serialiser perl-JSON-XS perl-JSON perl-Metabase-Fact perl-CPAN-Testers-Report perl-Compress-Bzip2 perl-Config-Perl-V perl-Data-Alias perl-Devel-Symdump perl-Digest-HMAC perl-Digest-SHA perl-Encode-Locale perl-File-Copy-Recursive perl-HTTP-Date perl-File-Listing perl-File-pushd perl-IO-HTML perl-LWP-MediaTypes perl-URI perl-HTTP-Message perl-HTTP-Cookies perl-HTTP-Daemon perl-HTTP-Negotiate perl-IO-CaptureOutput perl-Socket6 perl-IO-Socket-INET6 perl-IO-String perl-IO-Tty perl-IPC-Cmd perl-IPC-Run perl-Net-HTTP perl-WWW-RobotRules perl-libwww-perl perl-Metabase-Client-Simple perl-Module-ScanDeps perl-Module-Signature perl-Net-DNS perl-Net-IP perl-PAR-Dist perl-PadWalker perl-Pod-Coverage perl-Pod-Escapes perl-Proc-ProcessTable perl-Tee perl-Term-ReadLine-Gnu perl-Term-ReadLine-Perl perl-Test-NoWarnings perl-Test-Pod perl-Test-Pod-Coverage perl-Test-Reporter-Transport-Metabase perl-Test-Simple perl-XML-NamespaceSupport perl-XML-SAX-Base perl-XML-SAX perl-XML-LibXML perl-XML-Parser perl_vendor ping pkg-config procps qt4-devel-tools readline rebase ruby-minitest4 ruby-json ruby-rdoc ruby-rake rubygems ruby run shutdown tar time tree xxd vim-common vim vim-minimal wget which zsh 
-2016/02/07 23:08:00 running: D:\atomicApe\cygwin\bin\dash.exe "/etc/postinstall/0p_000_autorebase.dash"
+get_url_to_file http://cygwin.mirror.constant.com//x86/release/unzip/unzip-6.0-15.tar.xz D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/unzip/unzip-6.0-15.tar.xz.tmp
+2016/02/09 20:30:48 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/unzip/unzip-6.0-15.tar.xz
+get_url_to_file http://cygwin.mirror.constant.com//x86/release/zip/zip-3.0-12.tar.xz D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/zip/zip-3.0-12.tar.xz.tmp
+2016/02/09 20:30:48 Downloaded D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/zip/zip-3.0-12.tar.xz
+Checking SHA512 for file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/unzip/unzip-6.0-15.tar.xz
+SHA512 verified OK: file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/unzip/unzip-6.0-15.tar.xz 770ccf8efac91c302ad165c8247aca829fdce28c91122ccd4031926dd34582f783771320286fcab631a66ba3d990225e4e830729b7dead79b65730c682985112
+Checking SHA512 for file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/zip/zip-3.0-12.tar.xz
+SHA512 verified OK: file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/zip/zip-3.0-12.tar.xz a1999c2685e2d610af30517f8d27871839a300d6393b9fe0f8a0869a84ecb538a9bb031a333b06bd69335b7a05c36efc0b05e65274554f864efe1cb02696337f
+compress_xz::bid_xz: success: 48
+compress_xz::bid_xz: success: 48
+2016/02/09 20:30:50 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/unzip/unzip-6.0-15.tar.xz
+Installing file cygfile:///usr/
+Installing file cygfile:///usr/bin/
+Installing file cygfile:///usr/bin/funzip.exe
+Installing file cygfile:///usr/bin/unzip.exe
+Installing file cygfile:///usr/bin/unzipsfx.exe
+Installing file cygfile:///usr/bin/zipgrep
+Installing file cygfile:///usr/bin/zipinfo
+io_stream::mklink (cygfile:///usr/bin/zipinfo->cygfile://unzip)
+Installing file cygfile:///usr/lib/
+Installing file cygfile:///usr/share/
+Installing file cygfile:///usr/share/doc/
+Installing file cygfile:///usr/share/doc/unzip/
+Installing file cygfile:///usr/share/doc/unzip/BUGS
+Installing file cygfile:///usr/share/doc/unzip/funzip.txt
+Installing file cygfile:///usr/share/doc/unzip/History.600
+Installing file cygfile:///usr/share/doc/unzip/LICENSE
+Installing file cygfile:///usr/share/doc/unzip/README
+Installing file cygfile:///usr/share/doc/unzip/unzip.txt
+Installing file cygfile:///usr/share/doc/unzip/unzipsfx.txt
+Installing file cygfile:///usr/share/doc/unzip/WHERE
+Installing file cygfile:///usr/share/doc/unzip/zipgrep.txt
+Installing file cygfile:///usr/share/doc/unzip/zipinfo.txt
+Installing file cygfile:///usr/share/man/
+Installing file cygfile:///usr/share/man/man1/
+Installing file cygfile:///usr/share/man/man1/funzip.1.gz
+Installing file cygfile:///usr/share/man/man1/unzip.1.gz
+Installing file cygfile:///usr/share/man/man1/unzipsfx.1.gz
+Installing file cygfile:///usr/share/man/man1/zipgrep.1.gz
+Installing file cygfile:///usr/share/man/man1/zipinfo.1.gz
+compress_xz::bid_xz: success: 48
+compress_xz::bid_xz: success: 48
+2016/02/09 20:30:52 Extracting from file://D:\atomicApe\dist/http%3a%2f%2fcygwin.mirror.constant.com%2f/x86/release/zip/zip-3.0-12.tar.xz
+Installing file cygfile:///usr/
+Installing file cygfile:///usr/bin/
+Installing file cygfile:///usr/bin/zip.exe
+Installing file cygfile:///usr/bin/zipcloak.exe
+Installing file cygfile:///usr/bin/zipnote.exe
+Installing file cygfile:///usr/bin/zipsplit.exe
+Installing file cygfile:///usr/lib/
+Installing file cygfile:///usr/share/
+Installing file cygfile:///usr/share/doc/
+Installing file cygfile:///usr/share/doc/zip/
+Installing file cygfile:///usr/share/doc/zip/BUGS
+Installing file cygfile:///usr/share/doc/zip/CHANGES
+Installing file cygfile:///usr/share/doc/zip/LICENSE
+Installing file cygfile:///usr/share/doc/zip/README
+Installing file cygfile:///usr/share/doc/zip/TODO
+Installing file cygfile:///usr/share/doc/zip/WHATSNEW
+Installing file cygfile:///usr/share/man/
+Installing file cygfile:///usr/share/man/man1/
+Installing file cygfile:///usr/share/man/man1/zip.1.gz
+Installing file cygfile:///usr/share/man/man1/zipcloak.1.gz
+Installing file cygfile:///usr/share/man/man1/zipnote.1.gz
+Installing file cygfile:///usr/share/man/man1/zipsplit.1.gz
+2016/02/09 20:30:53 Changing gid back to original
+Visited: 353 nodes out of 8348 while creating dependency order.
+Dependency order of packages: base-cygwin cygwin dash _autorebase libiconv2 libintl8 libgcc1 libstdc++6 terminfo libncursesw10 info _update-info-dir alternatives libattr1 libgmp10 libreadline7 tzcode coreutils bash libaspell15 crypt libdb4.8 libgdbm4 libssp0 perl_autorebase perl_base perl aspell aspell-en attr sed libsigsegv2 m4 autoconf2.1 autoconf2.5 autoconf libmpfr4 gawk perl-Pod-Simple perl-Unicode-Normalize texinfo automake1.4 automake1.5 automake1.6 automake1.7 automake1.8 automake1.9 liblzma5 xz automake1.10 automake1.11 automake1.12 automake1.13 perl-Carp automake1.14 automake1.15 automake findutils base-files bc zlib0 zlib-devel binutils libbz2_1 bzip2 libffi6 libp11-kit0 libtasn1_6 p11-kit p11-kit-trust ca-certificates corkscrew editrights libpcre1 grep cron diffutils csih ctags libcom_err2 libkrb5support0 libk5crypto3 libkrb5_3 libgssapi_krb5_2 libidn11 libnghttp2_14 libopenssl100 libsasl2_3 libopenldap2_4_2 libssh2_1 libcurl4 libexpat1 libmetalink3 curl cygrunsrv popt cygutils cygwin-devel dos2unix libglapi0 libedit0 libllvm3.5 dri-drivers file libxml2 shared-mime-info gsettings-desktop-schemas libfam0 libglib2.0_0 gamin libatomic1 libcloog-isl4 libgomp1 libisl10 libisl13 libmpc3 libquadmath0 libvtv0 w32api-headers w32api-runtime windows-default-manifest gcc-core gcc-g++ gcc4-core gcc4-g++ libargp getent gettext perl-Error perl-TermReadKey libsqlite3_0 libcharset1 libiconv-devel libintl-devel libuuid1 libuuid-devel python less openssh rsync git perl-YAML libapr1 perl-Scalar-List-Utils libiodbc2 libmysqlclient18 openssl libpq5 libaprutil1 libserf1_0 libproxy1 libneon27 subversion subversion-perl git-svn libgmpxx4 gmp libnettle4 libhogweed2 libgnutls28 libopts25 gnutls groff gzip hostname ipc-utils keychain libX11-xcb1 libXau6 libXdmcp6 libxcb1 libX11_6 libxcb-glx0 libXext6 libGL1 libICE6 libQtCore4 libdbus1_3 libQtScript4 libQtXml4 libQtDBus4 libSM6 libXt6 libaudio2 libpng16 libfreetype6 libfontconfig1 libjpeg8 liblcms1 libmng1 libjbig2 libtiff6 libXfixes3 libXrender1 libXcursor1 libXi6 libXinerama1 libXrandr2 libQtGui4 libQtNetwork4 libQtOpenGL4 libgpg-error0 libgcrypt20 libsybdb5 libQtSql4 libQtXmlPatterns4 libQtDeclarative4 libQtDesigner4 libQtHelp4 libblkid1 libevent2.0_5 libevent-devel libext2fs2 libffi-devel libgmp-devel libltdl7 libguile17 libiconv libncurses-devel libncurses10 libpcre16_0 libpcre32_0 libpcreposix0 libpipeline1 libpopt0 libreadline-devel libsmartcols1 libwrap0 libyaml0_2 links login lynx make util-linux man-db man mc mintty perl-DBI perl-DBD-mysql mysqld nano nc ncurses ncursesw openssl-devel openssl-perl pcre perl-Archive-Zip perl-B-Generate perl-HTML-Tagset perl-HTML-Parser perl-CGI perl-CPAN-DistnameInfo perl-Capture-Tiny perl-Config-Tiny perl-Devel-Autoflush perl-File-Which perl-File-HomeDir perl-Probe-Perl perl-Test-Reporter perl-CPAN-Reporter perl-Data-UUID perl-Params-Util perl-Sub-Install perl-Data-OptList perl-Sub-Exporter perl-Data-GUID perl-IO-Prompt-Tiny perl-common-sense perl-Types-Serialiser perl-JSON-XS perl-JSON perl-Metabase-Fact perl-CPAN-Testers-Report perl-Compress-Bzip2 perl-Config-Perl-V perl-Data-Alias perl-Devel-Symdump perl-Digest-HMAC perl-Digest-SHA perl-Encode-Locale perl-File-Copy-Recursive perl-HTTP-Date perl-File-Listing perl-File-pushd perl-IO-HTML perl-LWP-MediaTypes perl-URI perl-HTTP-Message perl-HTTP-Cookies perl-HTTP-Daemon perl-HTTP-Negotiate perl-IO-CaptureOutput perl-Socket6 perl-IO-Socket-INET6 perl-IO-String perl-IO-Tty perl-IPC-Cmd perl-IPC-Run perl-Net-HTTP perl-WWW-RobotRules perl-libwww-perl perl-Metabase-Client-Simple perl-Module-ScanDeps perl-Module-Signature perl-Net-DNS perl-Net-IP perl-PAR-Dist perl-PadWalker perl-Pod-Coverage perl-Pod-Escapes perl-Proc-ProcessTable perl-Tee perl-Term-ReadLine-Gnu perl-Term-ReadLine-Perl perl-Test-NoWarnings perl-Test-Pod perl-Test-Pod-Coverage perl-Test-Reporter-Transport-Metabase perl-Test-Simple perl-XML-NamespaceSupport perl-XML-SAX-Base perl-XML-SAX perl-XML-LibXML perl-XML-Parser perl_vendor ping pkg-config procps qt4-devel-tools readline rebase ruby-minitest4 ruby-json ruby-rdoc ruby-rake rubygems ruby run shutdown tar time tree unzip xxd vim-common vim vim-minimal wget which zip zsh 
+2016/02/09 20:30:53 running: D:\atomicApe\cygwin\bin\dash.exe "/etc/postinstall/0p_000_autorebase.dash"
 Updating package information in /var/cache/rebase/rebase_pkg.
+	from /etc/setup/unzip.lst.gz...
+/bin/rebaselst: 182: /bin/rebaselst: cannot create /var/cache/rebase/rebase_pkg: Permission denied
+/bin/rebaselst: 187: /bin/rebaselst: cannot create /var/cache/rebase/rebase_pkg: Permission denied
+	from /etc/setup/zip.lst.gz...
+/bin/rebaselst: 182: /bin/rebaselst: cannot create /var/cache/rebase/rebase_pkg: Permission denied
+/bin/rebaselst: 187: /bin/rebaselst: cannot create /var/cache/rebase/rebase_pkg: Permission denied
 Updating rebase information for installed dynamic objects in /var/cache/rebase/rebase_lst.
 /bin/rebaselst: 223: /bin/rebaselst: cannot create /var/cache/rebase/rebase_lst: Permission denied
 Updating rebase information for installed executables in /var/cache/rebase/rebase_exe.
@@ -40,6 +106,9 @@ Updating rebase information for installed executables in /var/cache/rebase/rebas
 removing /var/cache/rebase/rebase_dyn
 creating empty /var/cache/rebase/rebase_dyn
 touch: setting times of '/var/cache/rebase/rebase_dyn': Invalid argument
+Looking for dynamic language modules/libraries in:
+  /usr/lib/python2.7/site-packages
+Updating rebase information for dynamic language modules/libraries /var/cache/rebase/rebase_dyn.
 Updating rebase information for user-defined dynamic objects /var/cache/rebase/rebase_user.
 Updating rebase information for user-defined executables /var/cache/rebase/rebase_user_exe.
 Rebasing with list /var/cache/rebase/rebase_all, built from /var/cache/rebase/rebase_lst /var/cache/rebase/rebase_dyn /var/cache/rebase/rebase_user.
@@ -56,9 +125,9 @@ The following DLLs couldn't be rebased because they were in use:
   /usr/bin/libzsh-5.1.1.dll
   /usr/bin/cygncursesw-10.dll
   /usr/bin/cyggcc_s-1.dll
-2016/02/07 23:08:46 running: D:\atomicApe\cygwin\bin\dash.exe "/etc/postinstall/0p_update-info-dir.dash"
-2016/02/07 23:08:47 Changing gid to Administrators
+2016/02/09 20:31:05 running: D:\atomicApe\cygwin\bin\dash.exe "/etc/postinstall/0p_update-info-dir.dash"
+2016/02/09 20:31:07 Changing gid to Administrators
 Program directory for program link: C:\ProgramData\Microsoft\Windows\Start Menu\Programs
 Desktop directory for desktop link: C:\Users\Public\Desktop
-2016/02/07 23:08:52 note: Nothing needed to be installed
-2016/02/07 23:08:52 Ending cygwin install
+2016/02/09 20:31:33 note: Installation Complete
+2016/02/09 20:31:33 Ending cygwin install

@@ -59,6 +59,13 @@ Dictionary	An associative, unordered array: Each entry has a key and a
 		value. |Dictionary|
 		Example: {'blue': "#0000ff", 'red': "#ff0000"}
 
+Funcref		A reference to a function |Funcref|.
+		Example: function("strlen")
+
+Special		v:false, v:true, v:none and v:null
+
+Job		Used for job control, see |job_start()|.
+
 The Number and String types are converted automatically, depending on how they
 are used.
 
@@ -1785,6 +1792,12 @@ byteidxcomp( {expr}, {nr})	Number	byte index of {nr}'th char in {expr}
 call( {func}, {arglist} [, {dict}])
 				any	call {func} with arguments {arglist}
 ceil( {expr})			Float	round {expr} up
+ch_close( {handle})		none	close a channel
+ch_open( {address} [, {argdict})] Number open a channel to {address}
+ch_sendexpr( {handle}, {expr} [, {callback}])
+				any	send {expr} over JSON channel {handle}
+ch_sendraw( {handle}, {string} [, {callback}])
+				any	send {string} over raw channel {handle}
 changenr()			Number	current change number
 char2nr( {expr}[, {utf8}])	Number	ASCII/UTF8 value of first char in {expr}
 cindent( {lnum})		Number	C indent for line {lnum}
@@ -1916,6 +1929,9 @@ invert( {expr})			Number  bitwise invert
 isdirectory( {directory})	Number	TRUE if {directory} is a directory
 islocked( {expr})		Number	TRUE if {expr} is locked
 items( {dict})			List	key-value pairs in {dict}
+job_start({command} [, {options}]) Job	start a job	
+job_status({job})		String	get the status of a job
+job_stop({job} [, {how}])	Number	stop a job
 join( {list} [, {sep}])		String	join {list} items into one String
 jsondecode( {string})		any	decode JSON
 jsonencode( {expr})		String	encode JSON
@@ -2630,6 +2646,48 @@ confirm({msg} [, {choices} [, {default} [, {type}]]])
 		tries to put the buttons in one horizontal line.  If they
 		don't fit, a vertical layout is used anyway.  For some systems
 		the horizontal layout is always used.
+
+ch_close({handle})					*ch_close()*
+		Close channel {handle}.  See |channel|.
+
+ch_open({address} [, {argdict}])				*ch_open()*
+		Open a channel to {address}.  See |channel|.
+		Returns the channel handle on success.  Returns a negative
+		number for failure.
+
+		{address} has the form "hostname:port", e.g.,
+		"localhost:8765".
+
+		If {argdict} is given it must be a |Directory|.  The optional
+		items are:
+			mode        "raw" or "json".
+				    Default "json".
+			callback    function to call for requests with a zero
+				    sequence number.  See |channel-callback|.
+				    Default: none.
+			waittime    Specify connect timeout as milliseconds.
+				    Negative means forever.
+				    Default: 0.
+			timeout	    Specify response read timeout value as
+				    milliseconds. 
+				    Default: 2000.
+
+ch_sendexpr({handle}, {expr} [, {callback}])		*ch_sendexpr()*
+		Send {expr} over JSON channel {handle}.  See |channel-use|.
+
+		When {callback} is given returns immediately.  Without
+		{callback} waits for a JSON response and returns the decoded
+		expression.  When there is an error or timeout returns an
+		empty string.
+
+		When {callback} is zero no response is expected.
+		Otherwise {callback} must be a Funcref or the name of a
+		function.  It is called when the response is received.  See
+		|channel-callback|.
+
+ch_sendraw({handle}, {string} [, {callback}])		*ch_sendraw()*
+		Send {string} over raw channel {handle}.  See |channel-raw|.
+		Works like |ch_sendexpr()|, but does not decode the response.
 
 							*copy()*
 copy({expr})	Make a copy of {expr}.	For Numbers and Strings this isn't
@@ -4152,6 +4210,73 @@ items({dict})						*items()*
 		order.
 
 
+job_start({command} [, {options}])				*job_start()*
+		Start a job and return a Job object.  Unlike |system()| and
+		|:!cmd| this does not wait for the job to finish.
+
+		{command} can be a string.  This works best on MS-Windows.  On
+		Unix it is split up in white-separated parts to be passed to
+		execvp().  Arguments in double quotes can contain white space.
+
+		{command} can be a list, where the first item is the executable
+		and further items are the arguments.  All items are converted
+		to String.  This works best on Unix.
+
+		The command is executed directly, not through a shell, the
+		'shell' option is not used.  To use the shell: >
+	let job = job_start(["/bin/sh", "-c", "echo hello"])
+<		Or: >
+	let job = job_start('/bin/sh -c "echo hello"')
+<		However, the status of the job will now be the status of the
+		shell, and stopping the job means stopping the shell and the
+		command may continue to run.
+
+		On Unix $PATH is used to search for the executable only when
+		the command does not contain a slash.
+
+		The job will use the same terminal as Vim.  If it reads from
+		stdin the job and Vim will be fighting over input, that
+		doesn't work.  Redirect stdin and stdout to avoid problems: >
+	let job = job_start(['sh', '-c', "myserver </dev/null >/dev/null"])
+<
+		The returned Job object can be used to get the status with
+		|job_status()| and stop the job with |job_stop()|.
+
+		{options} must be a Dictionary.  It can contain these optional
+		items:
+			killonexit	When non-zero kill the job when Vim
+					exits. (default: 0, don't kill)
+
+		{only available when compiled with the |+channel| feature}
+
+job_status({job})						*job_status()*
+		Returns a String with the status of {job}:
+			"run"	job is running
+			"fail"	job failed to start
+			"dead"	job died or was stopped after running
+
+		{only available when compiled with the |+channel| feature}
+
+job_stop({job} [, {how}])					*job_stop()*
+		Stop the {job}.  This can also be used to signal the job.
+
+		When {how} is omitted or is "term" the job will be terminated
+		normally.  For Unix SIGTERM is sent.
+		Other values:
+			"hup"	Unix: SIGHUP
+			"quit"	Unix: SIGQUIT
+			"kill"	Unix: SIGKILL (strongest way to stop)
+			number	Unix: signal with that number
+
+		The result is a Number: 1 if the operation could be executed,
+		0 if "how" is not supported on the system.
+		Note that even when the operation was executed, whether the
+		job was actually stopped needs to be checked with
+		job_status().
+		The operation will even be done when the job wasn't running.
+
+		{only available when compiled with the |+channel| feature}
+
 join({list} [, {sep}])					*join()*
 		Join the items in {list} together into one String.
 		When {sep} is specified it is put in between the items.  If
@@ -4164,17 +4289,31 @@ join({list} [, {sep}])					*join()*
 		The opposite function is |split()|.
 
 jsondecode({string})					*jsondecode()*
-		TODO
+		This parses a JSON formatted string and returns the equivalent
+		in Vim values.  See |jsonencode()| for the relation between
+		JSON and Vim values.
+		The decoding is permissive:
+		- A trailing comma in an array and object is ignored.
+		- An empty item in an array, two commas with nothing or white
+		  space in between, results in v:none.
+		- When an object member name is not a string it is converted
+		  to a string.  E.g. the number 123 is used as the string
+		  "123".
+		- More floating point numbers are recognized, e.g. "1." for
+		  "1.0".
+		The result must be a valid Vim type:
+		- An empty object member name is not allowed.
+		- Duplicate object member names are not allowed.
 
 jsonencode({expr})					*jsonencode()*
-		Encodode {expr} as JSON and return this as a string.
+		Encode {expr} as JSON and return this as a string.
 		The encoding is specified in:
-		http://www.ietf.org/rfc/rfc4627.txt
+		https://tools.ietf.org/html/rfc7159.html
 		Vim values are converted as follows:
 		   Number		decimal number
 		   Float		floating point number
 		   String		in double quotes (possibly null)
-		   Funcref		nothing
+		   Funcref		not possible, error
 		   List			as an array (possibly null); when
 		   			used recursively: []
 		   Dict			as an object (possibly null); when
@@ -4183,6 +4322,13 @@ jsonencode({expr})					*jsonencode()*
 		   v:true		"true"
 		   v:none		nothing
 		   v:null		"null"
+		Note that using v:none is permitted, although the JSON
+		standard does not allow empty items.  This can be useful for
+		omitting items in an array:
+			[0,,,,,5] ~
+		This is much more efficient than:
+			[0,null,null,null,null,5] ~
+		But a strict JSON parser will not accept it.
 
 keys({dict})						*keys()*
 		Return a |List| with all the keys of {dict}.  The |List| is in

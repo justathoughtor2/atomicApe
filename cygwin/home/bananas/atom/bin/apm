@@ -1,2 +1,0 @@
-#!/bin/sh
-"$(dirname "$0")/../app-1.4.3/resources/cli/apm.sh" "$@"

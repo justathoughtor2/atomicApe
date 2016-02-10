@@ -1,0 +1,80 @@
+corkscrew
+------------------------------------------
+Tunnel TCP connections through HTTP proxies
+
+A simple tool to tunnel TCP connections through an HTTP proxy
+supporting the CONNECT method. It reads stdin and writes to stdout
+during the connection, just like netcat. It can be used for instance
+to connect to an SSH server running on a remote 443 port through a
+strict HTTPS proxy.
+
+Runtime requirements:
+  cygwin
+
+Build requirements:
+  cygwin
+
+Canonical homepage:
+  http://www.agroman.net/corkscrew
+  http://packages.debian.org/corkscrew
+
+Canonical download:
+  See above
+
+Version control repository:
+
+Mailing list:
+
+Forum / Wiki:
+
+IRC channel:
+
+Upstream contact:
+  Maintainer: Pat Padgett <agroman@agroman.net>
+  Bugs: Pat Padgett <agroman@agroman.net>
+
+License:
+  GPL
+
+Language:
+  C
+
+------------------------------------
+
+Build instructions:
+  unpack corkscrew-2.0-1-src.tar.bz2
+    if you use setup to install this src package, it will be
+    unpacked under /usr/src automatically
+  cd /usr/src
+  ./corkscrew*.sh all
+
+This will create:
+  corkscrew-2.0-1.tar.bz2
+  corkscrew-2.0-1-src.tar.bz2
+
+-------------------------------------------
+
+Files included in the binary distro:
+
+/usr/bin/corkscrew.exe
+/usr/share/doc/Cygwin/corkscrew-2.0.README
+/usr/share/doc/corkscrew-2.0/AUTHORS
+/usr/share/doc/corkscrew-2.0/COPYING
+/usr/share/doc/corkscrew-2.0/ChangeLog
+/usr/share/doc/corkscrew-2.0/INSTALL
+/usr/share/doc/corkscrew-2.0/NEWS
+/usr/share/doc/corkscrew-2.0/README
+/usr/share/doc/corkscrew-2.0/TODO
+/usr/share/man/man1/corkscrew.1.gz
+
+------------------
+
+Port Notes:
+
+----- version 2.0-1 -----
+- Initial release 2007-12-03 Jari Aalto
+- This port is based on Debian source.
+- No manual page. Copied one from Debian.
+
+Cygwin port maintained by: Jari Aalto <jari.aalto@cante.net>
+Copyright (C) 2007 Jari Aalto; Licenced under GPL v2 or later

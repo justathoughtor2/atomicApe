@@ -103,3 +103,12 @@
 # rebase_pkg information from: /etc/setup/rubygems.lst.gz
 # rebase_pkg information from: /etc/setup/texinfo.lst.gz
 /usr/lib/texinfo/XSParagraph.dll
+# rebase_pkg information from: /etc/setup/vim.lst.gz
+/usr/bin/vim.exe
+# rebase_pkg information from: /etc/setup/xxd.lst.gz
+/usr/bin/xxd.exe
+# rebase_pkg information from: /etc/setup/corkscrew.lst.gz
+/usr/bin/corkscrew.exe
+# rebase_pkg information from: /etc/setup/vim-common.lst.gz
+# rebase_pkg information from: /etc/setup/vim-minimal.lst.gz
+/usr/bin/vi.exe

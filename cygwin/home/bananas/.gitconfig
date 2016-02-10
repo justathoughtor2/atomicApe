@@ -25,7 +25,7 @@
 	dc = diff --cached
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
 [user]
-	email = bananas@atomicape.xyz
+	email = atomicape@justathoughtor2.com
 	name = bananas
 [filter "lfs"]
 	clean = git-lfs clean %f
