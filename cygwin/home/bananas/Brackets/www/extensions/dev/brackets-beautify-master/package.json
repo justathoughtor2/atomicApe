@@ -1,0 +1,50 @@
+{
+    "name": "brackets-beautify",
+    "title": "Beautify",
+    "version": "2.0.0",
+    "description": "Format JavaScript, HTML, and CSS files and related languages.",
+    "engines": {
+        "brackets": ">=1.5.0"
+    },
+    "homepage": "https://github.com/drewhamlett/brackets-beautify",
+    "author": "Drew Hamlett <i@drewh.me> (https://github.com/drewhamlett)",
+    "contributors": "Jan Pilzer (https://github.com/hirse)",
+    "license": "MIT",
+    "categories": "formatting",
+    "keywords": [
+        "beautify",
+        "beautifier",
+        "format",
+        "formatting",
+        "tidy",
+        "pretty",
+        "prettify",
+        "jsbeautify",
+        "JavaScript",
+        "CSS",
+        "XML",
+        "HTML",
+        "SVG",
+        "sass",
+        "scss"
+    ],
+    "i18n": [
+        "de",
+        "en",
+        "es",
+        "it",
+        "ja",
+        "zh-cn"
+    ],
+    "package-i18n": {
+        "de": {
+            "description": "Formatiere JavaScript, HTML, und CSS Dateien und verwandte Sprachen."
+        },
+        "it": {
+            "description": "Formato JavaScript, HTML e file CSS e linguaggi affini."
+        },
+        "zh-cn": {
+            "description": "格式化JavaScript, HTML, CSS文件以及相关的语言。"
+        }
+    }
+}

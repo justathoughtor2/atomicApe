@@ -1,0 +1,19 @@
+
+
+====================================
+Stats
+
+Files:
+- Total: 22
+- Binary: 0 (skipped)
+- With Matches: 0
+- Without Matches: 22
+- Failed to Open: 0
+- Failed to Write: 0
+
+Matches:
+- Found: 0
+- Replaced: 0
+
+Duration: 0.093 secs
+====================================

@@ -1,0 +1,6 @@
+.builder-content {
+    overflow: scroll !important;
+    height: 150px;
+    padding: 5px 10px;
+    white-space: pre;
+}

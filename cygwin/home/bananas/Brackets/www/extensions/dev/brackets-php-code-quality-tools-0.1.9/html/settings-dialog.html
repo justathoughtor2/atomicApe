@@ -1,0 +1,175 @@
+<div id="php-lint-settings-dialog" class="modal php-lint-settings-dialog {{ ^phpAvailable }}error{{ /phpAvailable }}">
+	<div class="modal-header">
+		<h1 class="dialog-title">{{ Strings.SETTINGS_DIALOG_TITLE }}</h1>
+	</div>
+	
+	<div class="modal-body tab-content">
+		{{ ^phpAvailable }}
+			<fieldset class="error">
+				{{ Strings.SETTINGS_DIALOG_NOT_AVAILABLE }}
+			</fieldset>
+		{{ /phpAvailable }}
+		
+		<fieldset class="tool tool-phpcs">
+			<legend>CodeSniffer</legend>
+			
+			<p>
+				<label>
+					<input type="checkbox" name="enabled[]" value="phpcs" />
+					{{ Strings.SETTINGS_DIALOG_ENABLE }}
+				</label>
+			</p>
+			
+			<p>{{ Strings.SETTINGS_DIALOG_STANDARDS }}</p>
+			
+			<p class="columns clearfix">
+				<label>
+					<input type="checkbox" name="phpcs-standards[]" value="MySource" />
+					MySource
+				</label>
+				
+				<label>
+					<input type="checkbox" name="phpcs-standards[]" value="PEAR" />
+					PEAR
+				</label>
+				
+				<label>
+					<input type="checkbox" name="phpcs-standards[]" value="PHPCS" />
+					PHPCS
+				</label>
+				
+				<label>
+					<input type="checkbox" name="phpcs-standards[]" value="PSR1" />
+					PSR-1
+				</label>
+				
+				<label>
+					<input type="checkbox" name="phpcs-standards[]" value="PSR2" />
+					PSR-2
+				</label>
+				
+				<label>
+					<input type="checkbox" name="phpcs-standards[]" value="Squiz" />
+					Squiz
+				</label>
+				
+				<label>
+					<input type="checkbox" name="phpcs-standards[]" value="Zend" />
+					Zend
+				</label>
+			</p>
+			
+			<p>{{ Strings.SETTINGS_DIALOG_CUSTOM_STANDARDS }}</p>
+			
+			<p class="columns clearfix">
+				<label>
+					<input type="checkbox" name="phpcs-standards[]" value="Drupal" />
+					Drupal
+				</label>
+				
+				<label>
+					<input type="checkbox" name="phpcs-standards[]" value="DrupalPractice" />
+					Drupal Best Practices
+				</label>
+				
+				<label>
+					<input type="checkbox" name="phpcs-standards[]" value="MediaWiki" />
+					MediaWiki
+				</label>
+				
+				<label>
+					<input type="checkbox" name="phpcs-standards[]" value="WordPress-Core" />
+					WordPress-Core
+				</label>
+				
+				<label>
+					<input type="checkbox" name="phpcs-standards[]" value="WordPress-Docs" />
+					WordPress-Docs
+				</label>
+				
+				<label>
+					<input type="checkbox" name="phpcs-standards[]" value="WordPress-Extra" />
+					WordPress-Extra
+				</label>
+				
+				<label>
+					<input type="checkbox" name="phpcs-standards[]" value="WordPress-VIP" />
+					WordPress-VIP
+				</label>
+			</p>
+		</fieldset>
+		
+		<fieldset class="tool tool-phpcpd">
+			<legend>Copy/Paste Detector</legend>
+			
+			<p>
+				<label>
+					<input type="checkbox" name="enabled[]" value="phpcpd" />
+					{{ Strings.SETTINGS_DIALOG_ENABLE }}
+				</label>
+			</p>
+		</fieldset>
+		
+		<fieldset class="tool tool-phpl">
+			<legend>PHP Lint</legend>
+			
+			<p>
+				<label>
+					<input type="checkbox" name="enabled[]" value="phpl" />
+					{{ Strings.SETTINGS_DIALOG_ENABLE }}
+				</label>
+			</p>
+		</fieldset>
+		
+		<fieldset class="tool tool-phpmd">
+			<legend>Mess Detector</legend>
+			
+			<p>
+				<label>
+					<input type="checkbox" name="enabled[]" value="phpmd" />
+					{{ Strings.SETTINGS_DIALOG_ENABLE }}
+				</label>
+			</p>
+			
+			<label>Rulesets</label>
+			<p class="columns clearfix">
+				<label>
+					<input type="checkbox" name="phpmd-rulesets[]" value="cleancode" />
+					Clean Code
+				</label>
+				
+				<label>
+					<input type="checkbox" name="phpmd-rulesets[]" value="codesize" />
+					Code Size
+				</label>
+				
+				<label>
+					<input type="checkbox" name="phpmd-rulesets[]" value="controversial" />
+					Controversial
+				</label>
+				
+				<label>
+					<input type="checkbox" name="phpmd-rulesets[]" value="design" />
+					Design
+				</label>
+				
+				<label>
+					<input type="checkbox" name="phpmd-rulesets[]" value="naming" />
+					Naming
+				</label>
+				
+				<label>
+					<input type="checkbox" name="phpmd-rulesets[]" value="unusedcode" />
+					Unused Code
+				</label>
+			</p>
+		</fieldset>
+	</div>
+	
+	<div class="modal-footer">
+		<button data-button-id="reset" class="reset-preferences btn left">{{ Strings.RESET }}</button>
+		
+		<button data-button-id="ok" class="dialog-button btn primary">{{ Strings.OK }}</button>
+		<button data-button-id="cancel" class="dialog-button btn">{{ Strings.CANCEL }}</button>
+	</div>
+</div>

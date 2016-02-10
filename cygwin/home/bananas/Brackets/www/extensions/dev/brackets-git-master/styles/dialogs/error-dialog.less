@@ -1,0 +1,16 @@
+// main: ../brackets-git.less
+
+#git-error-dialog {
+    .modal-header {
+        background-color: @bc-error;
+        .dialog-title {
+            color: @bc-text-alt;
+        }
+    }
+    pre {
+        white-space: pre;
+        word-wrap: normal;
+        overflow: scroll;
+        .selectable-text();
+    }
+}

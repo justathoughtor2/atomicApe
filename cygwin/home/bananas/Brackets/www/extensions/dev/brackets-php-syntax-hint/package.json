@@ -1,0 +1,12 @@
+{
+    "name": "brackets-php-syntax-hint",
+    "title": "PHP Syntax Hint",
+    "description": "PHP Syntax Hint is a plugin for Brackets, which will help you alot in writing php SYNTAX, MYSQL Queries as this will auto suggest Syntax while coding, within Brackets software. The best part of it is that if you want to write some words again and again, just go to Help > Show Extensions Folder. Once folder opens up, open folder user > brackets-php-syntax-hint. There you will get php-syntax.txt, open that file and go on adding syntax and words you require and reload Brackets to enjoy writing codes(words you have added).  They will appear in the dropdown as HINT, press ENTER and it's done.",
+    "homepage": "http://www.oslibrary.in/other-information-code/brackets-php-syntax-hint",
+    "version": "1.1.6",
+    "author": "Ritesh Kumar Prakash <riteshbksc@gmail.com> (https://www.oslibrary.in/)",
+    "license": "MIT",
+    "engines": {
+        "brackets": ">=0.41.0"
+    }
+}

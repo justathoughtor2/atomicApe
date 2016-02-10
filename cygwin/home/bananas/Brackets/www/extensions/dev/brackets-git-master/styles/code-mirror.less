@@ -1,0 +1,72 @@
+// main: brackets-git.less
+
+.CodeMirror {
+    .CodeMirror-gutter-elt {
+        // do not enable pointer events
+        // pointer-events: all;
+    }
+    .brackets-git-gutter {
+        width: @gutterWidth;
+        margin-left: 1px;
+    }
+    .brackets-git-gutter-added,
+    .brackets-git-gutter-modified,
+    .brackets-git-gutter-removed {
+        background-size: @gutterWidth @gutterWidth;
+        background-repeat: no-repeat;
+        font-size: 1em;
+        font-weight: bold;
+        color: @bc-menu-bg;
+
+        .dark & {
+            color: @dark-bc-menu-bg;
+        }
+    }
+    .brackets-git-gutter-added {
+        background-color: @green;
+    }
+    .brackets-git-gutter-added.brackets-git-gutter-hover:before {
+        content: "+";
+    }
+    .brackets-git-gutter-modified {
+        background-color: @orange;
+    }
+    .brackets-git-gutter-modified.brackets-git-gutter-hover:before {
+        content: "*";
+    }
+    .brackets-git-gutter-removed {
+        background-color: @red;
+    }
+    .brackets-git-gutter-removed.brackets-git-gutter-hover:before {
+        content: "-";
+    }
+    .brackets-git-gutter-deleted-lines {
+        color: @bc-text;
+        background-color: lighten(@red, 25%);
+        .selectable-text();
+
+        .dark & {
+            background-color: darken(@red, 25%);
+            color: @dark-bc-text;
+        }
+
+        position: relative;
+        .brackets-git-gutter-copy-button {
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding: 1px;
+            height: 1.2em;
+            line-height: 0.5em;
+        }
+    }
+    .CodeMirror-linenumber.brackets-git-gutter-hover {
+        background-color: @bc-panel-bg-alt;
+        color: @bc-text-thin;
+
+        .dark & {
+            background-color: @dark-bc-panel-bg-alt;
+            color: @dark-bc-text-alt !important;
+        }
+    }
+}
