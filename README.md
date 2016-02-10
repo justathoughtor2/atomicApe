@@ -1,6 +1,6 @@
-# atomicApe
+# atomicApe (encagedApe Edition)
 ## Always fresh. Always bananas.
-Atom meets Babun in this repository optimized for running various forms of development software on a flash drive on Windows. Download one of the releases and unzip the folder *directly* to `MYDRIVELETTER:\` or run `cd MYDRIVELETTER:\ && git clone https://github.com/justathoughtor2/atomicApe.git`. Note that the reason the developer recommends using the flash drive directly is due to the Windows pathname character limit.
+Brackets meets Babun in this repository optimized for running various forms of development software on a flash drive on Windows. Download the latest [release](https://github.com/justathoughtor2/atomicApe/releases) and unzip the folder *directly* to `MYDRIVELETTER:\` or run `cd MYDRIVELETTER:\ && git clone -b encaged --single-branch https://github.com/justathoughtor2/atomicApe.git`. Note that the reason the developer recommends using the flash drive directly is due to the Windows pathname character limit.
 
 You may contact justathoughtor2 with any questions or comments at [atomicape@justathoughtor2.com](mailto:atomicape@justathoughtor2.com).
 
