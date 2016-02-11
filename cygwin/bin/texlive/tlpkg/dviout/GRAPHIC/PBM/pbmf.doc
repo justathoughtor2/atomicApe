@@ -1,0 +1,167 @@
+ 　　　　               pbmf.sty について
+
+　　　　　　　　　　　　　　　　　　　　　　　　　　　　 Oct. 25, 1993 八雲
+
+
+　これは、PBMファイル読み込み機能付きdviout/dviprtで 、PBM形式のビットマップ
+データをLaTeX文書に取り込むためのマクロです。
+ （このマクロは、風間さん＆磯崎さん作の(ecl)epsf.styを元にして作りました。）
+
+【機能】
+
+　　指定されたサイズの枠をあけて、PBMファイルを取り込みます。
+　（Ver.0.5d から、monochrome GIFファイル取り込み用マクロも追加されました。）
+
+【必要な設定】
+
+　　scaleオプション用に、プリンタの解像度を\pbmhdpiと\pbmvdpi に設定する必要
+　があります。 \pbmhdpiが水平方向、\pbmvdpiが垂直方向の解像度で、単位はdpiで
+　す。自分の使っているプリンタの解像度に設定して下さい。
+　　デフォルト値の設定は、pbmf.styの51,52行目で行っています。
+
+　\pbmhdpi=360%<---- プリンタ水平方向解像度のデフォルト値
+　\pbmvdpi=360%<---- プリンタ垂直方向解像度のデフォルト値
+
+【使用方法】
+
+　　file=の後にraw PBM形式のファイル名を書きます。
+
+  正しい例１：\pbmfile{file=foo.pbm}
+                            ^^^^^^^
+                           ファイル名
+
+　　出力サイズを指定するオプションとして、width,height,scale,hscale,vscaleの
+　５種類が使えます。
+　　基本的に(ecl)epsf.styでの\epsfile{file=...}の代わりに\pbmfile{file=...}
+　を使うというだけで、オプションのサイズ指定方法は(ecl)epsf.styと同じです。
+
+ (1)width,heightオプション
+
+　　width=,height=を使った場合、cmやptなどの単位で、出力画像の幅と高さを指定
+　できます。widthまたはheightの片方のみ指定した場合は、元の画像の縦横比から
+　残りのサイズが決定されます。例えば、元の画像が200x100の場合に、width=5cmと
+　だけ指定された場合は幅5cm、高さ2.5cmの画像が出力されます。
+
+  正しい例２：\pbmfile{file=foo.pbm,width=3cm}
+                            ^^^^^^^ ^^^^^^^^^
+                         ファイル名  サイズ指定オプション
+
+  正しい例３：\pbmfile{file=foo.pbm,width=100pt,height=70pt}
+
+　【注意】オプション指定の前に空白を入れてはいけません。
+　　　　　正常に処理されない可能性が高いです。
+
+　悪い例：\pbmfile{file=foo.pbm, width=5cm, height=3.5cm}
+                                ^空白      ^空白
+
+ (2)scaleオプション
+ 
+　　scale=を使った場合、元の画像に対する倍率で出力画像のサイズを指定できます。
+　例えば、元の画像が640x400の場合に、scale=2と指定した場合は幅1280ドット、高
+　さ800ドットの画像が出力されます。また、hscale=とvscale=は、幅と高さの倍率を
+　独立に設定したい場合に使用します。
+
+  正しい例４：\pbmfile{file=foo.pbm,scale=2}
+  正しい例５：\pbmfile{file=foo.pbm,hscale=1.5,vscale=1.2}
+
+ (3)文字列等を画像の上に上書きする方法
+
+　　(ecl)epsf.styでの\epsfatに対応するものとして\pbmfat、\pbmfon、及び
+　\ovpbmfon が用意されています。これらを使うことで、画像の中に適当な枠を空け
+　て文字列等を上書きすることができます。\pbmfatは透過形、\pbmfonと\ovpbmfon 
+　は非透過形です。\pbmfonは四角い枠を、\ovpbmfonは角の丸い四角い枠を空けます。
+　　\pbmfonと\ovpbmfonはdviout/prtのtpic specialsを用いて実現していますので、
+　"-tpic"オプションがオンになっていないと使用できません。
+
+　　\epsfatを使ったことのある方は、位置指定に注意してください。\epsfatでは原
+　画像上の座標で指定しますが、\pbmfat,\pbmfon,\ovpbmfon では拡大縮小された出
+　力画像上の座標で指定します。
+
+  例６：\pbmfile[\pbmfat(1cm,1.5cm){サンプル画像１}]{file=foo1.pbm}
+  例７：\pbmfile[\pbmfon(1cm,1.5cm){サンプル画像２}]{file=foo2.pbm,scale=2}
+　例８：\pbmfile[\ovpbmfon(10mm,12mm){サンプル画像}]{file=foo.pbm}
+                           ^^^^^^^^^  ^^^^^^^^^^^^
+                           位置指定　　上書きする文字列
+
+ (4)mono GIF形式のデータを取り込む場合
+
+　　monochrome GIFの場合は、\giffile{file=...}を使って下さい。ただし、GIFの場
+　合、scale、vscale、hscaleオプションを使うためには、orgsizeというオプション
+　で元の画像の幅と高さを設定する必要があります。
+　　一方、orgsizeが設定されていない場合は、widthとheightの両方必要です。
+　　\epsfileや\pbmfileの様に片方を省略することはできません。
+
+  正しい例９：\giffile{file=foo.gif,orgsize=640x400,width=4cm}
+  正しい例１０：\giffile{file=foo.gif,orgsize=400x400,scale=2}
+  正しい例１１：\giffile{file=foo.gif,width=4cm,height=3cm}
+
+
+【使用例】
+
+ ［例12］：foo.pbmというPBMファイルを読み込んで、幅を5cmに指定して出力する。
+　（この場合、高さは縦横比から自動的に計算されます）
+
+　\documentstyle[12pt,pbmf]{jarticle}
+　\begin{document}
+　This is test image.
+　\frame{\pbmfile{file=foo.pbm,width=5cm}}
+　Test image.
+　\end{document}
+
+
+ ［例13］：foo.pbmというPBMファイルを読み込んで、２倍に拡大して出力する。
+　（例えばPBMデータが150x100の場合、300x200dotsでプリンタに出力されます）
+
+　\documentstyle[pbmf]{jarticle}
+　\begin{document}
+　This is test image.
+　\pbmfile{file=foo.pbm,scale=2}
+　Test image.
+　\end{document}
+
+
+ ［例14］：foo.pbmというPBMファイルを読み込み、画像の中に"Hello!" という文
+　字列を上書きして出力する。その位置は、画像の左下から右に2cm、上に1cmの所に
+　なります。
+
+　\documentstyle[pbmf]{jarticle}
+　\begin{document}
+　This is test image.
+　\pbmfile[\pbmfon(2cm,1cm){\fbox{\large Hello!}}]{file=foo.pbm}
+　Test image.
+　\end{document}
+
+
+ ［例15］：foo.pbmというPBMファイルを読み込み、画像の中に"Hello!" という文
+　字列を角の丸い枠を空けて上書きする。枠線の太さを0.6pt、角の丸みの半径を3mm
+　にしています。（pbmf.styのデフォルトは各々0.4pt,2mmになっています）
+
+　\documentstyle[pbmf]{jarticle}
+  \ovrulewidth=0.6pt
+  \ovradius=3mm
+　\begin{document}
+　This is test image.
+　\pbmfile[\ovpbmfon(2cm,1cm){\large Hello!}]{file=foo.pbm}
+　Test image.
+　\end{document}
+
+
+【問題点】
+
+　　pbmf.styはPBM形式を完全にサポートしているわけではありません(;_;)。
+　以下の様なフォーマットのPBMファイルは正常に処理されます（pbmplusライブラリ
+　で他の画像形式からPBMに変換したファイルやGhostScriptのpbmraw出力は、この形
+　式のはずなので、正常に処理されると思います）。
+
+     P 4       0x0a                             : 3 byte, 最初の "P4" は、ID
+     #<string> 0x0a                             : コメント行
+     .........                                  : （任意バイト x 任意行）
+     <width_by_dots> 0x20 <height_by_dots> 0x0a : 横と縦のドットサイズ
+     ........                                   : binary image-data
+
+     <width_by_dots>, <height_by_dots> は、通常の 10進数です。
+
+
+　　raw PBMの正式なフォーマットでは、P4, <width_by_dots>,  <height_by_dots>
+　の次の 1 byte として、0x20, 0x0a, 0x0d, 0x09のいずれかが認められていますが、
+　pbmf.styでは上記フォーマット以外は正常に処理されないと思って下さい。

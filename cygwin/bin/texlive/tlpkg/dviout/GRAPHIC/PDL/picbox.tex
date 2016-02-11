@@ -1,0 +1,58 @@
+%----------------------------------------------------------------------%
+%   Macros for GP -> TeX interface                                     %
+%                        version 2.10  Nov. 12 1993   by K.Edamatsu.   %
+%----------------------------------------------------------------------%
+%
+% Macros for plain TeX and LaTeX
+%
+\def\PictureOrigin{u}%  Origin of a picture = upper (or lower)
+\def\SpecialCommand{lipsfile=}%
+%
+%--- picture in \hbox
+\def\PictureHbox#1{\def\PictureFile{#1}%
+                   \input#1\hbox to\PictureWidth true mm
+                  {\vbox to\PictureHeight true mm
+                   \if\PictureOrigin u
+                     {\special{\SpecialCommand\PictureFile}\vfil}%
+                   \else
+                     {\vfil\special{\SpecialCommand\PictureFile}}%
+                   \fi\hfil}}
+%
+%--- picture in \mbox
+\def\PictureBox#1{\leavevmode\PictureHbox{#1}}
+%
+%--- picture in \fbox
+\def\PictureFrameBox#1{\leavevmode\hbox
+                      {\vrule\vbox{\hrule\PictureHbox{#1}\hrule}\vrule}}
+%
+% Macros for LaTeX
+%
+\expandafter\ifx\csname LaTeX\endcsname\relax% { if \LaTeX is undefined }
+\else%                                         { else ....              }
+%
+%--- picture in LaTex's `picture' environment
+\newenvironment{PictureIn}[1]{%
+\input#1\unitlength=1mm%
+\begin{picture}(\PictureWidth,\PictureHeight)
+\if\PictureOrigin u
+  \put(0,\PictureHeight){\special{\SpecialCommand\PictureFile}}
+\else
+  \put(0,0){\special{\SpecialCommand\PictureFile}}
+\fi}{%
+\end{picture}}
+%
+%--- picture in \oval
+\def\PictureOvalBox#1{%
+\begin{PictureIn}{#1}
+  \put(\PictureCenterX,\PictureCenterY){\oval(\PictureWidth,\PictureHeight)}
+\end{PictureIn}}
+%
+%--- picture in \dashbox
+\def\PictureDashBox#1#2{%
+\begin{PictureIn}{#2}
+   \put(0,0){\dashbox{#1}(\PictureWidth,\PictureHeight){}}
+\end{PictureIn}}
+%
+\fi
+%
+\endinput

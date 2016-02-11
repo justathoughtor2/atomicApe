@@ -1,0 +1,128 @@
+#!/usr/bin/env texlua
+--*-Lua-*-
+-- $Id: ps2ascii.tlu 37204 2015-05-05 21:26:28Z reinhardk $
+
+-- Copyright (C) 2008-2015 Reinhard Kotucha.
+-- You may freely use, modify and/or distribute this file.
+
+-- Replacement for ps2ascii.bat.
+
+-- Extract ASCII text from a PostScript file.  Usage:
+--
+--	ps2ascii [infile.ps [outfile.txt]]
+--
+-- If outfile is omitted, output goes to stdout.
+-- If both infile and outfile are omitted, ps2ascii acts as a filter,
+-- reading from stdin and writing on stdout.
+
+
+-- We have to pass the command as a string to os.execute() because we
+-- need a shell for i/o-redirection.  But we create a table first and
+-- convert it to a string, just to make sure we don't miss any spaces.
+
+local function push (t, ...)
+   local args={...}
+   for _,v in ipairs(args) do
+      if type(v) == 'table' then
+	 for _,x in ipairs(v) do
+	    t[#t+1]=x
+	 end
+      else
+	 t[#t+1]=v
+      end
+   end
+end
+
+
+local function filename (file)
+   -- strip path
+   if string.find(file, '[/\\]') then
+      return string.match(file, '.*[/\\](.*)$')
+   else
+      return file
+   end
+end
+
+
+local function remove_tmpfiles (tmpfiles)
+   -- The shell script contains
+   --
+   --    trap "rm -f _temp_.err _temp_.out" 0 1 2 15
+   --
+   -- texlua doesn't support signals (yet).  So we remove temporary files
+   -- if possible.
+   for i=1, #tmpfiles do
+      if lfs.isfile(tmpfiles[i]) then
+	 os.remove(tmpfiles[i])
+      end
+   end
+end
+
+
+local function parse_cmdline ()
+   local files={}
+   local options={}
+
+   local progname
+   local basename=filename(arg[0])
+   if basename:find('%.') then
+      progname=basename:match('(.*)%..*')
+   else
+      progname=basename
+   end
+
+   for i=1, #arg do
+      if string.find(arg[i], '^%-.+') then
+	 push(options, arg[i])
+      else
+	 push(files, arg[i])
+      end
+   end
+   files.input =files[1]
+   files.output=files[2]
+   return progname, options, files
+end
+
+
+-- main --
+
+local progname, options, files=parse_cmdline ()
+
+-- setup command
+
+local command={gs}
+if os.type == 'unix' then command={'gs'} else command={'gswin32c'} end
+
+push(command, {'-q', '-dNODISPLAY', '-P-', '-dSAFER', '-dDELAYBIND',
+	       '-dWRITESYSTEMDICT', '-dSIMPLE'})
+
+push(command, '-c', 'save', '-f', 'ps2ascii.ps')
+
+if #files == 0 then
+   push(command, '-')
+else
+   push(command, '"'..files.input..'"')
+end
+
+push(command, '-c', 'quit')
+
+if #files > 1 then
+   push(command, '>', '"'..files.output..'"')
+end
+
+local cmd_string=table.concat(command, ' ')
+
+--[[ prepend an additional hyphen to activate this code
+print(cmd_string)
+os.exit(0)
+--]]
+
+ret=os.execute(cmd_string)
+
+-- The last character of the ASCII file is a form feed (^L).
+-- Uncomment the following line if this confuses your terminal.
+--
+-- if #files < 2 then io.stdout:write('\r') end
+
+remove_tmpfiles{'_temp_.err', '_temp_.out'}
+os.exit(ret)

@@ -1,0 +1,26 @@
+$Id: xpdfutil-install.txt 37291 2015-05-09 07:47:37Z kakuto $
+
+             Installation of resources for xpdf utilities
+
+Run a command
+
+texlua install-xpdf-data
+
+This command expands xpdfutil-supp.zip in $APPDATA/xpdfutil,
+and creates a suitable configuration file xpdfrc in $USERPROFILE.
+After the installation of the resource data, full functions of
+xpdf utilities are available.
+
+Contents in the file xpdfutil-supp.zip are those in
+Arabic: xpdf-arabic.tar.gz
+Chinese/simplified: xpdf-chinese-simplified.tar.gz
+Chinese/traditional: xpdf-chinese-traditional.tar.gz
+Cyrillic: xpdf-cyrillic.tar.gz
+Greek: xpdf-greek.tar.gz
+Hebrew: xpdf-hebrew.tar.gz
+Japanese: xpdf-japanese.tar.gz
+Korean: xpdf-korean.tar.gz
+Latin2: xpdf-latin2.tar.gz
+Thai: xpdf-thai.tar.gz
+Turkish: xpdf-turkish.tar.gz
+provided at http://www.foolabs.com/xpdf/download.html.

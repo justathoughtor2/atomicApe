@@ -1,0 +1,13 @@
+#          GEN_FONT.BAT作成用テンプレート サンプル(for MakeTeXPK)
+#                      By 八雲           1994/ 5/15
+#		       modified by SHIMA 1996/12/27
+#
+%1st
+%2nd
+#
+# ex. MakeTeXPK ^s ^d ^D ^d/^D CanonCX
+#
+# The next uses the default defined by MAKETEXPK_MODE_... in texmf.cnf
+#
+MakeTeXPK ^s ^d ^D ^d/^D
+%3rd

@@ -1,0 +1,142 @@
+#!/usr/bin/env texlua
+--*-Lua-*-
+-- $Id: eps2eps.tlu 37204 2015-05-05 21:26:28Z reinhardk $
+
+-- Copyright (C) 2008-2015 Reinhard Kotucha.
+-- You may freely use, modify and/or distribute this file.
+
+-- Replacement for eps2eps.bat.
+-- 'Distill' Encapsulated PostScript.
+
+
+local function usage (progname)
+   local message=
+      'Usage: '..progname..' [options] <inputfile> <outputfile>\n'..
+      '       <inputfile> can be either a PS, EPS, PDF file, or stdin.\n'..
+      '       A single hyphen (-) denotes stdin.\n'
+   return message
+end
+
+
+function fixwin(args_unix)
+   if os.type == 'windows' then
+      local args_win={}  -- new table
+      args_win[0]=args_unix[1]
+      for i=1, #args_unix do  
+	 args_win[i]='"'..args_unix[i]..'"'
+      end
+      return args_win
+   else
+      return args_unix
+   end
+end
+
+
+local function push (t, ...)
+   local args={...}
+   for _,v in ipairs(args) do
+      if type(v) == 'table' then
+	 for _,x in ipairs(v) do
+	    t[#t+1]=x
+	 end
+      else
+	 t[#t+1]=v
+      end
+   end
+end
+
+
+local function filename (file)
+   -- strip path
+   if string.find(file, '[/\\]') then
+      return string.match(file, '.*[/\\](.*)$')
+   else
+      return file
+   end
+end
+
+
+local function basename (file)
+   -- strip extension
+   return string.match(filename(file), '(.*)%..*')
+end
+
+
+local function extension (file)
+   -- return extension if available, false otherwise.
+   local fn=filename(file)
+   if fn:find('%.') then
+      return string.match(fn, '.*%.(.*)')
+   else
+      return false
+   end
+end
+
+
+local function parse_cmdline ()
+   local files={}
+   local options={}
+
+   local progname
+   local basename=filename(arg[0])
+   if basename:find('%.') then
+      progname=basename:match('(.*)%..*')
+   else
+      progname=basename
+   end
+
+   for i=1, #arg do
+      if string.find(arg[i], '^%-.+') then
+	 push(options, arg[i])
+      else
+	 push(files, arg[i])
+      end
+   end
+   files.input =files[1]
+   files.output=files[2]
+
+   return progname, options, files
+end
+
+
+local function check_files (progname, files) 
+   if #files < 2 then
+      io.stderr:write(usage(progname))
+      os.exit(1)
+   end
+end
+
+-- main --
+
+-- parse command line
+local progname, options, file=parse_cmdline()
+
+check_files (progname, file)
+
+-- setup command
+
+local command={}
+if os.type == 'unix' then command={'gs'} else command={'gswin32c'} end
+
+push(command, '-q', '-sDEVICE=eps2write')
+
+if os.type=='unix' then push (command, '-sstdout=%stderr') end
+
+push(command, '-sOutputFile='..file.output, '-dNOPAUSE',
+     '-dBATCH', '-P-', '-dSAFER', '-dDEVICEWIDTH=250000', 
+     '-dDEVICEHEIGHT=250000')
+
+push(command, options)
+push(command, file.input)
+
+command=fixwin(command)
+
+--[[ prepend an additional hyphen to activate this code
+for i=0, #command do
+   print (command[i])
+end
+os.exit(0)
+--]]
+
+ret=os.spawn(command)
+os.exit(ret)

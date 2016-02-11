@@ -1,0 +1,1240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD W3 HTML//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<title>dviout-cmode</title>
+</head>
+
+<body BGCOLOR="#eeffff">
+
+<hr NOSHADE ALIGN="left" WIDTH="65%">
+
+<h1 align="center">DVIware としての dviout</h1>
+
+<hr NOSHADE ALIGN="right" WIDTH="65%">
+
+<p align="center">May 5, 2005</p>
+
+<p><a HREF="http://akagi.ms.u-tokyo.ac.jp/ftp-j.html#TeX" name="contents">TeX 
+のページへ </a><br>
+<a href="tex_dvioutw.html">dvioutのインストール</a></p>
+
+<pre>
+<b>目次</b>
+
+ 0. 序
+ 1. dvioutの基本
+ 2. 各種のDVIwareやワープロ
+ 3. gray scale
+ 4. 文字の色づけ - その１ -
+ 5. 文字の色づけ - その２ -
+ 6. 文字の重なり
+ 7. <a
+href="#graphics">画像データの取り込み</a>
+ 8. <a href="#rotate">文字や画像の回転</a>
+         <a
+href="#BWvsColor">白黒画像とカラー画像</a>
+         <a href="#rotPS">カラーPostScript画像の回転</a>
+         <a
+href="#BMC">BMC画像ファイル</a>
+ 9. <a href="#tpic">斜線やtpicによる描画</a>
+10. <a
+href="#printer">プリンタとの関わり</a>
+   10.1. <a href="#Winprinter">Windows専用プリンタ</a>
+           <a
+href="#CheckDriver">プリンタドライバのチェック</a>
+   10.2. <a
+href="#PSprinter">PostScriptプリンタ</a>
+   10.3. <a href="#color2bw">カラー画像の白黒印刷</a>
+11. <a
+href="#picture">画像出力</a>
+   11.1. <a href="#cut">矩形領域の指定</a>
+   11.2. <a
+href="#BMPout">BMP/BMC画像出力</a>
+   11.3. <a href="#EMFout">EMF画像出力</a>
+   11.4. <a
+href="#png">PNG/EPS等の画像出力</a>
+   11.5. <a href="#PDF">PDF画像出力</a>
+   11.6. <a href="#PSout">PostScript画像出力</a>
+   11.7. <a href="#PDFT">PDF変換</a>
+   11.8. <a href="#OTHER">上記以外の画像ファイルへの切り出し</a>
+   11.9. <a href="#FAX">FAX送信</a>
+12. <a href="#dviprt">dviprt機能</a>
+   12.1. <a
+href="#LBP">LBP用ドライバ</a>
+   12.2. <a href="#raw">他のプリンタドライバの制御</a>
+13. <a
+href="#CompBMC">BMC画像の圧縮率</a>
+</pre>
+
+<h2>0. 序</h2>
+
+<p><b>dviout</b>が如何にして preview 画面（= 
+画像）を作成しているか、ということを解説します。<br>
+それとともに、On-line Help のみでは解説が不十分と思われる </p>
+
+<p>Option → Setup Parameters ... → [Graphic] の <br>
+<br>
+<b>cmode</b>: auto mode(p2), merge, replace(def), replace(bak), patch, patch2, auto 
+mode(rep)<br>
+<b>GIF</b>:&nbsp;&nbsp; raw PBM, monochrome BMP, BMP(16 colors), BMP(256 colors), BMP(full 
+color)<br>
+<b>gfit</b>:&nbsp; ON/OFF<br>
+<b>gow</b>:&nbsp;&nbsp; ON/OFF<br>
+<b>gclip</b>: ON/OFF<br>
+</p>
+
+<p>の説明をします。 </p>
+
+<p>他の<b> WinDvi</b> や<strong> lips3dvi</strong> などとのDVIwareとの原理的な違い、あるいは 
+PostScript printer を使うとき、どうして <b>auto mode(rep)</b> が良いか、Windows用のカラーインクジェットプリンタを 
+使うときは、どうすれば高速に印刷できるか、など、プリンタと<b>cmode</b>との関係の解説もあります。 
+<br>
+</p>
+
+<h2>1. dviout の基本</h2>
+
+<p>DVIファイルはページ毎に独立に書かれており、何番（例えば２番）のフォントの何番 
+（例えば65番）のコードの文字を、そのページのどの位置（<b>reference 
+point</b>）に配置せよ、という 
+命令のほか、中が詰まった矩形を縦横のサイズを指定して指定した場所に描け、という命令などか 
+ら成っています。後者は、例えば罫線を引く場合に、線の太さと長さと引く位置を指定することに 
+なります。 </p>
+
+<p>全てのページ内容を記述したDVIファイルの最後には、そのDVIファイルで使われるフォントの情報が書 
+いてあります。例えば、２番のフォントは<b>cmr10</b>（Compuer Modern 
+Roman 10pt）を12ptのサイズで用いる、というような情報が書かれています。 
+</p>
+
+<blockquote>
+  <p>フォントの番号はdvioutの <strong>Help → Font Info.</strong> 
+  で表示されるもので、DVIファイルで便宜的に決められるものですが、文字のコード番号は、フォントに応じて決まっているものです（例えば、cmr10 
+  の65番の文字は「A」にあたります）。 </p>
+</blockquote>
+
+<p><b>dviout</b>などの<b>DVIware</b>は、各フォントの使われる文字の画像データを得て、それを張り付けていくことにより、１ページの紙面の画像データを作成します。最も普通に使われるフォントの画像データは、<b>PKフォント</b>
+と呼ばれる形式で、各文字の画像データが独自の方法で圧縮されて文字毎に収録 されています。
+文字の画像データは、実際の文字の部分を囲む最小の矩形（<b>Bounding Box</b>）
+で切りつめられており、指定位置（reference point）から見てBounding Box
+をどこに配置すべきかの相対位置、次の文字との標準の空き、などの情報（これらは解像度と独立なデータ）も画像データ（これは解像度に依るデータ）と共に入っています。 
+</p>
+
+<p>通常の横書きでは、reference point 
+は文字下部の基準線の左端に位置します。例えば「A」では 
+ほぼ文字の最左下点ですが、「g」などでは、文字は基準線の下にもはみ出ています。また、「’」では 
+Bounding Box は「A」の場合より小さく、Bounding Box をreference point 
+から見て上の位置に配置 することになります。 </p>
+
+<p>解像度が600dpi（600 dots/1 inch）でcmr10を12ptに拡大して使う場合のPKフォントは、通常 
+<b>cmr10.720pk</b> という名前のファイルになっています。cmr10 という 
+10pt のフォントを12ptのサイズで 使うため、720 = 600 x 12/10 
+という数がファイル名に入っています。標準の10ptで使う場合のPKフォン 
+トのファイル名は、<b>cmr10.600pk</b> となります。</p>
+
+<p>dviout は、DVIファイルを解釈して、指定したページの紙面の画像データを作成します。具体的にはPKフォ 
+ントから黒で描かれた<strong>文字の画像</strong>（Bounding Boxの大きさの矩形上に白の背景に黒で一つの文字が描かれた切手のようなものを想像すればよい）
+を得て、空白（白とみなして良い）の紙面に張り付けていく、 
+と考えればよいでしょう。そのほか、<strong>指定された矩形の部分を黒で塗りつぶす</strong>ことも行います。 
+</p>
+
+<p>このようにして紙面の画像データが完成すると、それをディスプレイ画面で表示したり、プリンタに出力することになります。これがdviout（あるいは多くのDVIware）の基本的な仕組みです。 
+なお、Windowsでは<b>BMP画像形式</b>（あるヘッダ付きの無圧縮画像データ）が用いられますので、dvioutもこの形式で紙面の画像データを作成します。 
+</p>
+
+<p>元来のTeXの場合、紙面作成にはこの２つしか存在しません。カラー画像を張り付けたり、文字に色づけするのは、TeXの <strong>special</strong> 
+という拡張したコマンドを使ってなされ、元来のTeXの仕様には定義されていません
+（従ってこれは個々のDVIwareに依存する仕様になる）。 
+これについては、後から述べます。 </p>
+
+<p>Windowsの<b>TrueTypeフォント</b>などの場合も、WindowsのSystemから必要な文字の画像データを得ることにより、PKフォントと同様に考えることが出来ます。<br>
+</p>
+
+<h2>2. 各種のDVIwareやワープロ</h2>
+
+<p>dviout 
+は、紙面の画像データを作成することが基本ですが、単なる一つの画像データを受け付ける出力デバイスは多い上、そのコマンドは単純であるため、各種出力デバイスに対応することが出来ます。一方、ある出力デバイスに特化したDVIwareについては、別のやり方が可能です。 
+</p>
+
+<p>かつてよく使われた <b>lip3dvi</b>（Canon の LBP 用の DVIware）では、DVIファイルで使われる 
+PKフォントの画像データをあらかじめLBPにダウンロードしておき、DVIを読んで、ページの開始・終了や、あるフォントのある文字をある位置に置け、という命令があると、それをプリンタ制御コマンド(LIPS 
+III）の対応する命令に翻訳し、翻訳したその命令をプリンタに送ります。したがって、紙面の画像作成はプリンタ側で行われることになります。指定し 
+た矩形を黒く塗りつぶす場合も同様です。 </p>
+
+<p>なお、dviout での印刷においても <b>dviprt機能</b>を使えば、このような方法で印刷をすることができます。 
+</p>
+
+<p>このやり方は、他のDVIwareでも使われることがあり、たとえばインプレスの<b>WinDvi</b>では、基本的には 
+MS Windowsに登録されたTrueTypeフォントを用い、「紙面のどの位置にどのフォントのどの文字をどのサイズで置け」という命令をWindowsのシステムに送ることにより、
+Windows側で文字の画像データを作成して紙面に張り付けて紙面を完成させ、画面に出したりプリンタに出力したりします。すなわち、WinDvi は文字の画像データを扱わないのが基本となっています。 </p>
+
+<p>dviout では<b>patch2</b>というモード（<b>cmode</b>）やデフォルトの印刷方式（<b>auto 
+mode (p2)</b>）がこれにあたります。 </p>
+
+<p><b>Word</b>や<b>一太郎</b>などのMS Windowsのワープロも、上記と同様な方法が用いられており、それは紙面作成のためのデータからMS 
+Windowsの紙面作成コマンドへの翻訳機と見なすことができます。一方、 
+dviout では、「文字の画像データという沢山の画像データを合成して一つの紙面の画像データを作成する」
+という画像処理の要素が多分に入ることになります。 </p>
+
+<p><b>dvipsk</b>などのDVIwareは、DVIの紙面作成命令を<b>PostScript言語</b>に翻訳するものであり、その後の紙面の画像データ作成は、<strong>PostScriptプリンタ</strong>や<b>Ghostscript</b>によってなされます。 
+<br>
+</p>
+
+<h2>3. <a name="GrayScale">gray scale</a></h2>
+
+<p>DVIwareにおいて、ディスプレイ画面に出力を行う<b>previewer</b>は印刷の場合とは異なった側面が 
+あります。すなわち、高速に動作することと、低い解像度でそれなりに美しく表示することです。 
+後者のために、<b>gray scale</b> という手法が用いられます。 </p>
+
+<p>印刷では 600 dpi (600 dots/ 1 inch）
+というのは普通ですが、ディスプレイの解像度はずっとそれより低いので、 
+600 dpi 
+用に作成された画像データでは、紙面が大きく拡大され、その一部のみが表示されることに 
+なります。150 dpi 
+程度に解像度を落とさないと、紙面全体を見ることが出来ません。このとき 
+600 dpi の白黒の画像データを 150 dpi の gray scale 
+画像に変換することができます。 </p>
+
+<pre>
+  ●○○○
+  ●●○○
+  ●●●○  →  ◎  黒が 9/16 で 明るさは 7/16(c=1), 4/16(c=0.5 でのγ補正)
+  ●●●○
+</pre>
+
+<p>150 dpi の 1 dot は、600 dpi の 4 x 4 = 16 dots 
+の部分に対応します。白を1、黒を0という数字 
+で表し、その中間の灰色を明るさを 0 と 1 
+の間の数字で表すことにします。「150 dpi の縮小画像の、ある 1 dot 
+に対応する 600 dpi の画像の 16 dots のうち n dots 
+が黒（文字や線の部分） に対応していた場合、150 dpi のその 1 dot 
+を (1 - n/16) の明るさの灰色にする」というような 手法で 150 dpiのgray 
+scale画像が得られます。 </p>
+
+<p>たとえば、1 inch x 1 inch の白黒2値の画像は、600 dpi 
+では 600 x 600 dots のサイズですが、150 dpi の gray scale に変換すると 
+150 x 150 dots
+のサイズになります。</p>
+
+<p>その際に、若干調整をして、正数 c を用いて (1 - (n/16)<sup>c</sup>) 
+の明るさにしています。これは <b>γ補正</b>と呼ばれます。c = 1 
+のときが補正無しで、c が 0 
+に近くなるほど、文字の周りが黒くなります（dviout の [Display] の <strong>contrast</strong> 
+では <strong>high</strong> と表現されています）。 </p>
+
+<p>dviout では、c が 0.01 から 6.00 の範囲で調整でき、デフォルトは 
+0.80 としてあります。これは、 
+ディスプレイや好みに応じて見やすいように調整するのが良いでしょう。また、dviout 
+では、gray scale での白から黒までは、γ補正に応じた16 
+段階に固定しており（600 dpi → 100 dpi でも同じ）、 このときdvioutで作成される画像データは 
+<strong>16色</strong>（色は白から黒までの16段階で、γ補正に従って 
+パレットで指定）の<strong>カラーBMP画像</strong>となります。このgray 
+scaleのBMP画像をMS Windowsを通じてディプレイ 画面に表示します。 </p>
+
+<p><img src="cmode1.png" WIDTH="165" HEIGHT="47"><img src="cmode2.png" WIDTH="166"
+HEIGHT="47"><img src="cmode3.png" WIDTH="166" HEIGHT="48"><img src="cmode6.png"
+WIDTH="166" HEIGHT="48"></p>
+
+<p>上は、<a href="ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/font/bakoma/bakoma.lzh">BaKoMaのCM 
+TrueTypeフォント</a>をLaTeXの \Large で用いた場合（<strong>cmr12</strong>が使われます）のdvioutの100 
+dpi での表示からの画像コピーで、順にgray scale無し、そのあとは 200 
+dpi, 300 dpi, 600 dpi からのgray scale です。</p>
+
+<p>このdviout の gray scale 機能は、MS-DOS版のdvioutが一部Display Card用に対応していたことが元になっています。 
+</p>
+
+<blockquote>
+  <p>一文字の画像を紙面に置く、ということをWindowsなどのSystemに任せているDVIwareの場合は、 
+  あらかじめ gray scale 
+  に変換された文字の画像データを張り付けます、あるいは、Windows 
+  の TrueType フォントの場合では、gray scale によって文字を置くというSystemの機能を用いる 
+  こともできます。 </p>
+</blockquote>
+
+<p>高解像度のディスプレイではあまり差は明らかではありませんが、以下の違いがあります。 
+
+<ul>
+  <li>dviout方式に比べ、gray scaleの文字画像を張り付ける方式では、文字間の間隔やbase 
+    line の位置などが、並んだ文字で不揃いに見えることがあります。 </li>
+</ul>
+
+<ul>
+  <li>600 dpi → 150 dpi の縮小によるgray scaleの例では、3 dots幅の横線は、dviout方式では 
+    1/4の明るさの1 dot幅の横線になる場合と、1/2の明るさ1 dot幅と3/4の明るさの1 
+    dot幅の合計2 dots幅の横線と場合があります。gray scale画像を張り付ける方式では、前者でしょう。文字の時も同様で、dviout方式では、同じ文字でも位置により線の端の画像が異なります。 
+  </li>
+</ul>
+
+<dl>
+  <dt><b>previewでの表示方法の違いについて</b></dt>
+  <dd>dviout のデフォルトの表示方式は、ページ全体のBMP画像を作成しておき、WindowsのSystemによって 
+    preview Windowに入る部分を表示します。一方、<strong>WinDvi</strong>や<b>patch2</b>方式では、文字などの描画命令に対し、preview 
+    Windowに入る部分のみを解釈して表示します。従って、ページスク 
+    ロールを行った場合、preview Windowに新たに入る部分を描画しなくてはなりません。その 
+    ため、スクロールがより遅くなると思われます。また、MS Windowsのフォントのgray 
+    scale やanti-aliasing機能が貧弱ならば、previewの画質が劣ります（γ補正などなし？）。<br>
+  </dd>
+</dl>
+
+<h2>4. 文字の色づけ - その１ -</h2>
+
+<p>dviout では、<strong>HyperTeX</strong>におけるホットスポットにあたる文字や、<strong>文字列検索</strong>で見つかった文字に対し、<strong> 
+色づけ表示</strong>や<strong>アンンダーライン</strong>を付加することができます。特に前者は、Windows版のdvioutを作成する動機に 
+なったものなので、dviout for Windowsの基本設計段階で組み込まれています。 
+</p>
+
+<p>この<strong>色づけの文字</strong>や<strong>アンダーライン</strong>などは、graphics 
+package などによる文字の色づけと違って、previewのみに関係し、色を付けたり消したりが容易に出来る必要がある一方、色数は多い必要がありません。またpreview 
+での gray scale 
+に応じて、色づけした文字にも同様な処理が望まれます（カラーの時は、<b>anti-aliasing</b> 
+と言います）。 </p>
+
+<p>基本的な8色、それに対する2種類16段階の anti-aliasing用ということで、2・8・16 
+= 256 のカラーパレットを用意し、<strong>256色BMP画像</strong>として表示画面を作成することで対応しています。2種類というのはnormal背景と色づけ背景で、例えば、赤を指定した場合、
+normal背景では 文字色赤と背景色白の間をγ補正を考慮して16段階の色とし、
+色づけ背景では、文字色黒と背景色赤の間のanti-aliasingとします。
+なお、graphics packageのcolor.styなどによって<strong>背景色を指定</strong> 
+した場合、その背景色と文字色との間でanti-aliasingを行います。 </p>
+
+<p>dviout では、たとえば 600 dpi の紙面の画像（背景は白、文字は黒の2色画像）を用意し、 
+その際、HyperTeXのホットスポットなどのために色づけすべきBondingBoxの紙面での位置をすべて記憶しておきます。次にたとえば、150 dpiに縮小し、
+16段階のgray scaleにした上記 256色BMPに変換します。
+その後、色づけすべきBoundingBoxに属する dots のすべての色を変更します。</p>
+
+<p>赤の文字の場合、黒から白までの 16 段階の gray scale 
+が、赤から白までの 16段階のanti-aliasing 
+に変更され、紙面は白のままで、文字はanti-aliasing処理がなされた赤の文字となります。具体的には、カラーパレットを表す8ビットのうち、色を表す3ビットを変更することになります（残りの5ビットのうち、4ビットが gray scale に、1ビットが反転背景かどうかに対応）。 </p>
+
+<p>アンダーラインや箱で囲む場合は、その線に対応するdotに 
+対し、反転背景色と文字色とのanti-aliaslingを逆にしたものに変更します（元が復元可能、すな 
+わち、可逆な操作にするためこうなっています。青で線を引くと文字と重なった部分は黒にな 
+ります。よって、文字の色づけとアンダラインの同時指定の場合の処理は、より複雑です）。 
+</p>
+
+<p>色づけされる文字のBoundingBoxの中に、色づけされない文字が入っていた場合は、そちらの文字も色づけされてしまうことになりますが、使われる目的から言って大きな支障はないと考えています。 
+</p>
+
+<blockquote>
+  <p>なお、<b>WinDvi</b> のような形式（dviout での<b>patch2</b>のモード）におけるWindowsのTrueTypeフォントの文字出力は、WindowsのSystemが行うので、その際に文字色指定をするだけで、上記と比べて極めて簡単に色づけが実現されます。次項の文字の色づけも区別が無く同様です。<br>
+  </p>
+</blockquote>
+
+<h2>5. <a name="DefBack">文字の色づけ</a> - その２ -</h2>
+
+<p>LaTeX2eのgraphics packageのcolor specialなどで、文字に色を付けた場合を考えましょう。 
+このときは、previewにおいても印刷においても指定した色で正確に出力することが望まれます。 
+一方、フルカラー(24bits)で600dpiのA4サイズの紙面に必要なBMPファイルのサイズは約100M 
+byte 
+のサイズとなり、処理を快適に行うにおいて現実的なサイズを超えており、WindowsのSystem 
+が扱う場合にも様々な支障が生じてしまいます。そこで、以下のような方法を取ります。 
+</p>
+
+<p>一文字毎に画像ファイルを（文字色と背景色の）2色BMP形式で作成し、印刷の時は紙面全体の画像に色づけされた一文字の画像を順に張り付けてから出力する操作をWindowsのSystemの関数を通じて行います。dvioutのワークエリア上には、紙面全体の大きなBMP画像の他、色づけ文字の小さな<strong>2色BMP画像</strong>を複数保持することになります。 
+</p>
+
+<p>画面表示も同様ですが、anti-aliasingの処理が入ります。すなわち、一文字の2色BMP画像はサイズを縮めてanti-aliasingを行った<strong>16色BMP画像</strong>に変換しておき、それを印刷の時と同様 
+WindowsのSystemの関数を通じて、紙面と合成して出力します。このときの 
+anti-aliasing を文字色と背景色で行うか、あるいは（graphics package 
+に従って、dviout内部での色指定は色の push/pop を使います） 
+その一つ前の色のスタックで定義されている色（それが無ければ背景色）で行うかを選択できます 
+（cmode の<b>replace(def)</b> と<b>replace(bak)</b>）。但し、前者でも文字色が白の場合は、 
+背景色は黒とみなします。<br>
+</p>
+
+<h2>6. 文字の重なり</h2>
+
+<p>dvioutでの１ページの紙面にあたるBMP画像作成は、黒で一文字が描かれた切手のようなものを白い紙面に貼っていく、というような操作である、と述べました。
+このとき、「切手」が重なりなく貼られていけば問題ありませんが、重なりが生じたときに問題が生じます。
+透明な紙に黒で文字が描かれた「切手」ならば良いでしょうが、BMP画像には「<strong>透明色</strong>」というものは存在しません。 
+</p>
+
+<p>欧文タイプライタで「￥」の文字を、「Ｙ」と「＝」との重ね打ちで作る、ということがありましたがTeXでもこのようなことはよく行われます（たとえば、\sqrt[n]{2} 
+や AMSフォントを使わない場合の \hvar 
+で重なりが生じます）。画像データは、それぞれ </p>
+
+<pre>
+  ●○○○○○●       ●○○○○○●
+  ○●○○○●○       ○●○○○●○
+  ○○●○●○○       ○○●○●○○
+  ○○○●○○○       ○○○●○○○
+  ○●●●●●○       ○○○●○○○       ●●●●●
+  ○○○●○○○       ○○○●○○○       ○○○○○
+  ○●●●●●○       ○○○●○○○       ●●●●●
+  ○○○●○○○       ○○○●○○○
+  ○○○●○○○       ○○○●○○○
+</pre>
+
+<p>であるとします。 </p>
+
+<table border="1" align="left">
+  <tr>
+    <th>　</th>
+    <th>AND</th>
+    <th>OR&nbsp;&nbsp;</th>
+    <th>XOR</th>
+  </tr>
+  <tr>
+    <td>(1,1)</td>
+    <td align="center">1</td>
+    <td align="center">1</td>
+    <td align="center">0</td>
+  </tr>
+  <tr>
+    <td>(1,0)</td>
+    <td align="center">0</td>
+    <td align="center">1</td>
+    <td align="center">1</td>
+  </tr>
+  <tr>
+    <td>(0,1)</td>
+    <td align="center">0</td>
+    <td align="center">1</td>
+    <td align="center">1</td>
+  </tr>
+  <tr>
+    <td>(0,0)</td>
+    <td align="center">0</td>
+    <td align="center">0</td>
+    <td align="center">0</td>
+  </tr>
+</table>
+
+<p>白黒２色の時、白と黒をそれぞれ１と０で表し、画像は１と０とを並べて表すとします。上の図では、○が１に●が０にあたります。画像の合成は、この１と０に対する（重なりが生じた）各点毎の演算 
+<b>AND</b>, <b>OR</b>, <b>XOR</b> によって表すことが出来ます。 </p>
+
+<p>OHP（オーバーヘッドプロジェクタ）で、透明シートに黒で描かれた字をスクリーンに投影することを考えてみましょう。このとき、AND 
+は、「字が描かれた２枚のOHPシートを重ねて投影する」ことに対応します。また、OR 
+は、２枚のOHPシートに対し、「OHPを２台用意して、同じスクリーンに重ねて投影すること」に対応します。これは、後述のカラー画像でも同様です。<br
+clear="all">
+<br>
+よって、ANDの操作を行えば正しく文字の重ね合わせがなされます。この合成を「<b>merge</b>」 
+と呼ぶことにします。実際、dviout は merge によって紙面のBMP画像を作成するのが基本です。 
+一方、切手を貼るように「Ｙ」の上に「＝」を張り付けると下左のようになってしまいます（なお、OR 
+や XOR は下中や下右のようになります）。</p>
+
+<pre>
+     ●○○○○○●         ●○○○○○●     ●○○○○○●
+     ○●○○○●○         ○●○○○●○     ○●○○○●○
+     ○○●○●○○         ○○●○●○○     ○○●○●○○
+     ○○○●○○○         ○○○●○○○     ○○○●○○○
+     ○●●●●●○         ○○○●○○○     ○●●○●●○
+     ○○○○○○○         ○○○○○○○     ○○○●○○○
+     ○●●●●●○         ○○○●○○○     ○●●○●●○
+     ○○○●○○○         ○○○●○○○     ○○○●○○○
+     ○○○●○○○         ○○○●○○○     ○○○●○○○
+        張り付け                 OR                XOR
+</pre>
+また、貼る順番を逆にすると、「＝」が隠れてしまいます。この画像合成を「<b>貼り付け</b>」 と呼ぶことにします。</p>
+
+<p>Windows のPostScriptプリンタでの印刷や <strong>xdvi</strong> 
+での表示では、「張り付け」現象が生じて上記の不具合が起きることがあります。このとき、後者では 
+<strong>overstrike</strong> のWarningが出ます（前者は<a href="#PSprinter">ドライバのバグ</a>です）。 
+</p>
+
+<p>色づけがなされた文字の場合は、より難しい問題が生じます。 
+色は、24bitで表されているとします。16進数で <strong>ffffff</strong>, <strong>ff0000</strong>, 
+<strong>00ff00</strong>, <strong>0000ff</strong>, <strong>000000</strong> 
+が、それぞれ白、赤、緑、青、黒といった具合です。<strong> ffff00</strong>は黄色に、<strong>808080</strong>は灰色に対応することになります。この場合の画像合成も色を表す<strong>24bit整数</strong>についての 
+<strong>AND</strong>,<strong> OR</strong>, <strong>XOR</strong> が考えられます。 </p>
+
+<p>「Ｙ」は緑で「＝」は赤として、「Ｙ」の上に後から「＝」を描くとしたとき、下図の最左図 
+が望むものであるとしましょう。このような合成を「<b>replace</b>」と呼ぶことにします。 
+<font color="#008000">●</font>は緑に、<font color="#FF0000">★</font>は赤に対応しています。「merge」すなわち 
+AND 
+で合成すると、中左図のようになり、色が重なった◆は黒になってしまいます。一方、「張り付け」では、中右図のようにな 
+りこれも望むものではありません。 </p>
+
+<p>dviout は以下のように「replace」を実現しています。すなわち、後から描く「＝」の画像の色パレットを変えて<font
+color="#FF0000">★</font>を白、○を黒にした画像を用意し、それともとの画像とを 
+OR で合成 
+します。すると後から描かれる文字の部分のみ白抜きされます。その後、色パレットを元に戻 
+して AND で合成すれば、望みのものになります。「merge」より複雑なステップを踏むことになります。 
+</p>
+
+<p>なお、後で描かれる文字が黒の時は「merge」のみでOKで、また、白のときは★を白、○を黒にした画像による OR のみでOKです（dviout もこの最適化を行っています。
+後者は<strong>白抜き文字</strong>のときに、 黒で矩形を描いた後に使われます）。 </p>
+
+<pre>
+  <font color="#008000">●</font>○○○○○<font color="#008000">●</font>     <font
+color="#008000">●</font>○○○○○<font color="#008000">●</font>     <font
+color="#008000">●</font>○○○○○<font color="#008000">●</font>
+  ○<font
+color="#008000">●</font>○○○<font color="#008000">●</font>○     ○<font
+color="#008000">●</font>○○○<font color="#008000">●</font>○     ○<font
+color="#008000">●</font>○○○<font color="#008000">●</font>○
+  ○○<font
+color="#008000">●</font>○<font color="#008000">●</font>○○     ○○<font
+color="#008000">●</font>○<font color="#008000">●</font>○○     ○○<font
+color="#008000">●</font>○<font color="#008000">●</font>○○
+  ○○○<font
+color="#008000">●</font>○○○     ○○○<font color="#008000">●</font>○○○     ○○○<font
+color="#008000">●</font>○○○
+  ○<font color="#FF0000">★★★★★</font>○     ○<font
+color="#FF0000">★★</font>◆<font color="#FF0000">★★</font>○     ○<font
+color="#FF0000">★★★★★</font>○    <font color="#FF0000">★★★★★</font>
+  ○○○<font
+color="#008000">●</font>○○○     ○○○<font color="#008000">●</font>○○○     ○○○○○○○    ○○○○○
+  ○<font
+color="#FF0000">★★★★★</font>○     ○<font color="#FF0000">★★</font>◆<font
+color="#FF0000">★★</font>○     ○<font color="#FF0000">★★★★★</font>○    <font
+color="#FF0000">★★★★★</font>
+  ○○○<font color="#008000">●</font>○○○     ○○○<font
+color="#008000">●</font>○○○     ○○○<font color="#008000">●</font>○○○
+  ○○○<font
+color="#008000">●</font>○○○     ○○○<font color="#008000">●</font>○○○     ○○○<font
+color="#008000">●</font>○○○
+     replace             AND             張り付け               
+</pre>
+
+<p>表示の際の「replace」は anti-aliasing の問題と絡んできますが、dvioutは文字が少しでもかかる部分を白、それ以外を黒という色パレットにして 
+OR の操作を行い、その後、元に戻してanti-aliasing処理をした文字画像の「merge」を行っています。 
+</p>
+
+<p>dviout では、カラー文字の描画はWindowsのSystemの関数を使った合成でなされますが、あるページでDVIを順に見て白と黒しか使われていない段階、あるいは、<strong>cmode</strong> 
+が<strong>merge</strong>の場合は常に、 白や黒の文字は紙面BMPに直接描かれます。具体的には白抜き文字など、黒の背景に白で描く場合に意味を持ちます。紙面BMPを作成した後、WindowsのSystemを使って色つき文字描画やカラー 
+画像の張り付けがなされますが、（「merge」と異なり）「relace」は描画順序に依存するため、 
+このような仕様になっています。 
+
+<ul>
+  <li>色づけ文字の画像の「merge」の際、dvioutは文字の無い部分は全て「白」にして 
+    AND の操作を行います。color special 
+    で背景色が青、文字が赤の場合は、preview用のanti-aliasingを行った16色画像は、文字のかからない部分は白に、文字のかかった部分は赤と青との間のanti-aliasingされた画像ということになります。</li>
+</ul>
+
+<ul>
+  <li>背景色と文字色が同じ場合は、anti-aliasing処理で異なった色パレットに同じ色が割り当てられることになります。パレットを使っているので、文字の部分と文字以外の部分との区別が256色の 
+    8 bit 中の 3 bit を見るだけで可能なので「replace」などの操作が容易に行えます。</li>
+</ul>
+
+<ul>
+  <li>dviout for Windowsでは、反転画面がサポートされています（黒の画面に文字が白という、MS-DOS版のdvioutと同じ）。このときは、この節で述べたことは白と黒とを逆にし、AND 
+    と OR も逆にして解釈します。従って、「merge」は OR 
+    による合成となります。</li>
+</ul>
+
+<p><strong>cmode</strong> が <b>auto mode(p2)</b> や <b>auto mode(rep)</b> の場合の 
+preview の際は、 基本的には「replace」ですが、より簡単な「merge」でそれが実現されると推測される場合は、 
+「merge」で代用します。 </p>
+
+<p>色づけされた矩形あるいは線を描く場合も同様で、それをカラーBMP画像として保存し 
+カラー文字と同様な処理をします。但し、矩形や線の場合は 1 dot x 
+1 dot のサイズのカラーBMP画像として保存しておき、紙面に描画の際に縦横実際のサイズにWindowsのSystem関数により拡大して合成します。 
+</p>
+
+<p><b>patch2</b>では、WindowsのTrueTypeフォントの場合や矩形塗りつぶしの場合は、BMP画像に変換する必要はなく、 
+Systemの文字等の描画関数を使えば通常「replace」の操作が可能です。PKフォントの場合はBMP画像 
+となるので、この節で述べたやり方が使われます。 </p>
+
+<p><b>patch</b>は、一文字とか線とかの全ての描画要素をBMP画像として作成しておき、DVIに現れてくる 
+順序に従ってWindowsのSystem関数を使って合成していく、という出力形態です。すなわち、全ての文字や線がカラー画像データである、と見なした処理と考えることができます。 
+</p>
+
+<p><a href="#contents">目次へ</a></p>
+
+<h2>7. <a name="graphics">画像データの取り込み</a></h2>
+
+<p>PostScript画像の場合も、それ以外の画像の場合も、dviout 
+での取り込み画像の処理はBMP画像 
+として得て合成することになります（PBM 
+などのこともあるが、以下の原理は同じ）。 実際 PostScript画像の場合は、GhostScriptを通じてBMP画像に変換したファイルをdvioutが用いる 
+ことになります。 </p>
+
+<blockquote>
+  <p>ただし、<strong>WMF/EMF画像</strong>は、WindowsのSystem関数を使った画像の描き方が記された形式であるので、WindowsのSystemに任せて処理します（付属の 
+  <strong>sample.dvi</strong> の Graphic specials 
+  のページには、それを使った例があるので、その画像をルーペなどで拡大してみると、実際<strong>メッシュの細かさが変化します</strong>）。</p>
+</blockquote>
+
+<p>文字画像の場合と異なり、BMP画像の場合は背景色の概念がないので、dvioutでは紙面との画像合成は「<b>merge</b>」（<b>gow</b> 
+の<strong>OFF</strong>）または「<b>張り付け</b>」（<b>gow</b> の<strong>ON</strong>）のどちらかを選ぶことになります 
+。 白黒画像の時は、必要ならばスケール変換を行って紙面BMPに 「merge」または「張り付け」で描きます。カラー画像や<b>patch2</b>の場合は、Windowsの関数で、必要ならスケール変換を行って 
+「merge]または「張り付け」を行います。 </p>
+
+<p>PostScript画像の時は、Ghostscriptを通じて必要なサイズの画像を得ることが出来るので、スケール変換は不要と考えられますが、表示の際の縮小gray 
+scale画像との関係で選択肢が生じます。 パラメータ <strong>GIF</strong> 
+がカラーBMPでない場合は、縮小画像の解像度でなくて、もとの大きなサイズで画像を得て、紙面BMPに合成し、その後gray 
+scaleに変換します。よって、比較的綺麗な画像となり、 
+また白黒画像ファイルなので、サイズもあまり大きくありません。<strong>GIF</strong> 
+がカラーのBMPとなっている場合、元のサイズで画像を得るか（<b>gfit</b> 
+の<strong> OFF</strong>）、縮小したものを使うか（<b>gfit</b> の <strong>ON</strong>）が選択できます。 
+
+<ul>
+  <li>Windowsの関数でカラー画像を合成の際縮小すると、anti-aliasing処理が満足できるものでないので、最初から縮小画面を作成して合成したものに比べて、品質が悪くなります。 
+  </li>
+</ul>
+
+<ul>
+  <li>previewでgray scale表示を行っているとき、その縮小比に応じたカラーBMP画像を使う場合は、縮小比を変えると、あるいは、previewと印刷との間で、Ghostscriptによる画像の再生成のオーバヘッドが生じます。 
+  </li>
+</ul>
+
+<p>通常使われるEPSF形式のPostScript画像は、指定されているBoundingBoxをはみ出て描画が行われているものがあるので、BoundingBoxよりも上下左右<strong>1 
+inch</strong>ずつ大きなサイズでBMP画像を生成するようにできます（<b>gclip</b> 
+を<strong>OFF</strong> にする）。 <b>gclip</b> を<strong>ON</strong>にする事により、BoundingBoxのサイズのBMP画像になります。 
+特に<b> gow</b> が<strong> ON</strong> の「張り付け」のときは、自動的に<b> 
+gclip</b> が<strong> ON</strong> になります。 </p>
+
+<p><a href="#contents">目次へ</a></p>
+
+<h2>8. <a name="rotate">文字や画像の回転</a></h2>
+
+<p>文字や画像の<strong>回転</strong>や<strong>変形</strong>があると、カラーや 
+anti-aliasing の問題と絡んで、より複雑な処理にな ります。 </p>
+
+<p>まずWindowsのSystemにおける基本的事項を述べます。 
+
+<ul>
+  <li>WindowsのSystemは、画像を回転して出力することをサポートしていません。 
+  </li>
+  <li>文字については、TrueTypeフォントの文字について、回転しての出力が可能です。</li>
+  <li>画像や文字の変形しての出力は、縦横のスケール変換程度しかサポートされていません。</li>
+  <li>TrueTypeフォントの文字を任意の一次変換によって変換した画像を得ることは可能です。</li>
+</ul>
+
+<p>白黒画像の場合は、dvioutが紙面BMP画像に描画しますので、拡大・縮小のみならず任意角の回転を含む任意の一次変換が原則として可能です。一方、カラー画像や<b>patch2</b>のモードでは、Windows 
+の System が描画を行うので、90度の整数倍以外の角度での変換は出来ません。縦横のスケール変換は可能です。 
+</p>
+
+<p>カラー文字の回転は、通常は文字毎に回転したBMP画像を得て、必要ならanti-aliasing処理を行った 
+BMP画像にして張り付けるので問題ありません。ただし、<b>patch2</b>でTrueTypeフォントを使った場合は、 
+回転や色づけによる描画をWindows の Systemがサポートしているので、より綺麗な出力が期待でき 
+ます（印刷の際）。この場合も、複雑な変形を伴う場合は、BMP画像にしてから合成します。 
+
+<dl>
+  <dt><a name="rotPS"><b>カラーPostScript画像の回転</b></a></dt>
+  <dd><a href="#rotate">上記の理由</a>で、回転の角度が90度の整数倍のみサポートされています。このときは、その回転を行ったBMP画像をGhostScript 
+    によって作成し、それを用いています。画像回転処理を元のPostScriptファイルに書き込んでおけばそれ以外 
+    の角度で回転を行った画像が取り込めます。例えば、45度回転を行った画像は 
+    ◇ の形ですが、生成される画像データはそれを囲む □ 
+    の形になるので、背景が白でない場合や、「貼り付け」（<b>gow</b>）によって 
+    取り込む場合は注意が必要です。 </dd>
+</dl>
+
+<dl>
+  <dt><a name="BWvsColor"><b>白黒画像とカラー画像</b></a></dt>
+  <dd>白黒画像とは、ここでは白黒２値の画像のことを言っています。従って、 
+    gray scale 画像はカラー画像と見なします。またカラー原画のPostScript画像に対し、<strong>GIF</strong> 
+    を <b>raw PBM</b> または <b>monochrome BMP</b> としてGhostscriptを通じて得た画像は、色の違いが適当な白黒のパターンによって表現されていますので、白黒画像です。また、白黒のPostScript画像を256色BMP画像形式で 
+    出力した場合、カラーパレットは256色存在しますが、実際に画像で使われるのは白と黒の２色のみ 
+    です。dviout は、BMPの画像形式だけでなく、実際に画像で使われている色のチェックを、カラーパ 
+    レットのみならず画像の中身を読んで行っていますので、この場合も白黒画像と判断されます。</dd>
+</dl>
+
+<dl>
+  <dt><a name="BMC"><b>BMC画像ファイル</b></a></dt>
+  <dd>dvioutはPostScript画像の取り込みに対し、Ghostscriptを起動して必要なサイズのBMP画像ファイルとして出力し、それを用います。このとき、必要なら左右反転や90度回転などの操作を行ったBMP画像を得ています。dvioutは、再度そのBMP画像を使う時（例えばpreviewで別のページに移動して戻ってきたとき）に再利用するため、独自の圧縮形式の<strong>BMC画像ファイル</strong>に変換しておきます。但し、回転などの変形を行って作成したBMP画像ファイルは、そのページのみで有効で、ページを移動した場合は破棄されます。同じPostScript画像が、あるページで回転せずに、別のページで回転して、と２回使われた場合、対応する画像ファイルを区別することが困難なためです。再利用可能なBMC画像ファイルは、もとの画像ファイル名の拡張子を<strong> 
+    .bmc</strong> に変えたものです。同じPostScript画像を同一ページで別サイズで取り込む場合も、後の方はテンポラリなファイルとなり、再利用されません。</dd>
+  <dt>　</dt>
+  <dt><a href="#contents">目次へ</a></dt>
+</dl>
+
+<h2>9. <a name="tpic">斜線やtpicによる描画</a></h2>
+
+<p><strong>斜線</strong>（すなわち回転した矩形領域の塗りつぶし）は、通常のTeXの矩形塗りつぶしに 
+graphics packageなどの回転が組合わさった場合に生じます。また、<strong>tpic 
+specials</strong>では、斜線や<strong>自由曲線の描画</strong>、それらで<strong>囲まれた領域のパターンでの塗りつぶし</strong>や、内部に既にあった文字などの<strong>消去</strong> 
+が可能です。さらに <strong>color special</strong> 
+と関連して、塗りつぶしが<strong>色つきのパターン</strong>で行われること 
+も想定されます</p>
+
+<p>まず、通常の<b>auto mode(p2)</b>などの場合を考察します。 
+黒の線での描画や適当なパターンでの塗りつぶし、あるいは、閉領域内部の消去などは、紙面の白黒２色BMP画像に対して直接行ないますので、問題ありません。</p>
+
+<p>例えば、赤で紙面に対角線を引いた場合を考えてみましょう。全体を囲む矩形は紙面と同じサイズとなり、似たような直線や曲線を何本も引くことを想定すると、そのような矩形領域をBMP画像ファイルとして作成して後から合成する方法では困ります。そこで 
+dvioutは、カラーの斜線や回転したカラーの中が詰まった矩形は、（縦横のサイズに限界を設けた）小さなサイズに分割して複数のBMPファイルとして保存し、WindowsのSystem関数を用いて、後から紙面と合成します。<strong>tpic</strong>によるカラーの線画も同様です。</p>
+
+<p><strong>閉領域の塗りつぶしや消去</strong>は<strong> tpic </strong>の持つ機能ですが、実際は 
+1 dot ずつ内部かどうか判断しながら描かれます。このとき、1 dotずつのカラーBMP画像として保存していくと、画像数が膨大になって不具合が生じます。このような場合、dvioutは仮想紙面を用意し、そこに塗りつぶしや消去のパターンを生成し、（線画の時と同様に、必要ならそれを適当に分割して）カラーBMPファイルとして保存して、後からWindowsのSystem関数で紙面との合成の処理を行います。</p>
+
+<p><strong>patch2</strong>の場合は、基本的にWindowsの描画関数を使います。Windowsの描画関数の場合、太さと色を与えたブラシを定義し、それで線を画くこと、また、頂点を指定した多角形領域を指定した色で塗りつぶすことができます。実際は、前者の方が後者より高速に処理されます。しかしながら、ブラシが太い場合、線を引いても始点と終点に対応する辺が直線にならず、矩形またはそれを回転した形にはなりません。</p>
+
+<p>dvioutでは、回転の無い矩形の場合は、細いブラシで何度も平行な線を画くことにより矩形の塗りつぶしを実現しています（多角形領域の塗りつぶし関数を使うよりも遙かに高速です）。斜線の場合は、線がある程度細い時にはブラシによる線画、そうでないときは矩形領域の塗りつぶし関数を使っています。</p>
+
+<p>なお<strong>patch2</strong>では、色が黒かカラーかによる動作の差はありません。ただ、<strong>白のブラシ</strong>を指定して描いても何も描かれないので（透明な筆？ 
+- 理由は不明です）、白の場合は、ほぼ白の色<strong> fefefe </strong>を指定して描くことによって、下に描かれたものの実質的な消去を実現しています。</p>
+
+<p><a href="#contents">目次へ</a></p>
+
+<h2>10. <a name="printer">プリンタとの関わり</a></h2>
+
+<p>dviout での印刷はいくつか方法がありますが、ここではdviprt機能を使わない、Windowsのプリンタ 
+ドライバによる通常の印刷を考察します。 </p>
+
+<p><b>cmode</b>との関係で、以下の印刷方法の違いがあります。</p>
+
+<table BORDER="1">
+  <tr>
+    <th>cmode=</th>
+    <th>auto mode(p2)</th>
+    <th>merge</th>
+    <th>replace(def)</th>
+    <th>replace(bak)</th>
+    <th>patch</th>
+    <th>patch2</th>
+    <th>auto mode(rep)</th>
+  </tr>
+  <tr>
+    <th>表示</th>
+    <td>auto mode(rep)</td>
+    <td>merge</td>
+    <td>replace(def)</td>
+    <td>replace(bak)</td>
+    <td>patch</td>
+    <td>patch2</td>
+    <td>auto mode(rep)</td>
+  </tr>
+  <tr>
+    <th>印刷</th>
+    <td>patch2</td>
+    <td>merge</td>
+    <td>replace</td>
+    <td>replace</td>
+    <td>patch</td>
+    <td>patch2</td>
+    <td>auto mode(rep)</td>
+  </tr>
+</table>
+
+<p>dviout 
+は、プリンタの解像度に合わせた印刷ページに対応する白黒BMP画像を作成し、それをWindows 
+のSystemを通じて印刷するのが基本でした。その際、カラー画像などの要素があれば、それもBMP画像 
+として用意してWindowsのSystemによって合成して出力する、という訳です。画像処理的な部分を出来るだけ 
+dviout 側で行う、という方針です。 </p>
+
+<h3>10.1. <a name="Winprinter">Windows専用プリンタ</a></h3>
+
+<p>プリンタ（＋ドライバ）にとっては、完成された紙面の白黒BMP画像を印刷する方が、TrueTypeフォン 
+トの文字や線を描いて紙面を作成する処理も行って出力するより、遙かに楽なはずですが、MS 
+Windows 
+が普及し、安値なカラーインクジェットプリンタが使われるようになると、プリンタメーカの競争から 
+MS Windowsに特化されたプリンタで、通常使われる印刷方式（たとえば、Wordとかでなされる方式、すなわち、dviout 
+ではWindowsのTrueTypeフォントを使った<b>patch2</b>方式にあたる）でのみ高速化や高品位化がなされるように開発が進んだようです。そのような状況から、dviout 
+for Windows では、Ver.3.08 から <b>patch2</b> 
+モードがサポートされました。 </p>
+
+<p>あるカラーの<strong>インクジェットプリンタ</strong>での実験では 
+
+<ul>
+  <li>プリンタの解像度は 1200dpi 
+    となっているが、実際に印刷可能な画像データは、300dpiであった（なお、カラープリンタの解像度（dpi） 
+    というのは、白黒プリンタと違って、極めて不明確である（一つのドットでフルカラーの色が表現できる訳ではない）。 
+    白黒プリンタの場合は、よりはっきりしているが、それでも 1200dpi 
+    相当などと書いてあって、実際 
+    のコントロール可能な解像度とは異なる大きな値になっていることがある）。</li>
+</ul>
+
+<ul>
+  <li>WindowsのTrueTypeフォントを、WindowsのSystem関数を使って出力した場合（<b>patch2</b>）、300 
+    dpi より 高解像で文字が印刷されるようである。</li>
+</ul>
+
+<ul>
+  <li>Windowsに登録されたTrueTypeフォントをWindowsの描画関数を使って描画したり、あるいは、線を描く 
+    Windowsの描画関数を使っていて、それ以外のBMP画像の描画やカラーの要素が含まれていない場合、印 
+    刷は極めて高速化される（10 sec/page 程度）。一方、BMP画像が一つだけ、あるいは、カラー文字が 
+    一文字だけでも含まれていると、極端に遅くなる（1 min/page 以上）。</li>
+</ul>
+
+<p>という結果になりました。このようなWindows専用プリンタの普及を考えて、<b>auto 
+mode(p2)</b> 
+が現在デフォルトになっています。すなわち、表示の際は<b> auto 
+mode(rep)</b> で、印刷の際は<b> patch2</b> 
+に切り替えるというものです。 </p>
+
+<p>上記の結果から、<b>patch2</b>方式での印刷で高速化を行うためには、フォントは全てWindowsに登録された 
+TrueTypeフォントを使うことが望ましいことになります。なお、通常和文フォントはWindowsのTrueType 
+フォントが使われています。なお、この速度はページ単位で決まりますので、カラー要素がないページやPKフォントが使われていないページが高速印刷されることになります。 
+</p>
+
+<p>一方、<b>patch2</b>を使っていても、欧文でPKフォントを使っている場合は、このような高速化の効果が無く、逆に多くの画像張り付けの処理をプリンタドライバが行うため、速度が却って遅くなったり、 
+不具合が生じる場合もあります。 
+
+<dl>
+  <dt><a name="CheckDriver"><b>プリンタドライバのチェック</b></a></dt>
+  <dd><b>auto mode(p2)</b> では、印刷は<b>patch2</b>方式で行います。従って、印刷に不具合があるとき、 
+    <b>cmode</b> を<b>patch2</b> にし、最大に拡大した状態（Display → Size → 
+    Magnify 
+    を実行してもそれ以上拡大されない状態）にしておくと、表示と印刷とでは、WindowsのSystemに対して全く同一の描画コマンドとデータを送ることになり、出力デバイスの指定のみが異なります。よってこのとき、表示に問題が無くて印刷に不具合があるならば、Windowsのプリンタドライバかプリンタなどdviout以外に不具合がある 
+    ことになります。</dd>
+  <dt>　</dt>
+</dl>
+
+<h3>10.2. <a name="PSprinter">PostScriptプリンタ</a></h3>
+
+<p>PostScriptプリンタ用のWindowsのドライバは、Windowsのプリンタドライバが一般的にサポートするデータを入力して、PostScript言語に翻訳することになります。PostScript言語では、画像合成は 
+「張り付け」のみサポートされているようで、画像の AND, OR, XOR 
+などの合成命令からの翻訳は 
+ドライバがすべきですが、実際はうまく行われない、という<strong>Windowsのプリンタドライバの仕様を満たさない根本的な不具合</strong>を抱えているようです。たとえば、 
+<strong>白抜き文字が印刷できない</strong>、というようなことになります。また、そのような不具合で結果がどうなるかは、Windows95/98用 
+の PostScriptプリンタドライバとWindowsNT/2000用とで異なっているようです。 
+</p>
+
+<p>さらに、多くの画像や大きな画像を合成して印刷する、というような場合（例えば、<b>patch2</b>で 
+PKフォントを使い、さらにカラー画像を張り込む、といった場合の出力）、メモリーなどから来る機能制約のためか、いくつかの画像要素が無視されて、それが出力されなかったり、間違って出力される、というような事例が多く 
+報告されています。 </p>
+
+<p>上記は、例えば市販の画像処理ソフトから印刷を行う場合のPostScriptプリンタの不具合としても知られているようです。以上の理由から、PostScriptプリンタで、PKフォントを使う場合や画像の取り込みが 
+ある場合は、プリンタドライバ側での画像合成操作を最少にする<b>auto 
+mode(rep)</b> を用いると、 多くの不具合が解消されるようです。 
+さらに、プリントダイアログにおける<strong> Unite job</strong> 
+のチェックをはずすと、状況が改善されるかも知れません。</p>
+
+<blockquote>
+  <p>PostScriptプリンタを使う場合は、<strong>dvipsk</strong> などのDVIファイルからPostScriptへの変換プログラムを用いて印刷すれば、WindowsのPostScriptプリンタドライバの上記不具合などの問題点が無く印刷できます。特に、<strong>PSTrick</strong> 
+  などのPostScriptに特化されたspecialsを使っている場合は、こちらでないと印刷できません。なお、<a
+  href="#raw">dvioutのGUIを使ってdvipskによる印刷をする</a>ことも可能です。</p>
+</blockquote>
+
+<h3>10.3. <a name="color2bw">カラー画像の白黒印刷</a></h3>
+
+<p>カラーのPostScript画像を、白黒プリンタなどを使って、適当な白黒のパターンで表現して印刷するという場合があります。dvioutは、カラーから白黒変換などの画像の変更は一切行いません。従って 
+dvioutが白黒化した画像を受け取るか（これは、Ghostscriptが作成します）、プリンタドライバがカラー画像を白黒化するかのどちらかです。なお、ここでいうカラーのPostScript画像というのは、 
+gray scale画像も含まれています。この変換を 
+
+<ol>
+  <li>Ghostscript側で行う場合は、<b>GIF</b> を <b>raw PBM</b> または、<b>monochrome 
+    BMP</b>と指定します。 </li>
+  <li>プリンタドライバ側で行う場合は、プリンタドライバの設定を変えることにより、様々な調整が可 
+    能な場合があります。 </li>
+  <li>Ghostscriptが出力したカラー画像ファイルを、別のプログラムを使って白黒画像に変換するという 
+    方法もあります。 </li>
+</ol>
+
+<p>手間はかかりますが、よいプログラムを使うならば 3. が最良でしょう。
+また、プリンタドライバの性能次第では 2. が良いこともあります。
+一方、1. や 3. ではプリンタに依らない結果が得られることになります。 </p>
+
+<p><a href="#contents">目次へ</a></p>
+
+<h2>11. <a name="picture">画像出力</a></h2>
+
+<p>dvioutで表示されている紙面を、プリンタにでなく画像データとして出力したい場合があります。用途によって最適な方法が異なります。また、画像やカラー文字が入っているかどうかによっても異なります（EMFまたはBMP形式画像形式として、クリップボードにコピーすることも可能です -- October 9, 2002版以降）。
+</p>
+
+<blockquote>
+  <p><strong>注意</strong>：適当な外部プログラムを用いることによって、dvioutから出力されるBMP/BMC/EMF/PNG/PDF/EPS画像を、必要なら画像処理をして 
+  BMP/PNG/JPEG/EPS画像などに変換することができます（例えば、付属の<strong>ifbmc.spi</strong> 
+  をグラフィックコンバータ<a href="http://homepage1.nifty.com/beny/">BTJ32</a>に登録して使うと便利）。</p>
+</blockquote>
+
+<h3>11.1. <a name="cut">矩形領域の指定</a></h3>
+
+<p>Ver.3.12.2 (June 29, 2001) 以降では、Display →　Region → On 
+（Nov. 25, 2002 以降は <b>CTRL+[</b> にデフォルトで割り当てられている）の後、切り出す矩形の左上頂点と右下頂点をマウスカーソルで示し、それぞれマウスの左ボタンと右ボタンを、SHIFTキーを押した状態でクリックして指定します。
+<ul>
+<li>切り出す矩形が赤の枠で示されます。</li>
+<li>修正が必要ならその頂点を再度同様に指定します（このとき、拡大表示にした方が、より正確に指定できます）。</li>
+<li>設定した矩形領域を画像として出力したり、Display → Region → Cut 
+で切り出すことができます。</li>
+<li>ページ全体を画像ファイルにする場合は、矩形領域を指定する必要はありません。</li>
+<li>
+dviout がより古い版の場合は、以下のようにします。 </p><p>
+<ol>
+  <li>preview画面で切り出す矩形の<strong>左上端</strong>にマウスカーソルを持っていき、<strong>CTRL+SHIFT</strong> 
+    を押しながらマウスの左ボタンをクリックします。</li>
+  <li>その点の座標が表示されるので、<strong>Option → Setup Parameters... → 
+    [Paper] </strong>の <strong>OX</strong>, <strong>OY</strong> に cm で示された値を<strong>100倍</strong>して 
+    mm に直し、<strong>マイナス</strong>に符号を変えて設定して<strong>[OK]</strong>で抜け出ます。</li>
+  <li>左部と上部がカットされますが、それが適当でなければ、上記のパラメータ 
+    <strong>OX</strong>, <strong>OY </strong>を再調整します。</li>
+  <li>切り出す矩形の<strong>右下端</strong>にマウスカーソルを持っていき、<strong>CTRL+SHIFT</strong>を押しながらマウスの左ボタンをクリックして、その点の座標を得ます。</li>
+  <li><strong>Paper → User Defined</strong> を選んで、座標のcmの値を<strong>100倍</strong>してmmに直し、<strong>Width</strong> 
+    と <strong>Height</strong> 
+    に設定します。必要なら微調整します。これは上の Option → Setup 
+    Parameters... → [Paper] からも設定可能です。</li>
+</ol>
+</li></ul>
+<h3>11.2. <a name="BMPout">BMP/BMC画像出力</a></h3>
+
+<p>WEBページなどに張り付けるような場合で、白黒部分の切り出しに適します。 
+カラー文字やカラー画像は除かれます。 
+
+<ol>
+  <li>解像度（<strong>[Resolution] → dpi</strong>）やコントラスト（<strong>[Display] 
+    → contrast</strong>）および縮小率を調整し、希望の画像を得て、それを 
+    <strong>File → Save as Image</strong> を選んで <strong>BMP/BMC画像</strong>として出力します。</li>
+  <li>必要なら、適当な画像処理プログラムによって<strong>PNG/GIF/EPS画像</strong>などに変換します（文字画像には、<strong>JPEG</strong>は圧縮率が低く適さない）。</li>
+</ol>
+
+<p>なお、gray scale 変換など、画像処理プログラムによって画像を加工する場合は、縮小しないで（すなわち、プレビュー画面を最大に拡大表示して）白黒２値のBMP/BMC画像ファイルとして出力しておくと良い。 
+</p>
+
+<h3>11.3. <a name="EMFout">EMF画像出力</a></h3>
+
+<p>他のワープロやプレゼンテーションためのプログラムで作成するページに張り付ける場合などに適します。そのプログラムが<strong>EMF</strong>（Windows 
+Enhanced MetaFile）に対応している必要があります。<strong>File → Save as 
+Image</strong> を選んで <strong>EMF画像</strong>として出力します。</p>
+
+<p>この場合、フォントは<strong>Windows TrueType </strong>を使うことが望まれます。<strong>patch2</strong> 
+にあたるモードで出力され、<strong>EMF</strong> にはWindowsのSystem関数を使った描き方が記録されます。文字や線や色づけなど、それの描き方が記録されるので、サイズの変換に対応したファイルを作成することが可能です。ファイルサイズは比較的大きくなります。</p>
+
+<h3>11.4. <a name="png">PNG/EPS等の画像出力</a></h3>
+
+<p>Susie plug-in の出力版にあたる ABC 出力プラグイン（画像出力用DLL）を用いることにより、各種の形式でプレビュー画面を切り出して画像ファイルにすることができます（July 
+2, 2001以降）。どの形式になるかは、指定したファイルの拡張子で判断されます。</p><p>
+<strong>256色以下の画像に対応しているもの</strong>が必要で、現在 
+<a href="http://www.asahi-net.or.jp/~kh4s-smz/">PNG 用の ABC出力プラグイン</a>や
+<a href="http://at.sakura.ne.jp/~t-mz/">ラスター形式EPS 用の ABC出力プラグイン</a>
+が存在します。
+</p><p>
+画質や解像度等の調整については、<a href="#BMPout">BMP/BMC画像出力</a>のときと同じです。
+<ul>
+<li>ABC出力プラグイン、すなわち、PNGやEPS用の出力プラグイン <strong>expng.xpi</strong>, <strong>exeps.xpi</strong> 
+などは、Susie plug-in と同じディレクトリか、そのサブディレクトリ 
+<strong>exp_plug</strong> 、あるいは dviout のディレクトリに入れておくと、dviout 
+により認識されます。</li>
+<li>カラー文字やカラー画像には非対応です。</li>
+<li>PNG形式では、<a href="#CompBMC">サイズが小さい画像ファイル</a>となります。</li>
+<li>出力ファイル名の拡張子で画像形式が決まります。たとえば、 All files を選び、
+出力ファイルの拡張子を eps とする（たとえば、<font color="blue">fig1.eps</font>）
+ことによって、EPS形式で出力されます。</li>
+</ul>
+
+<h3>11.5. <a name="PDF">PDF画像出力</a></h3>
+<p>dvipdfmx 20040204以降および dviout Ver.3.16 以降が必要ですが、
+矩形領域を指定し、その領域を PDF形式画像ファイルに変換して出力する
+ことが出来ます。
+拡張子 .pdf を用いれば、自動的に PDF 変換になります。</p>
+
+<h3>11.6. <a name="PSout">PostScript画像出力</a></h3>
+<p>DVIファイルをPostScriptファイルに変換するには、dvipsk や dvi2ps 
+などを用いるとよいでしょう。また、Windows の PostScriptプリンタドライバに 
+dviout から出力する方法もあります。ここでは、画像を切り出して<a
+href="#dviprt">dviprt機能</a>を使い、ビットマップ形式の<strong>EPSFファイル</strong>を作成する方法を述べます。</p>
+
+<p>切り出す部分を指定し、Display → Region → Cut で<a href="#cut">カット</a>しておきます。dviout 
+のパッケージに含まれるコンフィギュレーションファイルの <strong>epsimage.cfg</strong> 
+を、Option → Setup Parameters... → [Printer] の<strong> [CFG file]</strong> 
+ボタンで選択します。印刷ダイアログで、<strong>dviprt</strong> と <strong>Print 
+to file</strong> をチェックしてファイルに出力すると、-dpi: 
+で指定された解像度の白黒画像の<strong>EPSF形式</strong>画像ができます（前項の方法と異なり、画面の拡大／縮小とは無関係で、
+カラー文字やカラー画像取り込みには非対応）。
+同様なやり方で、<strong>g3fax.cfg</strong>や<strong>dvi2pbm.cfg</strong>を使うことにより、
+<strong>G3FAX形式</strong>や<strong>PBM 形式</strong>画像出力が出来ます。</p>
+
+<h3>11.7. <a name="PDFT">PDF変換</a></h3>
+
+<p>PDF形式の画像は、DVIファイルのように複数ページをまとめて扱うことが出来ます。また、汎用性が高く、フォント埋め込みなどに注意して作成すれば、高解像度の印刷にも向くファイルとすることができます。</p>
+
+<p>PDFファイルの作成は、dvioutからPrinterドライバにAcrobat <strong>PDF 
+Writer</strong>を指定して作成する、<strong>dvipsk</strong>を使って<strong>PostScript</strong>ファイルに変換し、それを 
+Acrobat <strong>Distiller</strong> によってPDFファイルにする、<strong>PDFTeX</strong>を使う、<strong>dvipdfm</strong> 
+を使う、など多くの方法があります。現時点では<a
+href="texinst98.html#dvipsk">dvipsk とDistiller を使う方法</a>が最も勧められるようですが、版によっては、あるいは使い方によっては不具合が生じることがあるので、注意が必要です。 
+また、日本語に対応がなされた<strong> dvipdfmx</strong> も勧められるでしょう。</p>
+<p>Ver.3.15.1 以降では 
+2nd tool button のニコニコマークのボタンにデフォルトでPDFへの変換が定義されています
+。dvipdfm(x)を用います。
+Option->Choose Parameters... からは種々のやり方が定義されています。</p>
+<p>dviout でも<strong>フォントや画像の埋め込み機能</strong>がサポートされているので、<strong>DVI 
+ファイル + dviout for Windows</strong> を <strong>PDFファイル + Acrobat Reader </strong>のように考えることもできます。</p>
+
+<h3>11.8. <a name="OTHER">上記以外の形式の画像ファイルへの切り出し</a></h3>
+<p>
+File → Save as Image... （矩形領域を指定しての切り出しをサポート）で，拡張子により外部のDVIファイルから画像ファイルへの変換用の一般的なプログラムを呼ぶことが可能（Ver.3.16以降）．
+11.5 の<a href="#PDF">PDF画像出力</a>は，この機能で実現されている．
+<p>
+拡張子 .foo の画像ファイル出力の場合，utility\dvi$foo.bat に変換の手順を書い
+ておけば，それが呼び出される．渡されるパラメータは
+<pre>
+   %1  横の原点移動  （単位は cm）．デフォルト(移動なし）は 2.54cm
+   %2  縦の原点移動  （単位は cm）．デフォルト(移動なし）は 2.54cm
+   %3  紙面の横幅    （単位は cm）
+   %4  紙面の縦の長さ（単位は cm）
+   %5  出力するページの番号（１つのみ）
+   %6  DVIファイルのフルパス名（" " で囲まれた形式）
+   %7  出力ファイルのフルパス名
+   %8  横の移動      （単位は cm）．デフォルト(移動なし）は 0cm
+   %9  縦の移動      （単位は cm）．デフォルト(移動なし）は 0cm
+</pre>
+<h3>11.9. <a name="FAX">FAX送信</a></h3>
+
+<p>Windowsのプリンタドライバとして<strong>FAX送信</strong>が組み込まれていれば、それとモデムとを使ってdvioutから直接FAX送信が可能です。</p>
+
+<p>解像度は<strong> 200 dpi </strong>程度が適当でしょう。印刷ダイアログで、<strong>Unite 
+job</strong> 
+のチェックが外れていると、各頁毎に別々に送信することになるので注意。</p>
+
+<p><a href="#contents">目次へ </a></p>
+
+<h2>12. <a name="dviprt">dviprt機能</a></h2>
+
+<p>dviout for Windowsの前身であるMS-DOS版のDVIwareは、previewer の dviout と 
+printer driver の dviprt の２つに別れており、特に dviout 
+はパソコンのグラフィック表示機能の違いから、PC-9801用とDOS/V用というように別のプログラムになっていました。 
+dviout for Windowsは、パソコンのグラフィック画面の制御が不要なため、MS-DOS版dviprtを元に開発されたものですが、MS-DOS版でのdviprtの機能をdviout 
+for Windowsでも実現するものが、dviout for Windowsの<strong>dviprt機能</strong>です。 
+</p>
+
+<p>dviprt機能は、「白黒２色の紙面画像を個々のプリンタの制御コードを用いて直接プリンタに送って印刷する」というのが基本となっています（よって<strong>カラー非対応</strong>）。MS-DOS時代に使われたプリンタの多くは、その制御コードが公開されていたので、このことが可能でした。個々のプリンタの制御コードの違いに対応するため、<strong>プリンタ定義ファイル</strong>を用意し、それに従って出力する、というものです。この定義ファイルの仕様は、付属の 
+<strong>cfg\optcfg.dvi </strong>に詳しい解説があります。</p>
+
+<p>optcfg.dvi の入っているフォルダーに定義ファイル <strong>*.src</strong> 
+をパックしたものが入っています。多くの人の協力で種々のプリンタに対する定義ファイルが作成され、実際50種類以上のものが入っています。定義ファイルは、<strong>optcfg.exe</strong> 
+で dviout が解釈可能な<strong> *.cfg</strong> 
+ファイルに変換し（変換したものもパックして入れてあります）、それをパラメータ 
+<strong>dviprt </strong>に指定することで、その機能を有効にできます。</p>
+
+<p>出力先は、プリンタとは限らないので、FAXモデム用の定義ファイルや画像ファイル出力用の定義ファイルも存在します。画像ファイル出力用としては、<a
+href="#PSout"><strong>G3FAX</strong>, <strong>PBM</strong>, <strong>EPSF</strong> 
+の形式用</a>があります。</p>
+
+<h3>12.1. <a name="LBP">LBP用ドライバ</a></h3>
+
+<p>MS-DOS時代から高品位で高速なプリンタとして <strong>LBP</strong>（Laser 
+Beam Printer）が使われています。特にMS-DOSには、高品位で自由にサイズ変更可能な和文フォントをシステムが持っていなかったため、そのようなフォントを内蔵しているLBPへの対応が望まれ、dviprtは早い時期にLBPに対応しました。対応が行われたLBPの制御コードは、Canonの<strong>LIPS III/IV </strong>および Epson の <strong>ESC/Page</strong> です。</p>
+
+<p>dviprt機能のLBP対応の基本は、次の２つです。 
+
+<ul>
+  <li><strong>プリンタ内蔵の和文フォント</strong>使用</li>
+  <li><strong>フォントのダウンロード機能</strong></li>
+</ul>
+
+<p>プリンタ内蔵の和文フォント使用では、TeXのどのフォントに対してどのようにプリンタ内蔵のフォントを使うか（各種の装飾や変形が可能）、あるいは使わないか、を指定できます。LBP対応の印刷は、以下のように<strong>２パス</strong>でなされます。</p>
+
+<p>ダウンロードするフォントについては、欧文のみ、あるいは（プリンタ内蔵フォントを使う設定になっていない）和文フォントも含めるかどうか指定できます。dvioutはダウンロードの可能性のあるフォントの使われている文字を、実際に印刷するページに渡って調べ、その文字サイズや頻度に応じてソートし、ダウンロード容量や使用頻度を考慮してダウンロードするものを決定します。
+dvioutはダウンロードする文字のセットを（欧文文字も和文文字も区別せずに）組みなおして、新たな1 byteの文字コードを与えた複数の新たな欧文フォントセットとして定義して、文字の画像データをLBPにダウンロードします。</p>
+
+<p>そのあと、各ページ毎の印刷を行いますが、各ページに対応する白黒２色のBMP画像は、ダウンロードされなかった文字（たとえば、１回しか使われない文字とか、サイズが大きすぎてダウンロードができない文字）や取り込みが指定された白黒画像などのみが貼り付けられた、空白の多いものになります。
+dviout はこの空白の多い画像を、適当に細かく分割し、分割された小画像のうち空白でないもののみを抽出して（これはLBP対応でないdviprt機能での印刷も同じ）そのデータをLBPに送り、さらに内蔵フォントやダウンロードされたフォントの文字を、フォント選択コマンドと文字コードで呼び出してページを完成させて印刷します。</p>
+
+<blockquote>
+  <p>MS-DOS版では、ページ全体の画像データを作成するだけのメモリーが取れなくて、ページをいくつかに分割して画像データを作成していましたので、より複雑でした。</p>
+</blockquote>
+
+<p>そのほか、LBPの仕様上の問題点に関連して種々の複雑なことがありますが、ここでは省略します。なお、各種のオプション機能については、On-line 
+Help の<strong> 概要 →&nbsp; 印刷 → dviprtによる印刷 → LBP用ドライバ</strong>　から<strong>サブパラメータ</strong>を参照してください。MS-DOS版からほとんど機能は変わっていないので、パラメータ指定はGUIでなくて文字列での指定になっています。</p>
+
+<p>dviprt機能のLBP対応印刷は、個々のプリンタに対応したWindowsのドライバを使った印刷よりはるかに高速であり（特に大量のページを含む文書）、Windowsのドライバを使うということで生じる不確定要素がないので、現時点（2002年）でもdviout開発者によって使われています。</p>
+
+<h3>12.2. <a name="raw">他のプリンタドライバの制御</a></h3>
+
+<p>「dviout でpreviewを行うが、dvipskなど他のプリンタドライバから出力したい」という場合への対応もdviprt機能と呼びます。これは今まで述べたdviprt機能と意味が異なっていますが、やはりパラメータ dviprt で設定します。</p>
+
+<p>印刷のページや順序の指定、紙面サイズの指定など、dviout 
+の印刷ダイアログのGUIを使って指定したものを、どのような書式でどのようなプログラムに渡すか、ということをパラメータ 
+dviprt に指定します。詳しくは、On-line Help のパラメータ <strong>-dviprt:</strong> 
+の解説などをご覧ください。</p>
+
+<p>その例は、Ver.3.14.3以降では Option->Choose Parameters... の選択肢にありますので、その例を参考に環境に合わせて書き直すと便利に使えるでしょう。</p>
+
+<p>外部のプリンタドライバのプログラムの出力先が<strong>標準出力</strong>の場合、Windowsではプリンタへのリダイレクトが正常に動作しない場合があります。dvioutのパッケージには、Windowsの<strong> 
+rawプリンタドライバ</strong> 
+を使って標準出力やファイルの内容をそのままプリンタに送るためのプログラム<strong> 
+rawprt.exe</strong> 
+を添付してあるので、それを利用すれば問題が解決します。</p>
+
+<h2>13. <a name="CompBMC">BMC画像の圧縮率</a></h2>
+
+<p>dviout で使われているBMC画像形式（可逆圧縮）の圧縮率を調べてみました。dviout付属のepsfdoc.dvi 
+をサンプルとしました。紙面サイズは、A4 です。画像は</p>
+
+<blockquote>
+  <p>\includegraphics*[height=10cm]{golfer}<br>
+  \includegraphics*[height=6cm]{tiger}</p>
+</blockquote>
+
+<p>によって300dpiとして作成したものです。文書の方は600dpiを用いています。<br>
+<br>
+epspdoc(2) : 最初のページを 600 dpi で B/W（２色）画像としたもの。<br>
+epsfdoc(16): 最初のページを 600 dpi/6 として gray scale（16色）画像としたもの。<br>
+golfer(256) : golfer.ps を 256色で画像ファイルにしたもの<br>
+tiger(256)&nbsp; : tiger.eps を 256色で画像ファイルにしたもの<br>
+golfer(full)&nbsp; : golfer.ps を full color(24 bit)で画像ファイルにしたもの<br>
+tiger(full)&nbsp;&nbsp; : tiger.eps を full color(24 bit)で画像ファイルにしたもの<br>
+</p>
+<div align="left">
+
+<table border="1" width="754" height="2">
+  <caption><strong>画像データサイズ(byte)</strong></caption>
+  <tr>
+    <td width="130" height="31"></td>
+    <th width="61" height="31" align="center">BMP</th>
+    <th width="55" height="31" align="center">BMP+LZH </th>
+    <th width="55" height="31" align="center">BMP+GZIP</th>
+    <th width="61" height="31" align="center">BMC</th>
+    <th width="70" height="31" align="center">BMC+LZH </th>
+    <th width="78" height="31" align="center">PNG</th>
+    <th width="67" height="31" align="center">PNG+LZH </th>
+    <th width="53" height="31" align="center">GIF</th>
+    <th width="75" height="31" align="center">GIF+LZH</th>
+  </tr>
+  <tr>
+    <th width="130" height="32">epsfdoc(2)</th>
+    <td width="61" height="32" align="right">4378046</td>
+    <td width="55" height="32" align="right">189330</td>
+    <td width="55" height="32" align="right">190107</td>
+    <td width="61" height="32" align="right">204831</td>
+    <td width="70" height="32" align="right">148307</td>
+    <td width="78" height="32" align="right">204643</td>
+    <td width="67" height="32" align="right">197189</td>
+    <td width="53" height="32" align="right">291454</td>
+    <td width="75" height="32" align="right">291454</td>
+  </tr>
+  <tr>
+    <th width="130" height="32">epsfdoc(16)</th>
+    <td width="61" height="32" align="right">486838 </td>
+    <td width="55" height="32" align="right">46648</td>
+    <td width="55" height="32" align="right">46976</td>
+    <td width="61" height="32" align="right">57062</td>
+    <td width="70" height="32" align="right">48486</td>
+    <td width="78" height="32" align="right">48208</td>
+    <td width="67" height="32" align="right">47451</td>
+    <td width="53" height="32" align="right">52497</td>
+    <td width="75" height="32" align="right">52407</td>
+  </tr>
+  <tr>
+    <th width="130" height="33">golfer(256)</th>
+    <td width="61" height="33" align="right">1144286</td>
+    <td width="55" height="33" align="right">15458</td>
+    <td width="55" height="33" align="right">15294</td>
+    <td width="61" height="33" align="right">23932</td>
+    <td width="70" height="33" align="right">12369</td>
+    <td width="78" height="33" align="right">21401</td>
+    <td width="67" height="33" align="right">21294</td>
+    <td width="53" height="33" align="right">22643</td>
+    <td width="75" height="33" align="right">22643</td>
+  </tr>
+  <tr>
+    <th width="130" height="32">tiger(256)</th>
+    <td width="61" height="32" align="right">485350</td>
+    <td width="55" height="32" align="right">25447</td>
+    <td width="55" height="32" align="right">25249</td>
+    <td width="61" height="32" align="right">46858</td>
+    <td width="70" height="32" align="right">25807</td>
+    <td width="78" height="32" align="right">29415</td>
+    <td width="67" height="32" align="right">29160</td>
+    <td width="53" height="32" align="right">31884</td>
+    <td width="75" height="32" align="right">31884</td>
+  </tr>
+  <tr>
+    <th width="130" height="32">golfer(full)</th>
+    <td width="61" height="32" align="right">3429678</td>
+    <td width="55" height="32" align="right">23054</td>
+    <td width="55" height="32" align="right">22028</td>
+    <td width="61" height="32" align="right">40337</td>
+    <td width="70" height="32" align="right">16038</td>
+    <td width="78" height="32" align="right">28167</td>
+    <td width="67" height="32" align="right">27432</td>
+    <td width="53" height="32" align="center">---</td>
+    <td width="75" height="32" align="center">---</td>
+  </tr>
+  <tr>
+    <th width="130" height="31">tiger(full)</th>
+    <td width="61" height="31" align="right">1447206</td>
+    <td width="55" height="31" align="right">30958</td>
+    <td width="55" height="31" align="right">31766</td>
+    <td width="61" height="31" align="right">95170</td>
+    <td width="70" height="31" align="right">31639</td>
+    <td width="78" height="31" align="right">44921</td>
+    <td width="67" height="31" align="right">44628</td>
+    <td width="53" height="31" align="center">---</td>
+    <td width="75" height="31" align="center">---</td>
+  </tr>
+</table>
+</div>
+
+<p align="center">　</p>
+<div align="left">
+
+<table border="1" width="754" height="2">
+  <caption><strong>圧縮比（％）</strong></caption>
+  <tr>
+    <td width="121" height="31"></td>
+    <th width="69" height="31" align="center">BMP</th>
+    <th width="56" height="31" align="center">BMP+LZH </th>
+    <th width="57" height="31" align="center">BMP+GZIP</th>
+    <th width="61" height="31" align="center">BMC</th>
+    <th width="72" height="31" align="center">BMC+LZH </th>
+    <th width="76" height="31" align="center">PNG</th>
+    <th width="67" height="31" align="center">PNG+LZH </th>
+    <th width="53" height="31" align="center">GIF</th>
+    <th width="75" height="31" align="center">GIF+LZH</th>
+  </tr>
+  <tr>
+    <th width="121" height="32">epsfdoc(2)</th>
+    <td width="69" height="32" align="right">100.000</td>
+    <td width="56" height="32" align="right">4.378</td>
+    <td width="57" height="32" align="right">4.325</td>
+    <td width="61" height="32" align="right">4.679</td>
+    <td width="72" height="32" align="right">3.388</td>
+    <td width="76" height="32" align="right">4.674</td>
+    <td width="78" height="32" align="right">4.504</td>
+    <td width="53" height="32" align="right">6.657</td>
+    <td width="75" height="32" align="right">6.657</td>
+  </tr>
+  <tr>
+    <th width="121" height="32">epsfdoc(16)</th>
+    <td width="69" height="32" align="right">100.000</td>
+    <td width="56" height="32" align="right">9.582</td>
+    <td width="57" height="32" align="right">9.649</td>
+    <td width="61" height="32" align="right">11.720</td>
+    <td width="72" height="32" align="right">9.960</td>
+    <td width="76" height="32" align="right">9.902</td>
+    <td width="78" height="32" align="right">9.747</td>
+    <td width="53" height="32" align="right">10.783</td>
+    <td width="75" height="32" align="right">10.765</td>
+  </tr>
+  <tr>
+    <th width="121" height="33">golfer(256)</th>
+    <td width="69" height="33" align="right">100.000</td>
+    <td width="56" height="33" align="right">1.351</td>
+    <td width="57" height="33" align="right">1.337</td>
+    <td width="61" height="33" align="right">2.091</td>
+    <td width="72" height="33" align="right">1.081</td>
+    <td width="76" height="33" align="right">1.870</td>
+    <td width="78" height="33" align="right">1.861</td>
+    <td width="53" height="33" align="right">1.979</td>
+    <td width="75" height="33" align="right">1.979</td>
+  </tr>
+  <tr>
+    <th width="121" height="32">tiger(256)</th>
+    <td width="69" height="32" align="right">100.000</td>
+    <td width="56" height="32" align="right">5.243</td>
+    <td width="57" height="32" align="right">5.202</td>
+    <td width="61" height="32" align="right">9.654</td>
+    <td width="72" height="32" align="right">5.317</td>
+    <td width="68" height="32" align="right">6.061</td>
+    <td width="78" height="32" align="right">6.008</td>
+    <td width="53" height="32" align="right">6.569</td>
+    <td width="75" height="32" align="right">6.569</td>
+  </tr>
+  <tr>
+    <th width="121" height="32">golfer(full)</th>
+    <td width="69" height="32" align="right">100.000</td>
+    <td width="56" height="32" align="right">0.672</td>
+    <td width="57" height="32" align="right">0.642</td>
+    <td width="61" height="32" align="right">1.176</td>
+    <td width="72" height="32" align="right">0.468</td>
+    <td width="68" height="32" align="right">0.858</td>
+    <td width="78" height="32" align="right">0.771</td>
+    <td width="53" height="32" align="center">---</td>
+    <td width="75" height="32" align="center">---</td>
+  </tr>
+  <tr>
+    <th width="121" height="31">tiger(full)</th>
+    <td width="69" height="31" align="right">100.000</td>
+    <td width="56" height="31" align="right">2.139</td>
+    <td width="57" height="31" align="right">2.196</td>
+    <td width="61" height="31" align="right">6.576</td>
+    <td width="72" height="31" align="right">2.186</td>
+    <td width="68" height="31" align="right">3.104</td>
+    <td width="78" height="31" align="right">3.084</td>
+    <td width="53" height="31" align="center">---</td>
+    <td width="75" height="31" align="center">---</td>
+  </tr>
+</table>
+</div>
+
+<p>BMC画像形式は、圧縮率を目指したものでなくBMP形式との相互変換の容易さと高速性とを目指したものです。対象とする画像ファイルは、PostScript画像や文書紙面、グラフや線画など文書で使われるものです。フルカラーなどの写真画像には適さないと思われます。上記の圧縮率を見ると、BMC(+LZH)はそう悪くない成績となっています。</p>
+
+<hr>
+
+<p><a href="#contents">目次へ</a><br>
+<a HREF="http://akagi.ms.u-tokyo.ac.jp/ftp-j.html#TeX">TeXのページへ</a><br>
+<br>
+誤りや補足すべき点があればお知らせ下さい --&gt; <a
+href="mailto:ftp-admin@akagi.ms.u-tokyo.ac.jp">ftp-admin@akagi.ms.u-tokyo.ac.jp</a><br>
+</p>
+</body>
+</html>

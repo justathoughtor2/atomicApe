@@ -1,0 +1,7 @@
+;#j dvipsk -Ppdf -D8000 によって PS ファイルに変換（dviprt 機能での印刷）
+;# Transform into a PS file by dvipsk -Ppdf -D8000 -z
+;;       Transform into a PS file by dvipsk -Ppdf -D8000
+;;  Paper size, Landscape, Offset OX, OY,
+;;  Pages to be transformed, odd/even/reverse
+dviprt='dvipsk.exe -Ppdf -D8000 ^W -z -p=^a -l=^b "^q"^z^8Transform into PS;by dvipsk -Ppdf -D8000 -z'
+Set=fd

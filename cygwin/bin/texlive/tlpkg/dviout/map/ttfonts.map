@@ -1,0 +1,198 @@
+% This is the ttfonts.map file, describes a mapping
+% between TeX Font Metric (TFM) files and Windows TrueType fonts.
+% The writing form comes from DVIOUT, which is a DVI driver
+% produced by SHIMA and others.
+%
+% In This file, I defined a mapping between *8r (what we call 8r-tfm) and
+% Windows TrueType fonts. However, please don't use 8r-tfm file in your
+% TeX documents (DVI file) but use 8t-tfm file.
+% For example, please use wnsr8t.tfm but wnsr8r.tfm file.
+% If you write `\font\timesnew=wnsr8t \timesnew' in your TeX source,
+% TeX uses wnsr8t.tfm file. Then, in DVI file, there is a DVI command
+% to use "wnsr8t" font. When DVIOUT searches the font, DVIOUT may
+% find wnsr8t.tfm file. At the time, DVIOUT search in this ttfonts.map
+% file for wnsr8t font, but in vain. DVIOUT next shall find wnsr8t.vf,
+% the VIRTUAL font. In the wnsr8t.vf file, which is very similar with
+% DVI file, in fact, there is a utility software written by Knuth to
+% transform vf file to dvifile, named DVIcopy, there is a mapping
+% from 8t-encoding to 8r-encoding.
+% Now DVIOUT understands how to show the dvi file using wnsr8r fonts.
+% Finally, DVIOUT searches wnsr8r font, which is defined in THIS FILE!
+% Following the definition, DVIOUT shall request the Windows system
+% to show the DVI file with using Times New Roman font!
+%
+% Set "ftt" parameter ([Option]-[Setup Parameters]-[Font2])
+% like "c:\ptex\bin\ttfonts.map".
+% 
+% There is a trivial remark.
+% You may use BaKoMa's TrueType fonts now.
+% However, it is properly different from this.
+% To use BaKoMa's font, DVIOUT only does "remapping".
+% Of course you don't need to define the BaKoMa fonts in this file.
+% This mechanism doesn't want to provide such a trivial way.
+% It aims to use sophisticated TrueType fonts.
+%
+% Copyright(C) 1999 by Yoshiki OTOBE,
+% Department of Mathematical Sciences,
+% The University of Tokyo.
+%
+%
+% 1999/02/19 first edition.
+% 1999/02/21 add SmallCaps definition. (essentially depends on Virtual Font)
+% 2000/11/18 add Proportional fonts definition (using %input)  by SHIMA
+% 2002/12/24 add $user.map for the modification by a user      by SHIMA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%   If the line
+
+%skip
+
+   appears, then the following lines are ignored.
+
+   The map file can include other map files by
+
+%input	<name_of_map_file>
+
+   The skip continues until the line
+
+%endskip
+
+%  appaears.
+%  This is used to ignore many unnecessary definitions of mappings for 
+%  the quick search of the TrueType fonts in the list.
+%
+#x This is a map of non-Japanese fonts!
+%
+%%%%%%%%%%%%%%%  STANDARD SYMBOL FONTS  %%%%%%%%%%%%%%%%%%%
+wsyr		Symbol				symbol
+wsyro		Symbol				symbol,italic
+wpi313		"Monotype Sorts"	symbol
+wmsdr		Webdings			symbol
+wmswdr		WingDings			symbol
+wmswdr2		"WingDings 2"		symbol
+wmswdr3		"WingDings 3"		symbol
+wingding	WingDings			symbol
+wmsmlt		Marlett				symbol
+%%
+%%%%%%%%%%%%%%%%  STANDARD TEXT FONTS  %%%%%%%%%%%%%%%%%%%%
+wlcr8r		"Lucida Console"
+wlcrih8r	"Lucida Handwriting"	italic
+wlsri8r		"Lucida Sans"			italic
+wlsr8r		"Lucida Sans Unicode"
+wwmtr8r		Westminster
+wimtsr8r	"Matisse ITC"
+witpsr8r	"Tempus Sans ITC"
+wplr8r		"Palatino Linotype"
+wplb8r		"Palatino Linotype"		bold
+wplbi8r		"Palatino Linotype"		bold,italic
+wplri8r		"Palatino Linotype"		italic
+wmcsr8r		"Comic Sans MS"
+wmcsb8r		"Comic Sans MS"			bold
+wmgr8r		Georgia
+wmgb8r		Georgia					bold
+wmgri8r		Georgia					italic
+wmgbi8r		Georgia					bold,italic
+msssr8r		"Microsoft Sans Serif"
+wmssfr8r	Sylfaen
+wthr8r		Tahoma
+wthb8r		Tahoma	bold
+wtbcr8r		"Trebuchet MS"
+wtbcb8r		"Trebuchet MS"			bold
+wtbcbi8r	"Trebuchet MS"			bold,italic
+wtbcri8r	"Trebuchet MS"			italic
+wvdr8r		Verdana
+wvdb8r		Verdana					bold
+wvdri8r		Verdana					italic
+wvdbi8r		Verdana					bold,italic
+wail8rc		"Abadi MT Condensed Light"
+wa1r8r		Arial
+wa1b8r		Arial					bold
+wa1bi8r		Arial					bold,italic
+wa1ri8r		Arial					italic
+wa1c8r		"Arial Black"
+waqr8r		"Book Antiqua"
+wc1r8r		"Calisto MT"
+wagb8r		"Century Gothic"		bold
+wagbi8r		"Century Gothic"		bold,italic
+wagr8r		"Century Gothic"
+wagri8r		"Century Gothic"		italic
+wcrr8r		"Courier New"
+wcrb8r		"Courier New"			bold
+wcrbi8r		"Courier New"			bold,italic
+wcrri8r		"Courier New"			italic
+wicr8r		Impact
+wngb8r		"News Gothic MT"		bold
+wngb8r		"News Gothic MT"
+wngb8r		"News Gothic MT"		italic
+wocrr8r		"OCR A Extended"
+wnsr8r		"Times New Roman"
+wnsb8r		"Times New Roman"		bold
+wnsbi8r		"Times New Roman"		bold,italic
+wnsri8r		"Times New Roman"		italic
+wcpbs8r		"Copperplate Gothic Bold"
+wcpls8r		"Copperplate Gothic Light"
+%%
+%%%%%%%%%%%%%%%  STANDARD SMALL CAPS FONTS  %%%%%%%%%%%%%%%
+wlcrc8r		"Lucida Console"
+wlcrihc8r	"Lucida Handwriting"	italic
+wlsrc8r		"Lucida Sans Unicode"
+wlsric8r	"Lucida Sans"			italic
+wwmtrc8r	Westminster
+wimtsrc8r	"Matisse ITC"
+witpsrc8r	"Tempus Sans ITC"
+wplrc8r		"Palatino Linotype"
+wplbc8r		"Palatino Linotype"		bold
+wplbic8r	"Palatino Linotype"		bold,italic
+wplric8r	"Palatino Linotype"		italic
+wmcsrc8r	"Comic Sans MS"
+wmcsbc8r	"Comic Sans MS"			bold
+wmgrc8r		Georgia
+wmgbc8r		Georgia					bold
+wmgric8r	Georgia					italic
+wmgbic8r	Georgia					bold,italic
+msssrc8r	"Microsoft Sans Serif"
+wmssfrc8r	Sylfaen
+wthrc8r		Tahoma
+wthbc8r		Tahoma	bold
+wtbcrc8r	"Trebuchet MS"
+wtbcbc8r	"Trebuchet MS"			bold
+wtbcbic8r	"Trebuchet MS"			bold,italic
+wtbcric8r	"Trebuchet MS"			italic
+wvdrc8r		Verdana
+wvdbc8r		Verdana					bold
+wvdric8r	Verdana					italic
+wvdbic8r	Verdana					bold,italic
+wailc8rc	"Abadi MT Condensed Light"
+wa1rc8r		Arial
+wa1bc8r		Arial					bold
+wa1bic8r	Arial					bold,italic
+wa1ric8r	Arial					italic
+wa1cc8r		"Arial Black"
+wcrrc8r		"Courier New"
+wcrbc8r		"Courier New"			bold
+waqrc8r		"Book Antiqua"
+wc1rc8r		"Calisto MT"
+wagbc8r		"Century Gothic"		bold
+wagbic8r	"Century Gothic"		bold,italic
+wagrc8r		"Century Gothic"
+wagric8r	"Century Gothic"		italic
+wcrbic8r	"Courier New"			bold,italic
+wcrric8r	"Courier New"			italic
+wicrc8r		Impact
+wngbc8r		"News Gothic MT"		bold
+wngbc8r		"News Gothic MT"
+wngbc8r		"News Gothic MT"		italic
+wocrrc8r	"OCR A Extended"
+wnsrc8r		"Times New Roman"
+wnsbc8r		"Times New Roman"		bold
+wnsbic8r	"Times New Roman"		bold,italic
+wnsric8r	"Times New Roman"		italic
+wcpbsc8r	"Copperplate Gothic Bold"
+wcplsc8r	"Copperplate Gothic Light"
+
+%input	pttfonts.map
+%input	morisawa.map
+%input	japanese.map
+%input	mojikyo.map
+%input	gtfonts.map
+%input  $user.map

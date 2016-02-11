@@ -1,0 +1,11 @@
+;#j source specials (èGä€óp)
+;# source specials for Hidemaru
+;`    source specials for Hidemaru
+;; A sample for source specials with Hidemaru
+;;
+;; Rewrite the path of Hidemaru if it is different from
+;;    c:\Program Files\Hidemaru\Hidemaru.exe
+;;
+;; To jump from Hidemaru to dviout, use  special\srcspecial.mac
+;;    which supports string search
+src='c:\Program Files\Hidemaru\Hidemaru.exe^s/j%d "%s"'

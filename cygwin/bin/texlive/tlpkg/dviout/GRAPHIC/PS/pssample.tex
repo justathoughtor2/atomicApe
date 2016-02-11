@@ -1,0 +1,69 @@
+% Translate this file into a dvi file by LaTeX and execute dviout/prt by 
+% putting the following files in the directory where the dvi file exists.
+%
+% GhostScript should be in the search path.
+%
+% sample0.ps, sample1.ps, sample2.ps, sample3.ps, starbrst.ps
+% myhyper.sty         (myhyper.sty is contained in the package of dviout)
+% tiger.ps, golfer.ps (tiger.ps, golfer.ps are contained in the package of
+% GostScript)
+%
+
+\documentstyle[a4, myhyper]{article}
+\begin{document}
+
+\centerline{\Huge A samples : dviout/dviprt--PostScript figure}
+\vskip .5cm
+
+
+\hskip-.3cm\special{epsfile=sample0.ps vsize=4.2cm}
+\vskip3cm
+
+
+\vskip 1.5cm
+\hskip 2cm
+\special{epsfile=sample1.ps vsize=10cm}
+
+
+\vskip 10cm
+
+\hskip.3cm\special{epsfile=sample2.ps vsize=5cm}
+\vskip 5cm
+
+{\Large Click \href{file:..\..\sample\sample.dvi#graphic"}{here} to
+jump to another file}
+\vskip 5cm
+
+\pagebreak
+
+\centerline{\Huge ``%
+\special{color push rgb 0 0 1}%
+Golfer%
+\special{color pop}%
+" in Ghostscript
+}
+
+\hskip 3.5cm
+\special{epsfile=golfer.ps vsize=10cm}
+\vskip 11cm
+
+\centerline{\Huge ``%
+\special{color push rgb 0.8 0.4 0.2}%
+Tiger%
+\special{color pop}%
+" lives in Ghostscript
+}
+\vskip 1.5cm
+
+\hskip3.6cm
+\special{epsfile=tiger.ps hscale=0.4 vscale=0.36}
+\pagebreak
+
+
+\vskip 1cm
+\hskip 1.5cm
+\special{epsfile=sample3.ps vsize=17cm}
+
+\vskip 19cm
+\centerline{\Large Modified by SHIMA from samples by Asayama, Mar.\ 1993}
+\end{document}

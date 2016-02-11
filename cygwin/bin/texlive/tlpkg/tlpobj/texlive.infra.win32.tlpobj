@@ -1,0 +1,13 @@
+name texlive.infra.win32
+category TLCore
+revision 36776
+shortdesc win32 files of texlive.infra
+containersize 858684
+containermd5 3203ff41706cfbc63bc50f4890e06eb2
+binfiles arch=win32 size=576
+ bin/win32/tlmgr-gui.exe
+ bin/win32/tlmgr.bat
+ tlpkg/installer/tar.exe
+ tlpkg/installer/wget/wget.exe
+ tlpkg/installer/xz/xz.exe
+ tlpkg/installer/xz/xzdec.exe

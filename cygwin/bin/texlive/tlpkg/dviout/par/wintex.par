@@ -1,0 +1,28 @@
+;#j WinTeX‚ÌTrueTypeƒtƒHƒ“ƒg‚ğg‚¤İ’è
+;`          Setting for TrueType fonts
+;`
+;`  CM/AMS/LaTeX fonts: WinTeX
+;`  Japanese fonts: Microsoft Mincho/Gothic
+;`
+;`  Indicate *.tfm files in -TEXPK:  (ex. ^r\tfm\\^s.tfm)
+vfn='
+%version=2
+%vfont_list
+1,"‚l‚r –¾’©"
+2,"‚l‚r ƒSƒVƒbƒN"
+3,"@‚l‚r –¾’©"
+4,"@‚l‚r ƒSƒVƒbƒN"
+5,"cmr10"
+%jfm_list
+min,1,a,a,n,1;0;0,,1,0
+goth,2,a,a,n,0;0;0,,1,0
+tmin,3,a,a,n,0;0;0,,1,1
+tgoth,4,a,a,n,0;0;0,,1,1
+jis,1,a,a,n,1;0;0,,1,0
+jisg,2,a,a,n,0;0;0,,1,0
+jis-v,3,a,a,n,0;0;0,,1,1
+jisg-v,4,a,a,n,0;0;0,,1,1
+default,1,a,b,n,0;0;0,,1,0
+tdefault,3,a,b,n,0;0;0,,1,1
+edefault,5,a,a,n,1;0;0,,1,0
+'

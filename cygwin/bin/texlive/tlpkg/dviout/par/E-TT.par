@@ -1,0 +1,4 @@
+;#j 欧文TrueTypeフォント使用許可
+;# Allow to Use Europian TrueType fonts
+;;  Allow to Use Europian TrueType fonts
+ttf=1

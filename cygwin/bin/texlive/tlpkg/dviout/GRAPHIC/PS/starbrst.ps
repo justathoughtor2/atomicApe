@@ -1,0 +1,30 @@
+userdict begin
+% Usage : -- starburstfill --
+% Fill current path with "Star Burst"
+/starburstfill {
+10 dict begin
+	pathbbox /uy exch def /ux exch def /ly exch def /lx exch def
+	ux lx sub /xs exch def xs dup mul
+	uy ly sub /ys exch def ys dup mul
+	add sqrt /R exch def
+	clip
+	newpath
+	lx xs 2 div add /xx exch def
+	ly ys 2 div add /yy exch def
+	0 2 359.9 {
+		xx yy moveto
+		dup cos R mul exch sin R mul rlineto
+	} for
+	stroke
+end
+} bind def
+
+% Usage : <strings> starburstshow --
+/starburstshow {
+2 dict begin
+	dup stringwidth /yw exch def /xw exch def gsave
+	currentpoint newpath moveto
+	false charpath starburstfill grestore xw yw rmoveto
+end
+} bind def
+end

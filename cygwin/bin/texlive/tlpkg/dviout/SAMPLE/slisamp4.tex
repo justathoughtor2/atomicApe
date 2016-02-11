@@ -1,0 +1,83 @@
+\documentclass{slides}
+\usepackage{graphicx, color, myhyper}
+\def\pause{\special{pause}}
+
+\paperwidth=10.24in
+\paperheight=7.68in
+\textwidth=9in
+\textheight=6.6in
+\voffset=-.9in
+\hoffset=-.48in
+
+\title{Presentation with dviout%
+\special{dviout `keep y}
+%  1024 x 768, general screen, cover sheet On, cover bottom, Presentation;
+%  Fit
+\special{dviout -e=0 -y=XGAP !AN0!w!p;!b!0df}
+\pagecolor[rgb]{1,1,0.8}% slightly yellow
+}
+\author{Toshio OSHIMA}
+\date{January 1, 2000}
+\pagestyle{plain}
+
+%%%%%%    TEXT START    %%%%%%
+\begin{document}
+\maketitle
+
+\begin{slide}
+\pagecolor[rgb]{1,1,0.8}%
+{\large \S0 Presentation by \TeX}
+
+Many technical documents including mathematical formulas are written by
+{\TeX} and they can be used for presentations by dviout for Windows.
+
+{\color{red} Hit [Space] key!}
+\special{dviout `+5-}%
+{\color{red}($\Rightarrow$ next page)}
+
+\special{dviout `+1-}
+Study the solution $u(x)$ of the Shr\"odinger equation
+\[
+\left(-\frac12\sum_{1\le j\le n}\frac{\partial^2}{\partial x_j^2} + 
+\special{dviout `+2,4}\special{color push Red}\special{dviout `+1-}
+U(x)
+\special{dviout `+2,4}\special{color pop}\special{dviout `+1-}
+\right)u(x) = \lambda u(x)
+\]
+
+with the potential function
+
+\special{dviout `+2-}
+\[
+ U(x) = \sum_{1\le i < j\le n}
+\special{dviout `+2-3}\makebox[0pt]{$\hspace*{3cm}\frac{C}{(x_i - x_j)^2.}$}
+\special{dviout `+4-}\frac{C}{\sinh^2(x_i - x_j)}.
+\]
+
+\special{dviout `+3,5-}
+It can be written by 
+\rlap{\special{dviout `+5-}Gauss hypergeometric function when $n=2$.}%
+{\special{dviout `+3}Bessel function when $n=2$.}
+\end{slide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{slide}
+\pagecolor[rgb]{1,1,0.8}%
+One may try to present this document by a key or mouse operation.
+If it is displayed under a cover sheet,
+\begin{itemize}
+\item
+push [Space] key to proceed step by step,
+\item
+move the mouse under pushing its left button.
+\end{itemize}
+For this purpose, open \href{file:slisamp2.dvi}{slisamp2.dvi} (a sample 
+with the slightly yellow background).
+
+Or open \href{file:slisamp3.dvi}{slisamp3.dvi} (without the cover sheet).
+
+Otherwise jump to \href{file:sample.dvi}{sample.dvi}. % after 30 seconds. 
+
+Note that the [ESC] key is the toggle switch between the presentation mode and
+the normal mode.
+\end{slide}
+\end{document}

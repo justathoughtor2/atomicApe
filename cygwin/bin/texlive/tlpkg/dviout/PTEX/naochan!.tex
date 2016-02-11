@@ -1,0 +1,203 @@
+% pTeX サンプル for Testing dviout&dviprt (ver2.38以降) (2. Sep. 1991版)
+%
+% このサンプルの著作権は、Naochan!(戸塚 直哉:NIFTY-Serve GDH02225)にあります。
+
+\font\tentmin=tmin10
+\font\ninetmin=tmin9
+\font\tentgoth=tgoth10
+\font\ninerm=cmr9
+\font\sevenrm=cmr7
+\font\sixmin=min6
+\font\ninemin=min9
+\font\minii=tmin10 scaled \magstep2
+
+\ninetmin \ninerm
+
+\newskip\連数skip
+\連数skip=0.1zw plus 0.1zw minus 0.1zw
+
+\def\pTeX{p\kern-.2em\TeX}
+
+\def\連数字#1{\hskip\連数skip\hbox to 0pt{\yoko\hss#1\hss}\nobreak\hskip\連数skip}
+\def\連三字#1{{\sevenrm\hskip\連数skip\hbox to 0pt{\yoko\hss#1\hss}\nobreak\hskip\連数skip}}
+
+\def\nidan{
+  \loop\ifvbox0
+    \vfill
+    \vbox to \vsize{\baselineskip0mm \lineskiplimit0mm
+      \vss
+      \hbox to \hsize{\hss%
+    \vbox{\tate
+      \hrule
+      \hbox to 210mm{%
+        \vrule\hskip 70H%
+        \setbox1=\vsplit0 to 452H
+        \vtop to 148mm{\vskip 70H\unvbox1\vskip 70H}% 20*22+12
+        \hskip 36H%
+        \setbox1=\vsplit0 to 452H
+        \vtop to 148mm{\vskip 70H\unvbox1\vskip 70H}% 20*22+12
+        \hss%
+	\ifodd\count0%
+        \vtop{\vskip 70H\hbox to 452H{\yoko$\oldstyle\number\count0$\ 
+		\sixmin 京都下宿案内\hfil}}%
+	\else%
+        \vtop{\vskip 70H\hbox to 452H{\yoko\hfil\sixmin 京都下宿案内\ 
+		$\oldstyle\number\count0$}}%
+	\fi%
+        \hskip 56H\vrule%
+      }
+      \hrule
+    }%
+      \hss}\vskip3mm
+    \hbox to \hsize{\hfill\rm\tengt
+      Naochan!\ の『改訂版・京都下宿案内』より\hfill}
+    \vss}
+    \vfill
+    \eject
+  \repeat
+}
+
+\splittopskip=0pt
+\splitmaxdepth=0pt
+\tbaselineshift=2pt
+\parindent=0.9zw
+\baselineskip=20H plus 1H
+\lineskiplimit=0H
+\lineskip=0H
+\leftskip=2zw
+
+\def\半行空け{\vskip 10H plus 0.5H}
+
+\def\一行空け{\vskip\baselineskip}
+
+\def\科白#1{\parindent=0zw\par 「#1」\parindent=0.9zw}
+
+\def\item#1{\leavevmode\hbox to 0pt{\kern-\leftskip #1\hss}}
+
+\setbox0=\vbox{\tate \hsize=324H% 12[Q]x 27[字ツメ]
+
+\line{\vrule width0pt height.5zh depth.5zh\hfill}
+\hbox to 1zh{\yoko\hss%
+\line{\tate\minii \hskip 3zh 改訂版・京都下宿案内\hfill}%
+\hss}
+\line{\vrule width0pt height.5zh depth.5zh\hfill}
+
+\line{\vrule width0pt height.5zh depth.5zh\hfill}
+
+東大路通沿いにも桜の花が咲く今日この頃ですが、如何お過ごしでしょうか。
+早速、{\bf 「改訂版・京都下宿案内」}をお送りします。
+
+住所も電話番号も去年と同じです。
+
+\半行空け
+〒\連三字{606}\ 京都市左京区○△□◇▽町×-\連三字{307}\par
+{\hfill Tel.(xxx)xxx-xxxx（留守電有） }
+\半行空け
+
+京都にお越しの際は、{\bf 何らかの差し入れ品持参は必須}です。
+案内もしてさしあげますが、何らかの見返りを求めることがあります。
+（pretty ladyだったら免除しようかな）
+
+去年の下宿案内にも書いたのですが、
+今月（四月）の\連数字{15}日は{\bf My Birthday}で、
+今年は二十歳になるので、それに見合うだけオトナになろうと思います。
+
+いちおう下宿案内ですので、うちの下宿へ来るときの手順（秘儀）を公開します。
+
+とりあえず、ＪＲ京都駅までやって来た、と仮定します。
+
+するとあなたは、
+\科白{ああ、京都に来たんだなあ}
+\科白{そういえば、京都にゃ Naochan! がいるんだよね}
+\科白{あいたいな}
+
+と思います。
+
+そういう時には、まず電話連絡を。
+
+すると、留守電が、
+\科白{はい\ \ Naochan!です\ \ ただ今留守にしております\ \ %
+ピィという発信音のあとにメッセージをお願いします\ \ \ \ ピィ}
+
+そういう場合は、お手数ですが、あなたの名前を名乗ったあとに以下のメッセージを。
+\科白{せっかく京都に来たから逢いたかったのに$\cdots$留守かぁ、しょうがない$\cdots$}
+
+こうすると、留守電の主は、留守にしていたことをきっと後悔しはじめますから。
+
+もし、留守電ではなくて、本人が電話にでた場合。
+\科白{はい、Naochan! です}
+\科白{あの、○○です$\cdots$いま　京都に来てるんだけど、
+せっかく京都に来たから会いたいんですが$\cdots$}
+
+と、とりあえず言います。
+（○○のところにあなたのお名前を。）
+
+
+
+あなたが男性である場合、まず、こういう返事が返ってきます。
+\科白{あ、○○（あなたの名前）？
+ごめん、今日これからデートだから$\cdots$}
+
+そういう時、差し入れ品が役に立ちます。
+\科白{せっかく鳩サブレ持ってきたのになぁ$\cdots$}
+
+きっと、「それなら$\cdots$」といって快くお会いするでしょう。
+
+
+
+あなたが女性である場合$\cdots$
+\科白{あ$\cdots$○○さん（あなたの名前）？
+ごめん、今日これからデートだから$\cdots$}
+
+あなたは、すかさずこう聞くのです。
+\科白{えー？誰と？}
+\科白{君とだよ}
+
+$\cdots\cdots$あとの事は、それからふたりで考えましょう。
+
+
+
+
+
+\一行空け
+
+下宿を見に来たい人は$\cdots$
+京都駅烏丸中央口を出ると、バスのりばがありますので、
+××のりばから市バス\連三字{206}系統（東山通 北大路バスターミナルゆき）に
+乗って、★★で降りてください（所要時間約\連数字{30}分）。
+四月の運賃改訂で\連三字{200}円になりました。
+何時何分のバスに乗る、とわかっていれば、★★のバス停で待ってます。
+★★まで来て、姿が見えなかったら、
+最寄りの電話ボックスから連絡してください。\par
+
+
+
+\一行空け
+
+それぞれの生活をエンジョイしましょう。
+
+
+
+\一行空け
+
+{\it When you wish upon a star \par
+Makes no difference who you are \par
+Anything your heart desires \par
+Will come to you} （星に願いを）\par
+
+
+\一行空け
+\一行空け
+
+なお、この下宿案内は\pTeX で組版しました。
+
+縦書き可能な\pTeX を開発した アスキー と、縦書き対応の dviout/dviprt を
+公開してくださった Naochan! さんに心から感謝いたします。（自画自賛）
+
+\vfill
+}
+
+\nidan
+
+\end
+

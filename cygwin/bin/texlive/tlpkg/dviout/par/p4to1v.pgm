@@ -1,0 +1,3 @@
+#j#両面印刷プリンタ用製本印刷v(Unite 2 pages): 1 4 3 2 5 8 7 6 ->
+#4to1    2-sided prining with [Unite 2 pages]:1 4 3 2 5 8 7 6 4 9 12 11 ->
+Mz+=3,z/=4;x+=4;x,x+3[x+2,x+1]

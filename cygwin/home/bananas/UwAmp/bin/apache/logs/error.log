@@ -197,3 +197,13 @@ AH00548: NameVirtualHost has no effect and will be removed in the next release F
 [Tue Feb 09 12:10:54.470807 2016] [mpm_winnt:notice] [pid 3348:tid 376] AH00354: Child: Starting 64 worker threads.
 [Tue Feb 09 12:14:28.116068 2016] [mpm_winnt:warn] [pid 3348:tid 1228] (OS 64)The specified network name is no longer available.  : AH00341: winnt_accept: Asynchronous AcceptEx failed.
 [Tue Feb 09 12:14:28.117069 2016] [mpm_winnt:warn] [pid 3348:tid 1228] (OS 64)The specified network name is no longer available.  : AH00341: winnt_accept: Asynchronous AcceptEx failed.
+[Wed Feb 10 17:49:38.519092 2016] [core:warn] [pid 10252:tid 608] AH00098: pid file F:/atomicApe/cygwin/home/bananas/UwAmp/bin/apache/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Wed Feb 10 17:49:38.697252 2016] [ssl:warn] [pid 10252:tid 608] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed Feb 10 17:49:39.213656 2016] [mpm_winnt:notice] [pid 10252:tid 608] AH00455: Apache/2.4.10 (Win32) OpenSSL/1.0.1h PHP/5.4.31 configured -- resuming normal operations
+[Wed Feb 10 17:49:39.213656 2016] [mpm_winnt:notice] [pid 10252:tid 608] AH00456: Apache Haus VC9 Server built: Jul 15 2014 20:34:18
+[Wed Feb 10 17:49:39.213656 2016] [core:notice] [pid 10252:tid 608] AH00094: Command line: 'F:\\atomicApe\\cygwin\\home\\bananas\\UwAmp\\bin\\apache\\bin\\httpd.exe -d F:/atomicApe/cygwin/home/bananas/UwAmp/bin/apache -f F:\\atomicApe\\cygwin\\home\\bananas\\UwAmp\\bin\\apache\\conf\\httpd.conf'
+[Wed Feb 10 17:49:39.219676 2016] [mpm_winnt:notice] [pid 10252:tid 608] AH00418: Parent: Created child process 5784
+AH00548: NameVirtualHost has no effect and will be removed in the next release F:/atomicApe/cygwin/home/bananas/UwAmp/bin/apache/conf/httpd.conf:264
+[Wed Feb 10 17:49:39.900381 2016] [ssl:warn] [pid 5784:tid 588] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed Feb 10 17:49:39.941420 2016] [mpm_winnt:notice] [pid 5784:tid 588] AH00354: Child: Starting 64 worker threads.
+[Wed Feb 10 17:50:52.055254 2016] [mpm_winnt:crit] [pid 5784:tid 588] AH02538: Child: Parent process exited abruptly. Child process is ending

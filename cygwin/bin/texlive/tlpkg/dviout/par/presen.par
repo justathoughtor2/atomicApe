@@ -1,0 +1,21 @@
+;#j プレゼンテーション・モード（編集して使う）
+;# Go to Presentation mode (Edit the following)
+;;       Go to Presentation mode
+;; Cltl+L or Shift+F2 to quit from the mode
+
+; Black background and white letters
+;Set=N2
+
+; Cover sheet
+;Set=NF	;         Off
+;Set=NO	;         On
+;Set=NP	;         On for Pause
+
+; Use mouse button of mouse for [Space]
+;Set=NL ;         Left button
+;Set=NR ;         Right button
+
+;  Choose one from the following three types
+;Set=!A!Zdy!pdl	; Seamless pages
+;Set=!A!Z!pdf   ; Fit mode
+Set=!A!Z!pdl   ; Full mode

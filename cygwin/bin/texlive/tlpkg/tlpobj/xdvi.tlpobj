@@ -1,0 +1,26 @@
+name xdvi
+category TLCore
+revision 37078
+shortdesc A DVI previewer for the X Window System.
+longdesc The canonical previewer for use on Unix and other X-windows
+longdesc based systems. The distribution has been integrated with that
+longdesc of xdvik (no longer separately available), so that it will
+longdesc build with web2c "out of the box". In practice, it is usually
+longdesc distributed via Tex-live.
+depend xdvi.ARCH
+containersize 6836
+containermd5 0d66ffa281d713e3395ee0f5db93c9bd
+doccontainersize 154468
+doccontainermd5 11ef916e02ea589fb1e28b856e837628
+docfiles size=65
+ texmf-dist/doc/man/man1/xdvi.1
+ texmf-dist/doc/man/man1/xdvi.man1.pdf
+runfiles size=9
+ texmf-dist/dvips/xdvi/config.xdvi
+ texmf-dist/xdvi/XDvi
+ texmf-dist/xdvi/pixmap/toolbar.xpm
+ texmf-dist/xdvi/pixmap/toolbar2.xpm
+catalogue-ctan /dviware/xdvi
+catalogue-date 2014-04-22 11:35:25 +0200
+catalogue-license other-free
+catalogue-version 22.87

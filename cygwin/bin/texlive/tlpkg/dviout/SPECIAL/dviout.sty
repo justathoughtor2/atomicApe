@@ -1,0 +1,412 @@
+%
+% This package automatically buries specials for dviout.
+% Copyright(C) by Yoshiki OTOBE.
+% Needs dviout version 3.11(after beta 7) or later.
+% After dviout version 3.11.4, you can use all the features.
+%
+% The following commands have effects only if [each] option is specified.
+% \putdvioutspecials
+%   puts \specials specified in this packages will put at the top.
+%   This is the default.
+% \noputdvioutspecials
+%   will no longer put dviout specials.
+%
+% Definition:(auto dviout special)
+% We call the specials which will be embedded by this macro package
+% "auto dviout special".
+% For example, paper size option is an auto dviout special.
+%
+%
+% You can freely modify this package to add new specials.
+% Please be careful about not to lose generality.
+% Of course you can freely re-distribute this file.
+%
+% 2000/03/03
+% add \SetOption and \SetLocalOption commands to set dviout up.
+% e.g. \SetOption{ftt}{.\ttfonts.map}
+%      \SetOption{TEXPK}{q:\\^s.^dpk}
+% *** supported from version 1.4.
+%
+% 2000/09/05:
+% * keep up with dviout supporting dvips' papersize special.
+%   ** \usepackage[dvips]{dviout}  :: use \special{papersize=...}
+%   ** \usepackage{dviout}         :: use \special{dviout -y=A4P} and so on.
+%   ** dviout also supports \special{papersize=A4L} etc., it is, however
+%      NOT supported from this macro package.
+% * supports dviout's initializing special.
+%  After dviout 3.11.4, it supports a initializing special.
+%  When it finds "\special{dviout ...}" at the top of dvi, it is ensured
+%  that the special is run even if you start dviout from any page.
+%   ** \usepackage[each]{dviout}   :: put dviout special
+%      (currently only papersize special is supported) at each top of
+%      the page. This is safe for dviout 3.11
+%   ** \usepackage[top]{dviout}    :: default of current distribution.
+%      put dviout special only at the top of dvi file.
+%   ** \usepackage[nopaper]{dviout} :: paper size option will not be
+%      inserted.
+% * supports some \special put automatically on each page.
+%   ** \SPECIAL{xxx}
+%      \special{xxx} will be executed at the each page.
+% * supports message window
+%   ** \ShowInfo{title}{sentense}
+%      the ``sentense'' will be shown in the message window which
+%      will appear at the bottom of dviout's window.
+%      you may use \\ to line break (only in the 2nd argument).
+%      e.g., \ShowInfo{memo}{Remark (1) is true.\\Now 5 minutes??}
+%   ** \Question{title}{question}{yes}{no}
+%      You will see a small dialog box on the desktop.
+%      The ``title'' is shown on the title bar,
+%      the ``question'' is shown on the main body,
+%      and [YES] [NO] button will appear.
+%      You may use ``\\'' for line-breaking in the 2nd argument.
+%      When a document reader select [Yes],
+%      \special{dviout ``yes''} will be executed.
+%      Otherwise, \special{dviout ``no''} will be executed.
+%      e.g., \Question{direction}{Landscape?}{-y=A4L fn}{-y=A4P fn}
+%   ** ``title'' may be empty.
+%      In case \ShowInfo, the default is [Information from DVI file].
+%      When \question-ing, it is [Select [Y] or [N]]
+% * add utility macros
+%   ** \def\SetTEXROOT{\SetOption{TEXROOT}}
+%   ** \def\SetTEXPK{\SetOption{TEXPK}}
+%   ** \def\SetMapFile{\SetOption{ftt}}
+%   ** e.g.,
+%      \SetTEXROOT{^F\^s.tfm;^x\\^s.^dpk}
+% * supports local settings.
+%   ** \SetLocalOption{parameter}{settings}
+%      is now supported.
+%      This shall be used in a group and you can use only once in a
+%      group (nesting shall not be allowed, since dviout keep only one
+%      parameter. When you exit from the group, the parameter is
+%      automatically restored.
+%
+% 2000/09/09
+% * fix a bug in \SetOption
+%   ** \SetOption only put \special{dviout ...} at the top of the dvi file,
+%      which will no longer read if one opens it by 2nd or after page.
+%      Now changed to \special{dviout `initialize ...}
+% * supports adding a path to an optional setting
+%   ** \AppendOption is provided.
+%      Assume that current TEXPK=\\^s.^dpk.
+%      \AppendOption{TEXPK}{^F\^s.pk;} -> TEXPK=^F\^s.pk;\\^s.^dpk
+%      \AppendOption{TEXPK}{;^F\^s.pk} -> TEXPK=\\^s.^dpk;^F\^s.pk
+%      Notice that the position of the semi-colon is important.
+%      If there is no semi-colon at the top or bottom of the argument,
+%      this package never reports a warning or an error, which will only
+%      be ignored by dviout.
+%      It is only allowed to TEXPK, TEXFONTS, TEXKNJ and gdat.
+%      \AppendTEXPK is identical to \AppendOption{TEXPK}.
+%
+% 2001/05/23
+% * append options a4j, a5j, etc.
+% * default paper size option will be embeded in dvips style
+%   (this has dviout to select "User Defined")
+%   nodvips option makes dviout's style.
+% * remove "beta" logo.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{dviout}[2001/05/23 v1.4]
+\newif\if@put@dviout@eachpage \@put@dviout@eachpagefalse
+\newif\if@dvips@specials \@dvips@specialsfalse
+\newif\if@put@paper \@put@papertrue
+\DeclareOption{each}{\@put@dviout@eachpagetrue}
+\DeclareOption{top}{\@put@dviout@eachpagefalse}
+\DeclareOption{dvips}{\@dvips@specialstrue}
+\DeclareOption{nodvips}{\@dvips@specialsfalse}
+\DeclareOption{nopaper}{\@put@paperfalse}
+
+\newif\if@emode \@emodefalse
+\ifx\c@@paper\@undefined
+  \newcounter{@paper}
+  \expandafter\expandafter\expandafter\newif\expandafter\csname if@landscape\endcsname \@landscapefalse
+  \@emodetrue
+\fi
+\newif\if@putspecial\@putspecialtrue
+\DeclareOption{a4paper}{\setcounter{@paper}{1}}
+\DeclareOption{a5paper}{\setcounter{@paper}{2}}
+\DeclareOption{b4paper}{\setcounter{@paper}{3}}
+\DeclareOption{b5paper}{\setcounter{@paper}{4}}
+\DeclareOption{a4j}{\setcounter{@paper}{1}}
+\DeclareOption{a5j}{\setcounter{@paper}{2}}
+\DeclareOption{b4j}{\setcounter{@paper}{3}}
+\DeclareOption{b5j}{\setcounter{@paper}{4}}
+\DeclareOption{a4p}{\setcounter{@paper}{1}}
+\DeclareOption{a5p}{\setcounter{@paper}{2}}
+\DeclareOption{b4p}{\setcounter{@paper}{3}}
+\DeclareOption{b5p}{\setcounter{@paper}{4}}
+\DeclareOption{letterpaper}{\setcounter{@paper}{5}}
+\DeclareOption{legalpaper}{\setcounter{@paper}{6}}
+\DeclareOption{executivepaper}{\setcounter{@paper}{7}}
+\DeclareOption{landscape}{\@landscapetrue}
+\DeclareOption{draft}{\@putspecialfalse}
+\DeclareOption{final}{\@putspecialtrue}
+%
+\if@emode
+  \ExecuteOptions{top,dvips,letterpaper}
+\else
+  \ExecuteOptions{top,dvips,a4paper}
+\fi
+\ProcessOptions\relax
+
+\if@put@dviout@eachpage
+  \RequirePackage{ophook}
+  \let\@put@special\AtOutput
+\else
+  \let\@put@special\AtBeginDvi
+\fi
+%
+%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Paper Size special. Put always.
+%% Put them even if draft option is specified.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\if@dvips@specials %% use \special{papersize=...,...}
+  \ifcase\c@@paper
+    \or% 1:A4
+      \if@landscape
+        \@put@special{\special{papersize=297mm,210mm}}
+      \else
+        \@put@special{\special{papersize=210mm,297mm}}
+      \fi
+    \or% 2:A5
+      \if@landscape
+        \@put@special{\special{papersize=210mm,149mm}}
+      \else
+        \@put@special{\special{papersize=149mm,210mm}}
+      \fi
+    \or% 3:B4
+      \if@landscape
+        \if@emode
+          \@put@special{\special{papersize=353mm,250mm}}
+        \else
+          \@put@special{\special{papersize=364mm,257mm}}
+        \fi
+      \else
+        \if@emode
+          \@put@special{\special{papersize=250mm,353mm}}
+        \else
+          \@put@special{\special{papersize=257mm,364mm}}
+        \fi
+      \fi
+    \or% 4:B5
+      \if@landscape
+        \if@emode
+          \@put@special{\special{papersize=250mm,176mm}}
+        \else
+          \@put@special{\special{papersize=257mm,182mm}}
+        \fi
+      \else
+        \if@emode
+          \@put@special{\special{papersize=176mm,250mm}}
+        \else
+          \@put@special{\special{papersize=182mm,257mm}}
+        \fi
+      \fi
+    \or% 5:Letter
+      \if@landscape
+        \@put@special{\special{papersize=11in,8.5in}}
+      \else
+        \@put@special{\special{papersize=8.5in,11in}}
+      \fi
+    \or% 6:Legal
+      \if@landscape
+        \@put@special{\special{papersize=14in,8.5in}}
+      \else
+        \@put@special{\special{papersize=8.5in,14in}}
+      \fi
+    \or% 7:Executive
+      \if@landscape
+        \@put@special{\special{papersize=10.5in,7.25in}}
+      \else
+        \@put@special{\special{papersize=7.25in,10.5in}}
+      \fi
+    \else% other size
+  \fi
+\else   %% use \special{dviout -y=...}
+  \ifcase\c@@paper
+    \or% 1:A4
+      \if@landscape
+        \@put@special{\special{dviout -y=A4L}}
+      \else
+        \@put@special{\special{dviout -y=A4P}}
+      \fi
+    \or% 2:A5
+      \if@landscape
+        \@put@special{\special{dviout -y=A5L}}
+      \else
+        \@put@special{\special{dviout -y=A5P}}
+      \fi
+    \or% 3:B4
+      \if@landscape
+        \if@emode
+          \@put@special{\special{dviout -y=E4L}}
+        \else
+          \@put@special{\special{dviout -y=B4L}}
+        \fi
+      \else
+        \if@emode
+          \@put@special{\special{dviout -y=E4P}}
+        \else
+          \@put@special{\special{dviout -y=B4P}}
+        \fi
+      \fi
+    \or% 4:B5
+      \if@landscape
+        \if@emode
+          \@put@special{\special{dviout -y=E5L}}
+        \else
+          \@put@special{\special{dviout -y=B5L}}
+        \fi
+      \else
+        \if@emode
+          \@put@special{\special{dviout -y=E5P}}
+        \else
+          \@put@special{\special{dviout -y=B5P}}
+        \fi
+      \fi
+    \or% 5:Letter
+      \if@landscape
+        \@put@special{\special{dviout -y=LetterL}}
+      \else
+        \@put@special{\special{dviout -y=LetterP}}
+      \fi
+    \or% 6:Legal
+      \if@landscape
+        \@put@special{\special{dviout -y=LegalL}}
+      \else
+        \@put@special{\special{dviout -y=LegalP}}
+      \fi
+    \or% 7:Executive
+      \if@landscape
+        \@put@special{\special{dviout -y=ExecutiveL}}
+      \else
+        \@put@special{\special{dviout -y=ExecutiveP}}
+      \fi
+    \else% other size
+  \fi
+\fi
+
+\if@put@dviout@eachpage
+  \let\putdvioutspecials\h@@koutput
+  \let\noputdvioutspecials\unh@@koutput
+  \putdvioutspecials
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Auto settings for dviout
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcounter{@dviout@option}
+\begingroup
+  \catcode`\^=12
+  \catcode`|=0
+  \catcode`\\=12
+  |gdef|@set@option#1{%
+    |expandafter|xdef|csname @dviout@option|the|c@@dviout@option|endcsname{%
+      |special{|csname @dviout@option|the|c@@dviout@option|endcsname#1}%
+    }%
+    |begingroup
+    |aftergroup|endgroup
+    |if@local@option
+      |csname @dviout@option|the|c@@dviout@option|endcsname
+    |else
+      |expandafter|AtBeginDvi     %% 2000/09/05
+        |csname @dviout@option|the|c@@dviout@option|endcsname
+%      |h@@koutput %% remove 2000/09/05
+    |fi
+    |endgroup
+    |global|advance|c@@dviout@option1%
+  }%
+|endgroup
+
+\def\SetOption#1{% put an Option setting on each page after the command.
+  \expandafter\xdef\csname @dviout@option\the\c@@dviout@option\endcsname{%
+    dviout `initialize -#1=%
+  }%
+  \@local@optionfalse
+  \begingroup
+  \catcode`|=0
+  \catcode`\\=12
+  \@set@option% Why \set@option?  Why |@set@option fails?
+  %% maybe...   \@set@option is read by TeX when \def is read.
+  %% At that time, TeX doesn't evaluate the commands.
+  %% He only classifies, i.e., \catcode... is not interpreted,
+  %% but he know \@set@option is a control sequence.
+  %% Is this true?                                 2000/09/05
+}
+\@onlypreamble\SetOption
+
+\def\AppendOption#1{% put an Option setting on each page after the command.
+  \expandafter\xdef\csname @dviout@option\the\c@@dviout@option\endcsname{%
+    dviout `initialize +#1=%
+  }%
+  \@local@optionfalse
+  \begingroup
+  \catcode`|=0
+  \catcode`\\=12
+  \@set@option
+}
+\@onlypreamble\SetOption
+
+\newif\if@local@option \@local@optionfalse
+\def\SetLocalOption#1{% put an Option (only) there.
+  \if@local@option
+    \PackageError{dviout}{You can use \string\SetLocalOption{}
+    only once in a group!}{Give up using it.}%
+  \fi
+  \@local@optiontrue
+  \special{dviout `keep #1}%
+  \expandafter\xdef\csname @dviout@option\the\c@@dviout@option\endcsname{%
+    dviout -#1=%
+  }%
+  \aftergroup\@restore@param
+  \aftergroup\@local@optionfalse
+  \begingroup
+  \catcode`|=0
+  \catcode`\\=12
+  \@set@option
+}
+
+\def\@restore@param{\special{dviout `restore}}
+
+\def\SetTEXROOT{\SetOption{TEXROOT}}
+\def\SetTEXPK{\SetOption{TEXPK}}
+\def\AppendTEXPK{\AppendOption{TEXPK}}
+\def\SetMapFile{\SetOption{ftt}}
+\@onlypreamble\SetTEXROOT
+\@onlypreamble\SetTEXPK
+\@onlypreamble\AppendTEXPK
+\@onlypreamble\SetMapFile
+
+
+\def\SPECIAL#1{%
+  \expandafter\xdef\csname @dviout@option\the\c@@dviout@option\endcsname{%
+    \special{dviout `initialize page `sp #1}%
+  }%
+  \expandafter\AtBeginDvi     %% 2000/09/05
+    \csname @dviout@option\the\c@@dviout@option\endcsname
+  \global\advance\c@@dviout@option1%
+}
+\@onlypreamble\SPECIAL
+
+\def\ShowInfo#1#2{%
+  \begingroup
+  \def\\{`'}%
+  \edef\@null@word{}%
+  \edef\@check@word{#1}%
+  \ifx\@check@word\@null@word\def\@check@word{Information from DVI file}\fi
+  \special{dviout `message `'\@check@word`'#2'`}%
+  \endgroup
+}
+
+\def\Question#1#2#3#4{%
+  \begingroup
+  \def\\{`'}%
+  \edef\@null@word{}%
+  \edef\@check@word{#1}%
+  \ifx\@check@word\@null@word\def\@check@word{Select [Y] or [N]}\fi
+  \special{dviout `ask `'\@check@word`'#2'` `yes #3 `no #4}%
+  \endgroup
+}
+
+\endinput

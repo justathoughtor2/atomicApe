@@ -1,0 +1,158 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ophook}[2000/03/03 v1.1]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%               INTERFACE MACROS            %%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \@outputpageh@@kA
+%   called before letting \protect \noexpand.
+%   remark that \protect has tree states, \noexpand\protect\noexpand,
+%   \relax and \string except \@outputpage.
+%   after \let-ting, let ^^M and " "(space) space(\@resetactivechars),
+%   and restore paragraph parameters(\@parboxrestore),
+%   and starts \shipout
+% \@outputpageh@@kB
+%   called just before putting box in dvi file,
+%   but after \vskip-ing \topmargin and \moveright-ing the left margin.
+% \@outputpageh@@kC
+%   called just before putting page components
+%   (header, \headsep, \@outputbox, \footskip, footer).
+%   it is the top of the page box.
+% \@outputpageh@@kD
+%   called just before finishing putting page components in the box.
+%   (bottom of the page box)
+% \@outputpageh@@kE
+%   called just after creating page box but still in the dvi-file.
+%   (just before exiting \shipout routine.)
+% \@outputpageh@@kF
+%   called just after putting out dvi-file.
+%   also just before stepping "page" counter and letting \firstmark \botmark.
+% \@outputpageh@@kG
+%   called just before finishing \@outputpage routine.
+%
+\ifx\@outputpageh@@kA\@undefined
+  \let\@outputpageh@@kA\empty
+\fi
+\ifx\@outputpageh@@kB\@undefined
+  \let\@outputpageh@@kB\empty
+\fi
+\ifx\@outputpageh@@kC\@undefined
+  \let\@outputpageh@@kC\empty
+\fi
+\ifx\@outputpageh@@kD\@undefined
+  \let\@outputpageh@@kD\empty
+\fi
+\ifx\@outputpageh@@kE\@undefined
+  \let\@outputpageh@@kE\empty
+\fi
+\ifx\@outputpageh@@kF\@undefined
+  \let\@outputpageh@@kF\empty
+\fi
+\ifx\@outputpageh@@kG\@undefined
+  \let\@outputpageh@@kG\empty
+\fi
+\def\AtOutput{\g@addto@macro\@outputpageh@@kC}
+\@onlypreamble\AtOutput
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Use \AtOutput to add a special at the top of the each page.
+% You can use it to put any command.
+% However, like the following, use \special to add a dviout special.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                          THE TRICK CODE.                      %%%
+%%%                           DON'T MODIFY                        %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtoks\tokstemp
+\newtoks\toksone
+\newtoks\tokstwo
+\newtoks\toksthree
+\newtoks\toksfour
+\newtoks\toksfive
+\newbox\tempb@x
+\newdimen\temp@ht
+\newdimen\temp@wd
+\newif\if@outputpage@hooked \@outputpage@hookedfalse
+\newif\if@reh@@king \@reh@@kingfalse % necessary?
+\let\saved@@outputpage\@outputpage
+\def\unh@@koutput{%
+  \let\@outputpage\saved@@outputpage
+}
+
+\def\h@@koutput{%
+  \if@outputpage@hooked\if@reh@@king\else
+    \reh@@koutput\fi
+  \else
+    \begingroup
+    \tokstemp=\expandafter{\@outputpage\@noticeend}
+    \long\def\parse@outputpage##1\vbox##2##3\@noticeend{%
+      \def\part@@one{##1}%
+      \def\part@@two{##2}%
+      \def\part@@three{##3}%
+    }%
+    \expandafter\parse@outputpage\the\tokstemp
+    \let\part@one=\part@@one
+    \let\part@five=\part@@three
+    \tokstemp=\expandafter{\part@@two\@noticeend}%
+    \expandafter\parse@outputpage\the\tokstemp
+    \let\part@two=\part@@one
+    \let\part@three=\part@@two
+    \let\part@four=\part@@three
+    \toksone=\expandafter{\part@one}%
+    \tokstwo=\expandafter{\part@two}%
+    \toksthree=\expandafter{\part@three}%
+    \toksfour=\expandafter{\part@four}%
+    \toksfive=\expandafter{\part@five}%
+    \let\@outputpageh@@kA\relax
+    \let\@outputpageh@@kB\relax
+    \let\@outputpageh@@kC\relax
+    \let\@outputpageh@@kD\relax
+    \let\@outputpageh@@kE\relax
+    \let\@outputpageh@@kF\relax
+    \let\@outputpageh@@kG\relax
+    \xdef\@outputpage{%
+      \@outputpageh@@kA
+      \the\toksone
+      \noexpand\vbox{%
+        \the\tokstwo
+        \@outputpageh@@kB
+        \noexpand\vbox{%
+          \@outputpageh@@kC
+          \the\toksthree
+          \@outputpageh@@kD
+        }%
+        \@outputpageh@@kE
+        \the\toksfour
+      }%
+      \@outputpageh@@kF
+      \the\toksfive
+      \@outputpageh@@kG
+    }%
+    \endgroup
+    \@outputpage@hookedtrue
+  \fi
+}
+
+\def\reh@@koutput{%
+  \unh@@koutput
+  \begingroup
+  \let\@outputpageh@@kA\relax
+  \let\@outputpageh@@kB\relax
+  \let\@outputpageh@@kC\relax
+  \let\@outputpageh@@kD\relax
+  \let\@outputpageh@@kE\relax
+  \let\@outputpageh@@kF\relax
+  \let\@outputpageh@@kG\relax
+  \@reh@@kingtrue
+  \h@@koutput
+  \endgroup
+  \@reh@@kingfalse
+}
+
+% Please tell me (otobe@ms.u-tokyo.ac.jp) a macro package or a macro
+% command that doesn't work with this package if you find.
+\ifx\fb@outputpage\@undefined\else
+  \@latex@warning@no@line{You cannot use this package with fancy page}%
+\fi

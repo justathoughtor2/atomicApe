@@ -1,0 +1,8 @@
+;#j dvipdfm(x) によって PDF ファイルに変換（dviprt 機能での印刷）
+;# Transform into a PDF file by dvipdfm
+;;       Transform into a PDF file by dvipdfm
+;;  Paper size A3/4/5/6, B3/4/5/6, Letter, Legal, Landscape
+;;  Offset OX, OY
+;;  Pages to be transformed
+dviprt='dvipdfm^X{x}.exe ^w -s ^a-^b \"^q\"^Y{;\"^d.pdf\"}^z^{dvipdfm&x}^{View PDF &?}Make PDF by dvipdfm(x)'
+Set=fd

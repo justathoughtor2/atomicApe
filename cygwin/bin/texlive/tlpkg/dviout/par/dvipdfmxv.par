@@ -1,0 +1,9 @@
+;#j dvipdfmx によってPDF ファイルに変換（日本語可）
+;# Transform into a PDF file by dvipdfmx
+;;       Transform into a PDF file by dvipdfmx
+;;  Paper size A3/4/5/6, B3/4/5/6, Letter, Legal, Landscape
+;;  Offset OX, OY
+;;  Pages to be transformed
+;;  
+dviprt='dvipdfmx ^w -s ^a-^b ^X{-S} "^q"^Y{;"^d.pdf"}^z^{encryption&1}^{View PDF &?}Make PDF by dvipdfmx'
+Set=fd

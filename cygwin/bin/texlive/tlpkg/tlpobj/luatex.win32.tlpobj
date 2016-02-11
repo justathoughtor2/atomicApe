@@ -1,0 +1,18 @@
+name luatex.win32
+category TLCore
+revision 37692
+shortdesc win32 files of luatex
+containersize 3113828
+containermd5 9b106d38b27e2fc04e5de5af75092613
+binfiles arch=win32 size=3947
+ bin/win32/dviluatex.exe
+ bin/win32/lua52.dll
+ bin/win32/luajit51.dll
+ bin/win32/luajittex.dll
+ bin/win32/luajittex.exe
+ bin/win32/luatex.dll
+ bin/win32/luatex.exe
+ bin/win32/texlua.exe
+ bin/win32/texluac.exe
+ bin/win32/texluajit.exe
+ bin/win32/texluajitc.exe

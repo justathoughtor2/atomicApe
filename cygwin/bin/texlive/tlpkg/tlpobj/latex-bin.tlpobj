@@ -1,0 +1,20 @@
+name latex-bin
+category TLCore
+revision 39620
+shortdesc LaTeX executables and man pages.
+depend latex
+depend latex-bin.ARCH
+execute AddFormat name=latex engine=pdftex           patterns=language.dat           options="-translate-file=cp227.tcx *latex.ini"           fmttriggers=babel,cm,hyphen-base,latex,latexconfig,latex-fonts,pdftex
+execute AddFormat name=pdflatex engine=pdftex           patterns=language.dat           options="-translate-file=cp227.tcx *pdflatex.ini"           fmttriggers=babel,cm,hyphen-base,latex,latexconfig,latex-fonts,pdftex
+execute AddFormat name=dvilualatex engine=luatex           patterns=language.dat,language.dat.lua           options="dvilualatex.ini"           fmttriggers=babel,cm,hyphen-base,latex,latexconfig,latex-fonts,pdftex,unicode-data
+execute AddFormat name=lualatex engine=luatex           patterns=language.dat,language.dat.lua           options="lualatex.ini"           fmttriggers=babel,cm,hyphen-base,latex,latexconfig,latex-fonts,pdftex,unicode-data
+execute AddFormat name=luajitlatex mode=disabled engine=luajittex           patterns=language.dat,language.dat.lua           options="lualatex.ini"           fmttriggers=babel,cm,hyphen-base,latex,latexconfig,latex-fonts,pdftex,cslatex,unicode-data
+containersize 492
+containermd5 65b10a74ea3c231373809f4d4b58e65a
+doccontainersize 19536
+doccontainermd5 b1da9b83ffba7baeb87f3c4324bc6ec8
+docfiles size=9
+ texmf-dist/doc/man/man1/latex.1
+ texmf-dist/doc/man/man1/latex.man1.pdf
+ texmf-dist/doc/man/man1/pdflatex.1
+ texmf-dist/doc/man/man1/pdflatex.man1.pdf

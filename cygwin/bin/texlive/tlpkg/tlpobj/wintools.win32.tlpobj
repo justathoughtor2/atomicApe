@@ -1,0 +1,69 @@
+name wintools.win32
+category TLCore
+revision 37294
+shortdesc Utilities provided only for Windows.
+longdesc Common utilities, mainly from the w32tex distribution.
+postaction filetype name="TL.bitmap2eps.convert"  cmd='"TEXDIR/bin/win32/bitmap2eps.exe" "%1"'
+postaction progid extension=.bmp filetype="TL.bitmap2eps.convert"
+postaction progid extension=.png filetype="TL.bitmap2eps.convert"
+postaction progid extension=.gif filetype="TL.bitmap2eps.convert"
+postaction progid extension=.jpg filetype="TL.bitmap2eps.convert"
+postaction progid extension=.jpe filetype="TL.bitmap2eps.convert"
+postaction progid extension=.jpeg filetype="TL.bitmap2eps.convert"
+postaction progid extension=.tif filetype="TL.bitmap2eps.convert"
+postaction progid extension=.tiff filetype="TL.bitmap2eps.convert"
+containersize 2307188
+containermd5 c19e0764a5fa617310d7a9d7573299a3
+doccontainersize 3745304
+doccontainermd5 d54d643cd622aba5620d4ee84bd635c2
+docfiles size=980
+ texmf-dist/doc/support/wintools/gzip.pdf
+ texmf-dist/doc/support/wintools/install-xpdf-data
+ texmf-dist/doc/support/wintools/pdfdetach.pdf
+ texmf-dist/doc/support/wintools/pdffonts.pdf
+ texmf-dist/doc/support/wintools/pdfimages.pdf
+ texmf-dist/doc/support/wintools/pdfinfo.pdf
+ texmf-dist/doc/support/wintools/pdftohtml.pdf
+ texmf-dist/doc/support/wintools/pdftopng.pdf
+ texmf-dist/doc/support/wintools/pdftoppm.pdf
+ texmf-dist/doc/support/wintools/pdftops.pdf
+ texmf-dist/doc/support/wintools/pdftotext.pdf
+ texmf-dist/doc/support/wintools/unzip.pdf
+ texmf-dist/doc/support/wintools/xpdfrc.pdf
+ texmf-dist/doc/support/wintools/xpdfutil-install.txt
+ texmf-dist/doc/support/wintools/xpdfutil-supp.zip
+ texmf-dist/doc/support/wintools/zip.pdf
+runfiles size=1
+ texmf-dist/scripts/bitmap2eps/bitmap2eps.vbs
+binfiles arch=win32 size=3202
+ bin/win32/aftopl.exe
+ bin/win32/bitmap2eps.exe
+ bin/win32/bmeps.exe
+ bin/win32/bmp2png.exe
+ bin/win32/cjpeg.exe
+ bin/win32/djpeg.exe
+ bin/win32/gunzip.exe
+ bin/win32/gzip.exe
+ bin/win32/jbig2.exe
+ bin/win32/luajitlatex.exe
+ bin/win32/pdfdetach.exe
+ bin/win32/pdffonts.exe
+ bin/win32/pdfimages.exe
+ bin/win32/pdfinfo.exe
+ bin/win32/pdftohtml.exe
+ bin/win32/pdftopng.exe
+ bin/win32/pdftoppm.exe
+ bin/win32/pdftops.exe
+ bin/win32/pdftotext.exe
+ bin/win32/png22pnm.exe
+ bin/win32/png2bmp.exe
+ bin/win32/sam2p.exe
+ bin/win32/texview.exe
+ bin/win32/tif22pnm.exe
+ bin/win32/tiff2png.exe
+ bin/win32/todos.exe
+ bin/win32/tomac.exe
+ bin/win32/tounix.exe
+ bin/win32/type1afm.exe
+ bin/win32/unzip.exe
+ bin/win32/zip.exe

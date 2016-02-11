@@ -1,0 +1,25 @@
+name pspicture
+category Package
+revision 15878
+shortdesc PostScript picture support.
+longdesc A replacement for LaTeX's picture macros, that uses PostScript
+longdesc \special commands. The package is now largely superseded by
+longdesc pict2e.
+containersize 1780
+containermd5 42b94b904f2ec5ea032c795b22f8bed7
+doccontainersize 42648
+doccontainermd5 513069318e9d5a6ca1c3ceed5b8e46a2
+docfiles size=18
+ texmf-dist/doc/latex/pspicture/README details="Package Readme"
+ texmf-dist/doc/latex/pspicture/pspicture.pdf details="Package documentation"
+srccontainersize 6040
+srccontainermd5 0d634dd932f20ad37f34ab2a3c0a9ba1
+srcfiles size=6
+ texmf-dist/source/latex/pspicture/pspicture.dtx
+ texmf-dist/source/latex/pspicture/pspicture.ins
+runfiles size=2
+ texmf-dist/dvips/pspicture/pspicture.ps
+ texmf-dist/tex/latex/pspicture/pspicture.sty
+catalogue-ctan /macros/latex/contrib/pspicture
+catalogue-date 2012-07-23 15:04:13 +0200
+catalogue-license lppl

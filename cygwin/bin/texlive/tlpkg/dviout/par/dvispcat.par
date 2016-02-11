@@ -1,0 +1,5 @@
+;#j DVI ファイルの preamble の部分を表示する
+;# Show preamble of DVI file
+;;   Show preamble of DVI file by notepad
+dviprt='dvispc -avlpT "^d" ^X{-v} ^Y{-t} ^t;notepad ^t^Z^{verbose&1}^{DLT&?}Show preamble of DVI file; by notepad'
+Set=fd

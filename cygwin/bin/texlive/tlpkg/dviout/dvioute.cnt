@@ -1,0 +1,473 @@
+:Base dvioute.HLP
+:Title dviout
+1 Contents=CONTENTS
+1 Outline
+2 Specifications=IDH_SHIYOU
+2 Distribution=IDH_HAIFU
+2 dviout User's Group=IDH_USERSCLUB
+2 Known Problems=IDH_BUGS
+2 Attached Programs=IDH_FUZOKU
+2 Supplement=IDH_THANKS
+2 Uninstall=IDH_UNINSTALL
+2 Preview=IDH_PREVIEW
+2 HyperTeX=IDH_EHYPERTEX
+2 String Copy=IDH_PICKSTRING
+2 String Search=IDH_ESEARCH
+2 Presentation Mode
+2 Presentation Mode=IDH_PRESENTATION
+3 cover sheet=IDH_COVER
+3 pause specials=IDH_PAUSE
+3 key/mouse=IDH_PRESENKEY
+2 Embedding into DVI file
+3 Embedding into DVI file=IDH_IMBED
+3 Extended DVI file=IDH_DVIEXT
+3 tar file=IDH_TAR
+3 dviout specials=IDH_DVIOUTSP
+3 source specials=IDH_SRCSPECIAL
+3 Font/Image Embedding=IDH_ETF
+2 Move
+3 Move within the file=IDH_MOVE
+3 Move to other files=IDH_FILES
+3 Jump by giving Page Number=IDH_INPUTPAGE
+2 Printing
+2 Printing
+3 Print Dialog=IDH_PRINT
+3 Page selection
+4 Page selection=IDH_PSELECTION
+3 Page Option
+4 Page Option=IDH_PAGEOPTION
+4 Page Macro=IDH_PAGEMACRO
+3 Number of Copies Specification
+4 Number of Copies Specification=IDH_PCOPY
+3 Dual Page Printing
+4 Dual Page Printing=IDH_FUKUROPRT
+4 Examples Using Printing Options=IDH_OPTPRINT
+3 Page Printing Order
+4 Page Printing Order=IDH_PORDER
+3 Reduce/Magnify Printing Function
+4 Reduce/Magnify Printing Function=IDH_PREDUCE
+3 Printing by dviprt
+4 Printing by dviprt=IDH_USEDVIPRT
+4 Example of -dviprt: Settings=IDH_EXAMPRT
+4 CFG File=IDH_PRTCFG
+4 LBP Driver=IDH_LBP
+4 Reading in Printer Control Codes=IDH_CTRPRT
+3 Output to Files
+4 Output to Files=IDH_PFILE
+3 Pause at Each Page Function
+4 Pause at Each Page Function=IDH_PPOSE
+3 Job Unite/Divide
+4 Job Unite/Divide=IDH_PJOB
+3 Cancel During Print Data Output
+4 Cancel During Print Data Output=IDH_POUTCANCEL
+2 Start and Exit
+2 Start and Exit
+3 Start and Exit=IDH_STARTEND
+3 no more dviout=IDH_NOMORE
+2 Link to Other Programs
+2 Link to Other Programs
+3 Link to Other Programs=IDH_OTHERP
+3 Examples Using DDE=IDH_USEDDE
+2 Install
+2 Install
+3 How to install dviout=IDH_INSTALL
+3 Setting the Resolution
+4 Setting the ResolutionIDH_SETDPI
+3 Setting the Font Path
+4 Setting the Font Path=IDH_SETPK
+4 Examples of -TEXPK: Settings=IDH_SETTEXPK
+3 Adjusting the Display Scale
+3 Adjusting the Display Scale=IDH_DISPSCALE
+3 Adjusting the Print Position
+3 Adjusting the Print Position=IDH_SETLM
+3 Associating dvi files to dviout
+3 Associating dvi files to dviout=IDH_EXTDVI
+3 Automatic Parameter Installation Function
+3 Automatic Parameter Installation Function=IDH_PARAINST
+1 User Interface
+1 User Interface=IDH_USERINTERF
+2 Menu Bar
+2 Menu Bar
+3 Menu Bar=IDH_MENU
+3 File Menu=IDH_FILEMENU
+3 Jump Menu=IDH_JUMPMENU
+3 Search Menu=IDH_SEARCHMENU
+3 Display Menu=IDH_DISPLAYMENU
+3 View Menu=IDH_VIEWMWNU
+3 Presentation Menu=IDH_PRESENTATIONMENU
+3 Option Menu=IDH_OPTIONMENU
+3 Help Menu=IDH_HELPMENU
+2 Information Display
+2 Information Display
+3 Information Display=IDH_INFO
+3 Information Related to Files and Displays=IDH_INFORMATION
+3 Font Information=IDH_FONTINFO
+3 Buffer Information=IDH_BUFERINFO
+3 System Information=IDH_SYSINFO
+3 Key Function List=IDH_KEYINFO
+3 Parameter List=IDH_PARAINFO
+3 Output of Parameter Setting=IDH_PARAOUT
+3 Character Information=IDH_CHARACTER
+1 Property Sheets
+1 Property Sheets
+2 Property Sheets=IDH_PPSHEETS
+2 [CONTENTS]
+3 [CONTENTS]=IDH_PCONTENTS
+3 [Save]=IDH_PSAVE
+3 [Restore]=IDH_RESTORE
+3 [OK]=IDH_POK
+3 [Cancel]=IDH_PCANCEL
+3 [Apply]=IDH_PAPPLY
+3 [Default]=IDH_Default
+3 [Help]=IDH_PHELP
+3 current mode=IDH_PCMODE
+2 [Resolution]
+2 [Resolution]
+3 [Resolution]=IDH_PRESOLUTION
+2 [Display]
+2 [Display]
+3 [Display]=IDH_PDISPLAY
+3 gamma correction=IDH_GAMMA
+3 gray scale=IDH_GRAYSCALE
+3 HVscale=IDH_HVSCALE
+3 reverse Display=IDH_REVDISPLAY
+2 [Font]
+2 [Font]
+3 [Font]=IDH_PFONT
+3 [Guess]=IDH_GUESS
+3 Handling Nonexistent Fonts=IDH_NOFONT
+3 Font Glyph File=IDH_FONTGRIPH
+3 Font Metric File=IDH_FONTMETRIC
+3 tfm File=IDH_TFM
+3 jfm File=IDH_JFM
+3 FLI Font Library=IDH_FLI
+3 European Language TrueType Font=IDH_TRUETYPE
+3 GTH Font Library=IDH_DTH
+3 FAR Font Library=IDH_FAR
+3 -F: Specification=IDH_FEXP
+3 Checking Fonts
+4 Checking Fonts=IDH_CHECKFONT
+4 cmr10=IDH_CMR10
+4 line10=IDH_LINE10
+4 msam10=IDH_MSAM10
+4 lcircle10=IDH_LCIRCLE10
+4 dcr10=IDH_DCR10
+4 eufm10=IDH_EUFM10
+4 min10=IDH_MIN10
+4 tmin10=IDH_TMIN10
+2 [Font2]
+2 [Font2]
+3 [Font2]=IDH_PFONT2
+3 Automatic Font Generation
+4 Automatic Font Generation=IDH_GENFONT
+4 Font Creation Template=IDH_GENFONTTMP
+2 [WinJFont]
+2 [WinJFont]
+3 [WinJFont]=IDH_PWINJFONT
+3 [WinJFont] TrueType Font=IDH_WJTRUETYPE
+3 [WinJFont] H scale=IDH_WJHSCALE
+3 [WinJFont] V scale=IDH_WJVSCALE
+3 [WinJFont] [Define]=IDH_WJDEFINE
+3 [WinJFont] [Remove]=IDH_WJREMOVE
+3 [Change Font]=IDH_CHANGEFONT
+3 [Add Font]=IDH_ADDFONT
+3 [WinJFont] jfm/tfm=IDH_WJJFM
+3 [WinJFont] Flat Type=IDH_WJHEI
+3 [WinJFont] Slanted Type=IDH_WJSHA
+3 [WinJFont] Orientation=IDH_WJMUKI
+3 [WinJFont] H position=IDH_WJHPOSITION
+3 [WinJFont] V position=IDH_WJVPOSITION
+2 [JFont2]
+2 [JFont2]
+3 [JFont2]=IDH_PJFONT2
+3 -ntt: Specification=IDH_NTTEXP
+2 [Key]
+2 [Key]
+3 [Key]=IDH_PKEY
+3 [Key] Define=IDH_KEYDEFINE
+3 [Key] Clear=IDH_KEYCLEAR
+3 [Key] Search=IDH_KEYSEARCH
+3 [Key] All Clear=IDH_KEYALLCLEAR
+3 [Key] Function=IDH_KEYFUNCTION
+3 [Key] Key=IDH_KEYKEY
+3 Key Symbol=IDH_KEYSYM
+2 [Search]
+2 [Search]=IDH_PSEARCH
+2 [HyperTeX]
+2 [HyperTeX]
+3 [HyperTeX]=IDH_PHYPERTEX
+3 HyperTeX specials=IDH_HYPERTEXSPECIAL
+2 [Common]
+2 [Common]=IDH_PLOUPE
+2 [Graphic]
+2 [Graphic]
+3 [Graphic]=IDH_PGRAPHIC
+3 tpic specials=IDH_TPICSPECIAL
+3 Image Date File
+4 Image Date File=IDH_GAZOUDATA
+4 Image Date File speicials=IDH_GSPECIALS
+4 PostScript special parameters=IDH_PSPARAMETER
+4 Example of Using PostScript special=IDH_POSTSCRIPTEX
+4 Ghostscript=IDH_GHOSTSCRIPT
+4 BMP File=IDH_BMPFILE
+2 [Printer]
+2 [Printer]=IDH_PPRINTER
+2 [Paper]
+2 [Paper]=IDH_PPAPER
+2 [System]
+2 [System]=IDH_PSYSTEM
+2 [REGISTRY]
+2 [REGISTRY]
+3 [REGISTRY]=IDH_PREGISTRY
+3 Registry=IDH_REGISTRY
+3 [Auto Load]=IDH_RROAD
+3 [Ignore]=IDH_RIGNORE
+3 [REGISTRY] List Box=IDH_REGLIST
+3 [REGISTRY] [Save]=IDH_RSAVE
+3 [REGISTRY] [Restore]=IDH_RRESTORE
+3 [REGISTRY] [All Set]=IDH_ALLSET
+3 [REGISTRY] [All Clear]=IDH_RCLEAR
+3 Selected mode
+4 Selected mode=IDH_REGMODE
+4 Current Name:=IDH_REGNAME
+4 Current mode:=IDH_REGCURRENT
+4 Default mode:=IDH_REGDEFAULT
+4 Current Print:=IDH_REGPRINT
+1 Q&A
+1 Q&A
+2 Preview
+3 Slow display of the first page=IDH_QV1
+3 Slow page move=IDH_QV2
+3 Want to reverse the direction of the page motion by the arrow of the tool bar=IDH_LUPDWN
+3 Using a button on the tool bar to go chage in Landscape style=IDH_QV10
+3 Too large or too small display scale=IDH_QV3
+3 Blurred or faint characters in the preview view=IDH_QV4
+3 Want to guarantee a preview view that is as large as possible=IDH_QV5
+3 Check for the update of the dvi file and the preview is updated to match=IDH_QV6
+3 An afterimage remains when the Loupe moves and the flickering becomes evident=IDH_QV7
+3 The display paper is too bright=IDH_BRIGHT
+3 Landscape page is displayed Portrait=IDH_QO22
+3 When magnified, colors are not assigned to the string found by the "Search"=IDH_SDPI
+3 The colors of the strings found by the "Search" are unclear and do not change=IDH_QV8
+3 String copy changes symbols to strange characters=IDH_SFONT
+3 Faint colors appear on the outlines of colored characters=IDH_QV9
+3 Preview window flickers by scrolling=IDH_QV15
+3 How to display the outline of a whole page=IDH_QV11
+3 Using mouse while previewing=IDH_QV12
+3 How to know a position or a length while previewing=IDH_QV13
+3 How to prepare a dvi file for a Presentation=IDH_QPRESENT
+2 Font
+3 Font metric file and Font glyph file=IDH_FONTGRIPH
+3 Automatic font location setting=IDH_GUESS
+3 Size adjustment of the Japanese font=IDH_QF1
+3 Adjustments of the base line positions of the European fonts and Japanese fonts=IDH_QF2
+3 Use Times New Roman or non-default TrueType Japanese fonts=IDH_QF14
+3 Embed fonts into DVI file=IDH_DVIFONT
+3 What is the precedence of the Japanese fonts?=IDH_QF11
+3 Uses slanted, flat, and long fonts=IDH_QF3
+3 How to get the information of the using font?=IDH_QF13
+3 Uses the color characters=IDH_SCOLOR
+3 The font with a long name such as lcircle10 or lcirclew10 is not found=IDH_QF4
+3 The automatic generation of a nonexistent European language font=IDH_QF6
+3 Handling nonexistent fonts=IDH_NOFONT
+3 High-resolution, large fonts will be used=IDH_QF8
+3 Want to use TrueType Japanese fonts with fonts in a format of "the Shotai Club"=IDH_QF10
+3 Will TrueType Japanese fonts be used in the non-Japanese Windows=IDH_QF12
+3 A Windows Japanese font is used by NTT JTeX=IDH_QO3
+3 The Windows TrueType Japanese font settings were erased=IDH_QF9
+3 The European language TrueType display looks odd=IDH_QF5
+3 Want to use rotated strings=IDH_ROTPIC
+2 Printing
+3 Want to adjust the irregular printing positions=IDH_PPRINTER
+3 The printed sizes are irregular=IDH_QP1
+3 Printing takes too much time=IDH_QP2
+3 "Copies:" in the number of copies specification in the print dialog is disabled=IDH_PCOPY
+3 Want to print the page checked in preview or the range=IDH_QP4
+3 Preview is correct but the printing result is wrong=IDH_QP10
+3 Want to use different parameters when printing than those used during the preview=IDH_QP6
+3 What are the differences with the types of possible printing methods?=IDH_QP7
+3 Want to print by the console version dviprt or by another program=IDH_USEDVIPRT
+3 Embed the printer control codes for the built-in driver=IDH_CTRPRT
+3 The printing by the built-in dviout driver is poor=IDH_QP9
+3 Want to use TrueType Japanese fonts in printing by dviout's LBP driver=IDH_QP5
+3 What is the paper size when enlarging or reducing and printing by an LBP?=IDH_QP8
+3 Send the dviout file document by fax=IDH_FAX
+3 In a fax transmission, each page is divided into multiples parts and transmitted=IDH_PJOB
+2 Parameters
+3 The defaults are the parameters changed on the property sheet=IDH_QS1
+3 Want to use parameters during printing that differ from the parameters during previewing=IDH_QP6
+3 How to start with a different mode=IDH_MODE
+3 Output of the parameter settings=IDH_PARAOUT
+3 Parameter setting examples=IDH_SAMPLPARA
+3 Want to start without reading in the settings written in the Registry=IDH_STARTEND
+3 Want to copy the parameter settings to another computer=IDH_QS2
+3 Form of the parameters settings that can be read=IDH_QS3
+3 Want to read parameters from the file =IDH_QS4
+3 Edit function when setting or saving parameters=IDH_QS5
+3 Setting the parameters shared by different machines=IDH_QS6
+3 Want to appropriately use multiple parameter settings=IDH_QS7
+3 The parameters were changed, but did not act as expected=IDH_QS9
+3 Default parameter file is ignored=IDH_QS10
+3 Want to delete the contents of the Registry and reinstall=IDH_Q8
+3 Automatic parameter install function=IDH_PARAINST
+2 Image data
+3 Read in the image data file=IDH_GAZOUDATA
+3 specials for image data files=IDH_GSPECIALS
+3 Failure in the image display used by PostScript=IDH_QO9
+3 EPSF figure is over-clipped=IDH_GCLIP
+3 The size read in of the image data file is incorrect=IDH_QO1
+3 Color image data is handled=IDH_QO2
+3 The colors displayed for color image data are strange=IDH_QO17
+3 Displaying color images is extremely slow=IDH_GFIT
+3 Loupe doesn't zoom; display is jaggy=IDH_GFIT
+3 Parts of the lines in the image being previewed disappear=IDH_QO16
+3 Want to also use color Ghostscript images in black and white=IDH_QO14
+3 Using the LaTeX2e graphics pakage=IDH_QO18
+3 Using PSfrag package=IDH_PSFRAG
+3 tpic specials are used=IDH_TPICSPECIAL
+3 Sizes of characters or figures in WMF are strange=IDH_QO29
+3 The displayed page is saved as a EMF or BMP file etc.=IDH_QO7
+2 Operations on Windows95/98/NT
+3 dviout is registered on the desktop=IDH_QO5
+3 Prohibiting multiple dviout invocation=IDH_MULTI
+3 Associating dvi files with a suitable icon=IDH_EXTDVI
+3 Starting dviout by double-clicking on dvi files=IDH_EXTDVI
+3 dviout is used to link to another program such as an editor=IDH_OTHERP
+3 What is the current directory for dviout for Windows?=IDH_CURDIR
+3 Want to specify the dviout location as the reference in each file specification=IDH_QO21
+3 Changing dviout installation directory (folder)=IDH_QO26
+3 History of DVI files and folders=IDH_FOLDER
+3 Starting from the first/last page of a selected DVI file=IDH_FOLDER
+2 Error Messages
+3 NO_FONT: ***=IDH_QE1
+3 Unpack_Error: ***=IDH_QE2
+3 Cannot resolve Fonts=IDH_QE10
+3 Warning: Cannot find cmr10.tfm for TT Font=IDH_QE3
+3 Ghostscript generates Unknown Device error=IDH_QE4
+3 Not enough memory=IDH_QE8
+3 Since this program performs illegal processing, it is forcibly terminated =IDH_QE7
+3 The warning message window is complicated=IDH_QE9
+2 Other ploblems
+3 The result of a string search is incorrect=IDH_QE6
+3 Known problems=IDH_BUGS
+3 dviout stalls when generating fonts or starting Ghostscript=IDH_QO23
+3 dviout generates errors when startup=IDH_QO25
+3 The settings conformed to the description, but the operation was poo=IDH_QO11
+3 "Help Topics" is only displayed by keywords, and a table of contents is not output=IDH_QO13
+2 Other questions
+3 How to define a function such as the page jump to a key or a button=IDH_QO10
+3 What is the button on the tool bar with the shape of a smiley face=IDH_QO4
+3 Deleting dvi files from the history list=IDH_QO24
+3 In the TeX for Windows by Impress, dviout is used when previewing or printing=IDH_QO6
+3 What is HyperTeX?=IDH_EHYPERTEX
+3 A dvi file on the Internet is displayed by dviout=IDH_QO8
+3 Consult words or sentences by a dictionary or execute URL in a preview window=IDH_QO27
+3 What files/environment variables does dviout use=IDH_QO19
+3 What if doing Option->Install multiple times=IDH_QO20
+3 Can dviout recognize the paper size=IDH_QO22
+3 Original extensions by dviout=IDH_QO28
+3 How does dviout display a page?=IDH_QO30
+3 Want to display more information when adjusting the parameters=IDH_QO15
+3 How to extend dviout?=IDH_QO12
+3 Source Code=IDH_SOURCE
+1 Parameters
+1 Parameters
+2 List of Parameters=IDH_PARALIST
+2 Default parameters at the start=IDH_PARAMETER
+2 Example of the setting of parameters=IDH_SAMPLPARA
+2 Output the settings of parameters=IDH_PARAOUT
+2 Automatic parameters install function=IDH_PARAINST
+2 -A:=IDH_A
+2 -area:=IDH_AREA
+2 -base:=IDH_BASE
+2 -bb:=IDH_BB
+2 -bf:=IDH_BF
+2 -BM:=IDH_BM
+2 -BMP:=IDH_BMP
+2 -box:=IDH_BOX
+2 -br:=IDH_BR
+2 -bright:=IDH_BRIGHT
+2 -Browser:=IDH_BROWSER
+2 -button:=IDH_BUTTON
+2 -c:=IDH_C
+2 -cmode:=IDH_CMODE
+2 -color:=IDH_COLOR
+2 -dpi:=IDH_HDPI
+2 -dpiv:=IDH_VDPI
+2 -dviprt:=IDH_DVIPRT
+2 -e:=IDH_E
+2 -edge:=IDH_CUTEDGE
+2 -F:=IDH_F
+2 -FB:=IDH_FB
+2 -file:=IDH_FILE
+2 -Fkeep:=IDH_FKEEP
+2 -Fod:=IDH_FOD
+2 -ftt:=IDH_FTT
+2 -G:=IDH_GG
+2 -g:=IDH_G
+2 -gbox:=IDH_GBOX
+2 -gclip:=IDH_GCLIP
+2 -gdat:=IDH_GDAT
+2 -gen:=IDH_GEN
+2 -gfit:=IDH_GFIT
+2 -GIF:=IDH_GIF
+2 -gow:=IDH_GOW
+2 -GS:=IDH_GS
+2 -gsize:=IDH_GSIZE
+2 -gsrc:=IDH_GSRCSPECIAL
+2 -gsx:=IDH_GSX
+2 -hbuf:=IDH_HBUF
+2 -HC:=IDH_HC
+2 -hname:=IDH_HNAME
+2 -href:=IDH_HREF
+2 -HS:=IDH_HS
+2 -hyper:=IDH_HYPER
+2 -hyperoff:=IDH_HYPEROFF
+2 -isp:=IDH_ISP
+2 -J:=IDH_J
+2 -Jbt:=IDH_JBT
+2 -JC:=IDH_JC
+2 -Jgt:=IDH_JGT
+2 -Jfm:=IDH_IJFM
+2 -L:=IDH_PL
+2 -LM:=IDH_LM
+2 -log:=IDH_LOG
+2 -macro:=IDH_MACRO
+2 -mag:=IDH_MAG
+2 -mode:=IDH_MODE
+2 -multi:=IDH_MULTI
+2 -ntt:=IDH_NTT
+2 -nttF:=IDH_NTTF
+2 -OX:=IDH_OX
+2 -OY:=IDH_OY
+2 -renew:=IDH_RENEW
+2 -RM:=IDH_RM
+2 -S:=IDH_S
+2 -scale:=IDH_SCALE
+2 -sdpi:=IDH_SDPI
+2 -search:=IDH_SEARCH
+2 -Set:=IDH_SET
+2 -sFont:=IDH_SFONT
+2 -spi:=IDH_SPI
+2 -src:=IDH_SRC
+2 -t:=IDH_T
+2 -TEXFLI:=IDH_TEXFLI
+2 -TEXFONTS:=IDH_TEXFONTS
+2 -TEXKNJ:=IDH_TEXKNJ
+2 -TEXPK:=IDH_TEXPK
+2 -TEXPKD:=IDH_TEXPKD
+2 -TEXROOT:=IDH_PTEXROOT
+2 -TEXSUBF:=IDH_SUBFONT
+2 -texhelp:=IDH_TEXHELP
+2 -TM:=IDH_TM
+2 -tpic:=IDH_TPIC
+2 -ttf:=IDH_TTF
+2 -varf:=IDH_VARF
+2 -virtual:=IDH_VIRTUAL
+2 -VC:=IDH_VC
+2 -VS:=IDH_VS
+2 -vfn:=IDH_VFN
+2 -Wshow:=IDH_WSHOW
+2 -y:=IDH_Y
+1 Terminology
+1 Terminology=IDH_YOUGO

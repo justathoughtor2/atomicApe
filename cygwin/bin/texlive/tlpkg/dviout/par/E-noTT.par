@@ -1,0 +1,6 @@
+;#j 欧文TrueTypeフォント使用禁止
+;# Prohibit to use Europen TrueType fonts
+;;  Prohibit to use Europen TrueType fonts
+;;
+;;  PK fonts will be used
+ttf=0

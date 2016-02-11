@@ -1,0 +1,180 @@
+#!/usr/bin/env texlua
+--*-Lua-*-
+-- $Id: install-xpdf-data 37265 2015-05-08 00:47:05Z reinhardk $
+
+-- Copyright (C) 2015 Reinhard Kotucha.
+-- You may freely use, modify and/or distribute this file.
+
+kpse.set_program_name('texlua')
+
+
+local function qquote (s)
+  -- doublequote string
+  return '"'..s..'"'
+end
+
+
+local function action (s)
+  -- print message and return string with padding
+  local msg=s..' ...'
+  local done='[done]'
+  io.write(msg)
+  local padding=string.rep(' ', 77-string.len(msg)-string.len(done))
+  return string.format('%s%s', padding, done)
+end
+
+
+local function get_path (envvar)
+  -- get environment variable
+  local path=os.getenv(envvar)
+  if not path then
+    error('Environment Variable '..envvar..' not set.')
+  end
+  -- we can't use backslashes in the config file
+  path=path:gsub('\\', '/')
+  -- remove trailing slash if present
+  if path:match('/$') then path=path:gsub('/$', '') end
+  --check path
+  if not lfs.isdir(path) then
+    error('Path '..qquote(path)..' doesn\'t esist.')
+  end
+  return path
+end
+
+
+local function find_datafile (file)
+  -- locate data file
+  local format='TeX system documentation'
+  local datafile=kpse.find_file(file, format)
+  -- check
+  if not datafile then
+    error('File '..file..' not found.  Did you run mktexlsr?')
+  end
+  return datafile
+end
+
+
+local function install_data (source, targetdir)
+  -- create target directory and extract zip file
+  if not lfs.isdir (targetdir) then
+    assert(lfs.mkdir(targetdir),
+           "Can't create directory "..targetdir..': Permission denied.')
+  end
+  -- os.execute() doesn't quote arguments automatically
+  local cmd='unzip -q -o -d "'..targetdir..'" "'..source..'"'
+  local retval=os.execute(cmd)
+  if retval ~= 0 then
+    error('unzip.exe returned error code '..retval..'.')
+  end
+end
+
+
+local function write_xpdfrc (FILE, datadir, xpdfrc_raw)
+  local xpdfrc=xpdfrc_raw:explode('\n')
+  for _,line in ipairs (xpdfrc) do
+    line=line:gsub('%s+', ' ')
+    line=line:gsub('@XPDF%-DATA%-DIR@', datadir)
+    if line:match('#----- begin') then FILE:write('\n') end
+    FILE:write(line..'\n')
+  end
+end
+
+
+local xpdfrc=[===[
+# xpdfrc (for xpdf utilities)
+# 
+# This file was created by install-xpdf-data.  Don't edit
+#
+#----- begin Arabic support package (2011-sep-02)
+unicodeMap	ISO-8859-6	"@XPDF-DATA-DIR@/arabic/ISO-8859-6.unicodeMap"
+#----- end Arabic support package
+#----- begin Chinese Simplified support package (2011-sep-02)
+cidToUnicode	Adobe-GB1	"@XPDF-DATA-DIR@/chinese-simplified/Adobe-GB1.cidToUnicode"
+unicodeMap	ISO-2022-CN	"@XPDF-DATA-DIR@/chinese-simplified/ISO-2022-CN.unicodeMap"
+unicodeMap	EUC-CN		"@XPDF-DATA-DIR@/chinese-simplified/EUC-CN.unicodeMap"
+unicodeMap	GBK		"@XPDF-DATA-DIR@/chinese-simplified/GBK.unicodeMap"
+cMapDir		Adobe-GB1	"@XPDF-DATA-DIR@/chinese-simplified/CMap"
+toUnicodeDir			"@XPDF-DATA-DIR@/chinese-simplified/CMap"
+#fontFileCC	Adobe-GB1	c:/windows/fonts/gkai00mp.ttf
+#----- end Chinese Simplified support package
+#----- begin Chinese Traditional support package (2011-sep-02)
+cidToUnicode	Adobe-CNS1	"@XPDF-DATA-DIR@/chinese-traditional/Adobe-CNS1.cidToUnicode"
+unicodeMap	Big5		"@XPDF-DATA-DIR@/chinese-traditional/Big5.unicodeMap"
+unicodeMap	Big5ascii	"@XPDF-DATA-DIR@/chinese-traditional/Big5ascii.unicodeMap"
+cMapDir		Adobe-CNS1	"@XPDF-DATA-DIR@/chinese-traditional/CMap"
+toUnicodeDir			"@XPDF-DATA-DIR@/chinese-traditional/CMap"
+#fontFileCC	Adobe-CNS1	c:/windows/fonts/bkai00mp.ttf
+#----- end Chinese Traditional support package
+#----- begin Cyrillic support package (2011-aug-15)
+nameToUnicode			"@XPDF-DATA-DIR@/cyrillic/Bulgarian.nameToUnicode"
+unicodeMap	KOI8-R		"@XPDF-DATA-DIR@/cyrillic/KOI8-R.unicodeMap"
+#----- end Cyrillic support package
+#----- begin Greek support package (2011-aug-15)
+nameToUnicode			"@XPDF-DATA-DIR@/greek/Greek.nameToUnicode"
+unicodeMap	ISO-8859-7	"@XPDF-DATA-DIR@/greek/ISO-8859-7.unicodeMap"
+#----- end Greek support package
+#----- begin Hebrew support package (2011-aug-15)
+unicodeMap	ISO-8859-8	"@XPDF-DATA-DIR@/hebrew/ISO-8859-8.unicodeMap"
+unicodeMap	Windows-1255	"@XPDF-DATA-DIR@/hebrew/Windows-1255.unicodeMap"
+#----- end Hebrew support package
+#----- begin Japanese support package (2011-sep-02)
+cidToUnicode	Adobe-Japan1	"@XPDF-DATA-DIR@/japanese/Adobe-Japan1.cidToUnicode"
+unicodeMap	ISO-2022-JP	"@XPDF-DATA-DIR@/japanese/ISO-2022-JP.unicodeMap"
+unicodeMap	EUC-JP		"@XPDF-DATA-DIR@/japanese/EUC-JP.unicodeMap"
+unicodeMap	Shift-JIS	"@XPDF-DATA-DIR@/japanese/Shift-JIS.unicodeMap"
+cMapDir		Adobe-Japan1	"@XPDF-DATA-DIR@/japanese/CMap"
+toUnicodeDir			"@XPDF-DATA-DIR@/japanese/CMap"
+#fontFileCC	Adobe-Japan1	c:/windows/fonts/msmincho.ttf
+#----- end Japanese support package
+#----- begin Korean support package (2011-sep-02)
+cidToUnicode	Adobe-Korea1	"@XPDF-DATA-DIR@/korean/Adobe-Korea1.cidToUnicode"
+unicodeMap	ISO-2022-KR	"@XPDF-DATA-DIR@/korean/ISO-2022-KR.unicodeMap"
+cMapDir		Adobe-Korea1	"@XPDF-DATA-DIR@/korean/CMap"
+toUnicodeDir			"@XPDF-DATA-DIR@/korean/CMap"
+#fontFileCC	Adobe-Korea1	c:/windows/fonts/batang.ttf
+#fontFileCC	Unidocs-Korea1	c:/windows/fonts/batang.ttf
+#----- end Korean support package
+#----- begin Latin2 support package (2011-aug-15)
+unicodeMap	Latin2		"@XPDF-DATA-DIR@/latin2/Latin2.unicodeMap"
+#----- end Latin2 support package
+#----- begin Thai support package (2011-aug-15)
+nameToUnicode			"@XPDF-DATA-DIR@/thai/Thai.nameToUnicode"
+unicodeMap	TIS-620		"@XPDF-DATA-DIR@/thai/TIS-620.unicodeMap"
+#----- end Thai support package
+#----- begin Turkish support package (2011-aug-15)
+unicodeMap	ISO-8859-9	"@XPDF-DATA-DIR@/turkish/ISO-8859-9.unicodeMap"
+#----- end Turkish support package
+]===]
+
+-- main --
+
+local datafile=find_datafile('xpdfutil-supp.zip')
+local xpdf_datadir=get_path('APPDATA')..'/xpdfutil'
+local xpdf_config =get_path('USERPROFILE')..'/xpdfrc'
+
+print('Source: '..qquote(datafile))
+print('Directory for Data Files: '..qquote(xpdf_datadir))
+print('Config File: '..qquote(xpdf_config))
+print()
+      
+local done=action('Extracting Data Files')
+install_data(datafile, xpdf_datadir)
+print(done)
+
+local done=action('Installing Config File')
+local CONF=assert(io.open(xpdf_config, 'wb'),
+                  "Can't open file "..qquote(xpdf_config))
+write_xpdfrc(CONF, xpdf_datadir, xpdfrc)
+io.close(CONF)
+print(done)
+
+print('Done.')
+
+
+-- Local Variables:
+--   lua-indent-level: 2
+--   tab-width: 2
+--   indent-tabs-mode: nil
+-- End:
+-- vim:set tabstop=2 expandtab: #
+

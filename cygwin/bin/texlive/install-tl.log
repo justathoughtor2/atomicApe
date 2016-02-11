@@ -1,0 +1,1494 @@
+Loading http://ctan.math.utah.edu/ctan/tex-archive/systems/texlive/tlnet/tlpkg/texlive.tlpdb
+Installing TeX Live 2015 from: http://ctan.math.utah.edu/ctan/tex-archive/systems/texlive/tlnet
+Platform: win32 => 'Windows'
+Distribution: net  (downloading)
+Using URL: http://ctan.math.utah.edu/ctan/tex-archive/systems/texlive/tlnet
+Directory for temporary files: C:/Users/Jesse/AppData/Local/Temp
+Installer revision: 39362
+Database revision: 39630
+Installing [01/89, time/total: ??:??/??:??]: ae [84k]
+Installing [02/89, time/total: 00:05/01:38:35]: amscls [1279k]
+Installing [03/89, time/total: 00:12/14:26]: amsfonts [4725k]
+Installing [04/89, time/total: 00:50/13:27]: amsmath [2256k]
+Installing [05/89, time/total: 01:02/12:10]: babel [497k]
+Installing [06/89, time/total: 01:06/12:13]: babel-english [134k]
+Installing [07/89, time/total: 01:07/12:13]: babelbib [1239k]
+Installing [08/89, time/total: 01:12/11:32]: bibtex [389k]
+Installing [09/89, time/total: 01:16/11:44]: bibtex.win32 [41k]
+Installing [10/89, time/total: 01:17/11:51]: carlisle [34k]
+Installing [11/89, time/total: 01:18/11:58]: cm [237k]
+Installing [12/89, time/total: 01:24/12:36]: collection-basic [1k]
+Installing [13/89, time/total: 01:25/12:45]: collection-latex [1k]
+Installing [14/89, time/total: 01:26/12:54]: collection-wintools [1k]
+Installing [15/89, time/total: 01:26/12:54]: colortbl [556k]
+Installing [16/89, time/total: 01:28/12:34]: dviout.win32 [2183k]
+postaction install fileassoc for dviout.win32: .dvi, TL.DVIOUT.view.2015
+Installing [17/89, time/total: 01:42/12:14]: dvipdfmx [344k]
+Installing [18/89, time/total: 01:44/12:10]: dvipdfmx-def [49k]
+Installing [19/89, time/total: 01:45/12:14]: dvipdfmx.win32 [290k]
+Installing [20/89, time/total: 01:46/12:06]: dvips [629k]
+Installing [21/89, time/total: 01:53/12:22]: dvips.win32 [88k]
+Installing [22/89, time/total: 01:54/12:24]: enctex [272k]
+Installing [23/89, time/total: 01:57/12:30]: etex [197k]
+Installing [24/89, time/total: 01:59/12:33]: etex-pkg [7k]
+Installing [25/89, time/total: 02:00/12:39]: fancyhdr [250k]
+Installing [26/89, time/total: 02:03/12:46]: fix2col [217k]
+Installing [27/89, time/total: 02:05/12:48]: geometry [228k]
+Installing [28/89, time/total: 02:08/12:55]: glyphlist [25k]
+Installing [29/89, time/total: 02:08/12:54]: graphics [1647k]
+Installing [30/89, time/total: 02:17/12:32]: gsftopk [16k]
+Installing [31/89, time/total: 02:18/12:37]: gsftopk.win32 [13k]
+Installing [32/89, time/total: 02:18/12:37]: hyperref [3729k]
+Installing [33/89, time/total: 02:29/11:16]: hyph-utf8 [1698k]
+Installing [34/89, time/total: 02:50/11:55]: hyphen-base [22k]
+Installing [35/89, time/total: 02:51/11:59]: ifluatex [132k]
+Installing [36/89, time/total: 02:53/12:03]: ifxetex [166k]
+Installing [37/89, time/total: 02:56/12:11]: knuth-lib [30k]
+Installing [38/89, time/total: 02:57/12:14]: knuth-local [23k]
+Installing [39/89, time/total: 02:58/12:17]: kpathsea [1011k]
+Installing [40/89, time/total: 03:08/12:27]: kpathsea.win32 [381k]
+Installing [41/89, time/total: 03:10/12:23]: latex [12679k]
+Installing [42/89, time/total: 03:57/10:16]: latex-bin [20k]
+Installing [43/89, time/total: 03:58/10:18]: latex-bin.win32 [1k]
+Installing [44/89, time/total: 03:59/10:21]: latex-fonts [19k]
+Installing [45/89, time/total: 04:00/10:23]: latexconfig [7k]
+Installing [46/89, time/total: 04:01/10:26]: ltxmisc [16k]
+Installing [47/89, time/total: 04:02/10:28]: lua-alt-getopt [6k]
+Installing [48/89, time/total: 04:02/10:28]: luatex [946k]
+Installing [49/89, time/total: 04:05/10:20]: luatex.win32 [3041k]
+Installing [50/89, time/total: 04:20/10:10]: makeindex [423k]
+Installing [51/89, time/total: 04:22/10:09]: makeindex.win32 [18k]
+Installing [52/89, time/total: 04:23/10:11]: metafont [68k]
+Installing [53/89, time/total: 04:24/10:12]: metafont.win32 [139k]
+Installing [54/89, time/total: 04:24/10:10]: mflogo [242k]
+Installing [55/89, time/total: 04:26/10:11]: mfnfss [187k]
+Installing [56/89, time/total: 04:27/10:11]: mfware [27k]
+Installing [57/89, time/total: 04:28/10:13]: mfware.win32 [58k]
+Installing [58/89, time/total: 04:29/10:14]: mptopdf [41k]
+Installing [59/89, time/total: 04:30/10:16]: mptopdf.win32 [1k]
+Installing [60/89, time/total: 04:31/10:18]: natbib [493k]
+Installing [61/89, time/total: 04:35/10:20]: oberdiek [15839k]
+Installing [62/89, time/total: 06:11/10:14]: pdftex [2875k]
+Installing [63/89, time/total: 06:21/10:01]: pdftex-def [14k]
+Installing [64/89, time/total: 06:22/10:03]: pdftex.win32 [656k]
+Installing [65/89, time/total: 06:26/10:02]: plain [59k]
+Installing [66/89, time/total: 06:28/10:05]: pslatex [7k]
+Installing [67/89, time/total: 06:29/10:07]: psnfss [502k]
+Installing [68/89, time/total: 06:36/10:13]: pspicture [50k]
+Installing [69/89, time/total: 06:37/10:14]: tetex [394k]
+Installing [70/89, time/total: 06:41/10:16]: tetex.win32 [1k]
+Installing [71/89, time/total: 06:42/10:18]: tex [23k]
+Installing [72/89, time/total: 06:42/10:17]: tex.win32 [130k]
+Installing [73/89, time/total: 06:44/10:19]: texconfig [22k]
+Installing [74/89, time/total: 06:45/10:20]: texlive-common [260k]
+Installing [75/89, time/total: 06:48/10:23]: texlive-docindex [216k]
+Installing [76/89, time/total: 06:52/10:27]: texlive-en [1599k]
+Installing [77/89, time/total: 07:03/10:28]: texlive-msg-translations [110k]
+Installing [78/89, time/total: 07:06/10:31]: texlive-scripts [107k]
+Installing [79/89, time/total: 07:07/10:32]: texlive-scripts.win32 [18k]
+Installing [80/89, time/total: 07:08/10:33]: texlive.infra [330k]
+Installing [81/89, time/total: 07:10/10:33]: texlive.infra.win32 [839k]
+Installing [82/89, time/total: 07:13/10:29]: tlgs.win32 [10193k]
+Installing [83/89, time/total: 08:18/10:29]: tlperl.win32 [7311k]
+Installing [84/89, time/total: 10:08/11:42]: tlpsv.win32 [1411k]
+postaction install fileassoc for tlpsv.win32: .eps, TL.PSView.view.2015
+postaction install fileassoc for tlpsv.win32: .ps, TL.PSView.view.2015
+postaction install fileassoc for tlpsv.win32: .pdf, TL.PSView.view.2015
+Installing [85/89, time/total: 10:13/11:36]: tools [5244k]
+Installing [86/89, time/total: 10:39/11:24]: unicode-data [212k]
+Installing [87/89, time/total: 10:43/11:27]: url [266k]
+Installing [88/89, time/total: 10:44/11:26]: wintools.win32 [5911k]
+Installing [89/89, time/total: 11:17/11:18]: xdvi [158k]
+Time used for installing the packages: 11:19
+running mktexlsr F:/atomicApe/cygwin/bin/texlive/texmf-dist ...
+writing fmtutil.cnf to F:/atomicApe/cygwin/bin/texlive/texmf-dist/web2c/fmtutil.cnf
+writing updmap.cfg to F:/atomicApe/cygwin/bin/texlive/texmf-dist/web2c/updmap.cfg
+writing language.dat to F:/atomicApe/cygwin/bin/texlive/texmf-var/tex/generic/config/language.dat
+writing language.def to F:/atomicApe/cygwin/bin/texlive/texmf-var/tex/generic/config/language.def
+writing language.dat.lua to F:/atomicApe/cygwin/bin/texlive/texmf-var/tex/generic/config/language.dat.lua
+running mktexlsr F:/atomicApe/cygwin/bin/texlive/texmf-var F:/atomicApe/cygwin/bin/texlive/texmf-config F:/atomicApe/cygwin/bin/texlive/texmf-dist ...
+running updmap-sys --nohash ...done
+updmap will read the following updmap.cfg files (in precedence order):
+  f:/atomicape/cygwin/bin/texlive/texmf-dist/web2c/updmap.cfg
+updmap may write changes to the following updmap.cfg file:
+  f:/atomicape/cygwin/bin/texlive/texmf-config/web2c/updmap.cfg
+dvips output dir: "f:/atomicape/cygwin/bin/texlive/texmf-var/fonts/map/dvips/updmap"
+pdftex output dir: "f:/atomicape/cygwin/bin/texlive/texmf-var/fonts/map/pdftex/updmap"
+dvipdfmx output dir: "f:/atomicape/cygwin/bin/texlive/texmf-var/fonts/map/dvipdfmx/updmap"
+
+updmap is creating new map files
+using the following configuration:
+  LW35 font names                  : URWkb (f:/atomicape/cygwin/bin/texlive/texmf-dist/web2c/updmap.cfg)
+  prefer outlines                  : true (f:/atomicape/cygwin/bin/texlive/texmf-dist/web2c/updmap.cfg)
+  texhash enabled                  : false
+  download standard fonts (dvips)  : true (f:/atomicape/cygwin/bin/texlive/texmf-dist/web2c/updmap.cfg)
+  download standard fonts (pdftex) : true (f:/atomicape/cygwin/bin/texlive/texmf-dist/web2c/updmap.cfg)
+  kanjiEmbed replacement string    : noEmbed (f:/atomicape/cygwin/bin/texlive/texmf-dist/web2c/updmap.cfg)
+  kanjiVariant replacement string  :  (default)
+  create a mapfile for pxdvi       : false (default)
+
+Scanning for LW35 support files  [  3 files]
+Scanning for MixedMap entries    [  6 files]
+Scanning for KanjiMap entries    [  0 files]
+Scanning for Map entries         [  7 files]
+
+Generating output for dvipdfmx...
+Generating output for ps2pk...
+Generating output for dvips...
+Generating output for pdftex...
+
+Files generated:
+  f:/atomicape/cygwin/bin/texlive/texmf-var/fonts/map/dvips/updmap:
+       16069 2016-02-10 19:08:48 builtin35.map
+       21543 2016-02-10 19:08:48 download35.map
+       24288 2016-02-10 19:08:48 psfonts_pk.map
+       28289 2016-02-10 19:08:48 psfonts_t1.map
+       28284 2016-02-10 19:08:48 ps2pk.map
+       28289 2016-02-10 19:08:48 psfonts.map = psfonts_t1.map
+  f:/atomicape/cygwin/bin/texlive/texmf-var/fonts/map/pdftex/updmap:
+       28291 2016-02-10 19:08:48 pdftex_dl14.map
+       26626 2016-02-10 19:08:48 pdftex_ndl14.map
+       28291 2016-02-10 19:08:48 pdftex.map = pdftex_dl14.map
+  f:/atomicape/cygwin/bin/texlive/texmf-var/fonts/map/dvipdfmx/updmap:
+         341 2016-02-10 19:08:48 kanjix.map
+
+Transcript written on "f:/atomicape/cygwin/bin/texlive/texmf-var/web2c/updmap.log".
+setting default paper size to letter:
+running tlmgr --no-execute-actions paper letter ...done
+F:\atomicApe\cygwin\bin\texlive\texmf-dist\scripts\texlive\tlmgr.pl: setting paper size for dvipdfmx to letter.
+F:\atomicApe\cygwin\bin\texlive\texmf-dist\scripts\texlive\tlmgr.pl: setting paper size for dvips to letter.
+F:\atomicApe\cygwin\bin\texlive\texmf-dist\scripts\texlive\tlmgr.pl: setting paper size for pdftex to letter.
+F:\atomicApe\cygwin\bin\texlive\texmf-dist\scripts\texlive\tlmgr.pl: setting paper size for xdvi to letter.
+re-running mktexlsr F:/atomicApe/cygwin/bin/texlive/texmf-var F:/atomicApe/cygwin/bin/texlive/texmf-config ...
+pre-generating all format files, be patient...
+running fmtutil-sys --no-error-if-no-engine=luajittex --all ...done
+fmtutil: fmtutil is using the following fmtutil.cnf files (in precedence order):
+fmtutil:   f:/atomicape/cygwin/bin/texlive/texmf-dist/web2c/fmtutil.cnf
+fmtutil: fmtutil is using the following fmtutil.cnf file for writing changes:
+fmtutil:   f:/atomicape/cygwin/bin/texlive/texmf-config/web2c/fmtutil.cnf
+fmtutil [INFO]: writing formats under f:/atomicape/cygwin/bin/texlive/texmf-var/web2c
+fmtutil [INFO]: --- remaking luajittex with luajittex
+fmtutil: running `luajittex -ini   -jobname=luajittex -progname=luajittex luatex.ini' ...
+This is LuajitTeX, Version beta-0.80.0 (TeX Live 2015/W32TeX) (rev 5238)  (INITEX)
+ restricted \write18 enabled.
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/config/luatex.ini
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/config/luatexiniconfig.
+tex)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/config/luatex-unicode-l
+etters.tex loading Unicode properties)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/config/pdfetex.ini
+(f:/atomicApe/cygwin/bin/texlive/texmf-config/tex/generic/config/pdftexconfig.t
+ex) (f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/luatex/hyph-utf8/etex.src
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/base/plain.tex
+Preloading the plain format: codes, registers, parameters, fonts, more fonts,
+macros, math definitions, output routines, hyphenation
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/hyphen/hyphen.tex
+[skipping from \patterns to end-of-file...]))
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/etex/etexdefs.lib
+Skipping module "grouptypes"; Loading module "interactionmodes";
+Skipping module "nodetypes"; Skipping module "iftypes";)
+(f:/atomicApe/cygwin/bin/texlive/texmf-var/tex/generic/config/language.def
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/hyphen/hyphen.tex))
+Augmenting the Plain TeX definitions: \tracingall;
+Adding new e-TeX definitions: \eTeX, \loggingall, \tracingnone,
+register allocation; extended register allocation; 
+Recycling: \addlanguage, \@nswer (not defined), \@sk, \b@dresponsetrue,
+\b@dresponsefalse, \ch@ckforyn, \mayber@cycle, \et@xabort, \et@xbuf,
+\et@xfmtsrc, \et@xfilehdr, \et@xinf, \et@xpatterns, \l@ngdefnfile, \n@xt,
+\p@rse (not defined), \pr@mpt (not defined), \pr@mptloop (not defined),
+\forcer@cycle, \usef@llback, \usef@llbacktrue, \usef@llbackfalse, 
+Retaining: \et@xerr, \et@xinput, \et@xlibhdr, \et@xmsg, \et@xtoks, \et@xwarn,
+\et@xl@@d, \et@xl@ad, \et@xload, \et@xlang, \et@xhash, \eTeX, \etexhdrchk,
+\etexstatus, \module, \uselanguage, \r@tain, \r@cycle,)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/config/pdftexmagfix.tex)))
+Beginning to dump on file luajittex.fmt
+ (format=luajittex 2016.2.10)
+3114 strings using 9624 bytes
+68807 memory locations dumped; current usage is 103&7731
+1712 multiletter control sequences
+\font\nullfont=nullfont
+\font\tenrm=cmr10
+\font\preloaded=cmr9
+\font\preloaded=cmr8
+\font\sevenrm=cmr7
+\font\preloaded=cmr6
+\font\fiverm=cmr5
+\font\teni=cmmi10
+\font\preloaded=cmmi9
+\font\preloaded=cmmi8
+\font\seveni=cmmi7
+\font\preloaded=cmmi6
+\font\fivei=cmmi5
+\font\tensy=cmsy10
+\font\preloaded=cmsy9
+\font\preloaded=cmsy8
+\font\sevensy=cmsy7
+\font\preloaded=cmsy6
+\font\fivesy=cmsy5
+\font\tenex=cmex10
+\font\preloaded=cmss10
+\font\preloaded=cmssq8
+\font\preloaded=cmssi10
+\font\preloaded=cmssqi8
+\font\tenbf=cmbx10
+\font\preloaded=cmbx9
+\font\preloaded=cmbx8
+\font\sevenbf=cmbx7
+\font\preloaded=cmbx6
+\font\fivebf=cmbx5
+\font\tentt=cmtt10
+\font\preloaded=cmtt9
+\font\preloaded=cmtt8
+\font\preloaded=cmsltt10
+\font\tensl=cmsl10
+\font\preloaded=cmsl9
+\font\preloaded=cmsl8
+\font\tenit=cmti10
+\font\preloaded=cmti9
+\font\preloaded=cmti8
+\font\preloaded=cmti7
+\font\preloaded=cmu10
+\font\preloaded=cmmib10
+\font\preloaded=cmbsy10
+\font\preloaded=cmcsc10
+\font\preloaded=cmssbx10
+\font\preloaded=cmdunh10
+\font\preloaded=cmr7 at 14.51799pt
+\font\preloaded=cmtt10 at 14.4pt
+\font\preloaded=cmssbx10 at 14.4pt
+\font\preloaded=manfnt
+50 preloaded fonts
+0 words of pdf memory
+0 indirect objects
+No pages of output.
+Transcript written on luajittex.log.
+fmtutil [INFO]: f:/atomicape/cygwin/bin/texlive/texmf-var/web2c/luajittex/luajittex.fmt installed.
+fmtutil [INFO]: --- remaking tex with tex
+fmtutil: running `tex -ini   -jobname=tex -progname=tex tex.ini' ...
+This is TeX, Version 3.14159265 (TeX Live 2015/W32TeX) (INITEX)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/config/tex.ini
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/base/plain.tex
+Preloading the plain format: codes, registers, parameters, fonts, more fonts,
+macros, math definitions, output routines, hyphenation
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/hyphen/hyphen.tex)) )
+Beginning to dump on file tex.fmt
+ (preloaded format=tex 2016.2.10)
+2027 strings of total length 29413
+4990 memory locations dumped; current usage is 110&4877
+926 multiletter control sequences
+\font\nullfont=nullfont
+\font\tenrm=cmr10
+\font\preloaded=cmr9
+\font\preloaded=cmr8
+\font\sevenrm=cmr7
+\font\preloaded=cmr6
+\font\fiverm=cmr5
+\font\teni=cmmi10
+\font\preloaded=cmmi9
+\font\preloaded=cmmi8
+\font\seveni=cmmi7
+\font\preloaded=cmmi6
+\font\fivei=cmmi5
+\font\tensy=cmsy10
+\font\preloaded=cmsy9
+\font\preloaded=cmsy8
+\font\sevensy=cmsy7
+\font\preloaded=cmsy6
+\font\fivesy=cmsy5
+\font\tenex=cmex10
+\font\preloaded=cmss10
+\font\preloaded=cmssq8
+\font\preloaded=cmssi10
+\font\preloaded=cmssqi8
+\font\tenbf=cmbx10
+\font\preloaded=cmbx9
+\font\preloaded=cmbx8
+\font\sevenbf=cmbx7
+\font\preloaded=cmbx6
+\font\fivebf=cmbx5
+\font\tentt=cmtt10
+\font\preloaded=cmtt9
+\font\preloaded=cmtt8
+\font\preloaded=cmsltt10
+\font\tensl=cmsl10
+\font\preloaded=cmsl9
+\font\preloaded=cmsl8
+\font\tenit=cmti10
+\font\preloaded=cmti9
+\font\preloaded=cmti8
+\font\preloaded=cmti7
+\font\preloaded=cmu10
+\font\preloaded=cmmib10
+\font\preloaded=cmbsy10
+\font\preloaded=cmcsc10
+\font\preloaded=cmssbx10
+\font\preloaded=cmdunh10
+\font\preloaded=cmr7 at 14.51799pt
+\font\preloaded=cmtt10 at 14.4pt
+\font\preloaded=cmssbx10 at 14.4pt
+\font\preloaded=manfnt
+14787 words of font info for 50 preloaded fonts
+14 hyphenation exceptions
+Hyphenation trie of length 6075 has 181 ops out of 35111
+  181 for language 0
+No pages of output.
+Transcript written on tex.log.
+fmtutil [INFO]: f:/atomicape/cygwin/bin/texlive/texmf-var/web2c/tex/tex.fmt installed.
+fmtutil [INFO]: --- remaking pdftex with pdftex
+fmtutil: running `pdftex -ini   -jobname=pdftex -progname=pdftex -translate-file=cp227.tcx *pdfetex.ini' ...
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/W32TeX) (INITEX)
+ restricted \write18 enabled.
+ (f:/atomicApe/cygwin/bin/texlive/texmf-dist/web2c/cp227.tcx)
+entering extended mode
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/config/pdfetex.ini
+(f:/atomicApe/cygwin/bin/texlive/texmf-config/tex/generic/config/pdftexconfig.t
+ex) (f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/etex/etex.src
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/base/plain.tex
+Preloading the plain format: codes, registers, parameters, fonts, more fonts,
+macros, math definitions, output routines, hyphenation
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/hyphen/hyphen.tex
+[skipping from \patterns to end-of-file...]))
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/etex/etexdefs.lib
+Skipping module "grouptypes"; Loading module "interactionmodes";
+Skipping module "nodetypes"; Skipping module "iftypes";)
+(f:/atomicApe/cygwin/bin/texlive/texmf-var/tex/generic/config/language.def
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/hyphen/hyphen.tex))
+Augmenting the Plain TeX definitions: \tracingall;
+Adding new e-TeX definitions: \eTeX, \loggingall, \tracingnone,
+register allocation; extended register allocation; 
+Recycling: \addlanguage, \@nswer (not defined), \@sk, \b@dresponsetrue,
+\b@dresponsefalse, \ch@ckforyn, \mayber@cycle, \et@xabort, \et@xbuf,
+\et@xfmtsrc, \et@xfilehdr, \et@xinf, \et@xpatterns, \l@ngdefnfile, \n@xt,
+\p@rse (not defined), \pr@mpt (not defined), \pr@mptloop (not defined),
+\forcer@cycle, \usef@llback, \usef@llbacktrue, \usef@llbackfalse, 
+Retaining: \et@xerr, \et@xinput, \et@xlibhdr, \et@xmsg, \et@xtoks, \et@xwarn,
+\et@xl@@d, \et@xl@ad, \et@xload, \et@xlang, \et@xhash, \eTeX, \etexhdrchk,
+\etexstatus, \module, \uselanguage, \r@tain, \r@cycle,)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/config/pdftexmagfix.tex) 
+)
+Beginning to dump on file pdftex.fmt
+ (preloaded format=pdftex 2016.2.10)
+2890 strings of total length 43428
+7960 memory locations dumped; current usage is 203&7321
+1260 multiletter control sequences
+\font\nullfont=nullfont
+\font\tenrm=cmr10
+\font\preloaded=cmr9
+\font\preloaded=cmr8
+\font\sevenrm=cmr7
+\font\preloaded=cmr6
+\font\fiverm=cmr5
+\font\teni=cmmi10
+\font\preloaded=cmmi9
+\font\preloaded=cmmi8
+\font\seveni=cmmi7
+\font\preloaded=cmmi6
+\font\fivei=cmmi5
+\font\tensy=cmsy10
+\font\preloaded=cmsy9
+\font\preloaded=cmsy8
+\font\sevensy=cmsy7
+\font\preloaded=cmsy6
+\font\fivesy=cmsy5
+\font\tenex=cmex10
+\font\preloaded=cmss10
+\font\preloaded=cmssq8
+\font\preloaded=cmssi10
+\font\preloaded=cmssqi8
+\font\tenbf=cmbx10
+\font\preloaded=cmbx9
+\font\preloaded=cmbx8
+\font\sevenbf=cmbx7
+\font\preloaded=cmbx6
+\font\fivebf=cmbx5
+\font\tentt=cmtt10
+\font\preloaded=cmtt9
+\font\preloaded=cmtt8
+\font\preloaded=cmsltt10
+\font\tensl=cmsl10
+\font\preloaded=cmsl9
+\font\preloaded=cmsl8
+\font\tenit=cmti10
+\font\preloaded=cmti9
+\font\preloaded=cmti8
+\font\preloaded=cmti7
+\font\preloaded=cmu10
+\font\preloaded=cmmib10
+\font\preloaded=cmbsy10
+\font\preloaded=cmcsc10
+\font\preloaded=cmssbx10
+\font\preloaded=cmdunh10
+\font\preloaded=cmr7 at 14.51799pt
+\font\preloaded=cmtt10 at 14.4pt
+\font\preloaded=cmssbx10 at 14.4pt
+\font\preloaded=manfnt
+14787 words of font info for 50 preloaded fonts
+14 hyphenation exceptions
+Hyphenation trie of length 6075 has 181 ops out of 35111
+  181 for language 0
+0 words of pdfTeX memory
+0 indirect objects
+No pages of output.
+Transcript written on pdftex.log.
+fmtutil [INFO]: f:/atomicape/cygwin/bin/texlive/texmf-var/web2c/pdftex/pdftex.fmt installed.
+fmtutil [INFO]: --- remaking luatex with luatex
+fmtutil: running `luatex -ini   -jobname=luatex -progname=luatex luatex.ini' ...
+This is LuaTeX, Version beta-0.80.0 (TeX Live 2015/W32TeX) (rev 5238)  (INITEX)
+ restricted \write18 enabled.
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/config/luatex.ini
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/config/luatexiniconfig.
+tex)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/config/luatex-unicode-l
+etters.tex loading Unicode properties)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/config/pdfetex.ini
+(f:/atomicApe/cygwin/bin/texlive/texmf-config/tex/generic/config/pdftexconfig.t
+ex) (f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/luatex/hyph-utf8/etex.src
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/base/plain.tex
+Preloading the plain format: codes, registers, parameters, fonts, more fonts,
+macros, math definitions, output routines, hyphenation
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/hyphen/hyphen.tex
+[skipping from \patterns to end-of-file...]))
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/etex/etexdefs.lib
+Skipping module "grouptypes"; Loading module "interactionmodes";
+Skipping module "nodetypes"; Skipping module "iftypes";)
+(f:/atomicApe/cygwin/bin/texlive/texmf-var/tex/generic/config/language.def
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/hyphen/hyphen.tex))
+Augmenting the Plain TeX definitions: \tracingall;
+Adding new e-TeX definitions: \eTeX, \loggingall, \tracingnone,
+register allocation; extended register allocation; 
+Recycling: \addlanguage, \@nswer (not defined), \@sk, \b@dresponsetrue,
+\b@dresponsefalse, \ch@ckforyn, \mayber@cycle, \et@xabort, \et@xbuf,
+\et@xfmtsrc, \et@xfilehdr, \et@xinf, \et@xpatterns, \l@ngdefnfile, \n@xt,
+\p@rse (not defined), \pr@mpt (not defined), \pr@mptloop (not defined),
+\forcer@cycle, \usef@llback, \usef@llbacktrue, \usef@llbackfalse, 
+Retaining: \et@xerr, \et@xinput, \et@xlibhdr, \et@xmsg, \et@xtoks, \et@xwarn,
+\et@xl@@d, \et@xl@ad, \et@xload, \et@xlang, \et@xhash, \eTeX, \etexhdrchk,
+\etexstatus, \module, \uselanguage, \r@tain, \r@cycle,)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/config/pdftexmagfix.tex)))
+Beginning to dump on file luatex.fmt
+ (format=luatex 2016.2.10)
+3114 strings using 9618 bytes
+68807 memory locations dumped; current usage is 103&7731
+1712 multiletter control sequences
+\font\nullfont=nullfont
+\font\tenrm=cmr10
+\font\preloaded=cmr9
+\font\preloaded=cmr8
+\font\sevenrm=cmr7
+\font\preloaded=cmr6
+\font\fiverm=cmr5
+\font\teni=cmmi10
+\font\preloaded=cmmi9
+\font\preloaded=cmmi8
+\font\seveni=cmmi7
+\font\preloaded=cmmi6
+\font\fivei=cmmi5
+\font\tensy=cmsy10
+\font\preloaded=cmsy9
+\font\preloaded=cmsy8
+\font\sevensy=cmsy7
+\font\preloaded=cmsy6
+\font\fivesy=cmsy5
+\font\tenex=cmex10
+\font\preloaded=cmss10
+\font\preloaded=cmssq8
+\font\preloaded=cmssi10
+\font\preloaded=cmssqi8
+\font\tenbf=cmbx10
+\font\preloaded=cmbx9
+\font\preloaded=cmbx8
+\font\sevenbf=cmbx7
+\font\preloaded=cmbx6
+\font\fivebf=cmbx5
+\font\tentt=cmtt10
+\font\preloaded=cmtt9
+\font\preloaded=cmtt8
+\font\preloaded=cmsltt10
+\font\tensl=cmsl10
+\font\preloaded=cmsl9
+\font\preloaded=cmsl8
+\font\tenit=cmti10
+\font\preloaded=cmti9
+\font\preloaded=cmti8
+\font\preloaded=cmti7
+\font\preloaded=cmu10
+\font\preloaded=cmmib10
+\font\preloaded=cmbsy10
+\font\preloaded=cmcsc10
+\font\preloaded=cmssbx10
+\font\preloaded=cmdunh10
+\font\preloaded=cmr7 at 14.51799pt
+\font\preloaded=cmtt10 at 14.4pt
+\font\preloaded=cmssbx10 at 14.4pt
+\font\preloaded=manfnt
+50 preloaded fonts
+0 words of pdf memory
+0 indirect objects
+No pages of output.
+Transcript written on luatex.log.
+fmtutil [INFO]: f:/atomicape/cygwin/bin/texlive/texmf-var/web2c/luatex/luatex.fmt installed.
+fmtutil [INFO]: --- remaking latex with pdftex
+fmtutil: running `pdftex -ini   -jobname=latex -progname=latex -translate-file=cp227.tcx *latex.ini' ...
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/W32TeX) (INITEX)
+ restricted \write18 enabled.
+ (f:/atomicApe/cygwin/bin/texlive/texmf-dist/web2c/cp227.tcx)
+entering extended mode
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/latexconfig/latex.ini
+(f:/atomicApe/cygwin/bin/texlive/texmf-config/tex/generic/config/pdftexconfig.t
+ex)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/latex.ltx
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/texsys.cfg)
+./texsys.aux found
+
+
+\@currdir set to: ./.
+
+
+Assuming \openin and \input 
+have the same search path.
+
+
+Defining UNIX/DOS style filename parser.
+
+catcodes, registers, compatibility for TeX 2,  parameters,
+LaTeX2e <2016/02/01>
+hacks, control, par, spacing, files, font encodings, lengths,
+====================================
+
+Local config file fonttext.cfg used
+
+====================================
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/fonttext.cfg
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/fonttext.ltx
+=== Don't modify this file, use a .cfg file instead ===
+
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/omlenc.def)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/t1enc.def)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/ot1enc.def)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/omsenc.def)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/t1cmr.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/ot1cmr.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/ot1cmss.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/ot1cmtt.fd)))
+====================================
+
+Local config file fontmath.cfg used
+
+====================================
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/fontmath.cfg
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/fontmath.ltx
+=== Don't modify this file, use a .cfg file instead ===
+
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/omlcmm.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/omscmsy.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/omxcmex.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/ucmr.fd)))
+====================================
+
+Local config file preload.cfg used
+
+=====================================
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/preload.cfg
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/preload.ltx))
+page nos., x-ref, environments, center, verbatim, math definitions, boxes,
+title, sectioning, contents, floats, footnotes, index, bibliography, output,
+===========================================
+Local configuration file hyphen.cfg used
+===========================================
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/babel/hyphen.cfg
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/babel/switch.def)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/hyphen/hyphen.tex)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/hyphen/dumyhyph.tex)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/hyphen/zerohyph.tex))
+ ) )
+Beginning to dump on file latex.fmt
+ (preloaded format=latex 2016.2.10)
+5042 strings of total length 69606
+44294 memory locations dumped; current usage is 144&43702
+3390 multiletter control sequences
+\font\nullfont=nullfont
+\font\OMX/cmex/m/n/10=cmex10
+\font\tenln=line10
+\font\tenlnw=linew10
+\font\tencirc=lcircle10
+\font\tencircw=lcirclew10
+\font\OT1/cmr/m/n/5=cmr5
+\font\OT1/cmr/m/n/7=cmr7
+\font\OT1/cmr/m/n/10=cmr10
+\font\OML/cmm/m/it/5=cmmi5
+\font\OML/cmm/m/it/7=cmmi7
+\font\OML/cmm/m/it/10=cmmi10
+\font\OMS/cmsy/m/n/5=cmsy5
+\font\OMS/cmsy/m/n/7=cmsy7
+\font\OMS/cmsy/m/n/10=cmsy10
+3633 words of font info for 14 preloaded fonts
+14 hyphenation exceptions
+Hyphenation trie of length 6081 has 183 ops out of 35111
+  2 for language 1
+  181 for language 0
+0 words of pdfTeX memory
+0 indirect objects
+No pages of output.
+Transcript written on latex.log.
+fmtutil [INFO]: f:/atomicape/cygwin/bin/texlive/texmf-var/web2c/pdftex/latex.fmt installed.
+fmtutil [INFO]: --- remaking dvilualatex with luatex
+fmtutil: running `luatex -ini   -jobname=dvilualatex -progname=dvilualatex dvilualatex.ini' ...
+This is LuaTeX, Version beta-0.80.0 (TeX Live 2015/W32TeX) (rev 5238)  (INITEX)
+ restricted \write18 enabled.
+
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/latexconfig/dvilualatex.i
+ni
+(f:/atomicApe/cygwin/bin/texlive/texmf-config/tex/generic/config/pdftexconfig.t
+ex) (f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/latex.ltx
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/texsys.cfg)
+./texsys.aux found
+
+
+\@currdir set to: ./.
+
+
+Assuming \openin and \input 
+have the same search path.
+
+
+Defining UNIX/DOS style filename parser.
+
+catcodes, registers, compatibility for TeX 2,  parameters,
+LaTeX2e <2016/02/01>
+hacks, control, par, spacing, files, font encodings, lengths,
+====================================
+
+Local config file fonttext.cfg used
+
+====================================
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/fonttext.cfg
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/fonttext.ltx
+=== Don't modify this file, use a .cfg file instead ===
+
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/omlenc.def)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/t1enc.def)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/ot1enc.def)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/omsenc.def)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/t1cmr.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/ot1cmr.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/ot1cmss.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/ot1cmtt.fd)))
+====================================
+
+Local config file fontmath.cfg used
+
+====================================
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/fontmath.cfg
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/fontmath.ltx
+=== Don't modify this file, use a .cfg file instead ===
+
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/omlcmm.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/omscmsy.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/omxcmex.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/ucmr.fd)))
+====================================
+
+Local config file preload.cfg used
+
+=====================================
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/preload.cfg
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/preload.ltx))
+page nos., x-ref, environments, center, verbatim, math definitions, boxes,
+title, sectioning, contents, floats, footnotes, index, bibliography, output,
+ Unicode character data,
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/unicode-data/load-unico
+de-data.tex 
+load-unicode-data.tex v1.3a (2016-02-06)
+Reading Unicode data
+# UnicodeData-8.0.0.txt
+# Downloaded 2015-12-01 09:00:00 GMT [JAW]
+)
+===========================================
+Local configuration file hyphen.cfg used
+===========================================
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/babel/hyphen.cfg
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/babel/luababel.def)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/babel/switch.def)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/hyphen/hyphen.tex))
+))
+Beginning to dump on file dvilualatex.fmt
+ (format=dvilualatex 2016.2.10)
+4990 strings using 29727 bytes
+153281 memory locations dumped; current usage is 124&48866
+3694 multiletter control sequences
+\font\nullfont=nullfont
+\font\OMX/cmex/m/n/10=cmex10
+\font\tenln=line10
+\font\tenlnw=linew10
+\font\tencirc=lcircle10
+\font\tencircw=lcirclew10
+\font\OT1/cmr/m/n/5=cmr5
+\font\OT1/cmr/m/n/7=cmr7
+\font\OT1/cmr/m/n/10=cmr10
+\font\OML/cmm/m/it/5=cmmi5
+\font\OML/cmm/m/it/7=cmmi7
+\font\OML/cmm/m/it/10=cmmi10
+\font\OMS/cmsy/m/n/5=cmsy5
+\font\OMS/cmsy/m/n/7=cmsy7
+\font\OMS/cmsy/m/n/10=cmsy10
+14 preloaded fonts
+0 words of pdf memory
+0 indirect objects
+No pages of output.
+Transcript written on dvilualatex.log.
+fmtutil [INFO]: f:/atomicape/cygwin/bin/texlive/texmf-var/web2c/luatex/dvilualatex.fmt installed.
+fmtutil [INFO]: --- remaking mf with mf-nowin
+fmtutil: running `mf-nowin -ini   -jobname=mf -progname=mf -translate-file=cp227.tcx mf.ini' ...
+This is METAFONT, Version 2.7182818 (TeX Live 2015/W32TeX) (INIMF)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/web2c/cp227.tcx)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/metafont/config/mf.ini
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/metafont/base/plain.mf
+Preloading the plain base, version 2.71: preliminaries,
+ basic constants and mathematical macros,
+ macros for converting from device-independent units to pixels,
+ macros and tables for various modes of operation,
+ macros for drawing and filling,
+ macros for proof labels and rules,
+ macros for character and font administration,
+and a few last-minute items.)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/metafont/misc/modes.mf) )
+Beginning to dump on file mf.base
+ (preloaded base=mf 2016.2.10)
+2227 strings of total length 30162
+11855 memory locations dumped; current usage is 3651&7844
+1004 symbolic tokens
+Transcript written on mf.log.
+fmtutil [INFO]: f:/atomicape/cygwin/bin/texlive/texmf-var/web2c/metafont/mf.base installed.
+fmtutil [INFO]: --- remaking mptopdf with pdftex
+fmtutil: running `pdftex -ini   -jobname=mptopdf -progname=context -translate-file=cp227.tcx mptopdf.tex' ...
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/W32TeX) (INITEX)
+ restricted \write18 enabled.
+ (f:/atomicApe/cygwin/bin/texlive/texmf-dist/web2c/cp227.tcx)
+
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/context/mptopdf/mptopdf
+.tex (f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/context/base/syst-tex.mkii
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/base/plain.tex
+Preloading the plain format: codes, registers, parameters, fonts,
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+more fonts,
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping \font in plain
+skipping scaled \font in plain
+skipping scaled \font in plain
+skipping scaled \font in plain
+skipping \font in plain
+skipping \skewchar in plain
+skipping \skewchar in plain
+skipping \skewchar in plain
+skipping \skewchar in plain
+skipping \skewchar in plain
+skipping \skewchar in plain
+skipping \textfont in plain
+skipping \scriptfont in plain
+skipping \scriptscriptfont in plain
+skipping \textfont in plain
+skipping \scriptfont in plain
+skipping \scriptscriptfont in plain
+skipping \textfont in plain
+skipping \scriptfont in plain
+skipping \scriptscriptfont in plain
+skipping \textfont in plain
+skipping \scriptfont in plain
+skipping \scriptscriptfont in plain
+skipping \textfont in plain
+skipping \textfont in plain
+skipping \textfont in plain
+skipping \scriptfont in plain
+skipping \scriptscriptfont in plain
+skipping \textfont in plain
+macros, math definitions,
+skipping used \tenex in plain
+output routines, hyphenation
+skipping \input in plain
+skipping \tenrm in plain
+)) (f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/context/base/supp-mis.mkii
+loading : ConTeXt Support Macros / Miscellaneous (2004.10.26)
+) (f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+loading : ConTeXt Support Macros / PDF
+) (f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/context/base/supp-mpe.mkii
+loading : ConTeXt Support Macros / MPS extensions
+) )
+Beginning to dump on file mptopdf.fmt
+ (preloaded format=mptopdf 2016.2.10)
+3286 strings of total length 49010
+13893 memory locations dumped; current usage is 116&13746
+1661 multiletter control sequences
+\font\nullfont=nullfont
+0 words of font info for 0 preloaded fonts
+0 hyphenation exceptions
+Hyphenation trie of length 256 has 0 ops out of 35111
+0 words of pdfTeX memory
+0 indirect objects
+No pages of output.
+Transcript written on mptopdf.log.
+fmtutil [INFO]: f:/atomicape/cygwin/bin/texlive/texmf-var/web2c/pdftex/mptopdf.fmt installed.
+fmtutil [INFO]: --- remaking dviluatex with luatex
+fmtutil: running `luatex -ini   -jobname=dviluatex -progname=dviluatex dviluatex.ini' ...
+This is LuaTeX, Version beta-0.80.0 (TeX Live 2015/W32TeX) (rev 5238)  (INITEX)
+ restricted \write18 enabled.
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/config/dviluatex.ini
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/config/luatexiniconfig.
+tex)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/config/luatex-unicode-l
+etters.tex loading Unicode properties)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/config/etex.ini
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/luatex/hyph-utf8/etex.src
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/base/plain.tex
+Preloading the plain format: codes, registers, parameters, fonts, more fonts,
+macros, math definitions, output routines, hyphenation
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/hyphen/hyphen.tex
+[skipping from \patterns to end-of-file...]))
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/etex/etexdefs.lib
+Skipping module "grouptypes"; Loading module "interactionmodes";
+Skipping module "nodetypes"; Skipping module "iftypes";)
+(f:/atomicApe/cygwin/bin/texlive/texmf-var/tex/generic/config/language.def
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/hyphen/hyphen.tex))
+Augmenting the Plain TeX definitions: \tracingall;
+Adding new e-TeX definitions: \eTeX, \loggingall, \tracingnone,
+register allocation; extended register allocation; 
+Recycling: \addlanguage, \@nswer (not defined), \@sk, \b@dresponsetrue,
+\b@dresponsefalse, \ch@ckforyn, \mayber@cycle, \et@xabort, \et@xbuf,
+\et@xfmtsrc, \et@xfilehdr, \et@xinf, \et@xpatterns, \l@ngdefnfile, \n@xt,
+\p@rse (not defined), \pr@mpt (not defined), \pr@mptloop (not defined),
+\forcer@cycle, \usef@llback, \usef@llbacktrue, \usef@llbackfalse, 
+Retaining: \et@xerr, \et@xinput, \et@xlibhdr, \et@xmsg, \et@xtoks, \et@xwarn,
+\et@xl@@d, \et@xl@ad, \et@xload, \et@xlang, \et@xhash, \eTeX, \etexhdrchk,
+\etexstatus, \module, \uselanguage, \r@tain, \r@cycle,)))
+Beginning to dump on file dviluatex.fmt
+ (format=dviluatex 2016.2.10)
+3102 strings using 9563 bytes
+68807 memory locations dumped; current usage is 103&7700
+1710 multiletter control sequences
+\font\nullfont=nullfont
+\font\tenrm=cmr10
+\font\preloaded=cmr9
+\font\preloaded=cmr8
+\font\sevenrm=cmr7
+\font\preloaded=cmr6
+\font\fiverm=cmr5
+\font\teni=cmmi10
+\font\preloaded=cmmi9
+\font\preloaded=cmmi8
+\font\seveni=cmmi7
+\font\preloaded=cmmi6
+\font\fivei=cmmi5
+\font\tensy=cmsy10
+\font\preloaded=cmsy9
+\font\preloaded=cmsy8
+\font\sevensy=cmsy7
+\font\preloaded=cmsy6
+\font\fivesy=cmsy5
+\font\tenex=cmex10
+\font\preloaded=cmss10
+\font\preloaded=cmssq8
+\font\preloaded=cmssi10
+\font\preloaded=cmssqi8
+\font\tenbf=cmbx10
+\font\preloaded=cmbx9
+\font\preloaded=cmbx8
+\font\sevenbf=cmbx7
+\font\preloaded=cmbx6
+\font\fivebf=cmbx5
+\font\tentt=cmtt10
+\font\preloaded=cmtt9
+\font\preloaded=cmtt8
+\font\preloaded=cmsltt10
+\font\tensl=cmsl10
+\font\preloaded=cmsl9
+\font\preloaded=cmsl8
+\font\tenit=cmti10
+\font\preloaded=cmti9
+\font\preloaded=cmti8
+\font\preloaded=cmti7
+\font\preloaded=cmu10
+\font\preloaded=cmmib10
+\font\preloaded=cmbsy10
+\font\preloaded=cmcsc10
+\font\preloaded=cmssbx10
+\font\preloaded=cmdunh10
+\font\preloaded=cmr7 at 14.51799pt
+\font\preloaded=cmtt10 at 14.4pt
+\font\preloaded=cmssbx10 at 14.4pt
+\font\preloaded=manfnt
+50 preloaded fonts
+0 words of pdf memory
+0 indirect objects
+No pages of output.
+Transcript written on dviluatex.log.
+fmtutil [INFO]: f:/atomicape/cygwin/bin/texlive/texmf-var/web2c/luatex/dviluatex.fmt installed.
+fmtutil [INFO]: --- remaking etex with pdftex
+fmtutil: running `pdftex -ini   -jobname=etex -progname=etex -translate-file=cp227.tcx *etex.ini' ...
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/W32TeX) (INITEX)
+ restricted \write18 enabled.
+ (f:/atomicApe/cygwin/bin/texlive/texmf-dist/web2c/cp227.tcx)
+entering extended mode
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/config/etex.ini
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/etex/etex.src
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/base/plain.tex
+Preloading the plain format: codes, registers, parameters, fonts, more fonts,
+macros, math definitions, output routines, hyphenation
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/hyphen/hyphen.tex
+[skipping from \patterns to end-of-file...]))
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/etex/etexdefs.lib
+Skipping module "grouptypes"; Loading module "interactionmodes";
+Skipping module "nodetypes"; Skipping module "iftypes";)
+(f:/atomicApe/cygwin/bin/texlive/texmf-var/tex/generic/config/language.def
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/hyphen/hyphen.tex))
+Augmenting the Plain TeX definitions: \tracingall;
+Adding new e-TeX definitions: \eTeX, \loggingall, \tracingnone,
+register allocation; extended register allocation; 
+Recycling: \addlanguage, \@nswer (not defined), \@sk, \b@dresponsetrue,
+\b@dresponsefalse, \ch@ckforyn, \mayber@cycle, \et@xabort, \et@xbuf,
+\et@xfmtsrc, \et@xfilehdr, \et@xinf, \et@xpatterns, \l@ngdefnfile, \n@xt,
+\p@rse (not defined), \pr@mpt (not defined), \pr@mptloop (not defined),
+\forcer@cycle, \usef@llback, \usef@llbacktrue, \usef@llbackfalse, 
+Retaining: \et@xerr, \et@xinput, \et@xlibhdr, \et@xmsg, \et@xtoks, \et@xwarn,
+\et@xl@@d, \et@xl@ad, \et@xload, \et@xlang, \et@xhash, \eTeX, \etexhdrchk,
+\etexstatus, \module, \uselanguage, \r@tain, \r@cycle,) )
+Beginning to dump on file etex.fmt
+ (preloaded format=etex 2016.2.10)
+2880 strings of total length 42980
+7960 memory locations dumped; current usage is 203&7290
+1258 multiletter control sequences
+\font\nullfont=nullfont
+\font\tenrm=cmr10
+\font\preloaded=cmr9
+\font\preloaded=cmr8
+\font\sevenrm=cmr7
+\font\preloaded=cmr6
+\font\fiverm=cmr5
+\font\teni=cmmi10
+\font\preloaded=cmmi9
+\font\preloaded=cmmi8
+\font\seveni=cmmi7
+\font\preloaded=cmmi6
+\font\fivei=cmmi5
+\font\tensy=cmsy10
+\font\preloaded=cmsy9
+\font\preloaded=cmsy8
+\font\sevensy=cmsy7
+\font\preloaded=cmsy6
+\font\fivesy=cmsy5
+\font\tenex=cmex10
+\font\preloaded=cmss10
+\font\preloaded=cmssq8
+\font\preloaded=cmssi10
+\font\preloaded=cmssqi8
+\font\tenbf=cmbx10
+\font\preloaded=cmbx9
+\font\preloaded=cmbx8
+\font\sevenbf=cmbx7
+\font\preloaded=cmbx6
+\font\fivebf=cmbx5
+\font\tentt=cmtt10
+\font\preloaded=cmtt9
+\font\preloaded=cmtt8
+\font\preloaded=cmsltt10
+\font\tensl=cmsl10
+\font\preloaded=cmsl9
+\font\preloaded=cmsl8
+\font\tenit=cmti10
+\font\preloaded=cmti9
+\font\preloaded=cmti8
+\font\preloaded=cmti7
+\font\preloaded=cmu10
+\font\preloaded=cmmib10
+\font\preloaded=cmbsy10
+\font\preloaded=cmcsc10
+\font\preloaded=cmssbx10
+\font\preloaded=cmdunh10
+\font\preloaded=cmr7 at 14.51799pt
+\font\preloaded=cmtt10 at 14.4pt
+\font\preloaded=cmssbx10 at 14.4pt
+\font\preloaded=manfnt
+14787 words of font info for 50 preloaded fonts
+14 hyphenation exceptions
+Hyphenation trie of length 6075 has 181 ops out of 35111
+  181 for language 0
+0 words of pdfTeX memory
+0 indirect objects
+No pages of output.
+Transcript written on etex.log.
+fmtutil [INFO]: f:/atomicape/cygwin/bin/texlive/texmf-var/web2c/pdftex/etex.fmt installed.
+fmtutil [INFO]: --- remaking pdfetex with pdftex
+fmtutil: running `pdftex -ini   -jobname=pdfetex -progname=pdfetex -translate-file=cp227.tcx *pdfetex.ini' ...
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/W32TeX) (INITEX)
+ restricted \write18 enabled.
+ (f:/atomicApe/cygwin/bin/texlive/texmf-dist/web2c/cp227.tcx)
+entering extended mode
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/config/pdfetex.ini
+(f:/atomicApe/cygwin/bin/texlive/texmf-config/tex/generic/config/pdftexconfig.t
+ex) (f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/etex/etex.src
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/base/plain.tex
+Preloading the plain format: codes, registers, parameters, fonts, more fonts,
+macros, math definitions, output routines, hyphenation
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/hyphen/hyphen.tex
+[skipping from \patterns to end-of-file...]))
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/etex/etexdefs.lib
+Skipping module "grouptypes"; Loading module "interactionmodes";
+Skipping module "nodetypes"; Skipping module "iftypes";)
+(f:/atomicApe/cygwin/bin/texlive/texmf-var/tex/generic/config/language.def
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/hyphen/hyphen.tex))
+Augmenting the Plain TeX definitions: \tracingall;
+Adding new e-TeX definitions: \eTeX, \loggingall, \tracingnone,
+register allocation; extended register allocation; 
+Recycling: \addlanguage, \@nswer (not defined), \@sk, \b@dresponsetrue,
+\b@dresponsefalse, \ch@ckforyn, \mayber@cycle, \et@xabort, \et@xbuf,
+\et@xfmtsrc, \et@xfilehdr, \et@xinf, \et@xpatterns, \l@ngdefnfile, \n@xt,
+\p@rse (not defined), \pr@mpt (not defined), \pr@mptloop (not defined),
+\forcer@cycle, \usef@llback, \usef@llbacktrue, \usef@llbackfalse, 
+Retaining: \et@xerr, \et@xinput, \et@xlibhdr, \et@xmsg, \et@xtoks, \et@xwarn,
+\et@xl@@d, \et@xl@ad, \et@xload, \et@xlang, \et@xhash, \eTeX, \etexhdrchk,
+\etexstatus, \module, \uselanguage, \r@tain, \r@cycle,)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/plain/config/pdftexmagfix.tex) 
+)
+Beginning to dump on file pdfetex.fmt
+ (preloaded format=pdfetex 2016.2.10)
+2890 strings of total length 43431
+7960 memory locations dumped; current usage is 203&7321
+1260 multiletter control sequences
+\font\nullfont=nullfont
+\font\tenrm=cmr10
+\font\preloaded=cmr9
+\font\preloaded=cmr8
+\font\sevenrm=cmr7
+\font\preloaded=cmr6
+\font\fiverm=cmr5
+\font\teni=cmmi10
+\font\preloaded=cmmi9
+\font\preloaded=cmmi8
+\font\seveni=cmmi7
+\font\preloaded=cmmi6
+\font\fivei=cmmi5
+\font\tensy=cmsy10
+\font\preloaded=cmsy9
+\font\preloaded=cmsy8
+\font\sevensy=cmsy7
+\font\preloaded=cmsy6
+\font\fivesy=cmsy5
+\font\tenex=cmex10
+\font\preloaded=cmss10
+\font\preloaded=cmssq8
+\font\preloaded=cmssi10
+\font\preloaded=cmssqi8
+\font\tenbf=cmbx10
+\font\preloaded=cmbx9
+\font\preloaded=cmbx8
+\font\sevenbf=cmbx7
+\font\preloaded=cmbx6
+\font\fivebf=cmbx5
+\font\tentt=cmtt10
+\font\preloaded=cmtt9
+\font\preloaded=cmtt8
+\font\preloaded=cmsltt10
+\font\tensl=cmsl10
+\font\preloaded=cmsl9
+\font\preloaded=cmsl8
+\font\tenit=cmti10
+\font\preloaded=cmti9
+\font\preloaded=cmti8
+\font\preloaded=cmti7
+\font\preloaded=cmu10
+\font\preloaded=cmmib10
+\font\preloaded=cmbsy10
+\font\preloaded=cmcsc10
+\font\preloaded=cmssbx10
+\font\preloaded=cmdunh10
+\font\preloaded=cmr7 at 14.51799pt
+\font\preloaded=cmtt10 at 14.4pt
+\font\preloaded=cmssbx10 at 14.4pt
+\font\preloaded=manfnt
+14787 words of font info for 50 preloaded fonts
+14 hyphenation exceptions
+Hyphenation trie of length 6075 has 181 ops out of 35111
+  181 for language 0
+0 words of pdfTeX memory
+0 indirect objects
+No pages of output.
+Transcript written on pdfetex.log.
+fmtutil [INFO]: f:/atomicape/cygwin/bin/texlive/texmf-var/web2c/pdftex/pdfetex.fmt installed.
+fmtutil [INFO]: --- remaking pdflatex with pdftex
+fmtutil: running `pdftex -ini   -jobname=pdflatex -progname=pdflatex -translate-file=cp227.tcx *pdflatex.ini' ...
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/W32TeX) (INITEX)
+ restricted \write18 enabled.
+ (f:/atomicApe/cygwin/bin/texlive/texmf-dist/web2c/cp227.tcx)
+entering extended mode
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/latexconfig/pdflatex.ini
+(f:/atomicApe/cygwin/bin/texlive/texmf-config/tex/generic/config/pdftexconfig.t
+ex)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/latex.ltx
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/texsys.cfg)
+./texsys.aux found
+
+
+\@currdir set to: ./.
+
+
+Assuming \openin and \input 
+have the same search path.
+
+
+Defining UNIX/DOS style filename parser.
+
+catcodes, registers, compatibility for TeX 2,  parameters,
+LaTeX2e <2016/02/01>
+hacks, control, par, spacing, files, font encodings, lengths,
+====================================
+
+Local config file fonttext.cfg used
+
+====================================
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/fonttext.cfg
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/fonttext.ltx
+=== Don't modify this file, use a .cfg file instead ===
+
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/omlenc.def)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/t1enc.def)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/ot1enc.def)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/omsenc.def)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/t1cmr.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/ot1cmr.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/ot1cmss.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/ot1cmtt.fd)))
+====================================
+
+Local config file fontmath.cfg used
+
+====================================
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/fontmath.cfg
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/fontmath.ltx
+=== Don't modify this file, use a .cfg file instead ===
+
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/omlcmm.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/omscmsy.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/omxcmex.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/ucmr.fd)))
+====================================
+
+Local config file preload.cfg used
+
+=====================================
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/preload.cfg
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/preload.ltx))
+page nos., x-ref, environments, center, verbatim, math definitions, boxes,
+title, sectioning, contents, floats, footnotes, index, bibliography, output,
+===========================================
+Local configuration file hyphen.cfg used
+===========================================
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/babel/hyphen.cfg
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/babel/switch.def)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/hyphen/hyphen.tex)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/hyphen/dumyhyph.tex)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/hyphen/zerohyph.tex))
+ ) )
+Beginning to dump on file pdflatex.fmt
+ (preloaded format=pdflatex 2016.2.10)
+5043 strings of total length 69632
+44297 memory locations dumped; current usage is 144&43705
+3390 multiletter control sequences
+\font\nullfont=nullfont
+\font\OMX/cmex/m/n/10=cmex10
+\font\tenln=line10
+\font\tenlnw=linew10
+\font\tencirc=lcircle10
+\font\tencircw=lcirclew10
+\font\OT1/cmr/m/n/5=cmr5
+\font\OT1/cmr/m/n/7=cmr7
+\font\OT1/cmr/m/n/10=cmr10
+\font\OML/cmm/m/it/5=cmmi5
+\font\OML/cmm/m/it/7=cmmi7
+\font\OML/cmm/m/it/10=cmmi10
+\font\OMS/cmsy/m/n/5=cmsy5
+\font\OMS/cmsy/m/n/7=cmsy7
+\font\OMS/cmsy/m/n/10=cmsy10
+3633 words of font info for 14 preloaded fonts
+14 hyphenation exceptions
+Hyphenation trie of length 6081 has 183 ops out of 35111
+  2 for language 1
+  181 for language 0
+0 words of pdfTeX memory
+0 indirect objects
+No pages of output.
+Transcript written on pdflatex.log.
+fmtutil [INFO]: f:/atomicape/cygwin/bin/texlive/texmf-var/web2c/pdftex/pdflatex.fmt installed.
+fmtutil [INFO]: --- remaking lualatex with luatex
+fmtutil: running `luatex -ini   -jobname=lualatex -progname=lualatex lualatex.ini' ...
+This is LuaTeX, Version beta-0.80.0 (TeX Live 2015/W32TeX) (rev 5238)  (INITEX)
+ restricted \write18 enabled.
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/latexconfig/lualatex.ini
+(f:/atomicApe/cygwin/bin/texlive/texmf-config/tex/generic/config/pdftexconfig.t
+ex) (f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/latex.ltx
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/texsys.cfg)
+./texsys.aux found
+
+
+\@currdir set to: ./.
+
+
+Assuming \openin and \input 
+have the same search path.
+
+
+Defining UNIX/DOS style filename parser.
+
+catcodes, registers, compatibility for TeX 2,  parameters,
+LaTeX2e <2016/02/01>
+hacks, control, par, spacing, files, font encodings, lengths,
+====================================
+
+Local config file fonttext.cfg used
+
+====================================
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/fonttext.cfg
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/fonttext.ltx
+=== Don't modify this file, use a .cfg file instead ===
+
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/omlenc.def)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/t1enc.def)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/ot1enc.def)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/omsenc.def)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/t1cmr.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/ot1cmr.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/ot1cmss.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/ot1cmtt.fd)))
+====================================
+
+Local config file fontmath.cfg used
+
+====================================
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/fontmath.cfg
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/fontmath.ltx
+=== Don't modify this file, use a .cfg file instead ===
+
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/omlcmm.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/omscmsy.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/omxcmex.fd)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/ucmr.fd)))
+====================================
+
+Local config file preload.cfg used
+
+=====================================
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/preload.cfg
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/latex/base/preload.ltx))
+page nos., x-ref, environments, center, verbatim, math definitions, boxes,
+title, sectioning, contents, floats, footnotes, index, bibliography, output,
+ Unicode character data,
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/unicode-data/load-unico
+de-data.tex 
+load-unicode-data.tex v1.3a (2016-02-06)
+Reading Unicode data
+# UnicodeData-8.0.0.txt
+# Downloaded 2015-12-01 09:00:00 GMT [JAW]
+)
+===========================================
+Local configuration file hyphen.cfg used
+===========================================
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/babel/hyphen.cfg
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/babel/luababel.def)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/babel/switch.def)
+(f:/atomicApe/cygwin/bin/texlive/texmf-dist/tex/generic/hyphen/hyphen.tex))
+))
+Beginning to dump on file lualatex.fmt
+ (format=lualatex 2016.2.10)
+4990 strings using 29715 bytes
+153275 memory locations dumped; current usage is 124&48863
+3694 multiletter control sequences
+\font\nullfont=nullfont
+\font\OMX/cmex/m/n/10=cmex10
+\font\tenln=line10
+\font\tenlnw=linew10
+\font\tencirc=lcircle10
+\font\tencircw=lcirclew10
+\font\OT1/cmr/m/n/5=cmr5
+\font\OT1/cmr/m/n/7=cmr7
+\font\OT1/cmr/m/n/10=cmr10
+\font\OML/cmm/m/it/5=cmmi5
+\font\OML/cmm/m/it/7=cmmi7
+\font\OML/cmm/m/it/10=cmmi10
+\font\OMS/cmsy/m/n/5=cmsy5
+\font\OMS/cmsy/m/n/7=cmsy7
+\font\OMS/cmsy/m/n/10=cmsy10
+14 preloaded fonts
+0 words of pdf memory
+0 indirect objects
+No pages of output.
+Transcript written on lualatex.log.
+fmtutil [INFO]: f:/atomicape/cygwin/bin/texlive/texmf-var/web2c/luatex/lualatex.fmt installed.
+fmtutil [INFO]: Disabled formats: 1
+fmtutil [INFO]: Successfully rebuilt formats: 13
+fmtutil [INFO]: Total formats: 14
+fmtutil [INFO]: exiting with status 0
+running package-specific postactions
+postaction install shortcut for dviout.win32
+postaction install fileassoc for dviout.win32: .dvi, TL.DVIOUT.view.2015
+postaction install script for dvipdfmx: perl F:/atomicApe/cygwin/bin/texlive/tlpkg/tlpostcode/dvipdfmx.pl
+postaction install shortcut for texlive-common
+postaction install shortcut for texlive-scripts
+postaction install shortcut for texlive.infra
+postaction install shortcut for tlpsv.win32
+postaction install fileassoc for tlpsv.win32: .eps, TL.PSView.view.2015
+postaction install fileassoc for tlpsv.win32: .ps, TL.PSView.view.2015
+postaction install fileassoc for tlpsv.win32: .pdf, TL.PSView.view.2015
+finished with package-specific postactions
+Settings:
+  TEXDIR: "F:/atomicApe/cygwin/bin/texlive"
+  TEXMFCONFIG: "$TEXMFSYSCONFIG"
+  TEXMFHOME: "$TEXMFLOCAL"
+  TEXMFLOCAL: "F:/atomicApe/cygwin/bin/texlive/texmf-local"
+  TEXMFSYSCONFIG: "F:/atomicApe/cygwin/bin/texlive/texmf-config"
+  TEXMFSYSVAR: "F:/atomicApe/cygwin/bin/texlive/texmf-var"
+  TEXMFVAR: "$TEXMFSYSVAR"
+  binary_alpha-linux: "0"
+  binary_amd64-freebsd: "0"
+  binary_amd64-netbsd: "0"
+  binary_armel-linux: "0"
+  binary_armhf-linux: "0"
+  binary_i386-cygwin: "0"
+  binary_i386-freebsd: "0"
+  binary_i386-linux: "0"
+  binary_i386-netbsd: "0"
+  binary_i386-solaris: "0"
+  binary_mipsel-linux: "0"
+  binary_powerpc-linux: "0"
+  binary_sparc-solaris: "0"
+  binary_universal-darwin: "0"
+  binary_win32: "1"
+  binary_x86_64-cygwin: "0"
+  binary_x86_64-darwin: "0"
+  binary_x86_64-linux: "0"
+  binary_x86_64-solaris: "0"
+  collection-basic: "1"
+  collection-bibtexextra: "0"
+  collection-binextra: "0"
+  collection-context: "0"
+  collection-fontsextra: "0"
+  collection-fontsrecommended: "0"
+  collection-fontutils: "0"
+  collection-formatsextra: "0"
+  collection-games: "0"
+  collection-genericextra: "0"
+  collection-genericrecommended: "0"
+  collection-htmlxml: "0"
+  collection-humanities: "0"
+  collection-langafrican: "0"
+  collection-langarabic: "0"
+  collection-langchinese: "0"
+  collection-langcjk: "0"
+  collection-langcyrillic: "0"
+  collection-langczechslovak: "0"
+  collection-langenglish: "0"
+  collection-langeuropean: "0"
+  collection-langfrench: "0"
+  collection-langgerman: "0"
+  collection-langgreek: "0"
+  collection-langindic: "0"
+  collection-langitalian: "0"
+  collection-langjapanese: "0"
+  collection-langkorean: "0"
+  collection-langother: "0"
+  collection-langpolish: "0"
+  collection-langportuguese: "0"
+  collection-langspanish: "0"
+  collection-latex: "1"
+  collection-latexextra: "0"
+  collection-latexrecommended: "0"
+  collection-luatex: "0"
+  collection-mathextra: "0"
+  collection-metapost: "0"
+  collection-music: "0"
+  collection-omega: "0"
+  collection-pictures: "0"
+  collection-plainextra: "0"
+  collection-pstricks: "0"
+  collection-publishers: "0"
+  collection-science: "0"
+  collection-texworks: "0"
+  collection-wintools: "1"
+  collection-xetex: "0"
+  doc_splitting_supported: "1"
+  in_place: "0"
+  inst_platform: "win32"
+  n_collections_available: "48"
+  n_collections_selected: "3"
+  n_systems_available: "19"
+  n_systems_selected: "1"
+  option_adjustrepo: "1"
+  option_autobackup: "1"
+  option_backupdir: "tlpkg/backups"
+  option_desktop_integration: "0"
+  option_doc: "1"
+  option_file_assocs: "0"
+  option_fmt: "1"
+  option_letter: "1"
+  option_menu_integration: "1"
+  option_path: "0"
+  option_post_code: "1"
+  option_src: "1"
+  option_sys_bin: "/usr/local/bin"
+  option_sys_info: "/usr/local/share/info"
+  option_sys_man: "/usr/local/share/man"
+  option_w32_multi_user: "0"
+  option_write18_restricted: "1"
+  portable: "1"
+  scheme-basic: "0"
+  scheme-context: "0"
+  scheme-full: "1"
+  scheme-gust: "0"
+  scheme-medium: "0"
+  scheme-minimal: "0"
+  scheme-small: "0"
+  scheme-tetex: "0"
+  scheme-xml: "0"
+  selected_scheme: "scheme-basic"
+  src_splitting_supported: "1"
+  this_platform: "win32"
+  total_size: "244"

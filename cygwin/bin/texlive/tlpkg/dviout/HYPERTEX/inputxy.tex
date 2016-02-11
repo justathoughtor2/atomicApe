@@ -1,0 +1,930 @@
+\documentclass[10pt]{jarticle}
+%%%
+\def\pdf{TF}		%  TT (pdf for dvipdfmx) <-> TF (dvi for dviout)
+%%%
+\usepackage{myhyper,amsmath,amssymb,amsfonts,amscd,alltt}
+\if\pdf
+\usepackage[nokeyin]{keyin}
+\else
+\usepackage{keyin}
+\fi
+\usepackage[dviout]{graphicx,color}
+\AtBeginDvi{\special{dviout -hyper=144 -hyperoff=0 v0}}
+% -hyper=144 : Blue letters without underline (hot spot)
+% -hyperoff=0: HyperTeX is valid
+% v0         : Minimal bars
+% v0vs       : Minimal bars + Status bar
+% !3         : Copy to Editor without CTRL
+\if\pdf
+\AtBeginDvi{\special{papersize=5.5in,8in}}
+\hoffset=-1.03cm
+\voffset=-3.18cm
+\paperwidth=5.6in
+\paperheight=8in
+\else
+\AtBeginDvi{\special{papersize=4.6in,7.07in}}
+\hoffset=-2.3cm
+\voffset=-4.45cm
+\paperwidth=4.6in
+\paperheight=7in
+\fi
+\textwidth=4.4in
+\textheight=7.0in
+\renewcommand\baselinestretch{0.92}
+%\paraindent=0cm
+\setlength{\oddsidemargin}{0cm}
+\setlength{\parindent}{0cm}
+\def\BK{\texttt{\symbol{'134}}}
+\def\D#1{\keyin{#1}{#1}}
+\def\E#1{\keyin{\string#1}{#1}}
+\def\Q#1{\keyin{\string#1}{$#1$}}
+\def\R#1{\keyin{\noexpand#1}{$#1$}}
+\def\F#1{\special{html:<a href="dviout:`in .5c#1">}\BK#1\special{html:</a>}}
+\def\G#1{\special{html:<a href="dviout:`in .5c#1=">}\BK#1\special{html:</a>}}
+\def\Goto#1#2{\goto{#1}{\colorbox{green}{\tiny\sf #2}}}
+% \def\gotop#1{\makebox[0mm]{\hspace{#1}\Goto{top}{Top}}}
+\def\red#1{{\color{red}#1}}
+\def\blue#1{{\color{blue}#1}}
+\def\green#1{{\color{green}#1}}
+\def\RED#1{{\it\color{red}#1}}
+\def\MGNT#1{{\it\color{magenta}#1}}
+\def\GREEN#1{{\it\color{green}#1}}
+\def\ops#1{\{\MGNT{#1}\}}
+\def\Ops#1{[\MGNT{#1}]}
+\def\opt#1{\{\RED{#1}\}}
+\def\Opt#1{[\RED{#1}]}
+\def\ST{\hspace{-.1em}\raisebox{-0.25em}*}
+\if\pdf
+\def\NEXT{\phantom{a}}
+\def\BACK{\phantom{a}}
+\else
+\def\NEXT%
+{\special{html:<a href="dviout: Je">}\colorbox{cyan}{\tiny$\Rightarrow$}\special{html:</a>}}
+\def\BACK%
+{\special{html:<a href="dviout: Jv">}\colorbox{cyan}{\tiny$\Leftarrow$}\special{html:</a>}}
+\fi
+\def\GOTO#1{
+
+\vspace*{-2.7ex}
+\hfill{\Goto{#1}{#1}}
+
+}
+%
+\pagestyle{empty}
+%%%
+\newlength{\minitwocolumn}
+\newenvironment{z2col}[1][0pt]%
+{\def\kaidan{\end{minipage}%
+             \hspace{\columnsep}%
+             \addtolength{\minitwocolumn}{-#1}%
+             \begin{minipage}[t]{\minitwocolumn}}%
+ \setlength{\minitwocolumn}{0.48\textwidth}%
+ \addtolength{\minitwocolumn}{-0.5\columnsep}%
+ \addtolength{\minitwocolumn}{#1}%
+ \begin{minipage}[t]{\minitwocolumn}}%
+{\end{minipage}}
+%%%
+\if\pdf
+\usepackage[all,ps,dvips]{xy}
+\else
+\usepackage[all]{xy}
+\fi
+\xyoption{poly}
+\xyoption{arc}
+\xyoption{2cell}
+\xyoption{knot}
+\xyoption{web}
+\UseAllTwocells
+%%%
+\newenvironment{Alltt}{%
+\renewcommand{\\}{\char`\\}
+\begin{alltt}%
+}{%
+\end{alltt}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\ToDef#1{\goto{#1}{\colorbox{magenta}{\tiny\sf Def}}}
+\def\ToEx#1{\goto{#1}{\colorbox{magenta}{\tiny\sf Ex}}}
+\def\La{\,$\leftarrow$\,}
+\def\pos{\MGNT{pos}}
+\def\Pos{\goto{pos}\pos}
+\def\cod{\MGNT{cod}}
+\def\Cod{\goto{cod}\cod}
+\def\obj{\MGNT{obj}}
+\def\Obj{\goto{obj}\obj}
+\def\vector{\MGNT{vector}}
+\def\Vector{\goto{vector}\vector}
+\def\place{\MGNT{place}\/}
+\def\Place{\goto{place}\place}
+\def\stack{\MGNT{stack}\/}
+\def\sav{\MGNT{save}}
+\def\FAC{{\it\color{cyan}factor}}
+\def\dr{\MGNT{direction}}
+\def\dm{{\it\color{cyan}dimen}}
+\def\Dm{\goto{dm}\dm}
+\def\CIR{{\it\color{magenta}cir}}
+\def\Cir{\goto{cir}\CIR}
+\def\anchor{\MGNT{anchor}}
+\def\Anchor{\goto{anchor}\anchor}
+\def\DIR{{\MGNT{dir}}}
+\def\Dir{\goto{dir}\DIR}
+\def\TEXT{{\it\color{cyan}text}}
+\def\ID{{\it\color{cyan}id}}
+\def\diag{{\it\color{magenta}diag}}
+\def\Diag{\goto{diag}\diag}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\if\pdf
+\rightline{\href{http://akagi.ms.u-tokyo.ac.jp/input9.pdf}{\colorbox{cyan}{\scriptsize\sf Help \Xy-pic}}
+\ \NEXT}
+\else
+\rightline{\href{file:input9.dvi}{\colorbox{cyan}{\scriptsize\sf Help \Xy-pic}}
+\ \NEXT}
+\fi
+\centerline{\Large\bf\Xy-pic}
+
+\vspace*{-4ex}
+\section{はじめに}
+\AmS-\LaTeX の\texttt{CD}環境で簡単な可換図式が描けますが，
+矢印の形状が限られている上，斜めの矢印が描けないなど種々の制約があります．
+$\Xy$-pic はこのような制約が無く，各種の図式を描くことができます．
+%簡単に可換図式を描くことができるなど，
+%以下のような優れた特徴を持っています．
+\begin{itemize}
+\item
+任意の２点間に矢印が引け，矢先，軸，矢羽を組み合わせて種々の形状が可能で，
+軸の部分も自由に曲げることができる．
+\item
+可換図式，フローチャート，有向グラフやツリーグラフ，
+カテゴリー理論のセル２つの図式，多角形や楕円などの図形や自由曲線，
+格子構造の図式，結び目やリンク，などを描くための機能が備わっている．
+\item
+矢印や曲線などは独自のフォントによって（specialsを用いない）標準の\TeX の機能
+内で動作する．一方，出力デバイスに依存するが，tpic specials や PostScriptを使
+った軽く綺麗な出力にも対応し，タイプセットは（綺麗さを除いて）両者で同一で
+ある．これを利用し，拡大してもギザギザが出ないPDFに変換できる．
+\item
+座標の原点の移動のみならず，$X$-軸，$Y$-軸の単位ベクトルを任意に指定できるので，斜交座標の採用や図形のアフィン変換が容易．
+\item
+\LaTeX, plain\TeX, \AmS-\TeX など，種々の\TeX の下で同様に動く．
+\end{itemize}
+\quad
+\Xy-pic はいくつかのファイル群から成り立っており，必要なもののみ読み込むことができますが，当面は
+\begin{quote}
+\keyin{\usepackage[all]{xy} 0d 0a}{{\sf \BK usepackage[all]\{xy\}}}
+\end{quote}
+を\LaTeX の冒頭の{\sf \BK usepackage\{\}}の最後に追加しておくのがよいでしょう．
+
+\quad
+以下で扱う \LaTeX や p\LaTeX の場合，\Xy-pic は，本文の中で
+\begin{quote}
+\keyin{\begin{xy} 0d 0a\end{xy} 0d 0a}{{\sf \BK begin\{xy\}\\
+\quad$\cdots$\\
+\BK end\{xy\}}}
+\end{quote}
+として使うのが基本です．\\
+\quad
+なお，\href{ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/macros/xypic.zip}{ここ}
+をクリックして得たパッケージを {\tt.\BK texmf} の存在するディレクトリで展開すれば \Xy-pic  がインストールされます．
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{矢印}
+
+\vspace*{-4ex}
+\hfill\raisebox{2ex}{\BACK\ \NEXT}\\
+{\bf 1}.
+デフォルトの座標単位はmmで，%す．\\ \quad
+$(0,0)$から$(20,0)$に矢印を引くには
+
+\begin{z2col}
+\begin{Alltt}
+\\begin\{xy\}
+  \\ar (20,0)
+\\end\{xy\}
+\end{Alltt}
+\kaidan
+\vspace*{3ex}
+\begin{xy}
+  \ar (20,0)
+\end{xy}
+\end{z2col}
+
+\medskip
+とします．
+{\color{red}$(20,0)$} の代わりに実寸を用いて {\color{red}\verb|<2cm,0cm>|} の
+ように書くこともできます（\TeX で有効な\MGNT{長さ}を用いる）．
+
+\quad 実際には「続けて{\color{red}\verb|\begin{xy} |}\verb|\ar (20,0)|{\color{red}\verb|\end{xy}|}と書く」と，
+以下のようになります．
+
+\centerline{「続けて\begin{xy} \ar (20,0)\end{xy}と書く」}
+
+\smallskip
+\quad
+より短く「続けて{\color{red}\verb|\xybox{|}\verb|\ar(20,0)|{\color{red}\verb|}|}と書く」としても同じ結果です．
+
+\medskip
+{\bf 2}.
+一般に
+
+\centerline{\tt\{(\MGNT{a},\MGNT{b}) \BK ar \string@\{\MGNT{arrow}\} (\MGNT{c},\MGNT{d})\} または　\{\BK ar \string@\{\MGNT{arrow}\} (\MGNT{a},\MGNT{b});(\MGNT{c},\MGNT{d})\}}
+
+\medskip
+によって，{\tt(\MGNT{a},\MGNT{b})}から{\tt(\MGNT{c},\MGNT{d})}へ 
+\MGNT{arrow}で形状を指定した矢印が引かれます
+（形状指定がないときは，上の標準の矢印）：
+
+\begin{z2col}
+\begin{Alltt}
+\\begin\{xy\}
+ \{(0,20)  \\ar @\{\red{=>\}}        (15,23)\},
+ \{(0,15)  \\ar @\{\red{|-->}\}      (15,15)\},
+ \{(0,15)  \\ar @\{\red{~>}\}        (35,5)\},
+ \{(0,5)   \\ar @\{\red{.}\}         (15,5)\},
+ \{(0,0)   \\ar @\red{_}\{\red{||->>}\}    (10,0)\},
+ \{(20,20) \\ar @\red{/^4mm/}      (35,20)\},
+ \{(20,15) \\ar @\red{3}\{\red{<->}\}      (35,15)\},
+ \{(20,0)  \\ar @\{\red{^\{(\}-_\{>\}}\} (35,0)\}
+\\end\{xy\}
+\end{Alltt}
+\kaidan
+\vspace*{5ex}
+\hfill
+\begin{xy}
+ {(0,20)  \ar @{=>}        (15,23)},
+ {(0,15)  \ar @{|-->}      (15,15)},
+ {(0,15)  \ar @{~>}        (35,2)},
+ {(0,5)   \ar @{.}         (15,5)},
+ {(0,0)   \ar @_{||->>}    (15,0)},
+ {(20,20) \ar @/^4mm/      (35,20)},
+ {(20,15) \ar @3{<->}      (35,15)},
+ {(20,0)  \ar @{^{(}-_{>}} (35,0)}
+\end{xy}
+\end{z2col}
+
+\medskip
+\quad
+矢印の進む向きに対し，\red{\tt\string^} は左直交方向，
+\red{\tt\string_} は右直交方向を表します（左から右へ向かう矢印に対しては，
+前者は「上」，後者は「下」方向）．
+
+\quad
+一般に {\color{red}\verb|/  /|} は\textbf{ずらし}を表し，
+{\color{red}\verb|@/^4mm/|} は「左直交方向に4mmのずらし」となります．
+矢印の始点と終点は固定されたままで，上の例では4mm上に曲がった曲線の軸を持つ\textbf{標準の形状}の矢印が引かれます．
+
+\quad
+矢先と矢羽には \red{\tt < > ( ) | ' ` + / x o \{*\}} などが使えます．
+
+\quad
+矢軸には \red{\tt - . \string~ = :} が使えます．
+
+\quad
+\red{\tt@} の直後に {\tt\color{red}\verb|^ _ 2 3|} （左／右半，二／三重）のいずれかを付加できます．
+
+\quad
+形状の\MGNT{arrow}における 上の例の{\color{red}\verb|^{(}|}は
+「矢羽 \red{\tt(} の左半分」を表します．
+
+\medskip
+{\bf 3}.
+矢印のフォントはComputer ModernやEulerに変更できます:
+\hfill{\BACK\ \NEXT\!\!}
+
+\begin{z2col}
+\begin{Alltt}\\begin\{xy\}         \\ar (0,10);(10,10)
+ \red{\\SelectTips\{cm\}\{\}} \\ar (0,5) ;(10,5)
+ \red{\\SelectTips\{eu\}\{\}} \\ar (10,0)  \\end\{xy\} \end{Alltt}
+\kaidan
+\vspace*{-.5ex}
+\hfill\hfill
+\begin{xy}
+ \ar (0,10);(10,10)
+ \SelectTips{cm}{} \ar (0,5); (10,5)
+ \SelectTips{eu}{} \ar (10,0)
+\end{xy}
+\hfill\phantom{.}
+\end{z2col}
+
+\smallskip
+後の\red{\tt\{\ \}} の中で，ポイント（\red{10}/\red{11}/\red{12}）が
+指定できます．
+
+\medskip
+{\bf 4}.
+矢印には，以下のように {\color{red}\verb:^ _ |:}(挿入) によって\textbf{ラベル}を付けられます：
+
+\begin{z2col}
+\begin{Alltt}
+\\begin\{xy\}
+ \{(0,20) \\ar @\{\red{o.x}\}(20,20)\red{\tt\string^\{}n\\to\\infty\red{\}\string_}p\},
+ \{(0,15) \\ar @\red{/_/}@\{\red{\{*\}->}\} (20,10)\red{\tt\string^}A\red{\tt\string_}\\alpha\},
+ \{(0,0)  \\ar @\{\red{||->>}\} (20,0){\tt\color{red}|\{}\\sum_n a_n\red{\tt\}}\}
+\\end\{xy\}
+\end{Alltt}
+\kaidan
+\vspace*{-1.5ex}
+\hfill
+\begin{xy}
+ {(0,15) \ar @{o.x}(20,15)^{n\to\infty}_p},
+ {(0,10) \ar @/_/@{{*}->} (20,7)^A_\alpha},
+ {(0,0)  \ar @{||->>} (20,0)|{\sum_n a_n}}
+\end{xy}\!\!\!\!
+\end{z2col}
+%%%%%%%%%%%%%%%%%%%%%%
+
+\medskip
+{\bf 5}.
+位置やラベルに{\tt\color{red}=\{\it{\color{cyan}id}\}} によって\textbf{名前}をつけると，後から参照できます：
+\begin{z2col}
+\begin{Alltt}
+\\begin\{xy\}
+ (5,8.66)\red{="A"}, (0,0)\red{="B"}, (10,0)\red{="C"},
+ \\ar@\{-\}\red{"A"};\red{"B"} \\ar@\{-\}\red{"B"};\red{"C"} \\ar@\{-\}\red{"C"};\red{"A"} 
+\\end\{xy\}
+\\begin\{xy\}
+ \\ar @\{<-|\} (0,0);(10,0)^a\red{="A"}
+ \\ar @\{|=>\}(15,0);(25,0)^b\red{="B"}
+ \\ar @/^/ @\{<->\}\red{"A"};\red{"B"}^c
+\\end\{xy\}
+\end{Alltt}
+\kaidan
+\vspace*{1.ex}
+\hfill
+\begin{xy}
+ (5,8.66)="A", (0,0)="B", (10,0)="C",
+ \ar@{-}"A";"B" \ar@{-}"B";"C" \ar@{-}"C";"A" 
+\end{xy}
+
+\vspace*{8ex}
+\hfill
+\begin{xy}
+ \ar @{<-|}(0,0);(10,0)^a="A"
+ \ar @{|=>}(15,0);(25,0)^b="B"
+ \ar @/^/ @{<->}"A";"B"^c
+\end{xy}
+\end{z2col}
+
+\medskip
+{\bf 6}.
+矢（羽）の\textbf{出発方向}と，終点からみた矢先の\textbf{到着方向}とは，
+この順に
+
+\centerline{\color{red}\tt@(\MGNT{方向},\MGNT{方向})}
+
+で指定できます．
+方向には
+\red{\tt r}（右），\red{\tt rd}（右下），\red{\tt d}（下），
+\red{\tt ld}（左下），\red{\tt l}（左），\red{\tt lu}（左上），\
+\red{\tt u}（上），\red{\tt ru}（右上）があります．
+
+\begin{z2col}
+\begin{Alltt}
+\\begin\{xy\}
+ (0,0)="A", (20,0)="B",
+ \\ar \red{@(lu,ld)} "A";"A"|\{id\}
+ \\ar \red{@(d,d)} "A";"B"^f \\ar \red{@(ld,ru)} "B";"A"_g
+\\end\{xy\}
+\end{Alltt}
+\kaidan
+\vspace*{-.1ex}
+\hfill
+\begin{xy}
+ (0,0)="A", (20,0)="B",
+ \ar @(lu,ld) "A";"A"|{id}
+ \ar @(d,d)   "A";"B"^f
+ \ar @(ld,ru) "B";"A"_g
+\end{xy}
+\end{z2col}
+
+\medskip
+{\bf 7}.
+矢印は，指定した長さ（左方向が正）だけの平行の\textbf{ずらし}ができます：
+
+\centerline{\color{red}\tt@<\MGNT{長さ}>}
+
+\vspace*{-2ex}
+\begin{z2col}
+\begin{Alltt}
+\\begin\{xy\}
+ (0,0)="A", (20,0)="B",
+ \\ar \red{@<1mm>} "A";"B"^\{f\}
+ \\ar \red{@<1mm>} "B";"A"^\{f^\{-1\}\}
+\\end\{xy\}
+\end{Alltt}
+\kaidan
+\vspace{1ex}
+\hfill
+\begin{xy}
+ (0,0)="A", (20,0)="B",
+ \ar @<1mm> "A";"B"^{f}
+ \ar @<1mm> "B";"A"^{f^{-1}}
+\end{xy}
+\end{z2col}
+
+\newpage
+\medskip
+{\bf 8}.
+ラベルの直前にラベルの\textbf{場所指定}を置くことができます．\hfill
+\BACK\ \NEXT
+
+\hspace{1cm}{\tt\red{< > -\ \ \ } :矢印の末尾/先頭/中央（\red{\tt-} は \red{<>(0.5)} と同等）}\\
+\hspace{1cm}{\tt\red{(\MGNT{比})\ \ \ \ } :比で指定}\\
+\hspace{1cm}{\tt\red{/\MGNT{長さ}/\ \ } :ずらし}\\
+\hspace{1cm}{\tt\red{!\{\MGNT{位置}\}\ }} :位置で指定
+
+\begin{z2col}
+\begin{Alltt}
+\\begin\{xy\}  (0,15)="A",(0,0)="B",
+ \\ar        "A";"B"^\red{<}a
+ \\ar@<6mm>  "A";"B"^\red{<<<}b
+ \\ar@<12mm> "A";"B"^\red{>}c
+ \\ar@<18mm> "A";"B"^\red{(.3)}d
+ \\ar@<24mm> "A";"B"^\red{/3mm/}e  \\end\{xy\}
+\end{Alltt}
+\kaidan
+\vspace{1ex}
+\hfill
+\begin{xy}  (0,15)="A", (0,0)="B",
+ \ar         "A";"B"^<a
+ \ar @<6mm>  "A";"B"^<<<b
+ \ar @<12mm> "A";"B"^>c
+ \ar @<18mm> "A";"B"^(.3)d
+ \ar @<24mm> "A";"B"^/3mm/e
+\end{xy}\!\!\!\!
+\end{z2col}
+
+
+\medskip
+{\bf 9}.
+``A" と ``B" を結ぶ直線との交点の位置は
+
+\centerline{\color{red}\tt!\{"A";"B"\}}
+
+によって得られます．
+
+\begin{z2col}
+\begin{Alltt}
+\\begin\{xy\}
+ (0,0)="A",(10,10)="B",(15,0)="C",(0,10)="D",
+ \\ar "A";"B"
+ \\ar "C";"D"|\red{!\{"A";"B"\}\\hole}
+\\end\{xy\}
+\end{Alltt}
+\kaidan
+
+\vspace*{1ex}
+\hfill
+\begin{xy}
+ (0,0)="A",(10,10)="B",(15,0)="C",(0,10)="D",
+ \ar "A";"B"
+ \ar "C";"D"|!{"A";"B"}\hole
+\end{xy}
+\end{z2col}
+
+\medskip
+``C" から ``D" への矢印に対し，``A" と ``B" を結ぶ直線との交点に空白の穴 {\color{red}\verb|\hole|} を空けたものです．
+
+\quad
+一般に ``A" と ``B" を結ぶ直線と ``C" と ``D" を結ぶ直線の交点は\\
+\centerline{\tt\red{!\{"A";"B":"C";"D",x\}}}
+によって求められます．
+
+\vspace*{-3ex}
+\section{要素}
+{\bf 1}.
+図式に{\bf 要素}を配置し，それを矢印で結ぶことができます．要素は，
+通常の記号や文字，さらに一般に\TeX で表現されたものとすることができます．
+%要素の大きさが考慮されて矢印が引かれます．
+
+\begin{z2col}
+\begin{Alltt}
+\\begin\{xy\}
+ (0,0) \red{*\{A\}}="A",(10,10)\red{*\{B\}}="B",
+ (15,0)\red{*\{C\}}="C",(0,10) \red{*\{D\}}="D",
+ \\ar "A";"B"
+ \\ar "C";"D"|!\{"A";"B"\}\\hole
+\\end\{xy\}
+\end{Alltt}
+\kaidan
+\vspace*{2ex}
+\hfill
+\begin{xy}
+ (0,0) *{A}="A",(10,10)*{B}="B",
+ (15,0)*{C}="C",(0,10)*{D}="D",
+ \ar "A";"B"
+ \ar "C";"D"|!{"A";"B"}\hole
+\end{xy}
+\end{z2col}
+
+\smallskip
+\quad
+要素を配置するには，先頭に \red{\tt *} をつけて \red{\tt *\{\!要素\!\}} の
+ように書きます．
+%が，要素が通常の文字一つの時は \red{\tt\{\ \}} は省略できます．\\
+
+\vspace{5ex}
+\quad
+次のようなものが要素として，先頭に \red{\tt *} を付加することで配置されます．
+
+\hspace{.5cm}\red{\tt \{\!テキスト\!\}} :テキストは数式モードで組まれます．\\
+\hspace{1cm}{\TeX}における通常の {\tt\BK hbox} のように組まれた\textbf{箱}
+でもOKです.\\
+\hspace{.5cm}\red{\tt\BK txt<幅>\{\!テキスト\!\}} :テキストは通常の文章として組まれます．\\
+\hspace{1cm}\red{\tt<幅>} は省略可能で，テキスト中は強制改行
+記号 \red{\tt\BK\BK} が使用できます．\\
+\hspace{.5cm}\red{\tt \BK xybox\{{\rm\Xy-pic}による図式\}} 
+
+これらの要素は，{\bf ラベル}としても使用できます．\hfill
+\BACK\ \NEXT
+
+\begin{z2col}
+\begin{Alltt}
+\\begin\{xy\}
+ \\ar (0,0) *\red{\{}\\sum_\{n=1\}^N2^{-n}\red{\}}; 
+ (30,0) 
+ *\red{\\txt\{}増加して\red{\\\\}1に収束\red{\}}
+ ^-\red{\{}N\\to\\infty\red{\}}
+\\end\{xy\}
+\end{Alltt}
+\kaidan
+
+\vspace*{4ex}
+\hfill
+\begin{xy}
+ \ar (0,0) *{\sum_{n=1}^N2^{-n}}; 
+    (30,0) *\txt{増加して\\1に収束}
+     ^-{N\to\infty}   \end{xy}\!\!\!\!\!\!
+\end{z2col}
+
+\medskip
+{\bf 2}.
+要素は{\bf 大きさ}や{\bf 位置}が調整でき，{\bf 枠}を付けることなどもできます．
+
+\hspace{.5cm}\MGNT{add-op}\MGNT{長さ} :大きさの調整．
+\MGNT{add-op} には，\red{\tt + - = += -=} がある．\\
+\hspace{1cm}\MGNT{長さ}を指定しない場合は，デフォルト値が用いられる．\\
+\hspace{.5cm}\red{\tt !}\MGNT{ベクトル} :位置の調整（境界までのベクトル
+\red{\tt R RD D} $\cdots$ なども可）\\
+\hspace{.5cm}\red{\tt[\MGNT{形}]} :様々な{\bf 形}（\red{\tt[o]}は丸に）を設定可能で，以下の{\bf 枠}もそのひとつ．\\
+\hspace{1cm}\red{\tt [F\MGNT{frame}:\MGNT{opt}]\ \,} :\red{\tt:\MGNT{opt}}は省略可．
+\red{\tt F}に（空白無しで続けた）\MGNT{frame} は\\
+\hspace{1.5cm}\red{\tt .\ - =\ \ \ \ \ } :矩形の枠，\MGNT{opt}は\red{\tt<\MGNT{長さ}>}で角の丸みの半径\\
+\hspace{1.5cm}\red{\tt -- o-\ \ \ \ \ } :破線の枠，丸みを帯びた枠\\
+\hspace{1.5cm}\red{\tt , -,\ \ \ \ \ \ } :影つきの枠（\MGNT{opt}は\red{\tt<\MGNT{長さ}>}で影のサイズ）\\
+\hspace{1.5cm}\red{\tt o .o -o oo} :円形の枠，\MGNT{opt}は\red{\tt<\MGNT{長さ}>}で半径を指定\\
+\hspace{1.5cm}\red{\tt (  ) \string^) \string_(\ } :\,{\tt (} の形の括弧（左/右/上/下）\\
+\hspace{1.5cm}\red{\tt\BK\{ \BK\} \string^\{ \string_\}}:\,{\tt \{} の形の括弧（左/右/上/下）
+
+枠は \red{\tt*\BK frm \MGNT{opt}\{\MGNT{frame}\}} または，
+\red{\tt**\BK frm \MGNT{opt}\{\MGNT{frame}\}} によっても描ける．前者は直前の
+\text{要素}を囲み，後者はその前の\text{要素}も囲むものとなる．
+
+\begin{z2col}
+\begin{Alltt}
+\\begin\{xy\}
+\{\\ar(0,20) *\{\\times\}*\red{+!D}\{a\};(15,20) *\{\\bigcirc\}
+ \\ar(0,15) *\red{=0}\{\\times\};(15,15) *\red{=0}\{\\bigcirc\}
+ \\ar(0,10) *\red{+[F]}\{A\};   (15,10) *\red{+[Fo]}\{B\}
+ \\ar *\red{++=}\{A\} \red{*\\frm\{o\}};
+    (15,3) \red{*+++}=\{B\} \red{*\\frm\{oo\}} \red{**\\frm\{-\}}\},
+ (8,-8) \red{*+[Fo]}\{AB\} ="A",
+    \\ar @(lu,ld) "A";"A"
+\\end\{xy\}
+\end{Alltt}
+\kaidan
+\vspace*{.2ex}
+\hfill
+\begin{xy}
+{\ar(0,20) *{\times}*+!D{a};(15,20) *{\bigcirc}
+ \ar(0,15)  *=0{\times};(15,15)*=0{\bigcirc}
+ \ar(0,10)  *+[F]{A};  (15,10) *+[Fo]{B}
+ \ar *++={A} *\frm{o};(15,3) *+++={B} *\frm{oo} **\frm{-}},
+ (8,-8) *+[Fo]{AB} ="A",
+ \ar @(lu,ld) "A";"A"
+\end{xy}\!\!\!\!
+\end{z2col}
+
+\medskip
+{\bf 3}.
+\textbf{行列形式の図式}．\hfill{\BACK\ \NEXT}\\
+\textbf{要素}を，直接座標を指定せずに行列の\textbf{成分}として
+配置します．\\
+座標を考慮する必要がなく，可換図式のような図式を描くのに便利です．
+
+\quad
+列は \red{\tt\string&} で，行は \red{\tt\BK\BK} で区切り，以下の
+ように書きます．
+
+{\tt
+\BK xymatrix\{\\[-.2ex]
+\quad \textbf{成分} \string& \textbf{成分} \string& $\cdots$ \BK\BK\\[-.4ex]
+\quad \textbf{成分} \string& \textbf{成分} \string& $\cdots$ \BK\BK\\[-.7ex]
+\qquad$\cdots$\quad\}}
+
+\quad
+各\textbf{成分}には，配置された\textbf{要素}と，そこを始点と
+する\textbf{矢印}の情報があり
+
+・ \textbf{要素}がテキストの場合，\red{\tt *} は不要．%\\
+%\phantom{・ }
+先頭が \red{\tt\BK} でないなら \red{\tt\{ \}} も不要．\\
+・ 矢印の行き先は，成分の番号で指定できる：\\
+\quad \red{\tt[\MGNT{hop}]} :\MGNT{hop}は，\red{\tt r l u d} (右/左/上/下) を
+いくつか並べたもの\\
+\qquad たとえば \red{\tt[rrd]} は，
+その場所から2つ右で一つ下の成分を意味する．\\
+\quad \red{\tt "\MGNT{行},\MGNT{列}"} :例えば \red{\tt"1,1"} は左上
+の$(1,1)$成分
+
+\smallskip
+\begin{z2col}
+\begin{Alltt}
+\red{\\xymatrix\{} \\ar@\{\}\red{[rd]}|\{\\circlearrowright\}
+ X\\times_Z Y \\ar\red{[r]}_q \\ar\red{[d]}^p \red{&} Y \\ar\red{[d]}_q\red{\\\\}
+ X \\ar\red{[r]}^q \red{&} Z \red{\}}
+\end{Alltt}
+\kaidan
+
+\vspace*{-3ex}
+\hfill
+\xymatrix{ \ar@{}[rd]|{\circlearrowright}
+ X\times_Z Y \ar[r]_q \ar[d]^p & Y \ar[d]_p\\
+ X \ar[r]^q & Z }\!\!\!\!\!\!\!\!
+\end{z2col}
+
+\begin{z2col}
+\begin{Alltt}
+\red{\\xymatrix\{}
+ U \\ar@/_/\red{[ddr]}_y \\ar@\{.>\}\red{[dr]}
+     |\{x\\otimes y\} \\ar@/^/\red{[drr]}^x \red{\\\\}
+  \red{&} *+[F-:<3pt>]\{X \\times_Z Y\}
+   \\ar\red{[d]}^q \\ar\red{[r]}_p \red{&} X \\ar\red{[d]}_f \red{\\\\}
+  \red{&} Y \\ar\red{[r]}^g \red{&} Z \red{\}}
+\end{Alltt}
+\kaidan
+\vspace*{-1ex}
+\hfill
+\xymatrix{
+ U \ar@/_/[ddr]_y \ar@{.>}[dr]|{x\otimes y} \ar@/^/[drr]^x \\
+  & *+[F-:<4pt>]{X \times_Z Y} \ar[d]^q \ar[r]_p & X \ar[d]_f \\
+  & Y \ar[r]^g & Z }\!\!\!\!
+\end{z2col}
+
+\vspace*{-3ex}
+\section{いろいろな図式}
+{\bf 1}．曲がった軸をもつ矢印\\
+円弧と線分を組み合わせて，\textbf{迂回する矢印}を描くことができる．経路は\\
+\quad\red{\tt '\MGNT{目標}} :目標までの線分\\
+\quad\red{\tt `\MGNT{方向} \MGNT{目標}} :出発\MGNT{方向}から\MGNT{目標}に向かって$\frac14$回転する．\\
+\qquad 最初の\MGNT{方向}指定がなければ，前回の方向からの回転となる（次項も）．
+\\
+\quad\red{\tt `\MGNT{方向} \MGNT{回転の向き} \MGNT{方向} \MGNT{目標}} :最初の\MGNT{方向}へ出発して直線的に移動し，後
+
+\qquad の\MGNT{方向}で進むと\MGNT{目標}に到達できる地点で必要な回転をする．\\
+\qquad 方向には \red{\tt r rd d ld l lu u ru} がある．\\
+\qquad\MGNT{回転の向き}は，\red{\tt\string^} (反時計回り) また
+は \red{\tt\string_} (時計回り)
+\\
+\quad
+最後は，同じ向きの矢印を引いて，最終\MGNT{目標}に到達させる．
+\\
+\quad
+円弧の半径は 10pt であるが \red{\tt/\MGNT{長さ}} により以降変更可能．
+
+\begin{z2col}
+\begin{Alltt}
+\\xymatrix\{
+ \{\\circ\} \\ar 
+   \red{`r[d] `[rr] `^lu/3pt[rr] [rr]}
+        &\{\\circ\}&\{\\circ\}\\\\
+ \{\\circ\}&\{\\circ\}&\{\\circ\}\\\\ \}
+\end{Alltt}
+\kaidan
+\vspace*{1ex}
+\hfill
+\xymatrix{
+ {\circ} \ar 
+    `r[d]       `[rr]
+    `^lu/3pt[rr] [rr]
+  &{\circ} &{\circ}\\
+ {\circ}&{\circ}&{\circ}\\ }
+\end{z2col}
+
+\medskip
+\quad
+より一般に，始点と終点とを与えたとき，途中の\textbf{制御点}を指定したB\'ezier曲線
+を使って\textbf{自由曲線}が描けます．
+
+\centerline{\tt\red{**\BK crv\{\MGNT{制御点} \string& \MGNT{制御点} \string& $\cdots$\}}}
+
+・ 制御点がないときは，二点を結ぶ線分になります．
+
+・ 矢印のときと同様 \red{\tt\string~*\{.\}} などを入れて\textbf{線種}指定できます．\\
+\begin{z2col}
+\begin{Alltt}
+\\begin\{xy\}
+ (0,10)*[o]+\{A\};(20,0)*[o]+\{B\}="B"
+ \red{**\\crv\{\}}
+ \red{**\\crv\{~*\{.\}}(10,15)\red{\}}
+ \red{**\\crv\{}(10,20)\red{&}(20,20)\red{\}} ?>*\\dir\{>\}, "B"
+ \red{**\\crv\{}(5,10)\red{&}(10,10)\red{&}(15,-10)\red{&}(20,-5)\red{\}}
+\\end\{xy\}
+\end{Alltt}
+\kaidan
+\vspace*{-1ex}
+\hfill
+\begin{xy}
+ (0,10)*[o]+{A};(20,0)*[o]+{B}="B"
+ **\crv{}
+ **\crv{~*{.}(10,15)}
+ **\crv{(10,20)&(20,20)} ?>*\dir{>}, "B"
+ **\crv{(5,10)&(10,10)&(15,-10)&(20,-5)}
+\end{xy}
+\end{z2col}
+
+\medskip
+{\bf 2}．座標軸の回転\hfill{\BACK\ \NEXT}\\
+\MGNT{ベクトル\tt:} $X$軸の単位ベクトルを定める（回転＋スケール変換を行う）．
+
+\begin{z2col}
+\begin{Alltt}
+\\begin\{xy\} \{\\ar (8,0)\}, 
+　(-.5,\red{\\halfrootthree})\red{:} \{\\ar(0,0);(8,0)\},
+　(0,0),(-.5,\red{\\halfrootthree})\red{:} \\ar(0,0);(8,0)
+\\end\{xy\}
+\end{Alltt}
+\kaidan
+\vspace*{-.5ex}
+\hfill
+\begin{xy}
+{\ar (8,0)}, (-.5,\halfrootthree): {\ar(0,0);(8,0)},
+(0,0),(-.5,\halfrootthree): \ar(0,0);(8,0)
+\end{xy}
+\end{z2col}
+
+\medskip
+%座標軸の単位ベクトルを指定することにより，自由なアフィン変換ができますが，
+次に，{\tt \BK xymatrix} を使った$\frac\pi4$の整数倍の回転の例を挙げます．\\
+\quad {\tt \BK xymatrix} の直後の指定で\\
+\quad \red{\tt\ @}\MGNT{方向}  :\MGNT{方向}に向けた回転をする
+（\red{\tt @r}\,:回転なし）\\
+\quad \red{\tt\ @}\MGNT{\it add-op 長さ}:行と列の空きの設定
+（\red{\tt@!}\,:行と列の空きを等しくする）\\
+\quad \red{\tt@C}\MGNT{\it add-op 長さ}:列の空き
+（\red{\tt@C!}\,:列の空きを等しくする）\\
+\quad \red{\tt@R}\MGNT{\it add-op 長さ}:行の空き
+（\red{\tt@R!}\,:行の空きを等しくする）\\
+\quad \red{\tt@M}\MGNT{\it add-op 長さ}:要素のデフォルトの空き
+
+\begin{z2col}
+\begin{Alltt}
+\\xymatrix\red{@=0pt@M=0pt}\{X&Y\\\\Z&W\}\\qquad
+\\xymatrix\red{@dr@=0pt@M=0pt}\{X&Y\\\\Z&W\}
+\end{Alltt}
+\vspace*{-4ex}
+\begin{Alltt}
+\\xymatrix\red{@dr@C=4mm}\{
+ A \\ar[r]^a &  B \\ar@\{.>\}[d]^b\\\\
+ C \\ar[u]^c &  D \\ar@\{.>\}[l]^d \}
+\end{Alltt}
+\kaidan
+\vspace*{-.5ex}
+\hfill
+\xymatrix@=0pt@M=0pt{X&Y\\Z&W}\qquad
+\xymatrix@dr@=0pt@M=0pt{X&Y\\Z&W}
+
+\vspace*{-1ex}
+\hfill
+\xymatrix@dr@C=4mm{
+ A \ar[r]^a &  B \ar@{.>}[d]^b\\
+ C \ar[u]^c &  D \ar@{.>}[l]^d
+}\quad\phantom{.}
+\end{z2col}
+
+\medskip
+{\bf 3}．仕様と例\hfill{\BACK}\\[-4ex]
+\[\begin{xy}
+  \ar@{=>} *++!D{\alpha_1} *\cir<4pt>{}; 
+   (10,0)  *++!D{\alpha_2} *\cir<4pt>{}
+%
+  \ar@{-} (20,0) *++!D{\alpha_1} *\cir<4pt>{};
+  (30,0) *++!D!R(0.4){\alpha_2} *\cir<4pt>{}="A",
+  \ar@{-} "A";(35,8.61) *++!L{\alpha_3} *\cir<4pt>{}
+  \ar@{-} "A";(35,-8.61) *++!L{\alpha_4} *\cir<4pt>{},
+  \ar@{-} "A";(35,-8.61) *++!L{\alpha_4} *\cir<4pt>{},
+%
+  \ar@{-} (50,0) *++!D{\alpha_1} *\cir<4pt>{};
+  (60,0) *++!D{\alpha_2} *\cir<4pt>{}="B"
+  \ar@{-} "B";(70,0) *++!D{\alpha_3} *\cir<4pt>{}="C"
+  \ar@{-} "C";(75,0) \ar@{.} (75,0);(80,0)^*!U{\cdots}
+  \ar@{-} (80,0);(85,0) *++!D{\alpha_n} *\cir<4pt>{}
+\end{xy}
+\]
+\if\pdf
+\begin{verbatim}
+\begin{xy}
+  \ar@{=>} *++!D{\alpha_1} *\cir<4pt>{}; 
+    (10,0)    *++!D{\alpha_2} *\cir<4pt>{}
+  \ar@{-} (20,0) *++!D{\alpha_1} *\cir<4pt>{};
+    (30,0)   *++!D!R(0.4){\alpha_2} *\cir<4pt>{}="A",
+  \ar@{-} "A";(35,8.61) *++!L{\alpha_3} *\cir<4pt>{}
+  \ar@{-} "A";(35,-8.61) *++!L{\alpha_4} *\cir<4pt>{},
+  \ar@{-} "A";(35,-8.61) *++!L{\alpha_4} *\cir<4pt>{},
+  \ar@{-} (50,0) *++!D{\alpha_1} *\cir<4pt>{};
+    (60,0)   *++!D{\alpha_2} *\cir<4pt>{}="B"
+  \ar@{-} "B";(70,0) *++!D{\alpha_3} *\cir<4pt>{}="C"
+  \ar@{-} "C";(75,0) \ar@{.} (75,0);(80,0)^*!U{\cdots}
+  \ar@{-} (80,0);(85,0) *++!D{\alpha_n} *\cir<4pt>{}
+\end{xy}
+\end{verbatim}
+\else
+このDynkin図式の例（
+\keyin{\begin{xy}
+  \ar@{=>} *++!D{\alpha_1} *\cir<4pt>{}; 
+    (10,0)    *++!D{\alpha_2} *\cir<4pt>{}
+%
+  \ar@{-} (20,0) *++!D{\alpha_1} *\cir<4pt>{};
+    (30,0)   *++!D!R(0.4){\alpha_2} *\cir<4pt>{}="A",
+  \ar@{-} "A";(35,8.61) *++!L{\alpha_3} *\cir<4pt>{}
+  \ar@{-} "A";(35,-8.61) *++!L{\alpha_4} *\cir<4pt>{},
+  \ar@{-} "A";(35,-8.61) *++!L{\alpha_4} *\cir<4pt>{},
+%
+  \ar@{-} (50,0) *++!D{\alpha_1} *\cir<4pt>{};
+    (60,0)   *++!D{\alpha_2} *\cir<4pt>{}="B"
+  \ar@{-} "B";(70,0) *++!D{\alpha_3} *\cir<4pt>{}="C"
+  \ar@{-} "C";(75,0) \ar@{.} (75,0);(80,0)^*!U{\cdots}
+  \ar@{-} (80,0);(85,0) *++!D{\alpha_n} *\cir<4pt>{}
+\end{xy}
+}{ここ}をクリックすると，ソースがクリップボードにコピーされます）
+\fi
+では，以下の\textbf{円弧}を描くコマンドを使っています．
+\\
+%\begin{verbatim}
+%\[\begin{xy}
+%  \ar@{=>} *++!D{\alpha_1} *\cir<4pt>{}; 
+%   (10,0)  *++!D{\alpha_2} *\cir<4pt>{}
+%%
+%  \ar@{-} (20,0) *++!D{\alpha_1} *\cir<4pt>{};
+%  (30,0) *++!D!R(0.4){\alpha_2} *\cir<4pt>{}="A",
+%  \ar@{-} "A";(35,8.61) *++!L{\alpha_3} *\cir<4pt>{}
+%  \ar@{-} "A";(35,-8.61) *++!L{\alpha_4} *\cir<4pt>{},
+%  \ar@{-} "A";(35,-8.61) *++!L{\alpha_4} *\cir<4pt>{},
+%%
+%  \ar@{-} (50,0) *++!D{\alpha_1} *\cir<4pt>{};
+%  (60,0) *++!D{\alpha_2} *\cir<4pt>{}="B"
+%  \ar@{-} "B";(70,0) *++!D{\alpha_3} *\cir<4pt>{}="C"
+%  \ar@{-} "C";(75,0) \ar@{.} (75,0);(80,0)^*!U{\cdots}
+%  \ar@{-} (80,0);(85,0) *++!D{\alpha_n} *\cir<4pt>{}
+%\end{xy}
+%\]
+%\end{verbatim}
+\quad
+\red{\tt \BK cir<\MGNT{半径}>\{\!\MGNT{方向} \MGNT{回転の向き} \MGNT{方向}\!\}}
+
+最初の\MGNT{方向}で円周上を\MGNT{回転の向き}（\red{\tt\string^} は反時計回り，
+\red{\tt\string_} は時計回り）にスタートし，後の\MGNT{方向}まで円弧を
+描きます．\red{\tt\{\ \}}の中を空として，これらを指定しない場合は円を描きます．
+
+\begin{z2col}
+\begin{Alltt}
+\\begin\{xy\}
+ *\red{\\cir<5mm>\{l_d\}}, (10,0) *\red{\\cir<5mm>\{r^d\}},
+ (22,0) *+\{M\} *\red{\\cir\{dr_ur\}}
+\\end\{xy\}
+\end{Alltt}
+\kaidan
+\vspace*{.1ex}
+\hfill
+\begin{xy}
+ *\cir<5mm>{l_d}, (10,0) *\cir<5mm>{r^d},
+ (22,0) *+{M} *\cir{dr_ur}
+\end{xy}\!\!\!\!\!\!
+\end{z2col}
+
+\medskip
+\quad
+\Xy-pic は {\TeX} のメモリーを大量に使うため，複雑な図式を扱うと
+{\tt TeX capacity exceeded} のエラーが発生することがあります．
+それが解消できない場合，より軽い
+
+\keyin{\usepackage[all,ps,dvisp]{xy}
+}{\quad{\tt\BK usepackage[all,ps,dvisp]\{xy\}}}
+
+としてDVIファイルを作成して下さい．その後 PS ファイルから EPS ファイル，
+あるいは PDF ファイルに変換（{\tt Ghostscript}+{\tt dvipsk}+{\tt ps2pdf}な
+ど）することができます．
+
+\medskip
+\quad
+これまで \Xy-pic の基本的な機能をいくつか紹介してきましたが，
+その他にも，楕円や多角形，各種ダイアグラムや結び目などに関する
+多くの描画機能を持っています．
+より詳しい仕様やこれらの機能については，
+\if\pdf
+dvioutに添付の
+\href{http://akagi.ms.u-tokyo.ac.jp/input9.pdf}{Help}，
+\else
+\href{file:input9.dvi}{添付のHelp}，
+\fi
+あるいはそこに挙げてある文献などを参照してください．
+\end{document}

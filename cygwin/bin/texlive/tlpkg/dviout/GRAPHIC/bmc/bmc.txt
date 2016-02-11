@@ -1,0 +1,141 @@
+                          BMC format の仕様
+
+BMC は、BMP formatの画像データを、簡単な変換により圧縮したものである。
+
+dviout for Windows でのPostScript画像の中間ファイルとして用いるため、
+圧縮や復元の高速性と容易さに主眼が置かれている。
+
+もとの画像データは、<width> byte のデータが <height>組、順に並んでいる
+とする（たとえば、フルカラー(24bit)BMPファイルの場合、<width> は、画像
+のPIXEL単位での幅の3倍を4の倍数になるように切り上げたものである）。これ
+を以下の 1. 2. 3. と変換したものが、BMCにおける画像データである。
+
+1. 元の画像データ
+
+unsigned char image[<height>*<width>];
+
+を XOR の演算により
+
+unsigned char trans[<height>*<width>];
+
+に変換する。ただし
+
+trans[i] = image[i]                        if i == 0
+         = image[i] ^ image[i-1]           if 0 < i < <width>
+         = image[i] ^ image[i - <width>]   if <width> <= i < <height>*<width>
+
+trans[] には、0 というデータが多数含まれていると期待される。
+
+2. trans[] の各 byte の上位 4 bit (0 から 15)の頻度を調べ、1 から 15 
+のうちで、もっとも現れる頻度の少ないもの K を決定する（簡単化のため、K=5 な
+どとあらかじめ決めてしまってもよい）。
+
+3. trans[] を、同じデータが何 byte 続くか、という情報でデータ化する。
+
+<M N> が、L byte 続くとする。ただし、M, N は 0 から 15 までの数で、
+1 byte(unsigned char) が表す数の上位4bitが M, 下位4bitが N に対応する
+ものとする。
+
+なお、L >= 0x100000000 のときは、0xffffffff（約 42.9G）以下のブロック
+に分割することにより、L < 0x100000000 とする。
+
+3.1. L == 1 のとき
+     M != K  ならば                 <M N>
+     M == K  ならば                 <K 0><0 N>
+
+3.2. L == 2 のとき
+     <M N> == 0 ならば              <K 1>
+     M != K かつ <M N> != 0 ならば  <M N><M N>
+     M == K ならば                  <K 0><0 N><K 0><0 N>
+
+3.3. L > 2 のとき
+     <M N> == 0 ならば    <K L-1>               if L-1 < 0x10
+                          <K 0><L-1>            if 0x10 <= L-1 <= 0xe0
+                          <K 0><0xff>S(L-1,2)   if 0xe0 < L-1 < 0x10000
+                          <K 0><0xfe>S(L-1,3)   if 0x10000 <= L-1 < 0x1000000
+                          <K 0><0xfd>S(L-1,4)   if 0x1000000 <= L-1
+
+     <M N> != 0 ならば
+         M != K かどうかに応じて、<M N> または <K 0><0 N> の後(cf. 3.1)
+                          <K 0><0xde + L>       if L < 0x1b
+                          <K 0><0xfc>S(L-1,1)   if 0x19 <= L-2 < 0x100
+                          <K 0><0xfb>S(L-1,2)   if 0x100 <= L-2 < 0x10000
+                          <K 0><0xfa>S(L-1,3)   if 0x10000 <= L-2 < 0x1000000
+                          <K 0><0xf9>S(L-1,4)   if 0x1000000 <= L-2
+
+ただし、S(X,K) は、X を K byte の整数で表示したもので、上位バイト -> 
+下位バイトの順。
+
+BMC データの全体は、先頭から
+
+id[2];                   // 'B', 'C'  ID for BMC
+flag[1];                 // flag & 1: Not compressed?
+key[1];                  // <K 0>
+bmc_head_size[4];        // address of bmp_head[0]  "BM..."
+bmp_head_size[4];	 // size of BMP header
+byte_width[4];           // <width>
+
+height[4];               // <height>
+bit_width[4];            // width by bit
+bmc_data_size[4];        // size after "BM..."
+f_mode[1];               // used by dviout
+bmp_rev[1];              // used by dviout
+bmp_on[1];               // used by dviout
+bmp_off[1];              // used by dviout
+
+-- The following top is 0x20 byte from the head --
+name[];                  // original filename (zero terminated) 
+bmp_head[];              // original BITMAPFILEHEADEF + BITMAPINFOHEADER
+bmc_data[];              // compressed or original image data
+
+となる。
+
+f_mode[1] & 0xf  =  2:    1 PIXEL =   1 bit
+                    3:                4 bit
+                    4:                8 bit
+                    5:               24 bit
+                    6:               16 bit
+                    7:               32 bit
+
+f_mode[1] & 0x10     :  Use only Black & White (not gray, no color)
+f_mode[1] & 0x20     :  Only Black & White but the number of pallets > 2
+f_mode[1] & 0x40     :  the number of pallets <= 0x10 ? in 256 color mode
+
+bmp_rev[1]          0:  0 is white for 2 color mode
+                    1:  1 is white for 2 color mode
+bmp_on[1]            :  pallet index of white for B & W
+bmp_off[1]           :  pallet index of black for B & W
+
+---------------------------   付属資料 ----------------------------------
+epsfdoc(1)  : the first page of epsfdoc.dvi A4 size 600dpi   B/W
+epsfdoc(16) : the first page A4 epsfdoc.dvi size 600dpi/6 gray scale(16 colors)
+
+\includegraphics*[height=10cm]{golfer}  in 300dpi
+\includegraphics*[height=6cm]{tiger}    in 300dpi
+
+golfer(256)  : 16   colors
+tiger(256)   : 16   colors
+golfer(full) : full colors(24 bit)
+tiger(full)  : full colors(24 bit)
+
+
+                         Size of image data files
+
+                BMP BMP+LZH BMP+GZIP BMC BMC+LZH  PNG  PNG+LZH   GIF  GIF+LZH
+epsfdoc(1)   4378046 189330 190107 204831 148307 204643 197189 291454 291454
+epsfdoc(16)   486838  46648  46976  57062  48486  48208  47451  52497  52407
+golfer(256)  1144286  15458  15294  23932  12369  21401  21294  22643  22643
+tiger(256)    485350  25447  25249  46858  25807  29415  29160  31884  31884
+golfer(full) 3429678  23054  22028  40337  16038  28167  27432
+tiger(full)  1447206  30958  31766  95170  31639  44921  44628
+
+
+                       Ratio of compression (%)
+
+                BMP BMP+LZH BMP+GZIP BMC  BMC+LZH  PNG  PNG+LZH  GIF  GIF+LZH
+epsfdoc(1)    100.00  4.378  4.325  4.679  3.388  4.674  4.504  6.657  6.657
+epsfdoc(16)   100.00  9.582  9.649 11.720  9.960  9.902  9.747 10.783 10.765
+golfer(256)   100.00  1.351  1.337  2.091  1.081  1.870  1.861  1.979  1.979
+tiger(256)    100.00  5.243  5.202  9.654  5.317  6.061  6.008  6.569  6.569
+golfer(full)  100.00  0.672  0.642  1.176  0.468  0.858  0.771
+tiger(full)   100.00  2.139  2.196  6.576  2.186  3.104  3.084

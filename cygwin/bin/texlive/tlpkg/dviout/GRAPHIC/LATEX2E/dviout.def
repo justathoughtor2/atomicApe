@@ -1,0 +1,180 @@
+%%
+%% This is file `dviout.def',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% dviout.dtx  (with options: `dviout,color')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from dviout.def.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file dviout.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+\ProvidesFile{dviout.def}
+                [2000/5/11 Driver file of `dviout' for LaTeX2e]
+\def\c@lor@arg#1{%
+  \dimen@#1\p@
+  \ifdim\dimen@<\z@\dimen@\maxdimen\fi
+  \ifdim\dimen@>\p@
+    \PackageError{color}{Argument `#1' not in range [0,1]}\@ehd
+  \fi}
+\def\color@gray#1#2{%
+  \c@lor@arg{#2}%
+  \def#1{gray #2}%
+  }
+\def\color@cmyk#1#2{\c@lor@@cmyk#2\@@#1}
+\def\c@lor@@cmyk#1,#2,#3,#4\@@#5{%
+  \c@lor@arg{#1}%
+  \c@lor@arg{#2}%
+  \c@lor@arg{#3}%
+  \c@lor@arg{#4}%
+  \def#5{cmyk #1 #2 #3 #4}}
+\def\color@rgb#1#2{\c@lor@@rgb#2\@@#1}
+\def\c@lor@@rgb#1,#2,#3\@@#4{%
+  \c@lor@arg{#1}%
+  \c@lor@arg{#2}%
+  \c@lor@arg{#3}%
+  \def#4{rgb #1 #2 #3}}
+\def\color@hsb#1#2{\c@lor@@hsb#2\@@#1}
+\def\c@lor@@hsb#1,#2,#3\@@#4{%
+  \c@lor@arg{#1}%
+  \c@lor@arg{#2}%
+  \c@lor@arg{#3}%
+  \def#4{hsb #1 #2 #3}}
+\def\color@named#1#2{\c@lor@@named#2,,\@@#1}
+\def\c@lor@@named#1,#2,#3\@@#4{%
+  \@ifundefined{col@#1}%
+    {\PackageError{color}{Undefined color `#1'}\@ehd}%
+  {\def#4{ #1}}%
+  }
+\def\current@color{ Black}
+\def\define@color@named#1#2{%
+  \expandafter\let\csname col@#1\endcsname\@nnil}%
+\def\set@color{%
+  \special{color push \current@color}\aftergroup\reset@color}
+\def\reset@color{\special{color pop}}
+\def\set@page@color{\special{background \current@color}}
+\def\Ginclude@eps#1{%
+ \message{<#1>}%
+  \bgroup
+  \def\@tempa{!}%
+  \dimen@=10\Gin@req@width
+  \dimen@ii1bp%
+  \divide\dimen@\dimen@ii
+  \@tempdima=10\Gin@req@height
+  \divide\@tempdima\dimen@ii
+    \special{PSfile="#1"\space
+      llx=\Gin@llx\space
+      lly=\Gin@lly\space
+      urx=\Gin@urx\space
+      ury=\Gin@ury\space
+      \ifx\Gin@scalex\@tempa\else rwi=\number\dimen@\space\fi
+      \ifx\Gin@scaley\@tempa\else rhi=\number\@tempdima\space\fi
+      \ifGin@clip clip\fi}%
+  \egroup}
+\def\Ginclude@image@common#1#2{%
+  \bgroup
+  \def\@tempa{!}%
+  \ifx\Gin@scaley\@tempa
+    \let\Gin@scaley\Gin@scalex
+  \else
+    \ifx\Gin@scalex\@tempa\let\Gin@scalex\Gin@scaley\fi
+  \fi
+  \raise\Gin@req@height\hbox{%
+  \divide\Gin@req@width by 65781% convert sp to bp
+  \divide\Gin@req@height by 65781% convert sp to bp
+  \message{<#1 \number\Gin@req@width bp\space x%
+\space\number\Gin@req@height bp>}%
+  \special{#2file=#1\space%
+        hsize=\number\Gin@req@width\space%
+        vsize=\number\Gin@req@height}}%
+  \egroup}
+\def\Gread@pbm#1{%
+  \begingroup
+  \Gin@bboxfalse
+  \catcode`\#=14
+  \openin\@inputcheck=#1\relax
+  \ifeof\@inputcheck\errmessage{#1: could not open.}\fi
+  \read\@inputcheck to \pbm@line
+  %% Here, checking magic number. Not implemented yet.
+  \newif\ifpbm@not@bb
+  \loop\ifeof\@inputcheck\errmessage{#1: unexpected EOF.}\fi
+  \read\@inputcheck to \pbm@line
+  \ifx\pbm@line\@empty\pbm@not@bbtrue\else\pbm@not@bbfalse\fi
+  \ifpbm@not@bb\repeat
+  \closein\@inputcheck
+  \expandafter\pbm@decode@bb\pbm@line]
+  \endgroup}
+\def\pbm@decode@bb#1 #2]{%
+  \Gin@bboxtrue%
+  \gdef\Gin@llx{0}\gdef\Gin@lly{0}\gdef\Gin@urx{#1}\gdef\Gin@ury{#2}}
+\def\get@pbm@magic P#1{#1}
+\def\Ginclude@pbm#1{\Ginclude@image@common{#1}{pbm}}
+\def\Gread@bmp#1{%
+  \begingroup
+\@tempcnta\z@
+\loop\ifnum\@tempcnta<\@xxxii
+   \catcode\@tempcnta14 %
+   \advance\@tempcnta\@ne
+\repeat
+\catcode127=14 %
+  \let\do\@makeother\dospecials\catcode`\ 10 %
+  \catcode\endlinechar5 %
+  \immediate\openin\@inputcheck#1 %
+  \ifeof\@inputcheck
+    \@warning{File `#1' not found (which will be created by %
+    `bmc' with -b option)}
+  \else
+     \Gread@true
+     \let\@tempb\Gread@false
+     \loop
+       \read\@inputcheck to\@tempa
+       \ifeof\@inputcheck
+         \Gread@false
+       \else
+         \expandafter\Gread@find@bb\@tempa:.\\%
+       \fi
+     \ifGread@
+     \repeat
+    \immediate\closein\@inputcheck
+  \fi
+  \ifGin@bbox\else
+    \@warning
+      {Assume Bounding Box: 0 0 72 72}%
+    \gdef\@gtempa{0 0 72 72 }%
+  \fi
+  \endgroup
+  \expandafter\Gread@parse@bb\@gtempa\\}
+\def\Ginclude@bmp#1{\Ginclude@image@common{#1}{bmp}}
+\def\Gin@extensions{.eps,.ps,.pbm,.gif,.bmp,.bmc,.ps.gz,.eps.gz}
+\@namedef{Gin@rule@.ps}#1{{eps}{.ps}{#1}}
+\@namedef{Gin@rule@.eps}#1{{eps}{.eps}{#1}}
+\@namedef{Gin@rule@.ps.gz}#1{{eps}{.bb}{#1}}
+\@namedef{Gin@rule@.eps.gz}#1{{eps}{.bb}{#1}}
+\@namedef{Gin@rule@.pbm}#1{{pbm}{.pbm}{#1}}
+\@namedef{Gin@rule@*}#1{{bmp}{.bb}{#1}}
+\def\Grot@start{%
+ \special{ps: gsave currentpoint
+ currentpoint translate \Grot@angle\space neg
+ rotate neg exch neg exch translate}}
+\def\Grot@end{\special{ps: currentpoint grestore moveto}}
+\def\Gscale@start{\special{ps: currentpoint currentpoint translate
+  \Gscale@x\space \Gscale@y\space scale neg exch neg exch translate}}
+\def\Gscale@end{\special{ps: currentpoint currentpoint translate
+  1 \Gscale@x\space div 1 \Gscale@y\space div scale
+  neg exch neg exch translate}}
+\def\Gin@PS@raw#1{\special{ps: #1}}
+\def\Gin@PS@restored#1{\special{" #1}}
+\endinput
+%%
+%% End of file `dviout.def'.

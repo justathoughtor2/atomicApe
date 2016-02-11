@@ -1,0 +1,28 @@
+name dvipdfmx-def
+category Package
+revision 38796
+shortdesc Configuration file for dvipdfmx graphics
+longdesc This is the graphics driver for use when output is to be
+longdesc processed by dvipdfmx.
+containersize 3880
+containermd5 f53558c19bd98c666c0926549a061656
+doccontainersize 45732
+doccontainermd5 a3ebf1d0563d8f5791659c1aba344634
+docfiles size=35
+ texmf-dist/doc/latex/dvipdfmx-def/README details="Readme"
+ texmf-dist/doc/latex/dvipdfmx-def/doc/Makefile
+ texmf-dist/doc/latex/dvipdfmx-def/doc/image1.tex
+ texmf-dist/doc/latex/dvipdfmx-def/doc/image2.tex
+ texmf-dist/doc/latex/dvipdfmx-def/doc/pagebox-dx.pdf
+ texmf-dist/doc/latex/dvipdfmx-def/doc/pagebox-dx.tex
+ texmf-dist/doc/latex/dvipdfmx-def/doc/pagebox-dx.txt
+ texmf-dist/doc/latex/dvipdfmx-def/doc/pagebox-pd.pdf
+ texmf-dist/doc/latex/dvipdfmx-def/doc/pagebox-pd.tex
+runfiles size=3
+ texmf-dist/tex/latex/dvipdfmx-def/dvipdfmx.def
+catalogue-also xetex-def
+catalogue-ctan /macros/latex/contrib/dvipdfmx-def
+catalogue-date 2015-11-04 07:37:28 +0100
+catalogue-license lppl1
+catalogue-topics graphics-drv
+catalogue-version 4.07

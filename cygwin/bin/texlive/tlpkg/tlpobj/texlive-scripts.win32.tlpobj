@@ -1,0 +1,16 @@
+name texlive-scripts.win32
+category TLCore
+revision 39067
+shortdesc win32 files of texlive-scripts
+containersize 17936
+containermd5 71f9d009374c9224cbfa581176017fc2
+binfiles arch=win32 size=18
+ bin/win32/rungs.exe
+ bin/win32/runscript.dll
+ bin/win32/runscript.exe
+ bin/win32/runscript.tlu
+ install-tl-advanced.bat
+ install-tl-windows.bat
+ tl-tray-menu.exe
+ tlpkg/installer/tl-cmd.bat
+ tlpkg/installer/tl-tray-menu.ini

@@ -1,0 +1,378 @@
+% この文書は tpic specials を含みます。tpic 用 dviout/prt で御覧ください。
+
+\documentstyle[11pt,a4j,jtwocolumn]{jarticle}
+
+\title{Tpic について}
+\author{Oh-Yeah? (Nifty-Serve GGA03472)}
+\date{June 7, 1992}
+
+\begin{document}
+\maketitle
+\section{見果てぬ夢、\TeX ~Graphics}
+ご存じのように、\TeX は本来文章を美しく組版するためのプログラムであり、 描画
+の機能は極めて限定されています。しかし、その素晴らしい出力を目にして、図や絵
+を取り込めたらいいなぁと思うひとも多いらしく、\LaTeX の picture 環境をはじめ、
+PiCTeX や epic など、いくつかの工夫がなされてきました。 これらのアド・オンソ
+フトは 100 \% の \TeX 互換性を保っており、作成した文書は標準の \TeX システム
+及び dvi ドライバでそのまま出力できます。 その反面、互換性ゆえの制限もかなり
+厳しく、描ける線の傾きが限られていたり、小さな文字を並べて図をかくために大量
+のディスク容量とメモリを必要としたりします。特にパソコン上の \TeX でこみいっ
+た図を書こうとすると、Big\TeX でも、 遠いところへ旅立って行き二度と帰ってきま
+せん。\verb+v(^^;)v+
+
+一方、（私はよく知りませんが） \TeX 文書に Postscript の図を取り込む工夫もな
+されつつあるようです。しかし、このアプローチには Postscript プリンタが必要で
+す。
+
+tpic も、\TeX にグラフィックス機能を付け加えるために考案されたもののひとつで
+す。ところがこの場合、\TeX の special コマンドを利用するので、それをサポート
+する dvi ドライバが必要となります。 \TeX は標準のものでいいのですが、\TeX 自
+身は tpic specials コマンドをそのまま dvi ファイルに書き込むだけです。早い話
+が、「グラフィックスは dvi ドライバに任せとけ」というわけです。 互換性はある
+程度犠牲になりますが、 その代わり \TeX に負担がかからないので、 メモリと dvi
+ファイルはずっと小さくてすみ、処理速度も（たぶん）速くなります。実線・破線・
+点線・ spline 曲線・円・楕円・弧が自由に描けます。また、シェーディング（塗り
+つぶし）や上書きの機能もあります。dvi ドライバが tpic をサポートしていれば、
+プリンタは当然普通のものでよいわけです。
+
+\begin{center}
+\unitlength 0.001in
+\begin{picture}(2000,1700)(0,-1600)
+	\special{pn 8}%
+	\special{sh}%
+	\special{ia 350 200 400 250 0 6.28319}%
+	\special{sh 0}%
+	\special{ar 400 250 400 250 0 6.28319}%
+	\put(400,-250){\makebox(0,0){document}}%
+	\special{sh 0}%
+	\special{ia 750 475 200 200 0 6.28319}%
+	\special{sh 0.1}%
+	\special{ar 750 475 200 200 0 6.28319}%
+	\put(750,-450){\makebox(0,0){tpic}}%
+	\special{pa 800 250}%
+	\special{pa 1200 250}%
+	\special{fp}%
+	\special{sh 1}%
+	\special{pa 1200 250}%
+	\special{pa 1100 275}%
+	\special{pa 1100 225}%
+	\special{pa 1200 250}%
+	\special{fp}%
+	\special{sh}%
+	\special{pa 1150 450}%
+	\special{pa 1950 450}%
+	\special{pa 1950 -50}%
+	\special{pa 1750 -50}%
+	\special{pa 1550 100}%
+	\special{pa 1350 -50}%
+	\special{pa 1150 -50}%
+	\special{pa 1150 450}%
+	\special{ip}%
+	\special{sh 0}%
+	\special{pa 1200 500}%
+	\special{pa 2000 500}%
+	\special{pa 2000 0}%
+	\special{pa 1800 0}%
+	\special{pa 1600 150}%
+	\special{pa 1400 0}%
+	\special{pa 1200 0}%
+	\special{pa 1200 500}%
+	\special{fp}%
+	\put(1600,-250){\makebox(0,0){\TeX}}%
+	\special{pa 1600 500}%
+	\special{pa 1600 1050}%
+	\special{fp}%
+	\special{sh 1}%
+	\special{pa 1600 1050}%
+	\special{pa 1625 950}%
+	\special{pa 1575 950}%
+	\special{pa 1600 1050}%
+	\special{fp}%
+	\special{sh}%
+	\special{pa 1150 1450}%
+	\special{pa 1550 1400}%
+	\special{pa 1950 1450}%
+	\special{pa 1950 1200}%
+	\special{pa 1950 950}%
+	\special{pa 1550 1000}%
+	\special{pa 1150 950}%
+	\special{pa 1200 1200}%
+	\special{pa 1150 1450}%
+	\special{sp -0.05}%
+	\special{sh 0}%
+	\special{pa 1200 1500}%
+	\special{pa 1600 1450}%
+	\special{pa 2000 1500}%
+	\special{pa 1950 1250}%
+	\special{pa 2000 1000}%
+	\special{pa 1600 1050}%
+	\special{pa 1200 1000}%
+	\special{pa 1250 1250}%
+	\special{pa 1200 1500}%
+	\special{sp}%
+	\put(1600,-1250){\makebox(0,0){dvi driver}}%
+	\special{sh 0}%
+	\special{ia 1950 1475 200 200 0 6.28319}%
+	\special{sh 0.2}%
+	\special{ar 1950 1475 200 200 0 6.28319}%
+	\put(1950,-1450){\makebox(0,0){tpic}}%
+	\special{pa 1250 1250}%
+	\special{pa 800 1250}%
+	\special{fp}%
+	\special{sh 1}%
+	\special{pa 800 1250}%
+	\special{pa 900 1275}%
+	\special{pa 900 1225}%
+	\special{pa 800 1250}%
+	\special{fp}%
+	\special{sh}%
+	\special{ia 350 1200 400 250 0 6.28319}%
+	\special{sh 0}%
+	\special{ar 400 1250 400 250 0 6.28319}%
+	\put(400,-1250){\makebox(0,0){printer}}%
+\end{picture}
+\end{center}
+
+むろん互換性とポータビリティは \TeX の重要な特徴であり、 specials の扱いには
+慎重さが必要です。とは言うものの、ことグラフィックスに関しては \TeX 自身では
+なく dvi ドライバが引き受けるのは合理的であるように思えます。 また、Knuth 氏
+も The \TeX ~Book の中で、
+
+\begin{quotation}
+\special{sh 0.1}%
+\special{pa 0 0}%
+\special{pa 3000 0}%
+\special{pa 3000 1500}%
+\special{pa 0 1500}%
+\special{pa 0 0}%
+\special{ip}%
+しかし、さまざまなグループの人たちが注意深く実験を重ね、その結果、グラフィッ
+ク命令の何らかの標準が生まれるものと期待している。そうなれば、\verb+\special
++ 拡張命令の使い方も統一される可能性も生じる。（鷺谷好輝訳）%
+\end{quotation}
+
+と書いています。この点、現在 tpic は eepic, gnuplot をはじめとする多くのプロ
+グラムや dvi ドライバによってサポートされており、 事実上の標準と呼べる存在に
+なっています。
+
+そこで今回のバージョンでは、sempa 氏のご厚意により、 dviout/prt に tpic サポ
+ートを付け加えることにしました。通常 (non-tpic) 文書の処理速度も旧バージョン
+の dviout/prt に比べ数 \% 遅い程度と思われますので、 tpic を使うことの少ない
+ユーザーにもデメリットにはならないでしょう。ただし、プログラムサイズはかなり
+大きくなっています。
+
+ちなみに、一例として、 gnuplot を用いて同一内容のグラフを latex 形式と eepic
+形式で出力しそのサイズを比較してみると：
+
+\begin{center}
+\begin{tabular}{lcc}
+            &  latex &  eepic \\
+\hline
+CP2FIG1.TEX &  11684 &  1513 \\
+CP2FIG2.TEX &  20586 &  1512 \\
+CP2FIG3.TEX &  11684 &  1513 \\
+CP2.DVI     &  21052 &  8584
+\end{tabular}
+\end{center}
+
+というわけで、かなりファイルサイズが小さくなり、 \TeX の負担も少なくなってい
+ることが判ります。複雑なグラフを書く場合には特にメリットが大きいと思います。
+
+\section{tpic とは何か}
+
+tpic は、 Brian Kernighan の Troff 用図形プリプロセッサ pic を元にして、 Tim
+Morgan が作り上げた \TeX 用図形プリプロセッサ及びそれが出力する special コマ
+ンドセットの名称です。最新バージョンは 2.2 です。tpic special コマンドセット
+それ自体はごく簡単なグラフィック・プリミティブ命令ですが、インプリメントが比
+較的容易であるにもかかわらず応用性が広いので、 多くの dvi  ドライバ  (iptex,
+xtex, texx, texsun, imagen1, dvips, dviis, quicspool) やグラフィックス・プロ
+グラムがサポートするようになりました。
+
+\subsection{tpic の使用法}
+
+普通の \TeX と tpic をサポートした dvi ドライバがあれば、ユーザー自身が tpic
+special コマンドを文書内に挿入して図を書くことが可能です。（実際この文書もそ
+うやって書いています。） ただし、tpic はテキスト処理と図形処理をほとんど独立
+に行いますので、テキストと図形を混在させるにはある程度試行錯誤が必要です。実
+用性から見ると、tpic specials はあくまでプリミティブであり、通常は他のグラフ
+ィックス・プログラムが出力する中間言語と考えたほうがよいでしょう。既に多くの
+プログラムが tpic specials 出力をサポートしていますので、 用途に応じて使い分
+けもできます。
+
+\begin{description}
+\item[tpic]
+上述の \TeX 用図形プリプロセッサです。フローチャートやブロックダイアグラムな
+ど、簡単な図形を書くのに大変便利に使えます。 ただし、AT\&T Bell Labs. が著作
+権を有する pic のコードを一部含んでおり、フリーウェアではありません。
+\item[gpic]
+GNU プロジェクトがつくった pic 上位互換のプリプロセッサであり、tpic 出力が可
+能です。tpic の代わりに使えるフリーウェアです。 groff パッケージに含まれてい
+ます。
+\item[eepic]
+Conrad Kwok の作った \LaTeX 用のマクロです。\LaTeX の picture 環境とその拡張
+である epic マクロを更に拡張して、tpic specials を出力できるようにしたもので
+す。 tpic をサポートする dvi ドライバがない場合にも、epic でエミュレートして
+類似の図が書けるように工夫されています。    documentstyle     のオプションに
+\verb|[epic,eepic]| を指定して使います。
+\item[gnuplot]
+Thomas Williams, Colin Kelley, David Kotz らの手になる、関数をプロットしてグ
+ラフを書くプログラムです。\LaTeX ~picture 環境出力と、eepic 出力の両方をサポ
+ートしています。 eepic マクロを用いる場合、``set terminal eepic'' と指定してグ
+ラフを出力し、    それを文書にとり込む際    documentstyle     のオプションに
+\verb|[epic,eepic]| を指定して使います。
+\item[transfig]
+Micah  Beck  による  \LaTeX  用図形ファイル相互変換プログラムです。   \LaTeX
+~picture, epic, eepic, PiCTeX など多くのグラフィックス言語をサポートしていま
+す。 特に便利と思われるのは、 UNIX のウィンドウシステム用の図形エディタ Fig,
+xfig が出力する Fig コードをこれらのコマンドに翻訳してくれることです。  将来
+Fig か xfig が DOS に移植されれば、\TeX グラフィックスの tpic 三題噺（ダイア
+グラム・関数プロット・お絵かき）が出そろうことになります。\verb+W(^^)W+
+
+\end{description}
+
+\subsection{tpic 2.2 コマンドセット (output language) 仕様}
+
+この仕様はグラフィックス・プログラムや dvi  ドライバを書こうとしている人のた
+めのガイドです。 tpic プリプロセッサの tpic 出力は、最初に newbox コマンドを
+実行して graph を定義します。個々の図は graph に割りあてられた vtop におさま
+っています。この箱の幅と高さは図のサイズのみで決まり、text は考慮されません。
+この箱の中に、一連の special コマンドと hbox コマンドが並びます。
+
+個々のグラフィック要素の位置は、 \TeX が保持している「ページ上の現在位置」に
+対する相対座標で指定します。個々の special は graph box の左上端に置かれ、こ
+の点が graph の原点になります。X 軸は右が正、Y 軸は{\em 下が正方向}です。（Y
+軸は picture 環境と逆向きなので注意が必要です。） 座標は整数で表し、単位はミ
+リインチです。通常 graph は内部のグラフィック要素を包含した大きさを持つので、
+x, y は正の値をとります。
+
+\begin{center}
+\unitlength 0.001in
+\begin{picture}(600,600)(0,-550)
+	\special{pn 8}%
+	\special{pa 0 0}%
+	\special{pa 500 0}%
+	\special{fp}%
+	\special{sh 1}%
+	\special{pa 500 0}%
+	\special{pa 400 25}%
+	\special{pa 400 -23}%
+	\special{pa 500 0}%
+	\special{fp}%
+	\special{pa 0 0}%
+	\special{pa 0 500}%
+	\special{fp}%
+	\special{sh 1}%
+	\special{pa 0 500}%
+	\special{pa -23 400}%
+	\special{pa 25 400}%
+	\special{pa 0 500}%
+	\special{fp}%
+	\put(0,0){\makebox(0,0)[rb]{0,0}}%
+	\put(520,0){\makebox(0,0)[l]{$+x$}}%
+	\put(0,-520){\makebox(0,0)[t]{$+y$}}%
+\end{picture}
+\end{center}
+
+角度は +X 軸から +Y 軸への向きを正として、ラジアン単位 (0 - $2\pi$) で記述し
+ます。  これは出力ページ上での「時計回り」に相当します。  完全な円と楕円は、
+$\hbox{\it start angle}=0$ と $\hbox{\it end angle} \ge 2\pi$ として指定しま
+す。
+
+dvi ドライバが理解すべき special コマンドは以下のとおりです。 引数は一つ以上
+の空白で区切られ、特に断らない限り整数です。全ての図形処理（塗りつぶし以外）
+はテキスト処理と独立に行い、重ね書きします。special の後に現れるテキストは図
+形の上に重ね書きされます。special の前後で \TeX の保持する現在位置は不変です。
+
+\begin{description}
+\item[pn $s$]
+線幅を $s$ ミリインチに設定します。
+\item[pa $x$ $y$]
+点 $(x, y)$ を path に付け加えます。path はドライバが記憶する一連の点の集合
+（経路）です。$x$ と $y$ の単位はミリインチです。
+\item[fp]
+それまでに定義された path を、現在の線幅で実際に描きます（フラッシュ）。path
+内の点の数はゼロにリセットされます。  シェーディングが設定されており、  かつ
+path が閉じていれば、path 内部を塗りつぶします。
+\item[ip]
+これは fp と同じですが、path を描きません。 シェーディングは、条件が満たされ
+れば行われます。
+\item[da $f$]
+これは fp と同じですが、path は破線で描かれます。 $f$ は実数で、ダッシュ当た
+りの長さをインチ単位で指定します。
+\item[dt $f$]
+これは fp と同じですが、path は点線で描かれます。 $f$ は実数で、点の間隔をイ
+ンチ単位で指定します。
+\item[sp $d$]
+これは fp と同じですが、path は spline 曲線で描かれます。 $d$ は実数で、曲線
+の種類を指定します：
+\begin{itemize}
+\item $d=0$ か $d$ が省略された場合、実線で描きます。
+\item $d>0$ の場合、破線で描きます。$d$ はダッシュの長さです。
+\item $d<0$ の場合、点線で描きます。$-d$ は点間隔です。
+\end{itemize}
+\item[ar $x$ $y$ $r_x$ $r_y$ $s$ $e$]
+中心 $(x,y)$ の弧を描きます。$s$ は開始角度、$e$ は終了角度で、ラジアン単位
+の実数です。 完全な円か楕円である場合は、$r_x$, $r_y$ はそれぞれ $x$, $y$ 半
+径を表します。そうでない場合は $r_x=r_y$ であり、$s$ から $e$ へ弧が描かれま
+す。条件が満たされればシェーディングも行います。
+\item[ia $x$ $y$ $r_x$ $r_y$ $s$ $e$]
+これは ar と同じですが弧は描かず、条件が満たされればシェーディングのみ行いま
+す。
+\end{description}
+
+以下のコマンドはオプションです。インプリメントしない場合は、dvi ドライバは単
+にこれらを無視しなければいけません。
+
+\begin{description}
+\item[sh $s$]
+シェーディングを指定します。このコマンドの次に定義される閉じた図形（３つ以上
+の pa とそれに続く fp か ip 、 もしくは ar か ia  ）の内部を塗りつぶします。
+$s$ は 0 以上 1 以下の実数です。ゼロは白で塗りつぶすことを意味し、図形の下に
+あったものはテキストを含め全て消去します。ゼロ以外の値は灰色を意味し、図形の
+下のものは {\em 消去せずに} 灰色を塗り加えます。1 は黒で塗りつぶすことを意味
+し、当然ながらその下にあったものは何も見えなくなります。0.5 はデフォールトの
+値で、「通常」の灰色を意味し、$s$ が指定されていなければ 0.5 の値を用います。
+シェーディングは図形の内側のみに対して行い、境界線はそれとは独立に現在の線幅
+を用いて描かれます。
+
+\end{description}
+
+以下のコマンドは以前のバージョンのものですが、互換性のためにインプリメントす
+べきです。
+
+\begin{description}
+\item[wh]
+これは sh 0 と同じです。
+\item[bk]
+これは sh 1 と同じです。
+\item[tx]
+このコマンドは、以前には塗りつぶしのパターンを指定するのに用いられていました
+が、Imagen デバイスドライバが対応しているのみであり、 非常にデバイス依存性が
+高いので、インプリメントはお勧めできません。sh コマンドを推奨します。
+
+\end{description}
+
+\section{著作権・バグなど}
+
+\begin{itemize}
+\item この文書の著作権等は dviout/prt パッケージのそれに従います。
+\item tpic 版のコンパイルは ``Make -D(機種名) -DTPIC  dviout.exe  dviprt.exe''
+です。``-DVFTPIC''では書体倶楽部フォントの展開にも tpic 用関数を利用します。
+\item dviout/prt はページ毎に処理を行うので、 ページを飛ばして表示・印刷する
+と以前のページの線幅設定が生かされずデフォルトの線幅になってしまうことがあり
+ます。デフォルト以外の線幅を複数ページにわたって用いるときには、各ページの最
+初か一連の specials の直前に pn コマンドを書くのが無難です。
+\item tpic specials の仕様はまだ完璧ではなく、 流動的な部分があります。 tpic
+をサポートするプログラムを書く場合には、将来の仕様変更に柔軟に対応できるよう
+なコーディングをお勧めします。
+\end{itemize}
+
+\section{謝辞}
+
+Tim Morgan 氏は tpic 2.2 latest version の仕様とマニュアルをお送りくださり、
+仕様の和訳を本パッケージに添付することを快諾してくださいました。また、宮井英
+行氏、かずや氏には tpic や dviout/prt について貴重なご助言をいただきました。
+spline 関数のインプリメントにあたり、奥村晴彦氏の「 C 言語による最新アルゴリ
+ズム事典」が参考になりました。感謝いたします。
+
+\end{document}

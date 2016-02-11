@@ -1,0 +1,102 @@
+2014-04-23  Karl Berry  <karl@gnu.org>
+
+	* pdftex-t.tex (\currentpdftex): 1.40.15.  (Update TeX Live.)
+
+2014-04-04  Karl Berry  <karl@gnu.org>
+
+	* pdftex-t.tex (\pdfinterwordspace...): mention dummy-space font.
+
+2014-03-23  Han The Thanh  <hanthethanh@gmail.com>
+
+	* pdftex-t.tex (\pdfinterwordspace...): add new sections.
+
+2014-03-23  Karl Berry  <karl@gnu.org>
+
+	* pdftex-t.tex (\pdfgentounicode, \pdfglyphtounicode): be a bit
+	less terse; mention failure of ligatures to be searchable by default.
+	(glyphtounicode.tex): \input this at the end, why not.
+
+2014-02-23  Karl Berry  <karl@gnu.org>
+
+	* pdftex-t.tex: small changes to the build process, copyright
+	year, no pool file any more, etc.
+
+	* pdftex-t.tex (\pdfnobuiltintounicode): belated doc.
+
+2014-02-14  Karl Berry  <karl@gnu.org>
+
+	* pdftex-t.tex (\pdfsuppresswarningpagegroup): doc.
+
+2012-04-15  Karl Berry  <karl@gnu.org>
+
+	* pdftex-t.tex: update copyright and other years.
+	(\currentpdftex): bump to 1.40.13 (missed this last year).
+	(\PDFReference): italics looks nicer, I think.
+	(Setting up fonts): description is written better to start on same
+	line as item name.  Also avoids bad page break after item name.
+	(\pdfsuppresswarningdupdest, \pdfsuppresswarningdupmap): doc.
+
+	* Makefile (pdftexversion): get from \currentpdftex (also missed).
+
+	* pdftex-w.tex: use flags (2=serif) to avoid warnings.
+
+2011-04-01  Karl Berry  <karl@gnu.org>
+
+	* pdftex-t.tex: Explain \pdfnormaldeviate a bit more fully.
+	Tweak wording of nearby entries.
+
+2010-11-22  Karl Berry  <karl@gnu.org>
+
+	* Makefile (distall): use $(distnopdf) instead of duplicating file
+	list.
+
+	* pdftex-t.tex: Fix \pdfobj example, PDF reference url,
+	MacTeX much more current than CMacTeX, etc.
+	From Paul I.
+
+	* pdftex-t.tex: avoid text lines >=80 chars.
+	No need for ~ after a and an in English.
+	* pdftex-w.tex: make consistent with pdftex-t.tex.
+
+2010-11-22  Paul Isambert  <zappathustra@free.fr>
+
+        * pdftex-t.tex: fixes for \Something instead of \type
+
+2010-11-19  Karl Berry  <karl@gnu.org>
+
+	* pdftex-t.tex: use \tex{foo} instead of \type{\foo} for bookmarks,
+	so we get the \'s.
+	Remove section about truetype details that became a TUB paper,
+	to avoid duplication.
+
+	* pdftex-w.tex (\pdfobjcompresslevel): must set to 0 explicitly.
+	Noticed by Paul I.
+	* pdftex-t.tex (titlepagelines): consequent update.
+
+	* pdftex-t.tex: alphabetize misc new primitives list; typos.
+
+2010-11-18  Karl Berry  <karl@gnu.org>
+
+	* pdftex-t.tex (\pdfretval): minimally document.
+
+2010-11-16  Karl Berry  <karl@gnu.org>
+
+	* pdftex-t.tex: a couple more abbreviations, English, etc.
+
+2010-11-15  Paul Isambert  <zappathustra@free.fr>
+
+        * pdftex-t.tex: more primitives.
+
+2010-11-14  Karl Berry  <karl@gnu.org>
+
+	* All files: expand keywords again, so the manual appears
+	updated, among other things.
+
+	* Makefile (pdftexversion): 1.40.11 now.
+	(pdftex-t.txt): set GREP_OPTIONS=--text.
+	
+	* pdftex-i.tex: add \pdfmapline for contnav, somehow omitted
+	from TL for years now.
+	
+	* pdftex-t.tex: update intro information about distributions,
+        etc., to be somewhat more accurate.

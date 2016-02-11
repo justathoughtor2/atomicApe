@@ -1,0 +1,98 @@
+                            Graphics Package
+
+            1. dviout.dtx
+            2. ps2frag.ps (PSfrag) 
+
+
+1.                            dviout.dtx
+
+LaTeX2e の dviout for Windows のグラフィクスドライバです。別途 LaTeX2e の 
+graphics package が必要です。
+
+(p)LaTeX2e で dviout.ins を処理し、生成される dviout.def とこのアーカイブに
+含まれる *.cfg を texmf\tex\latex\config に（それが存在しないときは graphics
+package とおなじディレクトリに）コピーしてください。
+なお、直接 dviout.dtx を処理すると、dviout.def のマニュアルが作成されます。
+
+・画像フォーマットは PBM, BMP, BMC, WMF, EPSF その他各種画像フォーマット、およ
+　びそれらを gzip で圧縮したものに対応しています。
+  ただし、PBM, EPSF以外では、\includegraphics マクロのオプション引数で画像
+  ファイルの縦横のサイズを指定するか、bmc の -b オプションによって BoundingBox
+  を記録した拡張子 .bb のファイルを作成しておく必要があります。EPSF, PBM につ
+  いては画像サイズは自動的に調べられます。
+
+・PBM のチェックはしていません。拡張子が .pbm の場合に強制的に PBM フォー
+  マットとして処理しています。チェックを入れるべきでしょうが、面倒なのでな
+  にもしていません (^^; どなたかお願いします。
+
+・不具合が見つかった場合には、報告するのではなく FIX して公開してください (^^;
+
+・dvips 用のドライバが出力する DVI ファイルとの互換性を高くしてありますが、
+  PBM/BMP/BMC/WMF/JPEG/TIFF/PNG/PCD など各種の画像の取り込みをサポートして
+  いる点で異なっています。
+
+・EPSFを扱うには Ghostscript が、PBM/BMP/BMC/WMF 以外の JPEG, TIFF, PCD, GIF, 
+  などの画像ファイルを扱うには、フリーソフト Susie の plug-in として提供され
+  る DLL が必要です（拡張子は spi）。その他の形式の画像ファイルの場合でも、対
+  応する Susie の plug-in を dviout for Windows の存在するフォルダに入れてお
+  けば、dviout.def を用いて LaTeX2e の graphics packages で取り込むことが出来
+  ます。
+
+  なお、Susie plug-in は
+  
+  WWW
+       http://www.digitalpad.co.jp/~takechin/
+  Nifty-serve
+       FGALAV,FQLD1,FWINMM,FGUI
+
+  などから手に入ります。
+
+・psflag.sty を用いる場合は, psflag.sty の中の
+
+  \def\@tempa{dvips.def}\ifx\Gin@driver\@tempa\def\pfg@orient{-1}\fi%
+
+  という行の後に
+
+  \def\@tempa{dviout.def}\ifx\Gin@driver\@tempa\def\pfg@orient{-1}\fi%
+
+  を挿入してください。dviout は、PSFLAG をサポートしていませんが、
+  dvips.def におけると同様、dviout.def によって作成された DVI ファイル
+  は、PSFLAG が dvips によってサポートされます。
+---
+使い方は graphics package 付属のドキュメント、および、付属の epsfdoc.dvi,
+color.dvi および、そのソースファイルをご覧ください。
+
+LaTeX のファイルでは、たとえば以下のようにします（graphicx の代わりに,
+graphics も使えます）。
+
+\documentclass[a4j]{jarticle}
+\usepackage{graphicx, color}
+\ExecuteOptions{usename}
+...
+\includegraphcs*[width=10cm, height=8cm]{foo.jpg}
+...
+--
+淺山/SHIMA
+
+
+
+2.                        ps2frag.ps (PSfrag)
+
+松田さんによって、dviout for Windows の PSfrag 対応が実現されました
+(Ver.3.11.4）。
+
+具体的には、以下の操作を行っておくことによって対応が可能になります。
+
+  1) Ghostscript（gswin32.exe） が dviout から正常に動かせる状態になっている
+     こと（Option -> Setup papameters... -> Graphic -> gsx: を参照）
+
+  2) PSfrag（これを書いた時点での最新版は Ver.3.04）パッケージの psfrag.pro 
+     を、Ghostscriptのサーチパスである環境変数 GS_LIB で指定されたディレクトリ
+     に入れておく。
+
+  3) 旧版（Ver.2.*) の PSfrag パッケージに付属の ps2frag.ps を、2) におけると
+     同じディレクトリに入れておく。
+
+環境変数 GS_LIB の設定が必要です。設定されていれば、1) の gsx: ボタンを押した
+とき、実行プログラム gswin32c.exe のパスのみが表示され、それにパラメータなど
+は付加されません。

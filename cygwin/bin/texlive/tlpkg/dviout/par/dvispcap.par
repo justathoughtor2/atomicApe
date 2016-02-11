@@ -1,0 +1,5 @@
+;#j DVI ファイルのページのコードを表示する
+;# Show Codes of some pages of DVI file
+;;   Show Codes of some pages of DVI file by notepad
+dviprt='dvispc -alp^a-^b ^X{-v} ^Y{-t} "^d" ^t;notepad ^t^Z^{verbose&1}^{DLT&?}Show code of DVI file; by notepad'
+Set=fd

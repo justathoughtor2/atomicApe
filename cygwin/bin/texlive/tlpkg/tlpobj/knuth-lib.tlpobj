@@ -1,0 +1,43 @@
+name knuth-lib
+category Package
+revision 35820
+shortdesc A small library of MetaFont sources.
+longdesc A collection of miscellaneous MetaFont source, including the
+longdesc means to generate the logo font that is used for MetaFont and
+longdesc MetaPost.
+containersize 30412
+containermd5 55076ca568570285f379b840c91d0494
+runfiles size=47
+ texmf-dist/fonts/source/public/knuth-lib/3test.mf
+ texmf-dist/fonts/source/public/knuth-lib/6test.mf
+ texmf-dist/fonts/source/public/knuth-lib/expr.mf
+ texmf-dist/fonts/source/public/knuth-lib/grayf.mf
+ texmf-dist/fonts/source/public/knuth-lib/io.mf
+ texmf-dist/fonts/source/public/knuth-lib/logo.mf
+ texmf-dist/fonts/source/public/knuth-lib/logo10.mf
+ texmf-dist/fonts/source/public/knuth-lib/logo8.mf
+ texmf-dist/fonts/source/public/knuth-lib/logo9.mf
+ texmf-dist/fonts/source/public/knuth-lib/logobf10.mf
+ texmf-dist/fonts/source/public/knuth-lib/logosl10.mf
+ texmf-dist/fonts/source/public/knuth-lib/manfnt.mf
+ texmf-dist/fonts/source/public/knuth-lib/null.mf
+ texmf-dist/fonts/source/public/knuth-lib/rtest.mf
+ texmf-dist/fonts/source/public/knuth-lib/slant.mf
+ texmf-dist/fonts/source/public/knuth-lib/test.mf
+ texmf-dist/fonts/source/public/knuth-lib/waits.mf
+ texmf-dist/fonts/source/public/knuth-lib/ztest.mf
+ texmf-dist/fonts/tfm/public/knuth-lib/logo10.tfm
+ texmf-dist/fonts/tfm/public/knuth-lib/logo8.tfm
+ texmf-dist/fonts/tfm/public/knuth-lib/logo9.tfm
+ texmf-dist/fonts/tfm/public/knuth-lib/logobf10.tfm
+ texmf-dist/fonts/tfm/public/knuth-lib/logosl10.tfm
+ texmf-dist/fonts/tfm/public/knuth-lib/manfnt.tfm
+ texmf-dist/tex/generic/knuth-lib/null.tex
+ texmf-dist/tex/plain/knuth-lib/manmac.tex
+ texmf-dist/tex/plain/knuth-lib/mftmac.tex
+ texmf-dist/tex/plain/knuth-lib/story.tex
+ texmf-dist/tex/plain/knuth-lib/testfont.tex
+ texmf-dist/tex/plain/knuth-lib/webmac.tex
+catalogue-ctan /systems/knuth/dist/lib
+catalogue-date 2014-02-26 23:03:13 +0100
+catalogue-license knuth

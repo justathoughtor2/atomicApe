@@ -1,0 +1,32 @@
+name tlpsv.win32
+category TLCore
+revision 22629
+shortdesc Cross-platform PostScript and PDF previewer (PS_view, psview, psv)
+longdesc See http://psview.sf.net for information and downloads. TeX
+longdesc Live includes executables only for Windows.
+postaction shortcut type=menu name="PS_View" cmd=TEXDIR/bin/win32/psv.exe
+postaction filetype name=TL.PSView.view cmd='"TEXDIR/bin/win32/psv.exe" "%1"'
+postaction fileassoc extension=.eps filetype=TL.PSView.view
+postaction fileassoc extension=.ps filetype=TL.PSView.view
+postaction fileassoc extension=.pdf filetype=TL.PSView.view
+containersize 1444380
+containermd5 242ccf46ace6979d3253063ea8a5f2ac
+runfiles size=459
+ tlpkg/tlpsv/README
+ tlpkg/tlpsv/cs/LC_MESSAGES/psv.mo
+ tlpkg/tlpsv/de/LC_MESSAGES/psv.mo
+ tlpkg/tlpsv/en/LC_MESSAGES/psv.mo
+ tlpkg/tlpsv/gswxlua.exe
+ tlpkg/tlpsv/nl/LC_MESSAGES/psv.mo
+ tlpkg/tlpsv/pl/LC_MESSAGES/psv.mo
+ tlpkg/tlpsv/psv.bat
+ tlpkg/tlpsv/psv.exe
+ tlpkg/tlpsv/psv.ico
+ tlpkg/tlpsv/psv.wx.lua
+ tlpkg/tlpsv/psv_about.ps
+ tlpkg/tlpsv/psv_about_pl.ps
+ tlpkg/tlpsv/psv_help_en.htb
+ tlpkg/tlpsv/psv_help_pl.htb
+ tlpkg/tlpsv/psv_view.ps
+binfiles arch=win32 size=5
+ bin/win32/psv.exe

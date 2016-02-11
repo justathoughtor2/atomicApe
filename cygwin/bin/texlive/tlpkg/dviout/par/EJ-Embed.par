@@ -1,0 +1,13 @@
+;#j 欧文・和文TrueTypeフォントを内部で展開（埋め込みに適）
+;# Render TrueType fonts by dviout
+;;  Render TrueType fonts by dviout
+;;
+;;  They should be in the subdirectory "fonts" of 
+;;    the system directory
+;;
+;;  Require corresponding *.tfm files.
+TEXFONTS=^r\tfm\\
+TEXPK=^w\fonts\^s.ttf;^r\pk\\^s.^dpk;^r\tfm\\^s^tfm;^r\vf\\^s.vf;^r\ovf\\^s.ovf;^r\tfm\\^s.tfm
+Jfm=-
+vfn=^x\utility\dviout1.vfn
+ftt=^x\map\ttfexp.map

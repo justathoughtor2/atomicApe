@@ -1,0 +1,87 @@
+name pdftex
+category TLCore
+revision 39381
+shortdesc A TeX extension for direct creation of PDF
+longdesc An extension of TeX which can be configured to directly
+longdesc generate PDF documents instead of DVI. All current free TeX
+longdesc distributions including TeX live, MacTeX and MiKTeX include
+longdesc pdfTeX (Plain TeX) and pdfLaTeX (LaTeX). ConTeXt was designed
+longdesc around use of pdfTeX (though it is now migrating towards
+longdesc LuaTeX).
+depend kpathsea
+depend pdftex.ARCH
+execute AddFormat name=pdftex engine=pdftex patterns=language.def           options="-translate-file=cp227.tcx *pdfetex.ini"           fmttriggers=cm,etex,hyphen-base,knuth-lib,plain,pdftex
+execute AddFormat name=etex engine=pdftex patterns=language.def           options="-translate-file=cp227.tcx *etex.ini"           fmttriggers=cm,etex,hyphen-base,knuth-lib,plain
+execute AddFormat name=pdfetex engine=pdftex patterns=language.def           options="-translate-file=cp227.tcx *pdfetex.ini"           fmttriggers=cm,etex,hyphen-base,knuth-lib,plain,pdftex
+execute addMap dummy-space.map
+containersize 160424
+containermd5 9b07c0d09bbf633bfc4d630dd55269ff
+doccontainersize 2782644
+doccontainermd5 d0b82d4b51d84282186d8f75c9d1d329
+docfiles size=1170
+ texmf-dist/doc/man/man1/pdfetex.1
+ texmf-dist/doc/man/man1/pdfetex.man1.pdf
+ texmf-dist/doc/man/man1/pdftex.1
+ texmf-dist/doc/man/man1/pdftex.man1.pdf
+ texmf-dist/doc/pdftex/01-fake-interword-space/fake-interword-space.tex
+ texmf-dist/doc/pdftex/NEWS
+ texmf-dist/doc/pdftex/README
+ texmf-dist/doc/pdftex/manual/ChangeLog
+ texmf-dist/doc/pdftex/manual/Makefile
+ texmf-dist/doc/pdftex/manual/README
+ texmf-dist/doc/pdftex/manual/makefiles.cmd
+ texmf-dist/doc/pdftex/manual/pdftex-a.pdf details="User manual"
+ texmf-dist/doc/pdftex/manual/pdftex-i.tex
+ texmf-dist/doc/pdftex/manual/pdftex-l.pdf
+ texmf-dist/doc/pdftex/manual/pdftex-s.pdf
+ texmf-dist/doc/pdftex/manual/pdftex-syntax.txt
+ texmf-dist/doc/pdftex/manual/pdftex-t.tex
+ texmf-dist/doc/pdftex/manual/pdftex-t.txt
+ texmf-dist/doc/pdftex/manual/pdftex-w.tex
+ texmf-dist/doc/pdftex/manual/samplepdf/cmr10.103
+ texmf-dist/doc/pdftex/manual/samplepdf/obj.dat
+ texmf-dist/doc/pdftex/manual/samplepdf/pdfcolor.tex
+ texmf-dist/doc/pdftex/manual/samplepdf/pic.eps
+ texmf-dist/doc/pdftex/manual/samplepdf/pic.jpg
+ texmf-dist/doc/pdftex/manual/samplepdf/pic.mps
+ texmf-dist/doc/pdftex/manual/samplepdf/pic.pdf
+ texmf-dist/doc/pdftex/manual/samplepdf/pic.png
+ texmf-dist/doc/pdftex/manual/samplepdf/pic16.png
+ texmf-dist/doc/pdftex/manual/samplepdf/rgb.icc
+ texmf-dist/doc/pdftex/manual/samplepdf/samplepdf.0
+ texmf-dist/doc/pdftex/manual/samplepdf/samplepdf.1
+ texmf-dist/doc/pdftex/manual/samplepdf/samplepdf.tex
+ texmf-dist/doc/pdftex/manual/samplepdf/supp-mis.tex
+ texmf-dist/doc/pdftex/manual/samplepdf/supp-pdf.tex
+ texmf-dist/doc/pdftex/manual/samplepdf/tmp.pdf
+ texmf-dist/doc/pdftex/manual/syntaxform.awk
+ texmf-dist/doc/pdftex/pdftex-pdfkeys/Makefile
+ texmf-dist/doc/pdftex/pdftex-pdfkeys/fdl.tex
+ texmf-dist/doc/pdftex/pdftex-pdfkeys/pdftex-pdfkeys.bbl
+ texmf-dist/doc/pdftex/pdftex-pdfkeys/pdftex-pdfkeys.pdf
+ texmf-dist/doc/pdftex/pdftex-pdfkeys/pdftex-pdfkeys.tex
+ texmf-dist/doc/pdftex/thanh/ext/abbr.tex
+ texmf-dist/doc/pdftex/thanh/ext/efcode.tex
+ texmf-dist/doc/pdftex/thanh/ext/il2.etx
+ texmf-dist/doc/pdftex/thanh/ext/il2.mtx
+ texmf-dist/doc/pdftex/thanh/ext/il2protcode.tex
+ texmf-dist/doc/pdftex/thanh/ext/mktextfm
+ texmf-dist/doc/pdftex/thanh/ext/mktextfm.ext
+ texmf-dist/doc/pdftex/thanh/ext/mktfm8z
+ texmf-dist/doc/pdftex/thanh/ext/protcode.tex
+ texmf-dist/doc/pdftex/thanh/ext/ufntinst.sty
+runfiles size=1395
+ texmf-dist/fonts/map/dvips/dummy-space/dummy-space.map
+ texmf-dist/fonts/map/pdftex/updmap/pdftex.map
+ texmf-dist/fonts/map/pdftex/updmap/pdftex_dl14.map
+ texmf-dist/fonts/map/pdftex/updmap/pdftex_ndl14.map
+ texmf-dist/fonts/tfm/public/pdftex/dummy-space.tfm
+ texmf-dist/fonts/type1/public/pdftex/dummy-space.pfb
+ texmf-dist/scripts/simpdftex/simpdftex
+ texmf-dist/tex/generic/config/pdftex-dvi.tex
+ texmf-dist/tex/generic/config/pdftexconfig.tex
+ texmf-dist/tex/generic/pdftex/glyphtounicode.tex
+ texmf-dist/tex/generic/pdftex/pdfcolor.tex
+catalogue-date 2015-08-03 05:43:12 +0200
+catalogue-license gpl
+catalogue-topics engine

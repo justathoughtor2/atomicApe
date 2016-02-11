@@ -1,0 +1,238 @@
+% dviout version 3.11 or later has "presentation" mode.
+% If you want to present something by a computer without
+% OHP sheet, lots of presenter used Microsoft PowerPoint.
+% It is certainly useful, but week to use mathematical formulas.
+% Now you can use dviout instead of PowerPoint.
+% This macro package provides interface macros to create
+% a dvi file which would be used in the presentation.
+% Copyright(C) 2000 by Yoshiki OTOBE.
+%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{presen}[2000/02/25 v1.0]
+\RequirePackage{ophook}
+
+\newif\if@cover \@coverfalse
+\newif\if@each  \@eachfalse
+\newcounter{@bkmode}\setcounter{@bkmode}{0}
+\newcounter{@scmode}\setcounter{@scmode}{0}
+\newcounter{@coverpos}\setcounter{@coverpos}{0}
+\newif\if@autoprocess \@autoprocessfalse
+\newcounter{@pausenum}\setcounter{@pausenum}{0}
+\newcounter{@pausesec}\setcounter{@pausesec}{0}
+\newcounter{@viewmode}\setcounter{@viewmode}{0}
+\newif\if@keepmargin  \@keepmarginfalse
+\DeclareOption{cover}{\@covertrue}
+\DeclareOption{uncover}{\@coverfalse}
+\DeclareOption{whiteback}{\setcounter{@bkmode}{1}}
+\DeclareOption{blackback}{\setcounter{@bkmode}{2}}
+\DeclareOption{white}{\setcounter{@scmode}{1}}
+\DeclareOption{black}{\setcounter{@scmode}{2}}
+\DeclareOption{bottom}{\setcounter{@coverpos}{1}}
+\DeclareOption{left}{\setcounter{@coverpos}{2}}
+\DeclareOption{right}{\setcounter{@coverpos}{3}}
+\DeclareOption{bottomleft}{\setcounter{@coverpos}{4}}
+\DeclareOption{bottomright}{\setcounter{@coverpos}{5}}
+\DeclareOption{each}{\@eachtrue}  %% DONT USE THIS OPTION. FOR FUTURE.
+\DeclareOption{auto}{\@autoprocesstrue}
+\DeclareOption{noauto}{\@autoprocessfalse}
+\DeclareOption{fit}{\setcounter{@viewmode}{1}}
+\DeclareOption{full}{\setcounter{@viewmode}{2}}
+\DeclareOption{keepmargin}{\@keepmargintrue}
+\DeclareOption{adjustmargin}{\@keepmarginfalse}
+\ExecuteOptions{uncover,black,bottom,adjustmargin}
+\ProcessOptions\relax
+
+\if@keepmargin\else
+  \message{Package presen : Paper size will be ignored.^^J%
+    use `keepmargin' option if you want to keep the layout.^^J}%
+  \topmargin-.5in
+  \headheight0pt
+  \headsep0pt
+  \advance\textwidth2\oddsidemargin
+  \advance\textwidth1in
+  \oddsidemargin-.5in
+  \evensidemargin\oddsidemargin
+  \textheight\linewidth
+  \paperheight\textheight
+  \advance\textheight-.5in
+\fi
+
+
+% If you fing "each" option is implimented, please forget it.
+% "each" option requires more complicated implimentation.
+\if@autoprocess
+  \special{dviout !A}
+\fi
+
+\if@each
+  \let\put@presentation\AtOutput
+\else
+  \let\put@presentation\AtBeginDocument
+\fi
+
+\if@cover\UseCoverSheet\fi
+
+\ifcase\c@@bkmode
+    \special{dviout N0}%
+  \or
+    \special{dviout N3}%
+  \or
+    \special{dviout N4}%
+\fi
+
+\ifcase\c@@scmode
+    \special{dviout N0}%
+  \or
+    \special{dviout N1}%
+  \or
+    \special{dviout N2}%
+\fi
+
+\ifcase\c@@coverpos
+  \or
+    \special{dviout N5}%
+  \or
+    \special{dviout N7}%
+  \or
+    \special{dviout N6}%
+  \or
+    \special{dviout N9}%
+  \or
+    \special{dviout N8}%
+\fi
+
+\ifnum\c@@coverpos>0
+  \if@cover\else
+    \special{dviout NP}%% ??
+    \@covertrue
+  \fi
+\fi
+
+\if@autoprocess
+  \ifcase\c@@viewmode
+    \special{dviout !p;!b}% go to presentation mode
+  \or
+    \special{dviout !p;!bdf}%
+  \or
+    \special{dviout !p;!bdl}%
+  \fi
+\fi
+
+% cover sheet will be used.
+% If you enter "presentation mode" without \Pause,
+% hitting [space] bar will...
+% 1. show the page with covering.
+% 2. show the page with all contents are shown.
+% 3. go to next page...
+\def\UseCoverSheet{%
+  \if@cover\else\special{dviout NO}\fi
+  \@covertrue
+}
+
+\def\UnuseCoverSheet{%
+  \if@cover\special{dviout NF}\fi
+  \@coverfalse
+}
+
+% cover sheet will be used.
+% but the page will be shown as default if there's no \Pause.
+\def\PrepareCoverSheet{%
+  \if@cover\else\special{dviout NP}\fi
+  \@covertrue
+}
+
+% we set cover sheet not to be used temporary.
+\def\SuspendCoverSheet{%
+  \special{dviout !S}%
+}
+
+% If cover sheet is not currently used (e.g., after jumping another file
+% or another page), come back to memoried page (e.g., the page the cover
+% sheet was suspended) and change the mode to use cover sheet.
+\def\ReturnToCoverSheet{%
+  \special{dviout !C}%
+}
+
+\def\SetTimer#1{\setcounter{@pausesec}{#1}}
+\def\Pause{%
+  \ifnum\count0=1%
+    \@latex@warning{The first page may contain a pause special}%
+  \fi
+  \if@cover\UseCoverSheet\fi
+  \special{pause}%
+  \addtocounter{@pausenum}{1}%
+}
+\def\AutoProcess{%
+  \if@autoprocess\else\special{dviout !p}\fi
+  \@autoprocesstrue
+}
+\def\NoAutoProcess{\@autoprocessfalse}
+\g@addto@macro\@outputpageh@@kE{\@embedpause}
+\AtEndDocument{%
+  \g@addto@macro\@outputpageh@@kE{\@embedreturntop}%
+}
+
+\def\@embedtimer{%
+  \ifnum\c@@pausesec>0%
+    \special{dviout `timer \the\c@@pausesec\space je}%
+  \fi
+}
+
+\def\GoTop{%
+  \special{dviout `timer 0}%
+  \special{dviout jt}%
+}
+
+\def\GoNext{%
+  \special{dviout `timer 0}%
+  \special{dviout je}%
+}
+
+\def\Wait#1{%
+  \special{dviout `timer #1}%
+}
+
+\def\StartPresentation{%
+  \ifcase\c@@viewmode
+    \special{dviout !p}% go to presentation mode
+  \or
+    \special{dviout !p;df}%
+  \or
+    \special{dviout !p;dl}%
+  \fi
+}
+
+\def\FinishPresentation{%
+  \special{dviout !n}%
+}
+
+\let\@embedpause\relax
+\h@@koutput
+
+\def\define@embed@macro{
+  \gdef\@embedreturntop{%
+    \if@autoprocess
+      \special{dviout `timer 0}%
+      \special{dviout jt}%
+    \fi
+  }%
+  \gdef\@embedpause{%
+    \ifnum\c@@pausenum=0%
+      \if@autoprocess
+        \special{pause}%
+        \special{dviout `timer 0 je}%
+      \fi
+    \fi
+    \loop\ifnum\c@@pausenum>0%
+      \@embedtimer
+      \global\advance\c@@pausenum by -1%
+    \repeat
+    \if@autoprocess
+      \special{dviout `timer \the\c@@pausesec\space je}%
+    \fi
+  }%
+}
+
+\define@embed@macro
+\endinput
+

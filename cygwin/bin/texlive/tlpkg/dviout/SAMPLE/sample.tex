@@ -1,0 +1,1734 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                       %
+%                This is a sample for dviout for Windows                %
+%                                                                       %
+%     Use graphics package of LaTeX2e with dviout.def and myhyper.sty   %
+%                                                                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{article}
+\usepackage[dviout]{graphicx, color}
+\IfFileExists{hyperref.sty}{\usepackage{hyperref}}{}
+\usepackage{myhyper}
+\title{A sample DVI file%
+{\raise-4.5pt\hbox{\includegraphics*[height=9mm,width=9mm]{dvi2.bmp}}}
+for {\tt dviout}
+{\raise-4pt\hbox{\includegraphics*[height=8mm,width=8mm]{dvi.bmp}}}%
+{\raise-4.5pt\hbox{\includegraphics*[height=9mm,width=9mm]{prt.bmp}}}}
+\author{Toshio OSHIMA}
+\date{\name{date}{December 18, 2005}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% return to the normal mode;
+% set paper size to be A4P and ReNew if necessary
+\special{dviout !n; -y=A4P !i}
+\def\button#1%
+{{\raise-3pt\hbox{\includegraphics*[height=4.6mm,width=4.6mm]{#1}}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 		Preview by dviout for Windows
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Preview by {\tt dviout for windows}}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 	A TeX system
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{A {\TeX} system}%
+
+Personal computers with a current OS%
+\footnote{Operating system, Windows95/98/NT/2000 are for {\tt dviout for Windows}}
+are now so powerful that {\TeX} works in the OS similarly as in 
+other OS, such as UNIX, without any special invention.
+ 
+It is recommended to use a {\TeX} system supporting {\tt mktexpk}%
+\footnote{A utility to make fonts by {\tt METAFONT}.}
+with a standard directory configuration.
+Then the environment variable {\tt TEXMF} indicates the location of 
+the {\TeX} system.
+Such a system for Windows95/98/NT can be obtained from
+\href{http://jupiter.fsci.fuk.kindai.ac.jp/~kakuto/win32-ptex/index-e.html}
+{here}\footnote{Click the colored part (which is blue with an underline in 
+default) by the left button on the mouse to access:
+
+\tt http://jupiter.fsci.fuk.kindai.ac.jp/%
+\~{}kakuto/win32-ptex/index-e.html}, which supports p\TeX%
+\footnote{\href{http://www.ascii.co.jp/pb/ptex}{p\TeX}, 
+a Japanized {\TeX} developed by ASCII corp.
+Another popular Japanized {\TeX} is called NTTJ\TeX, which is
+also supported by {\tt dviout}.}
+and source specials together with a usual {\TeX}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 	Preview window
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Preview window}
+\includegraphics[height=2.9cm,width=12.2cm]{select.bmp}
+\begin{itemize}
+\item
+Select {\tt [\b{D}isplay $\to$ \b{S}ize $\to$ 
+\href{dviout:DM}{\b{M}agnify}/\href{dviout:DR}{\b{R}educe}]}
+on the menu bar located at the top part in the preview window or 
+the tool button \button{lplus.bmp} or \button{lminus.bmp}
+to change the scale for the display of a page.  
+
+\item
+The contrast of the preview window can be
+adjusted by selecting {\tt [\b{D}isplay $\to$\b{C}ontrast $\to$ 
+\href{dviout:DB}{\b{B}lacker}/\href{dviout:DW}{\b{W}hiter}]}.
+More precise setting can be done by 
+{\tt [\b{O}ption $\to$ \b{S}etup Parameters$\ldots$} or \button{option.bmp}
+{\tt $\to$ Display]} and moreover the current setting is kept by pushing the 
+button {\tt [\b{S}ave]}.
+
+\item
+Check {\tt[\b{V}iew $\to$ 
+\href{dviout:VT}{\b{T}ool Bar}, 
+\href{dviout:VS}{\b{S}tatus Bar}, 
+\href{dviout:VP}{\b{P}age Slider}, 
+\href{dviout:VR}{Sc\b{r}oll Bar}]} 
+to hide or recover the bars on the preview window.
+
+\item
+Click {\tt[\b{V}iew $\to$ Gli\b{d} $\to$ \b{O}n]} to display a grid.
+%The size of the grid is changed by {\tt[\b{V}iew $\to$ Gli\b{d} $\to$ \b{S}cale]}.
+
+\item
+Select {\tt [\b{V}iew $\to$ 
+\href{dviout:VC}{\b{C}hange Tool Buttons}, Show Move \b{B}utton]} to 
+change some buttons on the tool bar.
+
+\item One can define any functions on some of tool buttons such as 
+\button{niko.bmp}
+or keys by {\tt [\b{O}ption $\to$ \b{S}etup Parameters$\ldots$}
+or \button{option.bmp} {\tt $\to$ Key]}.
+By {\tt[\b{H}elp $\to$ \b{K}ey table]} the current definition is shown
+in Information Window.  The height of the Window can be changed by 
+{\tt[\b{V}iew $\to$ \b{I}nformation Window]}.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 	Using keys and a mouse
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Using keys and a mouse}
+\begin{itemize}
+\item
+The arrow keys and {\tt[Home]}, {\tt [End]} and scroll bars are used to 
+scroll the preview window within a page.
+
+\item To scroll pages, one can use the keys {\tt [PageUp]},
+{\tt [PageDown]}, {\tt [N]}, {\tt [P]}, {\tt [Space]}, {\tt [BackSpace]} 
+etc.~or the menu in {\tt [\b{J}ump]} on the menu bar or the page slider on 
+the right side of the window or the buttons \button{bpage.bmp} and 
+\button{fpage.bmp}.  The buttons to move pages can be hidden by 
+{\tt [\b{V}iew $\to$ Show Move \b{B}utton]}.
+
+\item In the page window on the tool bar or after pushing the key {\tt[/]} in 
+the default key setting, one can jump to any page by the input of the page
+number.  If {\tt[+]} or {\tt[-]} is given preceding the number, the page
+is counted relatively from the current page.  
+If {\tt[.]} is given preceding the number, the page is counted from the last.
+If {\tt[Shift]} or {\tt[Ctrl]} is pressed when {\tt[Enter]} is hit to execute, 
+the nombre page is specified.
+For example, input {\tt[/][.][Enter]} means to jump to the last page.
+
+\item Click the right button on the mouse. Then a loupe will appear.
+Move the mouse while pressing the right button to move the loupe. 
+
+The loupe can be modified by {\tt [\b{D}isplay $\to$ \b{L}oupe]} on the 
+menu bar at the top of the preview window of {\tt dviout}.
+More precise setting is possible by 
+{\tt [\b{O}ption $\to$ \b{S}etup Parameters$\ldots$} or \button{option.bmp}
+{\tt $\to$ Common]}.
+
+If {\tt [Ctrl]} key is also pressed, a different kind of loupe will appear.
+
+\item When the mouse cursor is of the shape of a hand, move the mouse while 
+pressing the left button to scroll in a page.
+If the shape of mouse cursor is an arrow, select {\tt [\b{D}isplay $\to$ 
+\href{dviout:DH}{Mouse s\b{h}ape}]} or \button{han.bmp} to change it.  
+
+\item Click the left button on the mouse while {\tt [Shift]} key is pressed
+to acquire the character string under the mouse pointer for copying to 
+clipboard. 
+Then more strings are picked up by pressing {\tt [\b{A}dd]} or {\tt [\b{F}ull]}
+button.
+
+\item
+Click an arrow button while both {\tt [Shift]} key and {\tt[Ctrl]} key are 
+pressed, then the displayed area in a sheet is slightly adjusted.
+
+\item Click the left button on the mouse while both {\tt [Shift]} key and {\tt[Ctrl]} key are pressed, then the information of the pointed position and the 
+character is displayed.
+
+\item In displaying 4 or 16 pages in a reduced size ({\tt [\b{D}isplay $\to$ 
+\href{dviout:DS}{cro\b{s}s pages}/\href{dviout:D6}{1\b{6} pages}]}), 
+the pointed page will be displayed in a normal size by clicking the right 
+button on the mouse.
+
+\item Turn the central wheel of IntelliMouse to scroll up/down.  
+Press the wheel or {\tt [Shift]} key at the same time to move to another 
+page.  
+Press the {\tt[Ctrl]} key with the turn to magnify/reduce a page.
+Click the side buttons of IntelliMouse Explorer for Backward/Forward History.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 		Search a string
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Search a string}
+One can search a string in the DVI file by {\tt [\b{S}earch]} on menu bar.
+For example, 
+\begin{enumerate}
+\item Move the mouse cursor on the string of the next line:
+{\Large
+\begin{verbatim}
+       tpic
+\end{verbatim}}
+
+\item Click the left button of the mouse while pressing the {\tt[Shift]} key.
+If the string ``tpic" is picked up, press {\tt [Co\b{p}y]} in the window
+appeared.  
+\item Select {\tt [\b{S}earch $\to$ \b{F}ind]} on the menu bar or the tool 
+button \button{search.bmp} and paste the string to set it as the target 
+string by clicking the right button on the mouse.  
+\item Choose downward search, press a button to search it and close the 
+dialog window.
+
+\item Select {\tt [\b{S}earch $\to$ \b{U}pward/\b{D}ownward]} or 
+{\tt [F3]}/{\tt [Shift]+[F3]} or the tool buttons
+\button{seru.bmp}, \button{serd.bmp} for the further search.
+\end{enumerate}
+
+One may directly paste, write or choose the target string on the search 
+window on the tool bar.
+
+Indicating a string following after one space character, one can 
+search the location in the current DVI file by {Hyper\TeX} or source 
+specials.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 		Using Help
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Using Help}
+One can find more information from {\tt [\b{H}elp $\to$ 
+\href{dviout:HH}{\b{H}elp Topics}]} and
+{\tt [\b{H}elp $\to$ \b{T}ips on dviout]}
+on the menu bar.
+If you have a question in using {\tt dviout}, you may find an answer from
+{\tt[Q\&A]} in this Help Topics.
+
+If Japanese language is supported by Windows, the selection
+{\tt[\b{H}elp $\to$ Use \b{E}nglish Help]} is the toggle switch between 
+Help in English and that in Japanese.
+
+Through {\tt [\b{O}ption $\to$ \b{S}etup Parameters$\ldots$]} or the tool 
+button \button{option.bmp}, a  precise setting for {\tt dviout} can be done. 
+If you change the setting, you should push {\tt[OK]} to validate it in
+the current session.  If you want to validate it for the following sessions, 
+push {\tt[\b{S}ave]} before {\tt[OK]}.
+
+It may be difficult for you to do such setting but use {\tt[Help]} on each 
+property sheet or click the button {\tt[?]} and then push the left button 
+on the mouse pointing the spot where you want to have the explanation.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%			Specials
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Specials}
+%Examples of some specials supported by {\tt dviout for Windows} will be shown.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 			 HyperTeX specials
+%				from hyperdvi.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Hyper\TeX\ specials}
+\name{hyperTeX}
+Please click by the left button on the mouse at the colored part of the 
+following lines.  Also note the change of the cursor and the Status Bar.
+
+What is the \href{#version}{version number} of {\tt dviout for MS-DOS} 
+from which {\tt dviout for Windows} was created and
+what is the \href{#date}{date} when this document was written?
+$$
+2.33\quad\quad 2.43.1 \quad\quad 2.43.2\name{version}{\quad}\quad 
+2.43.3\quad\quad 2.43.4
+$$
+
+
+Using {\tt myhyper.sty} in the package of {\tt dviout}, the result of 
+following {\TeX} source 
+\begin{verbatim}
+If you click \href{#foo}{here}, you will jump to \name{foo}{this} 
+place.
+\end{verbatim}
+is ``If you click \href{#foo}{here}, you will jump to \name{foo}{this} 
+place", which corresponds to
+\begin{verbatim}
+If you click <a href="#foo">here</a>, you will jump to 
+<a name="foo">this</a> place.
+\end{verbatim}
+in HTML(Hyper Text Markup Language).
+
+In {\tt myhyper.sty}, these macros are defined as follows:
+\begin{verbatim}
+\def\href{\leavevmode\begingroup \@sanitize \@href}
+\def\@href#1{\special{html:<a href="#1">}\endgroup \@@href}
+\def\@@href#1{#1\special{html:</a>}}
+\def\name{\leavevmode\begingroup \@sanitize \@name}
+\def\@name#1{\special{html:<a name="#1">}\endgroup \@@name}
+\def\@@name#1{#1\special{html:</a>}}
+\end{verbatim}
+
+Then the result of
+\begin{verbatim}
+The current information on {\tt dviout} can be obtained from 
+\href{http://akagi.ms.u-tokyo.ac.jp/ftp.html#TeX}{here}.
+\end{verbatim}
+is ``The current information on {\tt dviout} can be obtained from 
+\href{http://akagi.ms.u-tokyo.ac.jp/ftp.html#TeX}{here}%
+\footnote{\tt http://akagi.ms.u-tokyo.ac.jp/ftp.html\#TeX}".  Similarly
+\begin{verbatim}
+{\tt dviout} can be obtained from 
+\href{ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/dviout/}{here}.
+\end{verbatim}
+becomes 
+``{\tt dviout} can be obtained from 
+\href{ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/dviout/}{here}". 
+One can even write as
+\begin{verbatim}
+\href{file:notepad.exe}{Execute Notepad} or 
+\href{file:dviout.doc}{dviout.doc}
+\end{verbatim}
+and then ``\href{file:notepad.exe}{Execute Notepad} or
+\href{file:dviout.doc}{dviout.doc}".
+Here dviout.doc is embedded in this DVI file.
+
+\goto{spdviout}{dviout specials} can be written in place of URL 
+of {Hyper\TeX} by \begin{verbatim}
+\href{dviout:.....}{...}
+\end{verbatim}
+so that
+the click of the corresponding spot implies desired operations of dviout.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 			 tpic specials
+%				from tpicdoc.tex by Oh-Yeah!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{tpic specials}
+\begin{center}
+\unitlength 0.001in
+\begin{picture}(2000,1700)(0,-1600)
+	\special{pn 8}%
+	\special{sh}%
+	\special{ia 350 200 400 250 0 6.28319}%
+	\special{sh 0}%
+	\special{ar 400 250 400 250 0 6.28319}%
+	\put(400,-250){\makebox(0,0){document}}%
+	\special{sh 0}%
+	\special{ia 750 475 200 200 0 6.28319}%
+	\special{sh 0.1}%
+	\special{ar 750 475 200 200 0 6.28319}%
+	\put(750,-450){\makebox(0,0){tpic}}%
+	\special{pa 800 250}%
+	\special{pa 1200 250}%
+	\special{fp}%
+	\special{sh 1}%
+	\special{pa 1200 250}%
+	\special{pa 1100 275}%
+	\special{pa 1100 225}%
+	\special{pa 1200 250}%
+	\special{fp}%
+	\special{sh}%
+	\special{pa 1150 450}%
+	\special{pa 1950 450}%
+	\special{pa 1950 -50}%
+	\special{pa 1750 -50}%
+	\special{pa 1550 100}%
+	\special{pa 1350 -50}%
+	\special{pa 1150 -50}%
+	\special{pa 1150 450}%
+	\special{ip}%
+	\special{sh 0}%
+	\special{pa 1200 500}%
+	\special{pa 2000 500}%
+	\special{pa 2000 0}%
+	\special{pa 1800 0}%
+	\special{pa 1600 150}%
+	\special{pa 1400 0}%
+	\special{pa 1200 0}%
+	\special{pa 1200 500}%
+	\special{fp}%
+	\put(1600,-250){\makebox(0,0){\color{red}\TeX}}%
+	\special{pa 1600 500}%
+	\special{pa 1600 1050}%
+	\special{fp}%
+	\special{sh 1}%
+	\special{pa 1600 1050}%
+	\special{pa 1625 950}%
+	\special{pa 1575 950}%
+	\special{pa 1600 1050}%
+	\special{fp}%
+	\special{sh}%
+	\special{pa 1150 1450}%
+	\special{pa 1550 1400}%
+	\special{pa 1950 1450}%
+	\special{pa 1950 1200}%
+	\special{pa 1950 950}%
+	\special{pa 1550 1000}%
+	\special{pa 1150 950}%
+	\special{pa 1200 1200}%
+	\special{pa 1150 1450}%
+	\special{sp -0.05}%
+	\special{sh 0}%
+	\special{pa 1200 1500}%
+	\special{pa 1600 1450}%
+	\special{pa 2000 1500}%
+	\special{pa 1950 1250}%
+	\special{pa 2000 1000}%
+	\special{pa 1600 1050}%
+	\special{pa 1200 1000}%
+	\special{pa 1250 1250}%
+	\special{pa 1200 1500}%
+	\special{sp}%
+	\put(1600,-1250){\makebox(0,0){dvi driver}}%
+	\special{sh 0}%
+	\special{ia 1950 1475 200 200 0 6.28319}%
+	\special{sh 0.2}%
+	\special{ar 1950 1475 200 200 0 6.28319}%
+	\put(1950,-1450){\makebox(0,0){tpic}}%
+	\special{pa 1250 1250}%
+	\special{pa 800 1250}%
+	\special{fp}%
+	\special{sh 1}%
+	\special{pa 800 1250}%
+	\special{pa 900 1275}%
+	\special{pa 900 1225}%
+	\special{pa 800 1250}%
+	\special{fp}%
+	\special{sh}%
+	\special{ia 350 1200 400 250 0 6.28319}%
+	\special{sh 0}%
+	\special{ar 400 1250 400 250 0 6.28319}%
+	\put(400,-1250){\makebox(0,0){printer}}%
+\end{picture}
+\end{center}
+The figure is taken from the document on tpic specials written 
+by Oh-Yeah?.  
+
+Some information on tpic specials with original extensions for 
+{\tt dviout} may be obtained from {\tt [Help]} on the menu bar of the 
+preview window of {\tt dviout}.
+
+tpic specials can be used combining together with color specials.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 			 color specials
+%				from epsfdoc.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{color specials}
+Using graphics package of {\LaTeXe} by indicating
+\begin{verbatim}
+\usepackage{graphicx, color}
+\end{verbatim}
+at the head of the source file of \LaTeX, one can easily write 
+the colored text:
+\medskip
+
+\noindent
+\rotatebox{15}{rotate 15 degree}, 
+\rotatebox[origin=c]{180}{rotate 180 degree},
+\scalebox{1}[.5]{Low}, \rotatebox[origin=c]{-15}{\scalebox{1}[2]{High}}, 
+\scalebox{1}[2]{\rotatebox[origin=c]{-15}{High}}, 
+\reflectbox{reflect} : reflect,
+\scalebox{.46}[1]{I}+\scalebox{.64}[1]{V}=%
+\scalebox{.46}[1]{I}\hskip-.5pt\scalebox{.64}[1]{V},
+
+{\color{red}Red}, {\color{green}Green}, {\color{blue}Blue}, 
+\rotatebox[origin=c]{30}{\color{magenta}Magenta}, 
+\textcolor[rgb]{0.8,0.4,0.2}{Brown}, \textcolor[gray]{0.5}{Gray}, 
+\colorbox{black}{\color{white}White},
+\rotatebox{15}{\fcolorbox{red}{yellow}{etc.}}
+\quad\href{file:..\graphic\color\color.dvi}{See 68 colors}
+\medskip
+
+The source text for the above is as follows:
+\begin{verbatim}
+\rotatebox{15}{rotate 15 degree}, 
+\rotatebox[origin=c]{180}{rotate 180 degree},
+\scalebox{1}[.5]{Low}, 
+\rotatebox[origin=c]{-15}{\scalebox{1}[2]{High}}, 
+\scalebox{1}[2]{\rotatebox[origin=c]{-15}{High}}, 
+\reflectbox{reflect} : reflect,
+\scalebox{.46}[1]{I}+\scalebox{.64}[1]{V}=%
+\scalebox{.46}[1]{I}\hskip-.5pt\scalebox{.64}[1]{V},
+\end{verbatim}
+\begin{verbatim}
+{\color{red}Red}, {\color{green}Green}, {\color{blue}Blue}, 
+\rotatebox[origin=c]{30}{\color{magenta}Magenta}, 
+\textcolor[rgb]{0.8,0.4,0.2}{Blown}, \textcolor[gray]{0.5}{Gray}, 
+\colorbox{black}{\color{white}White},
+\rotatebox{15}{\fcolorbox{red}{yellow}{etc.}}
+\end{verbatim}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 			 graphic specials
+%				from pssample.tex etc.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Graphic specials}
+{\tt dviout} can read BMP/BMC/PBM/WMF/EMF files. 
+
+The following figure is taken from tool buttons of {\tt dviout for Windows}.  
+To include the figure, we may write in the text as follows.
+\begin{verbatim}
+\special{bmpfile=toolbar vsize=4.95mm}
+\end{verbatim}
+\special{bmpfile=toolbar vsize=4.95mm}
+\vskip .7cm
+
+A sample figure using a WMF file
+
+\hskip .5cm
+\special{bmpfile=sample.wmf vsize=3cm hsize=10cm}
+\vskip 3.5cm
+is included by
+\begin{verbatim}
+\special{bmpfile=sample.wmf vsize=3cm hsize=10cm}
+\end{verbatim}
+
+Under the graphics package of {\LaTeXe} with {\tt dviout.def}%
+\footnote{contained in the package of {\tt dviout} and having a strong 
+compatibility with {\tt dvips.def}.
+To use it, put {\tt dviout.def}, {\tt graphics.cfg} and {\tt color.cfg} in 
+{\tt texmf\string\tex\string\latex\string\config}
+if it exists and otherwise in the directory where 
+the graphics package of {\LaTeXe} exists.} , 
+these can be written as
+\begin{verbatim}
+\includegraphics*[height=4.95mm]{toolbar.bmp}
+\includegraphics*[height=3cm,width=10cm]{sample.wmf}
+\end{verbatim}
+
+\begin{itemize}
+\item
+If {\tt Ghostscript} is installed and the parameter {\tt[gsx:]}
+in {\tt [\b{O}ption $\to$ \b{S}etup Parameters$\ldots$} or \button{option.bmp} 
+{\tt $\to$ Graphic]}
+is correctly set, click 
+\href{file:..\graphic\ps\pssample.dvi}{here}\name{graphic}{}
+to preview a DVI file including graphics in EPSF(Encapsilated PostScript).
+
+\item
+In the case when {\tt Ghostscript} is used for EPSF, one can indicate 
+the format of an intermediate graphic file which determines the number of 
+colors to be used.  To do so, select 
+{\tt [\b{O}ption $\to$ \b{S}etup Parameters$\ldots$} or \button{option.bmp} 
+{\tt $\to$ Graphic $\to$ GIF:]} and choose, for example, 
+{\tt[BMP(256 colors)]}.
+
+\item
+{\tt dviout for Windows} can understand the DVI file which is specially made 
+for {\tt dvips} using {\tt dvips.def} under graphics package of {\LaTeXe} or 
+using {\tt \string\psflag} or {\tt \string\epsflag}, except for the rotation 
+of a colored figure by a non-integer multiple of 90 degree.
+
+\item
+{\tt PSfrag} is supported if the files {\tt ps2frag.ps} in the PSfrag 
+package (Version~2) and {\tt psfrag.pro} exist in the search path of 
+{\tt Ghostscript} defined by the environment variable \verb|GS_LIB|.
+
+\item
+graphic files may be \goto{gzip}{gzipped} if {\tt gzip} works in the system.  
+Then the following is possible under {\tt graphicx.sty}.
+\begin{verbatim}
+\includegrphuics*[height=5cm,width=4cm]{images/fig.ps.gz}
+\end{verbatim}
+Here the character {\tt /} represents the separator of directories and the
+location of the graphic file is relative to the DVI file.
+
+\item
+If \href{http://www.digitalpad.co.jp/~takechin/}{{\tt Susie plug-in's}} are
+installed, {\tt dviout} can read figures in various formats such as 
+{\tt jpeg/tiff/png} etc.  
+In this case, the directory where {\tt Susie plug-in's} exist should be set
+in {\tt[\b{O}ption $\to$ \b{S}etup parameters$\ldots$} or 
+\button{option.bmp} {\tt $\to$Graphic $\to$ spi:]} in the short format.
+Then, for example, the following is valid.
+\begin{verbatim}
+\special{bmpfile=foo.jpg vsize=4cm}
+\end{verbatim}
+
+\item
+{\tt dviout.def} should be used if figures not in the format of EPSF are 
+included under the graphics package of {\LaTeXe}.  
+In this case, you can use {\tt bmc} in the package of {\tt dviout} to get 
+the {\tt BoundingBox}:
+\begin{verbatim}
+bmc -b foo.jpg
+\end{verbatim}
+Windows GUI interface for {\tt bmc} is available from 
+\href{ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/dviout/utility/}{here}.
+
+\item
+BMC is an original format used by {\tt dviout}, which is made by a 
+simple compression from the BMP format.  
+
+If a file {\tt foo.bmp} of BMP format is not found, 
+{\tt dviout} automatically searches {\tt foo.bmc} of BMC format.
+
+After creating an intermediate graphic file of BMP format 
+by {\tt Ghostscript}, {\tt dviout} changes it in BMC format to 
+keep it.  
+
+The program {\tt bmc} can transform one format to the other.
+
+\item
+The graphic files which are used in a DVI file can be \goto{embed}{embedded}
+in the DVI file by using {\tt dviadd}.  For example, the command
+\begin{verbatim}
+dviadd foo1.bmc foo2.ps foo3.jpg foo
+\end{verbatim}
+implies to embed {\tt foo1.bmc}, {\tt foo2.ps} and {\tt foo3.jpg}
+into {\tt foo.dvi}.  Then {\tt dviout} can read them.  Note that other 
+DVI wares cannot read the embedded files but just ignore them.
+
+\item
+If a DVI file is packed (and gzipped) in a UNIX tar format with 
+graphic files, then {\tt dviout} can directly read the packed file and 
+recognize all files.
+
+\item
+{\tt dviout} supports the following graphic special used by {\tt em\TeX} 
+and {\tt Myk\TeX}:
+\begin{verbatim}
+\special{em: <file>,<width>,<height>}
+\end{verbatim}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%       dviout specials
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{dviout specials}\name{spdviout}{}
+dviout specials are invented to control {\tt dviout}, such as to change 
+parameters of {\tt dviout} or to simulate key operations.
+In general, they have the format
+\begin{verbatim}
+\special{dviout <macro>}
+\end{verbatim}
+
+The dviout specials are only valid in the usual previewing and not valid in 
+printing nor in displaying 4 pages at a time etc.
+The current {\tt dviout} has the following dviout specials. 
+\begin{itemize}
+\item
+{\tt <macro>} is the parameter setting or the key input or their combination,
+which is the same format as in the key macro of {\tt dviout}.  
+If the key input changes the display, it should sometimes be written in
+small letters and then it is reserved to be executed after the interpretation 
+of the page and the other dviout specials.
+
+For example
+\begin{verbatim}
+\special{dviout -y=A5L df}
+\end{verbatim}
+implies to change the size of the paper into A5 style in the landscape mode 
+and display it to fit {\tt[\b{D}isplay $\to$ Si\b{z}e $\to$ \b{F}it]}
+the preview window. 
+
+One can get the list of the functions of the key inputs and parameters by 
+{\tt[\b{H}elp $\to$ 
+\href{dviout:HK}{\b{K}ey table}, \href{dviout:HP}{\b{P}rameters]}}.  
+The two letters corresponding to the key input are indicated by surrounding by 
+{\tt[} and {\tt]} in the list.
+
+\item If \verb|\special{dviout `wait}| and then another dviout special
+follow after \verb|\special{dviout <macro>}|, they can be 
+combined one dviout special separated by the character {\tt ;}.
+For example,
+\begin{verbatim}
+\special{dviout -y=A4P !AN2N5!p;!bdf}
+\end{verbatim}
+or
+\begin{verbatim}
+\special{dviout -y=A4P !AN2N5!p ; !bdf}
+\end{verbatim}
+is equivalent to
+\begin{verbatim}
+\special{dviout -y=A4P !AN2N5!p}
+\special{dviout `wait}
+\special{dviout !bdf}
+\end{verbatim}
+\end{itemize}
+
+Other dviout specials are of the form
+\begin{verbatim}
+\special{dviout `<key> <parameter>}
+\end{verbatim}
+Here \verb|<key>| is {\tt timer}, {\tt wait}, {\tt href}, {\tt keep}, 
+{\tt restore}, {\tt message}, {\tt ask}, {\tt sp} or {\tt initialize}.
+
+\begin{itemize}
+\item {\tt timer}, {\tt wait}:
+The dviout special
+\begin{verbatim}
+\special{dviout `timer <number>}
+\end{verbatim}
+means to wait {\tt <number>}/1000 seconds to execute the following
+dviout specials.  If the user changes the page of the DVI file in preview,
+under waiting this timer, it means that the timer and the following dviout 
+specials, which may be written after {\tt <number>} separated by a space, 
+are cancelled.
+
+If {\tt <number>} is 0, then the successive dviout specials will be interpreted
+after the former dviout specials will have been completed.  
+
+\verb|\special{dviout `wait}| is equal to \verb|\special{dviout `timer 0}|. 
+
+\item {\tt href}:
+The dviout special
+\begin{verbatim}
+\special{dviout `href [parameter]}
+\end{verbatim}
+is to simulate the \goto{hyperTeX}{{Hyper\TeX} special}
+\begin{verbatim}
+\special{html:<a href="[parameter]">}
+\end{verbatim}
+One can jump to other DVI file or execute a program by this special.
+
+For example
+\begin{verbatim}
+\special{dviout `href file:foo.mid}
+\special{dviout `timer 180000 je}
+\end{verbatim}
+means to play {\tt foo.mid}, which may be included in the DVI file,
+and to jump to the next page after 3 minutes.
+
+\item {\tt keep}, {\tt restore}:
+The current values of parameters can be reserved by
+\begin{verbatim}
+\special{dviout `keep <parameter list>}
+\end{verbatim}
+For example,
+\begin{verbatim}
+\special{dviout `keep cmode y}
+\end{verbatim}
+They are automatically recovered if the DVI file currently displayed is 
+changed to another DVI file. 
+They can be also recovered by
+\begin{verbatim}
+\special{dviout `restore}
+\end{verbatim}
+The values have been kept and another \verb|\special{dviout `keep ...}| 
+is ignored until they are recovered.
+
+\item {\tt+<levels>}: \name{Control}{}%
+Control dislay according to {\tt <levels>} hereafter in this page.
+
+Here \verb|<levels>| is a set of certain non-negative integers attached to
+every part of a DVI file.
+If the level of the current diplay is not contained in {\tt<levels>} of a 
+part, the part is not displayed.
+
+The level of a display starts from 0 and it inceases by clicking 
+{\tt [Space]} key.
+If the level goes beyond the maximal level defined in the page, 
+the following page is displayed with  the level 0. 
+
+Hence this special is useful for \goto{Presentation}{Presentation}
+with the following {\tt<levels>}.
+%\begin{quote}
+\begin{tabbing}
+ {\tt <num1>-<num2>}\ \= \kill
+ {\tt <num1>-<num2>}\>: From {\tt<num1>} to {\tt<num2>}.  {\tt2-4} means 2,3,4.\\
+ {\tt <num>-}\>: The integers larger than or equals to {\tt<num>}.\\
+  \>\ \ {\tt 2-} means 2,3,$\ldots$\\
+ {\tt -<num>}\>: The integers from 0 to {\tt<num>}. {\tt -2} means 0,1,2.\\
+ {\tt -}\>: All integers, which is the default {\tt<levels>}.\\
+ {\tt m}\>: The maximal integer already appeared in this page.\\
+ {\tt mm}\>: (The above integer) $-1$.\\
+ {\tt mm$\cdots$m}\>: (The above integer) $-n+1$ for $n$ succesive {\tt m}.\\
+ {\tt M}\>: (The above integer) $+1$.\\
+ {\tt MM}\>: (The above integer) $+2$.\\
+ {\tt MM$\cdots$M}\>: (The above integer) $+n$ for $n$ succesive {\tt M}.\\
+ {\tt -2,4-5,7,9-}\>: 0,1,2,4,5,7,9,10,11,$\ldots$\\
+ {\tt 1,M-}\>: $1$,(the above integer)+1,(the above integer)+2,$\ldots$
+\end{tabbing}
+If the contents of a page of a {\TeX} file is
+\begin{verbatim}
+  part1
+  \special{dviout `+M-}
+  part2
+  \special{dviout `+M-}
+  part3
+\end{verbatim}
+then only {\tt part1} is first displayed. Then if {\tt[Space]} is clicked,
+{\tt part2} is also displayed and the successive click of {\tt[Space]} implies 
+that the whole contents are displayed and then the following page is displayed.
+
+In this example, the first  \verb|\special{dviout `+M-}| equals to\\
+\verb|\special{dviout `+1-}| and the second to \verb|\special{dviout `+2-}|.
+This corressponds to the example using \goto{pause}{pause special} but they do
+not exacltly lead the same result.
+\begin{verbatim}
+  I am a \special{dviout `+0}dog.%
+  \llap{\special{dviout `+1-}cat.}\special{dviout `+0-}
+  You are ...
+\end{verbatim}
+implies that the sentence ``I am a dog. You are..." is first displayed and 
+it changes into ``I am a cat. You are  ..." by clicking {\tt[Space]}.
+
+Try a \href{file:slisamp4.dvi}{sample} using ths special.
+
+\item {\tt input}, {\tt in}, {\tt in*}: {\tt <string>} is copied to the
+clipboard by
+\begin{verbatim}
+\special{dviout `input <string>}
+\end{verbatim}
+If {\tt in} is used in place of {\tt input}, the following replacement of 
+{\tt <string>} is performed:
+\begin{quote}
+A space followed by two hexa-decimal characters in {\tt <string>} is 
+replaced by one character with the corresponding code.
+
+If the top character of the string is `{\tt .}' followed by two hexa-decimal
+characters, they are replaced one character in the same way. 
+The top two characters of the string are `{\tt ..}', 
+they are replaced by `{\tt .}'.
+\end{quote}
+
+If {\tt in*} is used in place of {\tt in}, {\tt <string>} is not displayed
+in the preview window.
+
+These dviout specials usually used with \goto{hyperTeX}{{Hyper\TeX} specials}
+as follows.
+\begin{verbatim}
+\special{html:<a href="dviout:`input \string\alpha">}$\alpha$
+\special{html:</a>}
+\end{verbatim}
+When a {\TeX} file is edited, 
+it is helpful to use {\tt[\b{H}elp $\to$ Help Te\b{X}]}
+because by clicking the displayed string on the screen the corresponding key 
+word for {\TeX} is copied to the clipboard, which will be pasted in an editor.
+
+\qquad
+Please try this [
+\special{html:<a href="dviout:`input \string\alpha">}$\alpha$
+\special{html:</a>}]
+as in the following.
+
+- If {\tt [ALT]} is pressed under the click, the key word is appended to the 
+clipboard.
+
+- If {\tt [CTRL]} is pressed under the click, the key word is copied to an editor 
+and the clipboard.  The editor is determined at this first click.
+
+- If {\tt [CTRL]+[ALT]} are pressed under the click, the key word is copied 
+to a new editor and the clipboard.
+
+This is an application of this dviout special and it is easily extended since
+the source file of this Help is in the package of {\tt dviout}.
+
+\item {\tt sp}: \TeX\ special {\tt <special>} is performed by
+\begin{verbatim}
+\special{dviout `sp <special>}
+\end{verbatim}
+
+\item {\tt initialize}: {\tt <macro>} is performed when dviout starts to
+preview the DVI file.  This is valid even if dviout does not start from
+the top page of the DVI file.
+If the option word {\tt page} is indicated after {\tt initialize}, 
+{\tt <macro>} is performed at the top of the each page. 
+
+This special \verb|\special{dviout `initialize <macro>}| should be put 
+at the top of a DVI file.  For example,
+\begin{verbatim}
+\AtBeginDvi{\special{dviout `initialize -y=A4L}}
+\end{verbatim}
+One can execute this again in any page by indicating
+\begin{verbatim}
+\special{dviout `initialize}
+\end{verbatim}
+there.
+One can also write as follows at the beginning of a TeX file
+\begin{verbatim}
+\AtBeginDvi{\special{dviout `initialize page `sp background 
+Yellow}}
+\end{verbatim}
+
+This special also allows to add a path to the original setting of
+{\tt -TEXPK:}\ {\tt-TEXFONTS:}\ {\tt-TEXKNJ} or {\tt-gdat},
+which is indicated by replacing {\tt -} by {\tt +}.
+For example,\name{AddTEXPK}{}
+\begin{verbatim}
+\AtBeginDvi{\special{dviout `initialize `keep TEXPK}}
+\AtBeginDvi{\special{dviout `initialize +TEXPK=^F/^s.pk;}}
+\end{verbatim}
+The delimiter {\tt ;} should be put at the top or the end of the value
+of the parameter.  The former means that the indicated value is 
+appended at the end of the original value and the latter means that 
+it is inserted at the top of the original value.
+Here \goto{hatF}{{\tt\string^F}} means \goto{embed}{embedded files} in 
+a DVI file.
+
+\item {\tt message}:
+{\tt <MESSAGE>} is displayed in the information Window by
+\begin{verbatim}
+\special{dviout `message <MESSAGE>}
+\end{verbatim}
+{\tt<MESSAGE>} can be a block surrounded by {\tt `'} and {\tt '`}.
+Then the block can be divided into lines by the separator {\tt `'}. 
+If the block divided into more than one line, the first line becomes
+the title and the other lines are the content.  For example
+\begin{verbatim}
+\special{dviout `message `'Remark`'This page is written:
+`'Jan 1, 2000'`}
+\end{verbatim}
+
+\item {\tt ask}: {\tt <MESSAGE>} is displayed in a dialog requiring the 
+answer Yes or No and execute dviout specials depending the answer.
+\begin{verbatim}
+\href{dviout:`ask `'Style`'Landscape?'` `yes -y=A4L df 
+`no -y=A4P df}{Choose style}
+\end{verbatim}
+If the answer is Yes, the dviout specials after {\tt `yes} are executed if 
+{\tt `yes} exists.  It will be terminated at {\tt `no} if {\tt `no} exists.
+The same result holds by exchanging Yes and No.
+
+\item {\tt `"....."`}:
+If dviout specials except {\tt `time} are surrounded by {\tt `"} and {\tt "`}, 
+they forms one block.  One can continue to write successive dviout specials and
+makes one \verb|\special|.  For example, under {\tt myhyper.sty}
+\begin{verbatim}
+\href{dviout: `"href file:foo.mid"` -y=A4L `href:foo.dvi}
+{jump to foo}
+\end{verbatim}
+
+\item Hyper\TeX:
+dviout specials can be used by {Hyper\TeX}.
+For example, under {\tt myhyper.sty}
+\begin{verbatim}
+\href{dviout:-y=A5L `href foo.dvi}{Jump to foo}.
+\end{verbatim}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%		source specials
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{source specials}
+source specials are supported by {\tt MikTeX} \& {\tt yap} which is a popular 
+{\TeX} system in MS Windows.  There is also a {p\TeX} system for Japanese 
+language supporting them.
+The specials with {\tt dviout} enable us to jump forward/backward between 
+preview screen and an editor for the {\TeX} file.  
+dviout with the attached utility {\tt srctex} also supports the specials.
+
+source specials are embedded in a DVI file which tell the line number and the 
+file name corresponding to the position in the DVI file.
+
+\begin{itemize}
+\item
+If the {\TeX} compiler supports source specials, they are embedded in a DVI 
+file by, for example,
+\begin{verbatim}
+latex -src foo
+\end{verbatim}
+
+\item
+It is recommended to use the compiler supporting source specials.
+But even if the {\TeX} compiler does not support them, one can embed them in 
+the DVI file by
+\begin{verbatim}
+srctex latex foo
+\end{verbatim}
+In this case, if the environment variable {\tt TEXEDIT} is set for the errors 
+in the compilation, for example,
+\begin{verbatim}
+TEXEDIT=mule +%d %s
+\end{verbatim}
+then it is better to change it to use {\tt convedit} by
+\begin{verbatim}
+TEXEDIT=convedit mule +%d %s
+\end{verbatim}
+
+\item
+The way to call an editor of {\TeX} files should be set in the parameter 
+{\tt -src:}, for example,
+\begin{verbatim}
+-src=c:\Program Files\editor.exe^s+%d "%s"
+\end{verbatim}
+Here \verb|^s| is the separator between the name of the editor and its command
+parameters. 
+Moreover \verb|%s| and \verb|%d| are  replaced by the source file and the 
+corresponding line number.
+If the letter `{\tt <}' is inserted at the top of the name of the 
+executable editor, {\tt dviout} becomes icon when the editor is executed.
+
+The environment variable {\tt TEXEDIT} is used for this purpose if {\tt -src:} 
+is not set.
+Then one can jump from the preview screen to the editor by double clicking 
+the left button on the mouse. 
+It is also possible by clicking the left button on the mouse 
+with {\tt [Shift]} is pressed and selecting {\tt [$\to$\b{S}rc]}. 
+One can also jump by clicking the same button with both {\tt [Shift]} 
+and {\tt [Ctrl]} buttons are pressed.  
+The former two methods are more accurate in the jump.
+
+\item
+By double clicking the left button on the mouse at the included graphic file,
+one can jump to the corresponding graphic editor.
+The way to call the editor according to the extension of the file 
+is indicated by the parameter {\tt-gsrc:} as in {\tt-src}, for example
+\begin{verbatim}
+.ps.eps=c:\usr\local\bin\psedit.exe^s"%n";.bmp=mspaint^s"%s"
+\end{verbatim}
+
+\item
+If one wants to  preview the DVI file corresponding to the
+the position around the 235-th line of the {\TeX} file {\tt foo.tex}, one can
+execute by
+\begin{verbatim}
+dviout foo.dvi "# 235 foo.tex"
+\end{verbatim}
+One may even specified {\tt <string>} around the line by
+\begin{verbatim}
+dviout foo.dvi "# 235/<string> foo.tex"
+\end{verbatim}
+If one wants to execute it by the $m$-th dviout, add the parameter
+$-m$ to indicate it.  For example, execute the first dviout by
+\begin{verbatim}
+dviout -1 foo.dvi "# 235/<string> foo.tex"
+\end{verbatim}
+To clearify the corresponding position in the preview window
+one can use the animation cursor by
+{\tt[\b{V}iew $\to$ Ani\b{m}ation Cursor]}.
+
+It is also possible and better to use a DDE command for this purpose.
+{\tt foo.tex} may be replaced by {\tt *} if the file name is not specified.
+The similar jump is also possible by the string search in {\tt dviout} 
+indicating two spaces ahead, such as, `{\tt \b{\ }\b{\ }235\b{\ }*}'.
+Here `{\tt\b{\ }}' denotes a space.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Other specials}
+\begin{itemize}
+\item{\tt file=}
+
+The content \verb|...| of \verb|\special{...}| is
+read from the file {\tt<filename>}.
+\begin{verbatim}
+\special{file=<filename>}
+\end{verbatim}
+
+\item{\tt papersize=}
+
+This special is for the compatibility to {\tt dvips}.
+It is translated into one of dviout specials.  Namely
+\begin{verbatim}
+\special{papersize=<width>,<height>}
+\end{verbatim}
+is translated into \verb|\special{dviout -y=F<width>:<height>}|.
+If it is at the top of a DVI file, it is always interpreted
+when dviout read the DVI file, that is, it is the same as
+\begin{verbatim}
+\special{dviout `initialize -y=F<width>:<height>}
+\end{verbatim}
+For example, it is used as
+\begin{verbatim}
+\AtBeginDvi{\special{papersize=29.7cm,21cm}}
+\end{verbatim}
+The size may be indicated by {\tt mm}, {\tt cm}, {\tt pt},
+{\tt bp} or {\tt <dot>/<number>dpi}.
+Moreover dviout allows the value of {\tt papersize} to be any 
+value of the parameter {\tt -y=}.  For example
+\begin{verbatim}
+\AtBeginDvi{\special{papersize=B5L}}
+\end{verbatim}
+
+\item{\tt pause}
+
+The \goto{pause}{pause special} is used in the presentation mode.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%		Ignore specials
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Ignore specials}
+Specials can be ignored by {\tt dviout}.  It can be done by switches:
+\begin{itemize}
+\item
+The switch for {Hyper\TeX} is {\tt[\b{J}ump $\to$ Enable Hyper\b{J}ump]} or 
+the tool button \button{hyper.bmp}.
+
+\item
+The switch for tpic specials is {\tt[\b{O}ption $\to$ \b{S}etup 
+Parameters$\ldots$} or \button{option.bmp} 
+{\tt $\to$ Graphics $\to$ tpic specials]}.
+
+\item
+The switch for color specials is {\tt[\b{D}isplay $\to$ \b{C}olor special]}.
+
+\item
+The switch for graphic specials is {\tt[\b{D}isplay $\to$ Graph\b{i}cs]}.
+If the check is erased, the position of a figure is displayed by a frame.
+Specials can be ignored by {\tt dviout}.  It can be done by switches:
+
+\item
+The switch for dviout specials is {\tt[\b{O}ption $\to$ d\b{v}iout specials]}.
+If this is not checked, the dviout specials are ignored.
+Note that dviout specials are only valid in case of preview and are not valid
+in case of printing etc.
+
+\item
+The switch for pause special, which is used under Presentation Mode, 
+is {\tt[\b{V}iew $\to$ C\b{o}ver sheet]}.
+
+\item
+The switch for source specials is {\tt[\b{O}ption $\to$ sour\b{c}e specials]}.
+\end{itemize}
+
+\noindent
+The following page is a sample using dviout specials.
+\special{dviout -y=A4P !w}%
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% A sample page for  dviout specials
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagecolor{blue}
+\special{dviout `keep cmode}%
+\special{dviout -cmode=2 -y=A5L DV}%
+\special{dviout `timer 4000 DV}%
+\special{dviout `timer 4000 je}%
+\centerline{\huge{{\color{red} Please wait 8 seconds!}}}
+
+\subsection{A sample of dviout special}
+{\Large
+\centerline{This page will be displayed in A5 landscape style.}
+
+The following dviout specials are used in this page
+\begin{verbatim}
+\special{dviout `keep cmode}
+\special{dviout -cmode=2 -y=A5L DV}
+\special{dviout `timer 4000 DV}
+\special{dviout `timer 4000 je}
+\end{verbatim}
+and the dviout special
+\begin{verbatim}
+\special{dviout -y=A4P !w}
+\end{verbatim}
+is in the former and next pages.
+}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\special{dviout -y=A4P !w}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%              Presentation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Presentation}
+\name{Presentation}{}
+{\tt dviout} is useful for a presentation using a document written by 
+\TeX.
+It has several features for the purpose.  
+
+Under the Presentation Mode of 
+{\tt dviout}, the page of a DVI file is displayed in the full screen with 
+no frame.
+The switch to/from the Presentation Mode is {\tt[ESC]} key.
+
+\subsection{Presentation Mode}
+One of the followings is indicated by 
+{\tt[Prese\b{n}tation $\to$ Presentation t\b{y}pe]}:
+
+\begin{itemize}
+\item
+{\tt general screen}: general background and sheet (default)
+\item
+{\tt white screen}: white background and sheet, black letters
+\item
+{\tt black screen}: black background and sheet, white letters
+\item
+{\tt white background}: white background
+\item
+{\tt black background}: black background
+\end{itemize}
+
+Except under the default {\tt general screen}, {\tt white screen} or 
+{\tt black screen}, the screen may flicker by the page jump or the usage of 
+Loupe.
+
+Under Presentation Mode, {\tt [\b{D}isplay $\to$ Si\b{z}e $\to$ \b{F}it, 
+Fu\b{l}l]} ({\tt[5]}, {\tt[6]} key in default) 
+will be performed exactly both by shrinking with gray scale and by 
+shrinking/enlarging with {\tt -e:} and {\tt -varf:}  In this case, 
+the usage of the TrueType fonts may give better results in place of PK fonts.
+\medskip
+
+The position of the page can be adjusted by {\tt[CTRL]+[SHIFT]+arrow key}.
+
+Checking {\tt[\b{D}isplay $\to$ \b{Y}-two pages]}, pages are vertically connected
+and one can seamlessly scroll the whole document.
+
+By a cover sheet, one can hide a part of a page and {\tt pause special} can 
+be used for this purpose.
+
+One may also use \goto{spdviout}{{\tt dviout specials}} in {Hyper\TeX} 
+specials.
+\begin{itemize}
+\item
+{\tt [ESC]} : Normal mode $\Leftrightarrow$ Presentation mode
+\item
+{\tt [5](default)} : fit screen
+\item
+{\tt [6](default)} : full screen
+\item
+{\tt [8](default)} : 4 pages
+\item
+{\tt [9](default)} : 16 pages
+\item
+{\tt [CTRL]+[SHIFT]+arrow key} : move the page by 0.5 pt
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     Region to be shown
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Region to be shown}
+One can cut spaces around the edges of the sheets by 
+{\tt [Prese\b{n}tation $\to$ Cut \b{e}dge]} preceding to the above 
+{\tt[Fit]} or {\tt[Full]}.  The default margin is of the width of 
+16 pixel in the original document but it can be changed by 
+{\tt[\b{O}ption $\to$ \b{S}etup Parameters$\ldots$ $\to$ 
+Paper $\to$ Cut Edge]}.
+\medskip
+
+For example, check {\tt [Prese\b{n}tation $\to$ Cut \b{e}dge]} and 
+{\tt [Prese\b{n}tation $\to$ Seamless Hyper\b{J}ump]}, push {\tt[ESC]}, 
+use the above {\tt[Fit]} or {\tt[Full]} to enter Presentation Mode. 
+Moreover the usage of {\tt [\b{D}isplay $\to$ cro\b{s}s pages, 1\b{6} pages]}
+ ({\tt[8]}, {\tt[9]} key in default) is useful.
+\medskip
+
+One may use {\tt[\b{D}isplay $\to$ Re\b{g}ion $\to$ O\b{n}]} to indicate
+the region to be shown with {\tt [SHIFT]}+left/right button on the mouse 
+and cut it by {\tt[\b{D}isplay $\to$ Re\b{g}ion $\to$ \b{C}ut]}.
+This is useful to cut off the page headers or footers.
+
+To indicate the region to be shown it is much better in {\LaTeX} to use 
+\begin{verbatim}
+\AtBegin{\speicial{papersize=...}}
+\end{verbatim}
+and \verb|\paperwidth=|, 
+\verb|\paperheight=|, \verb|\textwidth=|, \verb|\textheight=|, 
+\verb|\hoffset=| and \verb|\voffset=|.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        draw lines
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Draw lines}
+In the presentation mode, one can draw lines or boxes by the mouse.
+They will be disappeared if the page changes.
+Using the seamless scroll, they will be kept for two pages.
+\begin{itemize}
+\item
+{\tt [F12] Draw lines} : On/Off
+\item
+{\tt [SHIFT]+left button on Mouse} : indicate the start point
+\item
+{\tt [SHIFT]+right button on Mouse} : indicate the intermediate or end point and draw
+a line/box.
+\item
+{\tt [CTRL]+[SHIFT]+left button on Mouse} : change the last start point
+\item
+{\tt [CTRL]+[SHIFT]+right button on Mouse} : change the last end point
+\item
+{\tt [DELETE]} : delete the last point
+\item
+{\tt [SHIFT]+[F5]} : draw by red(default)
+\item
+{\tt [SHIFT]+[F6]} : draw by black
+\item
+{\tt [SHIFT]+[F7]} : draw by blue
+\item
+{\tt [SHIFT]+[F8]} : draw by green
+\item
+{\tt [F11]} : draw lines mode(default)
+\item
+{\tt [SHIFT]+[F11]} : draw boxes mode
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        seamless scroll
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Seamless scroll}
+If {\tt[\b{D}isplay $\to$ \b{Y}-two pages]} is checked, one can seamlessly
+and vertically scroll pages by the mouse or arrow keys as if all pages are vertically 
+connected into one page.
+In this case {\tt[\b{D}isplay $\to$ Si\b{z}e $\to$ Fu\b{l}l]} is usually 
+indicated.
+
+The following is an example of the top part of such document.
+One can quit the presentation mode by pushing {\tt[ESC]}.
+\begin{verbatim}
+\documentclass{slides}
+\AtBeginDvi{\special{dviout -dpi=180}}
+\AtBeginDvi{\special{dviout -y=F1024dot/90dpi:2730dot/90dpi}}
+\AtBeginDvi{\special{dviout !Ady!pdl;!b}}
+\textwidth=11.2in  \textheight=30.5in
+\hoffset=-.9in     \voffset=-1.6in
+\pagestyle{empty}
+...
+\begin{document}
+\maketitle\thispagestyle{empty}
+...
+\end{verbatim}
+In the above \goto{spdviout}{{\tt dviout specials}}
+\verb|!A|, \verb|dy|, \verb|!p|, \verb|dl|, \verb|;| and \verb|!b| mean
+``display OFF", ``Y-two pages", ``presentation mode", ``Full screen",
+``wait" and ``display ON", respectively.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        cover sheet
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Cover sheet}
+Checking {\tt[Prese\b{n}tation $\to$ C\b{o}ver sheet $\to$ On, 
+On for Pause]} in Menu Bar, one can hide a page under Presentation Mode. 
+One of the following cover type is indicated by
+{\tt[Prese\b{n}tation $\to$ Co\b{v}er type]}
+
+\begin{itemize}
+\item {\tt bottom}: cover bottom
+\item {\tt right}: cover right side
+\item {\tt left}: cover left side
+\item {\tt bottom + right}: cover bottom and right side
+\item {\tt bottom + left}: cover bottom and left side
+\end{itemize}
+At first, the whole part of page is hidden by a cover sheet. 
+The cover sheet can be moved by the mouse or by using pause special. 
+If one moves to the former page, then the page has no cover sheet and the 
+status of the original page is kept. 
+
+The following is an example of the top part of such document.
+\begin{verbatim}
+\documentclass{slides}
+\def\pause{\special{pause}}
+\AtBeginDvi{\special{dviout -y=XGAP !AN1N5NO!p;!bdf}}
+\paperwidth=10.24in  \paperheight=7.68in
+\textwidth=9.44in    \textheight=7in
+\hoffset=-.62in      \voffset=-1.4in
+...
+\end{verbatim}
+
+\begin{enumerate}
+\item {\bf Mouse}
+
+Under pressing the left button of Mouse, change the shape of the mouse cursor 
+into the up-down/right-left arrow by clicking the right button of the mouse 
+if necessary. If the whole page is in a screen, the clicking is unnecessary.
+
+If the boundary of the cover sheet is in the screen, the cursor jumps to the position. Then moving the mouse under pressing the left button of the mouse implies the moving of the cover sheet. If releasing the left button of the mouse, the mouse cursor jumps to the original position.
+
+If {\tt[Prese\b{n}tation $\to$ Use \b{M}ouse Button $\to$ \b{L}eft 
+(\b{R}ight)]} is checked, then the function of the left (right) button of the 
+mouse in the Presentation Mode changes into the function of [Space] key. 
+
+\item {\bf pause special}\name{pause}{}
+
+If \verb|\special{pause}| is written in the source text of \TeX, 
+the clicking \verb|[Space]| key moves the cover sheet to the position where 
+the special is written.
+
+In particular, \verb|\special{pause 0}| means to move the cover sheet to the 
+place where no part of the page is hidden by it.
+
+The click of \verb|[Space]| key implies to move the cover sheet to the next 
+position where \verb|\special{pause}| is written. 
+If there exists no \verb|\special{pause}| after there in the page and there 
+exists a part hidden by the cover sheet, the cover sheet will be removed. 
+
+On the other hand, if there exists no \verb|\special{pause}| after there in 
+the page and there exists no part hidden by the cover sheet, then the next page is shown. 
+The cover sheet is at the first position indicated by the first 
+\verb|\special{pause}| in the next page or the whole page (resp.~no part of 
+the page) is hidden by the cover sheet if there exists 
+no \verb|\special{pause}| there under cover sheet {\tt On} 
+(resp.~{\tt On for Pause}).
+
+See an example of the usage of pause special.
+
+\item {\bf Function keys}
+
+Special functions are attached to the following keys under Presentation Mode. 
+The functions can be attached to other keys.
+
+\begin{itemize}
+\item
+{\tt [F5] On} : Use cover sheet
+\item
+{\tt [F6] Off} : Don't use cover sheet
+\item
+{\tt [F7] Suspend} : Suspend to use cover sheet
+\item
+{\tt [F8] Return} : Return to the place where the original cover sheet exists
+\item
+{\tt [F9] On for Pause} : Similar as {\tt F5} but the cover sheet is initially at the position where no part of the page is hidden if no \verb|\special{pause}| 
+exists in the page.
+\end{itemize}
+By the above {\tt Suspend}, the current place is recorded as 
+``the place where the original cover sheet exists"
+
+Under suspending to use cover sheet, if the place to display coincides with 
+``the place where the original cover sheet exists", then the cover sheet is 
+again used and the suspension is stopped.
+
+The above {\tt Return} means to return to ``the place where the original 
+cover sheet exists" and to stop the suspension.
+
+The above {\tt Off} or jump by {Hyper\TeX} is done after performing the 
+above {\tt Suspend}.
+\end{enumerate}
+
+{\bf Remark 3.2.1}: Turning the pressed wheel of IntelliMouse means 
+to move to another page.  
+In this case, if the left mouse button is also pressed, then the movement to 
+the next page can be done without suspending the cover sheet, that is the same 
+result as clicking {\tt[Space]} key.  
+\medskip
+
+{\bf Remark 3.2.2}: Successive pushing of {\tt [Space]} key for a DVI file 
+without any \verb|\special{pause}| under Presentation Mode with the cover 
+sheet implies the following change of the preview:
+\begin{quote}
+a page hidden by the cover sheet $\to$ the page is displayed without the cover sheet 
+$\to$ the next page is shown with (resp.~without) covered by the cover sheet if {\tt On} (resp.~{\tt On for Pause}) is set $\to\ldots$
+\end{quote}
+
+\subsection{Examples}
+For example, a {\TeX} file for Presentation Mode using \verb|\special{pause}|
+is as follows.
+
+\begin{verbatim}
+%  bottom cover sheet On for Pause
+%  general screen, Presentation;
+%  Screen: 1024 x 768, Reverse; 
+%  Fit
+\special{dviout -cmode=2 !AN0N5NP!p; -e=0 -y=XGAP !v;!bdf}
+\def\pause{\special{pause}}
+...
+\pause% the place to pause (top of a paragraph)
+...
+\pause% the place to pause (top of a paragraph)
+...
+\end{verbatim}
+In this case, if the corresponding DVI file is previewed from the first page, 
+it is shown in Presentation Mode.
+The clicking of {\tt [Space]} key moves the cover sheet to the position 
+indicated by \verb|\special{pause}|.
+
+pause specials can be automatically inserted at the beginning of
+each paragraph by
+\begin{verbatim}
+srctex -n -S\special{pause} -onew.tex original.tex
+\end{verbatim}  
+One can indicate in {\TeX} source so that, for example, the paper size equals 
+10.24 inch $\times$ 7.68 inch.
+
+In the presentation it is better not to rewrite screen if possible.
+The dviout specials
+\begin{verbatim}
+\special{dviout `keep y}
+\special{dviout -y=A4L !i}
+\end{verbatim}
+set the paper size {\tt A4} landscape and rewrite the screen only if the size
+has changed.  The combination of {\tt !A} and {\tt !B} can also be used for 
+this purpose so that the drawing of the screen is stopped between the commands.
+In this case, \verb|\special{dviout `timer 0}| is usually put just before
+\verb|\special{dviout !b}|.  In short, it will be 
+\verb|\special{dviout !A...;!b...}|.
+
+If this \href{file:slisampl.dvi}{{\tt sample of presentation}} is 
+clicked, it is automatically displayed and performed without any key operation.
+It is written under slide class with the default fonts, the 
+corresponding fonts ({\tt lcmss} etc.) are necessary.  Also for the task bar 
+of Windows system at least one of the options ``always display at the top" and 
+``automatically hide" should be unchecked.
+
+\subsection{Display control}
+In place of {\tt pause special},
+the more complicated controls under clicking \verb|[Space]| key are possible 
+by using \goto{Control}{dviout specials} ({\tt `+<level>}).
+Try an \href{file:slisamp4.dvi}{example}.
+
+\subsection{Menu}
+{\bf Menu} will be appeared if the mouse cursor moves to the lower right corner
+of the screen.  The fundamental buttons are follows.
+\begin{quote}\begin{tabbing}
+AAA\=\kill\\
+{\tt [>]}\> same as {\tt[Space]}.\\
+{\tt [<]}\> go to the preceeding page.\\
+{\tt [+]}\> change {\bf Menu}.\\
+{\tt [-]}\> move {\bf Menu}.\\
+\end{tabbing}\end{quote}
+Many other buttons exist in the {\bf Menu} which are usually not shown.
+
+{\bf Menu} can be moved.
+If it is at the upper left corner of the screen, it will not disappear.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Embedding and Packing
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\section{Embedding and Packing}\name{embed}
+Some DVI files require graphic files to display it
+and some DVI files requires special font files or
+parameter files.
+One can pack a DVI file and these required files into one
+file which dviout can directly handle.
+There are two ways to do it.  One is the use of the program 
+{\tt tar} and the other is the direct embedding of these files in
+the original DVI file.
+The file may also be compressed by {\tt gzip}.
+
+\subsection{tar and gzip}
+For example, one can make an archived file {\tt foo.tar} from 
+{\tt foo.dvi}, {\tt fo1.dvi}, {\tt foo.ps}, {\tt fn.300pk}, 
+{\tt fn.vf} and {\tt fn.map} by
+\begin{verbatim}
+tar cvf foo.tar foo.dvi fo1.dvi foo.ps fn.300pk fn.vf fn.map
+\end{verbatim}
+One may also compress it into {\tt foo.tar.gz} by
+\begin{verbatim}
+gzip foo.tar
+\end{verbatim}
+Then {\tt dviout} can directly read {\tt foo.tar} or 
+{\tt foo.tar.gz}.  One may drag and drop the icon of 
+{\tt foo.tar.gz} to the window of {\tt dviout}.
+Here {\tt gzip} is necessary for {\tt dviout} to read {\tt foo.tar.gz}.
+
+\name{gzip}{Note} that the graphic files included in a DVI file can also be 
+compressed by {\tt gzip} for the use of {\tt dviout}.
+
+\subsection{Embedding into a DVI file}
+One can embed arbitrary files into a DVI file and {\tt dviout}
+can read them.  For example, by the command
+\begin{verbatim}
+dviadd foo.ps fn.300pk fn.vf fn.map foo.dvi
+\end{verbatim}
+the files {\tt foo.ps}, {\tt fn.300pk}, {\tt fn.vf} and {\tt fn.map} are 
+embedded into {\tt foo.dvi}.  
+Then {\tt dviout} can read these embedded files but other dviwares
+only ignore them.
+One may also compress graphic files by {\tt gzip} to be embedded
+in a DVI file.
+
+\subsection{Font/Image Embedding}
+By {\tt [\b{F}ile $\to$ \b{F}ont/Image Embedding]} in Menu Bar one 
+can embed the necessary ingredients from font files and image data 
+files used by the DVI file. 
+For example, only the necessary glyph data in font files for characters 
+appeared in the DVI file are automatically extracted and embedded in the 
+DVI file.  dviout can automatically recognize the embedded data.  
+
+One can also define there the initial setting for dviout when the DVI 
+file is opened. 
+
+If all the necessary fonts are embedded, dviout can treat the DVI file 
+without any font file.  Data extracted from PK fonts can be embedded 
+based on multiple resolutions.  dviout uses them with the closest 
+resolution by re-scaling them.
+
+This function supports Image data files / Japanese and European TrueType 
+fonts / Virtual fonts(vf/ovf) / tfm files / jfm files/ PK fonts / 
+Font mapping data.  Here some Japanese fonts are embedded:
+
+%%%%%  Here is written in Japanese (in SHIFT JIS Code)  %%%%%
+日本語のWindows TrueTypeフォントやjfmファイルを埋め込むことができます。
+ここでは、\href{http://www.l.u-tokyo.ac.jp/GT}{GTフォント}を埋め込んで
+います。日本語フォントを埋めこむと、dvioutは非日本語Windowsの下でもそ
+のdviファイルを扱えます。
+%%%%%			End of Japanese			%%%%%
+
+\subsection{special path to files}
+The graphic files archived by {\tt tar} with the DVI file or 
+embedded by {\tt dviadd} into the DVI file are automatically
+searched when the graphic specials require them.
+
+{\tt dviout} can use the archived or embedded parameter files 
+and font files by indicating \verb|^F\| or \verb|^F/| at the 
+top of their filenames.
+For example, 
+\begin{verbatim}
+-TEXPK=^F\^s.^dpk;^T\pk\\^s.pk
+\end{verbatim}
+ and {\tt dviout}
+requires {\tt cmr10} with the resolution 300dpi, then it first 
+searches the embedded file with the name {\tt cmr10.300pk}.
+(See \goto{AddTEXPK}{{\tt dviout special `initialize}}).
+One may use the following symbols in the setting of the parameters of 
+{\tt dviout} to indicate the location of files.
+\begin{quote}
+\verb|^T|\quad The directory indicated by the environment variable
+{\tt TEXMFMAIN} or {\tt TEXMF}.
+
+\verb|^x|\quad The directory where {\tt dviout} locates.
+
+\verb|^w|\quad Window's system directory
+
+\name{hatF}{}%
+\verb|^F|\quad The path to the archived or embedded files.
+\end{quote}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Output by dviout for Windows
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Output by {\tt dviout for Windows}}
+{\tt dviout} displays a DVI file in the preview Window and print it
+through the Windows printer driver as a usual dviware.  Using the
+corresponding Windows printer driver, {\tt dviout} can output the DVI
+file to FAX or translate it into a PS file or a PDF file etc.~if one
+uses the corresponding printer driver.
+
+\subsection{Output to a printer}
+There exist several method to print a DVI file by dviout.
+\begin{itemize}
+\item
+{\bf Using Windows printer driver}: 
+This is the default method. ({\tt[\b{O}ption 
+$\to$ \b{S}etup Parameters$\ldots$ $\to$ Graphic $\to$ auto mode(p2)]}.  
+Here the setting {\tt[patch2]} means the usage of the same method for 
+the preview.)
+ 
+If the characters to be printed are supplied in TrueType fonts, they are
+rendered to the Windows printer driver through Windows API.  
+The characters given by bitmap data such as PK format, the image data are 
+put on the required position in the sheet through Windows API. 
+Usually this method fits the Windows printers.
+
+\item
+{\bf Making a bitmapped data by dviout}: 
+This is the default method for preview.
+(The setting {\tt[\b{O}ption $\to$ \b{S}etup Parameters$\ldots$ $\to$ 
+Graphic $\to$ auto mode(rep)]} means the similar method for the output to 
+the printer.)
+
+{\tt dviout} gets the image data of characters by Windows API or the font 
+files in DISK, constructs a bitmapped image of a whole sheet and output it 
+through Windows printer driver.
+This method fits the non-Windows printers such as PostScript printers.
+
+\item
+{\bf {\tt dviprt} function}: 
+{\tt dviout} uses the specially defined method according to the output device 
+through the RAW printer driver 
+(Indicated by {\tt[\b{Op}tion $\to$ \b{S}etup Parameters$\ldots$ $\to$ Printer 
+$\to$ dviprt:]})
+
+\begin{itemize}
+\item
+{\bf Using inner printer driver}: 
+{\tt dviout} has special printer drivers for the 
+control codes of LIPS III/IV and ESC/Page and some dot matrix printers.  
+In particular, the output to the Laser Beam Printer with LIPS III/IV or 
+ESC/Page are faster and better if this function is used.
+
+\item
+{\bf Controlling other dviwares}:
+{\tt dviout} can control other dviwares.  For example, {\tt dviout} can output 
+a DVI file through {\tt dvips} or transform a DVI file into a PDF file
+through {\tt dvipdfm(x)} etc..
+
+\item
+{\bf Using configuration file}:
+{\tt dviout} uses the configuration file which can be written by the user.  
+The configuration files for many printers are already supplied.  
+For example, the configuration files to output the DVI file in the graphic 
+data formats such as  EPSF, PBM and G3 FAX are in the package of 
+the {\tt dviout}.
+\end{itemize}
+\end{itemize}
+
+\subsection{Output to a graphic image file}
+{\tt dviout} defines a rectangular region in the preview window by 
+{\tt[\b{D}isplay $\to$ \b{R}egion $\to$ O\b{n}]} and then output the region 
+as an image data file by {\tt[\b{F}ile $\to$ \b{S}ave as Image]}.  
+The supported graphic formats are BMP, EMF, BMC and the formats 
+(such as PNG or PDF) supported by 
+\href{http://www.asahi-net.or.jp/~kh4s-smz/spi/my_spi.html}{ABC plug-in} 
+or {\tt dvidfmx} if it is used.
+
+The graphic file in BMP or EMF can be output to the clipboard, which can
+be pasted in an editor.
+This will be useful when the file containing mathematical formula with
+using TrueType fonts in the EMF format is pasted in {\tt PowerPoint} 
+etc.\ because it is smoothly scalarble.
+
+\subsection{Transformation into a PDF file}
+{\tt dviout} can control other DVI wares to make a PDF file.
+\begin{itemize}
+\item {\bf dvipdfm}:
+One of the most convenient ways to transform a DVI file into a PDF file
+is the usage of {\tt dvipdfmx} which has been greatly developed and 
+improved.
+Under a standard installation of TeX and default parameters of dviout,
+one can use it by clicking the button \button{niko.bmp}.
+The size of the sheet, the adjustment of the position and the page to be 
+transformed etc. are automatically supported as in the usual way in 
+{\tt dviout}.
+
+\item {{\bf dvipsk} and {\bf Acrobat Distiller}}:
+This is supported by {\tt [\b{O}ption $\to$ Choose \b{P}arameters]}
+with the selection of 
+{\tt [A sample to transform to PDF by dvipsk and Acrobat Distiller (5.0)]}.
+One should modify the corresponding script file if necessary.
+
+\item{Printer Driver {\bf Acrobat Distiller}}:
+Printing through Acrobat Distiller, one makes a PDF file.
+In this case, TrueType fonts should be used in place of bitmap fonts
+to get a PDF file with a good quality.
+\end{itemize}
+
+\subsection{Transformation into a readable text}
+A DVI file can be transformed into a readable text and this readable
+text can be re-converted to a DVI file which may be edited if nessesary.
+For example, some pages of a DVI file are transformed into a readable text
+by {\tt [\b{O}ption $\to$ Choose \b{P}arameters]}
+with the selection of {\tt [Show Codes of some pages of DVI file]}.
+
+A readable text with DLT format can be converted into a DVI file.
+See {\tt dvispc.txt} for more details.
+
+\subsection{Output informations}
+{\tt dviout} can output several informations related to a DVI file or the
+environment to preview it.  
+Most of them can be obtained from the {\tt Help} on the menu bar.  
+They are displayed in the information Window and can be edited and copied to 
+the clipboard. 
+Here some ones are picked up:
+
+\begin{itemize}
+\item
+{\bf Parameters}: One gets the list of parameters controlling {\tt dviout} by
+{\tt[\b{H}elp $\to$ \href{dviout:HP}{\b{P}arameters}]}, 
+the current values of parameters by 
+{\tt[\b{O}ption $\to$ \b{A}ll Parameters]} and their non-default values
+by {\tt[\b{O}ption $\to$ Non-\b{d}efault Parameters]}.
+
+\item
+{\bf Font}: Clicking the left button on the mouse with pushing {\tt[CTRL]} and 
+{\tt[SHIFT]} keys, one gets the informations (such as the position in 
+a sheet, the position in the DVI file, the size and the font used) on the 
+pointed character.  
+{\tt[\b{H}elp $\to$ Other \b{I}nfo $\to$ \href{dviout:HF}{\b{F}ont Info.}]}
+gives the information of the fonts used in the DVI file.
+
+\item
+{\bf System Information}:
+{\tt[\b{H}elp $\to$ \href{dviout:HS}{\b{S}ystem Info.}]}
+gives the most basic information on the environment for 
+the correct operation of {\tt dviout}.  
+This information is important to analyze the problems appeared 
+for the operation of {\tt dviout}.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Will be continued$\ldots$}
+
+\end{document}

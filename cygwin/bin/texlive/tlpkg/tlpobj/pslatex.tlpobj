@@ -1,0 +1,38 @@
+name pslatex
+category Package
+revision 16416
+shortdesc Use PostScript fonts by default.
+longdesc A small package that makes LaTeX default to 'standard'
+longdesc PostScript fonts. It is basically a merger of the times and the
+longdesc (obsolete) mathptm packages from the psnfss suite. You must
+longdesc have installed standard LaTeX and the psnfss PostScript fonts
+longdesc to use this package. The main novel feature is that the pslatex
+longdesc package tries to compensate for the visual differences between
+longdesc the Adobe fonts by scaling Helvetica by 90%, and 'condensing'
+longdesc Courier (i.e. scaling horizontally) by 85%. The package is
+longdesc supplied with a (unix) shell file for a 'pslatex' command that
+longdesc allows standard LaTeX documents to be processed, without
+longdesc needing to edit the file. Note that current psnfss uses a
+longdesc different technique for scaling Helvetica, and treats Courier
+longdesc as a lost cause (there are better free fixed-width available
+longdesc now, than there were when pslatex was designed). As a result,
+longdesc pslatex is widely considered obsolete.
+containersize 5732
+containermd5 0f727091190f1fe9f54f602fa37a2302
+srccontainersize 1200
+srccontainermd5 2321ae0e5227155b134cfd0e9daf8590
+srcfiles size=3
+ texmf-dist/source/latex/pslatex/fontinst/pslatex.tex
+ texmf-dist/source/latex/pslatex/shell/pslatex
+ texmf-dist/source/latex/pslatex/shell/pslatex.bat
+runfiles size=9
+ texmf-dist/fonts/map/dvips/pslatex/pcrr8rn.map
+ texmf-dist/fonts/tfm/public/pslatex/pcrr7tn.tfm
+ texmf-dist/fonts/tfm/public/pslatex/pcrr8rn.tfm
+ texmf-dist/fonts/tfm/public/pslatex/pcrr8tn.tfm
+ texmf-dist/fonts/vf/public/pslatex/pcrr7tn.vf
+ texmf-dist/fonts/vf/public/pslatex/pcrr8tn.vf
+ texmf-dist/tex/latex/pslatex/pslatex.sty
+catalogue-ctan /macros/latex/contrib/pslatex
+catalogue-date 2012-07-23 14:43:10 +0200
+catalogue-license lppl

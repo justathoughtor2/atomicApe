@@ -1,0 +1,26 @@
+                              ifbmc.spi
+
+                  BMC 対応 Susie プラグイン ver.0.1
+                  March 18, 1998  (c) Toshio OSHIMA
+
+竹村嘉人(たけちん)氏製作のSusie32用のプラグインです。
+
+dviout for Windows Ver.3.06 は、PostScript画像表示で、Disk Spaceの節約と 
+dviout での表示の高速化のため、独自のBMC画像フォーマットをサポートしました。
+
+ifbmc.spi は、この BMC フォーマットに対応しています。
+
+BMC フォーマットについては、付属の bmc.txt をご覧ください。
+
+BMP と BMC の相互変換の Win32 用のコマンド版プログラム bmc.exe も付属して
+います。
+
+
+
+                             exbmc.xpi
+
+                  BMC 対応 ABC 出力プラグイン
+                  July 8, 2001  (c)  Toshio OSHIMA
+
+ABC Converter（４３Ｔ氏制作）などに使用可能な BMC フォーマット出力プラグイン
+です。bmc.exe も対応しています。

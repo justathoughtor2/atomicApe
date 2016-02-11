@@ -1,0 +1,88 @@
+#          GEN_FONT.BAT作成用テンプレート サンプル
+#                      By 八雲  1994/5/15
+#		       modified by SHIMA 1996/12/27
+#
+# auto=no
+#
+# Printer's dpi
+#
+extra_size=360
+#
+#
+# Temporary batch-file name
+#
+gen_tmp=a:\gen_tmp.bat
+#
+#
+# Batch-file name for ungenerated fonts
+#
+gen_font=a:\gen_font.bat
+#
+#
+####  METAFONT \mode name definitions
+#
+# Atari 96x96 previewer
+mode_name=96:atarins
+#
+# BBN Bitgraph at 118dpi
+mode_name=118:bitgraph
+#
+# Epson LQ-500, 180x180dpi
+mode_name=180:lqlores
+#
+# Canon LBP-10
+mode_name=240:canonlbp
+#
+# Canon CX, SX, LBP-LX
+mode_name=300:CanonCX
+#
+# Epson Action Laser
+#mode_name=300:epsonact
+#
+# Canon BubbleJet 10ex
+mode_name=360:bjtenex
+#
+# Sun SPARCprinter
+mode_name=400:sparcptr
+#
+# NeXT 400dpi, Newgen
+#mode_name=400:nexthi
+#
+# CanonEX in LaserWriter Pro 630
+mode_name=600:canonex
+#
+#
+%1st
+#
+echo off
+#
+%2nd
+#
+# ^s  METAFONT source file name (font name)
+# ^m  font magnification
+# ^d  font size ( dpi x magnification )
+# ^D  dpi
+# ^e  font extra_size
+# ^n  METAFONT mode name
+# ^N  METAFONT mode name for extra_size
+#
+REM For ^D dpi
+REM
+virmf &cmmf \mode=^n; mag=^m; nonstopmode; input ^s
+if not exist ^s.^dgf goto err
+gftopk ^s.^dgf ^s.pk
+gather -abi a:\tex\pkfont\dpi^d.gth ^s.pk
+del ^s.^dgf
+del ^s.pk
+#del ^s.log
+#
+#
+%3rd
+#
+copy *.tfm a:\tex\tfm
+del *.tfm
+echo *** Fonts generated! ***
+goto exit
+:err
+echo *** Failure! ***
+:exit

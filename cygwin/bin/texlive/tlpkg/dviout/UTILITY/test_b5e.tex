@@ -1,0 +1,121 @@
+% testpage.tex - created 20 July 1987
+% Copyright (C) 1987 by Leslie Lamport
+%
+% Test of how accurately printer reproduces dimensions specified
+% by LaTeX output.
+%
+% Revised by Stephen Gildea to:
+% make 10 tic marks instead of 9
+% add a long rule through the tics to show the exact edge of the paper
+% short tics on right-hand ruler positioned correctly
+% some comments added.
+%
+% Modified by Kohsaku HOTTA for B5E size (176mm x 250mm) in 22 Dec 1999.
+% The original file_name is "testpage.tex" is changed to "test_b5e.tex"
+% to avoid confusion.
+
+\documentclass{article}
+\pagestyle{empty}
+
+\setlength{\oddsidemargin}{0pt}
+\setlength{\evensidemargin}{0pt}
+\setlength{\marginparwidth}{1in}
+\setlength{\marginparsep}{0pt}
+
+\setlength{\topmargin}{0pt}
+\setlength{\headheight}{0pt}
+\setlength{\headsep}{0pt}
+\setlength{\topskip}{0pt}
+
+\setlength{\footskip}{0pt}
+
+%\setlength{\textheight}{8.0in}
+\setlength{\textheight}{7.84252in}
+
+%\setlength{\textwidth}{5.0in}
+\setlength{\textwidth}{4.92913in}
+
+\setlength{\unitlength}{1in}
+\newcounter{foo}
+
+\begin{document}
+
+\parindent 0pt
+\begin{picture}(0,0)
+\scriptsize
+
+%\put(0,-8.0){\framebox(5.0,8.0){}}
+\put(0,-7.84252){\framebox(4.92913,7.84252){}}
+
+% LEFT RULER
+%\put(0,-4.0){\line(-1,0){2.5}}
+\put(0,-3.92126){\line(-1,0){2.5}}
+%\multiput(-.1,-4.1)(-.1,0){10}{\line(0,1){.2}}
+\multiput(-.1,-4.02126)(-.1,0){10}{\line(0,1){.2}}
+%\multiput(-.05,-4.05)(-.1,0){10}{\line(0,1){.1}}
+\multiput(-.05,-3.97126)(-.1,0){10}{\line(0,1){.1}}
+%\setcounter{foo}{1}\multiput(-.1,-3.85)(-.1,0){9}{\makebox
+%                                 (0,0){\arabic{foo}}\addtocounter{foo}{1}}
+\setcounter{foo}{1}\multiput(-.1,-3.77126)(-.1,0){9}{\makebox
+                                 (0,0){\arabic{foo}}\addtocounter{foo}{1}}
+
+% RIGHT RULER
+%\put(5.0,-4.0){\line(1,0){2.5}}
+\put(4.92913,-3.92126){\line(1,0){2.5}}
+%\multiput(5.1,-4.1)(.1,0){10}{\line(0,1){.2}}
+\multiput(5.02913,-4.02126)(.1,0){10}{\line(0,1){.2}}
+%\multiput(5.05,-4.05)(.1,0){10}{\line(0,1){.1}}
+\multiput(4.97913,-3.97126)(.1,0){10}{\line(0,1){.1}}
+%\setcounter{foo}{1}\multiput(5.1,-3.85)(.1,0){9}{\makebox
+%                                 (0,0){\arabic{foo}}\addtocounter{foo}{1}}
+\setcounter{foo}{1}\multiput(5.02913,-3.77126)(.1,0){9}{\makebox
+                                 (0,0){\arabic{foo}}\addtocounter{foo}{1}}
+
+% TOP RULER
+%\put(2.5,0){\line(0,1){2.5}}
+\put(2.46457,0){\line(0,1){2.5}}
+%\multiput(2.4,.1)(0,.1){10}{\line(1,0){.2}}
+\multiput(2.36457,.1)(0,.1){10}{\line(1,0){.2}}
+%\multiput(2.45,.05)(0,.1){10}{\line(1,0){.1}}
+\multiput(2.41457,.05)(0,.1){10}{\line(1,0){.1}}
+%\setcounter{foo}{1}\multiput(2.65,.1)(0,.1){9}{\makebox
+%                                 (0,0){\arabic{foo}}\addtocounter{foo}{1}}
+\setcounter{foo}{1}\multiput(2.61457,.1)(0,.1){9}{\makebox
+                                 (0,0){\arabic{foo}}\addtocounter{foo}{1}}
+
+% BOTTOM RULER
+%\put(2.5,-8.0){\line(0,-1){2.5}}
+\put(2.46457,-7.84252){\line(0,-1){2.5}}
+%\multiput(2.4,-8.1)(0,-.1){10}{\line(1,0){.2}}
+\multiput(2.36457,-7.94252)(0,-.1){10}{\line(1,0){.2}}
+%\multiput(2.45,-8.05)(0,-.1){10}{\line(1,0){.1}}
+\multiput(2.41457,-7.89252)(0,-.1){10}{\line(1,0){.1}}
+%\setcounter{foo}{1}\multiput(2.65,-8.1)(0,-.1){9}{\makebox
+%                                 (0,0){\arabic{foo}}\addtocounter{foo}{1}}
+\setcounter{foo}{1}\multiput(2.61457,-7.94252)(0,-.1){9}{\makebox
+                                 (0,0){\arabic{foo}}\addtocounter{foo}{1}}
+\end{picture}
+
+\vfill
+\mbox{}\hfill
+\begin{minipage}{3in}
+%The frame on this page should be $6\frac{1}{2}'' \times 9''$.  When
+%printed on $8\frac{1}{2}'' \times 11''$ paper, the frame should be one
+%inch from each edge of the paper.\\[10pt]
+%The rulers at the four edges will indicate how much of the page is
+%useable.  The large ticks are $.1''$ apart.
+%%%%%
+This frame size is $125.2{\rm mm}\ \times\ 199.2{\rm mm}$.
+When printed on B5E size paper,
+the frame should be one inch from each edge of the paper,
+where one inch is equal to 25.4{\rm mm}.\\
+Please control the top lefthand corner of this frame
+should be one inch from the left and top edges of the paper.\\
+The ticks of the rulers at the four edges are 0.1 inch apart.
+%%%%%
+\end{minipage}
+\hfill\mbox{}
+\vfill
+\mbox{}
+
+\end{document}

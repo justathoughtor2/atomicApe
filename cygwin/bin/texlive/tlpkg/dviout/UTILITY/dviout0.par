@@ -1,0 +1,22 @@
+; dviout for Windows95/NT
+dpi=300
+
+; TEXROOT=c:\tex\texmf\fonts
+TEXROOT=c:\wintex	# substitute to ^r
+
+; PATH of PK files of usual fonts and jfm files of KANJI fonts
+; TEXPK=^r\gth\dpi^d^g^s.pk;^r\jfms\^s.tfm
+; TEXPK=^r\cmttf\^s.ttf;^r\jfms\^s.tfm
+TEXPK=^r\pk\^d\^s.pk;^r\jfms\^s.tfm
+
+vfn=^x\utility\dviout0.vfn	# cannot use ^r
+
+; The following two lines are useful after correct instalation of KANJI FONTs
+; F=.!=.;cmr10.=.;cmr10.!
+; FB=3
+
+L=2			# use long filenames
+BMP=4			# scaled to 1/4 x 1/4
+log+			# open log file
+TEXFONTS=^r\tfms	# directories for TFM/JFM files
+; ttf=1000

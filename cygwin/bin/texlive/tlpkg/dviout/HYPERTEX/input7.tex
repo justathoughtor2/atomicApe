@@ -1,0 +1,151 @@
+\documentclass[12pt]{jarticle}
+\usepackage{myhyper,keyin,amsmath,amssymb,amsfonts,amscd}
+\usepackage[dviout]{graphicx,color}
+\AtBeginDvi{\special{dviout -hyper=144 -hyperoff=0 v0}}
+% -hyper=144 : Blue letters without underline (hot spot)
+% -hyperoff=0: HyperTeX is valid
+% v0         : Minimal bars
+% v0vs       : Minimal bars + Status bar
+\AtBeginDvi{\special{papersize=4.6in,7.07in}}
+\hoffset=-2.3cm
+\voffset=-4.55cm
+\paperwidth=4.6in
+\paperheight=7in
+\textwidth=4.4in
+\textheight=7.0in
+\renewcommand\baselinestretch{0.92}
+%\paraindent=0cm
+\setlength{\oddsidemargin}{0cm}
+\setlength{\parindent}{0cm}
+\def\BK{\texttt{\symbol{'134}}}
+\def\E#1{\keyin{\string#1}{#1}}
+\def\Q#1{\keyin{\string#1}{$#1$}}
+\def\R#1{\keyin{\noexpand#1}{$#1$}}
+\def\F#1{\special{html:<a href="dviout:`in .5c#1">}\BK#1\special{html:</a>}}
+\def\G#1{\special{html:<a href="dviout:`in .5c#1=">}\BK#1\special{html:</a>}}
+\def\Goto#1#2{\goto{#1}{\colorbox{green}{\tiny\sf #2}}}
+% \def\gotop#1{\makebox[0mm]{\hspace{#1}\Goto{top}{Top}}}
+\def\RED#1{{\it\color{red}#1}}
+\def\MGNT#1{{\it\color{magenta}#1}}
+\def\ops#1{\{\MGNT{#1}\}}
+\def\Ops#1{[\MGNT{#1}]}
+\def\opt#1{\{\RED{#1}\}}
+\def\Opt#1{[\RED{#1}]}
+\def\ST{\hspace{-.1em}\raisebox{-0.25em}*}
+%
+\pagestyle{empty}
+%%%
+\newlength{\minitwocolumn}
+\newenvironment{z2col}[1][0pt]%
+{\def\kaidan{\end{minipage}%
+             \hspace{\columnsep}%
+             \addtolength{\minitwocolumn}{-#1}%
+             \begin{minipage}[t]{\minitwocolumn}}%
+ \setlength{\minitwocolumn}{0.48\textwidth}%
+ \addtolength{\minitwocolumn}{-0.5\columnsep}%
+ \addtolength{\minitwocolumn}{#1}%
+ \begin{minipage}[t]{\minitwocolumn}}%
+{\end{minipage}}
+%%%
+\begin{document}
+\small
+\tolerance=10000
+\name{top}{}%
+\href{file:input.dvi}{\colorbox{green}{\tiny\sf Return}}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Rewrite from Here %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\href{file:input9.dvi}{\colorbox{green}{\tiny\sf Xy-pic}}
+\href{file:input8.dvi#young}{\colorbox{green}{\tiny\sf Young}}
+\href{file:input8.dvi}{\colorbox{green}{\tiny\sf Myhelp2}}
+\centerline{\textsf{Make your own HELP!}}
+\bigskip
+\rm
+1. Copy the source file \textsf{./HyperTeX/input7.tex} of this DVI file 
+
+\qquad   as a name \textsf{input1.tex}.
+
+\medskip
+2. Copy \textsf{myhyper.sty} and \textsf{keyin.sty} in the same directory.
+
+\medskip
+3. Rewrite {\sf input1.tex} as you like after the line
+
+\qquad {\color{red}\verb|%%% Rewrite from Here %%%|}
+
+\medskip
+4.  For example, the result of the source text
+\begin{verbatim}
+  \Q{\alpha}
+  \E{\yen}
+  \keyin{\widehat{}}{$\widehat{x+y}$}
+  \keyin{\begin{quote} 0d 0a   0d 0a\end{quote}}{quote}
+\end{verbatim}
+\quad
+in \textsf{input1.tex} is as follows
+
+\medskip
+\qquad
+\Q{\alpha}
+\E{\yen}
+\keyin{\widehat{}}{$\widehat{x+y}$}
+\keyin{\begin{quote} 0d 0a   0d 0a\end{quote} 0d 0a}{quote}
+
+\medskip
+\quad
+Here \verb|\keyin{#1}{#2}| means 
+
+\qquad
+\verb|#2| is a hot spot
+
+\qquad
+\verb|#1| is a string to be copied to clipboard
+
+\qquad\quad
+and \textvisiblespace\textsf{0d} means the character with code 
+       \textsf{0d} in Hex
+
+\qquad\quad
+and {\textvisiblespace\textvisiblespace} is translated into 
+\textvisiblespace
+
+\quad
+\verb|\E{#1}| means \verb|\keyin{#1}{#1}|.
+
+\qquad
+If \verb|#1| contains multiple lines, it should be \verb|\K{#1\K}|
+
+\quad
+\verb|\Q{#1}| means \verb|\keyin{#1}{$#1$}|.
+
+\medskip
+\quad
+See \textsf{./HyperTex/input.tex} for more examples.
+
+\medskip
+5.  Make \textsf{input1.dvi} and copy it to \textsf{./HyperTeX/}.
+
+\medskip
+6.  Then by clicking \colorbox{green}{\tiny \sf MyHelp} in \textsf{Help TeX}, 
+    \textsf{input1.dvi} is shown.
+
+\medskip
+\textbf{Remark}.
+In the above, \textsf{input1.tex} may be \textsf{input0.tex}$,\ldots,$\textsf{input6.tex}.
+
+If \textsf{foo?.dvi} is indicated by \textsf{Hyper\TeX}, 
+then \textsf{?} is replaced by 
+\textsf{0,1,$\ldots$,9} and the corresponding DVI files are 
+searched in this order. 
+Then the DVI file first found is displayed.
+
+\quad
+Hence \textsf{input1.dvi} has priority over \textsf{input7.dvi} 
+and \textsf{input1.dvi} will not be changed 
+even if a new package of \textsf{dviout} is overwritten.
+
+\bigskip
+\bigskip
+\centerline{\Goto{top}{Top}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

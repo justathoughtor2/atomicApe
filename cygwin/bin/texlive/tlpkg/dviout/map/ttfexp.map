@@ -1,0 +1,155 @@
+% This is a variation of  ttfonts.map  written by Otobe and
+% supported by dviout Ver.3.12.4 (See ttfonts.map for the details).
+%
+% TrueType Fonts defined here with character codes of 1 byte will be 
+% expanded by dviout (not by Windows API).
+%
+% This may be useful to embed fonts
+%
+% Option  /1  Windows Latin 1 (Code Page 1252): times.ttf, BaKoMa etc.
+%	  /3  Some TeX fonts with 1 byte code (use Format 4 : 2 byte)
+%	  /4  Some TeX fonts with 1 byte code (use Format 0 : 1 byte)
+%	  /5  Symbol Character Set: symbol.ttf etc.
+%         /<code_page>  The Code page if it is larger than 256
+%
+% Note that ^w represents the Windows system directory (ex. c:\windows)
+
+% 2001/8/18  The first version (dviout Ver.3.12.4)
+% 2002/12/24 Modified a little (dviout Ver.3.14.3)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+#x This is a map of non-Japanese fonts!
+%
+%%%%%%%%%%%%%%%  STANDARD SYMBOL FONTS  %%%%%%%%%%%%%%%%%%%
+wsyr		^w\fonts\symbol.ttf/5
+;	wsyro		Symbol				symbol,italic
+wpi313		"Monotype Sorts"	symbol
+wmsdr		^w\fonts\webdings.ttf/5
+wmswdr		^w\fonts\wingding.ttf/5
+wmswdr2		^w\fonts\wingdng2.ttf/5
+wmswdr3		^w\fonts\wingdng3.ttf/5
+;	wingding	WingDings			symbol
+wmsmlt		^w\fonts\marlett.ttf/5
+%%
+%%%%%%%%%%%%%%%%  STANDARD TEXT FONTS  %%%%%%%%%%%%%%%%%%%%
+wlcr8r		^w\fonts\lucon.ttf
+;	wlcrih8r	"Lucida Handwriting"	italic
+;	wlsri8r		"Lucida Sans"			italic
+;	wlsr8r		"Lucida Sans Unicode"
+;	wwmtr8r		Westminster
+wimtsr8r	^w\fonts\matisse_.ttf
+witpsr8r	^w\fonts\tempsitc.ttf
+;	wplr8r		"Palatino Linotype"
+;	wplb8r		"Palatino Linotype"		bold
+;	wplbi8r		"Palatino Linotype"		bold,italic
+;	wplri8r		"Palatino Linotype"		italic
+wmcsr8r		^w\fonts\comic.ttf
+wmcsb8r		^w\fonts\comicbd.ttf
+wmgr8r		^w\fonts\geogia.ttf
+wmgb8r		^w\fonts\geogiab.ttf
+wmgri8r		^w\fonts\geogiai.ttf
+wmgbi8r		^w\fonts\geogiaz.ttf
+;	msssr8r		"Microsoft Sans Serif"
+;	wmssfr8r	Sylfaen
+wthr8r		^w\fonts\tahoma.ttf
+wthb8r		^w\fonts\tahomabd.ttf
+wtbcr8r		^w\fonts\trebuc.ttf
+wtbcb8r		^w\fonts\trebucbd.ttf
+wtbcbi8r	^w\fonts\trebucbi.ttf
+wtbcri8r	^w\fonts\trebucit.ttf
+wvdr8r		^w\fonts\vendana.ttf
+wvdb8r		^w\fonts\vendanab.ttf
+wvdbi8r		^w\fonts\vendanaz.ttf
+wvdri8r		^w\fonts\vendanai.ttf
+;	wail8rc		"Abadi MT Condensed Light"
+wa1r8r		^w\fonts\arial.ttf
+wa1b8r		^w\fonts\arialbd.ttf
+wa1bi8r		^w\fonts\arialbi.ttf
+wa1ri8r		^w\fonts\ariali.ttf
+wa1c8r		^w\fonts\ariblk.ttf
+waqr8r		^w\fonts\bkant.ttf
+wc1r8r		^w\fonts\calist.ttf
+wagb8r		^w\fonts\gothicb.ttf
+wagbi8r		^w\fonts\gothicbi.ttf
+wagr8r		^w\fonts\gothic.ttf
+wagri8r		^w\fonts\gothici.ttf
+wcrr8r		^w\fonts\cour.ttf
+wcrb8r		^w\fonts\courbd.ttf
+wcrbi8r		^w\fonts\courbi.ttf
+wcrri8r		^w\fonts\couri.ttf
+wicr8r		^w\fonts\impact.ttf
+;	wngb8r		"News Gothic MT"		bold
+;	wngb8r		"News Gothic MT"
+;	wngb8r		"News Gothic MT"		italic
+wocrr8r		"OCR A Extended"
+wnsr8r		^w\fonts\times.ttf
+wnsb8r		^w\fonts\timesbd.ttf
+wnsbi8r		^w\fonts\timesbi.ttf
+wnsri8r		^w\fonts\timesi.ttf
+;	wcpbs8r		"Copperplate Gothic Bold"
+;	wcpls8r		"Copperplate Gothic Light"
+%%
+%%%%%%%%%%%%%%%  STANDARD SMALL CAPS FONTS  %%%%%%%%%%%%%%%
+wlcrc8r		^w\fonts\lucon.ttf
+;	wlcrihc8r	"Lucida Handwriting"	italic
+;	wlsrc8r		"Lucida Sans Unicode"
+;	wlsric8r	"Lucida Sans"			italic
+;	wwmtrc8r	Westminster
+wimtsrc8r	^w\fonts\matisse_.ttf
+witpsrc8r	^w\fonts\tempsitc.ttf
+;	wplrc8r		"Palatino Linotype"
+;	wplbc8r		"Palatino Linotype"		bold
+;	wplbic8r	"Palatino Linotype"		bold,italic
+;	wplric8r	"Palatino Linotype"		italic
+wmcsrc8r	^w\fonts\comic.ttf
+wmcsbc8r	^w\fonts\comicbd.ttf
+wmgrc8r		^w\fonts\geogia.ttf
+wmgbc8r		^w\fonts\geogiab.ttf
+wmgric8r	^w\fonts\geogiai.ttf
+wmgbic8r	^w\fonts\geogiez.ttf
+;	msssrc8r	"Microsoft Sans Serif"
+;	wmssfrc8r	Sylfaen
+wthrc8r		^w\fonts\tahoma.ttf
+wthbc8r		^w\fonts\tahomabd.ttf
+wtbcrc8r	^w\fonts\trebuc.ttf
+wtbcbc8r	^w\fonts\trebucbd.ttf
+wtbcbic8r	^w\fonts\trebucbi.ttf
+wtbcric8r	^w\fonts\trebucit.ttf
+wvdrc8r		^w\fonts\vendana.ttf
+wvdbc8r		^w\fonts\vendanab.ttf
+wvdric8r	^w\fonts\vendanai.ttf
+wvdbic8r	^w\fonts\vendanai.ttf
+;	wailc8rc	"Abadi MT Condensed Light"
+wa1rc8r		^w\fonts\arial.ttf
+wa1bc8r		^w\fonts\arialbd.ttf
+wa1bic8r	^w\fonts\arialbi.ttf
+wa1ric8r	^w\fonts\ariali.ttf
+wa1cc8r		^w\fonts\ariblk.ttf
+wcrrc8r		^w\fonts\cour.ttf
+wcrbc8r		^w\fonts\courbd.ttf
+waqrc8r		^w\fonts\bkant.ttf
+wc1rc8r		^w\fonts\calist.ttf
+wagbc8r		^w\fonts\century.ttf
+wagbic8r	^w\fonts\gothicbi.ttf
+wagrc8r		^w\fonts\gothic.ttf
+wagric8r	^w\fonts\gothici.ttf
+wcrbic8r	^w\fonts\courbi.ttf
+wcrric8r	^w\fonts\couri.ttf
+wicrc8r		^w\fonts\impact.ttf 
+;	wngbc8r		"News Gothic MT"		bold
+;	wngbc8r		"News Gothic MT"
+;	wngbc8r		"News Gothic MT"		italic
+;	wocrrc8r	"OCR A Extended"
+wnsrc8r		^w\fonts\times.ttf
+wnsbc8r		^w\fonts\timesbd.ttf
+wnsbic8r	^w\fonts\timesbi.ttf
+wnsric8r	^w\fonts\timesi.ttf
+;	wcpbsc8r	"Copperplate Gothic Bold"
+;	wcplsc8r	"Copperplate Gothic Light"
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%input	pttfonts.map
+%input	morisawa.map
+%input	japanese.map
+%input	mojikyo.map
+%input	gtfonts.map
+%input	$userexp.map

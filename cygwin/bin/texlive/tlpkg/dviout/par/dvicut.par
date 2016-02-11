@@ -1,0 +1,5 @@
+;#j 指定した範囲のページを抜き出して temp.dvi を作る
+;# Make  temp.dvi  from a/some page(s) of the current DVI file
+;;     Make  temp.dvi  from a/some page(s) of the current DVI file
+dviprt='dvispc -atpT^a-^bL "^d"|dvispc -x temp.dvi^Z^Make temp.dvi; by selelected pages'
+Set=fd

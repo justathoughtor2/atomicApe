@@ -1,0 +1,9 @@
+name dvips.win32
+category Package
+revision 37162
+shortdesc win32 files of dvips
+containersize 89684
+containermd5 f1850a7aad75caa4badd5033e8e2e51f
+binfiles arch=win32 size=51
+ bin/win32/afm2tfm.exe
+ bin/win32/dvips.exe

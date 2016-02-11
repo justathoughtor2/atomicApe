@@ -1,0 +1,38 @@
+                  Imbedding files in a dvi file
+
+                 written by SHIMA, November 1999
+
+
+sample.dvi  contains some graphic files.  
+
+1. To list the graphic files, execute
+
+   > dviadd sample
+
+   in the command (MS-DOS) Window.  To write the list in a file, execute
+
+   > dviadd sample > file.txt
+
+   dviout for Windows can list the files contained in the dvi file by 
+   [Help -> Buffer Info].
+
+
+2. To extract the graphic files from  sample.dvi, execute
+
+   > dviadd e sample
+
+
+3. To change  sample.dvi  which contains no graphic files, execute
+
+   > dviadd d sample
+
+   sample.dvi contains Japanese characters and the font data is embedded
+   in the DVI file as a file  dviout.etf.  It is extracted in the above.
+
+5. After making  file.txt  and extracting the graphic files, one can make
+   sample.dvi  as follows.
+
+   > platex sample
+   > dviadd @file.txt sample
+
+  Here the part after the file name of each line in  file.txt  is ignored.

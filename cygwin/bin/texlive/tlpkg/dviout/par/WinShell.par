@@ -1,0 +1,9 @@
+;#j source specials (for WinShell)
+;# source specials for WinShell
+;`    source specials for WinShell
+;; A sample for source specials with WinShell
+;;
+;; Rewrite the path of WinShell if it is different from
+;;    c:\Program Files\Hidemaru\WinShell.exe
+;;
+src='C:\Program Files\WinShell\WinShell.exe^s-c "%s" -l %d'

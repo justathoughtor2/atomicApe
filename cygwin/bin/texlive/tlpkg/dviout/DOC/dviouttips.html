@@ -1,0 +1,1415 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD W3 HTML//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<title>Tips on dviout</title>
+</head>
+
+<body BGCOLOR="#eeffff">
+
+<hr NOSHADE ALIGN="left" WIDTH="65%">
+
+<h1 align="center">dvioutにおける小ヒント集</h1>
+
+<hr NOSHADE ALIGN="right" WIDTH="65%">
+
+<p align="center">March 18, 2006</p>
+
+<p><a HREF="http://akagi.ms.u-tokyo.ac.jp/ftp-j.html#TeX" name="contents">TeX 
+のページへ </a>,
+<a href="http://akagi.ms.u-tokyo.ac.jp/dvitest.html">dviout/dviprt開発室</a><br>
+<a href="http://akagi.ms.u-tokyo.ac.jp/texinst98.html">TeXシステムのインストール</a>，
+&nbsp;<a href="tex_dvioutw.html">dvioutのインストール</a><br>
+<a href="tex_instchk.html">Windows95/98/Me/NT/2000/XP における日本語TeX 
+のインストールのチェック</a><br>
+<a href="cmode.html">DVIwareとしてのdviout</a>，&nbsp;
+<a href="present.html">dvioutでのプレゼンテーション</a>,&nbsp;
+<a href="dvioutQA.html">dvioutにおけるトラブル</a><br>
+<a href="http://akagi.ms.u-tokyo.ac.jp/dviouttips.html">このドキュメントの最新版</a><br>
+<hr>
+<h3>以下は，Ver.3.14.2(Dec. 5, 2002) またはそれ以降の dviout で，デフォルトのキー機能に基づいています．</h3>
+Alt+F, Alt+J, Alt+S, Alt+D, Alt+V, Alt+N, Alt+P, Alt+O, Alt+H で始まるキー操作（Ver.3.14.2 からは，手の形のマウスカーソルの時も有効になった）は，メニューバーの該当メニューをクリックして選ぶマウス操作に対応しています．
+<p>
+・左クリック，右クリックとは，マウスの左ボタンのクリック，右ボタンのクリックのこととします．<br>
+・ Ctrl+\ or <img SRC="option.bmp" WIDTH="16" HEIGHT="15"> or Alt+OS (Option-Setup Parameters...) で<a href="#prop">「DVIOUTのプロパティー」</a>が表示されます．
+</p>
+<ol>
+<li><a href="#start">dvioutの起動</a></li>
+<li><a href="#Fmenu">メニューバーの File （Alt+F）のファイルリストから選択</a></li>
+<li><a href="#Youshi">用紙サイズ</a></li>
+<li><a href="#Position">表示範囲（原稿）の位置調整</a></li>
+<li><a href="#Large">表示の拡大・縮小</a></li>
+<li><a href="#Contrast">コントラストの調整</a></li>
+<li><a href="#Loupe">ルーペの調整</a></li>
+<li><a href="#ViewBar">紙面表示可能範囲を広くする</a></li>
+<li><a href="#Tool">ツールバーを調整する</a></li>
+<li><a href="#FormerPage">前のページへの移動</a></li>
+<li><a href="#NextPage">次のページへの移動</a></li>
+<li><a href="#Mscroll">マウスのスクロールボタンを使う操作</a></li>
+<li><a href="#Pages">複数頁の同時表示</a></li>
+<li><a href="#Length">プレビュー画面で紙面におけるサイズや位置を測る</a></li>
+<li><a href="#Image">プレビュー画面を画像として切り出して他のエディターに貼り付ける</a></li>
+<li><a href="#Wabun">和文の文字の調整</li>
+<li><a href="#OnOff">フォント関連の特殊機能のOn/Off</a></li>
+<li><a href="#OnOff2">その他の特殊機能のOn/Off</font></a></li>
+<li><a href="#Info">関連情報の表示・保存・印刷</a></li>
+<li><a href="#Special">specials に関連した情報</a></li>
+<li><a href="#presen">プレゼンテーション・モード</a></li>
+<li><a href="#search">文字列検索</a></li>
+<li><a href="#srcspc">エディターとの間の相互ジャンプ（source specials）</a></li>
+<li><a href="#hypertex">ディスク内やインタネット上のリソースへのジャンプ -- HyperTeX</a></li>
+<li><a href="#input">エディタなどへの入力支援(HyperTeX + dviout specials)</a></li>
+<li><a href="#print">印刷</a></li>
+<li><a href="#PDF">PDFファイルに変換する</a></li>
+<li><a href="#Embed">画像やフォントのDVIファイルへの埋め込み</a></li>
+<li><a href="#prop">DVIOUTのプロパティ</a></li>
+<li><a href="#key">Key機能表（デフォルト）</a></li>
+</ol>
+<a href="tex_dvioutw.html#HintMenu">そのほか，いくつかのヒント</a>
+<hr>
+
+<ol>
+<font color="#800000"><a name="start"><li>dviout の起動</a></font>
+<dl>
+<dt><b>dviout.exe のファイル名を変える</b></dt>
+<dd>・ dvioute.exe とする： 非日本語Windowsのモードで dviout が起動する（デフォルトでは自動判定）<br>
+    ・ dvioutj.exe とする： 日本語Windowsのモードで dviout が起動する（デフォルトでは自動判定）<br>
+    ・ windvi.exe, windvi32.exe, wdvipro.exe, wdvipro32.exe とする： インプレスのTeX for Windows の対応するプログラムの代わりに使う</dd>
+<dt><b>最大化した状態で起動する</b></dt>
+<dd>dviout &nbsp; -Set=!m &nbsp; とパラメータをつけて起動する</dd>
+<dt><b>同時に起動可能なdvioutの最大個数を調整する</b></dt>
+<dd>CTRL+\ [System][multi] で個数を設定する</dd>
+<dt><b>dviout のプログラムのアイコンをダブルクリックしても，dvioutが起動しない</b></dt>
+<dd>この事例の報告は未だありませんが，もしこのようなことがあれば <font color="blue">dviout -NULL</font> としてコマンドラインから起動し，Option → Uninstall でアンインストール後，再起動してパラメータを再設定する</dd>
+<dt><b>DVIファイルのアイコンをダブルクリックしても，dvioutが起動しない</b></dt>
+<dd>Alt+OI [Next][Next][Finsh] として，初期化を完了すればよい</b></dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="Fmenu"><li>メニューバーの File （Alt+F）のファイルリストから選択</a></font>
+<dl>
+<dt><b>選んだファイルを先頭から開きたい</b></dt>
+<dd>Ctrl を押して左クリック</b></dd>
+<dt><b>選んだファイルの最後のページを開きたい</b></dt>
+<dd>Ctrl+Shift を押して左クリック</dd>
+<dt><b>選んだファイルのあるフォルダーを開きたい</b></dt>
+<dd>Shift を押して左クリック</dd>
+<dt><b>選んだファイルを表示のリストから消したい</b></dt>
+<dd>Alt+I のリストから選んで [Hide] を押すと，次回dvioutから</dd>
+<dt><b>より多くのリストから選びたい</b></dt>
+<dd>Alt+I のリストから選ぶ． このときも，Ctrl/Shift の機能は有効</dd>
+</dl></li></p>
+
+<p>
+<font color="#800000"><a name="Youshi"><li>用紙サイズ</a></font>
+<dl>
+<dt><b>用紙サイズの変更</b></dt>
+<dd>Alt+PB5 でB5に変更． B5でなくて，A3,..,A8, B3,...,B6 なども同様に可</dd>
+<dt><b>用紙の縦置き，横置きの変更</b></dt>
+<dd>Alt+PL (Paper-Landscape)で縦と横の交換</dd>
+<dt><b>紙面周囲の余白を削る</b></dt>
+<dd>Alt+NE (preseN-cut Edge)，このときの空きは Ctrl+\ [Paper][Cut Edge]</dd>
+<dt><b>表示部分のサイズを知る</b></dt>
+<dd>Alt+H I I (Help-Info-Info)  or Ctrl+\ [Paper] or Alt+VDO（グリッド線の表示で調整は Alt+VDS）</dd>
+<dt><b>LaTeX での用紙サイズを，dviout に認識させる</b></dt>
+<dd>TeX のソースの最初の頁に以下のように書く． dvipsk, dvipdfmx などでも認識される<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<font color="blue"><tt>\AtBeginDvi{\special{papersize=\the\paperwidth,\the\paperheight}}</tt></font></dd>
+</dl></li></p>
+
+<p>
+<font color="#800000"><a name="Position"><li>表示範囲（原稿）の位置調整</a></font>
+<dl>
+<dt><b>位置の微調整</b></dt>
+<dd>Ctrl+Shift+矢印キー</dd>
+<dt><b>位置の確認・調整</b></dt>
+<dd>Ctrl+\ [Paper] OX: or OY:</dd>
+<dt><b>調整をキャンセルする</b></dt>
+<dd>Shift+F7</dd>
+<dt><b>グリッドを表示する</b></dt>
+<dd>Alt+VDO (View-griD-On), グリッドの調整は Alt+VDS (View-griD-Scale)</dd>
+</dl></li></p>
+
+<p>
+<font color="#800000"><a name="Large"><li>表示の拡大・縮小</a></font>
+<dl>
+<dt><b>表示の拡大</b></dt>
+<dd><img SRC="lplus.bmp" WIDTH="16" HEIGHT="15"> or Alt+DZM (Display-siZe-Magnify) or Ctrl+マウスのスクロールボタンを先方に回す</dd>
+<dt><b>表示の縮小</b></dt>
+<dd><img SRC="lminus.bmp" WIDTH="16" HEIGHT="15"> or Alt+DZR (Display-siZe-Reduce) or Ctrl+マウスのスクロールボタンを手前に回す</dd>
+<dt><b>紙面全体が表示される最大サイズに</b></dt>
+<dd>5 or Alt+DZF (Display-siZe-Fit)<br>
+   - プレゼンテーションモードでは，調整が正確</dd>
+<dt><b>縦または横のスクロールのみで紙面全体が表示できる最大サイズに</b></dt>
+<dd>6 or Alt+DZL (Display-siZe-fuLL)<br>
+   - プレゼンテーションモードでは，調整が正確</dd>
+<dt><b>デフォルトの表示の大きさを設定</b></dt>
+<dd>Ctrl+\ [Display][Size][Save] で，現在の状態がデフォルトに</dd>
+<dt><b>大きさの調整範囲</b></dt>
+<dd>解像度(dpi)が大きいほど，調整範囲が大きくて細かくなるが，動作はより重くなる</dd>
+<dt><b>原稿を紙面に対して拡大／縮小</b></dt>
+<dd>Ctrl+\ [Resolution][e:] で，0.1% 単位で調整可<br>
+- 印刷に影響（拡大／縮小印刷）． 印刷結果の調整が主目的<br>
+- Ctrl+\ [Resolution][varf:] を On にすると，固定サイズの PK フォントなども dviout の内部処理で，スケーリングがなされる</dd>
+</dl></li></p>
+
+<p>
+<font color="#800000"><a name="Contrast"><li>コントラストの調整</a></font>
+<dl>
+<dt><b>文字などの輪郭の濃さを調整</b></dt>
+<dd>・Alt+DNB，Alt+DNW (Display-coNtrast-Blacker/Whiter)により少しづつ調整<br>
+・ Ctl+\ [Display] で最上部の [contrast] で調整． 設定保存は [Save]</dd>
+<dt><b>紙面の明るさを調整</b></dt>
+<dd>Ctl+\ [Display][bright:]</dd>
+<dt><b>白黒反転表示</b></dt>
+<dd>Alt+DNV (Display-coNtrast-reVerse)</dd>
+</dl></li></p>
+
+<p>
+<font color="#800000"><a name="Loupe"><li>ルーペの調整</a></font>
+<dl>
+<dt><b>拡大／縮小率を変える</b></dt>
+<dd>Alt+DLE で拡大，Alt+DLA で縮小，または，Ctrl+\ [Common] から</dd>
+<dt><b>サイズを変える</b><dt>
+<dd>Alt+DLM で大きく Alt+DLD で小さく，または，Ctrl+\ [Common] から</dd>
+<dt><b>目盛りをつける</b><dt>
+<dd>Alt+DLU または，Ctrl+\ [Common] から</dd>
+<dt><b>円形のルーペを使う</b><dt>
+<dd>Ctrl+\ [Common][Shape][Circle]，ただし動作が重くなる</dd>
+<dt><b>ルーペ使用中はカーソルを消す</b><dt>
+<dd>Alt+DLK (Display-Loupe-Kill cursor)</dd>
+<dt><b>ルーペがスクリーンの端に来たとき，スクリーンから出ないようにする</b><dt>
+<dd>Ctrl+\ [Common][Edge view]</dd>
+<dt><b>2種類のルーペを使う</b></dt>
+<dd>右ボタンの他，Ctrl+右ボタンで別のルーペが可能<br>
+    こちらのルーペの拡大／縮小率や大きさ調整は，Ctrl+\ [Common] で</dd>
+</dl></li></p>
+
+<p>
+<font color="#800000"><a name="ViewBar"><li>紙面表示可能範囲を広くする</a></font>
+<dl>
+<dt><b>スクロールバーなどを消す</b></dt>
+<dd>・ Alt+VS (View-Status bar) : 下枠部ステータスバーの表示／表示<br>
+    ・ Alt+VR (View-scRoll bar) : 下枠部と右枠部のスクロールバーの表示／非表示<br>
+    ・ Alt+VP (View-Page slider): 右枠部のページスライダーの表示／非表示<br>
+    ・ Alt+VT (View-Tool bar) &nbsp;   : 上枠部のツールバーの表示／非表示<br>
+    ・ Alt+VB (View-move Button): ツールバーのページ移動ボタンの表示／非表示</dd>
+<dt><b>全画面表示にする</b></dt>
+<dd>[Esc] : 全画面表示と通常表示の切り替え<br>
+    -  さらに，6 で拡大表示（縦長用紙の場合，紙面の幅がスクリーンの幅に）<br>
+    -  5 ではページ全体が入る最大サイズへ<br>
+    -  全画面表示に入る前に，Alt+NY4 としておくと，紙面の外は黒になる<br></dd>
+<dt><b>別のコンピュータの画面で表示</b></dt>
+<dd>LAN等経由でDVIファイルを表示． Alt+OW (Option-Continuous reneW) を ON にしておく</dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="Tool"><li>ツールバーを調整する</a></font>
+<dl>
+<dt><b>ツールバーの幅を狭くする</b></dt>
+<dd>Alt+VB (View-move Button) でツールバーのページ移動ボタンを削除する</dd>
+<dt><b>ツールバーのページ移動ボタンによる移動の向きを逆にする</b><dt>
+<dd>Alt+VV (View-reVerse)</dd>
+<dt><b>ツールバーの（Change Settings の右の）6つのボタンを変更する</b></dt>
+<dd>Alt+VC (View-Change tool button)，<img src="niko.bmp" WIDTH="16" HEIGHT="15"> などを含むときの6つは機能登録可能</dd>
+<dt><b>ツールバーのボタンに機能を設定する</b></dt>
+<dd>Ctrl+\ [Key][key:] の Button, User1-5 の6つのボタン（<img src="niko.bmp" WIDTH="16" HEIGHT="15"> とその左の合わせて6つのボタン）に，[Function] から機能を選択して [Define] で設定できる</dd>
+<dt><b>ツールバーを消す</b></dt>
+<dd>Alt+VT (View-Tool bar)</dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="FormerPage"><li>前のページへの移動</a></font>
+<dl><dt>
+「次のページへの移動」の項とほぼ同じ． ただし，<br>
+ <b>[Space]</b>, <b>[PgDn]</b>, <b>JE</b>, <b>JN</b>, <b>JD</b>, <b>↓</b>, <b>N</b>, <b>D</b>，「先頭へ」，<img SRC="fpage.bmp" WIDTH="16" HEIGHT="15"> は，<b>[BackSpace]</b>, <b>[PgUp]</b>, <b>JV</b>, <b>JP</b>, <b>JU</b>, <b>↑</b>, <b>P</b>, <b>U</b>，「末尾へ」，<img SRC="bpage.bmp" WIDTH="16" HEIGHT="15"> になる
+</dt></dl></p>
+</p>
+
+<p>
+<font color="#800000"><a name="NextPage"><li>次のページへの移動</a></font>
+<dl>
+<dt><b>[Space]</b> or <b>Alt+JE</b></dt>
+<dd>次のページの先頭へ</dd>
+<dt><b>[PgDn]</b> or <b>N</b> or <b>Alt+JN</b></dt>
+<dd>次のページの同じ位置へ</dd>
+<dt><b>Shift+↓</b></dt>
+<dd>[Space] と同じ． 矢印キーで紙面スクロールしている場合に便利</dd>
+<dt><b>マウスのスクロールボタンを押して回す</b></dt>
+<dd>N と同じ． マウスを移動させないですむ</dd>
+<dt><b>マウスを移動しての左クリック</b></dt>
+<dd>・ 右枠のページスクロールバーの下部空白<br>
+    ・ ツールバーのページ移動ボタン <img SRC="fpage.bmp" WIDTH="16" HEIGHT="15">（Alt+VV で逆向きに移動）<br>
+    ・ ツールバー右のページ番号入力ウインドウの右の矢印<br>
+    ・ プレゼンテーション・モードでのポップアップメニューのボタン（不要の時は消えるので，邪魔にならない）</dd>
+<dt><b>Alt+JD</b>, <b>Alt+JD</b> or <b>D</b>, <b>D</b></dt>
+<dd>紙面の最下部へ移動 → 次のページの先頭へ移動<br>
+    -  D キーのクリックのみで，文書が全て順に表示可能な場合が多い<br>
+<dt><b>プレゼンテーションモードでのマウスボタン</b></dt>
+<dd>Alt+NBL（preseN-Button-Left）or Alt+NMR（preseN-Button-Right)で [Space] の機能を設定したとき<br>
+-  プロジェクターの（マウスボタンの機能付き）リモートコントローラを使うとき便利</dd>
+</dl></li></p>
+
+<p>
+<font color="#800000"><a name="Mscroll"><li>マウスのスクロールボタンを使う操作</a></font>
+<dl>
+<dt><b>回転させる</b></dt>
+<dd>表示紙面のスクロール</dd>
+<dt><b>押して回転させる</b></dt>
+<dd>ページをスクロールする<br>
+-  Shiftを押していると，5ページ毎<br>
+-  Ctrlを押していると，10ページ毎<br>
+-  Ctrl+Shiftを押していると，50ページ毎</dd>
+<dt><b>Shift を押して回転させる</b></dt>
+<dd>ページを移動</dd>
+<dt><b>Ctrl を押して回転させる</b></dt>
+<dd>拡大／縮小</dd>
+</dl></li></p>
+
+<p>
+<font color="#800000"><a name="Pages"><li>複数頁の同時表示</a></font>
+<dl>
+<dt><b>現在の頁から２頁毎に左右連結表示</b></dt>
+<dd>Alt+DT (Display-Two) or 7（左→右），あるいは，Alt+DO（右→左）</dd>
+<dt><b>現在の頁から２頁毎に上下連結表示</b></dt>
+<dd>Alt+DY or 0（上→下）． プレゼンテーションモードでは<b>全頁連結</b></dd>
+<dt><b>4頁同時縮小表示</b></dt>
+<dd>Alt+DS (Disply-croSs) or 8． 4頁同時スクロール可，右クリックでジャンプ</dd>
+<dt><b>サムネイル（16頁同時縮小表示）</b></dt>
+<dd>Alt+D6 (Display-16) or 9． 16頁同時スクロール可，右クリックでジャンプ</dd>
+</dl></li></p>
+
+<p>
+<font color="#800000"><a name="Length"><li>プレビュー画面で紙面におけるサイズや位置を測る</a></font
+<dl>
+<dt><b>位置を知る</b></dt>
+<dd>Ctrl+Shift+左クリック</dd>
+<dt><b>目盛り付きルーペを使う</b></dt>
+<dd>Alt+DLU (Display-Loupe-measUre) or Ctrl+\ [Common][Shape][Measure]， 4 pixel単位の目盛り</dd>
+<dt><b>画面上の 1 pxiel の長さを知る</b></dt>
+<dd>Alt+H I I で，1000 pixel の長さが cm 単位で示される</dd>
+<dt><b>２点間の距離や指定した矩形の位置とサイズを示す</b></dt>
+<dd>Ctrl+[ の後 Shiftを押して左／右クリックで2点を対角線とする矩形を定めて，Alt+H I I</dd>
+<dt><b>グリッドを表示する</b></dt>
+<dd>Alt+VDO (View-griD-On), グリッドの調整は Alt+VDS (View-griD-Scale)</dd>
+<dt><b>より正確な測定</b></dt>
+<dd>Alt+DZM (Dsiplay-siZe-Magnify) などで拡大表示してから測る</dd></dl></li></p>
+
+<p><font color="#800000"><a name="Image"><li>プレビュー画面を画像として切り出して他のエディターに貼り付ける（<a href="cmode.html#picture">詳細</a>）</a></font>
+<dl>
+<dt><b>BMP画像としてクリップボードにコピー</b></dt>
+<dd>Ctrl+[ の後，Shift を押して左／右クリックで切り出す範囲を定めて，Alt+FSB</dd>
+<dt><b>EMF画像としてクリップボードにコピー</b></dt>
+<dd>Ctrl+[ の後，Shift を押して左／右クリックで切り出す範囲を定めて，Alt+FSE</dd>
+<dt><b>BMP画像形式とEMF画像形式の違い</b><dt>
+<dd>・ BMP画像は，プレビュー画面通りの画像，ただし，カラー文字や取り込み画像は除かれる
+<br>
+・ EMF画像では，TrueTypeフォントを使った文字など，拡大や印刷に適す． カラーなど可</dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="#Wabun"><li>和文の文字の調整</font></a><br>
+<dl>
+<dt><b>ＭＳ 明朝の代わりに，他のフォントを使う</b><dt>
+<dd>・ Alt+OJ のメニューで変更する． この方法は簡便だが，dviout を閉じると設定は消える．<br>
+・ Ctrl+\ [WinJfont] で，Japanese TT をチェックし，jfm で min（または，jis）をクリックし，[Change Font] で表示されるダイアログからフォントを選択し，[Ok] でそのダイアログを抜けて，[Define] [Ok] でプレビュー画面に戻る<br>
+・ フォントマップファイルで指定する方法もある． -ftt: に ^x\map\ttfonts.map を設定したとき，<font color="blue">$user.map</font> というファイルに指定を書いておけば，dviout のバージョンアップなどでも上書きされることはない</dd>
+<dt><b>和文文字のサイズ調整</b></dt>
+<dd>Ctrl+\ [JFont2][Adjust size s:]，0.1% 単位で調整可<br>
+-  個々のフォント毎にサイズ調整する場合は，Ctrl+\ [WinJFont] で</dd>
+<dt><b>欧文文字に対する和文文字のベースライン位置調整</b></dt>
+<dd>Ctrl+\ [JFont2][base line J:]，文字サイズの 0.1% 程度単位で調整可</dd>
+<dt><b>ある和文文字を別の和文文字に替える</b></dt>
+<dd>Ctrl+\ [Jfont2][JC:] で文字コードの対応を設定</dd>
+<dt><b>和文の文字調整などの設定を保存しておく</b></dt>
+<dd>Ctrl+\ の [DVIOUTのプロパティー] で行った変更は，Alt+OP [Save] でタイトルや説明をつけて保存可能<br>
+-  Alt+OP のメニューから選択して [Ok] を選ぶと，再度その設定が使用可能</dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="OnOff"><li>フォント関連の特殊機能のOn/Off</font></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+デフォルトでのOn/Offを示す．
+<dl>
+<dt><b>Vertial fonts</b></dt>(On)</dd>
+<dd>Ctrl+\ [Font2][virtual:]</dd>
+<dt><b>埋め込みフォント使用</b>(On)</dt>
+<dd>Alt+OF (Option-Font)，デフォルトを変えるのは<a href="#KeepOnOff">ここ</a></dd>
+<dt><b>欧文TrueTypeフォント使用</b>(On)<dt>
+<dd>Ctrl+\ [Font2][ttf:] 1(On)/0(Off)</dd>
+<dt><b>内蔵jfm使用</b>(On)</dt>
+<dd>Ctrl+\ [Font2][Use inner jfm]，
+  和文フォント min*, goth*, tmin*, tgoth*, jis, jisg, jis-v, jisg-v のメトリックファイルに dviout 内蔵のものを使用</dd>
+<dt><b>フォントの所在の保存</b>(On)</dt>
+<dd>Ctrl+\ [Font2][Keep Path], Off では，フォントサーチに時間がかかる</dd>
+<dt><b>オンデマンド・フォント機能</b>(On)</dt>
+<dd>Ctrl+\ [Font2][OnDemand]，Off にすると，DVIファイルを開いた時点で使われる全てのフォントをチェック<br>
+-  Off では，最初の表示に時間がかかるが，ページスクロールが速くなるので，プレゼンテーション・モードでの縦連結スクロールなどに適す</dd>
+<dt><b>NTTjTeXの日本語フォント代替</b>(Off)</dt>
+<dd>Ctrl+\ [JFont2][ntt:]，NTTjTeXの日本語フォントを，アスキーのpTeXのもので置き換える</dd>
+<dt><b>固定サイズフォントのスケーリング</b>(Off)</dt>
+<dd>Ctrl+\ [Resolution][varf:]，必要ならPKフォントなどに用いられる（ex. プレゼンテーションモードでのFit/Full）</dd>
+<dt><b>フォントIDチェック</b>(Off)</dt>
+<dd>Ctrl+\ [Font2][CheckFontID]，DVIファイルと使用中のTeXとの間でのチェック</dd>
+<dt><b>jfmによるベースライン調整</b>(On)</dt>
+<dd>Ctrl+\ [JFont2][Jbt:]，jfm の depth/height に応じた和文フォントのベースラインを調整</dd>
+<dt><b>jfmによる位置補正</b>(Off)</dt>
+<dd>Ctrl+\ [JFont2][Jgt:]，jfmのglueとplusの値に基づいた和文フォントの（横）位置補正</dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="OnOff2"><li>その他の特殊機能のOn/Off</font></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+デフォルトでのOn/Offを示す．
+<dl>
+<dt><b>DVIファイルの更新チェック</b>(On)</dt>
+<dd>Ctrl+\ [System][Auto renew]，DVIファイルの更新に合わせた画面更新（dviout のWindowsにフォーカスが変わったときにチェック）</dd>
+<dt><b>DVIファイル更新の常時チェック</b>(Off)</dt>
+<dd>Alt+OW (Continuous ReneW)，0.5秒毎にDVIファイルの更新をチェックしてプレビュー画面を直す</dd>
+<dt><b>グラフィック</b>(On)</dt>
+<dd>Alt+DG (Display-Graphics)， Off のときは，取り込み画像の枠を表示</dd>
+<dt><b>カラー文字・背景</b>(On)</dt>
+<dd>Alt+DC (Display-Color)，Off のときは，カラー文字は黒に，背景色の指定は無視</dd>
+<dt><b>tpic specials</b>(On)</dt>
+<dd>Ctrl+\ [Graphic][tpic specials]</dd>
+<dt><b>pTeXの縦書きでのtpic specialsのdvips互換モード</b>(Off)</dt>
+<dd>Ctrl+\ [Graphic][tpic specials][tate]縦書きの時，dvipsと同様 tpic specials の座標を90度回転する</dd>
+<dt><b>dviout specials</b>(On)</dt>
+<dd>Alt+OV (Option-dViout)，デフォルトを変えるのは<a href="#KeepOnOff">ここ</a></dd>
+<dt><b>source specials</b>(On)</dt>
+<dd><img SRC="hyper.bmp" WIDTH="16" HEIGHT="15"> or Alt+OC (Option-sourCe)，
+デフォルトを変えるのは<a href="#KeepOnOff">ここ</a></dd>
+<dt><b>HyperTeX</b>(On)</dt>
+<dd><img SRC="hyper.bmp" WIDTH="16" HEIGHT="15"> or Alt+JJ (Jump-hyperJump) or Ctrl+\ [HyperTeX][Disable Hyperjump]，デフォルトを変えるのは<a href="#KeepOnOff">ここ</a></dd>
+<dt><b>HyperTeXの外部への直接ジャンプ</b>(Off)</dt>
+<dd>Ctrl+\ [HyperTeX][Direct outerjump]，外部へのジャンプも実行ファイルなどを除いてダイアログ非表示</dd>
+<dt><b>HyperTeXのシームレス・ジャンプ</b>(Off)</dt>
+<dd>Alt+NJ (preseN+Jump)，全てのジャンプにダイアログを出さない<br>
+- プレゼンテーションモードなどで使用． セキュリティーに注意． デフォルトで On は不可</dd>
+<dt><b>color specialsのページ独立性のチェック</b>(On)</dt>
+<dd>Alt+OK (ChecK color specials)，ページ独立性が壊れているとき，DVIファイルを書き直して修復できる</dd>
+<dt><b>アニメーション・カーソル</b>(On)</dt>
+<dd>Alt+VM (View-aniMation)，HyperTeX/source specials でのジャンプ時</dd>
+<dt><b>ベースライン表示</b>(Off)</dt>
+<dd>Ctrl+\ [System][draw baseline]，組版チェック用の特殊機能</dd>
+<dt><b>文字の代わりに箱で組版</b>(Off)</dt>
+<dd>Ctrl+\ [System][draw box]，組版チェック用の特殊機能</dd>
+<dt><b>取り込み画像の枠表示</b>(Off)</dt>
+<dd>Alt+\ [Graphic][gbox:]</dd>
+<dt><b>取り込み画像の上書き</b>(Off)</dt>
+<dd>Alt+\ [Graphic][gow:]，Off では重ね塗り（色が混ざる），On では下側を消して描く</dd>
+<dt><b>取り込み画像のクリップ</b>(On)</dt>
+<dd>Alt+\ [Graphic][gclip:]，BoundingBox で画像を切りつめる</dd>
+<dt><b>取り込み画像をエディターで編集</b>(On)</dt>
+<dd>Alt+JA (Jump grAphic)，設定は Alt+\ [Common][gsrc:]</dd>
+<dt><b>表示と同じ解像度の画像生成</b>(On)</dt>
+<dd>Alt+\ [Graphic][gfit:]，Onの方が表示は綺麗で高速，ただし，ルーペの画像の質が落ちる</dd>
+<dt><dt><b>画像サイズは mag 込み</b>(Off)</dt>
+<dd>Alt+\ [Graphic][size includes mag]，Graphics packagesにより仕様が異なる</dd>
+<dt><b>画面表示制御機能（dviout special `+&lt;levels&gt from Ver.3.17.4）</b>(On)</dt>
+<dd>Alt+DK（Kill stop level)で変更，Ctrl+U で有効化，Ctrl+V で無効化, Ctrl+N で再表示を実行</dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="Info"><li>関連情報の表示・保存・印刷</font></a>
+<dl>
+<dt><b>情報の保存・印刷</b></dt>
+<dd>情報を表示し，それを[Copy]やマウス操作（範囲指定，右クリック）でコピーしてエディターに貼り付けてから保存・印刷</dd>
+<dt><b>情報表示のウインドウ</b></dt>
+<dd>Alt+V I L/U/A でウインドウの大きさを調整可． 情報表示ウインドウには編集機能あり</dd>
+<dt><b>dvioutのバージョン</b></dt>
+<dd>Ctrl+Q or Alt+HS (Help-System)</dd>
+<dt><b>TeXやGhostscriptのバージョン</b></dt>
+<dd>Ctrl+Q or Alt+HS (Help-System)</dd>
+<dt><b>カーソル位置の文字情報</b><dt>
+<dd>Ctrl+Shift で左ボタン</dd>
+<dt><b>カーソル位置の取り込み画像情報</b><dt>
+<dd>Ctrl+Shift で左ボタン</dd>
+<dt><b>使用フォントの情報</b><dt>
+<dd>Alt+HIF (Help-Info-Font)</dd>
+<dt><b>フォントマップ情報</b><dt>
+<dd>Alt+HIA (Help-Info-fontmAp)</dd>
+<dt><b>キー機能一覧</b><dt>
+<dd>Alt+HIK (Help-Info-Key)</dd>
+<dt><b>パラメータの一覧</b><dt>
+<dd>Alt+HIP (Option-Info-Parameters)</dd>
+<dt><b>パラメータの設定値一覧</b><dt>
+<dd>
+・ Alt+OD (Option-nonDefault) : デフォルトと異なるもの
+<br>
+・ Alt+OA (Option-All) : 全てのパラメータ
+<br>
+両者とも Alt+OR (Option-Read) で読み込み可能な形式</dd>
+<dt><b>パラメータの設定値の保存と再利用</b></dt>
+<dd>Alt+OP [Save]　（Dec. 11, 2002版以降）</dd>
+</dl>
+</li></p>
+
+<p><font color="#800000"><a name="Special"><li>specials に関連した情報</font></a><dl>
+<dt><b>URL of HyperTeX</b></dt>
+<dd>Alt+HIL (Help-Info-urL): 表示頁の URL のリスト</dd>
+<dt><b>Anchors of HyperTeX</b></dt>
+<dd>Alt+HIC (Help-Info-anChor): 表示頁のアンカーとその位置のリスト（画面上は緑十字）</dd>
+<dt><b>source specials</b></dt>
+<dd>Alt+HIR (Help-Info-souRce): 表示頁のsource specials とその位置のリスト（画面上は赤十字）</dd>
+<dt><b>埋め込みフォント</b></dt>
+<dd>Alt+HIM (Help-Info-eMbed): DVIファイルに埋め込まれたフォントのリスト</dd>
+<dt><b>埋め込まれたファイルのリスト</b></dt>
+<dd>Alt+HIB (Help-Info-Buffer): DVIファイルに埋め込まれたフォントや画像などのリスト<br>
+そのうち dviout.etf が埋め込まれたフォント</dd>
+<dt><b>埋め込みフォントの詳細情報</b></dt>
+<dd>附属のプログラム etfdump を使う（eg. <font color="blue">etfdump &nbsp;test_b5x.dvi</font> などとする）</dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="presen"><li>プレゼンテーション・モード</a></font>
+（<a href="present.html">詳細</a>）<dl>
+<dt>キーに登録された以下の機能は，Dec. 14, 2002以降の版に基づいています．</dt>
+<dt><b>簡易的な入り方(標準的)</b></dt>
+<dd><b>Shift+F6</b>（Alt+NE [Esc] 6 と同等），紙面の横幅は画面横幅と同じに（紙面が画面より縦長の時）<br>
+- 縦（または横）方向のスクロールのみで，紙面の全部分が表示可</dd>
+<dt><b>プレゼンテーション・モードから抜け出る</b></dt>
+<dd>・ <b>Shift+F2</b>: 通常のモードの元の状態へ<br>
+    ・ Alt+X or Alt+F4: dviout から抜け出る<br>
+    ・ Ctrl+L で表示されるリストから選ぶ</dd>
+<dt><b>紙面有効部分全体が画面に入る形のプレゼンテーション・モードに入る</b></dt>
+<dd><b>Shift+F5</b>（Alt+NE [Esc] 5 と同等），紙面の縦横比が画面の縦横比に近い場合に適す</dd>
+<dt><b>縦連結連続スクロールのプレゼンテーション・モードに入る</b></dt>
+<dd><b>Shift+F1</b>（Alt+NE Alt+DY [Esc] 6 と同等），文書全体が仮想的に1ページのようにみなされる</dd>
+<dt><b>メニューから選んでプレゼンテーション・モードに入る</b></dt>
+<dd>Ctrl+L のリストにあるプロトタイプを編集して使う</dd>
+<dt><b>画面の白黒反転（黒紙面に白文字をデフォルトにする）でのプレゼンテーション</b></dt>
+<dd>Alt+NY2 (preseN-tYpe-2 black screen) の後，プレゼンテーション・モードへ移行</dd>
+<dt><b>ヘッダや頁番号をカットしてプレゼンテーションする</b></dt>
+<dd>Ctrl+[ のあと，Shift+左／右クリックでカット部分を外して領域指定し Alt+DGC で切り出したあと，上記の方法などでプレゼンテーシン・モードへ</dd>
+<dt><b>ページ移動を画面のボタンクリックで</b></dt>
+<dd>（右下にカーソルを移動すると現れる）move のプレゼンテーション・メニューを使う（縦連結のときは2ページ単位の移動）<br>
+-  現れないときは， <b>Shift+F12</b>を押す． 必要に応じて [-] ボタンを押す<br>
+<dd>
+<dt><b>線画機能をメニュー付きで</b></dt>
+<dd><b>Shift+F12</b> または [+] による</dd>
+<dt><b>プレゼンテーション・モード起動時にメニューを有効／無効にする</b></dt>
+<dd>Alt+NM (preseN-Menu)</dd>
+<dt><b>プレゼンテーション・モード起動時のメニューの形状などを設定する</b></dt>
+<dd><a href="#KeepOnOff">現在のプレゼンテーションの設定などをデフォルトにする</a>を参照</dd>
+<dt><b>メニューダイアログを消す</b><dt>
+<dd>・ システムバーの[X] ボタンを押す<br>
+    ・ システムバーの右クリックメニューから<br>
+    ・ システムバーの左クリックの後，Alt+F4<br>
+    -  メニューの再起動では，位置と形状が保たれて使われる（dviout 終了まで）
+<dt><b>表示部分の位置の微調整</b></dt>
+<dd>Ctrl+Shift+矢印キー<dd>
+<dt><b>カバーシートを動かす</b><dt>
+<dd>・ 左ボタンを押し下げて両矢印マウスカーソルにして，マウスを動かす<br>
+&nbsp;&nbsp;&nbsp;- 手の形のカーソルになって両矢印カーソルにならなければ，さらに右クリック<br>
+ ・ [Space]で次のpauseまで，または次ページへ</dd>
+<dt><b>サムネイル（16頁同時縮小表示）</b></dt>
+<dd>9 のキー． 16頁同時スクロール可，右クリックでジャンプ</dd>
+<dt><b>紙面の表示，非表示（白紙へ）の切り替え</b><dt>
+<dd>F5: 表示，F6: 非表示（カバーシートで覆われた状態なので，マウスや[Space]で順に表示可）</dd>
+<dt><b>画面表示制御（dviout special `+&lt;levels&gt; from Ver.3.17.4）の On/Off</b><dt>
+<dd>
+・ Ctrl+U：　以降有効に<br>
+・ Ctrl+V：　以降無効に<br>
+・ Ctrl+N：　変更後などの再表示
+</dd>
+
+<dt><b>マウスボタンクリックを [Space] の機能に置き換える</b></dt>
+<dd>Alt+NBL（左ボタン），Alt+NBR（右ボタン）</dd>
+<dt><b>プレゼンテーション・モード中でのキー操作一覧</b><dt>
+<dd>プレゼンテーション・モードの中で <b>Shift+F1</b></dd>
+<dt><b><a name="KeepOnOff">現在のプレゼンテーションの設定などをデフォルトにする</b></dt></a>
+<dd>Alt+NS (preseN-Save)<br>
+ - preseN-Presentation switch/Presentation Menu/Cover sheet/cover type/Use Mouse Buttonの各設定/メニューの形状<br>
+ - HyperTeX/dviout/source specials と埋め込みフォントの使用許可のOn/Off状態もデフォルトに設定される<dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="search"><li>文字列検索</a></font> <img src="search.bmp" WIDTH="15" HEIGHT="15"><dl>
+<dt><b>検索文字列を指定して検索</b></dt>
+<dd>・ <img src="search.bmp" WIDTH="16" HEIGHT="15"> or Ctrl+F のダイアログで文字列を入力して [Enter] または [次を検索]<br>
+    ・ ツールバーのエディットボックスに入力して [Enter]<br>
+    ・ ツールバーのエディットボックス右の矢印を押して，リストから選択／[Enter]／左ダブルクリック<br>
+    -  和文文字列はアスキー日本語TeXのみサポート
+</dd>
+<dt><b>前回と同じ文字列（ツールバーのエディットボックスに表示されている）を検索</b></dt>
+<dd><img src="serd.bmp" WIDTH="15" HEIGHT="15"> or F3（後方検索），<img src="seru.bmp" WIDTH="15" HEIGHT="15"> or Shift+F3（前方検索），または Ctrl+F から</dd>
+<dt><b>単語単位で検索</b></dt>
+<dd>Ctrl+F で設定，欧文文字列に対してのみ有効，設定しておくと検索がより正確</dd>
+<dt><b>大文字と小文字を区別する</b></dt>
+<dd>Ctrl+F で設定</dd>
+<dt><b>検索された文字列の明示方法</b></dt>
+<dd>Ctrl+\ [Search] で設定</dd>
+<dt><b>検索された文字列の位置にカーソルを移動</b></dt>
+<dd>Ctrl+\ [Search][points targets]</dd>
+<dt><b>同じページの検索された文字列を全て明示</b><dt>
+<dd>Ctrl+\ [Search][All targets]</dd>
+<dt><b>より正確な検索</b></dt>
+<dd>・ 長めの文字列（複数の単語が含まれていてもよい）を，単語単位で検索<br>
+    ・ Ctrl+\ [Search][sFont:] で，記号などの特殊なフォントを検索対象から除外する</dd>
+<dt><b>HyperTeXを使った検索</b></dt>
+<dd>アンカーの文字列を，最初に空白一つ空けて <font color="blue">#</font> をつけて指定する</dd>
+<dt><b>TeXのソースの行番号で検索</b></dt>
+<dd>source specials が設定してあるときに有効で，
+「空白，行番号，空白，ソースファイル名」を指定<br>
+-  たとえば，<font color="blue">_235_foo.tex</font> は foo.tex の 235行目
+（ <font color="blue">_</font> は，空白を表す）<br>
+-  ファイル名の指定が不要なときは，ファイル名を <font color="blue">*</font> とする
+（たとえば，<font color="blue">_235_*</font> ）</dd>
+<dt><b>TeXのソースの文字列で検索</b></dt>
+<dd>source specials が設定してあるときに有効で，
+「空白，行番号/文字列，空白，ソースファイル名」を指定<br>
+たとえば，<font color="blue">_235/This_is_foo1.tex</font> は（ <font color="blue">_</font> は，空白を表す），foo1.tex の235行目の文字列 This is の検索指定</dd>
+<dt><b>ページで検索</b></dt>
+<dd>「空白，ページ番号」を（ <font color="blue">_23</font> のように）指定（ <font color="blue">_</font> は，空白を表す）</dd>
+<dt><a name="srcurl"><b>URLを検索</b></dt></a>
+<dd>「空白，=<font "blue">URL</font>」を（ <font color="blue">_=http://akagi.ms.u-tokyo.ac.jp</font> のように）<a href="#search">検索文字列として指定</a>（ <font color="blue">_</font> は，空白を表す）</dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="srcspc"><li>エディターとの間の相互ジャンプ -- source specials（<a href="tex_dvioutw.html#source">詳細</a>）</font><dl>
+エディタ側およびdvioutのパラメータ -src: が source specials を扱えるように設定してあり，source specials のオプションをつけてDVIファイルが作成されているとします．<br>
+&nbsp;&nbsp;
+-  秀丸エディタやWinShellの場合は，Alt+OP で選択して設定可．<br>
+&nbsp;&nbsp;
+-  DVIファイル作成時に，例えば以下のように　-src オプションをつける（最終原稿では，はずす）．<br>
+&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+<font color="blue">platex &nbsp; -src &nbsp foo.tex</font>
+<dt><b>文字等の部分を左ダブルクリック</b></dt>
+<dd>エディターにジャンプ（矢印マウスカーソルでないとうまくいかない場合がある． 
+必要なら，Ctrl+\ でそれに変更可）</dd>
+<dt><b>取り込み画像の部分を左ダブルクリック</b></dt>
+<dd>画像エディターにジャンプ（Ctrl+\ [Common][-gsrc:]で設定した画像ファイルの拡張子とエディターとの対応に基づく）．
+<dt><b>文字等の部分をShift+左クリック</b><dt>
+<dd>Direct Jump to Editor (Alt+JC で変更可）のとき，直接エディターにジャンプ． そうでないとき，さらに [-&gt;src] ボタンでジャンプ</dd>
+<dt><b>Ctrl+左ボタン押し下げ+右クリック</b></dt>
+<dd>エディターにジャンプ． ただし，正確性を若干欠く． 多段組文書には不適</dd>
+<dt><b>エディターからのジャンプ</b></dt>
+<dd>- コマンドライン型の呼び出しより，DDEを使う方が高速<br>
+    - その行の単語の情報もdvioutに渡すと，より正確になる（秀丸の例: special\srcspecial.mac）</dd>
+<dt><b>エディターからのジャンプ先の位置を目立たせる</b><dt>
+<dd>アニメーション・カーソルを使う（Alt+VM で切替）</dd>
+<dt><b>エディターを呼び出し後，dvioutをデスクトップのタスクバーにアイコン化する</b></dt>
+<dd>Ctrl+\ [Common][-src:] の設定の先頭に <font color="blue">&lt;</font> を付加する</dd>
+<dt><b>source specials をサポートしていない TeX</b><ct>
+<dd>附属のプログラム srctex.exe で，source specials に対応可能</dd>
+<dt><b>表示中のページのジャンプ先のマーク位置の情報</b></dt>
+<dd>Alt+HIR (Help-Info-souRce) : source specials とその位置のリスト（画面上は赤十字）</dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="hypertex"><li>ディスク内やインタネット上のリソースへのジャンプ -- HyperTeX</a></font><dl>
+<dt><b>HyperTeXのジャンプ前にジャンプ先を知る</b></dt>
+<dd>・ カーソルをホットスポットの上に持っていくと，下部ステータスバーに表示<br>
+・ Ctrl を押し下げて，左クリック<br>
+・ 表示している文書外へのジャンプのときは，Ctrl+\ [HyperTeX][Direct outerjump] でコントロール<br>
+・ Alt+HIL (Help-Info-urL) で，表示頁の URL のリストが得られる</dd>
+<dt><b>HyperTeXにおいて，ダイアログなしに左クリックで直接ジャンプ</b></dt>
+<dd>・ 表示している文書外へのジャンプは，Ctrl+\ [HyperTeX][Direct outerjump] でコントロール<br>
+・ 上記でも実行ファイルへのジャンプなどではセキュリティー上ダイアログが出る．
+（プレゼンションなどで）安全なことが分かっていれば， Alt+NJ (preseN-Jump)</dd>
+<dt><b>HyperTeXによるDVIファイルの中へのジャンプで，ジャンプ先の位置を見易く</b></dt>
+<dd>Alt+VM (View-aniMation)，アニメーション・カーソル</dd>
+<dt><b>ホットスポットの表示の仕方を変える</b></dt>
+<dd>Ctrl+\ [HyperTeX]，デフォルトは青字+青アンダライン<br>
+-  隠すことも可能（eg. 黒字にする）</dd>
+<dt><b>（HyperTeXでない）文書中に書かれた画像ファイルやURLへジャンプ</b></dt>
+<dd>Shift+左クリックで URL を得て（必要なら修正して or 書き込んで），[Execute]</dd>
+<dt><b>URLを指定して移動</b></dt>
+<dd><a href="#srcurl">検索機能を利用</a></dd>
+<dt><b>表示中のページのHyperTeXのホットスポットの情報</b></dt>
+<dd>Alt+HIL (Help-Info-urL): 表示頁の URL のリスト</dd>
+<dt><b>表示中のページのHyperTeXの飛び先になっている場所の情報</b></dt>
+<dd>Alt+HIC (Help-Info-anChor): 表示頁のアンカーとその位置のリスト（画面上は緑十字）</dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="input"><li>エディタなどへの入力支援 -- HyperTeX + dviout specials</a></font><dl>
+Help → TeX Help の例のように HyperTeX とクリップボードなどへの文字入力を行う dviout special `in や `input を組み合わせると，エディタへの入力支援ができます．
+この場合
+<dt><b>ホットスポットを左クリック</b>（Ver.3.17以降）</dt>
+<dd>定義された文字列がクリップボードにコピーされる．</dd>
+<dt><b>ALTを押したまま，ホットスポットを左クリック</b>（Ver.3.17.3以降）</dt>
+<dd>定義された文字列がクリップボードに追加される．</dd>
+<dt><b>CTRLを押したまま，ホットスポットを左クリック</b>（Ver.3.17.3以降）</dt>
+<dd>・ 初回は，5秒以内にエディタ画面をアクティブにすると，そこにコピーされる．<br>
+・ 2回目以降は，前回と同じエディタ画面がアクティブになって，自動的にコピーされる．<br>
+・ CTRLの他ALTも押した状態での左クリック，あるいは前回のエディタを終了した後での左クリックで，コピーするエディタが再定義できる．</dd>
+<dt><b>CTRLの機能を逆にする</b>（Ver.3.17.4以降）</dt>
+<dd>Alt+OE（Option-Clipboard+Editor) により
+「マウスの左ボタンクリックで，CTLキーを押さないとエディターにもコピーされ，CTLキーを押すとエディターにはコピーされない」
+と機能を逆にすることができる．
+</dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="print"><li>印刷</a></font> <img SRC="print.bmp" WIDTH="16" HEIGHT="15"><dl>
+<dt><b>いくつかのページ番号を直接指定して印刷</b><dt>
+<dd>Ctrl+PO で，ページ番号（先頭からの通しページ数）を入力して印刷する<br>
+-  例えば，<font color="blue"> 3 8-12 40- </font> は， 3ページ，8から12ページ，および 40ページから最後まで，を意味する</dd>
+<dt><b>プレビュー画面でページ範囲を指定して印刷</b><dt>
+<dd>開始ページで [M] (Mark) を押し，終了ページに移動して [R] (Range) を押して，Ctrl+PS としてから印刷<br>
+-  ページ範囲を指定していなければ，（必要なら，さらに [S] を押すと）表示しているページのみの印刷</dd>
+<dt><b>ページの逆順に印刷</b><dt>
+<dd>Ctrl+PR，で逆順印刷となる</dd>
+<dt><b>偶数ページ，または，奇数ページのみの印刷</b><dt>
+<dd>Ctrl+P E (Even)，または，O (Odd)</dd>
+<dt><b>拡大・縮小印刷</b><dt>
+<dd>Ctrl+P で，下部の <font color="blue">1000</font> の値を変更することにより，0.1% 単位で調整可能</dd>
+<dt><b>A4サイズの書類をA5に縮小し，A4用紙に袋綴じ印刷する</b><dt>
+<dd>Ctrl+P で [Unite 2 pages as] （表示されない場合は [+] を押す）と
+ [A4-&gt;A5] をチェックし，[Setup] を押して用紙を「A4 で横」に設定して印刷する<br>
+ -  PKフォントを避けてTrueTypeフォントを使うとよい</dd>
+<dt><b>異なるページを重ねて印刷</b><dt>
+<dd>Ctrl+P [Unite 2 pages as] で，その右の矢印を押して W: を 0.00cmx2 として印刷</dd>
+<dt><b>製本印刷（紙面を半分に折って重ねたときにページ順になる）</b></dt>
+<dd>Ctrl+PO で製本印刷を選び，B5版ページサイズでB4版用紙を使う場合には，[Unite 2 pages as] として [Setup] を押して用紙を「B4で横」に設定して印刷</dd>
+<dt><b>中綴じ印刷（紙面を重ねてから半分に折ったときにページ順になる）</b></dt>
+<dd>Ctrl+PO で中綴じ印刷を選び，B5版ページサイズでB4版用紙を使う場合には，[Unite 2 pages as] として [Setup] を押して用紙を「B4で横」に設定して印刷</dd>
+<dt><b>巨大文字を印刷する</b></dt>
+<dd>dviprtのLIPSIII により，数十センチ四方の文字一つを複数の紙に分割して印刷した例あり</dd>
+<dt><b>表示と印刷とで解像度を変える</b></dt>
+<dd>Alt+OI の最初のシートでの設定によるのが最も簡単</dd>
+<dt><b>PostScriptプリンタでの印刷</b></dt>
+<dd>Windowsの<a href="cmode.html#PSprinter">PostScriptプリンタのドライバのバグ等のため</a>，デフォルト設定でなく Ctrl+\ [Graphic] [automode(rep)] の指定が勧められます</dd>
+</dl></li>
+
+<p><font color="#800000"><a name="PDF"><li>PDFファイルに変換する</a></font>
+<dl>
+<dt><b>Acrobat Distillerプリンタ（など）へ，dvioutから出力する</b></dt>
+<dd>Alt+FP [Setup] で，Acrobat Distillerを選択して印刷<br>
+-  PKフォントは，拡大により字が汚くなるので，TrueTypeフォントを用いるのがよい．<br>
+-  dvioutで全てのページを表示後，Alt+HIF のフォント情報で，右端に PK と表示されるのが PK フォント，WinAPI と表示されるのがTrueTypeフォント（dviout のWindowの幅を広げると見易い）．
+前者が無いようにするのがよい．<br>
+-  欧文のCM/AMS TrueTypeフォントは，この <a href="ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/font/bakoma/Fixbkm.msi">FixBKM.msi</a> を実行すればインストールされる<br>
+-  添付の winttf.zip or winttf.lzh を展開してTeXのシステムにインストールすれば，Windowsの様々な（和文／欧文）TrueTypeフォントを使うことができる<br>
+-  和文で各種書体を使う場合に適す<br>
+-  WMF/EMF 以外の取り込み画像は，拡大／縮小に適さない<br>
+-  HyperTeX 非対応<br>
+-  Acrobat Distiller は，Adobe社の製品です． その設定など，<a href="http://oku.edu.mie-u.ac.jp/~okumura/texfaq/pdf.html">ここ</a>を参照<br>
+-  Acrobat Distiller の他に，無料の<a href="http://xelo.jp/xelopdf/">クセロPDF</a>などを利用することも可能です<br>
+</dd>
+<dt><b>dvipdfm(x)を使う</b></dt>
+<dd>Ver.3.15.1 以降は，<img src="niko.bmp" WIDTH="16" HEIGHT="15"> を押すか，印刷ダイアログに移って dviprt のチェックをして[Ok]を押せばよい<br>
+（Ver.3.15.1より前では，Alt+OP で，[dvipdfm によってPDFファイルに変換] を選択して，[Ok][Ok]で設定し，dviprt にチェックがついた状態で印刷）<br>
+-  上記は，用紙サイズ，位置補正，ページ抽出などに対応<br>
+-  必要に応じて Alt+OP から [Edit] を選んでパラメータファイルを編集する<br>
+-  EPS画像の他，JPEG/PNG画像を，以下のようにして取り込み可能<br>
+</p><p>
+&nbsp;&nbsp;&nbsp;&nbsp;
+   \usepackage[dvipdfm]{graphicx}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+   ...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+   \includegraphics[width=8cm]{foo.jpg}</p><p>
+ただし<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+   ebb &nbsp;foo.jpg<br>
+または<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+   bmc &nbsp;foo.jpg<br>
+として，拡張子が <font color="blue">.bb</font> のファイル foo.bb を作成しておく必要がある<br>
+-  HyperTeX 対応<br>
+-  Alt+OP で [印刷ダイアログでdviprtのチェックにより，dvipdfmでPDFを生成できるようにする] を選んで設定すると，以降は印刷ボタンにより簡単にPDF変換が行える．dviprt 機能による印刷をほとんど用いない場合に推奨．<br>
+-  Alt+OP で [dvipdfm+hyperref によって PDF ファイルに変換（日本語しおりつき）] を選ぶと，TeX のソースファイルが</p><p>
+&nbsp;&nbsp;&nbsp;&nbsp;
+  \usepackage[dvipdfm]{color}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+  \usepackage[dvipdfm,bookmarks=true,bookmarksnumbered=true,colorlinks=true,bookmarkstype=toc]{hyperref}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+...</p><p>
+などとしてあったとき，日本語しおりつきの PDF ファイルが作成される．具体的には</p><p>
+ &nbsp;&nbsp;&nbsp;&nbsp;platex&nbsp;foo<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;platex&nbsp;foo<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;mendex&nbsp;foo<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;out2uni&nbsp;foo<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;platex&nbsp;foo<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;dvipdfmx&nbsp;foo</p><p>
+などとする．<br>
+-  dvipdfmx は，和文フォントも埋め込み可能（埋め込めば，ファイルサイズが当然増える）<br>
+ たとえば，ヒラギノ明朝ProW3.otf とヒラギノ角ゴチックProW6.otf を用いる場合<br>
+ <tt>%TEXMF%\fonts\opentype </tt>にそれぞれ，<tt>HiraMinProW3.otf，HiraKakuProW6.otf </tt>という名前でコピー（またはリンク）し，<tt>%TEXMF%\fonts\map\dvipdfm\base\hira.map </tt> というファイルを作成して，以下の内容を書きます．</p><p>
+ <tt>
+ &nbsp;&nbsp;&nbsp;&nbsp;rml&nbsp;&nbsp;H&nbsp;HiraMinProW3.otf<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;gbm&nbsp;&nbsp;H&nbsp;HiraKakuProW6.otf<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;rmlv&nbsp;V&nbsp;HiraMinProW3.otf<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;gbmv&nbsp;V&nbsp;HiraKakuProW6.otf<br>
+ </tt></p><p>
+dvipdfmx 起動時に <tt>-f hira.map</tt> というオプションをつければ OK です．<br>
+-  dvipdfm(x) は，フリーソフトです（古いものは，日本語非対応．dvipdfmx の新しいものがベター）
+</dd>
+<dt><b>dvipsk と Acrobat Distiller を使う</b></dt>
+<dd>Alt+OP で，[transform to PDF by dvipsk and Distiller] を選択して，[Ok][Ok]で設定し，dviprt にチェックがついた状態で印刷<br>
+-  Alt+OP から [Edit] を選んで，パラメータファイルを，環境に合わせて修正しておく<br>
+-  画像取り込みは EPS 形式に限るので，他の形式の場合は変換しておく<br>
+-  HyperTeX 対応<br>
+-  取り込み EPS 画像ファイルのサポートについては，最も信頼性が高い<br>
+-  Acrobat Distiller は，Adobe社の製品です</dd>
+<dt><b>dvipskとps2pdf(Ghostscript)を使う</b></dt>
+<dd>
+-  日本語を扱う場合などは特に新しい版のGhostscriptを使用してください<br>
+-  dvips 用の直接のPostScriptコードを記述したspecialsを含むDVIファイルは，dvipdfmx では正常な変換が期待できませんが，この変換方法を使うことができます
+</dd>
+<dt><b>矩形領域を指定してPDF画像ファイルに変換する</b></dt>
+<dd>Ctrl+[ の後，Shift を押して左／右クリックで切り出す範囲を定めて，Atl+F [Save as Image][File...] で，拡張子 .pdf のファイル名によって画像を作成する．<br>
+-  dviout Ver.3.16, dvipdfmx 20040204以降が必要
+<dd></dl></li>
+
+<p><font color="#800000"><a name="Embed"><li>画像やフォントのDVIファイルへの埋め込み</a></font><dl>
+&nbsp;&nbsp;
+dvioutは， 取り込み画像や使用文字のデータをDVIファイルに埋め込み，それらがない環境でも表示／印刷を可能にします．<br>
+&nbsp;&nbsp;
+dviout 以外の DVIware では，埋め込みが無視され，通常のDVIファイルとして扱われます．
+<dt><b>取り込み画像を埋め込む</b><dt>
+<dd>Alt+FI で [Image File] にチェックをつけて [Ok]<br>
+埋め込み予定ファイル一覧が表示されるので，必要なら変更後 [Ok]</dd>
+<dt><b>欧文TrueTypeフォントを埋め込む</b><dt>
+<dd>Alt+OP で，[欧文TrueTypeフォントを内部で展開] を選ぶ<br>
+Alt+FI で [TrueType Font]と[Font Map/tfm/jfm]と[Virtual Font]にチェックをつけて[Ok]
+<br>
+埋め込み予定フォント一覧が表示されるので，必要なら変更後 [Ok]</dd>
+<dt><b>和文フォントを埋め込む</b><dt>
+<dd>Alt+OP で，[ＭＳ 明朝とＭＳ ゴシックを内部で展開] を選ぶ．<br>
+Alt+FI で [TrueType Font(Japanese)]と[Font Map/tfm/jfm]と[Virtual Font]にチェックをつけて [Ok]<br>
+埋め込み予定フォント一覧が表示されるので，必要なら変更後 [Ok]<br>
+-  非日本語Windowsで，和文フォントなしに和文のDVIファイルが表示可能になる<br>
+</dd>
+<dt><b>画像およびフォントなどを埋め込む</b><dt>
+<dd>上記と同様にできる． TrueTypeフォントは，WinAPI でなく，dviout の内部展開で表示するようにしておく<br>
+-  PK フォントも，複数の解像度で埋め込み可（表示／印刷では， 最適のものからスケーリングされる）<br>
+-  test_b5x.dvi （初期化ファイル，BaKoMaフォントとGTフォントを埋め込んである）や sample\sample.dvi が例</dd>
+<dt><b>初期化パラメータの埋め込み</b></dt>
+<dd>Alt+OP，[Ok] の次のダイアルログで，[initial.par] にチェックをつけ，下部のエディット・ボックスに dviout specials `initial のパラメータの形式で書き込んで [Ok] を押す<br>
+-  initial.par というファイル名の初期化のパラメータファイルを以下のように埋め込んでもよい<br>
+&nbsp;&nbsp;&nbsp;
+dviadd &nbsp;initial.par &nbsp;foo.dvi</dd>
+<dt><b>メモの埋め込み</b></dt>
+<dd>初期化パラメータの書き込みで，各行先頭 <font color="blue">#</font> をつけてコメントが書ける<br>
+-  <font color="blue">#rem</font> という行と <font color="blue">#end</font> という行の間に，メモを書いてもよい</dd>
+<dt><b>埋め込まれたメモの表示</b></dt>
+<dd>Alt+HIN，（実際には，埋め込まれた initial.par の中身の表示）</dd>
+<dt><b>PSfragの補助ファイルの埋め込み</b></dt>
+<dd>拡張子が <font color="blue">.pfi</font> の補助ファイルが作成されるので，
+<a href="tex_dvioutw.html#PSfrag">それを埋め込んでおく</a>と良い</dd>
+<dt><b>埋め込まれたファイル等の詳細情報</b><dt>
+<dd><a href="#Special">ここ</a>を参照</dd>
+</dl></p>
+<p><font color="#800000"><a name="prop"><li>DVIOUTのプロパティ</a></font> <img SRC="option.bmp" WIDTH="16" HEIGHT="15"><dl>
+Alt+OS (Option-Set) でdviout のパラメータの確認・設定のためのプロパティーシートが表示されます．
+<dt><b>各シートの意味を知るには</b></dt>
+<dd>そのシートに移って [Help] を押す</dd>
+<dt><b>個々の項目やボタンの意味を知るには</b></dt>
+<dd>[<b>?</b>] ボタンを左クリック後，該当個所で再度左クリック</dd>
+<dt><b>変更を現在のdvioutに適用するには</b></dt>
+<dd>[適用] または [Ok] を押す（後者は， DVIOUTのプロパティを抜け出す）</dd>
+<dt><b>変更を次回以降のdvioutのデフォルト設定にするには</b></dt>
+<dd>[Save] ボタンを押す</dd>
+<dt><b>特定のパラメータの設定値をdviout起動時に読み込まないようにするには</b></dt>
+<dd>[REGISTRY] のシートで，読み込まないパラメータを選択して [Ignore] で <b>+</b> を外して [Save] を押す</dd>
+</dl></li>
+</p><p>
+<li><font color="#800000"><a name="key">Key機能表（デフォルト）</a></font><br>
+右側の [&nbsp;&nbsp;] で囲んだ２文字は， そのキー機能を表すシンボル<br>
+そのシンボルの右側は， 変更可能なキー機能定義</li>
+<pre>
+<b>機能</b>                    : <b>対応するキー</b>
+次のページ              : PgDn, Alt+J N [JN],  N,  n
+        +2              : Alt+JO6 [J6]
+        +5              : Shift+SP, Shift+PgDn, Alt+JO7 [J7]
+        +10             : Ctrl+SP, Ctrl+PgDn, Alt+JO8 [J8]
+        +20             : Alt+JO9 [J9]
+        +50             : Ctrl+Shift+SP, Ctrl+Shift+PgDn, Alt+JO0 [J0]
+前のページ              : PgUp, Alt+J P [JP],  P,  p
+        -2              : Alt+JO5 [J5]
+        -5              : Shift+BS, Shift+PgUp, Alt+JO4 [J4]
+        -10             : Ctrl+BS, Ctrl+PgUp, Alt+JO3 [J3]
+        -20             : Alt+JO2 [J2]
+        -50             : Ctrl+Shift+BS, Ctrl+Shift+PgUp, Alt+JO1 [J1]
+
+次のページの先頭        : SP, Shift+DownArrow, Alt+J E [JE]
+前のページの末尾        : BS, Shift+UpArrow, Alt+J V [JV]
+最初のページ            : Ctrl+Home, Alt+J T [JT],  Ctrl+T
+最後のページ            : Ctrl+End, Alt+J B [JB],  Ctrl+B
+ページ末尾／次ページ先頭: Alt+J D [JD],  D,  d
+ページ先頭／前ページ末尾: Alt+J U [JU],  U,  u
+
+ページ内スクロール      : Arrow Keys, Left Mouse Botton
+ 上へ                   : Up    Arrow [!U]
+ 下へ                   : Down  Arrow [!D]
+ 左へ                   : Left  Arrow [!L]
+ 右へ                   : Right Arrow [!R]
+ページの先頭            : Home [!H]
+ページの末尾            : End [!E]
+ページの左              : [!X]
+ページの右              : [!Y]
+
+頁番号入力              : Alt+J I [JI],  /
+  絶対番号              :    &lt;number&gt;
+  相対番号              :    +&lt;number&gt, -&lt;number&gt;
+  末尾からのページ数    :    .[&lt;number&gt;]
+    先頭からの番号      :        Enter
+    振られたページ番号  :        Ctrl+Enter, Shift+Enter
+
+ページの履歴表          : Alt+J H [JH],  Ctrl+J
+直前のページへ          : Alt+J F [JF],  &lt;,  F,  f
+直後のページへ          : Alt+J L [JL],  &gt;,  L,  l
+履歴から抜け出る        : Alt+J Q [JQ],  Q,  q
+マークをつける          : Alt+J M [JM],  M,  m
+マークをつけたページへ  : Alt+J G [JG],  Ctrl+G
+マークと現ページの交換  : Alt+J X [JX],  Ctrl+X
+ページ範囲の設定        : Alt+J R [JR],  R,  r
+ファイルの履歴表        : Alt+I, Alt+F H [FH]
+直前のファイル          : Alt+J S [JS]
+
+検索ダイアログ          : Alt+S F [SF],  Ctrl+F
+逆方向の検索            : Alt+S U [SU],  Ctrl+R,  SFn3
+順方向の検索            : Alt+S D [SD],  Ctrl+S,  Fn3
+
+サイズ
+ 拡大                   : Alt+DSM [DM]
+ 縮小                   : Alt+DSR [DR]
+ 画面に入る最大紙面     : Alt+DSF [DF],  5
+ 紙面に入る最大画面     : Alt+DSL [DL],  6
+ウインドウの最大化      : [!M]
+
+プリセット
+ View 1                 : Alt+DR1 [D1],  1
+ View 2                 : Alt+DR2 [D2],  2
+ View 3                 : Alt+DR3 [D3],  3
+ View 4                 : Alt+DR4 [D4],  4
+
+コントラスト
+ より黒くBlacker        : Alt+DTB [DB]
+ より白くWhiter         : Alt+DTW [DW]
+ 反転／標準             : Alt+DTV [DV]
+  反転                  : [!V]
+  反転解除              : [!W]
+
+ルーペ                  : Right Mouse Botton
+ 拡大                   : Alt+DLG [DG]
+ 縮小                   : Alt+DLD [DD]
+ 大きく                 : Alt+DLE [DE]
+ 小さく                 : Alt+DLA [DA]
+ 目盛り                 : Alt+DLU [DU]
+
+２ページ同時表示        : Alt+D T [DT],  7
+逆２ページ同時表示      : Alt+D W [DW]
+縦２ページ同時表示      : Alt+D Y [DY],  0
+４ページ同時表示        : Alt+D S [DS],  8
+１６ページ同時表示      : Alt+D 6 [D6],  9
+通常の表示              : [!Q]
+
+縦置き／横置き          : Alt+P L [PL]
+領域定義                : Alt+DGN [DN],  Ctrl+[
+領域回復                : Alt+DGX [DX]
+マウスカーソル変更      : Alt+\, Alt+D H [DH]
+画像取り込み  On/Off    : Alt+D I [DI]
+Color special On/Off    : Alt+D C [DC],  Ctrl+C
+Color 上書き  On/Off    : Alt+D P [DP]
+表示Stop制御 有効       : [!0], CTRL+U
+表示Stop制御 無効       : [!1], CTRL+V
+
+HyperJump ON/OFF        : Alt+J J [JJ]
+HyperJump               : Left Mouse Botton
+     ダイアログ付き     :     + Ctrl
+
+ファイルを開く          : Alt+F O [FO],  Ctrl+O
+最後のファイルを開く    : Alt+F 1 [F1]
+再表示                  : Alt+F N [FN],  Ctrl+N
+必要な場合のみ再表示    : [!I]
+印刷                    : Alt+F P [FP],  Ctrl+P
+Dviprt機能              : Alt+F D [FD],  Ctrl+D
+画像として保存          : Alt+F S [FS]
+設定を保存して終了      : Alt+X, Alt+F4, Alt+F X [FX]
+終了                    : Alt+F Q [FQ]
+
+表示
+ ツールバー             : Alt+V T [VT]
+ ステータスバー         : Alt+V S [VS]
+ ページスライダー       : Alt+V P [VP]
+ スクロールバー         : Alt+V R [VR]
+ バーの非表示           : [V0]
+ ページ移動ボタン逆設定 : Alt+V V [VV]
+ 警告                   : Alt+V W [VW]
+ ツールボタン変更       : Alt+V C [VC]
+ 小さなエディタ         : Alt+V E [VE]
+
+プレゼンテーション
+On/Off スイッチ         : Alt+N N [NN]
+ プレゼンテーション On  : [!P]
+ プレゼンテーション Off : [!N]
+現状の設定の保存状況    : Alt+N S [NS]
+ 画面書き換え停止       : [!A]
+ 画面書き換え再開       : [!B]
+周辺カット On/Off       : Alt+N E [NE]
+周辺カット On           : [!Z]
+周辺カット Off          : [!T]
+フル／フィット表示解除  : [!F]
+
+マウスボタンで進行
+ 左ボタン               : Alt+NBL [NL]
+ 右ボタン               : Alt+NBR [NR]
+
+プレゼンテーションの型
+ 一般の画面             : Alt+NY0 [N0]
+ 白画面                 : Alt+NY1 [N1]
+ 黒画面                 : Alt+NY2 [N2]
+ 白背景                 : Alt+NY3 [N3]
+ 黒背景                 : Alt+NY4 [N4]
+ 背景更新               : [!G]
+ 線画                   : Alt+NDI [NI]
+   線／箱               : Alt+NDX [NX]
+   消去                 : Alt+NDC [NC]
+   赤                   : Alt+NDD [ND]
+   黒                   : Alt+NDK [NK]
+   青                   : Alt+NDB [NB]
+   緑                   : Alt+NDG [NG]
+   細線／太線           : Alt+NDT [NT]
+
+カバーシート
+ On                     : Fn5(Presentation) Alt+NCO [NO]
+ Off                    : Fn6(Presentation) Alt+NCF [NF]
+ PauseがあるページのみOn: Fn9(Presentation) Alt+NCP [NP]
+ カバーシートの保留     : Fn7(Rresentation) [!S]
+ 保留したものへ         : Fn8(Presentation) [!C]
+
+カバーシート型
+  下方                  : Alt+NV5 [N5]
+  右方                  : Alt+NV6 [N6]
+  左方                  : Alt+NV7 [N7]
+  右下方                : Alt+NV8 [N8]
+  左下方                : Alt+NV9 [N9]
+
+マクロ 1                : Alt+OC1 [O1],  SFn1
+マクロ 2                : Alt+OC2 [O2],  SFn2
+マクロ 3                : Alt+OC3 [O3],  SFn5
+マクロ 4                : Alt+OC4 [O4],  SFn6
+マクロ 5                : Alt+OC5 [O5],  SFn7
+
+dviout special ON/OFF   : Alt+O V [OV]
+source special ON/OFF   : Alt+O C [OC]
+CTRLを押してEditor入力  : [!2]
+CTRL無しでEditor入力    : [!3]
+
+Online Help             : Alt+H H [HH],  Fn1
+Help TeX                : Alt+H X
+Troubles in dviout      : Alt+H D
+Tips on dviout          : Alt+H T
+
+画面／ファイル情報      : Alt+HII [HI]
+フォント情報            : Alt+HIF [HF]
+バッファ情報            : Alt+HIB [HB]
+システム情報            : Alt+H S [HS],  Ctrl+Q
+パラメータ情報          : Alt+HIP [HP]
+パラメータ変更情報      : Alt+O D [OD]
+パラメータ設定          : Alt+O S [OS],  Ctrl+\
+パラメータ選択          : Alt+O P [OP],  Ctrl+L
+キー機能表              : Alt+HIK [HK]
+dviout について         : Alt+H A [HA]
+</pre></ol>
+
+<table border="1">
+<caption><strong>デフォルトのキー機能表</strong></caption>
+<tr>
+ <td>Ctrl+@</td>
+ <td></td>
+ <td>Ctrl+A</td>
+ <td></td>
+ <td>Ctrl+B</td>
+ <td>最後のページへ</td>
+ <td>Ctrl+C</td>
+ <td>Color special On/Off</td>
+</tr>
+<tr>
+ <td>Ctrl+D</td>
+ <td>Dviprt機能</td>
+ <td>Ctrl+E</td>
+ <td></td>
+ <td>Ctrl+F</td>
+ <td>文字列検索ダイアログ</td>
+ <td>Ctrl+G</td>
+ <td>マークをつけたページへ
+</td>
+</tr>
+<tr>
+ <td>Ctrl+H</td>
+ <td></td>
+ <td>Ctrl+I</td>
+ <td></td>
+ <td>Ctrl+J</td>
+ <td>ページの履歴表</td>
+ <td>Ctrl+K</td>
+ <td></td>
+</tr>
+<tr>
+ <td>Ctrl+L</td>
+ <td>Choose Parameters</td>
+ <td>Ctrl+M</td>
+ <td></td>
+ <td>Ctrl+N</td>
+ <td>DVIファイルを開き直す</td>
+ <td>Ctrl+O</td>
+ <td>DVIファイルを開く</td>
+</tr>
+<tr>
+ <td>Ctrl+P</td>
+ <td>印刷</td>
+ <td>Ctrl+Q</td>
+ <td>システム情報</td>
+ <td>Ctrl+R</td>
+ <td>逆方向文字列検索</td>
+ <td>Ctrl+S</td>
+ <td>順方向文字列検索</td>
+</tr>
+<tr>
+ <td>Ctrl+T</td>
+ <td>最初のページ</td>
+ <td>Ctrl+U</td>
+ <td>表示制御有効</td>
+ <td>Ctrl+V</td>
+ <td>表示制御無効</td>
+ <td>Ctrl+W</td>
+ <td></td>
+</tr>
+<tr>
+ <td>Ctrl+X</td>
+ <td>前のページの末尾</td>
+ <td>Ctrl+Y</td>
+ <td></td>
+ <td>Ctrl+Z</td>
+ <td></td>
+ <td>Ctrl+[</td>
+ <td>紙面の領域設定モードへ</td>
+</tr>
+<tr>
+ <td>Ctrl+\</td>
+ <td>DVIOUTのプロパティー</td>
+ <td>Ctrl+[</td>
+ <td></td>
+ <td>Ctrl+^</td>
+ <td></td>
+ <td>Ctrl+_</td>
+ <td></td>
+</tr>
+<tr>
+ <td>Space</td>
+ <td>次ページの先頭へ</td>
+ <td>!</td>
+ <td></td>
+ <td>"</td>
+ <td></td>
+ <td>#</td>
+ <td></td>
+</tr>
+<tr>
+ <td>%</td>
+ <td></td>
+ <td>$</td>
+ <td></td>
+ <td>&</td>
+ <td></td>
+ <td>'</td>
+ <td></td>
+</tr>
+<tr>
+ <td>(</td>
+ <td></td>
+ <td>)</td>
+ <td></td>
+ <td>*</td>
+ <td></td>
+ <td>+</td>
+ <td></td>
+</tr>
+<tr>
+ <td>,</td>
+ <td></td>
+ <td>-</td>
+ <td></td>
+ <td>.</td>
+ <td></td>
+ <td>/</td>
+ <td>頁番号入力</td>
+</tr>
+<tr>
+ <td>0</td>
+ <td>縦に2ページ同時表示</td>
+ <td>1</td>
+ <td>画面 1</td>
+ <td>2</td>
+ <td>画面 2</td>
+ <td>3</td>
+ <td>画面 3</td>
+</tr>
+<tr>
+ <td>4</td>
+ <td>画面 4</td>
+ <td>5</td>
+ <td>画面内最大紙面</td>
+ <td>6</td>
+ <td>紙面内最大画面</td>
+ <td>7</td>
+ <td>2ページ同時表示</td>
+</tr>
+<tr>
+ <td>8</td>
+ <td>4ページ同時表示</td>
+ <td>9</td>
+ <td>16ページ同時表示</td>
+ <td>*</td>
+ <td></td>
+ <td>;</td>
+ <td></td>
+</tr>
+<tr>
+ <td>&lt;</td>
+ <td>履歴における直前のページ</td>
+ <td>=</td>
+ <td></td>
+ <td>&gt;</td>
+ <td>履歴における直後のページ</td>
+ <td>?</td>
+ <td></td>
+</tr>
+<tr>
+ <td>@</td>
+ <td></td>
+ <td>A</td>
+ <td></td>
+ <td>B</td>
+ <td></td>
+ <td>C</td>
+ <td></td>
+</tr>
+<tr>
+ <td>D</td>
+ <td>ページ末尾／次ページ先頭</td>
+ <td>E</td>
+ <td></td>
+ <td>F</td>
+ <td>履歴における直前のページへ</td>
+ <td>G</td>
+ <td></td>
+</tr>
+<tr>
+ <td>H</td>
+ <td></td>
+ <td>I</td>
+ <td></td>
+ <td>J</td>
+ <td></td>
+ <td>K</td>
+ <td></td>
+</tr>
+<tr>
+ <td>L</td>
+ <td>履歴における直後のページへ</td>
+ <td>M</td>
+ <td>マークをつける</td>
+ <td>N</td>
+ <td>次のページ</td>
+ <td>O</td>
+ <td></td>
+</tr>
+<tr>
+ <td>P</td>
+ <td>前のページへ</td>
+ <td>Q</td>
+ <td>ページの履歴から抜け出る</td>
+ <td>R</td>
+ <td>ページ範囲の設定</td>
+ <td>S</td>
+ <td></td>
+</tr>
+<tr>
+ <td>T</td>
+ <td></td>
+ <td>U</td>
+ <td>ページ先頭／前ページ末尾</td>
+ <td>V</td>
+ <td></td>
+ <td>W</td>
+ <td></td>
+</tr>
+<tr>
+ <td>X</td>
+ <td></td>
+ <td>Y</td>
+ <td></td>
+ <td>Z</td>
+ <td></td>
+ <td>[</td>
+ <td></td>
+</tr>
+<tr>
+ <td>\</td>
+ <td></td>
+ <td>]</td>
+ <td></td>
+ <td>^</td>
+ <td></td>
+ <td>_</td>
+ <td></td>
+</tr>
+<tr>
+ <td>`</td>
+ <td></td>
+ <td>a</td>
+ <td></td>
+ <td>b</td>
+ <td></td>
+ <td>c</td>
+ <td></td>
+</tr>
+<tr>
+ <td>d</td>
+ <td>ページ末尾／次ページ先頭</td>
+ <td>e</td>
+ <td></td>
+ <td>f</td>
+ <td>履歴における直前のページへ</td>
+ <td>g</td>
+ <td></td>
+</tr>
+<tr>
+ <td>h</td>
+ <td></td>
+ <td>i</td>
+ <td></td>
+ <td>j</td>
+ <td></td>
+ <td>k</td>
+ <td></td>
+</tr>
+<tr>
+ <td>l</td>
+ <td>履歴における直後のページへ</td>
+ <td>m</td>
+ <td>マークをつける</td>
+ <td>n</td>
+ <td>次のページ</td>
+ <td>o</td>
+ <td></td>
+</tr>
+<tr>
+ <td>p</td>
+ <td>前のページへ</td>
+ <td>q</td>
+ <td>ページの履歴から抜け出る</td>
+ <td>r</td>
+ <td>ページ範囲の設定</td>
+ <td>s</td>
+ <td></td>
+</tr>
+<tr>
+ <td>t</td>
+ <td></td>
+ <td>u</td>
+ <td>ページ先頭／前ページ末尾</td>
+ <td>v</td>
+ <td></td>
+ <td>w</td>
+ <td></td>
+</tr>
+<tr>
+ <td>x</td>
+ <td></td>
+ <td>y</td>
+ <td></td>
+ <td>z</td>
+ <td></td>
+ <td>{</td>
+ <td></td>
+</tr>
+<tr>
+ <td>|</td>
+ <td></td>
+ <td>}</td>
+ <td></td>
+ <td>~</td>
+ <td></td>
+ <td></td>
+ <td></td>
+</tr>
+<tr>
+ <td>F1</td>
+ <td>Online Help</td>
+ <td>F2</td>
+ <td></td>
+ <td>F3</td>
+ <td>順方向文字列検索</td>
+ <td>F4</td>
+ <td></td>
+</tr>
+<tr>
+ <td>F5</td>
+ <td></td>
+ <td>F6</td>
+ <td></td>
+ <td>F7</td>
+ <td></td>
+ <td>F8</td>
+ <td></td>
+</tr>
+<tr>
+ <td>F9</td>
+ <td></td>
+ <td>F10</td>
+ <td></td>
+ <td>F11</td>
+ <td></td>
+ <td>F12</td>
+ <td></td>
+</tr>
+<tr>
+ <td>SF1</td>
+ <td>キーマクロ 1</td>
+ <td>SF2</td>
+ <td>キーマクロ 2</td>
+ <td>SF3</td>
+ <td>逆方向文字列検索</td>
+ <td>SF4</td>
+ <td></td>
+</tr>
+<tr>
+ <td>SF5</td>
+ <td>キーマクロ 3</td>
+ <td>SF6</td>
+ <td>キーマクロ 4</td>
+ <td>SF7</td>
+ <td>キーマクロ 5</td>
+ <td>SF8</td>
+ <td></td>
+</tr>
+<tr>
+ <td>SF9</td>
+ <td></td>
+ <td>SF10</td>
+ <td></td>
+ <td>SF11</td>
+ <td></td>
+ <td>SF12</td>
+ <td></td>
+</tr>
+<tr>
+ <td>Button</td>
+ <td>Dviprt機能</td>
+ <td>User1</td>
+ <td>紙面の再表示</td>
+ <td>User2</td>
+ <td>直前のページの履歴へ</td>
+ <td>User3</td>
+ <td>直後のページの履歴へ</td>
+</tr>
+<tr>
+ <td>User4</td>
+ <td>ページに印をつける</td>
+ <td>User5</td>
+ <td>印をつけたページへ</td>
+ <td>ESC</td>
+ <td>プレゼンテーション　On/Off</td>
+ <td>Alt+\</td>
+ <td>カーソルの形の変更</td>
+</tr>
+<tr>
+ <td>Alt+I</td>
+ <td>ファイルの履歴</td>
+ <td>Alt+X</td>
+ <td>設定を保存して dviout 終了</td>
+ <td>Alt+F4</td>
+ <td>設定を保存して dviout 終了</td>
+ <td></td>
+ <td></td>
+</tr>
+</table>
+<hr>
+誤りや補足すべき点があればお知らせ下さい --&gt; <a href="mailto:ftp-admin@akagi.ms.u-tokyo.ac.jp">ftp-admin@akagi.ms.u-tokyo.ac.jp</a> </p>
+</body>
+</html>

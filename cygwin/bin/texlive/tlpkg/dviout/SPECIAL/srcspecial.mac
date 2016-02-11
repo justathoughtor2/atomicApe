@@ -1,0 +1,15 @@
+ddeinitiate "dviout", "dviout";
+if(!result) {
+  run "dviout ";
+  ddeinitiate "dviout", "dviout";
+}else
+  $basefile = dderequest("dvifile");
+if(strlen($basefile) < 1)
+  $basefile = leftstr(filename,strlen(filename)-3)+"dvi";
+if(selecting){$SrcWord = "/" + gettext(seltopx,seltopy,selendx,selendy);}
+else $SrcWord="";
+ddeexecute "[PageOpen(# "+str(lineno)+$SrcWord+" '"+filename+"')]";
+ddeexecute "[WinNormal]";
+ddeexecute "[FileOpen("+$basefile+")]";
+ddeterminate;
+endmacro;

@@ -1,0 +1,294 @@
+<html>
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=SHIFT_JIS">
+<title>Check Installation of TeX (Windows95/98/Me/NT/2000/XP)</title>
+</head>
+
+<body bgcolor="#eeffff">
+<a name="Top"> </a>
+<p><a name="HEAD"></a><a href="http://akagi.ms.u-tokyo.ac.jp/index-j.html">Home Page へ</a><br>
+<a
+href="http://akagi.ms.u-tokyo.ac.jp/ftp-j.html#TeX">TeXのページへ</a><br> 
+<a href="http://akagi.ms.u-tokyo.ac.jp/texinst98.html">Windows 95/98/Me/NT/2000/XP における TeX システムのインストール</a><br>
+<a href="cmode.html">DVIwareとしてのdviout</a>, <a href="dvioutQA.html">dvioutにおけるトラブル</a>, <a href="present.html">dvioutでのプレゼンテーション</a></p>
+
+<hr align="left" noShade SIZE="4" width="75%">
+
+<h1 align="center">Windows95/98/Me/NT/2000/XP における<br>
+日本語TeX のインストールのチェック</h1>
+
+<hr align="right" noShade SIZE="4" width="75%">
+
+<p align="center">August 3, 2003</p>
+
+<p>誤りや補足すべき点があればお知らせ下さい --&gt; <a
+href="mailto:ftp-admin@akagi.ms.u-tokyo.ac.jp">ftp-admin@akagi.ms.u-tokyo.ac.jp</a> </p>
+<p>日本語TeXのパッケージのインストールが正しく行われているかどうかのチェック、あるいは、インストールやパッケージの変更後、うまくTeXが動作しない場合の問題点の見つけ方に関して記します。
+</p><p>
+TeXを使うためのユーザ・インタフェース（たとえば、<strong>WinShell</strong>, <strong>GuiShell</strong> やエディタのマクロ --- 秀丸の<strong>TeXMAC</strong>など ---）がうまく動作しないときななども含みます。
+</p><p>
+TeXのシステムは、インタネットからダウンロードしてインストールする（たとえば、角藤氏によるパッケージについての<a href="http://akagi.ms.u-tokyo.ac.jp/texinst98.html">TeXのインストール手順 </a>参照） ことや、<a href="tex_dvioutw.html#otobe">（乙部氏、奥村氏、アスキー出版局などによって書かれた）TeXに関する本</a>に付属の CD-ROM からインストールすることができます。
+</p><p>
+<h3 align="center">---
+次の手順で、簡単なTeXのファイルからdviファイルを作成し、<br>
+それが previewer (dviout)で表示できるかどうかテストします。
+---</h3>
+<h3><font color="#800000">1. <a href="testtex.bat">ここ</a> をマウスの右ボタンでクリックし、testtex.bat を適当なフォルダ</font>（たとえば、<font color="blue">c:\windows\temp</font>）<font color="#800000">に保存します。</font></h3>
+<h3><font color="#800000">2. 保存したフォルダの中にある testtex.bat を実行します。</font></h3> 
+<blockquote>
+<strong>アクセサリ</strong>の中の<strong>MS-DOSプロンプト</strong> あるいは <strong>コマンド プロンプト</strong> を起動し、<strong>cd </strong> コマンドなどを使って保存したフォルダへ移動して <strong>testtex.bat</strong> を実行します。</p><p>
+あるいは、デスクトップの <strong>マイコンピュータ</strong>、またはデスクトップの<strong>スタート</strong>からたどれる<strong>アクセサリ</strong>の中の<strong>エクスプローラ</strong> を起動してそのフォルダに移動し、<strong>testtex.bat</strong> のアイコンをダブルクリックします。</p><p>
+あるいは、たとえば、そのフォルダ名が <font color="blue">c:\windows\temp</font> であったなら、デスクトップの <strong>スタート → ファイル名を指定して実行</strong> を選んで、<font color="blue">c:\windows\temp</font>\<strong>testtex</strong> と入力して [Enter] キーを押します。</p><p>
+</blockquote>
+
+<h3><font color="#800000">3. testtex.bat 実行中の画面表示に注意しましょう。</font></h3>
+<strong>testtex.bat</strong> を実行すると、以下が表示された時点で画面が止まるので、[Enter] キーを押して進行させます。<br>
+ただし、最後は [Enter] か Ctrl+C（その後 Y [Enter]）かを選択してください。
+<pre>
+  ----- 1. Check the existence of latex -----
+  ----- 2. Check for making a DVI file by tex! -----
+  ----- 3. Check the existence of ptex -----
+  ----- 4. Check the existence of mktextfm and cmr10.tfm -----
+  ----- 5. Check the existence of kpsewhich -----
+  ----- 6. Check for making a DVI file by ptex! -----
+  ----- 7. Check the existence of gswin32c -----
+  ----- 8. Check Environment variables! -----
+  ----- 9. END -----
+  メモ帳で testtex.txt を見る場合は [Enter] 、終了する場合は Ctrl+C を押します！
+</pre>
+このとき、画面に<font color="red">エラーらしいメッセージ</font>が出ないかどうか、注意しましょう。<br>
+また、上記以外のところで止まった場合も何らかのエラーと考えられますので、そのときのメッセージに注意しましょう。<br>
+エラーメッセージが表示された場合は、<a href="#error">ここ</a>を参照してください。</p><p>
+
+<h3><font color="#800000">4. testtex.dvi と testtexj.dvi を dviout で表示します</font>（dviout のインストールが完了していない場合は、<font color="#800000">5.</font> へ）。</h3>
+<strong>testtex.bat</strong> の存在するフォルダーに <strong>testtex.dvi</strong> と <strong>testtexj.dvi</strong> という２つのファイルが出来ていることを確かめて、
+これらが <strong>dviout</strong> で正しく表示されることをチェックします。</p><p>
+
+<blockquote>
+dviファイルと <strong>dviout</strong> との関連づけが設定してあれば、<strong>testtex.dvi</strong> や <strong>testtexj.dvi</strong> のアイコン<IMG SRC="dvi2.bmp" ALT=""> のダブルクリックで <strong>dviout</strong> が起動されて、それらが表示されます。</p><p>
+<strong>dviout</strong> を起動して、メニューバーの <strong>File → Open</strong> からこれらの dvi ファイルを選んで表示することもできます。
+</blockquote>
+dviファイル作成中にエラーが生じなくて、<strong>dviout</strong> での表示でエラーが生じるときは、以下の <font color="#800000">5.</font> のチェックを行いましょう。
+問題なければ <strong>dviout</strong> のパッケージに付属の <strong>test_a4x.dvi</strong> が正しく表示できるかどうかを調べるとともに、
+<a href="dvioutQA.html">dvioutにおけるトラブル</a>を参照してください。<br>
+</p><p>
+
+<h3><a name="0-5"><font color="#800000">5. </a> testtex.txt をチェックします。</font></h3>
+<strong>testtex.bat</strong> のあるフォルダーに生成された <strong>testtex.txt</strong> を、<strong>メモ帳</strong> などのエディタで開いてみます。<br>
+TeXが正しくインストールされている場合の <a href="#sample">testtex.txt の例</a></p><p>
+<h4 align="center"><a name="env"><strong>5.1.</strong> 環境変数 <strong>TEXMF</strong>, <strong>TEXMFMAIN</strong>, 
+<strong>TEXMFCNF</strong> のチェック</a></h4>
+<ul>
+<li><strong>TEXMF=</strong>, <strong>TEXMFMAIN=</strong> の両方が定義されている（すなわち、その右辺が""でない）場合は、設定に誤りがあります。<u>以前設定したものが残っている</u>可能性もありますので、インストールの説明書きなどを見て修正します。</li></p><p>
+<li><strong>testtex.txt</strong> を最初から見て
+<blockquote>
+TeX(Web2C <font color="red">7.3.7</font>)3.14159<br>
+.........<br>
+pTeX(Web2C <font color="red">7.3.7</font>) p3.0.1 (SJIS), based on TeX 3.14159<br>
+.........
+</blockquote>
+のような記述があれば、Web2C のVersion が <font color="red">7.3.7</font> であることを示しています。<br>
+Web2C のVersion が <font color="red">7.3.7</font>（またはそれ以降である場合）や、淺山和典氏によるパッケージのようにレジストリにこれらのデータを記録するものの場合は、これらの環境変数は設定不要なことが考えられます。<br>
+実際、<u>角藤氏のWeb2C <font color="red">7.3.7</font>(またはそれ以降)に対応するパッケージの通常のインストールでは、これら3つの環境変数は設定不要で、間違った設定があるとエラーになります</u>。<br>
+詳しくは、対応するインストールの説明書きをご覧下さい。</p><p>
+これらの環境変数が設定されていない場合 --- 角藤氏のWeb2C <font color="red">7.3.7</font>(またはそれ以降)では、これが基本 --- は、<strong>testtex.txt</strong>では
+<blockquote>
+TEXMF="" <br>
+TEXMFMAIN="" <br>
+TEXMFCNF="" <br>
+</blockquote>
+となります。</li></p><p>
+<li><strong>TEXMF=</strong> , <strong>TEXMFMAIN=</strong> , <strong>TEXMFCNF=</strong> の右側の文字列はフォルダ名を示しますが、区切り記号は通常の <font color="red">\</font> でなくて <font color="red">/</font> になっている必要があります。和文文字が入っていないこと、文字の間に空白が混ざっていないこと、<u>存在する正当なフォルダ名である</u>ことを確かめます。</li>
+</ul>
+これらの環境変数の設定や削除に関しては、たとえば旧 @nifty の TeXフォーラムの
+<a href="http://www.nsknet.or.jp/~tony/TeX/install/win/tex.htm">Windows用のTeXのインストール</a> などをご覧ください。
+さらに、Windows NT/2000/XP の場合も、<u>\autoexec.bat での設定（定義の削除）</u>が必要な場合があるので、それにも注意が必要です。
+
+<h4 align="center"><a name="errtmp"><strong>5.2.</strong> その他の環境変数のチェック</h4></a>
+<ul>
+<li><strong>TEMP=</strong> や<strong>TMP=</strong> の右辺の文字列に、和文文字が入っていないこと、文字の間に空白が混ざっていないことを確かめます。
+また、右辺の文字列で指定されたフォルダが<u>存在して書き込み可能</u>になっていることを確かめます。<u>複数のフォルダ名を並べて指定してはいけません</u>。</li></p><p>
+<li><strong>Ghostscript</strong> を使う場合は、<strong>GS_LIB=</strong> の右辺が、正しく定義されていることを確かめます。
+設定方法については 旧 @nifty TEXフォーラムの<a href="http://www.nsknet.or.jp/~tony/TeX/install/">TeXインストールガイド</a> などを参照してください
+</li>
+</ul>
+<font color="red">以上のテストで問題なければ、TeXのインストールにおいて</font>基本的な設定が正しく出来ている可能性が高く、ここでのチェックは終わりです。</p>
+テストのために作成された全てのファイル（testtex.bat, testtex.txt, testtex,tex, 
+testtex.dvi, testtex.log, testtex.aux, testtexj.tex, testtexj.dvi, testtexj.log, 
+testtexj.log）を消すには、たとえばコマンド・プロンプトから以下のように入力します。
+<blockquote>
+del &nbsp; testtex*.*
+</blockquote>
+<p><a href="#TOP">先頭に戻る</a>
+<hr>
+<a name="error"><h2 align="center"><font color="red">エラーメッセージ</font></h2>
+以下に対応するメッセージがあれば、それをクリックしてください。
+<blockquote>
+<a href="#exist">コマンドまたはファイル名が違います</a></p><p>
+<a href="#exist">'latex' は、内部コマンドまたは外部コマンド、</a><br>
+<a href="#exist">操作可能なプログラムまたはバッチ ファイルとして認識されていません。
+</a></p><p>
+<a href="#exist">'platex' は、内部コマンドまたは外部コマンド、</a><br>
+<a href="#exist">操作可能なプログラムまたはバッチ ファイルとして認識されていません。
+</a></p><p>
+<a href="#found">Cannot find cmr10.mf.</a></p><p>
+<a href="#found">Failed to find cnffile fmtutil.cnf.</a></p><p>
+<a href="#fond">I can't find the format file `latex.fmt'!</a></p><p>
+<a href="#found">! LaTeX Error: File `article.cls' not found.</a></p><p>
+<a href="#found">I can't find the format file `platex.fmt'!</a></p><p>
+<a href="#found">! LaTeX Error: File `jarticle.cls' not found.</a></p><p>
+<a href="#format">Fatal format file error; I'm stymied</a></p><p>
+<a href="#errtmp">******   エラー: 環境変数 TEMP と TMP が共に定義されていない！           ******</a></p><p>
+<a href="#errtmp">****** エラー: <font color="#0000ff">c:\windows\temp</font> が存在しないか、書き込みが出来ない ******</a></p><p>
+<a href="#env">******    エラー：環境変数 TEXMF と TEXMFMAIN の両方が設定されています！ ******</a></p><p>
+<a href="#env">***  エラー：環境変数 TEXMF/TEXMFMAIN/TEXMF を全て削除する必要があります！  ***</a>
+</blockquote>
+<a name="exist"><font color="red">注意：</font><strong>gswin32c</strong> にはパスが通っていなくても問題ないことが多いので、</a>
+<pre>
+----- 7. Check the existence of gswin32c ----- 
+</pre>
+で、コマンドが認識されなくても、エラーではありません。
+<strong>gswin32c</strong> でなくて、<strong>mktextfm</strong> や <strong>kpsewhich</strong> で同様なことが起こる場合は、<strong>mktextfm.exe</strong> や <strong>kpsewhich.exe</strong> が存在しないか、それらに <strong>PATH</strong> が設定されていないことが原因です。角藤氏のパッケージでこのようなことが起きたならば、次の項と同様なエラーですので、次の項を参照してください。
+
+<h3><font color="#800000">A. コマンドが認識されず、latex や platex が起動しない</font></h3>
+<strong>latex.exe</strong> および <strong>platex.exe</strong> がどこに存在するか、デスクトップから <strong>スタート → 検索</strong> によって検索します。</p><p>
+
+<h4 align="center"><strong>A.1. <strong>latex.exe</strong> および <strong>platex.exe</strong> が見つかった</strong> </h4>
+以前使っていたものの残骸などでなく、正しくインストールされたものが見つかった場合、そこに<strong>PATH</strong> が設定されていないことがエラーの原因です。
+インストールの説明書きを読んで（たとえば、旧 @nifty TEXフォーラムの<a href="http://www.nsknet.or.jp/~tony/TeX/install/">TeXインストールガイド</a>）環境変数 <strong>PATH</strong> を設定してください。
+<h4 align="center"><strong>A.2.  <strong>latex.exe</strong> あるいは <strong>platex.exe</strong> が見つからなかった</strong></h4>
+<a name="inst">TeX のシステムのインストール（＝展開）に失敗しています。</a>
+インストールの説明書き（たとえば、旧 @nifty TEXフォーラムの<a href="http://www.nsknet.or.jp/~tony/TeX/install/">TeXインストールガイド</a>）を読んで、再度インストールしてください。以下のような原因が考えられます。
+<ul>
+<li>説明通りにインストールしていなかった</li>
+<li>インターネットからダウンロードし忘れたパッケージがあった</li>
+<li>インターネットからダウンロードするときに使ったプログラムに問題があった（たとえば、<strong>iria</strong> などのプログラムを使ってダウンロードすると、ファイル名が変更されたり、内容が変更されてダウンロードされることがあります）。</li>
+<li>CD-ROM などに入っているパッケージを、インストーラを使ってインストールした場合、ハード的な問題やインストーラの不具合などが原因で、インストールに失敗することがあります。
+このようなとき、手動でインストールするとうまくいくことがあります。<br>
+それぞれのパッケージのサポートページ（最新情報を得るには、インターネット上がよい）
+をご覧下さい。</li>
+</ul>
+<h3><a name="found"><font color="#800000">B. 
+Failed to find cnffile fmtutil.cnf.</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;! LaTeX Error: File `article.cls' not found.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;! LaTeX Error: File `jarticle.cls' not found.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Cannot find cmr10.mf.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;I can't find the format file `latex.fmt'!<br>
+&nbsp;&nbsp;&nbsp;&nbsp;I can't find the format file `platex.fmt'!</font><br></h3>
+見つからないと言われたファイル <b>fmtutil.cnf</b> あるいは <b>article.cls</b> あるいは
+<b>jarticle.cls</b> などの存在をデスクトップから <strong>スタート → 検索</strong> 
+によってチェックし、結果に応じて、次項の「存在しなかった場合は、...」、
+あるいは「存在した場合は、...」以下を参照。
+
+<a name="format"><h3><font color="#800000">C. Fatal format file error; I'm stymied</font></h3></a>
+TeX が、<font color="red">LaTeX や pLaTeX のフォーマットファイルを見つけることが出来ない</font>、あるいは、<font color="red">それらが正しい版のものでない</font>、などの理由によってエラーが生じたことを意味しています。<br>
+次のようなチェックをしましょう</p><p>
+<strong>latex.fmt</strong> や <strong>platex.fmt</strong> が存在するかどうか、デスクトップから <strong>スタート → 検索</strong> によって探します。<br>
+<a name="search"><ul>
+<li>存在しなかった場合は、</a><a href="#inst">インストールし直します。</a></li></p><p>
+<li>存在した場合は、プログラムから正しく使われるよう設定します。<br>
+特に、２箇所に同じ名前のものが存在した場合は、注意が必要です。</p><p>
+<a href="#0-5">環境変数 <strong>TEXMFMAIN</strong>, <strong>TEXMFCNF</strong>, <strong>TEXMF</strong> の設定をチェック</a>しましょう。<br>
+これらの設定が正しくないと、正しいフォーマットファイルなどを見つけることが出来ず、このようなエラーが起こることがあります。</p><p>
+<a href="#0-5">角藤氏のパッケージでWeb2C 7.3.7 またはそれ以降の場合</a>は、これら3つの環境変数を全て未定義にすれば、正しい場所にあるものが使われます。</p></p>
+環境変数 <strong>TEXMFMAIN</strong> と <strong>TEXMF</strong> の両方が定義されている場合は、不要なものを未定義にしてください。<br>
+環境変数 <strong>TEXMFMAIN</strong> を使うのがより新しいやりかたで、パッケージを新しくして、古い環境変数 <strong>TEXMF</strong> がそのまま残っていたためエラーになった、というケースが多々あります。
+<blockquote>
+これらの環境変数の設定値は <a href="#0-5">testtex.txt</a> に書かれています。</blockquote>
+<li><strong>latex.fmt</strong> や <strong>platex.fmt</strong> が壊れている場合や正しくない版の場合、あるいは存在しない場合、角藤氏のパッケージでは、コマンド（MS-DOS）プロンプトから
+<blockquote><pre>
+fmtutil --byfmt  platex
+</pre></blockquote>
+とすると、<strong>platex.fmt</strong> が作成されます。
+<strong>latex.fmt</strong> についても同様です。<br>
+なお、このコマンドを実行したとき
+<pre>
+     <font color="red">Failed to find file ....</font>
+</pre>
+などというエラーが出る場合は、環境変数の設定がおかしいか、インストールが不完全かのどちらかが原因と思われます。
+</li>
+</ul>
+<a href="#TOP">先頭に戻る</a>
+<hr>
+<h3><a name="sample"><font color="#800000">TeXのシステムが正しくインストールされている場合の <b>testtex.txt</b> の例</a></font></h3>
+角藤氏のTeXのパッケージ（Web2C 7.5.2, TeX 3.142592, pTeX 3.1.2）と Ghostscript 8.00 を、標準のディレクトリにインストールした場合の例です。
+<pre>
+TeX (Web2C 7.5.2) 3.141592
+kpathsea version 3.5.2
+Copyright (C) 1997-2003 D.E. Knuth.
+Kpathsea is copyright (C) 1997-2003 Free Software Foundation, Inc.
+There is NO warranty.  Redistribution of this software is
+covered by the terms of both the TeX copyright and
+the GNU General Public License.
+For more information about these matters, see the files
+named COPYING and the TeX source.
+Primary author of TeX: D.E. Knuth.
+Kpathsea written by Karl Berry and others.
+
+- cmr10.tfm - 
+c:/usr/local/share/texmf/fonts/tfm/public/cm/cmr10.tfm
+- min10.tfm - 
+c:/usr/local/share/texmf/fonts/tfm/ptex/min10.tfm
+- TEXMF - 
+C:/usr/local/share/texmf
+- MFINPUTS - 
+.;C:/usr/local/share/texmf/metafont//;C:/usr/local/share/texmf/fonts/source//;c:/var/tex/fonts/source//
+- MAKETEX_MODE - 
+/
+- PKFONTS - 
+.;C:/usr/local/share/texmf/fonts/pk////;c:/var/tex/fonts/pk////;C:/usr/local/share/texmf/fonts/pk/modeless//;c:/var/tex/fonts/pk/modeless//;/pk////;/pk/modeless//
+----- 
+pTeX (Web2C 7.5.2) 3.141592-p3.1.2 (SJIS)
+kpathsea version 3.5.2
+Copyright (C) 1997-2003 D.E. Knuth.
+Kpathsea is copyright (C) 1997-2003 Free Software Foundation, Inc.
+There is NO warranty.  Redistribution of this software is
+covered by the terms of both the pTeX copyright and
+the GNU General Public License.
+For more information about these matters, see the files
+named COPYING and the pTeX source.
+Primary author of TeX: D.E. Knuth.
+Kpathsea written by Karl Berry and others.
+----- 
+AFPL Ghostscript 8.00 (2002-11-21)
+Copyright (C) 2002 artofcode LLC, Benicia, CA.  All rights reserved.
+Usage: gs [switches] [file1.ps file2.ps ...]
+Most frequently used switches: (you can use # in place of =)
+ -dNOPAUSE           no pause after page   | -q       `quiet', fewer messages
+ -g<width>x<height>  page size in pixels   | -r<res>  pixels/inch resolution
+ -sDEVICE=<devname>  select device         | -dBATCH  exit after last file
+ -sOutputFile=<file> select output file: - for stdout, |command for pipe,
+                                         embed %d or %ld for page #
+Input formats: PostScript PostScriptLevel1 PostScriptLevel2 PostScriptLevel3 PDF
+Available devices:
+   display mswindll mswinpr2 epson eps9high eps9mid epsonc ibmpro deskjet
+   djet500 laserjet ljetplus ljet2p cdeskjet cdjcolor cdjmono cdj550
+   uniprint djet500c declj250 lj250 ijs st800 stcolor bj10e bj200 t4693d2
+   t4693d4 t4693d8 tek4696 pcxmono pcxgray pcx16 pcx256 pcx24b pcxcmyk pbm
+   pbmraw pgm pgmraw pgnm pgnmraw pkmraw tiffcrle tiffg3 tiffg32d tiffg4
+   tifflzw tiffpack bmpmono bmpgray bmp16 bmp256 bmp16m tiff12nc tiff24nc
+   psmono bit bitrgb bitcmyk pngmono pnggray png16 png256 png16m jpeg
+   jpeggray pdfwrite pswrite epswrite pxlmono pxlcolor bbox ljet3 ljet3d
+   ljet4 ljet4d pj pjxl pjxl300 jetp3852 r4081 lbp8 m8510 necp6 bjc600
+   bjc800 pnm pnmraw ppm ppmraw spotrgb spotcmyk devicen bmpsep1 bmpsep8
+   bmp32b psdcmyk psdrgb nullpage
+Search path:
+   . ; c:/gs/gs8.00/lib ; c:/gs/gs8.00/kanji ; c:/gs/fonts ;
+   c:/gs/gs8.00/lib ; c:/gs/gs8.00/kanji ; c:/gs/fonts
+For more information, see c:/gs/gs8.00/doc/Use.htm.
+Report bugs to bug-gs@ghostscript.com, using the form in Bug-form.htm.
+----- 
+TEXMF="" 
+TEXMFMAIN="" 
+TEXMFCNF="" 
+TEMP="C:\WINDOWS\TEMP" 
+TMP="C:\WINDOWS\TEMP" 
+GS_LIB="c:/gs/gs8.00/lib;c:/gs/gs8.00/kanji;c:/gs/fonts" 
+PATH="C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;c:\usr\local\bin;c:\gs\gs8.00\bin;c:\dviout" 
+</pre>
+<a href="#TOP">先頭に戻る</a>
+<hr>
+<p>以上です。 <a href="mailto:ftp-admin@akagi.ms.u-tokyo.ac.jp">ftp-admin@akagi.ms.u-tokyo.ac.jp</a> 
+</p>
+</body>
+</html>

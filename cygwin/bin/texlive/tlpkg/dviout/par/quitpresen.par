@@ -1,0 +1,4 @@
+;#j プレゼンテーション・モードから抜け出る
+;# Quit from Presentation mode
+;;   Quit from tPresentation mode (Shift+F2)
+Set=!A!N!Q!F;!A!T;!ADX;fn!b

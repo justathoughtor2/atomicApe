@@ -1,0 +1,478 @@
+%  PBM macro for DVIOUT/DVIPRT version 0.5e
+%      based on eclepsf.sty by Kazuhiro Kazama and modified by Hideki ISOZAKI
+%      and psfig.tex by Trevor J. Darrell.
+%
+% All software, documentation, and related files in this distribution of
+% psfig/tex are Copyright (c) 1987 Trevor J. Darrell
+%
+% Permission is granted for use and non-profit distribution of psfig/tex 
+% providing that this notice be clearly maintained, but the right to
+% distribute any portion of psfig/tex for profit or as part of any commercial
+% product is specifically reserved for the author.
+%
+%
+%　☆scaleオプション指定での基準サイズ(scale=1での出力)
+%　　 \realscaletrue時、PBMデータ1dotをプリンタ出力の1dotとして出力
+%　　 \realscalefalse時、PBMデータ1dotを 1pt x 1pt の点として出力
+%
+%　☆\realscaletrue時用に、プリンタの解像度を\pbmhdpiと\pbmvdpiで設定します。
+%　　 Ex. \pbmhdpi=300\pbmvdpi=300
+%
+% \pbmfile
+% usage : \pbmfile{file=foo.pbm,width=5cm,height=3.5cm}
+% usage : \pbmfile{file=foo.pbm,width=100pt,height=70pt}
+% usage : \pbmfile{file=foo.pbm,scale=2}
+% usage : \pbmfile{file=foo.pbm,hscale=1.5,vscale=1.2}
+%                              ^^         ^^ 
+%　　　　　　　　　　　　　　　　オプション間に、空白を入れないで下さい。
+%
+% \pbmfat
+% usage : \pbmfile[\pbmfat(10mm,12mm){テスト}]{file=foo.pbm}
+%
+% \pbmfon
+% usage : \pbmfile[\pbmfon(10mm,12mm){テスト}]{file=foo.pbm}
+%
+% \ovpbmfon
+% usage : \pbmfile[\ovpbmfon(10mm,12mm){テスト}]{file=foo.pbm}
+%                            ^^^^^^^^^
+%                            座標指定
+%
+%
+% \giffile
+%
+% ・orgsizeオプションを使う場合
+% usage : \giffile{file=foo.gif,orgsize=640x400,scale=2}
+% usage : \giffile{file=foo.gif,orgsize=200x200,hscale=3,vscale=2}
+%
+% ・使わない場合、scaleオプションは使用不可。width=とheight=は省略不可
+% usage : \giffile{file=foo.gif,width=5cm,height=3.5cm}
+% usage : \giffile{file=foo.gif,width=100pt,height=70pt}
+%
+%                                                  Oct. 25, 1993 by Yakumo
+%
+\endlinechar=-1
+\typeout{PBM macro ver. 0.5e - Released Oct. 25, 1993}
+\newcount\pbmhdpi
+\newcount\pbmvdpi
+\pbmhdpi=360%<---- プリンタ水平方向解像度のデフォルト値
+\pbmvdpi=360%<---- プリンタ垂直方向解像度のデフォルト値
+\newif\ifrealscale
+\realscaletrue
+\newif\ifset@vscale
+\newif\ifset@hscale
+\set@vscalefalse\set@hscalefalse
+\newif\ifset@orgsize
+\set@orgsizefalse
+\newdimen\@pbmhsize
+\newdimen\@pbmvsize
+\newcount\@bmarga
+\newcount\@bmargb
+\newcount\@bmsum
+\newcount\@bmrema
+\newcount\@bmremb
+\newcount\@bmctmpa
+\newcount\@bmctmpb
+\newcount\@bmctmpc
+\newdimen\@bmdarg
+\newif\ifcontinue
+
+\def\@setpbmfile#1{
+		\def\@pbmfile{#1}
+		\pbmbb@search
+}
+\def\@setpbmheight#1{
+		\@bmdarg=#1\relax
+   		\edef\@pbmheight{\number\@bmdarg}
+}
+\def\@setpbmwidth#1{
+		\@bmdarg=#1\relax
+   		\edef\@pbmwidth{\number\@bmdarg}
+}
+\def\@setpbmscale#1{
+		\def\@pbmhscale{#1}
+		\def\@pbmvscale{#1}
+		\set@vscaletrue\set@hscaletrue
+}
+\def\@setpbmhscale#1{
+		\def\@pbmhscale{#1}
+		\set@hscaletrue
+}
+\def\@setpbmvscale#1{
+		\def\@pbmvscale{#1}
+		\set@vscaletrue
+}
+\def\parse@pbm@parms#1{
+        \def\@bbw{0}\def\@bbh{0}
+	\def\@pbmhscale{1}\def\@pbmvscale{1}
+        \def\@pbmheight{0}\def\@pbmwidth{0}
+        \@for\@pbmopt:=#1\do
+           {\expandafter\@bmsetparms\@pbmopt,}}
+
+\def\@bmsetparms#1=#2,{\@nameuse{@setpbm#1}{#2}}
+%
+% \pbmin@compute performs #1 * (#2 / #3)
+%          then leaves the result in @result
+%
+\def\@divmod#1#2{
+	\@bmctmpa=#1\relax
+	\divide\@bmctmpa by#2\relax
+	\edef\@quotient{\number\@bmctmpa\relax}
+	\multiply\@bmctmpa by#2\relax
+	\@bmctmpb=#1\relax
+	\advance\@bmctmpb by -\@bmctmpa
+	\edef\@remaindar{\number\@bmctmpb}}
+%
+\def\pbmin@compute#1#2#3{
+	\ifnum#3>\z@
+		\@divmod{#1}{#3}
+		\@bmsum=\@quotient
+		\multiply\@bmsum by#2\relax
+		\@bmrema=\@remaindar\relax
+		\ifnum\@bmrema>\z@
+			\@divmod{#2}{#3}
+			\@bmctmpc=\@quotient
+			\multiply\@bmctmpc by\@bmrema
+			\advance\@bmsum by\@bmctmpc
+			\@bmremb=\@remaindar\relax
+			\ifnum\@bmremb>\z@
+				\ifnum#3<32769
+					\multiply\@bmrema by\@bmremb
+					\divide\@bmrema by#3\relax
+					\advance\@bmsum by\@bmrema
+				\else
+					\edef\bm@digit{1}
+					\@bmarga=0\relax
+					\loop
+						\edef\bm@digit{\bm@digit0}
+						\@divmod{\the\@bmremb0}{#3}
+						\@bmremb=\@remaindar\relax
+						\@bmargb=\@bmrema
+						\multiply\@bmargb by\@quotient
+						\advance\@bmargb by\@bmarga
+						\@divmod{\@bmargb}{\bm@digit}
+						\advance\@bmsum by\@quotient
+						\@bmarga=\@remaindar0\relax
+						\ifnum\bm@digit<\@bmrema
+					\repeat
+				\fi
+			\fi
+		\fi
+	\else
+		\errmessage{pbm: Illegal parameter}
+	\fi
+	\edef\@result{\number\@bmsum}
+}
+\def\bmcompute@handw{
+  \ifnum\@pbmheight=\z@
+    \ifnum\@pbmwidth=\z@
+      \@bmdarg=\@bbh sp \@bmdarg=\@pbmvscale\@bmdarg
+      \edef\@pbmheight{\number\@bmdarg}
+      \@bmdarg=\@bbw sp \@bmdarg=\@pbmhscale\@bmdarg
+      \edef\@pbmwidth{\number\@bmdarg}
+      \multiply\@pbmhsize by\@pbmhscale
+      \multiply\@pbmvsize by\@pbmvscale
+    \else
+      \pbmin@compute{\number\@pbmwidth}{\number\@pbmvsize}{\number\@pbmhsize}
+      \edef\@pbmheight{\@result}
+    \fi
+  \else 
+    \ifnum\@pbmwidth=\z@
+      \pbmin@compute{\number\@pbmheight}{\number\@pbmhsize}{\number\@pbmvsize}
+      \edef\@pbmwidth{\@result}
+    \fi
+  \fi
+  \ifnum\@pbmheight<\z@
+    \errmessage{pbm: Illegal height}
+  \fi
+  \ifnum\@pbmwidth<\z@
+    \errmessage{pbm: Illegal width}
+  \fi
+}
+
+\def\pbmfile{\@ifnextchar[{\@pbmfile}{\@pbmfile[]}}
+\def\@pbmfile[#1]#2{{
+  \parse@pbm@parms{#2}
+  \bmcompute@handw
+  {\@bmarga=\@pbmwidth \divide\@bmarga by 186468\relax
+    \@bmargb=\@pbmheight \divide\@bmargb by 186468\relax
+    \message{becomes \the\@bmarga mm x \the\@bmargb mm}}
+  \@bmarga=\@pbmheight  \divide\@bmarga by 65536\relax
+  \edef\@bmvsize{\number\@bmarga}
+  \@bmarga=\@pbmwidth   \divide\@bmarga by 65536\relax
+  \edef\@bmhsize{\number\@bmarga}
+  \leavevmode
+  \hbox to \@pbmwidth sp{
+   \vrule\@width\z@\@height\@pbmheight sp\@depth\z@
+   \raise\@pbmheight sp
+    \hbox to\z@{
+    \ifrealscale
+	\special{pbmfile=\@pbmfile\space
+		\ifset@hscale hsize=\number\@pbmhsize dot/\the\pbmhdpi dpi
+		\else	hsize=\@bmhsize\fi\space
+		\ifset@vscale vsize=\number\@pbmvsize dot/\the\pbmvdpi dpi
+		\else	vsize=\@bmvsize\fi\space
+	}
+    \else
+	\special{pbmfile=\@pbmfile\space
+		\ifset@hscale hscale=\@pbmhscale
+		\else hsize=\@bmhsize\fi\space
+		\ifset@vscale vscale=\@pbmvscale
+		\else vsize=\@bmvsize\fi\space
+	}
+    \fi
+    }
+    \vrule\@width\z@\@height\@pbmheight sp \@depth\z@
+    \hbox to\z@{#1}\hfil
+  }
+}}
+
+\newread\pbm@stream
+\catcode`\#=11\relax
+\def\pbmbb@search{\continuetrue
+	\typeout{analyzing \@pbmfile}
+	\openin\pbm@stream=\@pbmfile\relax
+	\ifeof\pbm@stream\errmessage{pbm: \@pbmfile\space not found}\fi
+	\read\pbm@stream to \pbm@line
+	\expandafter\id@pbmplus\pbm@line.
+	\ifnum4=\@magic \message{PBM(P4-type) }
+	\else \ifnum1=\@magic \errmessage{pbm: P1-type not supported}
+	\else \errmessage{pbm: \@pbmfile\space is not PBM file}\fi\fi
+	\loop
+	  \read\pbm@stream to \pbm@line
+	  \if\expandafter\next@char\pbm@line\end@getbb #\else\continuefalse\fi
+	  \ifeof\pbm@stream\errmessage{pbm: \@pbmfile\space has no data}\fi
+	\ifcontinue \repeat
+	\expandafter\pbm@getbb\pbm@line.
+	\closein\pbm@stream
+}
+\catcode`\#=6\relax
+\def\next@char#1#2\end@getbb{#1}
+\def\id@pbmplus#1#2.{\edef\@magic{\if#1P\next@char#2\end@getbb\else0\fi}}
+%
+%
+\def\pbm@getbb#1 #2.{
+  \@bmdarg=#1pt\ifrealscale\divide\@bmdarg by \pbmhdpi\@bmdarg=72.27\@bmdarg\fi
+  \edef\@bbw{\number\@bmdarg}\@pbmhsize=#1sp
+  \@bmdarg=#2pt\ifrealscale\divide\@bmdarg by \pbmvdpi\@bmdarg=72.27\@bmdarg\fi
+  \edef\@bbh{\number\@bmdarg}\@pbmvsize=#2sp
+  \message{original: #1 x #2}
+}
+%
+% You can put anything on the picture using \pbmfat , \pbmfon , \ovpbmfon
+%
+\def\pbmfat(#1,#2)#3{\@killglue{
+    \smash{\raise#2\hbox to \z@{\kern#1 \relax#3\hss}}}\ignorespaces}
+%
+\newbox\@strbox
+%
+\def\pbmfon(#1,#2)#3{
+  \setbox\@strbox=\hbox{#3}
+  \@bmctmpa=\number\wd\@strbox
+  \@bmctmpb=\number\ht\@strbox
+  \@bmctmpc=\number\dp\@strbox
+  \advance\@bmctmpc by\@bmctmpb
+  \divide\@bmctmpc by 4736\relax
+  \divide\@bmctmpa by 4736\relax
+  \pbmfat(#1,#2){
+    \raise\@bmctmpb sp\hbox to\z@{
+    \special{pn 0}\special{sh 0}
+    \special{pa 0 0}\special{pa \the\@bmctmpa\space 0}
+    \special{pa \the\@bmctmpa\space \the\@bmctmpc}\special{pa 0 \the\@bmctmpc}
+    \special{pa 0 0}
+    \special{ip}}#3
+  }
+}
+%
+\newdimen\ovrulewidth
+\newdimen\ovradius
+\ovrulewidth=0.4pt
+\ovradius=2mm
+\def\hornlength{5}
+%
+\def\ovpbmfon{\@ifnextchar({\@ovpbmfon{}}{\@ovpbmfon}}
+\def\@ovpbmfon#1(#2,#3)#4{
+  \setbox\@strbox=\hbox{#4}
+  \@bmctmpa=\number\wd\@strbox
+  \@bmctmpb=\number\ht\@strbox
+  \@bmctmpc=\number\dp\@strbox
+  \@bmremb=\number\ovrulewidth
+  \@bmarga=\number\ovradius
+  \divide\@bmarga by 4736\relax
+  \edef\CoRadius{\the\@bmarga}
+  \divide\@bmarga by 2\relax
+  \edef\CoBase{\the\@bmarga}
+  \@bmdarg=\ovradius
+  \advance\@bmdarg by\@bmremb sp
+  \@bmarga=\number\@bmdarg
+  \advance\@bmctmpc by\@bmctmpb
+  \advance\@bmctmpb by\@bmarga
+  \divide\@bmctmpc by 4736\relax
+  \divide\@bmctmpa by 4736\relax
+  \divide\@bmarga by 4736\relax
+  \divide\@bmremb by 4736\relax
+  \advance\@bmctmpa by\@bmarga
+  \@bmargb=\@bmctmpa
+  \advance\@bmargb by\@bmarga
+  \advance\@bmctmpc by\@bmarga
+  \@bmrema=\@bmctmpc
+  \advance\@bmrema by\@bmarga
+  \advance\@bmargb by-\@bmremb
+  \advance\@bmrema by-\@bmremb
+  \if#1\@empty\else
+    \@bmsum=\@bmarga
+    \divide\@bmsum by 10\relax
+    \multiply\@bmsum by\hornlength
+    \edef\@hornlg{\the\@bmsum}
+    \if#1a\@bmsum=\@bmremb
+  	\advance\@bmsum by -\@hornlg\relax
+  	\edef\@hornx{\the\@bmsum}
+    \else\if#1b\@bmsum=\@bmargb
+  	\advance\@bmsum by \@hornlg\relax
+  	\edef\@hornx{\the\@bmsum}
+  	\@bmsum=\@bmremb
+  	\advance\@bmsum by -\@hornlg\relax
+  	\edef\@horny{\the\@bmsum}
+    \else\if#1c\@bmsum=\@bmargb
+  	\advance\@bmsum by \@hornlg\relax
+  	\edef\@hornx{\the\@bmsum}
+  	\@bmsum=\@bmrema
+  	\advance\@bmsum by \@hornlg\relax
+  	\edef\@horny{\the\@bmsum}
+    \else\if#1d\@bmsum=\@bmremb
+  	\advance\@bmsum by -\@hornlg\relax
+  	\edef\@hornx{\the\@bmsum}
+  	\@bmsum=\@bmrema
+  	\advance\@bmsum by \@hornlg\relax
+  	\edef\@horny{\the\@bmsum}
+    \else\multiply\@bmsum by 3\relax
+  	\edef\@hornlg{\the\@bmsum}
+      \if#1A\pbm@horn\@bmctmpa\@bmremb{-\@hornlg}
+      \else\if#1B\pbm@horn\@bmctmpc\@bmargb{\@hornlg}
+      \else\if#1C\pbm@horn\@bmctmpa\@bmrema{\@hornlg}
+      \else\if#1D\pbm@horn\@bmctmpc\@bmremb{-\@hornlg}
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi
+  \pbmfat(#2,#3){
+    \raise\@bmctmpb sp\hbox to\z@{
+    \special{pn \the\@bmremb}\special{sh 0}
+    \special{pa \the\@bmarga\space \the\@bmremb}
+    \if#1A\special{pa \@horni\space \the\@bmremb}
+      \special{pa \@hornx\space \@horny}
+      \special{pa \@hornii\space \the\@bmremb}\fi
+    \special{pa \the\@bmctmpa\space \the\@bmremb}
+    \if#1b\special{pa \@hornx\space \@horny}\fi
+    \special{pa \the\@bmargb\space \the\@bmarga}
+    \if#1B\special{pa \the\@bmargb\space \@horni}
+      \special{pa \@horny\space \@hornx}
+      \special{pa \the\@bmargb\space \@hornii}\fi
+    \special{pa \the\@bmargb\space \the\@bmctmpc}
+    \if#1c\special{pa \@hornx\space \@horny}\fi
+    \special{pa \the\@bmctmpa\space \the\@bmrema}
+    \if#1C\special{pa \@hornii\space \the\@bmrema}
+      \special{pa \@hornx\space \@horny}
+      \special{pa \@horni\space \the\@bmrema}\fi
+    \special{pa \the\@bmarga\space \the\@bmrema}
+    \if#1d\special{pa \@hornx\space \@horny}\fi
+    \special{pa \the\@bmremb\space \the\@bmctmpc}
+    \if#1D\special{pa \the\@bmremb\space \@hornii}
+      \special{pa \@horny\space \@hornx}
+      \special{pa \the\@bmremb\space \@horni}\fi
+    \special{pa \the\@bmremb\space \the\@bmarga}
+    \if#1a\special{pa \@hornx\space \@hornx}\fi
+    \special{pa \the\@bmarga\space \the\@bmremb}
+    \ifnum\@bmremb>0\special{fp}\else\special{ip}\fi
+    \if#1a\else\special{sh 0}
+    \special{ia \the\@bmarga\space \the\@bmarga\space
+    	\CoRadius\space \CoRadius\space 0.0 6.28319}
+    \ifnum\@bmremb>0\special{ar \the\@bmarga\space \the\@bmarga\space
+    	\CoRadius\space \CoRadius\space 3.14159 4.71239}\fi\fi
+    \if#1b\else\special{sh 0}
+    \special{ia \the\@bmctmpa\space \the\@bmarga\space
+    	\CoRadius\space \CoRadius\space 0.0 6.28319}
+    \ifnum\@bmremb>0\special{ar \the\@bmctmpa\space \the\@bmarga\space
+    	\CoRadius\space \CoRadius\space 4.71239 6.28319}\fi\fi
+    \if#1c\else\special{sh 0}
+    \special{ia \the\@bmctmpa\space \the\@bmctmpc\space
+    	\CoRadius\space \CoRadius\space 0.0 6.28319}
+    \ifnum\@bmremb>0\special{ar \the\@bmctmpa\space \the\@bmctmpc\space
+    	\CoRadius\space \CoRadius\space 0.0 1.5708}\fi\fi
+    \if#1d\else\special{sh 0}
+    \special{ia \the\@bmarga\space \the\@bmctmpc\space
+    	\CoRadius\space \CoRadius\space 0.0 6.28319}
+    \ifnum\@bmremb>0\special{ar \the\@bmarga\space \the\@bmctmpc\space
+    	\CoRadius\space \CoRadius\space 1.5708 3.14159}\fi\fi
+    }\hbox to\z@{\kern\the\@bmdarg\relax #4\hss}
+  }
+}
+\def\pbm@horn#1#2#3{
+	\@bmsum=#1\relax
+	\advance\@bmsum by \@bmarga
+	\divide\@bmsum by 2\relax
+	\advance\@bmsum by -\CoBase\relax
+	\edef\@horni{\the\@bmsum}
+	\advance\@bmsum by \CoBase\relax
+	\edef\@hornx{\the\@bmsum}
+	\advance\@bmsum by \CoBase\relax
+	\edef\@hornii{\the\@bmsum}
+	\@bmsum=#2\relax
+	\advance\@bmsum by #3\relax
+	\edef\@horny{\the\@bmsum}
+}
+%
+% GIF macros
+%
+\def\@setpbmorgsize#1{
+	\gif@search#1.
+	\set@orgsizetrue
+}
+\def\gif@search#1x#2.{\pbm@getbb#1 #2.}
+\def\giffile{\@ifnextchar[{\@giffile}{\@giffile[]}}
+\def\@giffile[#1]#2{{
+  \def\@setpbmfile##1{\def\@pbmfile{##1}}
+  \typeout{input GIF file}
+  \parse@pbm@parms{#2}
+  \ifset@orgsize
+   \bmcompute@handw
+   {\@bmarga=\@pbmwidth \divide\@bmarga by 186468\relax
+     \@bmargb=\@pbmheight \divide\@bmargb by 186468\relax
+     \message{becomes \the\@bmarga mm x \the\@bmargb mm}}
+  \else
+   \ifset@hscale\errmessage{gif(\@pbmfile): You must set orgsize option}\fi
+   \ifset@vscale\errmessage{gif(\@pbmfile): You must set orgsize option}\fi
+   \ifnum\@pbmheight<1\errmessage{gif(\@pbmfile): You should set the height}\fi
+   \ifnum\@pbmwidth<1\errmessage{gif(\@pbmfile): You should set the width}\fi
+  \fi
+  \@bmarga=\@pbmheight  \divide\@bmarga by 65536\relax
+  \edef\@bmvsize{\number\@bmarga}
+  \@bmarga=\@pbmwidth   \divide\@bmarga by 65536\relax
+  \edef\@bmhsize{\number\@bmarga}
+  \leavevmode
+  \hbox to \@pbmwidth sp{
+    \vrule\@width\z@\@height\@pbmheight sp\@depth\z@
+    \raise\@pbmheight sp
+    \hbox to\z@{
+    \ifrealscale
+	\special{giffile=\@pbmfile\space
+		\ifset@hscale hsize=\number\@pbmhsize dot/\the\pbmhdpi dpi
+		\else	hsize=\@bmhsize\fi\space
+		\ifset@vscale vsize=\number\@pbmvsize dot/\the\pbmvdpi dpi
+		\else	vsize=\@bmvsize\fi\space
+	}
+    \else
+	\special{pbmfile=\@pbmfile\space
+		\ifset@hscale hscale=\@pbmhscale
+		\else hsize=\@bmhsize\fi\space
+		\ifset@vscale vscale=\@pbmvscale
+		\else vsize=\@bmvsize\fi\space
+	}
+    \fi
+    }
+    \vrule\@width\z@\@height\@pbmheight sp \@depth\z@
+    \hbox to\z@{#1}\hfil
+  }
+}}
+\def\giffat{\pbmfat}
+\def\giffon{\pbmfon}
+\def\ovgiffon{\ovpbmfon}
+%
+\endlinechar=13\relax
+\endinput

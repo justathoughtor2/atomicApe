@@ -1,0 +1,4085 @@
+%% PS_View -- previewing utility for Ghostscript interpreter
+%% Authors: P. Pianowski, P. Strzelczyk, B. Jackowski
+%% Address: BOP s.c. Gen. T. Bora-Komorowskiego, 80-377 Gda\'nsk, Poland
+%%          bop@bop.com.pl
+%% Copyright: (c) 2009 BOP s.c.
+%% Licence:   GPL
+%% History:
+%% Creation date: Friday, January 15th, 1993
+%% Version: 1.00, 28 III 1995
+%% Version: 1.99, 29 IV 1998
+%% Version: 2.01, 3 VI 1998
+%% Version: 2.02, 17.VI.1999 (handleerror)
+%% [...]
+%% Version: 2.06, 5.II.2002 (help once more)
+%% Version: 3.00, 12.03.2002 (new PS file search scheme -- by PERL)
+%% Version: 3.99, 2003 (Windows version)
+%%   09.07.2003 (DocumentMedia comment processed)
+%%   05.09.2003 (Printing touched)
+%%   11.02.2004 (Printing touched (new defs of /showpage and /copypage))
+%%   02.03.2004 (Bug in zoom_in & zoom_out fixed, it apeared when parameters were present)
+%%   18.06.2004 (IdiomRecognition turned off)
+%% Version: 4.9x, 2007 (multiplatform version)
+%%   21.03.2008 (small adjustments to new [gswxlua] stub: /start command and status line)
+%%   24.03.2008 (small adjustments cont.: /z_conv, psv_flush)
+%%   01.04.2008 (new !PSV callbacks added: CONSOLE, CONFIG, INFO and apprioprate
+%      changes in menu)
+%%   03.04.2008 (DLGBOX modified)
+%% Version: 5.01, 07.04.2008 (files renamed, RESIZE calls corrected)
+%% Version: 5.02, 08.04.2008 (some shortcuts added)
+%% Version: 5.03, 14.04.2008 (localisation, grids on separate `layer')
+%% Version: 5.04, 17.04.2008 (optional command parameters, and `layer' drawing corrected)
+%% Version: 5.05, 26.04.2008 (post-Pingwinaria release, 'layer' and printing bug corrected)
+%% Version: 5.06, 28.04.2008 (BachoTeX release)
+%% Version: 5.07, 05.05.2008 (post BachoTeX release)
+%% Version: 5.08, 14.05.2008 (full-screen mode)
+%% Version: 5.09, 02.07.2008 (LaTeX/HTML help added -- more formatting needed)
+%% Version: 5.10, 35.07.2008 (bug in DSC reading corrected)
+%% Version: 5.11, 06.02.2009 (some changes to compatibility with GS 8.64, and builtin inits)
+%% Version: 5.12, 07.10.2009 (changes for Windows Vista and wxWidgets 2.8.10, TL2009 release)
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+userdict /view_dict 300 dict put
+view_dict begin
+/PS_VIEW (PSView 5.12) def
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+userdict begin
+
+  /get_page_size {userdict begin /psv_VS exch def /psv_HS exch def end} def
+  /put_page_size {userdict begin psv_HS psv_VS end} def
+
+  /letter {612 792 get_page_size} def  /note /letter load def
+  /legal {612 1008 get_page_size} def
+  /a0 {2380 3368 get_page_size} def
+  /a1 {1684 2380 get_page_size} def
+  /a2 {1190 1684 get_page_size} def
+  /a3 {842 1190 get_page_size} def
+  /a4 {595 842 get_page_size} def
+  /a5 {421 595 get_page_size} def
+  /a6 {297 421 get_page_size} def
+  /a7 {210 297 get_page_size} def
+  /a8 {148 210 get_page_size} def
+  /a9 {105 148 get_page_size} def
+  /a10 {74 105 get_page_size} def
+  /b0 {2836 4008 get_page_size} def
+  /b1 {2004 2836 get_page_size} def
+  /b2 {1418 2004 get_page_size} def
+  /b3 {1002 1418 get_page_size} def
+  /b4 {709 1002 get_page_size} def
+  /b5 {501 709 get_page_size} def
+  /flsa {612 936 get_page_size} def
+  /flse {612 936 get_page_size} def
+  /halfletter {396 612 get_page_size} def
+  /11x17 {792 1224 get_page_size} def
+  /ledger {1224 792 get_page_size} def
+
+  /ori_setpagedevice /setpagedevice load def
+  /setpagedevice {/setpagedevice_dict XD
+    setpagedevice_dict /PageSize known {
+      setpagedevice_dict /PageSize get aload pop
+      PDF_file not {
+        setpagedevice_dict /Orientation known {
+          setpagedevice_dict /Orientation get
+          dup 1 eq exch 3 eq or {exch} if
+        } if
+      } if
+      get_page_size
+    } if
+  } def
+
+  /ori_dotsetpagedevice /.setpagedevice load def
+  /.setpagedevice {
+    % patch for ignore .setpagedevice in pdfshowpage_finish
+    dup /PageSpotColors known {pop}{ori_dotsetpagedevice} ifelse
+  } def
+
+end % userdict
+
+statusdict begin
+
+  /setpageparams {exch pop 1 ne {exch} if get_page_size} def
+  /setpage {1 ne {exch} if get_page_size} def
+
+end % statusdict
+
+/BD {bind def} def
+/XD {exch def} def
+/LD {load def} def
+
+/BP {1 mul} def
+/PT {72 72.27 div mul} def
+/MM {72 25.4 div mul} def
+/CM {72 2.54 div mul} def
+/IN {72 mul} def
+/DD {72 72.27 div 1238 mul 1157 div mul} def
+/PC {12 PT mul} def
+/CC {12 DD mul} def
+
+/set_psv_unit {
+  /orig_x orig_x psv_unit mul def
+  /orig_y orig_y psv_unit mul def
+  cross1 begin
+    /cross_x cross_x psv_unit mul def
+    /cross_y cross_y psv_unit mul def
+  end
+  cross2 begin
+    /cross_x cross_x psv_unit mul def
+    /cross_y cross_y psv_unit mul def
+  end
+  /multi_dist multi_dist psv_unit mul def
+  /vf_shift vf_shift psv_unit mul def
+  %
+  /psv_unit_name_secondary XD
+  /psv_unit_name XD
+  /psv_unit_factor XD
+  /psv_unit XD
+  /orig_x orig_x psv_unit div def
+  /orig_y orig_y psv_unit div def
+  cross1 begin
+    /cross_x cross_x psv_unit div def
+    /cross_y cross_y psv_unit div def
+  end
+  cross2 begin
+    /cross_x cross_x psv_unit div def
+    /cross_y cross_y psv_unit div def
+  end
+  /multi_dist multi_dist psv_unit div def
+  /vf_shift vf_shift psv_unit div def
+  menu_on {
+    psv_unit_name (cm) eq {(CM_SET_psv_unit) check_SET_psv_unit} if
+    psv_unit_name (mm) eq {(MM_SET_psv_unit) check_SET_psv_unit} if
+    psv_unit_name (in) eq {(IN_SET_psv_unit) check_SET_psv_unit} if
+    psv_unit_name (pt) eq {(PT_SET_psv_unit) check_SET_psv_unit} if
+    psv_unit_name (dd) eq {(DD_SET_psv_unit) check_SET_psv_unit} if
+    psv_unit_name (bp) eq {(BP_SET_psv_unit) check_SET_psv_unit} if
+  } if
+  measure
+} def
+
+/ht_rel_conv {window_ht grid_ht div magnification div psv_unit div mul} def
+/wd_rel_conv {window_wd grid_wd div magnification div psv_unit div mul} def
+%
+/z_conv {
+  angle   0 eq {vflip {screen_H exch sub} if exch hflip {screen_W exch sub} if exch} if
+  angle  90 eq {vflip not {screen_H exch sub} if exch hflip {screen_W exch sub} if screen_H screen_W sub add} if
+  angle 180 eq {vflip not {screen_H exch sub} if exch hflip not {screen_W exch sub} if exch} if
+  angle 270 eq {vflip {screen_H exch sub} if exch hflip not {screen_W exch sub} if screen_H screen_W sub add} if
+  %
+  default_matrix itransform
+  %
+  magnification div psv_unit div exch
+  magnification div psv_unit div exch
+} def
+
+/ori_cleardictstack /cleardictstack LD
+/ori_setmatrix /setmatrix LD
+/ori_initmatrix /initmatrix LD
+/ori_initgraphics /initgraphics LD
+/ori_showpage /showpage LD
+/ori_copypage /copypage LD
+/ori_defaultmatrix /defaultmatrix LD
+/ori_erasepage /erasepage LD
+
+/erasepage {bb_wd 0 gt bb_ht 0 gt and background and {
+    gsave 0.7 setgray clippath fill grestore
+  } {ori_erasepage} ifelse
+} def
+
+/cleardictstack {clear_dict_stack} def
+/showpage {} def
+/copypage {} def
+/initgraphics {view_matrix ori_setmatrix
+  newpath initclip 0 setgray 1 setlinewidth 0 setlinecap 0 setlinejoin
+  10 setmiterlimit [] 0 setdash} def
+/defaultmatrix {pop view_matrix} def
+/initmatrix {view_matrix ori_setmatrix} def
+/rectclip {pop pop pop pop} def %!!!
+%/initclip {} def %!!!
+
+pdfdict /pdfopen undef
+/pdfopen { % redefined to allow UseCIEcolors toggle in PDF
+           % (removed color space redefinition)
+  pdfopenfile begin
+  pdfopencache
+  currentdict end
+} def
+
+/clear_dict_stack {ori_cleardictstack view_dict begin} def
+
+
+<</IdiomRecognition false>> setuserparams
+DELAYBIND {.bindnow /bind /.bind load .bind def} if
+
+/val_str  20 string def
+/val_str2 20 string def
+/val_str3 20 string def
+
+/G {currentdevice getdeviceprops] pstack pop} def
+/As {abcdefghijklmnopqrstuvwxyz} def
+/Ab {ABCDEFGHIJKLMNOPQRSTUVWXYZ} def
+
+/get_screen_&_set_pos {
+  /old_window_wd window_wd def
+  /old_window_ht window_ht def
+  get_screen
+  bb_wd 0 gt bb_ht 0 gt and {
+  /orig_x orig_x
+    window_wd old_window_wd sub
+    0.5 mul magnification div psv_unit div sub
+    angle 90 eq angle 270 eq or {
+      window_wd window_ht sub old_window_wd old_window_ht sub sub 0.5 mul
+      magnification div
+      psv_unit div add
+    } if def
+  /orig_y orig_y
+    window_ht old_window_ht sub
+    0.5 mul magnification div psv_unit div sub
+    angle 90 eq angle 270 eq or {
+      window_wd window_ht sub old_window_wd old_window_ht sub sub 0.5 mul
+      magnification div
+      psv_unit div sub
+    } if def
+  } if
+} def
+
+/set_media {
+  /page_name XD
+  /page_H XD /page_W XD
+  get_screen_&_set_pos
+  menu_on {
+    page_name (A4) eq {(A4_SET_MEDIA) check_SET_MEDIA} if
+    page_name (A4 Landscape) eq {(A4L_SET_MEDIA) check_SET_MEDIA} if
+    page_name (A3) eq {(A3_SET_MEDIA) check_SET_MEDIA} if
+    page_name (A3 Landscape) eq {(A3L_SET_MEDIA) check_SET_MEDIA} if
+    page_name (BB) eq {(BB_SET_MEDIA) check_SET_MEDIA} if
+  } if
+} def
+
+/bb_set_media {
+    bb_wd multi_x mul multi_dist psv_unit mul multi_x 1 sub mul add
+    bb_ht multi_y mul multi_dist psv_unit mul multi_y 1 sub mul add
+    dup 0 gt 2 index 0 gt and {(BB) set_media run_file} {pop pop} ifelse
+} def
+
+/screen_res_corr {
+ screen_H page_H 72.0 div resolution_H mul div
+  screen_W page_W 72.0 div resolution_W mul div minimum dup
+  matrix scale matrix ori_defaultmatrix matrix concatmatrix
+  /default_matrix XD} def
+/set_window_size {newpath clippath pathbbox
+  /window_uy XD /window_ux XD /window_ly XD /window_lx XD
+  window_uy window_ly sub /window_ht XD
+  window_ux window_lx sub /window_wd XD} def
+/get_screen {
+  currentdevice getdeviceprops counttomark 2 idiv
+  dup dict /screen_dict exch def
+  screen_dict begin {def} repeat pop end
+  %
+  /screen_name screen_dict /Name get def
+  screen_dict /HWSize get aload pop
+  /screen_H exch def /screen_W exch def
+  screen_dict /HWResolution get aload pop
+  /resolution_H exch def /resolution_W exch def
+  %
+  screen_res_corr
+  /screen_dev currentdevice def
+  /font_size 11000 screen_H div def
+  gsave default_matrix ori_setmatrix set_window_size grestore
+} def
+
+/call_for_DSC {
+  flush
+  (!PSV_FINDDSC: {) print
+  file_name print
+  (}\n) print flush
+} def
+
+/match {DSC_line exch anchorsearch
+  {pop pop true} {pop false} ifelse} def
+
+/read_DSC {
+ % in_document {(D)} {( )} ifelse
+ % in_prolog   {(B)} {( )} ifelse concat_strings
+ % in_setup    {(S)} {( )} ifelse concat_strings
+ % in_page     {(P)} {( )} ifelse concat_strings
+ % in_inclusion val_str cvs concat_strings
+ % (  ) concat_strings
+ % DSC_line concat_strings =
+  in_page {
+    (%%BeginDocument) match {b_inclusion} if
+    (%%EndDocument) match {e_inclusion} if
+  } if
+  in_inclusion 0 eq {
+    (%%DocumentMedia:) match {bb_wd 0 eq bb_ht 0 eq or {read_media} if} if
+    (%%BoundingBox:) match {bb_wd 0 eq bb_ht 0 eq or {read_bb} if} if
+    (%%HiResBoundingBox:) match {read_bb} if
+%   (%%EndComments) match {b_document} if
+    (%%BeginProlog) match {b_prolog} if
+%   (%%EndProlog) match {} if
+%   (%%BeginResource) match {} if
+%   (%%EndResource) match {} if
+%   (%%BeginProcSet) match {} if
+%   (%%EndProcSet) match {} if
+%    (%%BeginSetup) match {b_setup} if
+    (%%BeginSetup) match {b_prolog} if
+%   (%%EndSetup) match {} if
+    (%DVIPSBeginSection) match {b_setup} if
+    (%DVIPSEndSection) match {b_prolog} if
+    (%DVIPSSectionPage:) match {b_page} if
+    (%%Page:) match {b_page} if
+    (%% Page:) match {b_page} if
+%   (%%Trailer) match {} if
+    (%%EOF) match {e_document} if
+  } if
+} def
+
+/in_document false def
+/in_prolog false def
+/in_setup false def
+/in_page false def
+
+/DSC_err {print} def
+
+/b_inclusion {
+  /in_inclusion in_inclusion 1 add def
+} def
+
+/e_inclusion {
+  in_inclusion 0 gt {/in_inclusion in_inclusion 1 sub def} if
+} def
+
+/b_document {
+  in_document not {
+    /doc_beg DSC_addr def
+    /in_document true def
+%    (Qq) print doc_beg val_str cvs print (qQ) print
+  } if
+} def
+
+/e_document {
+  in_document {
+    in_prolog {e_prolog} if
+    in_setup {e_setup} if
+    in_page {e_page} if
+    /doc_end DSC_addr def
+    /in_document false def
+%    (Qq) print doc_end val_str cvs print (qQ) print
+  } if
+} def
+
+/b_prolog {
+  in_setup {e_setup} if
+  in_page {e_page} if
+  in_prolog not {
+    /prolog_addr DSC_addr def
+    /in_prolog true def
+  } if
+} def
+
+/e_prolog {
+  prolog_count 0 ge prolog_count max_pages lt and {
+    /prolog_count prolog_count 1 add def
+    prolog_arr prolog_count prolog_addr put
+    prolog_len prolog_count DSC_addr prolog_addr sub put
+    /overfull false def} {pop pop /overfull true def} ifelse
+  /in_prolog false def
+} def
+
+/b_setup {
+  in_prolog {e_prolog} if
+  in_page {e_page} if
+  in_setup not {
+    /setup_addr DSC_addr def
+    /in_setup true def
+  } if
+} def
+
+/e_setup {
+  setup_count 0 ge setup_count max_pages lt and {
+    /setup_count setup_count 1 add def
+    setup_arr setup_count setup_addr put
+    setup_len setup_count DSC_addr setup_addr sub put
+    /overfull false def} {pop pop /overfull true def} ifelse
+  /in_setup false def
+} def
+
+/b_page {
+  in_prolog {e_prolog} if
+  in_setup {e_setup} if
+  in_page {e_page} if
+  /page_addr DSC_addr def
+  /in_page true def
+} def
+
+/e_page {
+  page_count 0 ge page_count max_pages lt and {
+    /page_count page_count 1 add def
+    page_arr page_count page_addr put
+    page_len page_count DSC_addr page_addr sub put
+    /overfull false def} {pop pop /overfull true def} ifelse
+  /in_page false def
+} def
+
+/read_bb {
+  DSC_line (:) search {pop pop
+    token {/dl_x XD token {/dl_y XD
+    token {/ur_x XD token {/ur_y XD pop
+      /bb_wd ur_x dl_x sub def
+      /bb_ht ur_y dl_y sub def
+      bb_wd 0 gt bb_ht 0 gt and to_center and {
+        dl_x dl_y multi_wd multi_ht center_rect
+        /to_center false def
+      } if
+    } if} if} if} if
+  }{pop} ifelse
+} def
+
+/read_media {
+  DSC_line (:) search {pop pop
+    token {/media_name XD token {/bb_wd XD
+    token {/bb_ht XD pop
+      /dl_x 0 def /ur_x bb_wd def
+      /dl_y 0 def /ur_y bb_ht def
+      bb_wd 0 gt bb_ht 0 gt and to_center and {
+        dl_x dl_y multi_wd multi_ht center_rect
+        /to_center false def
+      } if
+    } if} if} if
+  }{pop} ifelse
+} def
+
+/precision 3 def
+/psv_accuracy 10 precision neg exp def
+/psv_accuracy_mask (00000000000000000000000000000000000000000000000)
+  0 precision 1 add getinterval def
+
+/psv_print_rounded {view_dict begin
+  dup abs 0.000001 lt {pop (0) psv_print} {psv_accuracy div round
+  dup abs 16#7FFFFFFF gt {pop (INTEGER OUT of RANGE!\n) print quit} if
+  cvi
+  /minus_sign false def dup 0 lt {neg /minus_sign true def} if
+  %
+  dup /int_to_pull exch def /dig_to_pull 0 def
+  {int_to_pull 0 eq {exit} if
+  /mod_to_pull int_to_pull 10 mod def
+  mod_to_pull 0 eq {/dig_to_pull dig_to_pull 1 add def
+  /int_to_pull int_to_pull 10 idiv def} {exit} ifelse} loop
+  %
+  /fractional_dig precision dig_to_pull sub 0 max def
+%  minus_sign {<96> psv_print} if
+  minus_sign {(-) psv_print} if
+  val_str cvs dup length precision le {
+    /leading_zeros precision 1 add string def
+    leading_zeros 0 psv_accuracy_mask putinterval leading_zeros exch
+    dup length precision 1 add exch sub exch putinterval leading_zeros
+  } if
+  dup dup length precision sub 0 exch getinterval psv_print
+  fractional_dig 0 eq {pop} {(.) psv_print
+  dup length precision sub fractional_dig getinterval
+  psv_print} ifelse} ifelse end} def
+
+/psv_normal_print_rounded {view_dict begin
+  dup abs 0.000001 lt {pop (0) print} {psv_accuracy div round
+  dup abs 16#7FFFFFFF gt {pop (INTEGER OUT of RANGE!\n) print quit} if
+  cvi
+  /minus_sign false def dup 0 lt {neg /minus_sign true def} if
+  %
+  dup /int_to_pull exch def /dig_to_pull 0 def
+  {int_to_pull 0 eq {exit} if
+  /mod_to_pull int_to_pull 10 mod def
+  mod_to_pull 0 eq {/dig_to_pull dig_to_pull 1 add def
+  /int_to_pull int_to_pull 10 idiv def} {exit} ifelse} loop
+  %
+  /fractional_dig precision dig_to_pull sub 0 max def
+%  minus_sign {<96> print} if
+  minus_sign {(--) print} if
+  val_str cvs dup length precision le {
+    /leading_zeros precision 1 add string def
+    leading_zeros 0 psv_accuracy_mask putinterval leading_zeros exch
+    dup length precision 1 add exch sub exch putinterval leading_zeros
+  } if
+  dup dup length precision sub 0 exch getinterval print
+  fractional_dig 0 eq {pop} {(.) print
+  dup length precision sub fractional_dig getinterval
+  print} ifelse} ifelse end} def
+
+/print_buf 256 string def
+/print_count 0 def
+%/clear_rect {
+%  gsave
+%    newpath
+%    0 window_ht font_size sub 0.2 font_size mul sub translate
+%    0 0 moveto window_wd 0 lineto window_wd font_size 1.2 mul lineto
+%    0 font_size 1.2 mul lineto
+%    closepath 0 0 0 0 setcmykcolor fill
+%  grestore} def
+/psv_print {view_dict begin
+  print_buf print_count 2 index putinterval
+  length print_count add /print_count XD
+  end} def
+/psv_init_print {view_dict begin /print_count 0 def end} def
+
+%/ori_prompt /prompt LD % gswxlua DOESN'T use prompt!
+%/prompt {view_dict begin psv_flush %psv_init_print psv_prompt
+%  flush ori_prompt end} def
+
+/psv_prompt {
+  flush
+  (!PSV_STATUS: T ) print
+  was_error {({1bc}{ER}\n)} {({1tc}{OK}\n)} ifelse print flush
+} def
+/psv_clear_prompt {
+  flush
+  (!PSV_STATUS: T {1bc}{}\n) print flush
+  view_dict /was_error false put
+} def
+/psv_flush {
+  view_dict begin print_count 0 gt {
+    flush
+    (!PSV_STATUS: T {6}{) print
+    print_buf 0 print_count getinterval print
+    (}\n) print flush
+    (!PSV_CONSOLE: P {) print
+    print_buf 0 print_count getinterval print
+    (\n}\n) print flush
+  } {flush (!PSV_STATUS: T {6}{}\n) print flush} ifelse end
+} def
+/psv_sh_pn {
+  flush
+  (!PSV_STATUS: T {2}{) print
+  (Page: ) transl print
+  print
+  (/) print
+  print
+  (}\n) print flush
+} def
+/psv_sh_no_pn {flush (!PSV_STATUS: T {2}{ }\n) print flush} def
+/psv_sh_pnr {
+  flush
+  (!PSV_STATUS: T {2}{) print
+  (Pages: ) transl print
+  print
+  (-) print
+  print
+  (/) print
+  print
+  (}\n) print flush
+} def
+/psv_sh_angle {
+  flush
+  (!PSV_STATUS: T {3}{) print
+  (Angle: ) transl print
+  print
+  (}\n) print flush
+} def
+/psv_sh_no_angle {flush (!PSV_STATUS: T {3}{ }\n) print flush} def
+/psv_sh_flip {
+  flush
+  (!PSV_STATUS: T {4}{) print
+  (Flip: ) transl print
+  print
+  (}\n) print flush
+} def
+/psv_sh_no_flip {flush (!PSV_STATUS: T {4}{ }\n) print flush} def
+/psv_sh_zoom {
+  flush
+  (!PSV_STATUS: T {5}{) print
+  (Zoom: ) transl print
+  print
+  (}\n) print flush
+} def
+/psv_sh_no_zoom {flush (!PSV_STATUS: T {5}{ }\n) print flush} def
+%/psv_sh_unit {
+%  flush
+%  (!PSV_STATUS: T {6}{Unit: ) print
+%  print
+%  (}\n) print flush
+%} def
+%/psv_sh_no_unit {flush (!PSV_STATUS: T {6}{ }\n) print flush} def
+/psv_menu_status {
+  %
+  psv_clear_prompt
+  multi_z 1 eq {page_count val_str cvs curr_page val_str2 cvs psv_sh_pn} if
+  multi_z 1 gt {page_count val_str cvs
+    curr_page multi_z add 1 sub val_str3 cvs
+    curr_page val_str2 cvs psv_sh_pnr} if
+  angle val_str cvs psv_sh_angle
+  hflip not vflip not and {(None)        transl psv_sh_flip} if
+  hflip vflip not and     {(Horizontal)  transl psv_sh_flip} if
+  hflip not vflip and     {(Vertical)    transl psv_sh_flip} if
+  hflip vflip and         {(Both)        transl psv_sh_flip} if
+  magnification val_str cvs psv_sh_zoom
+%  psv_unit_name psv_sh_unit
+} def
+
+/psv_clear_menu_status {
+  psv_clear_prompt
+  psv_sh_no_pn
+  psv_sh_no_angle
+  psv_sh_no_flip
+  psv_sh_no_zoom
+%  psv_sh_no_unit
+} def
+
+/preview_toggle {
+  /ciecolor ciecolor not def
+  /alphabits ciecolor {4}{1} ifelse def
+  CIEcolor_set
+  AlphaBits_set
+  run_file
+  psv_init_print
+  ciecolor {(Final view \(CIE colors & antialiasing\))}
+    {(Quick view \(no CIE colors & no antialiasing\))} ifelse
+  psv_print psv_flush
+} def
+
+/CIEcolor_set {
+  ciecolor {(CI&E Color off) (CIECOLOR_TOGGLE) change_item}
+  {(CI&E Color on) (CIECOLOR_TOGGLE) change_item} ifelse
+  refresh_menu overlay_drawim
+  <</UseCIEColor ciecolor>> ori_setpagedevice
+} def
+
+/AlphaBits_set {
+ alphabits 1 gt {(&Antialiasing off) (ALPHABITS_TOGGLE) change_item}
+ {(&Antialiasing on) (ALPHABITS_TOGGLE) change_item} ifelse
+ refresh_menu overlay_drawim
+ <</GraphicsAlphaBits alphabits /TextAlphaBits alphabits>> ori_setpagedevice
+} def
+
+/ori_handleerror /handleerror LD
+
+/handleerror {
+  psv_clear_prompt
+  psv_init_print
+  (Error: ) psv_print
+  $error /errorname get 80 string cvs psv_print
+  ( in ) psv_print
+  $error /command get 80 string cvs psv_print
+%  (\n) psv_print psv_flush
+  psv_flush
+  ori_handleerror
+  view_dict /was_error true put
+} def
+
+
+%errordict /handleerror /handleerror load put
+
+/view_stopped {stopped $error /newerror get and
+%  {view_dict /handleerror get cvx exec false} {true} ifelse} def
+%  {view_dict /handleerror get cvx exec} if} def
+  {handleerror} if} def
+
+/maximum {/x_2 XD /x_1 XD
+  x_1 x_2 ge {x_1}{x_2} ifelse} def
+
+/minimum {/x_2 XD /x_1 XD
+  x_1 x_2 le {x_1}{x_2} ifelse} def
+
+/view_transform {
+  run_matrix ori_setmatrix
+  magnification dup scale
+  orig_x psv_unit mul neg
+  orig_y psv_unit mul neg translate
+  hflip {[-1 0 0 1 window_wd magnification div orig_x psv_unit mul 2 mul add 0] concat} if
+  vflip {[1 0 0 -1 0 window_ht magnification div orig_y psv_unit mul 2 mul add] concat} if
+  angle rotate
+  angle   0 eq {0 0} if
+  angle  90 eq {
+                orig_y orig_x sub psv_unit mul
+                window_wd magnification div
+                orig_x orig_y add psv_unit mul add neg
+                } if
+  angle 180 eq {
+                window_wd magnification div
+                2 orig_x mul psv_unit mul add neg
+                window_ht magnification div
+                2 orig_y mul psv_unit mul add neg
+                } if
+  angle 270 eq {
+                window_ht magnification div
+                orig_x orig_y add psv_unit mul add neg
+                orig_x orig_y sub psv_unit mul
+                } if
+  translate
+  } def
+
+%/xtra_transform	{
+%  angle 90 eq angle 270 eq or {
+%    window_wd window_ht sub 0.5 mul magnification div neg
+%    window_wd window_ht sub 0.5 mul magnification div
+%    translate
+%  } if
+%} def
+
+/do_run_file {/run_matrix XD
+  page_arr curr_page get /curr_pos XD
+  %
+  gsave
+    bb_wd 0 gt bb_ht 0 gt and background and {fill_bb} if
+  grestore
+  %
+  view_transform
+  /view_matrix matrix currentmatrix def
+  %
+  PDF_file {
+    GS_PDF_ProcSet begin pdfdict begin PDF_dict begin
+      {curr_page pdfgetpage
+       dup get_PDF_params
+       dup /Page exch store
+       pdfshowpage_setpage
+       pdfshowpage_finish
+      } view_dict /view_stopped get cvx exec
+    end end end
+  } {
+    ONEPAGE {
+      /view_save save def
+      view_dict begin
+        opened_file doc_beg setfileposition
+        opened_file
+        doc_end doc_beg sub () end
+      /SubFileDecode filter cvx
+      view_dict /view_stopped get cvx exec
+      clear
+      view_dict /view_save get restore
+    } {
+      first_time {
+        1 1 prolog_count {view_dict begin /cnt XD
+          opened_file prolog_arr cnt get setfileposition
+          opened_file
+          prolog_len cnt get () end
+          /SubFileDecode filter cvx
+          view_dict /view_stopped get cvx exec
+        } for
+        clear
+        view_dict /document_dicts countdictstack array dictstack put
+        view_dict /document_dicts
+        view_dict /document_dicts get dup length 3 sub 3 exch getinterval put
+%          (document_dicts length = ) print
+%          view_dict /document_dicts get length =
+        view_dict /first_time false put
+      } {
+        document_dicts dup type cvlit /arraytype eq
+        {{begin} forall} {pop} ifelse
+      } ifelse
+      %
+      userdict/PStoPSmatrix matrix currentmatrix put % uk/lon w kierunku /PStoPS
+      %
+      1 1 setup_count {view_dict begin /cnt XD
+        opened_file
+        setup_arr cnt get
+        dup curr_pos lt {
+          setfileposition
+          opened_file
+          setup_len cnt get () end
+          /SubFileDecode filter cvx
+          view_dict /view_stopped get cvx exec
+        } {pop pop end exit} ifelse
+      } for
+      clear
+      %
+      page_count 0 gt {
+        opened_file curr_pos setfileposition
+        opened_file
+        page_len curr_page get ()
+        /SubFileDecode filter cvx
+        view_dict /view_stopped get cvx exec
+      } {view_dict /first_time true put} ifelse
+      %
+    } ifelse
+  } ifelse
+  clear clear_dict_stack
+  /picture_on true def
+} def
+
+/multi_run {/multi_proc XD
+  /ori_orig_x orig_x def
+  /ori_orig_y orig_y def
+  /ori_curr_page curr_page def
+  /loc_page 0 def
+  checked_permut /null ne {checked_permut get_permut} if
+  /orig_y orig_y
+    bb_ht psv_unit div multi_y 1 sub mul sub
+    multi_dist multi_y 1 sub mul dup 0 gt {sub} {pop} ifelse
+  def
+  0 1 multi_y 1 sub {/multi_y_cnt XD
+    0 1 multi_x 1 sub {/multi_x_cnt XD
+      /curr_page ori_curr_page multi_permut loc_page get 1 sub add def
+      multi_proc
+      /orig_x orig_x bb_wd psv_unit div sub multi_dist sub def
+      /loc_page loc_page 1 add def
+    } for
+    /orig_y orig_y bb_ht psv_unit div add multi_dist add def
+    /orig_x ori_orig_x def
+  } for
+  in_print {1 true .outputpage} if
+  /orig_x ori_orig_x def
+  /orig_y ori_orig_y def
+  /curr_page ori_curr_page def
+} def
+
+/run_file {psv_clear_prompt INPUT /RUN get_PS_file} def
+
+/cont_run_file {
+  DSC_finished {
+    vf_set
+    psv_menu_status
+    psv_init_print psv_flush
+    curr_page page_count gt {/curr_page page_count def} if
+    curr_page multi_z neg 2 add lt {/curr_page multi_z neg 2 add def} if
+    in_print {
+      psv_init_print (Printing...) psv_print psv_flush
+    }{
+      overlay_drawim
+    } ifelse
+    initgraphics erasepage
+    file_name (r) file /opened_file XD
+    {
+      /run_curr_page curr_page def
+      multi_cycle {
+        curr_page 1 lt curr_page 1 multi_z sub gt and {
+         /curr_page page_count curr_page add def
+        } if
+        curr_page page_count gt curr_page page_count multi_z add lt and {
+          /curr_page curr_page page_count sub def
+        } if
+      } if
+      curr_page 1 ge curr_page page_count le and {default_matrix do_run_file} if
+      /curr_page run_curr_page def
+    } multi_run
+    vf_unset
+    in_print not {
+      cross1 /visible get {cross1 show_cross} if
+      cross2 /visible get {cross2 show_cross} if
+      overlay_checktransform
+    } if
+    opened_file closefile
+    psv_prompt
+  } if
+} def
+
+/check_integer {
+ count 1 eq not {
+   exch dup type /integertype eq {exch pop}{exch}ifelse
+ } if
+} def
+
+/check_number {
+ count 1 eq not {
+   exch dup type dup /integertype eq exch /realtype eq or
+   {exch pop}{exch}ifelse
+ } if
+} def
+
+/grid_x_color {1 1 0 0} def
+/grid_y_color {0 1 1 0} def
+/do_grid {/new_y_psv_unit XD /new_x_psv_unit XD
+  /x_psv_unit_frac psv_unit new_x_psv_unit div def
+  /y_psv_unit_frac psv_unit new_y_psv_unit div def
+  save
+  %
+  view_transform
+  %
+  0 setlinewidth
+  new_x_psv_unit new_y_psv_unit scale
+  set_window_size
+  %
+  /grid_x_ori grid_x_ori_set grid_factor mul def
+  /grid_y_ori grid_y_ori_set grid_factor mul def
+  /grid_x_num grid_x_num_set grid_factor mul def
+  /grid_y_num grid_y_num_set grid_factor mul def
+  %
+  grid_x_color setcmykcolor
+  newpath grid_x_ori grid_factor sub dup window_wd add grid_factor add 1 exch
+  {grid_y_ori grid_factor sub moveto 0 window_ht grid_factor add rlineto} for stroke
+  %
+  grid_y_color setcmykcolor
+  newpath grid_y_ori grid_factor sub dup window_ht add grid_factor add 1 exch
+  {grid_x_ori grid_factor sub exch moveto window_wd grid_factor add 0 rlineto} for stroke
+  restore
+  } def
+/show_number {gsave
+  run_matrix ori_setmatrix
+  magnification dup scale
+  new_x_psv_unit new_y_psv_unit scale
+  currentpoint translate
+  0 0 moveto
+  dup stringwidth pop -0.5 mul -0.15 rmoveto
+  gsave
+    0.01 0 0 0 setcmykcolor
+    dup stringwidth pop 1.2 mul /stwx XD 0.45 /stwy XD
+    stwx -0.1 mul -0.05 rmoveto
+    stwx 0 rlineto 0 stwy rlineto
+    stwx neg 0 rlineto closepath fill
+  grestore
+%  gsave 0 0 0 0 setcmykcolor 0.2 setlinewidth 1 setlinejoin dup
+%  true charpath stroke grestore
+  show grestore} def
+/exchange {
+  /aux_lite exch def
+  /aux_body aux_lite load def
+  dup aux_lite exch load def
+  /aux_body load def
+  } def
+/do_numbers {/new_y_psv_unit XD /new_x_psv_unit XD
+  /x_psv_unit_frac psv_unit new_x_psv_unit div def
+  /y_psv_unit_frac psv_unit new_y_psv_unit div def
+  %
+  save
+  view_transform
+  gsave
+  new_x_psv_unit new_y_psv_unit scale
+  set_window_size
+  %
+  /FuturaCondLight
+  findfont 0.5 scalefont setfont
+  window_ht 2 ge {window_ht 40 le {
+  %
+  /grid_x_ori grid_x_ori_set grid_factor mul def
+  /grid_y_ori grid_y_ori_set grid_factor mul def
+  /grid_x_num grid_x_num_set grid_factor mul def
+  /grid_y_num grid_y_num_set grid_factor mul def
+  newpath
+  gsave
+  grid_x_ori grid_factor sub 1 sub grid_y_ori 0.5 add moveto
+  grid_x_num grid_factor sub dup 1 exch window_wd ceiling add grid_factor add
+  {cvi /num XD 1 0 rmoveto gsave
+  grid_x_color setcmykcolor
+    num val_str cvs show_number
+    grestore} for
+  grestore
+  gsave
+  grid_x_ori 0.5 add grid_y_ori grid_factor sub 1 sub moveto
+  grid_y_num grid_factor sub dup 1 exch window_ht ceiling add grid_factor add
+  {cvi /num XD 0 1 rmoveto gsave
+  grid_y_color setcmykcolor
+    num val_str cvs show_number
+    grestore} for
+  } if} if
+  grestore
+  %
+  restore} def
+/gg {picture_on {
+ /gg overlay_drawov
+ /grid_factor 1 def psv_unit dup dup dup do_grid do_numbers
+  %
+  psv_init_print
+  ( Grid unit: ) psv_print
+  psv_unit_name psv_print
+  psv_flush
+  }if} def
+/ggg {picture_on {
+  /ggg overlay_drawov
+  psv_unit_factor 1 lt {gg} if
+  save
+    /grid_x_color {1 0.25 0 0} def /grid_y_color {0 1 0 0} def
+    /orig_x orig_x psv_unit mul def /orig_y orig_y psv_unit mul def
+    /psv_unit psv_unit psv_unit_factor div def
+    /orig_x orig_x psv_unit div def /orig_y orig_y psv_unit div def
+    gg
+  restore
+  psv_unit_factor 1 gt {gg} if
+  %
+  psv_init_print
+  ( Grid units: ) psv_print
+  psv_unit_name psv_print
+  (, ) psv_print
+  psv_unit_name_secondary psv_print
+  psv_flush
+  }if} def
+/igg {
+  count 0 eq {0 0} if count 1 eq {dup} if
+  /new_grid_y XD /new_grid_x XD
+  /grid_x_update grid_x_update new_grid_x neg add def
+  /grid_y_update grid_y_update new_grid_y neg add def
+  /grid_x_ori_set {orig_x epsilon add floor grid_x_update neg dup epsilon add floor sub add} def
+  /grid_y_ori_set {orig_y epsilon add floor grid_y_update neg dup epsilon add floor sub add} def
+  /grid_x_num_set {orig_x epsilon add floor grid_x_update add epsilon sub ceiling} def
+  /grid_y_num_set {orig_y epsilon add floor grid_y_update add epsilon sub ceiling} def
+  run_file
+  gg
+  } def
+/wgg {
+  /grid_x_update 0 def
+  /grid_y_update 0 def
+  orig_x orig_y igg
+  } def
+/default_gg {
+  /grid_x_color {1 1 0 0} def /grid_y_color {0 1 1 0} def
+  /grid_x_update 0 def
+  /grid_y_update 0 def
+  /grid_x_ori_set {orig_x epsilon sub ceiling} def /grid_y_ori_set {orig_y epsilon sub ceiling} def
+  /grid_x_num_set {orig_x epsilon sub ceiling} def /grid_y_num_set {orig_y epsilon sub ceiling} def
+  } def
+/dgg {
+  default_gg
+  run_file gg
+  } def
+/cgg {overlay_erase} def
+
+/cross1 3 dict def
+/cross2 3 dict def
+
+/init_cross {begin
+  /visible false def
+  /cross_x 0 def
+  /cross_y 0 def
+end} def
+
+cross1 init_cross
+cross2 init_cross
+
+/show_cross {view_dict begin
+    /curr_cross XD
+    overlay_drawim
+    save
+    initmatrix view_transform
+    set_window_size
+    %
+    0 setlinewidth
+    1 1 0 0 setcmykcolor
+    newpath curr_cross /cross_x get psv_unit mul window_ly moveto
+      curr_cross /cross_x get psv_unit mul window_uy lineto stroke
+    newpath window_lx curr_cross /cross_y get psv_unit mul moveto
+      window_ux curr_cross /cross_y get psv_unit mul lineto stroke
+    %
+    restore
+    end
+} def
+
+/freeze_cross {view_dict begin
+  /curr_cross XD
+  curr_cross begin
+    /cross_y XD /cross_x XD
+    /visible true def
+  end
+  curr_cross show_cross
+  end
+} def
+
+/hide_crosses {
+  cross1 init_cross
+  cross2 init_cross
+  run_file
+} def
+
+/measure {
+  psv_unit_name psv_unit meas
+} def  
+
+/meas {view_dict begin
+  /new_psv_unit XD
+  /new_psv_unit_name XD
+  psv_init_print
+  cross1 /visible get cross2 /visible get and {
+    /meas_x1 cross1 /cross_x get psv_unit mul new_psv_unit div def
+    /meas_y1 cross1 /cross_y get psv_unit mul new_psv_unit div def
+    /meas_x2 cross2 /cross_x get psv_unit mul new_psv_unit div def
+    /meas_y2 cross2 /cross_y get psv_unit mul new_psv_unit div def
+    /xdist meas_x2 meas_x1 sub abs def
+    /ydist meas_y2 meas_y1 sub abs def
+    /zdist xdist dup mul ydist dup mul add sqrt def
+    xdist abs ydist abs add 0 eq {/alpha 0 def /beta 0 def}
+    {/alpha ydist xdist atan def /beta 90 alpha sub def} ifelse
+    %
+    ( dx=) psv_print xdist psv_print_rounded
+    ( dy=) psv_print ydist psv_print_rounded
+    ( dz=) psv_print zdist psv_print_rounded
+    ( ) psv_print new_psv_unit_name psv_print
+    ( alpha=) psv_print alpha psv_print_rounded
+    ( beta=) psv_print beta psv_print_rounded
+  } {
+  cross1 /visible get {
+    /meas_x1 cross1 /cross_x get psv_unit mul new_psv_unit div def
+    /meas_y1 cross1 /cross_y get psv_unit mul new_psv_unit div def
+    %
+    ( x=) psv_print meas_x1 psv_print_rounded
+    ( y=) psv_print meas_y1 psv_print_rounded
+    ( ) psv_print new_psv_unit_name psv_print
+    } if
+  cross2 /visible get {
+    /meas_x2 cross2 /cross_x get psv_unit mul new_psv_unit div def
+    /meas_y2 cross2 /cross_y get psv_unit mul new_psv_unit div def
+    %
+    ( x=) psv_print meas_x2 psv_print_rounded
+    ( y=) psv_print meas_y2 psv_print_rounded
+    ( ) psv_print new_psv_unit_name psv_print
+    } if
+  } ifelse
+  psv_flush
+  end
+} def
+
+/sh_pos {view_dict begin
+  z_conv orig_y add exch orig_x add exch
+  psv_unit_name psv_unit
+  %
+  /new_psv_unit XD
+  /new_psv_unit_name XD
+  psv_init_print
+  psv_unit mul new_psv_unit div /sh_y XD
+  psv_unit mul new_psv_unit div /sh_x XD
+  cross1 /visible get {
+    /meas_x1 cross1 /cross_x get psv_unit mul new_psv_unit div def
+    /meas_y1 cross1 /cross_y get psv_unit mul new_psv_unit div def
+    /xdist sh_x meas_x1 sub abs def
+    /ydist sh_y meas_y1 sub abs def
+    /zdist xdist dup mul ydist dup mul add sqrt def
+    /alpha ydist xdist atan def
+    %
+    ( dx=) psv_print xdist psv_print_rounded
+    ( dy=) psv_print ydist psv_print_rounded
+    ( dz=) psv_print zdist psv_print_rounded
+    ( ) psv_print new_psv_unit_name psv_print
+    ( alpha=) psv_print alpha psv_print_rounded
+    ( beta=) psv_print 90 alpha sub psv_print_rounded
+  } {
+    ( x=) psv_print sh_x psv_print_rounded
+    ( y=) psv_print sh_y psv_print_rounded
+    ( ) psv_print new_psv_unit_name psv_print
+  } ifelse
+  pop pop
+  psv_flush
+  end
+} def
+
+/sh_meas {z_conv orig_y add exch orig_x add exch
+  cross1 /visible get {
+    cross2 /visible get {pop pop pop pop hide_crosses}
+  {cross2 freeze_cross pop pop measure} ifelse
+  } {cross1 freeze_cross pop pop measure} ifelse
+} def
+
+
+/overlay_on {inoverlay not {
+   (!PSV_DRAW: OC\n) print flush
+   /imagedevice currentdevice def
+   imagedevice copydevice setdevice
+   <</GraphicsAlphaBits 1>> ori_setpagedevice
+   /overlaydevice currentdevice def
+   /inoverlay true def
+   /drawoverlay true def
+  } if
+} def
+
+/overlay_toggle {inoverlay {
+   flushpage
+   (!PSV_DRAW: OT\n) print flush
+   /drawoverlay drawoverlay not def
+   drawoverlay {overlaydevice}{imagedevice} ifelse setdevice
+ } if
+} def
+
+/overlay_off {inoverlay {
+  (!PSV_DRAW: OD\n) print flush
+   /inoverlay false def
+  } if
+} def
+
+/overlay_todrawdict 10 dict def
+
+/overlay_erase {
+  overlay_todrawdict {pop overlay_todrawdict exch undef} forall
+  inoverlay {
+    drawoverlay {
+%      ori_erasepage
+      overlay_toggle
+    } if
+    overlay_off
+  }{
+    run_file
+  } ifelse
+} def
+
+/overlay_drawim {inoverlay {
+   drawoverlay {overlay_toggle} if
+ } if
+} def
+
+/overlay_drawov {
+  overlay_todrawdict exch dup dup where {exch get} if put
+  inoverlay {
+    drawoverlay not {overlay_toggle} if
+  }{
+    overlay_on
+  } ifelse
+  /overlay_matrix view_matrix def
+%  gsave 0 setgray clippath fill grestore
+} def
+
+/overlay_checktransform {inoverlay {
+    /ov_matrixchange false def
+    0 1 5 {
+      dup overlay_matrix exch get exch view_matrix exch get
+      ne {/ov_matrixchange true def} if
+    } for
+    ov_matrixchange overlay_todrawdict length 0 gt and {
+      drawoverlay not {overlay_toggle} if ori_erasepage
+      overlay_todrawdict {exec pop} forall
+    } if
+  } if
+} def
+
+/fullscreen {
+dup /infullscreen exch def {
+ (!PSV_SIZE: FT\n) print flush
+}{
+ (!PSV_SIZE: FF\n) print flush
+} ifelse 
+} def
+
+/start_refresh {
+  prepare_state /refresh_state XD
+  INPUT /REFRESH get_PS_file
+} def
+
+/cont_refresh {
+  DSC_finished {
+    refresh_state restore_state
+    run_file
+  } if
+} def
+
+/vertical_tape {
+%  v_tape multi_z 1 eq or {
+  true {
+    view_dict begin
+    angle 0 eq angle 180 eq or {window_ht} {window_wd} ifelse
+      magnification div /w_size XD
+    bb_ht multi_dist psv_unit mul add /p_size XD
+    orig_y psv_unit mul /orig_yu XD
+    orig_yu multi_dist psv_unit mul sub /orig_ydu XD
+    v_tape {
+      w_size orig_yu add dup 0 lt {
+        neg
+        p_size div ceiling cvi /vf_corr XD
+        curr_page vf_corr add page_count sub dup 0 gt {
+           vf_corr exch sub /vf_corr XD
+        } if
+        vf_corr curr_page add /curr_page XD
+        vf_corr p_size mul orig_yu add psv_unit div /orig_y XD
+      } {pop} ifelse
+      orig_yu p_size sub dup 0 gt {
+        p_size div ceiling cvi /vf_corr XD
+        vf_corr curr_page sub 1 add dup 0 gt {
+           vf_corr exch sub /vf_corr XD
+        } if
+        curr_page vf_corr sub /curr_page XD
+        orig_yu vf_corr p_size mul sub psv_unit div /orig_y XD
+      } {pop} ifelse
+    } if
+    /vf_curr_page curr_page def
+    1 1 multipage_nc
+    w_size p_size orig_yu sub sub
+      dup 0 gt {
+        p_size div ceiling cvi /upper_chunk XD
+      } {pop /upper_chunk 0 def} ifelse
+    orig_yu dup 0 lt {
+        neg p_size div ceiling cvi /down_chunk XD
+      } {pop /down_chunk 0 def} ifelse
+    upper_chunk down_chunk add 1 add /total_chunk XD
+    down_chunk p_size mul psv_unit div /vf_shift XD
+    /v_tape true def
+    end
+    1 total_chunk multipage_nc
+    run_file
+  } if
+} def
+
+/vf_set {
+  v_tape {
+    /curr_page vf_curr_page upper_chunk sub def
+    /orig_y orig_y vf_shift add def
+  } if
+} def
+
+/vf_unset {
+  v_tape {
+    /curr_page vf_curr_page def
+    /orig_y orig_y vf_shift sub def
+  } if
+} def
+
+/multipage {save_state
+  dup type cvlit /arraytype eq {
+    /checked_permut /null def /multi_permut XD} {
+    dup type cvlit /nametype eq {get_permut} {
+      /checked_permut /PERM_1 def
+      /multi_permut [] def
+    } ifelse
+  } ifelse
+  /multi_y XD /multi_x XD
+  /multi_z multi_x multi_y mul def
+  multi_permut length multi_z ne {[1 1 multi_z {} for] /multi_permut XD} if
+%  multi_z 1 eq {(ONE_PAGE) check_SET_MULTIPAGE} {
+%    multi_x 2 eq multi_y 1 eq and {(TWO_ONE_PAGE) check_SET_MULTIPAGE} {
+%      multi_x 1 eq multi_y 2 eq and {(ONE_TWO_PAGE) check_SET_MULTIPAGE} {
+%        (M_N_PAGE) check_SET_MULTIPAGE
+%      } ifelse
+%    } ifelse
+%  } ifelse
+  /v_tape false def
+  dl_x dl_y multi_wd multi_ht center_rect
+  run_file
+} def
+
+/multipage_nc {
+  dup type cvlit /arraytype eq {
+    /checked_permut /null def /multi_permut XD} {
+    dup type cvlit /nametype eq {get_permut} {
+      /checked_permut /PERM_1 def
+      /multi_permut [] def
+    } ifelse
+  } ifelse
+  /multi_y XD /multi_x XD
+  /multi_z multi_x multi_y mul def
+  multi_permut length multi_z ne {[1 1 multi_z {} for] /multi_permut XD} if
+} def
+
+/frame_squ{/vs XD /hs XD
+  newpath
+  0 0 moveto hs 0 lineto hs vs lineto 0 vs lineto
+  closepath stroke} def
+
+/do_frame {%/do_frame overlay_drawov
+  gsave
+  default_matrix ori_setmatrix
+  0 setlinewidth
+  0 1 0 0 setcmykcolor
+  %
+%  gsave 210 MM 297 MM frame_squ stroke grestore
+%  gsave 6 MM 6 MM translate 198 MM 285 MM frame_squ stroke grestore
+  window_wd page_W sub 0.5 mul window_ht page_H sub 0.5 mul translate
+  gsave page_W page_H frame_squ stroke grestore
+  gsave 6 MM 6 MM translate
+  page_W 6 MM 2 mul sub page_H 6 MM 2 mul sub frame_squ stroke grestore
+  grestore
+} def
+
+/fill_page {gsave default_matrix ori_setmatrix
+  view_transform
+  1 setgray
+  newpath
+  0 0 moveto psv_HS 0 lineto psv_HS psv_VS lineto 0 psv_VS lineto
+  closepath fill
+  grestore
+} def
+
+/sh_page {picture_on {
+  gsave default_matrix ori_setmatrix
+  view_transform
+  0 setlinewidth
+  0 1 1 0 setcmykcolor
+  %
+  newpath
+  0 0 moveto psv_HS 0 lineto psv_HS psv_VS lineto 0 psv_VS lineto
+  closepath stroke
+  grestore
+  %
+  psv_init_print
+  ( Page size: ) psv_print
+  psv_HS psv_unit div psv_print_rounded
+  ( x ) psv_print
+  psv_VS psv_unit div psv_print_rounded
+  ( ) psv_print
+  psv_unit_name psv_print
+  psv_flush
+}if} def
+
+/fill_bb {gsave default_matrix ori_setmatrix
+  view_transform
+  1 setgray
+  %
+  newpath
+  dl_x dl_y moveto ur_x dl_y lineto ur_x ur_y lineto
+  dl_x ur_y lineto closepath fill
+  grestore
+} def
+
+/sh_bb {picture_on {
+  gsave default_matrix ori_setmatrix
+  view_transform
+  0 setlinewidth
+  1 1 0 0 setcmykcolor
+  %
+  newpath
+  dl_x dl_y moveto ur_x dl_y lineto ur_x ur_y lineto
+  dl_x ur_y lineto closepath stroke
+  grestore
+  %
+  psv_init_print
+  ( BoundingBox size: ) psv_print
+  bb_wd psv_unit div psv_print_rounded
+  ( x ) psv_print
+  bb_ht psv_unit div psv_print_rounded
+  ( ) psv_print
+  psv_unit_name psv_print
+  psv_flush
+}if} def
+
+/get_PS_file {/context XD /file_name XD
+%  file_name status {/new_file_date XD pop /new_file_length XD pop
+  file_name status {pop /new_file_date XD /new_file_length XD pop
+    new_file_date file_date ne new_file_length file_length ne or
+    {new_PS_file} {context /RUN eq {cont_run_file} if} ifelse
+  } {
+    psv_init_print
+    ( File not opened ) psv_print psv_flush
+  } ifelse
+} def
+
+/new_PS_file {%
+  psv_clear_menu_status
+  /file_date new_file_date def
+  /file_length new_file_length def
+  /picture_on false def
+  /DSC_finished false def
+  /DSC_found false def
+%  init_undo
+%  addr_name findlibfile {closefile run} {pop} ifelse
+  psv_init_print (Reading DSC) psv_print psv_flush
+  call_for_DSC
+} def
+
+/init_file_found {%
+  view_dict begin
+    /prolog_count 0 def /setup_count 0 def
+    /page_count 0 def /curr_pos 0 def
+    /document_dicts 0 def
+    /first_time true def
+    /in_inclusion 0 def
+    /dl_x 0 def /dl_y 0 def
+    /ur_x 0 def /ur_y 0 def
+    /bb_ht 0 def /bb_wd 0 def
+    /DSC_found true def
+  end
+  userdict begin /psv_HS 0 def /psv_VS 0 def end
+  userdict /bop-hook known {userdict /bop-hook undef} if
+} def
+
+/apply_PS_file {
+  page_count 0 eq {/ONEPAGE true def} if
+  ONEPAGE {/page_count 1 def} if
+  overfull {
+    psv_init_print
+    (To many pages!) psv_print
+    psv_flush
+  } if
+  %
+  context /RUN eq {cont_run_file} if
+  context /REFRESH eq {cont_refresh} if
+} def
+
+/get_PDF_params {
+  dup /MediaBox pget {aload pop
+    view_dict begin /ur_y XD /ur_x XD /dl_y XD /dl_x XD end
+    dup /Rotate pget {90 div cvi 4 mod dup 0 lt {4 add} if
+      dup 1 eq exch 3 eq or {
+        view_dict begin
+%          ur_y ur_x /ur_y XD /ur_x XD
+%          dl_y dl_x /dl_y XD /dl_x XD
+        end
+      } if
+    } if
+    view_dict begin
+      /bb_wd ur_x dl_x sub abs def
+      /bb_ht ur_y dl_y sub abs def
+      bb_wd bb_ht get_page_size
+    end
+  } if
+  /CropBox pget {aload pop
+    view_dict begin
+      /ur_y XD /ur_x XD /dl_y XD /dl_x XD
+      /bb_wd ur_x dl_x sub abs def /bb_ht ur_y dl_y sub abs def
+    end
+  } if
+  view_dict begin
+    bb_wd 0 gt bb_ht 0 gt and to_center and {
+      dl_x dl_y multi_wd multi_ht center_rect
+      /to_center false def
+    } if
+  end
+} def
+
+/apply_PDF_file {
+   file_name (r) file /opened_file XD /Page null def
+   GS_PDF_ProcSet begin pdfdict begin
+   view_dict /PDF_dict undef
+   {view_dict /PDF_dict opened_file pdfopen put
+   } view_dict /view_stopped get cvx exec
+   view_dict /PDF_dict known {
+     PDF_dict begin
+     /FirstPage where {pop} {view_dict /FirstPage 1 put} ifelse
+     /LastPage where {pop} {/LastPage pdfpagecount def} ifelse
+     view_dict /page_count LastPage FirstPage sub 1 add put
+     FirstPage pdfgetpage get_PDF_params
+     end end end
+    %
+    context /RUN eq {cont_run_file} if
+    context /REFRESH eq {cont_refresh} if
+  }{
+    clear clear_dict_stack
+    /picture_on false def
+    psv_init_print
+    ( Error opening PDF file -- probably incomplete file ) psv_print psv_flush
+  } ifelse
+} def
+
+/rr {count 0 eq {/current_restart restart_name def}
+  {/current_restart XD} ifelse
+  current_restart findlibfile {
+    closefile run
+    /to_center false def
+  } {pop} ifelse
+  run_file
+} def
+
+/pn {count 0 eq {
+    psv_init_print
+    ( page=) psv_print curr_page psv_print_rounded
+    multi_z 1 gt {
+      (-) psv_print
+      curr_page multi_z add 1 sub psv_print_rounded
+    psv_flush
+    } if
+  } {
+      round cvi
+      dup curr_page le {
+        curr_page multi_z add 1 sub sub multi_z idiv
+      } {
+        curr_page sub multi_z idiv
+      } ifelse
+      n
+  } ifelse
+} def
+
+/np /pn LD
+
+/sn { 1 check_integer
+  curr_page add round cvi
+  dup page_count gt {pop page_count} if
+  dup multi_z 1 sub neg le {pop multi_z 2 sub neg} if
+  /prop_page XD
+  prop_page curr_page ne
+  prop_page page_count le and
+  prop_page multi_z add 1 gt and {
+    save_state /curr_page /prop_page LD
+    v_tape {vertical_tape} {run_file} ifelse
+  } if
+} def
+
+/n { 1 check_integer multi_z mul
+  curr_page add round cvi
+  dup page_count gt {page_count 1 add sub multi_z mod
+    page_count add multi_z sub 1 add} if
+  dup multi_z 1 sub neg le {1 sub multi_z mod 1 add} if
+  /prop_page XD
+  prop_page curr_page ne
+  prop_page page_count le and
+  prop_page multi_z add 1 gt and {
+    save_state /curr_page /prop_page LD
+    v_tape {vertical_tape} {run_file} ifelse
+  } if
+} def
+
+/sp {count 0 eq {-1} {neg} ifelse sn} def
+/p {count 0 eq {-1} {neg} ifelse n} def
+/pf {9999 p} def
+/fp /pf LD
+/pl {9999 n} def
+/lp /pl LD
+/spf {9999 sp} def
+/spl {9999 sn} def
+
+/center_rect {% llx lly wid hei
+  /hei XD /wid XD /lly XD /llx XD
+  hei 0 gt wid 0 gt and {
+  /orig_x
+    llx
+    angle 0 eq angle 180 eq or
+    {window_wd} {window_ht} ifelse magnification div
+    wid sub 0.5 mul sub
+    psv_unit div
+  def
+  /orig_y
+    lly
+    angle 0 eq angle 180 eq or
+    {window_ht} {window_wd} ifelse magnification div
+    hei sub 0.5 mul sub
+    psv_unit div
+  def
+  } {/orig_x 0 def /orig_y 0 def} ifelse
+  vf_unset
+} def
+
+/pos_rect {% llx lly wid hei hpos vpos   [hpos,vpos=0,.5,1]
+  /vpos XD /hpos XD /hei XD /wid XD /lly XD /llx XD
+  hei 0 gt wid 0 gt and {
+  hpos 0 eq {
+    /orig_x llx psv_unit div def
+  } if
+  hpos 1 eq {
+    /orig_x
+     llx
+     angle 0 eq angle 180 eq or
+     {window_wd} {window_ht} ifelse magnification div
+     wid sub sub
+    psv_unit div def
+  } if
+  vpos 0 eq {
+    /orig_y lly psv_unit div def
+  } if
+  vpos 1 eq {
+    /orig_y
+     lly
+     angle 0 eq angle 180 eq or
+     {window_ht} {window_wd} ifelse magnification div
+     hei sub sub
+    psv_unit div def
+  } if
+  } {/orig_x 0 def /orig_y 0 def} ifelse
+  vf_unset
+} def
+
+/multi_wd {%
+  bb_wd multi_x mul multi_dist psv_unit mul multi_x 1 sub mul add} def
+
+/multi_ht {%
+  bb_ht multi_y mul multi_dist psv_unit mul multi_y 1 sub mul add} def
+
+/i0 {save_state
+  /angle 0 def /hflip false def /vflip false def
+  /orig_x 0 def /orig_y 0 def
+  /magnification 1 def
+  default_gg
+  run_file} def
+/i {save_state
+  /angle 0 def /hflip false def /vflip false def
+  /magnification 1 def
+  default_gg
+  dl_x dl_y multi_wd multi_ht center_rect
+  v_tape {vertical_tape} {run_file} ifelse
+} def
+/w {save_state
+  /magnification 1 def
+  dl_x dl_y multi_wd multi_ht center_rect
+  v_tape {vertical_tape} {run_file} ifelse
+} def
+/wbb {save_state
+  /orig_x dl_x psv_unit div def /orig_y dl_y psv_unit div def
+  /magnification
+    angle 0 eq angle 180 eq or {window_wd} {window_ht} ifelse
+      multi_wd
+      dup 0 ne {div} {pop magnification} ifelse
+    angle 0 eq angle 180 eq or {window_ht} {window_wd} ifelse
+      multi_ht
+      dup 0 ne {div} {pop magnification} ifelse
+    minimum def
+    dl_x dl_y multi_wd multi_ht center_rect
+  v_tape {vertical_tape} {run_file} ifelse
+} def
+/wwd {save_state
+  /orig_x dl_x psv_unit div def
+  /old_magnification magnification def
+  /magnification
+    angle 0 eq angle 180 eq or {window_wd} {window_ht} ifelse
+      multi_wd
+      dup 0 ne {div} {pop magnification} ifelse
+    def
+  /mzoom_factor magnification old_magnification div def
+  /orig_y
+    orig_y window_ht dup mzoom_factor div sub
+    0.5 mul old_magnification div psv_unit div add
+    angle 90 eq angle 270 eq or {
+      window_wd window_ht sub 0.5 mul
+      1 mzoom_factor sub mul
+      magnification div
+      psv_unit div sub
+    } if
+  def
+  v_tape {vertical_tape} {run_file} ifelse
+} def
+/wht {save_state
+  /orig_y dl_y psv_unit div def
+  /old_magnification magnification def
+  /magnification
+    angle 0 eq angle 180 eq or {window_ht} {window_wd} ifelse
+      multi_ht
+      dup 0 ne {div} {pop magnification} ifelse
+    def
+  /mzoom_factor magnification old_magnification div def
+  /orig_x orig_x
+    window_wd dup mzoom_factor div sub
+    0.5 mul old_magnification div psv_unit div add
+    angle 90 eq angle 270 eq or {
+      window_wd window_ht sub 0.5 mul
+      1 mzoom_factor sub mul
+      magnification div
+      psv_unit div add
+    } if
+  def
+  v_tape {vertical_tape} {run_file} ifelse
+} def
+/cbb {save_state
+    dl_x dl_y multi_wd multi_ht center_rect
+  v_tape {vertical_tape} {run_file} ifelse
+} def
+
+/ldbb {save_state
+    dl_x dl_y multi_wd multi_ht 0 0 pos_rect
+  v_tape {vertical_tape} {run_file} ifelse
+} def
+
+/lobb {save_state
+    dl_x dl_y multi_wd multi_ht 0 0.5 pos_rect
+  v_tape {vertical_tape} {run_file} ifelse
+} def
+
+/lubb {save_state
+    dl_x dl_y multi_wd multi_ht 0 1 pos_rect
+  v_tape {vertical_tape} {run_file} ifelse
+} def
+
+/rdbb {save_state
+    dl_x dl_y multi_wd multi_ht 1 0 pos_rect
+  v_tape {vertical_tape} {run_file} ifelse
+} def
+
+/robb {save_state
+    dl_x dl_y multi_wd multi_ht 1 0.5 pos_rect
+  v_tape {vertical_tape} {run_file} ifelse
+} def
+
+/rubb {save_state
+    dl_x dl_y multi_wd multi_ht 1 1 pos_rect
+  v_tape {vertical_tape} {run_file} ifelse
+} def
+
+/odbb {save_state
+    dl_x dl_y multi_wd multi_ht .5 0 pos_rect
+  v_tape {vertical_tape} {run_file} ifelse
+} def
+
+/oubb {save_state
+    dl_x dl_y multi_wd multi_ht .5 1 pos_rect
+  v_tape {vertical_tape} {run_file} ifelse
+} def
+
+/g {/g overlay_drawov save
+  /grid_factor 1 def
+  /orig_x 0 def /orig_y 0 def
+  angle 0 eq angle 180 eq or
+   {window_wd grid_wd div magnification div
+    window_ht grid_ht div magnification div do_grid
+    window_wd grid_wd div magnification div
+    window_ht grid_ht div magnification div do_numbers}
+   {window_ht grid_ht div magnification div
+    window_wd grid_wd div magnification div do_grid
+    window_ht grid_ht div magnification div
+    window_wd grid_wd div magnification div do_numbers} ifelse
+  restore
+  ( Grid unit: 0.1 screen size) psv_print
+} def
+/fr /do_frame LD
+/pg {%/pg overlay_drawov
+  vf_set {sh_page} multi_run vf_unset} def
+/bb {%/bb overlay_drawov
+  vf_set {sh_bb} multi_run vf_unset} def
+/m {count 0 eq {
+  psv_init_print
+  ( magnification=) psv_print magnification val_str cvs psv_print
+  ( zoom_factor=) psv_print zoom_factor val_str cvs psv_print
+  psv_flush
+  }{
+  dup 0 ne {/zoom_factor XD} {pop} ifelse
+  } ifelse} def
+/s {count 0 eq {
+  psv_init_print
+  ( shift=) psv_print shift val_str cvs psv_print
+  psv_flush}{/shift XD} ifelse
+} def
+/gc {/ht_conv {} def /wd_conv {} def /local false def} def
+/lc {/ht_conv /ht_rel_conv LD /wd_conv /wd_rel_conv LD /local true def} def
+
+/zoom_in {save_state
+  /orig_x orig_x
+    window_wd dup zoom_factor div sub
+    0.5 mul magnification div psv_unit div add
+    angle 90 eq angle 270 eq or {
+      window_wd window_ht sub 0.5 mul
+      1 zoom_factor sub mul
+      magnification div zoom_factor div
+      psv_unit div add
+    } if
+  def
+  /orig_y
+    orig_y window_ht dup zoom_factor div sub
+    0.5 mul magnification div psv_unit div add
+    angle 90 eq angle 270 eq or {
+      window_wd window_ht sub 0.5 mul
+      1 zoom_factor sub mul
+      magnification div zoom_factor div
+      psv_unit div sub
+    } if
+  def
+%  count 0 eq {0 0} {count 1 eq {dup} if} ifelse
+  clear 0 0
+  ht_conv /new_y0 XD
+  wd_conv /new_x0 XD
+  /magnification magnification zoom_factor mul def
+  local {/orig_x orig_x new_x0 add def /orig_y orig_y new_y0 add def}
+        {/orig_x new_x0 def /orig_y new_y0 def} ifelse
+} def
+
+/vu {zoom_in v_tape {vertical_tape} {run_file} ifelse} def
+/v /vu LD
+
+/zoom_out {save_state
+  /orig_x orig_x
+    window_wd dup zoom_factor mul sub
+    0.5 mul magnification div psv_unit div add
+    angle 90 eq angle 270 eq or {
+      window_wd window_ht sub 0.5 mul
+      1 1 zoom_factor div sub mul
+      magnification div zoom_factor mul
+      psv_unit div add
+    } if
+  def
+  /orig_y orig_y
+    window_ht dup zoom_factor mul sub
+    0.5 mul magnification div psv_unit div add
+   angle 90 eq angle 270 eq or {
+      window_wd window_ht sub 0.5 mul
+      1 1 zoom_factor div sub mul
+      magnification div zoom_factor mul
+      psv_unit div sub
+    } if
+  def
+%  count 0 eq {0 0} {count 1 eq {dup} if} ifelse
+  clear 0 0
+  ht_conv /new_y0 XD
+  wd_conv /new_x0 XD
+  /magnification magnification zoom_factor div def
+  local {/orig_x orig_x new_x0 add def /orig_y orig_y new_y0 add def}
+        {/orig_x new_x0 def /orig_y new_y0 def} ifelse
+} def
+
+/vd {zoom_out v_tape {vertical_tape} {run_file} ifelse} def
+
+/rot {save_state
+  1 check_integer /angle_mul exch round cvi def
+  /angle_mul angle_mul 4 mod dup 0 lt {4 add} if def
+  angle_mul 0 ne {
+    angle_mul 1 eq angle_mul 3 eq or {
+      /orig_x orig_x
+        window_wd window_ht sub 0.5 mul
+        magnification div psv_unit div
+        angle 90 eq angle 270 eq or {sub} {add} ifelse
+      def
+      /orig_y orig_y
+        window_wd window_ht sub 0.5 mul
+        magnification div psv_unit div
+        angle 90 eq angle 270 eq or {add} {sub} ifelse
+      def
+    } if
+    /angle angle 90 angle_mul mul add def
+    angle abs 360 ge {/angle angle 360 sub def} if
+    angle 0 lt {/angle 360 angle add def} if
+  } if
+} def
+
+/ro {rot v_tape {vertical_tape} {run_file} ifelse} def
+
+/hf {save_state /hflip hflip not def run_file} def
+/vf {save_state /vflip vflip not def run_file} def
+
+/l {save_state shift check_number
+  wd_conv
+  angle   0 eq {/orig_x exch hflip not {neg} if orig_x add def} if
+  angle  90 eq {/orig_y exch hflip     {neg} if orig_y add def} if
+  angle 180 eq {/orig_x exch hflip     {neg} if orig_x add def} if
+  angle 270 eq {/orig_y exch hflip not {neg} if orig_y add def} if
+  v_tape {vertical_tape} {run_file} ifelse
+} def
+
+/r {save_state shift check_number
+  wd_conv
+  angle   0 eq {/orig_x exch hflip     {neg} if orig_x add def} if
+  angle  90 eq {/orig_y exch hflip not {neg} if orig_y add def} if
+  angle 180 eq {/orig_x exch hflip not {neg} if orig_x add def} if
+  angle 270 eq {/orig_y exch hflip     {neg} if orig_y add def} if
+  v_tape {vertical_tape} {run_file} ifelse
+} def
+
+/u {save_state shift check_number
+  ht_conv
+  angle   0 eq {/orig_y exch vflip     {neg} if orig_y add def} if
+  angle  90 eq {/orig_x exch vflip     {neg} if orig_x add def} if
+  angle 180 eq {/orig_y exch vflip not {neg} if orig_y add def} if
+  angle 270 eq {/orig_x exch vflip not {neg} if orig_x add def} if
+  v_tape {vertical_tape} {run_file} ifelse
+} def
+
+/d {save_state shift check_number
+  ht_conv
+  angle   0 eq {/orig_y exch vflip not {neg} if orig_y add def} if
+  angle  90 eq {/orig_x exch vflip not {neg} if orig_x add def} if
+  angle 180 eq {/orig_y exch vflip     {neg} if orig_y add def} if
+  angle 270 eq {/orig_x exch vflip     {neg} if orig_x add def} if
+  v_tape {vertical_tape} {run_file} ifelse
+} def
+
+/mul_l {shift check_number shift_factor mul l} def
+/mul_r {shift check_number shift_factor mul r} def
+/mul_u {shift check_number shift_factor mul u} def
+/mul_d {shift check_number shift_factor mul d} def
+
+%/go {save_state
+%  count 0 eq {0 0} if count 1 eq {dup} if
+%  /orig_y exch grid_y_update sub def
+%  /orig_x exch grid_x_update sub def
+%  v_tape {vertical_tape} {run_file} ifelse
+%} def
+
+/go {save_state
+  count 0 eq {
+  /orig_x orig_x
+    window_wd dup zoom_factor div sub
+    0.5 mul magnification div psv_unit div add
+    angle 90 eq angle 270 eq or {
+      window_wd window_ht sub 0.5 mul
+      1 zoom_factor sub mul
+      magnification div zoom_factor div
+      psv_unit div add
+    } if
+  def
+  /orig_y
+    orig_y window_ht dup zoom_factor div sub
+    0.5 mul magnification div psv_unit div add
+    angle 90 eq angle 270 eq or {
+      window_wd window_ht sub 0.5 mul
+      1 zoom_factor sub mul
+      magnification div zoom_factor div
+      psv_unit div sub
+    } if
+  def
+  0 0} {count 1 eq {dup} if} ifelse
+  ht_conv /new_y0 XD
+  wd_conv /new_x0 XD
+  local {/orig_x orig_x new_x0 add def /orig_y orig_y new_y0 add def}
+        {/orig_x new_x0 def /orig_y new_y0 def} ifelse
+  v_tape {vertical_tape} {run_file} ifelse
+} def
+
+/c {run_file} def
+
+/pr {count 0 eq {
+    user_printer begin /current_output /printer_output load store end
+  } {/current_output XD} ifelse
+  fr flushpage
+  %
+  /screen_dev currentdevice def
+  /print_save save def
+%  /copypage /ori_copypage LD
+%  /showpage /ori_showpage LD
+  /showpage {1 .endpage} def
+  /copypage {1 .endpage} def
+  /in_print true def
+  %
+  user_printer begin
+%  printer_name selectdevice
+  mark /OutputFile current_output
+  /printer_xy_res where {/printer_xy_res get /HWResolution exch} if
+  /Margins [printer_x_marg printer_y_marg]
+  /.HWMargins [0.0 0.0 0.0 0.0]
+  /PageSize [page_W page_H page_W page_H gt {exch} if]
+%  currentdevice putdeviceprops setdevice
+  printer_name finddevice putdeviceprops
+  printer_freq printer_angle {printer_spot} setscreen
+  end
+  dup getdeviceprops >> /OutputFile get () eq {pop} {
+    setdevice
+% currentdevice getdeviceprops ] pstack
+    page_W page_H gt {1 rot page_W page_H div /zoom_factor XD zoom_in} if
+    get_screen_&_set_pos
+    user_printer begin printer_x_corr printer_y_corr matrix translate end
+    default_matrix matrix concatmatrix /default_matrix XD
+    run_file
+  } ifelse
+  print_save restore
+  screen_dev setdevice run_file
+} def
+
+/prs {/user_printer XD} def
+/e {clear view_dict /clear_dict_stack get cvx exec
+%  view_dict /view_save known {view_dict /view_save get restore} if
+  } def
+/write_str {restart_file exch writestring} def
+/write_num {val_str cvs write_str} def
+/write_restart {count 0 eq {/current_restart restart_name def}
+  {/current_restart XD} ifelse /restart_file current_restart (w) file def
+  curr_page write_num ( /curr_page XD\15\12) write_str
+  angle write_num ( /angle XD\15\12) write_str
+  hflip {(true)}{(false)} ifelse write_str ( /hflip XD\15\12) write_str
+  vflip {(true)}{(false)} ifelse write_str ( /vflip XD\15\12) write_str
+  magnification write_num ( /magnification XD\15\12) write_str
+  orig_x write_num ( /orig_x XD\15\12) write_str
+  orig_y write_num ( /orig_y XD\15\12) write_str
+  multi_x write_num ( /multi_x XD\15\12) write_str
+  multi_y write_num ( /multi_y XD\15\12) write_str
+  multi_z write_num ( /multi_z XD\15\12) write_str
+  multi_dist write_num ( /multi_dist XD\15\12) write_str
+  multi_cycle {(true)}{(false)} ifelse write_str ( /multi_cycle XD\15\12) write_str
+  checked_permut /null eq {
+    ([ ) write_str multi_permut {write_num ( ) write_str} forall (] /multi_permut XD\15\12) write_str
+  } {
+    (/) write_str checked_permut val_str cvs write_str ( /checked_permut XD\15\12) write_str
+  } ifelse
+  v_tape {(true)}{(false)} ifelse write_str ( /v_tape XD\15\12) write_str
+  v_tape {
+    vf_curr_page write_num ( /vf_curr_page XD\15\12) write_str
+    vf_shift write_num ( /vf_shift XD\15\12) write_str
+  } if
+  zoom_factor write_num ( /zoom_factor XD\15\12) write_str
+  shift write_num ( /shift XD\15\12) write_str
+  psv_unit write_num ( ) write_str psv_unit_factor write_num ( \() write_str psv_unit_name write_str
+    (\) \() write_str psv_unit_name_secondary write_str (\) set_psv_unit\15\12) write_str
+  restart_file flushfile restart_file closefile} def
+/q {write_restart quit} def
+
+/ver {
+  psv_init_print PS_VIEW psv_print psv_flush} def
+/rev {
+  psv_init_print ( Ghostscript revision: ) psv_print
+  revision 100 div val_str cvs psv_print psv_flush} def
+
+%%%%%%%%%%%%%%%
+
+/undo_max 100 def
+
+<<
+  /sta undo_max array
+  /cnt -1
+>> /undo_dict XD
+
+<<
+  /sta undo_max array
+  /cnt -1
+>> /redo_dict XD
+
+/put_state {% <array> <dict> put_state --
+  begin
+    /cnt cnt 1 add def
+    sta cnt undo_max mod 3 -1 roll put
+  end
+} def
+
+/pop_state {% <dict> pop_state <array> true
+            %                  false
+  begin
+    cnt 0 ge {
+      sta cnt undo_max mod get
+      sta cnt undo_max mod null put
+      dup type cvlit /arraytype eq {true} {pop false} ifelse
+      /cnt cnt 1 sub def
+    } {false} ifelse
+  end
+} def
+
+/prepare_state {% -- prepare_state <array>
+  [curr_page angle hflip vflip magnification orig_x orig_y
+    background multi_x multi_y multi_z multi_dist multi_cycle
+    multi_permut checked_permut
+    v_tape vf_shift vf_curr_page]} def
+
+/save_state {% -- save_state --
+  prepare_state undo_dict put_state
+  view_dict /un_re_toggle true put
+} def
+
+/restore_state {% <array> restore_state --
+  aload pop
+  /vf_curr_page XD /vf_shift XD /v_tape  XD
+  /checked_permut XD /multi_permut XD
+  /multi_cycle XD /multi_dist XD /multi_z XD /multi_y XD /multi_x XD
+  /background XD /orig_y XD /orig_x XD
+  /magnification XD /vflip XD /hflip XD
+  /angle XD /curr_page XD
+} def
+
+/un {count 0 eq {1} {dup 0 le {pop 1} if} ifelse
+  round cvi 1 1 3 -1 roll {pop undo_dict pop_state {
+    prepare_state redo_dict put_state
+    restore_state
+  } if} for
+  run_file
+} def
+
+/re {count 0 eq {1} {dup 0 le {pop 1} if} ifelse
+  round cvi 1 1 3 -1 roll {pop redo_dict pop_state {
+    prepare_state undo_dict put_state
+    restore_state
+  } if} for
+  run_file
+} def
+
+/undo_redo {
+  un_re_toggle {un} {re} ifelse
+  /un_re_toggle un_re_toggle not def
+} def
+
+%%%%%%%%%%%%%%%
+
+/wr /write_restart LD
+
+/leave {
+  /CAUSE /LEAVE def
+  flush
+  (!PSV_MESSAGEBOX: 3 {LEAVE: save restart?}\n) print flush
+} def
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/get_info {flush
+  (!PSV_INFO: \n) print flush
+} def
+
+/get_config {flush
+  (!PSV_CONFIG: G {PSV_Config}{CIE}{) print
+    ciecolor {(1)}{(0)} ifelse print
+    (}\n) print flush
+  (!PSV_CONFIG: G {PSV_Config}{Alpha}{) print
+    alphabits val_str cvs print
+    (}\n) print flush
+  (!PSV_CONFIG: G {PSV_Parameters}{language}{}\n) print flush
+} def
+
+/transl {
+  transl_dict exch 2 copy known
+  {get} {exch pop} ifelse
+} def
+/do_transl{
+  flush (!PSV_LOCALE: T {) print
+  print
+  (}\n) print flush
+} def
+
+/prepare_locale {
+  /transl_dict 20 dict def
+  (Page: ) do_transl
+  (Pages: ) do_transl
+  (Angle: ) do_transl
+  (Flip: ) do_transl
+  (Zoom: ) do_transl
+  (None) do_transl
+  (Horizontal) do_transl
+  (Vertical) do_transl
+  (Both) do_transl
+  (!PSV_LOCALE: I\n) print flush
+} def
+
+/show_console {flush
+  (!PSV_CONSOLE: S\n) print flush
+} def
+
+/make_menu {flush
+  (&File) (FILE) (MAIN) append_submenu
+    (&Open\tCtrl+O) (OPEN) (FILE) append_item
+    (Re&fresh\tCtrl+R) (FILE_REFRESH) (FILE) append_item
+    (&Restart) (RESTART) (FILE) append_submenu
+      (&Save\tF2) (SAVE_RESTART) (RESTART) append_item
+      (Save &as) (SAVE_AS_RESTART) (RESTART) append_item
+      (&Load\tF3) (LOAD_RESTART) (RESTART) append_item
+      (Load &from) (LOAD_FROM_RESTART) (RESTART) append_item
+    (&Print) (PRINT) (FILE) append_item
+    (&Leave\tEsc) (LEAVE) (FILE) append_item
+    (&Quit (and save restart)\tF4) (QUIT) (FILE) append_item
+  (&Edit) (EDIT) (MAIN) append_submenu
+    (&Undo\tDel, NumpadAsterisk) (UNDO) (EDIT) append_item
+    (&Redo\tIns, Shift+NumpadAsterisk) (REDO) (EDIT) append_item
+    (Undo-redo &toggle\tCtrl+Z) (UNDO_REDO_TOGGLE) (EDIT) append_item
+    (Re&draw) (REDRAW) (EDIT) append_item
+    (&Copy image) (COPY_IMAGE) (EDIT) append_item (COPY_IMAGE) gray_item
+  (&View) (TRANSFORM) (MAIN) append_submenu
+    (Zoom &in\tGreater, Ctrl+NumpadPlus) (ZOOM_IN) (TRANSFORM) append_item
+    (Zoom &out\tLess, Ctrl+NumpadMinus) (ZOOM_OUT) (TRANSFORM) append_item
+    (Fit to &BB\tF12) (FIT_BB) (TRANSFORM) append_item
+    (Fit to &width\tCtrl+F12) (FIT_WD) (TRANSFORM) append_item
+    (Fit to &height\tShift+F12) (FIT_HT) (TRANSFORM) append_item
+    (&Move) (KBD_MOVE) (TRANSFORM) append_submenu
+      (&Left\tLeft) (LEFT_KBD_MOVE) (KBD_MOVE) append_item
+      (&Right\tRight) (RIGHT_KBD_MOVE) (KBD_MOVE) append_item
+      (&Up\tUp) (UP_KBD_MOVE) (KBD_MOVE) append_item
+      (&Down\tDown) (DOWN_KBD_MOVE) (KBD_MOVE) append_item
+    (&Align) (ALIGN) (TRANSFORM) append_submenu
+      (&Left edge\tCtrl+Num 4) (LEFT_ALIGN) (ALIGN) append_item
+      (&Right edge\tCtrl+Num 6) (RIGHT_ALIGN) (ALIGN) append_item
+      (&Top edge\tCtrl+Num 8) (UP_ALIGN) (ALIGN) append_item
+      (&Bottom edge\tCtrl+Num 2) (DOWN_ALIGN) (ALIGN) append_item
+      (Left &upper corner\tCtrl+Num 7) (LEFT_UP_ALIGN) (ALIGN) append_item
+      (Right upp&er corner\tCtrl+Num 9) (RIGHT_UP_ALIGN) (ALIGN) append_item
+      (Le&ft bottom corner\tCtrl+Num 1) (LEFT_DOWN_ALIGN) (ALIGN) append_item
+      (Right bottom &corner\tCtrl+Num 3) (RIGHT_DOWN_ALIGN) (ALIGN) append_item
+    (&Rotate) (ROTATE) (TRANSFORM) append_submenu
+      (90 &clockwise) (ROTATE_CLOCKWISE) (ROTATE) append_item
+      (90 &anticlockwise\tCtrl+Tab) (ROTATE_ANTICLOCKWISE) (ROTATE) append_item
+      (180 \(&upsidedown\)) (ROTATE_UPSIDEDOWN) (ROTATE) append_item
+    (&Flip) (FLIP) (TRANSFORM) append_submenu
+      (&Horizontal) (FLIP_HORIZONTAL) (FLIP) append_item
+      (&Vertical) (FLIP_VERTICAL) (FLIP) append_item
+    (&Center\tCtrl+F11) (CENTER) (TRANSFORM) append_item
+    (Reset &zoom && position\tF11) (RESET_ZOOM_&_POSITION) (TRANSFORM) append_item
+    (Reset &transformations\tShift+F11) (RESET_TRANSFORMATIONS) (TRANSFORM) append_item
+    (Full &screen\tShift+F5) (FULL_SCREEN) (TRANSFORM) append_item
+  (&Pages) (PAGES) (MAIN) append_submenu
+    (&Next\tPgDn) (NEXT_PAGE) (PAGES) append_item
+    (&Previous\tPgUp) (PREVIOUS_PAGE) (PAGES) append_item
+    (&Goto to) (SPECIFIED_PAGE) (PAGES) append_item
+    (&First\tHome) (FIRST_PAGE) (PAGES) append_item
+    (&Last\tEnd) (LAST_PAGE) (PAGES) append_item
+  (&Grids && Frames) (GRIDS) (MAIN) append_submenu
+    (&Bounding Box\tF5) (BB_FRAME) (GRIDS) append_item
+    (&Page\tF6) (PAGE_FRAME) (GRIDS) append_item
+    (&Printer\tF9) (PRINTER_FRAME) (GRIDS) append_item
+    (&Unit grid\tF7) (UNIT_GRID) (GRIDS) append_item
+    (&Fine grid\tF8) (FINE_GRID) (GRIDS) append_item
+    (&Window grid) (WINDOW_GRID) (GRIDS) append_item
+    (&Clear grids\tCtrl+F7) (CLEAR_GRID) (GRIDS) append_item
+    (&Measure\tCtrl+M) (MEASURE) (GRIDS) append_item
+  (&Options) (OPTIONS) (MAIN) append_submenu
+    (Set &unit) (SET_psv_unit) (OPTIONS) append_submenu
+      (&cm) (CM_SET_psv_unit) (SET_psv_unit) append_check_item
+      (&mm) (MM_SET_psv_unit) (SET_psv_unit) append_check_item
+      (&in) (IN_SET_psv_unit) (SET_psv_unit) append_check_item
+      (&pt) (PT_SET_psv_unit) (SET_psv_unit) append_check_item
+      (&dd) (DD_SET_psv_unit) (SET_psv_unit) append_check_item
+      (&bp) (BP_SET_psv_unit) (SET_psv_unit) append_check_item
+    (Set &media) (SET_MEDIA) (OPTIONS) append_submenu
+      (A&4) (A4_SET_MEDIA) (SET_MEDIA) append_check_item
+      (A4 &Landscape) (A4L_SET_MEDIA) (SET_MEDIA) append_check_item
+      (A&3) (A3_SET_MEDIA) (SET_MEDIA) append_check_item
+      (A3 Land&scape) (A3L_SET_MEDIA) (SET_MEDIA) append_check_item
+      (&BoundingBox) (BB_SET_MEDIA) (SET_MEDIA) append_check_item
+    (Set multi&page) (SET_MULTIPAGE) (OPTIONS) append_submenu
+      (&One page) (ONE_PAGE) (SET_MULTIPAGE) append_item
+      (&2 x 1) (TWO_ONE_PAGE) (SET_MULTIPAGE) append_item
+      (2 x 1 &reverse) (TWO_ONE_PAGE_REVERSE) (SET_MULTIPAGE) append_item
+      (&1 x 2) (ONE_TWO_PAGE) (SET_MULTIPAGE) append_item
+      (1 x 2 re&verse) (ONE_TWO_PAGE_REVERSE) (SET_MULTIPAGE) append_item
+      (m x &n) (M_N_PAGE) (SET_MULTIPAGE) append_item
+      (&Vertical tape) (VERTICAL_TAPE) (SET_MULTIPAGE) append_item
+      (&Bundle) (MULTIPAGE_BUNDLE) (SET_MULTIPAGE) append_submenu
+        (Page &up\tShift+PgUp) (MULTIPAGE_BUNDLE_UP) (MULTIPAGE_BUNDLE) append_item
+        (Page &down\tShift+PgDn) (MULTIPAGE_BUNDLE_DOWN) (MULTIPAGE_BUNDLE) append_item
+        (&Home\tShift+Home) (MULTIPAGE_BUNDLE_HOME) (MULTIPAGE_BUNDLE) append_item
+        (&End\tShift+End) (MULTIPAGE_BUNDLE_END) (MULTIPAGE_BUNDLE) append_item
+      (&Permutation) (MULTIPAGE_PERMUT) (SET_MULTIPAGE) append_item
+      multi_cycle {(&Cycle off) (CYCLE_TOGGLE) (SET_MULTIPAGE) append_item}
+        {(&Cycle on) (CYCLE_TOGGLE) (SET_MULTIPAGE) append_item} ifelse
+      (&Distance) (MULTIPAGE_DIST) (SET_MULTIPAGE) append_item
+    (Set &zoom factor) (SET_ZOOM_FACTOR) (OPTIONS) append_item
+    (Set &shift length) (SET_SHIFT_LENGTH) (OPTIONS) append_item
+    background {(&Background off) (BACKGROUND_TOGGLE) (OPTIONS) append_item}
+      {(&Background on) (BACKGROUND_TOGGLE) (OPTIONS) append_item} ifelse
+    ciecolor {(CI&E Color off) (CIECOLOR_TOGGLE) (OPTIONS) append_item}
+      {(CI&E Color on) (CIECOLOR_TOGGLE) (OPTIONS) append_item} ifelse
+    alphabits 1 gt {(&Antialiasing off) (ALPHABITS_TOGGLE) (OPTIONS) append_item}
+      {(&Antialiasing on) (ALPHABITS_TOGGLE) (OPTIONS) append_item} ifelse
+    (&Configuration) (CONFIGURATION) (OPTIONS) append_submenu
+      (Set &paths) (CONF_PATHS) (CONFIGURATION) append_submenu
+        (Set GS_&DLL path) (CONF_PATH_DLL) (CONF_PATHS) append_item
+        (Set GS_&LIB paths) (CONF_PATH_LIB) (CONF_PATHS) append_item
+        (Set &FONTPATH paths) (CONF_PATH_FONT) (CONF_PATHS) append_item
+        (Set &PSV_LIB path) (CONF_PATH_PSVL) (CONF_PATHS) append_item
+      (Set &commandline) (CONF_COMMANDLINE) (CONFIGURATION) append_item
+      (Set &graphics parameters) (CONF_GRAPHICS) (CONFIGURATION) append_item
+      (Set &language) (CONF_LANGUAGE) (CONFIGURATION) append_item
+    (&Show PS console) (SHOW_CONSOLE) (OPTIONS) append_item
+  (&Help) (HELP) (MAIN) append_submenu
+    (&Help\tF1) (HHELP) (HELP) append_item
+%    (&Manual) (USAGE) (HELP) append_item
+    (&About\tCtrl+F1) (ABOUT) (HELP) append_item
+    (&Close help) (CLOSE_HELP) (HELP) append_item (CLOSE_HELP) gray_item
+%    (&Show console) (SHOW_CONSOLE) (HELP) append_item
+  show_menu
+  /menu_on true def
+} def
+
+/append_item {
+  flush
+  (!PSV_MENU: I {) print
+  print
+  (}{) print
+  print
+  (}{) print
+  print
+  (}\n) print flush
+} def
+
+/append_check_item {
+  flush
+  (!PSV_MENU: IC {) print
+  print
+  (}{) print
+  print
+  (}{) print
+  print
+  (}\n) print flush
+} def
+
+/append_submenu {
+  flush
+  (!PSV_MENU: S {) print
+  print
+  (}{) print
+  print
+  (}{) print
+  print
+  (}\n) print flush
+} def
+
+/change_item {
+  flush
+  (!PSV_MENU: C {) print
+  print
+  (}{) print
+  print
+  (}\n) print flush
+} def
+
+/gray_item {
+  flush
+  (!PSV_MENU: UG {) print
+  print
+  (}\n) print flush
+} def
+
+/normal_item {
+  flush
+  (!PSV_MENU: UN {) print
+  print
+  (}\n) print flush
+} def
+
+/check_item {
+  flush
+  (!PSV_MENU: UC {) print
+  print
+  (}\n) print flush
+} def
+
+/show_menu {
+  flush
+  (!PSV_MENU: DT {}\n) print flush
+} def
+
+/refresh_menu {
+  flush
+  (!PSV_MENU: DR {}\n) print flush
+} def
+
+/OPEN_dialog {
+  flush
+  (!PSV_DIALOG: O {) print
+  (All files \(*.*\)|*.*|) print
+  (PostScript \(*.ps;*.prn\)|*.ps;*.prn|) print
+  (Encapsulated PostScript \(*.eps;*.ai;*.1*\)|*.eps;*.ai;*.1*|) print
+  (Portable Document Format \(*.pdf\)|*.pdf|) print
+  (|}{|}{}{Open input file}\n) print flush
+} def
+
+/FINDDLL_dialog {
+  flush
+  (!PSV_DIALOG: L {) print
+  (Dynamic libraries \(*.so;*.dll\)|*.so;*.dll|) print
+  (All files \(*.*\)|*.*||}{) print
+  /INFO_dict where {pop
+    INFO_dict /GSDLL known {INFO_dict /GSDLL get print} if
+  } if
+  (}{}{Find Ghostscript library dll/so}\n) print flush
+} def
+
+/LOAD_FROM_RESTART_dialog {
+  flush
+  (!PSV_DIALOG: O {All files \(*.*\)|*.*||}{) print
+  prev_restart print
+  (}{}{Load restart file}\n) print flush
+} def
+
+/SAVE_AS_RESTART_dialog {
+  flush
+  (!PSV_DIALOG: S {All files \(*.*\)|*.*||}{) print
+  prev_restart print
+  (}{ps}{Save restart file}\n) print flush
+} def
+
+/PRINT_dialog {
+  flush
+  (!PSV_DIALOG: P {}{Print}\n) print flush
+} def
+
+
+/SPECIFIED_PAGE_dlgbox {
+  flush
+  (!PSV_DLGBOX: I {100,50}{Go to specified page}\n) print flush
+  (!PSV_DLGBOX: E {N) print
+    curr_page val_str cvs print
+    (}{SPEC_PAGE}{24,9,25,11}{}\n) print flush
+  (!PSV_DLGBOX: T {R}{COMMENT}{3,11,18,11}{Page}\n) print flush
+  (!PSV_DLGBOX: T {L}{COMMENT}{53,11,10,11}{of }\n) print flush
+  (!PSV_DLGBOX: T {D}{COMMENT}{64,9,25,11}{) print
+    page_count val_str cvs print
+    (}\n) print flush
+  (!PSV_DLGBOX: B {O}{OK}{10,30,35,12}{OK}\n) print flush
+  (!PSV_DLGBOX: B {C}{CANCEL}{55,30,35,12}{Cancel}\n) print flush
+  (!PSV_DLGBOX: S {}\n) print flush
+} def
+
+/MULTIPAGE_DIST_dlgbox {
+  flush
+  (!PSV_DLGBOX: I {140,50}{Set distance between pages}\n) print flush
+  (!PSV_DLGBOX: E {N) print
+    multi_dist psv_normal_print_rounded
+    (}{MULTI_DIST}{55,9,30,11}{}\n) print flush
+  (!PSV_DLGBOX: T {R}{COMMENT}{3,11,48,11}{Distance =}\n) print flush
+  (!PSV_DLGBOX: T {L}{COMMENT}{90,11,25,11}{) print
+    psv_unit_name print
+    (}\n) print flush
+  (!PSV_DLGBOX: B {O}{OK}{25,30,35,12}{OK}\n) print flush
+  (!PSV_DLGBOX: B {C}{CANCEL}{80,30,35,12}{Cancel}\n) print flush
+  (!PSV_DLGBOX: S {}\n) print flush
+} def
+
+/SET_SHIFT_LENGTH_dlgbox {
+  flush
+  (!PSV_DLGBOX: I {140,50}{Set shift length}\n) print flush
+  (!PSV_DLGBOX: E {N) print
+    shift psv_normal_print_rounded
+    (}{SHIFT_LENGTH}{40,9,30,11}{}\n) print flush
+  (!PSV_DLGBOX: T {R}{COMMENT}{3,11,33,11}{Shift =}\n) print flush
+  (!PSV_DLGBOX: T {L}{COMMENT}{73,11,100,11}{x 0.1 screen size}\n) print flush
+  (!PSV_DLGBOX: B {O}{OK}{25,30,35,12}{OK}\n) print flush
+  (!PSV_DLGBOX: B {C}{CANCEL}{80,30,35,12}{Cancel}\n) print flush
+  (!PSV_DLGBOX: S {}\n) print flush
+} def
+
+/SET_ZOOM_FACTOR_dlgbox {
+  flush
+  (!PSV_DLGBOX: I {140,50}{Set zoom factor}\n) print flush
+  (!PSV_DLGBOX: E {N) print
+    zoom_factor psv_normal_print_rounded
+    (}{ZOOM_FACTOR}{75,9,30,11}{}\n) print flush
+  (!PSV_DLGBOX: T {R}{COMMENT}{23,11,48,11}{Zoom factor =}\n) print flush
+  (!PSV_DLGBOX: T {L}{COMMENT}{110,11,25,11}{}\n) print flush
+  (!PSV_DLGBOX: B {O}{OK}{25,30,35,12}{OK}\n) print flush
+  (!PSV_DLGBOX: B {C}{CANCEL}{80,30,35,12}{Cancel}\n) print flush
+  (!PSV_DLGBOX: S {}\n) print flush
+} def
+
+/M_N_PAGE_dlgbox {
+  flush
+  (!PSV_DLGBOX: I {140,50}{Set multipage view}\n) print flush
+  (!PSV_DLGBOX: E {N) print
+    multi_x val_str cvs print
+    (}{M_PAGE}{40,9,25,11}{}\n) print flush
+  (!PSV_DLGBOX: E {N) print
+    multi_y val_str cvs print
+    (}{N_PAGE}{75,9,25,11}{}\n) print flush
+  (!PSV_DLGBOX: T {R}{COMMENT}{1,11,35,11}{Horizontal}\n) print flush
+  (!PSV_DLGBOX: T {L}{COMMENT}{68,11,5,11}{x}\n) print flush
+  (!PSV_DLGBOX: T {L}{COMMENT}{104,11,35,11}{Vertical}\n) print flush
+  (!PSV_DLGBOX: B {O}{OK}{30,30,35,12}{OK}\n) print flush
+  (!PSV_DLGBOX: B {C}{CANCEL}{75,30,35,12}{Cancel}\n) print flush
+  (!PSV_DLGBOX: S {}\n) print flush
+} def
+
+/CONF_CMDL_dlgbox {
+  flush
+  (!PSV_DLGBOX: I {100,60}{Configure comandline parameters (for Ghostscript)}\n) print flush
+  (!PSV_DLGBOX: T {C}{CIETEXT}{15,5,70,8}{Command line parameters}\n) print flush
+  (!PSV_DLGBOX: E {N) print
+    shift psv_normal_print_rounded
+    (}{CMDLINE_EDIT}{20,20,60,11}{}\n) print flush
+  (!PSV_DLGBOX: B {O}{OK}{25,45,35,12}{Save}\n) print flush
+  (!PSV_DLGBOX: B {C}{CANCEL}{80,45,35,12}{Cancel}\n) print flush
+  (!PSV_DLGBOX: S {}\n) print flush
+} def
+
+/CONF_GRAPICS_dlgbox {
+  flush
+  (!PSV_DLGBOX: I {140,60}{Configure graphics parameters}\n) print flush
+  (!PSV_DLGBOX: T {C}{CIETEXT}{15,5,50,8}{CIE colors}\n) print flush
+  (!PSV_DLGBOX: L {N0|Current \() print
+    ciecolor {(on)}{(off)} ifelse print
+    (\)|On|Off|}{CIELIST}{15,15,50,25}\n) print flush
+  (!PSV_DLGBOX: T {C}{ALPHATEXT}{75,5,50,8}{Antialiasing}\n) print flush
+  (!PSV_DLGBOX: L {N0|Current \() print
+    alphabits val_str cvs print
+    (\)|Off (1)|On (4)|Medium (2)|}{ALPHALIST}{75,15,50,25}\n) print flush
+  (!PSV_DLGBOX: B {O}{OK}{25,45,35,12}{Save}\n) print flush
+  (!PSV_DLGBOX: B {C}{CANCEL}{80,45,35,12}{Cancel}\n) print flush
+  (!PSV_DLGBOX: S {}\n) print flush
+} def
+
+/CONF_LANGUAGE_dlgbox {
+  flush
+  (!PSV_DLGBOX: I {140,60}{Choose language}\n) print flush
+  (!PSV_DLGBOX: T {R}{ALPHATEXT}{5,13,30,8}{Language}\n) print flush
+  (!PSV_DLGBOX: L {N) print
+  llanguage () eq {(0) print} if
+  llanguage (cs) eq {(1) print} if
+  llanguage (de) eq {(2) print} if
+  llanguage (en) eq {(3) print} if
+  llanguage (nl) eq {(4) print} if
+  llanguage (pl) eq {(5) print} if
+  (|System default|Czech \(cs\)|German \(de\)|English \(en\)|Dutch \(nl\)|Polish \(pl\)|) print
+  (}{LANGUAGELIST}{40,5,65,20}\n) print flush
+  (!PSV_DLGBOX: T {C}{ALPHATEXT}{2,25,136,10}{Language will be changed after PS_View reset}\n) print flush
+  (!PSV_DLGBOX: B {O}{OK}{25,35,35,12}{OK}\n) print flush
+  (!PSV_DLGBOX: B {C}{CANCEL}{80,35,35,12}{Cancel}\n) print flush
+  (!PSV_DLGBOX: S {}\n) print flush
+} def
+
+/PERMUT_dlgbox {
+  flush
+  (!PSV_DLGBOX: I {166,95}{Set multipage permutation}\n) print flush
+  %
+  (!PSV_DLGBOX: K {S}{PERM1K}{5,16,10,10}{}\n) print flush
+  (!PSV_DLGBOX: T {D}{PERM1T}{18,10,20,20}{1  2\n3  4}\n) print flush
+  (!PSV_DLGBOX: K {R}{PERM2K}{45,16,10,10}{}\n) print flush
+  (!PSV_DLGBOX: T {D}{PERM2T}{58,10,20,20}{2  1\n4  3}\n) print flush
+  (!PSV_DLGBOX: K {R}{PERM3K}{85,16,10,10}{}\n) print flush
+  (!PSV_DLGBOX: T {D}{PERM3T}{98,10,20,20}{1  3\n2  4}\n) print flush
+  (!PSV_DLGBOX: K {R}{PERM4K}{125,16,10,10}{}\n) print flush
+  (!PSV_DLGBOX: T {D}{PERM4T}{138,10,20,20}{2  4\n1  3}\n) print flush
+  %
+  (!PSV_DLGBOX: K {R}{PERM5K}{5,46,10,10}{}\n) print flush
+  (!PSV_DLGBOX: T {D}{PERM5T}{18,40,20,20}{3  4\n1  2}\n) print flush
+  (!PSV_DLGBOX: K {R}{PERM6K}{45,46,10,10}{}\n) print flush
+  (!PSV_DLGBOX: T {D}{PERM6T}{58,40,20,20}{4  3\n2  1}\n) print flush
+  (!PSV_DLGBOX: K {R}{PERM7K}{85,46,10,10}{}\n) print flush
+  (!PSV_DLGBOX: T {D}{PERM7T}{98,40,20,20}{3  1\n4  2}\n) print flush
+  (!PSV_DLGBOX: K {R}{PERM8K}{125,46,10,10}{}\n) print flush
+  (!PSV_DLGBOX: T {D}{PERM8T}{138,40,20,20}{4  2\n3  1}\n) print flush
+  %
+  (!PSV_DLGBOX: B {O}{OK}{43,75,35,12}{OK}\n) print flush
+  (!PSV_DLGBOX: B {C}{CANCEL}{88,75,35,12}{Cancel}\n) print flush
+  checked_permut /null ne {
+    (!PSV_DLGBOX: U {C}{) print
+      checked_permut /PERM_1 eq {(PERM1K) print} if
+      checked_permut /PERM_2 eq {(PERM2K) print} if
+      checked_permut /PERM_3 eq {(PERM3K) print} if
+      checked_permut /PERM_4 eq {(PERM4K) print} if
+      checked_permut /PERM_5 eq {(PERM5K) print} if
+      checked_permut /PERM_6 eq {(PERM6K) print} if
+      checked_permut /PERM_7 eq {(PERM7K) print} if
+      checked_permut /PERM_8 eq {(PERM8K) print} if
+      (}\n) print flush
+  } if
+  (!PSV_DLGBOX: S {}\n) print flush
+} def
+
+/uncheck_SET_psv_unit {
+  (CM_SET_psv_unit) normal_item
+  (MM_SET_psv_unit) normal_item
+  (IN_SET_psv_unit) normal_item
+  (PT_SET_psv_unit) normal_item
+  (DD_SET_psv_unit) normal_item
+  (BP_SET_psv_unit) normal_item
+} def
+
+/check_SET_psv_unit {
+  uncheck_SET_psv_unit check_item refresh_menu
+%  picture_on {psv_unit_name psv_sh_unit} if
+} def
+
+/uncheck_SET_MEDIA {
+  (A4_SET_MEDIA) normal_item
+  (A4L_SET_MEDIA) normal_item
+  (A3_SET_MEDIA) normal_item
+  (A3L_SET_MEDIA) normal_item
+  (BB_SET_MEDIA) normal_item
+} def
+
+/check_SET_MEDIA {
+  uncheck_SET_MEDIA check_item refresh_menu
+%  picture_on {page_name psv_sh_page} if
+} def
+
+
+/make_status {
+  flush
+  (!PSV_STATUS: C {}\n) print flush
+%  (!PSV_STATUS: P {20ct150cb75cb100cb100cb75cb0n}\n) print flush
+  (!PSV_STATUS: P {25ct150cb75cb100cb100cb0n}\n) print flush
+} def
+
+/concat_strings {% <str1> <str2> concat_strings <res_str>
+  dup length /sl2 XD
+  exch dup length /sl1 XD
+  sl1 sl2 add string /res_str XD
+  res_str exch 0 exch putinterval
+  res_str exch sl1 exch putinterval
+  res_str
+} def
+
+/menu_shortcut {MENUCOMMANDS exch get def} def
+
+/start_help {
+  (!PSV_HELP: S {}\n) print flush
+} def
+
+/open_help {/help_file_name XD
+  prepare_state /after_help_state XD
+  /main_file INPUT def
+  /main_page_name page_name def
+  /main_page_H page_H def
+  /main_page_W page_W def
+  /main_window_wd window_wd def
+  /main_window_ht window_ht def
+  /main_to_center to_center def
+  /main_picture_on picture_on def
+  /multi_x 1 def /multi_y 1 def /multi_z 1 def
+  /checked_permut /PERM_1 def /multi_permut [] def
+  /angle 0 def /hflip false def /vflip false def
+%  /orig_x 0 def /orig_y 0 def
+  /to_center true def
+  /picture_on false def
+%  /magnification 2.15246 def
+  /magnification .9 def
+  /curr_page 1 def
+  /v_tape false def
+  KEYCOMMANDS begin NORM begin 
+    /ESC_ori /ESC LD /F1_ori /F1 LD
+    /ESC {close_help} def
+    /F1  {close_help} def 
+  end end
+%  (USAGE) gray_item
+  (ABOUT) gray_item
+  (CLOSE_HELP) normal_item
+  /INPUT help_file_name findlibfile {closefile} if def
+  421 298 (BB) set_media
+  0 0 421 298 center_rect
+  INPUT /RUN get_PS_file
+} def
+
+/close_help {
+  after_help_state restore_state
+%  (USAGE) normal_item
+  (ABOUT) normal_item
+  (CLOSE_HELP) gray_item
+  KEYCOMMANDS begin NORM begin /ESC /ESC_ori LD /F1 /F1_ori LD end end
+  /INPUT main_file def
+  /to_center main_to_center def
+  /picture_on main_picture_on def
+  /window_wd main_window_wd def
+  /window_ht main_window_ht def
+  main_page_W main_page_H main_page_name set_media
+  INPUT /RUN get_PS_file
+} def
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/initials {
+%% Default settings
+/restart_name (!ps_rest.ps) def   % name of the default restart file
+/help_file_en  (psv_help_en.htb) def % name of the help file
+/help_file_pl  (psv_help_pl.htb) def % name of the help file
+/usage_file_en (psv_usage.pdf) def   % name of the manual file
+/usage_file_pl (psv_usage_pl.pdf) def
+/about_file_en (psv_about.ps) def    % name of the product info file
+/about_file_pl (psv_about_pl.ps) def
+/zoom_factor 2 sqrt def           % MAG for the `m' command
+/shift_factor 5 def               % SHIFT coeff. for the `mul_?' commands
+/shift 1 def                      % SHIFT for the `l' `r' `u' `d' commands
+/max_pages 5000 def               % maximal viewable pages number
+/dot_spot {dup mul exch dup mul add 1 exch sub 2 div} def
+/gs_spot {1 add 180 mul cos 1 0.08 add mul exch
+          1 add 180 mul cos 1 0.08 sub mul add 2 div} def
+/user_printer 1 dict def          % dummy definition
+/printer_name (laserjet) def      % Ghostscript device name
+/printer_output (!psv_out.jep) def % printing to the file
+/printer_x_corr 0 def             % printer horizontal offset correction
+/printer_y_corr 0 def             % printer vertical offset correction
+/printer_x_marg 0 def             % printer horizontal margin
+/printer_y_marg 0 def             % printer vertical margin
+/printer_freq 46 def              % screen frequency for printing
+/printer_angle 45 def             % screen angle for printing
+/printer_spot /gs_spot load def   % selected spot function
+/epsilon 0.001 def
+/grid_wd 10 def /grid_ht 10 def   % local grid resolution
+/psv_unit 1 CM def
+/first_time true def              % first attempt to run document
+/file_date 0 def                  % new file
+/file_length 0 def                % new file
+default_gg                        % initialize the grid parameters
+lc                                % set local window-oriented coordinates
+%%%%
+%% Current settings
+/current_restart /restart_name LD
+/prev_restart /restart_name LD
+/current_output /printer_output LD
+%
+/doc_beg 0 def
+/doc_end 0 def
+/page_arr max_pages array def page_arr 0 0 put
+/page_len max_pages array def page_len 0 0 put
+/prolog_arr max_pages array def prolog_arr 0 0 put
+/prolog_len max_pages array def prolog_len 0 0 put
+/setup_arr max_pages array def setup_arr 0 0 put
+/setup_len max_pages array def setup_len 0 0 put
+%
+/PDF_file false def
+%
+/view_matrix matrix ori_defaultmatrix def
+/orig_x 0 def /orig_y 0 def
+/window_wd 0 def /window_ht 0 def
+/to_center true def
+/angle 0 def
+/hflip false def /vflip false def
+/curr_page 1 def /page_count 0 def /prolog_count 0 def /setup_count 0 def
+/curr_pos 0 def
+/overfull false def
+/document_dicts 0 def
+/magnification 1 def
+/ur_y 0 def /ur_x 0 def /dl_y 0 def /dl_x 0 def
+/bb_ht 0 def /bb_wd 0 def
+/multi_y 1 def
+/multi_x 1 def
+/multi_z 1 def
+/v_tape false def
+/vf_shift 0 def
+/vf_curr_page 0 def
+/total_chunk 0 def
+/upper_chunk 0 def
+/background true def
+currentpagedevice /UseCIEColor get /ciecolor XD
+currentpagedevice /GraphicsAlphaBits get /alphabits XD
+  alphabits 1 eq {/alphabits 2 def} if % requested by users
+/in_print false def
+/multi_dist 0 def
+/multi_cycle false def
+/multi_permut [1] def
+/checked_permut /null def
+%
+userdict begin /psv_HS 0 def /psv_VS 0 def end
+%
+/scroll_v 1 def
+%
+/un_re_toggle true def
+/picture_on false def
+/menu_on false def
+/inoverlay false def
+/drawoverlay false def
+/infullscreen false def
+psv_init_print
+%% Command line parameters
+systemdict /LOCAL known {/LOCAL LOCAL def} {/LOCAL (null) def} ifelse
+  LOCAL findlibfile {closefile run} {pop} ifelse
+systemdict /INPUT known {/INPUT INPUT def} {/INPUT () def} ifelse
+systemdict /ONEPAGE known {/ONEPAGE true def} {/ONEPAGE false def} ifelse
+INPUT () eq {/INPUT (null) def} if
+%%
+get_info
+get_config
+prepare_locale
+make_menu
+make_status
+psv_clear_prompt
+595 842 (A4) set_media
+1 CM 10 (cm) (mm) set_psv_unit
+%1 1 multipage
+/RESIZE_no 1 def
+} def
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/MENUCOMMANDS 300 dict def
+MENUCOMMANDS begin
+  /OPEN {/CAUSE /OPEN def OPEN_dialog} def
+  /FILE_REFRESH {start_refresh} def
+  /SAVE_RESTART {wr} def
+  /SAVE_AS_RESTART {SAVE_AS_RESTART_dialog} def
+  /LOAD_RESTART {rr} def
+  /LOAD_FROM_RESTART {/CAUSE /LOAD_FROM_RESTART def LOAD_FROM_RESTART_dialog} def
+%  /PRINT {pr} def
+  /PRINT {PRINT_dialog} def
+  /LEAVE {quit} def
+  /QUIT {q} def
+  /UNDO {un} def
+  /REDO {re} def
+  /UNDO_REDO_TOGGLE {undo_redo} def
+  /REDRAW {c} def
+  /COPY_IMAGE {} def
+  /ZOOM_IN {vu} def
+  /ZOOM_OUT {vd} def
+  /FIT_BB {wbb} def
+  /FIT_WD {wwd} def
+  /FIT_HT {wht} def
+  /LEFT_KBD_MOVE {l} def
+  /RIGHT_KBD_MOVE {r} def
+  /UP_KBD_MOVE {u} def
+  /DOWN_KBD_MOVE {d} def
+  /LEFT_ALIGN {lobb} def 
+  /RIGHT_ALIGN {robb} def
+  /UP_ALIGN {oubb} def
+  /DOWN_ALIGN {odbb} def
+  /LEFT_UP_ALIGN {lubb} def
+  /RIGHT_UP_ALIGN {rubb} def
+  /LEFT_DOWN_ALIGN {ldbb} def
+  /RIGHT_DOWN_ALIGN {rdbb} def
+  /ROTATE_CLOCKWISE {3 ro} def
+  /ROTATE_ANTICLOCKWISE {ro} def
+  /ROTATE_UPSIDEDOWN {2 ro} def
+  /FLIP_HORIZONTAL {hf} def
+  /FLIP_VERTICAL {vf} def
+  /CENTER {cbb} def
+  /RESET_ZOOM_&_POSITION {w} def
+  /RESET_TRANSFORMATIONS {i} def
+  /FULL_SCREEN {infullscreen not fullscreen} def
+  /NEXT_PAGE {n} def
+  /PREVIOUS_PAGE {p} def
+  /SPECIFIED_PAGE {SPECIFIED_PAGE_dlgbox} def
+  /FIRST_PAGE {fp} def
+  /LAST_PAGE {lp} def
+  /BB_FRAME {bb} def
+  /PAGE_FRAME {pg} def
+  /PRINTER_FRAME {fr} def
+  /UNIT_GRID {gg} def
+  /FINE_GRID {ggg} def
+  /WINDOW_GRID {g} def
+  /CLEAR_GRID {cgg} def
+  /MEASURE {measure} def
+  /CM_SET_psv_unit {1 CM 10  (cm) (mm)         set_psv_unit} def
+  /MM_SET_psv_unit {1 MM 0.1 (mm) (cm)         set_psv_unit} def
+  /IN_SET_psv_unit {1 IN 12  (in) (1/12_in)    set_psv_unit} def
+  /PT_SET_psv_unit {1 PT 1 12 div (pt) (pc)    set_psv_unit} def
+  /DD_SET_psv_unit {1 DD 1 12 div (dd) (cc)    set_psv_unit} def
+  /BP_SET_psv_unit {1 BP 1 12 div (bp) (12_bp) set_psv_unit} def
+  /A4_SET_MEDIA  { 595  842 (A4) set_media run_file} def
+  /A4L_SET_MEDIA { 842  595 (A4 Landscape) set_media run_file} def
+  /A3_SET_MEDIA  { 842 1190 (A3) set_media run_file} def
+  /A3L_SET_MEDIA {1190  842 (A3 Landscape) set_media run_file} def
+  /BB_SET_MEDIA  {bb_set_media} def
+  /ONE_PAGE {1 1 multipage} def
+  /TWO_ONE_PAGE {2 1 multipage} def
+  /TWO_ONE_PAGE_REVERSE {2 1 [2 1] multipage} def
+  /ONE_TWO_PAGE {1 2 multipage} def
+  /ONE_TWO_PAGE_REVERSE {1 2 [2 1] multipage} def
+  /M_N_PAGE {M_N_PAGE_dlgbox} def
+  /VERTICAL_TAPE {save_state vertical_tape} def
+  /CYCLE_TOGGLE {/multi_cycle multi_cycle not def
+    multi_cycle {(&Cycle off) (CYCLE_TOGGLE) change_item}
+      {(&Cycle on) (CYCLE_TOGGLE) change_item} ifelse
+    refresh_menu run_file} def
+  /MULTIPAGE_BUNDLE_UP {sp} def
+  /MULTIPAGE_BUNDLE_DOWN {sn} def
+  /MULTIPAGE_BUNDLE_HOME {spf} def
+  /MULTIPAGE_BUNDLE_END {spl} def
+  /MULTIPAGE_PERMUT {PERMUT_dlgbox} def
+  /MULTIPAGE_DIST {MULTIPAGE_DIST_dlgbox} def
+  /SET_ZOOM_FACTOR {SET_ZOOM_FACTOR_dlgbox} def
+  /SET_SHIFT_LENGTH {SET_SHIFT_LENGTH_dlgbox} def
+  /BACKGROUND_TOGGLE {/background background not def
+    background {(&Background off) (BACKGROUND_TOGGLE) change_item}
+      {(&Background on) (BACKGROUND_TOGGLE) change_item} ifelse
+    refresh_menu run_file} def
+  /CIECOLOR_TOGGLE {/ciecolor ciecolor not def
+    CIEcolor_set run_file} def
+  /ALPHABITS_TOGGLE {/alphabits alphabits 1 gt {1}{4} ifelse def
+    AlphaBits_set run_file} def
+  /SHOW_CONSOLE {} def
+  /HHELP {start_help} def
+%  /USAGE {usage_file open_help} def
+  /ABOUT {about_file open_help} def
+  /CLOSE_HELP {close_help} def
+  /SHOW_CONSOLE {show_console} def
+  /CONF_PATH_DLL {/CAUSE /FINDDLL def FINDDLL_dialog} def
+  /CONF_PATH_LIB {} def
+  /CONF_PATH_FONT {} def
+  /CONF_PATH_PSVL {} def
+  /CONF_GRAPHICS {CONF_GRAPICS_dlgbox} def
+  /CONF_LANGUAGE {CONF_LANGUAGE_dlgbox} def
+
+end % MENUCOMMANDS
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/KEYCOMMANDS 8 dict def
+KEYCOMMANDS begin
+
+  /NORM 100 dict def
+  /SHIFT 20 dict def
+  /CTRL 20 dict def
+  /SHIFTCTRL 10 dict def
+% /ALT 10 dict def
+% /SHIFTALT 10 dict def
+% /CTRLALT 10 dict def
+% /SHIFTCTRLALT 10 dict def
+
+  NORM begin
+    /PAGE_UP   /PREVIOUS_PAGE menu_shortcut
+    /PAGE_DOWN /NEXT_PAGE menu_shortcut
+    /HOME      /FIRST_PAGE menu_shortcut
+    /END       /LAST_PAGE menu_shortcut
+    /RIGHT_ARR /RIGHT_KBD_MOVE menu_shortcut
+    /LEFT_ARR  /LEFT_KBD_MOVE menu_shortcut
+    /DOWN_ARR  /DOWN_KBD_MOVE menu_shortcut
+    /UP_ARR    /UP_KBD_MOVE menu_shortcut
+    /ESC       {infullscreen {false fullscreen}{quit}ifelse} def
+    /F1        /HHELP menu_shortcut
+    /F2        /SAVE_RESTART menu_shortcut
+    /F3        /LOAD_RESTART menu_shortcut
+    /F4        /QUIT menu_shortcut
+    /F5        /BB_FRAME menu_shortcut
+    /F6        /PAGE_FRAME menu_shortcut
+    /F7        /UNIT_GRID menu_shortcut
+    /F8        /FINE_GRID menu_shortcut
+    /F9        /PRINTER_FRAME menu_shortcut
+%    /F10       /REDRAW menu_shortcut
+    /F11       /RESET_ZOOM_&_POSITION menu_shortcut
+    /F12       /FIT_BB menu_shortcut
+    /DEL       /UNDO menu_shortcut
+    /INS       /REDO menu_shortcut
+    /MULTIPLY  /UNDO menu_shortcut
+    /RETURN    /NEXT_PAGE menu_shortcut
+  end % NORM
+
+  SHIFT begin
+    /RIGHT_ARR {mul_r} def
+    /LEFT_ARR {mul_l} def
+    /DOWN_ARR {mul_d} def
+    /UP_ARR {mul_u} def
+    %
+    /PAGE_UP   /MULTIPAGE_BUNDLE_UP menu_shortcut
+    /PAGE_DOWN /MULTIPAGE_BUNDLE_DOWN menu_shortcut
+    /HOME      /MULTIPAGE_BUNDLE_HOME menu_shortcut
+    /END       /MULTIPAGE_BUNDLE_END menu_shortcut
+    /LESS      /ZOOM_OUT menu_shortcut
+    /GREATER   /ZOOM_IN menu_shortcut
+    /F5        /FULL_SCREEN menu_shortcut
+    /F11       /RESET_TRANSFORMATIONS menu_shortcut
+    /F12       /FIT_HT menu_shortcut
+    /MULTIPLY  /REDO menu_shortcut
+  end % SHIFT
+
+  CTRL begin
+    /PAGE_UP   /RIGHT_UP_ALIGN menu_shortcut
+    /PAGE_DOWN /RIGHT_DOWN_ALIGN menu_shortcut
+    /HOME      /LEFT_UP_ALIGN menu_shortcut
+    /END       /LEFT_DOWN_ALIGN menu_shortcut
+    /RIGHT_ARR /RIGHT_ALIGN menu_shortcut
+    /LEFT_ARR  /LEFT_ALIGN menu_shortcut
+    /DOWN_ARR  /DOWN_ALIGN menu_shortcut
+    /UP_ARR    /UP_ALIGN menu_shortcut
+    /BEGIN     /CENTER menu_shortcut
+    /L         /FULL_SCREEN menu_shortcut
+    /M         /MEASURE menu_shortcut
+    /O         /OPEN menu_shortcut
+    /R         /FILE_REFRESH menu_shortcut
+    /Z         /UNDO_REDO_TOGGLE menu_shortcut
+    /TAB       /ROTATE_ANTICLOCKWISE menu_shortcut
+    /F1        /ABOUT menu_shortcut
+    /F7        /CLEAR_GRID menu_shortcut
+    /F8        /CLEAR_GRID menu_shortcut
+    /F9        {preview_toggle} def
+    /F11       /CENTER menu_shortcut
+    /F12       /FIT_WD menu_shortcut
+    /ADD       /ZOOM_IN menu_shortcut
+    /SUBSTRACT /ZOOM_OUT menu_shortcut
+    /0         /FIT_BB menu_shortcut
+    /1         /ONE_PAGE menu_shortcut
+    /2         /TWO_ONE_PAGE menu_shortcut
+    /D {flush (!PSV_HOOK {}\n) print flush} def
+  end % CTRL
+
+end % KEYCOMMANDS
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/MOUSECOMMANDS 8 dict def
+MOUSECOMMANDS begin
+
+  /NORM 10 dict def
+  /SHIFT 10 dict def
+  /CTRL 10 dict def
+  /SHIFTCTRL 10 dict def
+% /ALT 10 dict def
+% /SHIFTALT 10 dict def
+% /CTRLALT 10 dict def
+% /SHIFTCTRLALT 10 dict def
+
+  NORM begin
+    %
+    /MEAS {sh_meas} def
+    %
+    /MOVE {view_dict begin
+      z_conv /move_y2 XD /move_x2 XD
+      z_conv /move_y1 XD /move_x1 XD
+      %
+      save_state
+      /orig_x orig_x move_x1 move_x2 sub add def
+      /orig_y orig_y move_y1 move_y2 sub add def
+      end
+      v_tape {vertical_tape} {run_file} ifelse
+    } def
+    %
+    /ZOOM {view_dict begin
+      /zoom_yb XD /zoom_xb XD
+      /zoom_ya XD /zoom_xa XD
+      %
+      /zoom_x1 zoom_xa zoom_xb minimum def
+      /zoom_x2 zoom_xa zoom_xb maximum def
+      /zoom_y1 zoom_ya zoom_yb minimum def
+      /zoom_y2 zoom_ya zoom_yb maximum def
+      /zoom_wd zoom_x2 zoom_x1 sub def
+      /zoom_ht zoom_y2 zoom_y1 sub def
+      zoom_ht 1 lt {/zoom_ht 1 def} if
+      zoom_wd 1 lt {/zoom_wd 1 def} if
+      %
+      /screen_factor screen_W screen_H div def
+      zoom_wd zoom_ht div screen_factor lt {
+        /zoom_wdn zoom_ht screen_factor mul def
+        zoom_wdn zoom_wd sub 0.5 mul
+        dup zoom_x1 exch sub /zoom_x1 XD
+        zoom_x2 add /zoom_x2 XD
+        /zoom_wd zoom_wdn def
+      } {
+        /zoom_htn zoom_wd screen_factor div def
+        zoom_htn zoom_ht sub 0.5 mul
+        dup zoom_y1 exch sub /zoom_y1 XD
+        zoom_y2 add /zoom_y2 XD
+        /zoom_ht zoom_htn def
+      } ifelse
+      %
+      screen_W zoom_wd div /mzoom_factor XD
+      %
+      zoom_x1 zoom_y1 zoom_x2 zoom_y2
+      z_conv /zoom_y2 XD /zoom_x2 XD
+      z_conv /zoom_y1 XD /zoom_x1 XD
+      zoom_x1 zoom_x2 minimum zoom_y1 zoom_y2 minimum
+      %
+      save_state
+      /new_y0 XD /new_x0 XD
+      /magnification magnification mzoom_factor mul def
+      local {/orig_x orig_x new_x0 add def /orig_y orig_y new_y0 add def}
+            {/orig_x new_x0 def /orig_y new_y0 def} ifelse
+      end
+      %
+      v_tape {vertical_tape} {run_file} ifelse
+    } def
+    %
+    /SCROLL {pop pop pop 120 div scroll_v mul u} def
+    %
+    /POS {sh_pos} def
+    %
+  end % NORM
+
+  SHIFT begin
+    %
+    /POS {sh_pos} def
+    /MEAS {sh_meas} def
+    /SCROLL {pop pop pop 120 div scroll_v mul l} def
+    %
+  end % SHIFT
+
+  CTRL begin
+    %
+    /MEAS {pop pop pop pop hide_crosses} def
+    %
+    /SCROLL {pop pop pop 120 div scroll_v mul l} def
+    %
+    /ZOOM {view_dict begin
+      /zoom_yb XD /zoom_xb XD
+      /zoom_ya XD /zoom_xa XD
+      %
+      /zoom_x1 zoom_xa zoom_xb minimum def
+      /zoom_x2 zoom_xa zoom_xb maximum def
+      /zoom_y1 zoom_ya zoom_yb minimum def
+      /zoom_y2 zoom_ya zoom_yb maximum def
+      /zoom_wd zoom_x2 zoom_x1 sub def
+      /zoom_ht zoom_y2 zoom_y1 sub def
+      %
+      /screen_factor screen_W screen_H div def
+      zoom_wd zoom_ht div screen_factor lt {
+        /zoom_wdn zoom_ht screen_factor mul def
+        zoom_wdn zoom_wd sub 0.5 mul
+        dup zoom_x1 exch sub /zoom_x1 XD
+        zoom_x2 add /zoom_x2 XD
+        /zoom_wd zoom_wdn def
+      } {
+        /zoom_htn zoom_wd screen_factor div def
+        zoom_htn zoom_ht sub 0.5 mul
+        dup zoom_y1 exch sub /zoom_y1 XD
+        zoom_y2 add /zoom_y2 XD
+        /zoom_ht zoom_htn def
+      } ifelse
+      %
+      zoom_wd screen_W div /mzoom_factor XD
+      %
+      zoom_x1 zoom_y1 zoom_x2 zoom_y2
+      z_conv /zoom_y2 XD /zoom_x2 XD
+      z_conv /zoom_y1 XD /zoom_x1 XD
+      zoom_x1 zoom_x2 minimum mzoom_factor div neg
+      zoom_y1 zoom_y2 minimum mzoom_factor div neg
+      %
+      save_state
+      /new_y0 XD /new_x0 XD
+      /magnification magnification mzoom_factor mul def
+      local {/orig_x orig_x new_x0 add def /orig_y orig_y new_y0 add def}
+            {/orig_x new_x0 def /orig_y new_y0 def} ifelse
+      end
+      v_tape {vertical_tape} {run_file} ifelse
+    } def
+    %
+  end % CTRL
+
+end % MOUSECOMMANDS
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/KEYCOMMAND {
+  view_dict /KEYCOMMANDS get cvx exec
+  dup 2 index known
+    {exch get cvx exec
+      dup 2 index known
+        {exch get cvx exec} {pop pop} ifelse
+    } {pop pop pop} ifelse
+} def
+
+/MOUSECOMMAND {
+  view_dict /MOUSECOMMANDS get cvx exec
+  dup 2 index known
+    {exch get cvx exec
+      dup 2 index known
+        {exch get cvx exec} {pop pop pop pop pop pop} ifelse
+    } {pop pop pop pop pop pop pop} ifelse
+} def
+
+/MENUCOMMAND {
+  pop view_dict /MENUCOMMANDS get cvx exec
+  dup 2 index known {exch get cvx exec} {pop pop} ifelse
+} def
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%/STARTSIZE {
+%%  << /HWSize [ 5 -2 roll ] currentdevice putdeviceprops setdevice pop
+%  pop pop pop
+%  view_dict begin
+%  initials
+%% rr
+%} def
+
+/RESIZE_no 0 def
+
+/RESIZE {
+  0 index 0 gt 2 index 0 gt and
+  1 index screen_H ne 3 index screen_W ne or
+  RESIZE_no 0 gt and and {
+    << /HWSize [ 5 -2 roll ] currentdevice putdeviceprops setdevice pop
+    get_screen_&_set_pos
+    RESIZE_no 1 eq {rr /RESIZE_no 2 def}{
+      picture_on {
+        run_file
+      } if
+    } ifelse
+  } {pop pop pop} ifelse
+} def
+
+/REFRESH {pop pop start_refresh} def
+
+/LOCALE {dup 1 eq {pop
+  transl_dict 3 1 roll put
+  }{
+  0 eq {
+    exch pop set_locale
+  }{pop pop} ifelse } ifelse
+} def
+
+/INFO {pop /INFO_dict XD /INFO_string XD} def
+
+/MESSAGEBOX {
+  CAUSE /LEAVE eq {
+    dup /YES eq {pop pop pop q} if
+    dup /NO eq {pop pop pop quit} if
+    dup /CANCEL eq {pop pop pop} if
+  } if
+} def
+
+/PDFFOUND {pop pop pop /PDF_file true def init_file_found} def
+
+/FILEFOUND {/FILE_end XD /DSC_addr XD pop
+  /PDF_file false def
+  init_file_found
+%  psv_init_print
+%  (Reading DSC) psv_print
+%  FILE_end 1e7 gt {(...) psv_print} if
+%  psv_flush
+  b_document
+  b_prolog
+} def
+
+/dscn 0 def
+
+/DSCCOMMENT {
+  pop /DSC_addr XD /DSC_line XD read_DSC
+} def
+
+/ENDDSC {pop pop pop
+  DSC_found {
+    /DSC_finished true def
+    PDF_file {apply_PDF_file} {
+      /DSC_addr FILE_end def
+      e_document
+      apply_PS_file
+    } ifelse
+  } {
+    psv_init_print
+    ( File not opened ) psv_print psv_flush
+  } ifelse
+} def
+
+/LIBDIALOG {
+  pop
+  /filename_system XD
+  /filename_ps XD
+  CAUSE /FINDDLL eq {
+    INFO_dict /GSDLL filename_system put
+  } if
+} def
+
+/DIRDIALOG {
+  pop
+  /dirname_system XD
+  /direname_ps XD
+  CAUSE /FIND_GS_LIB eq {
+    INFO_dict /GSDLL dirname_ps put
+  } if
+  CAUSE /FIND_PSV_LIB eq {
+    INFO_dict /GSDLL direname_ps put
+  } if
+  CAUSE /FIND_FONT eq {
+    INFO_dict /GSDLL direname_ps put
+  } if
+} def
+
+/OPENDIALOG {
+   /filename_filter XD
+   /filename_offset XD
+%  dup 256 mod /filename_offset XD 256 idiv /filename_filter XD
+%  /filename_length XD
+  CAUSE /OPEN eq {
+    /ONEPAGE filename_filter 2 eq {true} {false} ifelse def
+    /INPUT XD INPUT /RUN get_PS_file
+  } if
+  CAUSE /LOAD_FROM_RESTART eq {
+    dup filename_offset 1 index length filename_offset sub
+    getinterval /prev_restart XD
+    rr
+  } if
+} def
+
+/PRINTDIALOG {
+  pr
+} def
+
+/SAVEDIALOG {
+%  dup 256 mod /filename_offset XD 256 idiv
+%  dup 256 mod /filename_filter XD 256 idiv
+%  dup 2 mod /extension_differ XD 2 idiv
+%  dup 2 mod /readonly_file XD pop
+%  /filename_length XD
+  pop /filename_offset XD
+  dup filename_offset 1 index length filename_offset sub
+  getinterval /prev_restart XD
+  wr
+} def
+
+/PERM_1 {% 1 2 3 4
+  [1 1 multi_y {1 sub /y_c XD 1 1 multi_x {y_c multi_x mul add} for} for]
+} def
+/PERM_2 {% 2 1 4 3
+  [1 1 multi_y {1 sub /y_c XD multi_x -1 1 {y_c multi_x mul add} for} for]
+} def
+/PERM_3 {% 1 3 2 4
+  [1 1 multi_y {1 sub /y_c XD 1 multi_y multi_x multi_y mul {y_c add} for} for]
+} def
+/PERM_4 {% 2 4 1 3
+  [multi_y -1 1 {1 sub /y_c XD 1 multi_y multi_x multi_y mul {y_c add} for} for]
+} def
+/PERM_5 {% 3 4 1 2
+  [multi_y -1 1 {1 sub /y_c XD 1 1 multi_x {y_c multi_x mul add} for} for]
+} def
+/PERM_6 {% 4 3 2 1
+  [multi_y -1 1 {1 sub /y_c XD multi_x -1 1 {y_c multi_x mul add} for} for]
+} def
+/PERM_7 {% 3 1 4 2
+  [1 1 multi_y {1 sub /y_c XD multi_x multi_y mul multi_y neg multi_y {multi_y sub 1 add y_c add} for} for]
+} def
+/PERM_8 {% 4 2 3 1
+  [multi_y -1 1 {1 sub /y_c XD multi_x multi_y mul multi_y neg multi_y {multi_y sub 1 add y_c add} for} for]
+} def
+
+/get_permut {load cvx exec /multi_permut XD} def
+
+/make_permut {/checked_permut XD
+  multi_x multi_y /checked_permut multipage
+} def
+
+/PERM1K {/PERM_1 make_permut} def
+/PERM2K {/PERM_2 make_permut} def
+/PERM3K {/PERM_3 make_permut} def
+/PERM4K {/PERM_4 make_permut} def
+/PERM5K {/PERM_5 make_permut} def
+/PERM6K {/PERM_6 make_permut} def
+/PERM7K {/PERM_7 make_permut} def
+/PERM8K {/PERM_8 make_permut} def
+
+/CHECKED {
+  dup view_dict exch known
+    {view_dict exch get cvx exec} {pop pop} ifelse
+} def
+	
+/SPEC_PAGE {cvx exec pn} def
+/M_PAGE {cvx exec} def
+/N_PAGE {cvx exec multipage} def
+/MULTI_DIST {cvx exec /multi_dist XD run_file} def
+/SHIFT_LENGTH {cvx exec /shift XD} def
+/ZOOM_FACTOR {cvx exec /zoom_factor XD} def
+
+/CIELIST {
+  dup (010) eq {/ciecolor true def} if
+  (001) eq {/ciecolor false def} if
+  (!PSV_CONFIG: S {PSV_Config}{CIE}{) print
+  ciecolor {(1)}{(0)} ifelse print
+  (}\n) print flush
+  CIEcolor_set
+} def
+/PSV_Config_CIE {
+  1 eq /ciecolor XD pop
+  CIEcolor_set
+} def
+
+/ALPHALIST {
+  dup (0100) eq {/alphabits 1 def} if
+  dup (0010) eq {/alphabits 4 def} if
+  (0001) eq {/alphabits 2 def} if
+  (!PSV_CONFIG: S {PSV_Config}{Alpha}{) print
+  alphabits val_str cvs print
+  (}\n) print flush
+  AlphaBits_set
+  run_file
+} def
+/PSV_Config_Alpha {
+  /alphabits XD pop
+  AlphaBits_set
+} def
+
+/LANGUAGELIST {
+  dup (100000) eq {/llanguage () def} if
+  dup (010000) eq {/llanguage (cs) def} if
+  dup (001000) eq {/llanguage (de) def} if
+  dup (000100) eq {/llanguage (en) def} if
+  dup (000010) eq {/llanguage (nl) def} if
+      (000001) eq {/llanguage (pl) def} if
+  (!PSV_CONFIG: S {PSV_Parameters}{language}{) print
+  llanguage print (}\n) print flush
+} def
+/PSV_Parameters_language {
+  pop dup /llanguage XD set_locale
+} def
+/set_locale{
+  dup (pl) eq {
+    /about_file about_file_pl def
+    /usage_file usage_file_pl def
+    (!PSV_HELP: I {) print 
+      help_file_pl print 
+      (}\n) print flush
+  }{
+    /about_file about_file_en def
+    /usage_file usage_file_en def
+    (!PSV_HELP: I {) print 
+      help_file_en print 
+      (}\n) print flush
+  } ifelse
+  pop
+} def
+
+/CONFIG {
+  dup view_dict exch known
+    {view_dict exch get cvx exec} {pop pop pop} ifelse
+} def
+
+/EDIT {
+  dup view_dict exch known
+    {view_dict exch get cvx exec} {pop pop} ifelse
+} def
+	
+/LIST {
+  dup view_dict exch known
+    {view_dict exch get cvx exec} {pop pop} ifelse
+} def
+
+/COMBO {
+  dup view_dict exch known
+    {view_dict exch get cvx exec} {pop pop} ifelse
+} def
+	
+/ENDDIALOG {pop pop} def
+
+/DIALOG {
+  dup view_dict exch known
+    {view_dict exch get cvx exec} {pop pop pop} ifelse
+} def
+
+end % view_dict
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/EVENTCOMMAND {
+  dup view_dict exch known
+    {view_dict exch get cvx exec} {pop pop pop pop} ifelse
+} def
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%!PS-AdobeFont-1.0: FuturaCondLight
+%%CreationDate: Fri Jan 05 15:33:46 1996
+%%VMusage: 1024 5521
+% Generated by Fontographer 3.5
+%%EndComments
+FontDirectory/FuturaCondLight known{/FuturaCondLight findfont dup/UniqueID known{dup
+/UniqueID get 0 eq exch/FontType get 1 eq and}{pop false}ifelse
+{save true}{false}ifelse}{false}ifelse
+17 dict begin
+/FontInfo 13 dict dup begin
+/version(1.000)readonly def
+/FullName(FuturaCondLight)readonly def
+/FamilyName(FuturaCondLight)readonly def
+/Weight(Normal)readonly def
+/isFixedPitch false def
+/ItalicAngle 0 def
+/UnderlinePosition 0 def
+/UnderlineThickness 0 def
+end readonly def
+/FontName /FuturaCondLight def
+/Encoding StandardEncoding def
+/PaintType 0 def
+/FontType 1 def
+/StrokeWidth 0 def
+/FontMatrix[0.001 0 0 0.001 0 0]readonly def
+/FontBBox{0 -17 338 697}readonly def
+currentdict end
+currentfile eexec
+D9D66F633B846A97B686A97E45A3D0AA0525392EECAC163E584A9104D99AD0BC1B1F3F7121D1D0
+F2C60DD206B0D3C8C450620B47320CA0AEB8937511E456AADE8E66B301B1E3E9DFE17E2F79ECFE
+A709FF3DAE19B4C169DF6773EDA414D02915A6F0FAF8B24FBB0777C697BE8A37D63A390AD9DAE4
+95BB7E626721FF2FD3FB147C80D22BEAC37C2624D818D58C8DF0209F5CE76ACDDE57A303D9042B
+F0A674D095697F925F532D1814BEA8F8A5B1FD0737F362C88E00ACAED0FBD7C99D04538BF47AD1
+AC0EEF6289D64A227208CC932D86BA91B06B84F1C78BC60A9042E6B985666F15684EB454AE6C29
+DF8A9904192A40F725679F530DE4A953049751DEC70BCECE74A8E57026CEF2FDDBA1D1E7C8BF93
+66D03DCBC7205454303EEC2146BD91606462E63CFD1AEED94B578C13A70F0B1C819D80E87F808C
+E959EA32600B0E5998DA7D5A0A7C6E22F26F0BD55F3A0E290F09828D1E3EC3E119CE3000BF8D64
+5C955811468EB0AC9F444BE51D60A4D3639C10FCE22DC86F074918566634F5268E3D697B17C102
+93A68D53840037A9F547C817D763BDFC57E803DB51E5C398CBBA9DE9C16849F47364F2761B277D
+053933406E2AD6150B572A36B5A2725918339601427E64A5E96D47C614D1424B7D1449B71D4BC7
+20F615D287B9ACCB39A86126B419817F40C84FFECC431C92B995D8B1A04F16826F1B268B109BB4
+155C5D073AD546ED7362BB261B26325BB60D366F9F3A05D56FD7E0ED81DEFFCBF433DF42A1661D
+656C27C4864FF698228F64C9C22480EE51F809DBA2E131A6EF795F2F690DC37440B1AD9155E8A6
+A949A75E449A46CC5716E1BDA9EE77AD3E44DC50C53E3D232999CF429D4E3BEFAD5341A8E0A19C
+3A9D82BE797771FD3ADA7DEE0A77B08D7963706A14A40F26E417784B54ACB51E7CCAE759718414
+51A704DAAF9429EED7CBB3F9F236403E4979D2A362C440766587F7C9E2E43707530FF446F58B37
+C73CF528951E056AD6CA9054081804F5FD98DA373999C785F3E7A53037BD3215FC55E3BADB2725
+A9452350EB3A9763E830B5230E8BC76CA1F1A93A06785600D9FF31D281E130F313448EA1FA882B
+C224D1E38A99934913C792816130FD64FAD297A4A4941272C1818F6A1D30F81A5E6117720C4A8B
+1DC035E199017D8F2CD5598146862D91E878A80952F60B9F21C4A97064D194734F71C6277C3B2A
+9EAA8C7682A05FB4F5A96171389519ECE17464F3D605FFAF3420D956E6B1B3F2C988072C429719
+6B8241FDDBE9E0C6FCBDE1AD2F8A011E072DD5D16C853B6C57E2D06608398DFE0AD5C5EFF54A9B
+8CBB7C3E480ABD0E45FD188E5B47A9739A7FFA78D2CBA6C470F2DF7B5CE2A079814818A2A45343
+74A43C71D704F10071741DBF268AD761BF8AB57AEC0D773273F0A29B9EB54A68FDED44E1341BB1
+515B14377AA89B2E4A6C9911B1DA039D52C9C1CC35EE9D7011B8EA8A5706B696F924A59C6FDE05
+F9201332C578776A653975695A79E6D3518EC573FB9532E3989C57BF5D1AFFFB0650F020F996BB
+5B99BD8E5EF4A89A2578B90097EA29F2EB8FFECD25B7A82998B9D23228A4641D120E6303FE4FA1
+BEFB8CEDD0043BD669855278AA8A3CAEFB33951CE56AA3CBADABC53867A764559F25F6F6C8B0D9
+FBAC727A587B4B8EF9AAD2435F80B59DD7483CC787EF07FB837A380C4A6CD524FBD1CF5C1627B0
+16CC1A385134D4867224FEA4DDF33E03F7515938060ED08AD14EDC9740EA97C8913D5327A65293
+A939B4A33611EDBB246DF89113B2CC9A8936EF1294853EB13165286FD2A7C7713962F919E92A41
+50BB5CFAC727FADDA19E7D1C5FCFDA42EBAA13B26662CD50D02C299BC18E9DAD3C1BD025838381
+A9D1E3C93022B58A98889D18930DDEA6B0A42DBFF8845968259F2115206FFE94F83C2179C15B14
+309ED6576F771B9679B7375C319E4F889BA6067127C194B5D1346E4A65AB1C7003B13894AA835E
+E2A395FB6FE0A2D91AA73ECFCC29EC7A794FB3DEBEBE9E41D75CE873930153F444E815AB4B9A7C
+28A9A8E24E51B36445589A15A42E96C98D31259A361A006376660DC7C62652B245F6228586C346
+BA4C3C8F458531534DB349DF601BA97DB4A32EA47FDBC07FC337B8C5A3E2D975B2BDCE6E4F21BB
+479973509945DD8056FB5C3398916C3363A0C19F2B5D90A7BCBD82F087090A43F2E1FA78203B48
+455C02826682F8D7B285BA506E4E08908C11045262D0EAB75D738EF07D689A5A49A6A9CD1E2E5D
+873FA7E816D9648171F4757A68343E5F4877681ED3F0A738AB26C19DB24FCFDC97126A0B0CEADA
+C8D61402D2026819FECEC13C37256142EC3C64C0955D69D5000C761D25FACAE658BCF5CB00D80D
+6B5C650CCA49E47167052C8E6B686268EC3901B63F9130B3E2AB9D941E62DBAE73A122437A02C1
+F81C9CE111D676F5C57BF1CA67C40AD827BC8FD5F3FCC522D852435A563C724AEC6F6AE4ED3BE0
+B3A3A8087EF6A4142BECE917E0E4D378B9645B68356E41FCD9DA2CC2C4104B8F07C05DA6EAF490
+AC047E97E8EB9A41342142CD3EB2698A453A62E46945EB5630FAD396ADE7C3B3247C4110538AC8
+8352EB2D48FA29D33167181F60BF36A9DC50E61FFC99F6CA1079FC8DCC1581AD9C05014267A11F
+963F5C87A7689C6785B074F67DF1E66CCF7C81B201684FED66EDDF883964FD7239886C57DB4B04
+DBCF8E7BC1BAA23EA2176152F856C36605C05126FAFB608F26779E23C9E436907D9D7E770C079F
+9EAD9C9B0297E21B0A51DDFACCFB5E6E30292EF2F3D6312FD7647D67809C2A132166C3903C5A04
+16B5233B6867B1C8F9DF091A1BCFC373D312F447CF0DE0026B57AE7E0CEA47D81B0536C8DA4123
+B2CF44EF742A45D14EE771CCA5B3726BB9D19DE584DE547F8A8A51DA107219BDA245EDA31D066F
+5DA701D33850D31386E81BFF44A13BC5CEE1535AB8671EFCEA31F1F07D7C5126C37B72F996AABE
+3495088CEABFB13763FD71D9A04D43B9EBF18C06A4F245F561C25CA4E66DC7EB6996A507ED492E
+6C115C9556C4A9644294309DEFB0BBD379743DEEDF68997D537FE04D9791550223D9666D6869A8
+5E6615693B963FF4CE227C33C55F50548514BDCA24B1FD6D3FAEA95FD994A0A2E51A3FDE15ADBF
+9435C0595AF7A95F60C8B4826AB66AD6B881B491E506EA1EB92FDB09C3C9E572731F95957AABED
+36E18349F31CA1BDF4F1E2900E37923518D9DB78C4B3934C9B86BE3B893E7C358475AD3EA70995
+7CE23D39B6B8D57E02F1C41F24646DAAF64CB656CE318DEC46380E788270FFD1691892E94A59E6
+E7255215C9E410EE0F139A89FF2B2CBDC61A3889CBC27AD5536541D9FDA8E6E88AC6A428433616
+AE4467AB4F275F79F9B71D8B38EFE172B297994EB2144D0CA7964169F40CF14453F17252AC38A6
+7113123F86296D89D3114D7F1C84EAB1E9C02D68D5184C75DC92D89B07F0897FAF8AD89A1ADF8C
+307477783CB97A6CAD3D53373373A0DAD19BBC4D23517B78E1BC5AEA479B28166FB78004EB24D1
+FBCCC7E66605148120D6FBCE773F9D30F3D504163CC27517366A69CBB6362A9B87610EBF027EFD
+D398DE0CD80A6FB4B9E2AB44EAAAD75B27249330C923DAA048D40BE4FA0D146F14364C318F794C
+29C0F743BFE0A68E1B00D22086485BC80912BD515BDC4CAA6D12059F33DEECF9A0DE183A61F633
+3796C1A41FB921A835B68F82A33F05FE9B5C70C21302ED112E1EBBFE8005041D56CE72CB67E59E
+197BFB6D93A11744D0435B6ABD8C77A414FD723080825A9F9069EE4E93F489D29B1D16F3A6C869
+820C7C9E774A16BE8F45314E91EDE29DD0412BB2E8F2F26421385AFE39F3445FA166EE2EBC7C35
+2332074EFF0DDB3225817BAA2DA9BA9BF0EDE14CD70491485E465121B96C8F0FCF578A45B12352
+976A4E810717FE4B142D4E7AF0774768E77C146390E1D028E44156E02EA2007FA0DF1A482459A6
+8F4E038F4471209BA110D01C7EA427062A2C90EF7DCBD197F71D0971763F5AEF83C596FB661B1E
+DADB0E91764CB4769C2E1A632E14B3D25F737FC829F11115837FC1481CF4F85903FE00618AE814
+5B46569CAAFBB1417023107E679978B927759D339AF5
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+cleartomark{restore}if
+
+%%%%%%%%%%%%%%% end
+
+%!PS-AdobeFont-1.0: QDSSXX-Normal 1.000
+%%CreationDate: Tue Jun 16 10:45:12 1998
+%%VMusage: 1024 22888
+% Generated by Fontographer 3.5
+% Prepared in BOP (1998) basing on a modified CM sansserif font by D. E. Knuth.
+% ADL: 797 203 0
+%%EndComments
+FontDirectory/QDSSXX-Normal known{/QDSSXX-Normal findfont dup/UniqueID known{dup
+/UniqueID get 0 eq exch/FontType get 1 eq and}{pop false}ifelse
+{save true}{false}ifelse}{false}ifelse
+17 dict begin
+/FontInfo 13 dict dup begin
+/version(1.000)readonly def
+/Notice(Prepared in BOP (1998) basing on a modified CM sansserif font by D. E. Knuth.)readonly def
+/FullName(QDSSXX-Normal)readonly def
+/FamilyName(QDSSXX)readonly def
+/Weight(Normal)readonly def
+/isFixedPitch false def
+/ItalicAngle 0 def
+/UnderlinePosition -215 def
+/UnderlineThickness 75 def
+end readonly def
+/FontName /QDSSXX-Normal def
+/Encoding 256 array
+dup 0/.notdef put dup 1/.notdef put dup 2/.notdef put dup 3/.notdef put
+dup 4/.notdef put dup 5/.notdef put dup 6/.notdef put dup 7/.notdef put
+dup 8/.notdef put dup 9/.notdef put dup 10/.notdef put dup 11/.notdef put
+dup 12/.notdef put dup 13/.notdef put dup 14/.notdef put dup 15/.notdef put
+dup 16/.notdef put dup 17/.notdef put dup 18/.notdef put dup 19/.notdef put
+dup 20/.notdef put dup 21/.notdef put dup 22/.notdef put dup 23/.notdef put
+dup 24/.notdef put dup 25/.notdef put dup 26/.notdef put dup 27/.notdef put
+dup 28/.notdef put dup 29/.notdef put dup 30/.notdef put dup 31/.notdef put
+dup 32/space put dup 33/exclam put dup 34/quotedbl put dup 35/numbersign put
+dup 36/dollar put dup 37/percent put dup 38/ampersand put dup 39/quotesingle put
+dup 40/parenleft put dup 41/parenright put dup 42/asterisk put dup 43/plus put
+dup 44/comma put dup 45/hyphen put dup 46/period put dup 47/slash put
+dup 48/zero put dup 49/one put dup 50/two put dup 51/three put
+dup 52/four put dup 53/five put dup 54/six put dup 55/seven put
+dup 56/eight put dup 57/nine put dup 58/colon put dup 59/semicolon put
+dup 60/less put dup 61/equal put dup 62/greater put dup 63/question put
+dup 64/at put dup 65/A put dup 66/B put dup 67/C put
+dup 68/D put dup 69/E put dup 70/F put dup 71/G put
+dup 72/H put dup 73/I put dup 74/J put dup 75/K put
+dup 76/L put dup 77/M put dup 78/N put dup 79/O put
+dup 80/P put dup 81/Q put dup 82/R put dup 83/S put
+dup 84/T put dup 85/U put dup 86/V put dup 87/W put
+dup 88/X put dup 89/Y put dup 90/Z put dup 91/bracketleft put
+dup 92/backslash put dup 93/bracketright put dup 94/asciicircum put dup 95/underscore put
+dup 96/grave put dup 97/a put dup 98/b put dup 99/c put
+dup 100/d put dup 101/e put dup 102/f put dup 103/g put
+dup 104/h put dup 105/i put dup 106/j put dup 107/k put
+dup 108/l put dup 109/m put dup 110/n put dup 111/o put
+dup 112/p put dup 113/q put dup 114/r put dup 115/s put
+dup 116/t put dup 117/u put dup 118/v put dup 119/w put
+dup 120/x put dup 121/y put dup 122/z put dup 123/braceleft put
+dup 124/bar put dup 125/braceright put dup 126/asciitilde put dup 127/.notdef put
+dup 128/arrowright put dup 129/arrowleft put dup 130/arrowup put dup 131/arrowdown put
+dup 132/quotedblbase put dup 133/.notdef put dup 134/.notdef put dup 135/.notdef put
+dup 136/.notdef put dup 137/.notdef put dup 138/.notdef put dup 139/.notdef put
+dup 140/Sacute put dup 141/.notdef put dup 142/.notdef put dup 143/Zacute put
+dup 144/.notdef put dup 145/quoteleft put dup 146/quoteright put dup 147/quotedblleft put
+dup 148/quotedblright put dup 149/bullet put dup 150/endash put dup 151/.notdef put
+dup 152/.notdef put dup 153/.notdef put dup 154/.notdef put dup 155/.notdef put
+dup 156/sacute put dup 157/.notdef put dup 158/.notdef put dup 159/zacute put
+dup 160/nbspace put dup 161/.notdef put dup 162/.notdef put dup 163/Lslash put
+dup 164/.notdef put dup 165/Aogonek put dup 166/.notdef put dup 167/.notdef put
+dup 168/.notdef put dup 169/copyright put dup 170/.notdef put dup 171/guillemotleft put
+dup 172/.notdef put dup 173/.notdef put dup 174/registered put dup 175/Zdotaccent put
+dup 176/.notdef put dup 177/.notdef put dup 178/.notdef put dup 179/lslash put
+dup 180/.notdef put dup 181/.notdef put dup 182/.notdef put dup 183/periodcentered put
+dup 184/.notdef put dup 185/aogonek put dup 186/.notdef put dup 187/guillemotright put
+dup 188/.notdef put dup 189/.notdef put dup 190/.notdef put dup 191/zdotaccent put
+dup 192/.notdef put dup 193/.notdef put dup 194/.notdef put dup 195/.notdef put
+dup 196/.notdef put dup 197/.notdef put dup 198/Cacute put dup 199/.notdef put
+dup 200/.notdef put dup 201/.notdef put dup 202/Eogonek put dup 203/.notdef put
+dup 204/.notdef put dup 205/.notdef put dup 206/.notdef put dup 207/.notdef put
+dup 208/.notdef put dup 209/Nacute put dup 210/.notdef put dup 211/Oacute put
+dup 212/.notdef put dup 213/.notdef put dup 214/.notdef put dup 215/multiply put
+dup 216/.notdef put dup 217/.notdef put dup 218/.notdef put dup 219/.notdef put
+dup 220/.notdef put dup 221/.notdef put dup 222/.notdef put dup 223/.notdef put
+dup 224/.notdef put dup 225/.notdef put dup 226/.notdef put dup 227/.notdef put
+dup 228/.notdef put dup 229/.notdef put dup 230/cacute put dup 231/.notdef put
+dup 232/.notdef put dup 233/.notdef put dup 234/eogonek put dup 235/.notdef put
+dup 236/.notdef put dup 237/.notdef put dup 238/.notdef put dup 239/.notdef put
+dup 240/.notdef put dup 241/nacute put dup 242/.notdef put dup 243/oacute put
+dup 244/.notdef put dup 245/.notdef put dup 246/.notdef put dup 247/divide put
+dup 248/.notdef put dup 249/.notdef put dup 250/.notdef put dup 251/.notdef put
+dup 252/.notdef put dup 253/.notdef put dup 254/.notdef put dup 255/.notdef put
+readonly def
+/PaintType 0 def
+/FontType 1 def
+/StrokeWidth 0 def
+/FontMatrix[0.001 0 0 0.001 0 0]readonly def
+%/UniqueID 0 def
+/FontBBox{-64 -203 1017 916}readonly def
+currentdict end
+currentfile eexec
+D9D66F633B846A97B686A97E45A3D0AA0525392EECAC163E584A9104D99AD0BC1B1F3F7121D1D0
+F2C60DD206B0D3C8C450620B47320CA0AEB8937511E456AADE8E66B301B1E3E9DFE17E2F79ECFE
+A709FF3DAE19B4C169DF6773EDA414D02915A6F0FAF8B24FBB0777C697BE8A37D63A390AD9DAE4
+95BB7E626721FF2FD3FB147C80D22BEAC37C2624D818D58C8DF0209F5CE76ACDDE57A303D9042B
+F0A674D095697F925F532D1814BEA8F8A238428C7CFFA9AD00A69BE3AE10FA88522C2E1A6CC40C
+D7959397445AFBBFCBB40946FF99F8D415BDA1754F23B302AECAA21F8455B9095C57D4F3D00D42
+A5CB5086BB99D70142316407E4DA06B61DB9846C5ACBE2F8525E91712BF98D06C171A9987F93F3
+B4BBE6DEF3743DBBFC311605E977BB1FE846F17252D4876C2D1CF74BF15546A31F2EE591C1EB35
+DAD685E8ED96370EB4A41515D0EC44CB9A5C758033C09587FEA7504470B04FF86C54A2BDB3E79E
+4398C68C6F613498DCCE2AC418F9CC9150D156406263F8E4D5D22AB67A60BA8D85C30643D0D870
+9DB251E3FCC21DEB0221D63D909C7FF5AB89D7904E54831110ABB2D0B6618C561241FC4C817A0C
+DC8A1D9EA1A242EE210C805C29C9483523035DF4B6A42CDF12FD97BD7BAD0516B13F57D5B88BB9
+D233B5E4FB8A48544A73B77EF6811EBE41A6865032AEDFF3DADD1844BE36E421823CEEB14661CA
+7607D185D1E5941E6545F9289EFF0E14490191020C4DA4077AD4F72DEF8134F99F47891532AD52
+5190CA68D5739CF0DD5D89D8FDB3D2CCD3832F9D1B482062EAC842F209150B1CA6CCCF965BEA5B
+78ED3CC37AFCF8CBD4F22FB2FBF6B0D58157E74F451CD1FE24BBE088A6DF3EE50851FEEA89C185
+8F1F68111D921DD21A2D91C2C88736994B7237DDDD0AEB3AB19D0EFE83937474321B7E4C63295E
+9F55E134A663980C768540A8BB14D390F350DA0BA503DCE487915D0A9226ABDCDA689F202F6083
+1F7C96311F8EFB9B170587F9AD1CDFD668BC792A711875F4D86CA59CAF894036EBED2449863C38
+560F4CF0596F68B7DB18C6D3F9FD0EF0E6C5EC7FAA3A62D68785283BFF0E6663AF5D860AB2AB27
+BBC9E57C46B9B9A874B9224DCB5BABC9A05183869F677C8DC4C5D8616D5F643FFB8FC5DCBACDCB
+3524BCA2E90F0FDCFFBB3135C9D739768AC424E16588749CFD0A11A36CA9AA396C4D7582CEC03E
+A77B00040FCA30F6B96B335682C7CE2DE1E7356EC133B78480972CEE13C231951C50F259C97300
+B555D389F0A4F019504987B4DB7095DA38E222722722D31BFD70B6B8F013078728EFC9F45C88DE
+B19A25ADF996AC4F6405D127F77966BED35625930C42F2EE0EE1E463603884F05A1A7DF1BC22D2
+8F45019B219187B9689A2488502B3EF8841651AD6A44FCD24A0B3CBC3DAE467D903BA3BAA014E2
+28C132B2B51F33D1675BAECF5D83FC782EDF874A6D6E942EE2F98B11A727EDAE092D23A7EF6B94
+2C8AD02D5168149E950F93A5F3B7F7E0DF87832B92C298DF2EC7709493E1EBC311C0A47764156C
+7E7B5475EBB106355548A3A1A7B4E6525B8C3EFFB8162AAFE2C7C4FA75ACC3F852BE8FB9F9D587
+027B6402BFBA54671F721AE8DA45ED57D011D9A2356B9D2CAB9F18D3EFE45D3E7026A2C7AF1A9F
+B0475701DAF683695B0D466239A8092E6FABB11FE124ECE29D10DA5B77B2DA9C0AABE6AA417CFF
+EE315840B9D687488053602966F43AF5016324E461FE79E0A845DEF0E8FFF6FF570B49526A75D1
+0422EC1CEA8A4653081077E6A0982CC854C82DE326578E582AE46F714FE4B171E7AE87AD392B6D
+0A6FBF280C60F36FAFF8244C1AA0AAF2057B0B504BEADB9CB961ECF19DE3DA5301A13DA3DC43A1
+A21BC30DE9AF4E34BEA47E55D4F2FAD3DF397806782DE16DDEA0B8BAEE76CB05771D5B0EF33F0E
+272066FB1B6D745DEFDBCA591FF08782AEB8DA95925A9DFA77049C3EED074B538725715120DDF2
+218A5EEFEE97015A7AE6BF10D712280B8771B7BA9939D0F8E3F0C0C271A3D30FFEE6B4886E36B3
+0ADD739EB3908857A605B09030ECB8FA721050A203A618F413D4DA675EA622DF5C6FF9E210843E
+517ABB4DB23122EECAF722C4A3F681A48CCD669A58DEAFC742EFFC7D1AC2A463B51A68428B31BD
+C19748C2E1C212360F47F84AC21A8E18F4C770687845A8FA3F5A96FD2FDF5112BAD02BFDA08821
+C4BD13F7385E582673D961A43669B0888AD258014D43E45F4B992133C88C95A64C8E727AF4FBA0
+65EEA30D110B08EE9405733AEA098DED6461CFBAD3724A09EBAB4EEF60DCA57C7EC7FEDEC5E1CB
+22D66F1544582E214FB7521DA7D49058F1687BA617ACF2C1AF71F3D8DF06EDE28A451E8C3EA736
+67C44123EC9036B2186E3481D32C4A0C3BB4B55288AA63F08A0C7C5A938076249375421A0FEEF6
+09A42EA02E439F1A259DF7441491A08DF32C04F6EF0815EE6CDA24FEBA7D5AE1F0F68F9E0756F9
+90FBE598CF87D59397DCBA5270B2DB64830F1D853388601E422F27804AA6E1903476C98E2B7D4B
+57EFD4F3D36AF40F43D3ECC172F44FB80DC24AE1C30F930B93632F4D1C8CE802972CCA74FA58EB
+360D5859029543969D72BA4FF1F962E9D37D8BA78F5CF1C4C4AE9AE67923DED97B5DDB9872E4FB
+368398F74E1BA359FF34A207CE5845EFA89905F469A68DD4402FF3DB0427A95F74D6DBA367BA30
+CDCCF4B5406FB158CF279B831931EC683D056A75F9ED586B40817A3460217A59EC5278B8E88DB0
+C4E43B535395F953F58DED16EC64F0CF4968192835C1CA83B49E301548C661C97500E207CCB5FB
+4007BE830927470C587EE12993A047FBA8030168305CFF6416EE1918EB9059939D9B7219087676
+97FC7FAE660623E943DFA0932B65C1FF779C89CA7B7A546466B9C285E6F12E2660A785906B4D2D
+1574111275DBC24EAFBEDECC50A9DF8403DF6E34217ED468A0C452F9B16CBE8C7A8DEFCF43E3A3
+900291F14BA62172FFB10FA147508FA097A484D03E7415C80F01520FBAC0BAE68521AA3AE2C3EA
+76E03D679FE01692A17701E3B4B82E8C019483A7AC9752DF76FC96B0A85D275DF95809D971C746
+6081548CEFDAC6AA739D81342D24F2167A751BDC9B7CCD403FA99AD7A985E03B45448F55D000AD
+DB02EC6D7A57C351B9E32A1E285F1F2C5DE0619A3E75E6D8D3B23BF30EAE7B1749B3D2A98B9624
+2E1D9E4847FE0C98363EB6A6E91E246E4676A7A14ABC02EDD706AD8E97E3C5526FB56EBE59A497
+7D52E073E8A59124223039C93B6AA04DB5DD4AFADDCFCEBF0EA0F1A73C9B0DA246BBB9A64FD893
+91C048734F102B1F9E8919B73F34136F0DB2DE1B8027EDB8C512D2099E2FF8F52AE1FD26AEDBDD
+E6211576B517B6EF450FC2DF1CD9A5B30DF76FCD9036DCBEFB6847D49942E292D4ABE5A6BF1A87
+A9F2416D360934A0612CA3111694728DDF715343EE165CA171B928CD14780734821CA6B55AEC9B
+745DF9566CE767E30A8C3AE5981FD113F31D2FDCCEDEB54384C4B51A3A7178739B3AFFF7DB5DA2
+A15CA473EF99F8D5E5B23BD63D1DAD174CCD6AB678CA4407689EED1A61FDDFE526E616A33A26DC
+DAAB0D3B794A897A222C646474C3EC5EDAB74AC0DCB1CE940C11AFD4748B1EB9E6F1E221F21956
+7DDAED6DB33A0895B308E67FE7FFCD42495367A0742C699872CDCF4C4A160FCB7ED6BC1B3882D4
+54A44456835F5FCAC86EEB25ADDAAB7084446DA3318004CC369F68B7EE0B47644B35454C7FA8DE
+753181F5D177BC8AD5966D54EEBCC68A8A619885113AE52B63B482C3E52EF7B0B8DC46F0BD3A59
+588874502A11734CC1F0E004A51B0AFF92F017F55E5B6D45EBBC84AB262005136A491CA2D3199A
+4406404E459059BE2827D33398F8F0A81493872995DD88843B6DD0C82339CC8F4CE23019C39D17
+6DD5D4BDA201D2ED9E4C082ED6EDE06109A714E9F2DC34B842C45CA7DAB4E6224119B88EA0B7ED
+61B5E73EE3CD7A3577C159D23B4F1675AD54790EF0E08B196BC150A303EBA535D2B8A82881E711
+1A7668EB5E94D8F37C3FE24D2446AC3F58EDC8952D0509C8119226C78FA7D283DDF3F7D80AB956
+5FF5E82B36D694F34B067260E776FAA811F1148FD19D45831E8BD46C4D1CA5D4A21A63723A4FF7
+600EC58DC7ACFB1EF18BE0BA780B3C04E33CDC88E4018E7526DAA765CEBFB30C5E40CC0046552A
+F6A9A2D867C2E35D537C2AA649A923F40A33BB3331A257A3D1C15CC8CAC765CCFC3BF012052031
+3B6F46C8372404BB692B7A9756C846DC86459C0B7CD06DD23F2DB4675065F649FE81E6B3005AB3
+8B4DFA8938A9AC7FF921CC1B383A77822CDF82BAB3BC3397EE5DDA5E3CA792DAAF8ECD15E837E9
+0C838A22A198FA4CBA57B925F4691C69337F4656C99E4BDF6D79729E231F66EC3D23E60B5EE133
+0E359FB64729BDC3B399AC49D237A277655698DC7E5B11A744FB3DB0E27641274D9EBEB5243B61
+DAE95BB1FA63DD6DCA2ED6A5AD022042645FFC7FDF18411758C92647B2855E9CBCB63186F831F4
+1B3174D68456101522DEFC77A076A79CA24B4F153183391C8378567002FFECB3440BC2E69A7A36
+521C33ABA6F3606491D8387A52A1B70FDC50B7E79EEB1F06E041FDCA28B186B2E50F0DBD628315
+C749FDF2E66FCF09D1F9DA69D30E22C60EEAEF847D4ED48C9D656D83139769F56BFC50A7F356B9
+DBEFFF954F92EAF28584441E8A9E3CD3B892CB3C02B09BF1CEF93DD1DF1D4C819C45F08F3ABFC1
+422CCBADFCB84B8F0E461DD5EDC966AF46E1C31FCA2280FB55824DC0C790C4B03B622ED7D8DEB0
+EAB12052725209A771883ADFCDCB6BF7470AD7CB69430BD5534BFDC40680D52F81BEEEA5482DB0
+192CDECC59983E32C65384555ACD3765F34CCFA54911ACD0FFA79CC63DC801294D9312B83B26AC
+B316AE8893D14B9DF9C0B8F2C7B96E0D9885522F558539A4AEFF1E77C13B5D98FBB9EFCC70C9F1
+1D7131A5961CD341DFFFCE2D88D2A5EF01EFF598875FF7B06BF5139D098621D05F19645CC2D8CC
+BBCB787E0EF3A3856F5AF4F07FFA267C4D8238A27357C4697E778635C742CE3ADACA8707900D43
+3B0CFB0F762056EE5F71C73F6D0E1EE183F351542EFAAC59452435C736C010B44704F212141D29
+8494649F5DFD9424E8CEEDFEFC4CA4D4FC7A3545F07E81764507E20F4E30C016D4F5FA9F027C4A
+71C3A66A56E8D58FDF709A6D979CF8ADBB40D7BB9741EE701AEFBF68EF338A2045015F8D1A1F99
+9F9B718D9E8D52B446E390FA5252CC634440BC1D08E083BA4D310E79E378FECBF0E2C140C81ED4
+F9BC94F7A8178A62A8DD40EFDF6FB225D5DB71EC80423DF84110FDE1226CD5CF127F4651A52F36
+B4279FA1740C13290DBB340BBB3BA5A7A8E1783C85FF022EF8E01CB106A26EE41050672C9FDEE5
+98E86425FBC87794E0E26F28EF2B8B3DEB373B20C93A8875809BB5675D10BE5484E79135138B57
+CA58E53E8676527601E75D832679B0B71B80B731691056957B98A653FF3BA10051DD62BD60B096
+954EB69AEB5916A99717DB0DBB1641AD681A29E7CAC2F2CF60FB1D1ADFB1AE0DAFA5AC8ABDC9A1
+BC38C497DE2C3E392B555C9C53E0DF258E3423B0C7801F6A3D3C5E8711A905F2B7E806C02E148D
+01A02A315B3BDFE53A61F4160A54C3487B9E314D2B0D9FB95F028053657BE4BADBA11C5255BB7D
+5114BE2559F0FC2A9F61F887CA4DADB073D78364955B41CEAE3D6A938F5697ED026C990501D2CA
+77E992AA0F31C27349E6D9896C87AE53CF0720C7AB0CD67F7F2E2F12E4EDAFCE439540DA2946EA
+EA3C19B40C3798C69DE3C2ECFCDD9D609B1FB9D839CC5ED5114845EEAAE5449ADC496A3B983167
+B67FABE1B23935BF1BF0A9B4A03667A154B06C1B39AF204EDCAE6627DEF9AC9ECF898A8BB9E78C
+451BE100A0FB7FE850FBEBF26D4DC3C9CCF288F40AD1D0C8B32CE1FB79D62CD7542820803344CB
+7C63D20CB29A1F5E3BE1AFD388BD6E8CEB900432BC0D92AB5D15574BD1C96C19407E00B173F6C8
+F0392EA18A1B89AA9661F288DF1AAFD503506D77732D57BB87C3D3A2E4204745D899317784C216
+D192A31685D0C35D0A7DEE9FD65109F5438DABE0B77FA52FCF3813EBA087B1AF34DCFE07390D67
+87E86464719934B4342C3BD98209C77B81F3B368567A3CC48D129E778B4055EE76765F53248E1E
+1092282DF2CB0EB8610B5B8A727B1B1176F994C33D602DB0593AC3BBCD9D15DD5FDB31CF90E052
+D230565551902429CE97ADEDD3A5EC3F5FF83CDD9EEF3FDFD0BB5E29ED4CD255A7929663B9C583
+897864E59C1AF691D0800CC4150C0315E58DD537B671B8B38175C68E401A391EFBEF00AF8C2A17
+DCFFDA72F8FD1BAAA0F544132EC9C838003D020713EA5ED5D2F39F92F9337B9CFD877AF7266981
+E67A7A5004E38E54DC138276863890CD915ADB08F9DBB181E36E159190E3C9C3FA2851F6EED963
+06D1701C50AA80E75885C4128D2EAB0C32ED4181EDFCC1B3CF02A8DA34695AD1AEA6749866F370
+2300DCC80474A2482D6C4F07B21ABD8E85220EA75727839BD3A741A789AA585E1E1C5F4D2C469D
+2D9ED2B01E3AA2574347A276C0BF5AD194E9193907267BC2A46E3D276BA050CDCF523158657F93
+96FCDEB97E5BCB0F6043D813881ED3B1F31FF5648A9F24D82F2108F7AFB5F170F4816E738CDB25
+C28C3360C6B4E2812187F15260C2F6570D9042849FD9BB9F3229C17DD3807DF03996EA2745BF09
+6DE05F559A96A295B64BED481C467B50A303AB53ACCCD98E40BDEB3608925CC48C7900A7A1FF5A
+B310B6D11024266291103465061F61F56D9D3A159A8C3AA2DDBE49BADF568FB736D0782E8EC6D0
+9325B93565C0C0C981BFEE0B5C24BA8CB06F4FB5121A5B841A84978EAF97C690471CC280A4551E
+001F2CE371BE3599CBADC9765A5C5995B3583654F891D0E7254ABF44BDC288E943F80607130084
+87C3314685054DD5EE2782BAAD6BED2F4DEECCC89D58923B17266B7ED193065817387A2E09F21E
+1A70EEE78B1235F126AC01B6CB52E60C3014DF1EF0AF8EC567BE19047A39CAAA108A022D4C4BC0
+4EA151AF25872521D0994F70391F6C1D2EA555EA2AF398D5DE25BB57B67B770F4A333A5A1821C5
+2EFC188FC9EBB19CC68793EB33E5597DAF624DFFCF13AA1A36ABB40333794A762BDC53420471EF
+5EAA5E0DB41A65598FB87E93C74EAE6403AF5250185B741DB78D6655768F36DB89EBB4DB54D9B1
+51A641CA5DEAF53F3E84183A26894890C4F3C6273E787E791FEF2D4734D3038DDCB66F53F91BC6
+AF01773FF030E11372290031583FFF36F80E01D9462BD9F68121C111D73853D4D2004F7295D860
+7CFA4075FDBBF2FC22C949DE3B0CB90BCE82E871E4435F3F6BC007F70A92272D266A718C22E387
+5D8FF000CA83EA7C4071764305076560DB8926520B2285C1B8A9B38A8899F9547F2DF0C144EE66
+C0C06299DB31E07F14D6923F3780785D19FC10E3D2C7805344050B6A4753FF177667E9F6FC8F47
+B7EEFC26CFEB7A1DC6A7028A0A22971A5DA242C54FAEC048689B46D01A835189B5EF23DDBD2507
+FD0C2010D481B0C850627B9B4AAE5AB81B12E28F48060D991E63462FD3E99D1EE269B85F8D6A6D
+F98C77F2361BAA7B1F6FB4AEB5D6515D63233CB64586E88C1AA9BA741377A3D8166192385FB378
+5AA87A41CE89C068941DF37927BDB15A77F8190B9A545B0675C38591D92359AFA0CD40048285CE
+7E20A24E380A241F74BE1BAE53B14ADE03BDE69EB44FB2A1B57D8421E6654A64506F6482AE7952
+7B5920A5861DBBAE6A1FA8B824D7CE422530151F185F56AF581F8C5B75B2D436AC7857A7B85E8A
+B6D054BE329EFC3782D42F5E272CEABBDFA269347C3511E6FC41A6F817A1444B2D159634E5F1BC
+D162B7B7912F08654A46FB21E76C1DCFE8E030C95FC247694B470A0CE09BD561B11A18F31C1307
+EA1AA4518AA47609AC56FF77A856A9A87A47F6DDCCD2D587E9AFBBD93B27006FB440BAE861A875
+90DF57C1659E5604D906C98649FA9DB56330B9547275C6C1FCB6D747CACE2E4137D4B3F221B21A
+4C0B2725E71B2957F31B461FBBB38C21B87317AC222D65C592244E3F690F533F46AA7C48466118
+EAD41CB91B7FCEDD2235C40DBB7BC9F3F7E84A44D0A2F9256EB27DAE9F069F37FC9ABA099ED765
+1A99D87BF74447180CB93A30D4837F89EC207544060327CBD2A0A449B68ED1569BDDD6AF6324E5
+6C8418C10043BE284CEA1955AD3D71516B19A96D1D48EE4A4D681B75DDD5E61A405E0B8BA11F88
+093A3F2B7AE9CE94CAE4D20D31CD513E1131D7570CED27261C0BF5C8F6AC8C13F93C984393780F
+075E01899A4B327CE435065895D08C933A2A880F51632EA733AB4EEB1C104668EDFACB51FA8025
+54631B6697F6DDFE8358C5E8489C883DDA4AFA0CC643AE6528C24CF32E38399BF5C585AE6407A7
+E1E9A4BAFC25EE5EBF8161481A981EFE9DEEB8610532DBAA05D529BB45865069040B2F17D479DC
+3D60680ED40C14FAC2C91C4BADF8BB5AE4BB303215AB4CAD27D6776A05DE891966656568172121
+8CF08BE66E1D497C6FF825ADBCE1D098D661AEF7A532F545E0A606F2F1D6324E96E45183EBC85B
+99505F57452740968A386EA10E8506D7F2DE6934A710779C70C7DB82DFEA43922D574682F3E377
+29EBCD6A543F5786F7F88F85D84329C6730D62E9EC2D9DBA36141D62EEF6A074DFBBAA10466B5F
+D0DD37FFE57581E184C77ECAF0031313F92A306D1A7DD530A1B99498474AE7019A7D7BF5F3B14A
+5BB04063D940770EA1500B9317E81C3BD2A448C7457FAC0B5C76C6E3973A03036879441F9AEDF2
+4FAA5AE4B493B6A44955E44820D88ED4AD4CD6906EC092B0BB5ECE2B6E7D28F40362B6EDD4ECF2
+9FAB42AE3E6B3B957B4C48339C3552A733D697DCE77FEA22420131C1DEA0C9AA83C5B5B2040F6F
+EECEFB998B06D6D055FB50EA8DBE41055A508A313AB9EB6E491103124CDAA4143CD3E93D5CC1EC
+4EA082BB9155D4E64F9A5907293DCB23478E478822318EEB966EA718433F700708F35BCAC3D41D
+F0877A2C55685B6D6DAF2A063FE36F4A261C94884FA2D0541E4B22DC114802F8D8592A4FD36931
+8926469DC1918E3421675B380BDA342E0CFCD889E46B1A4106A742CC956511D6F89B3F9D78E06E
+4D69D61DB7C2993921BFC75559131B62B2D7DFCBAF38345CCA43F9AE90035F47B155D07E922E73
+4C9370815F861D86DE46704F21333542A085921D8353F87E0B68368A407799D26D1995E6D3D4AA
+C2C4EA61BAC8C932A6DF934D2F285941957748ECC62E4C11B835E3014BA0B82109A3826BD3EC47
+0B4608727981E2E50B2FA2DE23739256947D7985BB37D0621D0E539B617A62E5266D5AF11CD0B0
+DD78E18D815289C9796402E36887FCE5FA3436AA9E6FB5A47FF13ABD9CE8232484F66764A0D815
+38F87F29F90C54E8178FA40C7097CFF2294448EF93015F84BAC6AF06E5C4BD5F7912F4AA4D3288
+18561D69CCF8DA157891FB97FCA4D879AC2714D4167BC6F0485392A8C94E130C0C5A422045D333
+51EC64107F2B9ACAA94950754B4EFF6078790D59FCE323C1B82D4AB559EB4BD9B394902B987A76
+C6B2E0D118BD9247F8481466AB460A33234074823A4A275C8C30E0C11465052D0A2DCFCEEA7CB5
+E01B4A3E629A5AB9C4D707F651958F5FB4AFD075C42BC5B527D9170F2F24C3A31964C5353DF5D9
+9C2F493C21EA98C84CD89C87BF76EE6BAEA8FBB5FF9C10D9765BF6F130262A2DAE4C3705C8D849
+E92FDFF8CF65FF6E39CBC716235407C1DCA40325331E5EEE8995C10BD0241442ECB330C4FD35C1
+2F56EEE41A3E380F5B7DF3C977EE4B03A4C98BEEE658B0348CB8174AB87C48E19DDB47766A0481
+F83F322B166F4CBD3D1D1AF6BE3D2ACB5DF8F1369B4892624565FC298B70D8C0D60AF1428CAD1A
+3B5499F6F551F5DEB6749EC08D9B25CA3C814EAE8CE275AA107D2B3FE7940333765FC695D69446
+19B8F6DD65BE8053E7D09A311B327DF81CE3C3EBA3848B174C4FBCAF835632882E6D13C1FA0A08
+66F209A9ECA8725F5F61C05CCE44851589140722DFEC8A93FA0A50A883132F28DB7AF23FDDA8FD
+C887FA543D7380FC3563D88A7B243A322F4835EA96FA1D9937E352D0E19B9DE2DABB7BDCB95B24
+645CB40B7122CE2FCB811F47D02BBFF7FD7CF8EF2EAE02598AE06C27913E3DF26CCC1436F14CE4
+12CDF0500B8EE2FD3799B56C53D535DB1F33C09C11A10C0B4C6B51EFE8B4A4D2353330B3A0D631
+E601832C84CE4E3D1BE09915F816EED772DC48063612983C74999327F949FFCFA845B0BC578EA6
+82B9D3DEDA9E31C282E63A43396E4FFE9AD516E3459359173CB76975767790702D941770331302
+CE49D74F7DCF5FF11625260A1543F955EAC4A5E411014180C4D23345B4945849161881665D0823
+2C5A8E6D6615E4067EA187AFF45E42C65B628E9A23BD87A5D76224F2A148B3D2CB34BA0B6430AA
+5A65C36E29943239A8FD1942919D5936706FDEF405A68F5E15B6C6F47775CBD59ECA8CC352E5A8
+73C7B43799389CFF8548048636D455EBE24397ACAEC6E4022B38793A061FB6A434729AF1FDA482
+3E5B9B5D395CA6719EACB0A1321CFCDC9FFA40476AD6E7850D0EBA27F1D8AE8430FACB5F1EAD33
+4FB4EAE2BD44FC96A98CE3840865DA289734EE141760F2FA6BDDE04BF80E9BFB22B12CF5694FC6
+578352737A39094180813BD2E24B4AA9AF48879036A6AFCB34AABC59295D1121EFA702D368DB01
+0AECC8AA31B6B44674C01AF150C97DEAB0894A7A3A645696311DD29FD363EE2B4ECC22D2A88454
+AD179B8F5B8A59C4FE2765A276A303FB9B54B908E63963DF930D24F118B355F41707145E1C2FC6
+6046F14A283090CA40AC9B21BD6D9D884843D9CA4ACF0C4D10BC83FCAD4BCDC4323C0A0AE69489
+5AF0C57E93293F1D0D1EFF86A35BF3E722DFD1611B5CA368857C7C013561FC1E567689011EDD8B
+6A5124FF3F3FF928C5A4CFE6F152052E40F261F88FDF06E99FC4A9F5B183E06D2D0480493F0F81
+4DE0A41D2E565DCB72B2B828AA1A189B9B3488C8AA8371740771F0D7C33B34562A5AF7BB10952B
+B036AA97CCA014B7F18CE622F4BBD3901DEF158F1715703BF4E07B5840DFDE996E037B5D180578
+52EED2475B32BED7F5716531AC997CF174AA85BBC64A56B4A3980479BC5D3411976768A11EC3CC
+11384A58EA668E771C836B493088F1A572BD1C4B878882B9BE98B27E4B617F5CD96755E4DA9AE0
+1E09DC5C36CA0FE4A50388459C62C8980A136D9B99AF8B503A5C155166BA36E2A6FA87913A44AA
+FA71222F1A90E144DBF221DED568233DA86A36D717B068A30F0828633BE0C567B212BB0EBBA9D9
+F590F9D2F8FA71B084AA65BC76F01FC9221EDDB4996D777B88C8A1AE5F96AAA9157E60E7204136
+15D451FB2507AE4F95AE248353C089CB74EC50AF335994D4A9C13C918598850E482022C947D51E
+E39B062DFB3E66E23A1A3AFBE534F5022EAD863D7BC47A4FA41BBCE35BCE1E9B9D5BDF66E5B886
+DE5C37868A4333998860EDE231640BAF32ACB1B31B8CF0FBBCB9427585C213198C8ED78E0C38DB
+9D00A0B3AFBE03CFAF6204A41D5775208F5514E3DC69237C954C6D6226828B89ED66D573E8D33F
+8EDDC83B161984D3257A071492F87622B68D391215B1A8027578109E5856FDDDB367620BC0E945
+8EDF45DFD93440CBEA0D8C6DB9212701FFE13B68732F11C9D7DDDB3B4CD04D8246D27CAC0C4F89
+B1463C20FE17694CB9FB125F0C400388225D7882A48CEF7D54540C21ED0A8ABFDE45D18CFD0E5D
+B72F131597382084C40BB00E9712BA3EA15D3FEAFE1C023661F52B83B2771896F7C2783090497D
+2B348960D4FACB004B1E5EE5F1FCEEC842BD70710EE5F16DE76F7DCB69132237BE4C753BFB7D8C
+6EA19844F0707F8553B3580B7BED9F81638E19088BE87353E09A5DC20ECC57BD8EFCA710075ED0
+35D6511E3683B8683DBAB621A4EC9FB144EDB28F26AF956C74BDA72FBCB07DD57F3AF40855CF04
+CBBE004CDC32E01010CEEF07C3B7F8A8916F19DC5B9406913E49A841A8C10620BA97288221173D
+E6D6C8811592225E83D9C92A0357E3141FECE531A950C00D79C5B9CE6073719B1D978272F661DB
+4101C42138ED9EE35F31588B7EB0FA6EB42C0B05440FAC2C6A2A583AAE368D85A0C6699172441D
+938BB00A5013E90F1F4D88318A44A6D661DEC328C1D5D410D0BBF309D7AD5D89CBE7A16C2B44C8
+9589D2EC32B466D21C9B3AC0744B2F3752A1FF6FD700C6D76F997C728CC0DEAFD33B675C145D61
+75B95BDDFF9F9640E3C66EE375994F01837B38D8F0800751CADD77EEE9BCE7302F4DCE3ED9C543
+34347A339956D85119039AF08292E029199F01FEB17C82182FBB82604EAECC1F9CC32C40E73EB1
+2B63DA1C7B3D8F2990597582184A0A9D4BC8C82D5662AC1D198AFB8E603DA0F32C5E4F26AB3355
+EFE976AF2558393A1D83C761875D07B47590E903EB846DCCCFBE2532114BE43ADAD1230AD073B3
+113F6A9386D2AD7DE020A411334434EC8823C55E62F0F9D977726D664705E5358FDC4D7F3D59E5
+74A10FF03618490620440E8CDDBAA83F7F5FF77A057D1350183124A4EEC3FC6756195DF22315C9
+6429DCFAEBFA465A54F1E2751701F0549AF666970B1F2993B25F0059410D9F9BF71652182797A2
+87564970E198D1A625AE44F42F5A9AB7B2D8A601D341A030A6709379235D1CBE5327DBAFAE6BCB
+5F4F3FCFCE928A3B7A62E15F43CC5502E0A13C16273A711045A454151A1E5BF01850DF3A0D79DD
+24D767C8C1BA70011FCCE02A3BC5F7AC72A5832763629CB662D1850184552927EDB95B3F1B6505
+C6D97BB7E043E1DD3A93412C820E6384A33B4DEF4143005AF5ECE6ECC9B38EF5D524E99E79982B
+156086B2D3DC8575087B94DF858130B8BC92EFD289EBC7A965A3A8AC4DBF0377061C9103431479
+96E3D1A4D70AC332DF024BDB0ED428DC142FB6060D11842DAAEBBB8006F0562526873D3EC79270
+6E4B4DD0222AB2376544080135673B00E08A8A6176D3E593F45D9FD0FAF05C9DCA343FC31A6C44
+9BB1A4E14E61228684349EB0A3AB81FA898240445E30E44DD774BE7250E289D5E95D7847798F82
+CAEAFB5DBE478FEAB432EF59C454E167BA9876D4C9C7D4050A7116F098A1221FC9ADB3EB96C14F
+418208D9FA72ABECBECFF2064769893B48B1CD8B717E2FF6CF0DF32F0A27B7EC89C31C5652E783
+4F0ECBA2CC75007627664EC859B06A7791F95701E64067550B2F4DAA60AD6C5EF219086BA19E7E
+559BF132BCAB712887B9C8D9B73CFE1CA214000AF80B507441B553653F5A2A984E0F9E20A084C2
+C30ABA034D5F3C0203983538A40C43C085F6EA2AC3A5116289A5437D2EAFE6A870D2A6F7621C3B
+86A8C3F56F1BE23D9AD3885E8EDFC2F67FDFFC3B66B5B89A40CBB09221339DA7D9AAAD83A63F3C
+911430C4783C18FEF7F8453433350A86318750ABDF11FF1CA70EF03C9CD3043A856A2147B31A45
+EA2503DD92A7F54E9B303039534655F1A27BCCD8B3067266CF9F0E6F6842D09D8380E96C8E898C
+24856A05246E7CD800052A197429C33F75C8BD077272C65345F8BAF4B03F3D8C482018012621D4
+19F45D01B13A011AE1826675A5F7CC816E19F23DCDE8EB537A582BBDF856452D3422C0A49FDA98
+387565432867C1260BAC27B48222808C0CC6491FE4E650AB3687B5D945CC174B62605BC021B9D0
+35A04A007175BBE4DD0DBD10B593EE9EE52F39E07DFFDBDAC32B1CA6A5D0BC839952614DA47AC6
+2CB97FE17F3A2C8376A415EDCDEEA25E802F1379C701EC26F6EACAB439F441E2670D2E1C8F43DC
+C32331D3F5C028ED991B1366C397A42BC1EBC0A62D61B47A29BF72EC6D6678AC219B66ACA8BD92
+EE42CA7E42C6E45144FFF34440E202ECC5E5126D3E9AA508476A98B5C6C6A010FFDE519C38E487
+856449477B95E55B5DF590B5238D125E1CE8F46EE2C89877E2A870BB11FF39C6739D6FB62BB432
+8DBE9BAFCE60D73EA64CC2A3A8042FEF481A2706B97AF19FC8885EAD2CAB2693CBAE77261E43A0
+6EDB624679AC8D96634854DF1A3D2B9F8C080FDF3D4DB376702C711C49BDDEF38070DC124E4E22
+B4516C3B456601421678F154462F21E9A2F3C1BC18F1A784B0777536C01247C1DA885BCBD881B2
+8F54F845133874340D5DCE9EE984EE355E117CDF9A2230AEBB13BC2B1B983B7553B3031D33FBDF
+ED4930D9E1251B25CAEB69367510B6F45325D94CAD80C72EF7630E80F3EB9558BC3867FA664170
+FCD1ADF65389219FC322B74980F8DFE4EEB537887EB9540081A77CC7F89DFC1B0249555B424907
+8C0901416648B1EE12062938091111C8D628BA96DFE0E6E79F86DFBA815D1546A502889DFB617B
+EB5975963E0C8A5E11683F81E67979A153D641EE83D24D59376006A51994E06434D2C65E540CC0
+A1FF0C0225904BE1991AD2602951A149DCC3E9FCB4C32DC09886DC3CB5C1A4AC5CCCDB77B54E6B
+23F23FDDA8FDEBC0D896974F2D0A93D2E6527073B238C9F9C935FACF476F10338CBC1DDB37B4EF
+04B3FAFDE801A3CE34029C817F91480D188C5D2174B1A7B93731C0FD4C1EDD37F86AF1D27330C7
+F1F60153BB0A1961E27D92E297C0478B69653E9CCA63C5056CB4EF66525E8F15F6A8FCA480B427
+C0FF7DEEC7819D476E0994DE182BA040659FD91FD5F5D369BDFB7ECB41CB9EC0F6A9BB1D74B39E
+707F653C0B4101CB1E5F4CC8301E4711E8A85E325EF6B46602283DFAD9FC4ACF4105A0821888FE
+D1C52AC2FF53B2E7D2C866412A6DA1CC5C4C4EACE3AFDDCD930577D9062598AB0DAD02C9FB6182
+A11CFA4E8B5B9C5CD0527C4C7CF431A0FF87D88F19CCDC0EBEEF7C4679C74BCEE1E98434548A8F
+53CD70A089B16F1CAA62239D519E37F887A30BF5E3C507ECD221BFA73482667E9E81710064DD81
+10E8DDA96DE7860FD8FA0ECCD8EF063ADA63F3358BE93D239615ABB64F27D4EF3452784C5931A0
+110484481A2DEDA2DA7B540BA96C5A8E73938A2ED14F86631F0C96FEC991D0EE49FA4F2D0EF6CB
+90BAC9C0D570DDDAF6D34F95249D4A610929F0329CA85035FF2F876B779DC3E8C5F13F55FBF8C3
+119B1A0B98C6D81D162588351732EAD6697B2CA2BA681AB91E7A8A1372332E7549B3FD5FC8A008
+6B7CB0B3D11CAEA3599E67B18C7FBDF422BC83B4B51DD1B23E0B51B258759E4640F6E83CF86D90
+7E9098AB5D0AEC5FD0CF24EDC743A71E675555574BC61980BA0199BCC21EA72C9BFC1EF19A96C2
+573B6737CA7CE023ED9577E2D2134F17DE4479336F5090608119641E649117A0FDFFCD2238FAFE
+F7BB4B4FD24513C2B16E59080C81EF1E1C5706112563228ABD336F59AB155E55068D10B76867CA
+D3BD184F0C98591E4E454282753FCD50FD461780040A473A854C0085CE15EC03DAD728D930F4EA
+6DDA9DEF3201649D064891AD93335E954A1681A9F3D33F1E546E84D6A85A8601E5624051B05EA8
+1E69A739C7432B185706A7CDD5C26F0C5DA88AAFEB9A0B0FC9012A45BE03BB9C7E437B08DE5958
+C7D1141F82D2B5981D734499C0B710586D3E3D6DFD13662D38663EEA1D1F284C471500613D62E8
+3B2402A72EC256B12B668B5E4BA5206CF17810013D7107E7AFA4D9BF3FCF384BCE21A749C789C7
+5166227D590F9A349DBF283634B8BFFC4DEC6F5526359882D8E4FADE5E31677AC0C67D552DDE51
+1AEAC26410761699DF26B5C4F542B65DB8D1A10B7059771240DF26316A821797D24C86F0EAFE48
+EACA45BF173F2B304B6027476C2DC2A01F4A7322CF94A8BD4EA58F98F57A35F079A9B8DF2A3607
+E18301B62A7BA04AA6A3E02C910B514DDD61B474F7F2981E783BAE9905CC4A08BD212760E01350
+312A871126749C2149809F1C017C3D755492C0759239C72CBF2589080F911028087768E9033252
+B66B4FDF37FC4C6C7E7C6BF963836458C05926EC336836DE05804591A71E81B2896DB75007C633
+C515C3C26CAF458D701B060C0797825D7B54919C735A509827E6D167224348C93D5DE809E14D90
+DE91ABFDF86E12B703F3F57C1537832DFD7F8D76C55FE5D511884A5590DB35893A23DE9DB9E5D8
+43F2D3241E3F1FAEFBBB863AC123484E7B2216BB20E9E4D2ADDD1437B65867964DB9D97B93D033
+B09EE55CA932E29B8936B39026B53CCE01B56A7B0F34B247FE68F779C18A51B400563BA6FC334D
+617455B40C246F8880AF2B2735D4D433358C49064C9728498946CC69DE375201F25514C3837000
+20DEE11651591F3D3D6B7C21D4C59386419D4CE4AA05D10F111932DC5BFFEAD87D9922B3EE9C4D
+CFB8FED6DEE5CDE2A20675CF4C0B0DEA2D25B6D1557A1A4C89D42874B722DE4BEFA26B13143573
+174D2F7F747336D2A8C7D859A2DD71C0BE4D2EA59CB314746134B22D1F0F9743398FCD8A231936
+2AE49CD01A3E60A460B27AB7D61F5E3317E5B66083711F05418C5B677A11E72FC045C499769C98
+7D05DFBA5FD257B8F63EE3E10B02879123A74F98A368D4451BC9B9DFFE0350BDC7582AAF097C90
+07B1D66B703DF9094EDCFA74B1AE8D8FD27767696ABDAE507C3BF4C906B0A0DA5D9D2CDE896D7F
+5007BAED283E12627663C895083D3D72A7AC9476E2AE18E6F896624F94AD5ECA7375F15747A76E
+636D7795CFFD9C7E46DB4D9A515B8025BE8C8D9211CE4C3F21137710D98D28A7AA4EB784D7BFBF
+38CDF100E5A4671FD610673D38A9DE644188C636A568987B6ED2B2C28694A04AAD05B847BD9E9F
+AD7A24EA10CF6868F70FA1C2E33768FD2AB6A4D923451DC0BBFC094B4F699AE6CDCD5C71779A9B
+69AFF54E05A7C6D565F0DD6B0EC10DA15C4E2421F37DCEF1684BCFBDB2D359C73EB3C12F3C82E0
+53E35AEE44AF734322FA93589B80DEA844C25EEF7F6D2B6607164FC706474FB434DD253A91CC6A
+15492D3AF9CB1238951645B545345B31D3752DE66CB29FE9EFC9B26D18AC9C08BF0DA2D984B3B3
+C05BD0535885638502BDA5E7D32C03CB62EBC362765220F0786D46C48B5B27BF9633560FA4F56B
+D6B2B654272BBE6336C39E925EF57AB45FF6B1DF1A527152E00B1AB7C340B358C8C60A866FFAD0
+554FF408EC7289246D873B2F7BC17169EB1CAD2543E23090C3D471A84AC00739261D89DA3D4826
+A0DE18B9D1CE541C103DB304DA1F3A120EDA98BE478BF08A0FD55EDC484E80D999AE030F55CE20
+D224647BBCF94D85107C413BECA8CBFE1F62CADDC2C0D90A2B73C7860194EF688966D85DC3A0CB
+4D3C33ABEE705A6714949D6160475BBD7B45065C5AF7538DE81B5BEAC58648C70BC5D31707A4E3
+EE0DC6597236087027754BFCAF7FE0B06B278E328E32FA161813F07824A285CE0C7F3FF4ADB267
+5D8E58E2B8E75D793F3D730E58167DA6CC88E5F42210A51C6A3FF3DAF70B91B540226332AFBC48
+6DDD5498C8BB9BC9FC6E6F99432E6D0E33954C9362B7D718FE5AB48E242734F12B8F296A559B14
+DC8F2ADD1C41CFD9C35EB4884C3C31663F67E742E4FF102B30EE758C0F1EF509FA26C4697D779C
+15A617AD7F4234CC30CBA41351B749CA4B950A1A7197E48043A9D34C8DCFD395BAA9E8EE4BED28
+7499EF1F9082A734BB205CE35DBD6B36E68C61BAF7BC9DE3696015B6A2FE9FC58A582D2908D123
+C51A665B2DA20AF6EDA0B8CB5C5DD175A836C0B599C17484FB81307F5885B93EDA98E9A74F2D42
+C0CF7A4927D8413543D5D1F0AEEFC50A98B36A3C989F189B0842BB68716751883874C20CEFDFD2
+713240BD0B3AA6535A857A41D8EB7C0C21FE7EB0E8C53B2E5802C3D4FF15ED63EA26BD7266EC31
+C93F44E9221B53023F907A0935303EC1823887A24A58F4055A8602709EF5768CA72A70462D19DF
+18005C5CA20C1B4BB05A4FD95E807B5B6BC31DA5211303392669F795D11401FE70A542539AFDBF
+2594D73DDE8158CFCFBD545ACA831D1E935482BD72F3B7CEC29160258E5D7A76BC0EF7815A80E5
+CA9069888822D688C3C81A102E11767BACB5B70EDD6CA3CF1B9FC66229F4D0E8EF474C4BCE6933
+4EDCA9ECF658E4B8381DD1DEAB850AACCD54DD6426FDA1BD21CBF89D61442BEDC36AE870695F0B
+3D10B84455EFE1D55799B42B6F3C9FF671922428ABC646091B0231C98FC1C1DA83240BAEBA9253
+2E9CFD458D338878A8381A0B2DD85F967071BF3C6C5218F475F047276CDCE1AAD34E9BB16B753A
+A337600F88FFF2A4DFAC401E4E347A4969333E6F8EC225FCA37AFFF73AF88003E92B71752AB449
+EDD7114A25550ECCBA7ACEB0AC3B241513B444CFCCADA9EB4A22E0E0D10418635B4F50FC85B392
+FA58AFB0B0380A811BC41633574386D02C69B0F3111E35F464A6388FF507F8E41F197FCCD30A0C
+C99E76A9663943E0DF73BC8C39941F762DEFD0AF79A8C45CB9326F0AD43F742A05C38593B67993
+073F230E9B8AE837B7DDE865807BDC70EA18FBE6E2A6FD3F03DCA4E8F30A19ACEB398A1BE480BD
+D285D7133BA3D14DB51EF25F05F55D77E76EBBC43D366292003DA1EC7F7634D7B831A2D00150B7
+38AF7593F65FF2B285207B6429D490E01FAD17111AD9470547C71D4A597A89A990C5C725A04DFF
+E07365E928AB34127268178A992B05D834FB060281FFE2DAC887480F1A5F1B48FC163AE63D4C8B
+DA7EA1E3118D659FB0DABFFFE49686EFA4235A6011737B32B86C9F507AC005D915EC38D71A1A36
+B82699C576F419327080DE3ED109DF6DDEA394B792A2598C3EA8AA33B343E77F423EA507E81DCE
+7CD7076C724275F52AB661A53F22F14F0884EF6CDDD6CB98A1443FE8E3354D702A90143AE87573
+655879070102955A6DAAC3C026178E5EE5039E1D145FBDE91D3287B77A9A6BA0578907A138231A
+5E1C5CA4E6B1B7E27E73889102F9B47F7433BDBDAF1C7D8B1FF1A25FC0184EEC14EC17131B51E8
+FE30509B29A2FFA4B939B0DD471E898B9240ABF72282D5C999D266D0E920329F4ADC43335133B1
+8DE629DC27FFBF4BCD9DE710D2A9E76B6E098644E720644D1ADF60B8E3BD60E64D7EAC86095654
+0F59178958D38A55E3F9EE918F0D04D56EA2CA24E020A0FDDC6B95B6EA71D42FE43E52547B7C2A
+FA60F7A525192C6CD24CE9B780459E8BA2CD1D973E49B9EA463AB68BCEE8F769D05F4C0C558B9D
+0EE27DC6D8E1B5C85ED0D2952660644E4C3EEF3561F1DC4A62013C0F6D20BE98DF7D20EE5C2C86
+275379B808C7F637A160F893669019DD930264A89995901F15395A6420503FB1AF684AEE51AED7
+149682C13D71AAD45184D4C2FFBE43C08D28FB6FB7BF248E80FFB56E9C0DE57AE14ABC19D9F62E
+B9499A1307716A3C3964EDD15FA151816C247D40DCC3D4F53B7F7488D03ED6B921D7D385E0C506
+C20EA931BDEDB72A646AD6913D469DE580F71BEEDD44E552AEE8030CC260B4C0AC0DBE1276640C
+8FB29544D22847F5217ED08A4FF6DE50457BE1237B42E046D705967D50D704943748CE6754B5D9
+73EF180C39B25D67E4FD49C7F9D4B83EA879C3F511D20E41E5F6B3D79DBCC7F31469FB3590B2DB
+B4E4A3ED982DCE15FA803E7B379AAD25E6C7FC5E0F300C45DE57F5B4FF824D4080287FF17734C0
+4F34D6E54556C32C889BFCAD3E893BFE262B066A2EC8ECDEF0D73F0A32641A4B3072FDD4C125A2
+3AFD976C7F30D814AACB16B43BF85D8CDF41323AEA744785AB7AC861020E6EEF0F06B7AEFAD039
+DDC78289573425C26ACF708A9518C0D0DB29A96C7493C8F5151257663BDCF72C31F7DB3DBE9BC7
+6C4CAA6985197EA73AFEB44D50474290E2C94CCC44A38CF2824B6ED62534AF6222B9D4ED2B6C2D
+C3648291C10DBD71108E2DE28361D2DC57F9B525BC757C9DC4BCE06E70E1C2312E5E6D0F9A99EE
+F5BF71BEF695A81D9BE6B3BCEE2A6C456E8F5782A5AE75B04ED86FBAEE7AD5DF2AF741270B5836
+02E14E4F8D33A65DA39DBAB820B1E280F24F752E3E47EAB0AEF8E7387B0B3AC759E3A980578555
+1FDF5246B6F5D3587713CF623A4AD2FB7E0DD08759033184B7E004D9B1DB433910BB6F0CBC5144
+791266B0615BF0C3BD5E50D78ACE20034A76674FBC34256C9C5578F008C30411612A4FBE2FB66F
+0412E2BBE7EFB80B94AF4F5FAC48A010F452FD553886E7277AE980C26F392D8A34D76753469855
+3928FB2BC28879C962CC8CC28DF8DBE84F006A70191EB119CDE1EA43EEDB9555EC43F8B34F5519
+2FCA0D043711BBA440A398ED87F69E4B87B8D0C6DB10737A797D60B5FB1A68AA1215E68FE7E121
+5DF1A057F35BDD7A37A9B7A33A4A26D493703C788691C20309FE28C168C776AF19AD26BB72A494
+F370A732947719B17250549D1D7DEC494BE6D04E50FCD60BA0C9556FC7FB16C46D1161B0D27054
+556B1CDDEE552EED1DD77F784481BFC8E6D3224829CDE96ABF7E926A1225AD8AFB7C224D4FC96C
+8DE6A89D71835638546D5E4C7843935BD04AE04241EB57A564904E1EFD53B6349E639B01068CAE
+31E4BAE050E2BFBC7950E10A17636AD60CA2F243BC032F051C1D4C116F14BFC751921176F43C10
+F1336FBD019A9549EAA27A8212001BA6DE9ADC300F3DBA90F6F83B4EB5D4796E42070A2E126432
+658CDB585D710BD453BDA400E7BA0165FD80D72B1811F8DAAF62AA057BCDF707D6C09D0B67879B
+4FCF9B767F108929EE818747EE309363D0FD43D82A17CD46988DD59EEC3C7C9EAEB3D473487EB6
+2A726236D12E2A602E28FE1CCB895503B5B4C32CF255EF9BA8DA91F206E9D8B10F2BAF61D98B62
+2A69BA0B424714F4D4768989A15E59106ACFF2965A7084645905E151923B0154DD76C6466A9290
+EBDA330BD604DDE15EABAD4F24E07A7A8F74F728A0880519B31796F02DD72C71685470F6FBBAC0
+64ED66EE1CFB6204FC7C1FCA691508E01208419F746490FC8DF7A037E4E7C8D141E5454920DB8A
+000FEEE46058AE270F82231D7812B420028B2B3E59A490724593F5848F23BC2AE8432CE5D97423
+F17B63E67B6EBFE9345AAE08501D7EFDA518F0D2F4AC5B9DF01C1FCC1DDFEA712A5EAF9945BE40
+32D14112FC92B75C08F3DD7BF5B483599FCF1BB0F5B24D9C0E7B162CD30BD08F04034DAE7C6163
+E8D0AA810C50931E7A3B5C2AEFDC1C694BBDA5FB4CE355D34DF77A38168F14064D1459ACE6124C
+6F09501807D1B2F4AC124E22F0419E324BF0918EBC97E3439F8D38CC2558781A02B9B677567BE8
+39CE6761DF689738D509D0560E4A688B0376112BE48FE6BBA3D907788EA90F4867B92717EE8876
+9C70311116CA41EDE1F85E36465CC79387D179DF7D32F4BD512F9612446A71BE49073B10519222
+A1E01819B6E5739F35C4B14D645CC54E3B756764F7CC050C733FA651200EA68C0580D71F427940
+11C9CC3D610691D534F35E80DB9A38D2F9D507CC03D72E17A7164A287A8C8C869C41FE42F2890F
+08306371FA7381E8FA43C02F3B1682B64AE81D57EF00BB32CD0D4FCD8548AA6CE2CB03A5CBA053
+0181A109B9DBE4ED2C35582810BCB95D6188C670F166F7D7F1FE3AD02F465EE98E07D94EAFFB97
+16D4A4B17C956263FF0B9FFAA476BF9C2BAF11BEF1783C22E93EF6F210B974660961E05CE4476A
+0A04C98FC58C5ED5C43FF35CF63A850C0C1CF74C6A3AD73EBF6202E30DCC4D06A82F2DC1043E00
+193F4526AAE238D1C214837B9FAE2D16C78DB98208BCEEF5994AB1E932DE21AF37230BF1D9F12C
+DFBEE1634B9D8C2BF17528100F3EF6E71D27A503F76B0294CE0E777CB6DF0CF7D0CC53A1B89DBE
+781516416E6C344FB3F517D82A64F2EBB84790A91B79E1861F5D1DDF95247FE851E2E75B74C03A
+067C36346D141C02D3CDF3C9CC367BAC62B7B0A1A5C9B0D6A2FE5EFE4B0AB34A651FAA4E511BAB
+BDAFCD59089A9883D389CE
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+cleartomark{restore}if
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+/start {view_dict begin initials} def
+%%EOF

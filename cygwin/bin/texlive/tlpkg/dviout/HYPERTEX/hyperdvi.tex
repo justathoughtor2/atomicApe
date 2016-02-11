@@ -1,0 +1,163 @@
+\documentstyle[a4j, myhyper]{jarticle}
+\title{dviout for Windows\\
+       and\\
+       Hyper\TeX}
+\author{SHIMA}
+\date{1997年 3月 12\name{date}{日}}
+\begin{document}
+\maketitle
+\section{はじめに}
+
+MS-DOSにおける\TeX のデバイスドライバdviout/dviprtは、多くの人の協力により、
+高速かつ高機能なものに成長し、MS-DOSにおける\TeX の標準的なデバイス
+ドライバとして、広く日本で用いられるようになりました。
+
+MS-DOSが既に過去のものとなりつつある現在、dvioutをより新しいOS上に移植しよう
+という計画が1996年6月にスタートしました。
+
+32bit化をまず行い、djgpp版のdviprtやUNIX(SUN OS 4.1.3, FreeBSD etc.)上での
+dviprtが作成されました。
+その後、乙部氏の協力を得て、Windows95/NT版のdviout（dviprtの機能を含む）の
+作成に取り掛かり、幾つかのテスト版を経て、最初の公開版 Ver.3.0 となりました。
+
+WindowsのGUI(Graphical User Interface)を取り入れ、さらに以下の新しい機能に
+対応しています。
+
+\begin{itemize}
+\item Hyper\TeX
+\item 文字列サーチ機能
+\item ルーペ機能
+\item ヘルプシステム
+\end{itemize}
+
+特に Hyper\TeX\ は、インターネット時代の将来の\TeX として注目に値し、
+Windows版dvioutを作成する大きな動機の一つとなったものです。
+
+\section{\name{hyperTeX}{Hyper\TeX}}
+
+Hyper\TeX は、\TeX に HTML(Hyper Text Markup Language)の Hyper Jumpの機能（他の資源へのリンク情報とリンクのターゲットとしての情報）を付加したもので、Hyper\TeX \ specialsによって実現されます。
+
+dviout は Hyper\TeX\ specialsを解し、内部へのジャンプや、ローカルな他のdviファイルへのジャンプを実行するとともに、それ以外の資源へのリンクをWWW browserを呼ぶことにより、実現しています。
+\medskip
+
+例１：Windows版dvioutの元になった MS-DOS版の \href{#version}{Version番号}は？
+
+---上の行の色の変わった部分を、マウスの左ボタンでクリックしてみてください---
+$$
+2.33\quad\quad 2.43.1 \quad\quad 2.43.2\name{version}{\quad}\quad 2.43.3\quad\quad 2.43.4
+$$
+\medskip
+
+例２: この文章が書かれた\href{#date}{日}は？
+\medskip
+
+他のページへのジャンプから戻るのには、Jump $\rightarrow$ Latter History または、
+ツールバーの左向き矢印ボタン（ツールバーに、これが表示されていないときは、View
+$\rightarrow$ Change Tool Buttons をクリックする）を押します。
+
+URL(Universal Resource Locator)が指定された文字列を、どのような色付けで表示するか（デフォルトは青の下線付きの青文字で表示）、はdvioutの\href{#prop.sheet}{プロパティーシート}\footnote{\name{prop.sheet}{Option} $\rightarrow$ Setup parameters$\ldots$}のHyper\TeX のページで指定できます。
+
+また、foo.dvi という Hyper\TeX\ speiclas を含む dviファイルのアンカー（HTML文書や、Hyper\TeX の文書からリンクを張るときの目印）のラベル名に、Chapter1 というものがあるとすると
+
+\begin{verbatim}
+     dviout foo #Chapter1
+\end{verbatim}
+
+とすることにより、foo.dvi の表示をそのアンカーが打たれた場所から始めることができます。
+
+\section{Hyper\TeX\ specials}
+
+付属の{\tt myhyper.sty}を用いた場合
+\begin{verbatim}
+     If you click \href{#foo}{here}, you will jump to \name{foo}{this} place.
+\end{verbatim}
+と書くと、
+\medskip
+
+
+If you click \href{#foo}{here}, you will jump \name{foo}{this} place.
+\medskip
+
+\noindent
+となります。HTMLでは
+\begin{verbatim}
+     If you click <a href="#foo">here</a>, you will jump to <a name="foo">this</a> 
+     place.
+\end{verbatim}
+に対応します。
+
+{\tt myhyper.sty} では、これらのマクロは以下のように定義されてます。
+\begin{verbatim}
+     \def\href{\leavevmode\begingroup \@sanitize \@href}
+     \def\@href#1{\special{html:<a href="#1">}\endgroup \@@href}
+     \def\@@href#1{#1\special{html:</a>}}
+     \def\name{\leavevmode\begingroup \@sanitize \@name}
+     \def\@name#1{\special{html:<a name="#1">}\endgroup \@@name}
+     \def\@@name#1{#1\special{html:</a>}}
+\end{verbatim}
+
+HTMLで使われる \# が、\TeX では特殊な意味を持ってしまうので、上のような
+定義をしています。
+
+\section{WWW Browserとの連携}
+WWW Browserとしてインターネットエクスプローラがインストールされていて、
+それを呼び出すとインターネットにアクセス出来る状況になっているとしま
+しょう。
+
+また、拡張子{\tt dvi}を持つファイルは、dviout.exe に関連づけられている
+とします（エクスプローラの表示 $\rightarrow$ オプション $\rightarrow$ ファイル
+タイプで指定できます。このとき、dviファイルに、適当なアイコンを定義できま
+す）。
+
+上記の設定で、WWW Browserから dviファイルをアクセスすると、表示は自動的に
+dvioutで行われます。
+
+WWW Browserがサポートしている各種資源へのジャンプを、Hyper\TeX\ special
+として書くことができ、dvioutは、必要なら WWW Browser を呼び出して処理
+することが出来ます。たとえば、
+\begin{verbatim}
+     \href{http://akagi.ms.u-tokyo.ac.jp/ftp-j.html#TeX}{ここ}からdvioutの最新情報
+     が得られます。
+\end{verbatim}
+は、
+\medskip
+
+\noindent
+\href{http://akagi.ms.u-tokyo.ac.jp/ftp-j.html#TeX}{ここ}からdvioutの最新情報が
+得られます。
+\medskip
+
+\noindent
+となります。勿論
+\begin{verbatim}
+     \href{ftp://akagi.ms.u-tokyo.ac.jp/}{ここ}からanonymous ftpできます。
+ 
+\end{verbatim}
+なども可能で、これは
+\medskip
+
+\noindent
+\href{ftp://akagi.ms.u-tokyo.ac.jp/}{ここ}からanonymous ftpできます。
+\medskip
+
+\noindent
+となります。インターネットにアクセス可能ならば、マウスの左ボタンのクリック
+により、実際にこれらの資源にアクセスできます。
+
+外部の資源へのアクセスの場合は、デフォルトでは、それを実行するかどうかを尋ね
+るダイアログボックスが表示されます。プロパティーシートのHyper\TeX での設定で、
+これを省略することができます。逆に、{\tt CTRL}を押しながらマウスの左ボタンを
+クリックした場合は、内部へのジャンプでもこのダイアログボックスが表示されます。
+\medskip
+
+飛び先が dviファイルであれば、再び dviout に戻ってきます。ですから
+WWWサイトにHyper\TeX で作成したdviファイルを置いておけば、それらの間で
+相互参照が可能になります。
+\medskip
+
+なお、このファイルから、同じドライブにある dvi ファイルへの相対ジャンプは、
+WWW Browser を経由せずに、直接 dviout が処理します。たとえば、
+\href{file:hyper2.dvi#jump}{hyper2.dvi}\name{jump}{}
+にジャンプできます。
+
+\end{document}

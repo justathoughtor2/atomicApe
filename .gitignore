@@ -3,6 +3,12 @@ cygwin/home/bananas/workspace/**
 !cygwin/home/bananas/workspace/README.md
 cygwin/home/bananas/UwAmp/www/**
 !cygwin/home/bananas/UwAmp/www/README.md
+cygwin/home/bananas/UwAmp/bin/database/mysql-5.6.20/data/**
+!cygwin/home/bananas/UwAmp/bin/database/mysql-5.6.20/data/README.md
+
+# tmp directory
+cygwin/tmp/**
+!cygwin/tmp/README.md
 
 # .ssh directory
 cygwin/home/bananas/.ssh

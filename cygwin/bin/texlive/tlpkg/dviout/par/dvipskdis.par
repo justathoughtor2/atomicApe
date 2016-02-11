@@ -1,0 +1,6 @@
+;# A sample to transform to PDF by dvipsk and Acrobat Distiller (5.0)
+;; Transform to PDF by dvipsk and Acrobat Distiller (5.0)
+;;  Paper size, Landscape, Offset OX, OY,
+;;  Pages to be transformed, odd/even/reverse
+dviprt='dvipsk -Ppdf -D8000 ^W -p=^a -l=^b ^X{-z} "^q";"c:\Program Files\Adobe\Acrobat 5.0\Distillr\acrodist" "^d.ps"^Z^10^{Hyper PS&1}Transform into PDF;by dvipsk -Ppdf and Distiller(5.0)'
+Set=fd

@@ -1,0 +1,417 @@
+%  This is a LaTeX style file for  dviout special `input (Ver.3.16.1 and after)
+%                                 Ver.0.5
+%                      Written by hoda, misc, SHIMA
+%                             February 25, 2006
+%
+% \usepackage[<Options>]{keyin}
+%
+% Options: Ktrue(*)    \K{<string>\K} is valid
+%          Kfalse      \K{<string>\K} is not valid (interpreted as <string>)
+%          Kfalseall   Same as Kfalse but \Ktrue does not work
+%          Kmeaning(*) Use \K{<string>\K} in Kmeaning-mode (see below)
+%          Kverb       Use \K{<string>\K} in Kverb-mode    (see below)
+%       　　　　　　　　　　　　　　　 (*)--default
+%          keyin(*)	   \keyin is valid
+%          nokeyin     \keyin is invalid
+%
+%
+% \keyin{<string1>}{<string2>}
+%   <string1>: The string to be copied to Clipboard when the hot spot is 
+%            clicked.
+%              Two hexadecimal characters (0,1,...,9,A,...,F,a,...,f) following
+%            one space character are translated into one character with the 
+%            corresponding code.
+%              Two adjacent space characters are translated into one space 
+%            character.
+%              If the top character is "." and two hexadecimal characters 
+%            followed after it, they are translated into one character with 
+%            the code.
+%              If the top two characters are "..", they are translated into 
+%            ".".
+%   <string2>: Hot spot in the dvi file.
+%
+%   This command is interpreted as
+%
+%     \special{html:<a href="dviout:`in <string1>}<string2>%
+%     \special{htmt:</a>}
+%
+%   Example:
+%     \keyin{\begin{equation} 0d 0a\end{equation}}{Environment Equation}
+%
+% \verbkeyin{<string1>}{<string2>}
+%     This is similar to keyin{<string1>}{<string2>} but there is no 
+%   translation.
+%
+%   CAUTION:
+%     If \(verb)keyin is used outside any other macro, <string1> can contain
+%   any character provided that the balance of "{" and "}" is kept and
+%   <string1> is never expanded.  But if it is used in some macro, 
+%   <string1> will be expanded in the usual way.
+%
+%
+% \K{<string>\K}
+%     This is similar to \keyin{<string>}{<string>} but the translations 
+%   mentioned above are ignored.  
+%     This is useful when one is writing a source file of TeX with complex 
+%   formulas or equations.  For example, use
+%
+%     \usepackage{keyin}
+%
+%   when the corresponding source file is edited.  In the final version use
+%
+%     \usepackage[Kfalse]{keyin}
+%
+%   or change \K{ and \K} into spaces by an Editor.  
+%     The function of \K{<string>\K} is also switched on and off by \Ktrue 
+%   and \Kfalse in the document area.
+%     \K{<string>\K} has two different modes: `Kmeaning', `Kverb'. These modes
+%   are changed by \Kmeaning and \Kverb.
+%
+%   Kmeaning-mode:
+%     Adjusted form of <string> is copied to Clipboard.  \K{, \K} in comment
+%   area are ignored. \K{<string>\K} can be used inside any other macro.
+%
+%   Kverb-mode:
+%     CR/LF/SPACE/TAB in <string> is copied verbatim to Clipboard.
+%     \K} in comment area are counted and extra \K} are ignored.
+%   For example, if the source is
+%
+%     \K{ \K{ x \K} % y \K} z
+%
+%   then the string to be copied is " \K{ x \K} % y ".
+%     \K{<string>\K} CAN NOT BE USED inside any other macro.
+%                    
+%    (eg.) AMSLaTeX environment: equation, aligned, gathered -> OK
+%                                align, multline, gather,... -> not OK
+%
+%
+% \begin{prototype}<string>\end{prototype}
+%     This is almost the same as {\K{<string>\K}} in Kverb-mode but it ignores
+%   comment area.  \end{prototype} can not be replaced by \end {prototype} nor
+%   \end{ prototype } etc..
+%
+%
+% \Ksetext{<ext>}
+%     \K{<string>\K} in Kverb-mode and `prototype' environment use an extra
+%   output file. \Ksetext{<ext>} set the extension of this file (<ext>=`key' 
+%   by default).
+%
+%
+%
+\newif\if@K@command
+\newif\if@K@falseall
+\newif\if@K@verb
+\newif\if@K@keyin
+\DeclareOption{Kfalseall}{\@K@falsealltrue\@K@commandfalse}
+\DeclareOption{Kfalse}{\@K@commandfalse}
+\DeclareOption{Ktrue}{\@K@commandtrue}
+\DeclareOption{Kverb}{\@K@verbtrue}
+\DeclareOption{Kmeaning}{\@K@verbfalse}
+\DeclareOption{keyin}{\@K@keyintrue}
+\DeclareOption{nokeyin}{\@K@keyinfalse}
+%
+\ExecuteOptions{Ktrue,Kmeaning,keyin}
+\ProcessOptions\relax
+\def\Kfalse{\global\@K@commandfalse}
+\def\Ktrue{\if@K@falseall\else\global\@K@commandtrue\fi}
+\def\Kmeaning{\global\let\K=\m@K}
+\def\Kverb{\global\let\K=\v@K}
+%
+\def\K@ext{key}
+\def\Ksetext#1{\gdef\K@ext{#1}}
+\newwrite\@key@file
+%
+% definition of `\keyin', `\verbkeyin' ------------------------
+{%
+ \@makeother\^^M%
+ \@makeother\^^J%
+ \gdef\@dosrtn{^^M^^J}% return of DOS
+ \gdef\K@otherM{^^M}%
+}
+{
+ \catcode`\^^M=\active%
+ \gdef\@ctivate@rtn{%
+  \@makeother\^^I% tab
+  \catcode`\^^M=\active%
+  \def^^M{\@dosrtn}%
+ }%
+ \gdef\re@l@rtn{%
+  \def^^M{\K@otherM}%
+  \newlinechar=\endlinechar%
+ }%
+}
+% \keyin
+\def\keyin{\leavevmode\begingroup\@sanitize%
+ \@ctivate@rtn\@keyin}
+\if@K@keyin
+\def\@keyin#1{\special{html:<a href="dviout:`in #1">}\endgroup\@@keyin}
+\def\@@keyin#1{#1\special{html:</a>}}
+\else
+\def\@keyin#1{\endgroup\@@keyin}
+\def\@@keyin#1{#1}
+\fi
+% \verbkeyin
+\def\verbkeyin{\leavevmode\begingroup\@sanitize%
+ \@ctivate@rtn\@verbkeyin}
+\if@K@keyin
+\def\@verbkeyin#1{\special{html:<a href="dviout:`input #1">}\endgroup\@@keyin}
+\else
+\def\@verbkeyin#1{\endgroup\@@keyin}
+\fi
+%
+% ------------------------ internal tools ------------------------
+%
+% \K@aplyproctolist#1#2#3
+%   #1:<proc>  #2:<list>  #3:<delim> 
+% \Kexit: exit from the loop
+\newif\if@K@exit
+\def\Kexit{\global\@K@exittrue}
+\def\K@aplyproctolist#1#2#3{%
+ {%
+  \def\aplyproctoitm##1#3##2\@nil{%
+   #1{##1}%
+   \if@K@exit%
+    \def\nxt@todo{\global\@K@exitfalse}%
+   \else%
+    \def\rstlist{##2}%
+    \ifx\rstlist\@empty%
+     \let\nxt@todo=\relax%
+    \else%
+     \def\nxt@todo{\aplyproctoitm##2\@nil}%
+    \fi%
+   \fi%
+   \nxt@todo%
+  }%
+  \global\@K@exitfalse%  
+  \aplyproctoitm#2#3\@nil%
+ }%
+}%
+%
+% \K@warning
+\def\K@warning#1{\typeout{<Warning by `keyin.sty'> at l.\the\inputlineno:}%
+ \typeout{#1}}
+%
+% \K@chk@incmt
+\newif\if@K@incmt
+{
+ \catcode`/=0
+ /catcode`/\=12
+ /global/def/K@bs@char{\}
+ /catcode`/^^M=/active%
+ /gdef/K@chk@incmt#1^^M#2/@nil{%
+  /let/nxt@todoc=/relax%
+  /def/rst@lin{#2}%
+  /ifx/rst@lin/@empty%
+   /if@K@incmt/else%
+    /K@aplyproctolist/K@rmvesccmt{#1}{\\}%
+   /fi%
+  /else%
+   /global/@K@incmtfalse%
+   /def/nxt@todoc{/K@chk@incmt#2/@nil}%
+  /fi%
+  /nxt@todoc%
+ }%
+ /catcode`/*=14%
+ /@makeother/%*
+ /gdef/K@rmvesccmt#1{*
+  /K@aplyproctolist/K@chkcmtchar{#1}{\%}*
+  /if@K@incmt/Kexit/fi*
+ }*
+ /gdef/K@chkcmtchar#1{*
+  /K@@chkcmtchar#1%/@nil*
+ }*
+ /gdef/K@@chkcmtchar#1%#2/@nil{*
+  /def/rst@lin{#2}*
+  /ifx/rst@lin/@empty/else*
+   /global/@K@incmttrue/Kexit*
+  /fi*
+ }*
+}
+%
+% \Kcmtchkr
+\def\Kcmtchkr{%
+ \K@warning{I misjudged this place would be in comment area!}%
+}
+%
+% \K@wrtkeyfile
+\def\K@wrtkeyfile#1{%
+ \immediate\openout\@key@file=\jobname.\K@ext\relax%
+ {%
+  \re@l@rtn%
+  \immediate\write\@key@file{#1}%
+ }%
+ \immediate\closeout\@key@file%
+}%
+% \K@execkeyblk
+\def\K@execkeyblk{%
+ \endgroup%
+ \global\@K@topfalse%
+ \input{\jobname.\K@ext}%
+ \global\@K@toptrue%
+ \special{html:</a>}%
+}
+%
+{ % `%' of catcode 12
+ \@makeother\%
+ \gdef\K@cmt@char{%}
+}
+% `{', `}' -> catcode 12
+\def\@other@enb{%
+ \@makeother\{%
+ \@makeother\}%
+}
+%
+% definition of environment `prototype' ------------------------
+\newif\if@K@top
+\@K@toptrue
+\newcounter{prot@depth}
+%
+\newenvironment{prototype}{%
+ \leavevmode%
+ \let\nxt@todo=\relax%
+ \if@K@top%
+  \if@K@command%
+   \begingroup%
+   \@sanitize\@ctivate@rtn\@other@enb%
+   \setcounter{prot@depth}{1}%
+   \global\@K@incmtfalse%
+   \def\nxt@todo{\wrt@protostr{}}%
+  \fi%
+ \fi%
+ \nxt@todo%
+}{}
+{
+ \catcode`\[=1
+ \catcode`\]=2
+ \@makeother\{
+ \@makeother\}
+ \catcode`/=0%
+ \catcode`/^^M=\active%
+ /catcode`/\=12%
+ % get the whole text before the corresponding `\end{prototype}'
+ /gdef/wrt@protostr#1#2\end{prototype}[%
+  /K@aplyproctolist/K@cnt@vldbgn[#2][\begin{prototype}]%
+  /if@K@incmt%
+   /def/nxt@todo[/wrt@protostr[#1#2\end{prototype}]]%
+  /else%
+   /addtocounter[prot@depth][-2]%
+   /ifnum/value[prot@depth]=0%
+    /special[html:<a href="dviout:`input #1#2">]%
+    /K@wrtkeyfile[#1#2/K@cmt@char]%
+    /K@execkeyblk%
+    /def/nxt@todo[/end[prototype]]%
+   /else%
+    /def/nxt@todo[/wrt@protostr[#1#2\end{prototype}]]%
+   /fi%
+  /fi%
+  /nxt@todo%
+ ]%
+ /gdef/K@cnt@vldbgn#1[%
+  /K@chk@incmt#1^^M/@nil%
+  /if@K@incmt/else%
+   /stepcounter[prot@depth]%
+  /fi%
+ ]%
+]
+% definition of `\K{ ... \K}' ------------------------
+%
+% ------------ Kmeaning-mode ------------
+\long\def\m@K#1{\m@@K#1\@nil}
+\long\def\m@@K#1\K\@nil{%
+ \if@K@command%
+  \if@K@top%
+   \leavevmode%
+   \def\@keyin@temp{#1}%
+   \@onelevel@sanitize\@keyin@temp%
+   \special{html:<a href="dviout:`input \@keyin@temp">}%
+   \global\@K@topfalse%
+   #1%
+   \global\@K@toptrue%
+   \special{html:</a>}%
+  \else%
+   #1%
+  \fi%
+ \else%
+  #1%
+ \fi%
+}
+%
+% ------------ Kverb-mode ------------
+\newcounter{K@depth}
+%
+\outer\def\v@K{%
+ \leavevmode%
+ \begingroup%
+ \@other@enb%
+ \K@enb%
+}
+%
+{
+ \catcode`\[=1
+ \catcode`\]=2
+ \@other@enb%
+ \catcode`/=0
+ \catcode`/^^M=\active% 
+ /catcode`/\=12%
+ %
+ /gdef/K@enb#1[%
+  /def/nxt@todo[/endgroup]%
+  /if {#1%
+   /if@K@top%
+    /if@K@command%
+     /setcounter[K@depth][1]%
+     /global/@K@incmtfalse%
+     /@sanitize/@ctivate@rtn%
+     /def/nxt@todo[/v@@K[]]%
+    /fi%
+   /fi%
+  /else%
+   /if }#1/else%
+    /errmessage[\K must be followed by { or }]%
+   /fi%
+  /fi%
+  /nxt@todo%
+ ]%
+ %
+ /gdef/v@@K#1#2\K#3[%
+   /K@chk@incmt#2^^M/@nil%
+   /if }#3%
+    /addtocounter[K@depth][-1]%
+   	/ifnum/value[K@depth]=0%
+     /special[html:<a href="dviout:`input #1#2">]%
+     /if@K@incmt%
+      /K@wrtkeyfile[#1#2/K@bs@char Kcmtchkr]%
+      /def/nxt@todo[/K@skipaftr]%
+     /else%
+      /K@wrtkeyfile[#1#2/K@cmt@char]%
+      /def/nxt@todo[/K@execkeyblk]%
+   	 /fi%
+   	/else%
+     /def/nxt@todo[/v@@K[#1#2\K#3]]%
+   	/fi% 
+   /else%
+    /def/nxt@todo[/v@@K[#1#2\K#3]]%
+    /if@K@incmt%
+     /ifcat /noexpand#3/noexpand^^M%
+      /@K@incmtfalse%
+     /fi%
+    /else%
+     /if {#3%
+      /stepcounter[K@depth]%
+     /else%
+      /ifcat /noexpand#3a/else%
+       /errmessage[\K must be followed by { or }]%
+      /fi%
+     /fi%
+    /fi%
+   /fi%
+   /nxt@todo%
+ ]%
+ /gdef/K@skipaftr#1^^M[/K@execkeyblk]%
+]
+% 
+\if@K@verb
+ \Kverb
+\else
+ \Kmeaning
+\fi

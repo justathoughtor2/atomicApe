@@ -1,0 +1,355 @@
+\documentclass[a4j]{jarticle}
+\usepackage{graphicx, color}
+\title{DVIOUTとGhostscript}
+\author{内山 孝憲\thanks{慶応義塾大学理工学部物理情報工学科, Internet: uchiyama@thx.inst.keio.ac.jp}}
+\date{平成10年4月4日}
+\begin{document}
+\maketitle
+\section{はじめに}
+\LaTeX{}では, graphics packageを利用することにより,
+日本語ポストスクリプトプリンタでEncapsulated PostScriptファイル
+(EPSF)\footnote{カプセル化されたPostScriptファイル, つまりそれ自身で自
+己完結しており, EPSFを差し込んでいるPostScriptのプログラムの他の部分に
+影響を与えない. 「簡易」なPostScriptではない. EPSFについては,
+http://www.adobe.com/supportservice/devrelations/technotes.html
+の\#{}5002を参照されたい.}
+の図を挿入した文書を印刷することが出来ます.
+非ポストスクリプトプリンタでは, Ghostscriptを用いて印刷することが
+しばしば行われています. また, 画面でのプレビューにもGhostscriptが
+利用されます. しかし, GhostscriptはCPU負荷の大きいプログラムである
+ため, プレビューのように頻繁に利用する場合にはパーソナルコンピュータの
+ように計算速度や入出力速度が遅いマシンでは利用し難く感じられました.
+また, GhostscriptやGhostscriptのフロントエンドであるGhostViewによるプ
+レビュー・印刷は, dvipsを用いて予めdviファイルをポストスクリプトファ
+イルに変換しなくてはなりません. 
+
+X11用のプレビュアであるxdviやtexxには,
+Ghostscriptを起動してEPSFの表示する機能があります.
+これらと同様に, パソコン用のプレビュア・プリンタドライバとして
+広く普及しているDVIOUTもGhostscriptの力を借りて
+EPSFを取り込んだ\LaTeX{}の文書をプレビュー・印刷します.
+
+\section{実現方法}
+MS-DOS版の仕様を踏襲し,
+子プロセスでGhostscriptを起動し, 一度ビットイメージのファイルを生成し, 
+それを読み取ります. ビットイメージのファイルの
+形式はPortable Bitmap(PBM, 白黒)とWindows標準の多色
+BMP\footnote{Ver.3.06からは, BMPに画像圧縮を施した独自のBMC形式に変換
+して用います.}です.
+
+\verb+\special+コマンド内のPostScriptコマンド処理部分はjdvi2kps,
+dvi2ps-jおよびdvipsにほぼ互換性があります. 
+\verb+\special+コマンドをみつけると, \verb+\special+コマンドで指定されている
+EPSFの拡張子をpbmあるいはbmpに置き換えたファイル名で, Ghostscriptによって
+作成されたビットイメージのファイルを捜します. ビットイメージのファイルがなければGhostscriptを起動して作成します. 
+一度ビットイメージのファイルを作成すると
+EPSF自体が変更されない, あるいは取り込みサイズが変更されない
+限り, そのファイルを使います. 
+つまり, Ghostscriptの呼び出しを最小限に留めるように配慮されています.
+
+
+\section{使用法}
+graphics packageをあらかじめ入手し, 00readmeにしたがって,
+\begin{verbatim}
+latex graphics.ins
+\end{verbatim}
+を実行して, パッケージを展開します.
+
+次に, 中身が
+\begin{verbatim}
+\ExecuteOptions{dvips}
+\end{verbatim}
+だけのファイル,
+color.cfgとgraphics.cfgをgraphics packageと同じディレクトリに置きます.
+
+Ghostscriptがパスの通ったディレクトリに
+インストールされており, デバイスとしてpbmrawおよびbpm*が使用できること
+が条件となります.  
+
+\section{取り込み例}
+\subsection{取り込みに使用するスタイル}
+\verb+graphicx.sty+および\verb+graphics.sty+を使用することができます.
+これらの2つのスタイルファイルでは, 図を差し込むときの大きさの指定方法
+など, コマンドの引数が異なっています.
+
+実際にいくつかEPSFを取り込んでみます. 
+ここでは\verb+graphicx.sty+を用います.
+
+\subsection{実際に取り込んだ絵}
+図\ref{fig:golfer}は, Illustratorで作成されたゴルファーの
+絵です. 
+しばしばポストスクリプトプリンタの印刷サンプルに
+用いられます. 
+Ghostscriptの配布アーカイブに含まれています. 
+取込み時の指定は, 縦10cmにしました. 
+
+\begin{figure}[!htbp]
+\begin{center}
+\includegraphics*[height=10cm]{golfer}
+\end{center}
+\caption{EPSFサンプル(golfer.ps)}
+\label{fig:golfer}
+\end{figure}
+
+図\ref{fig:tiger}もIllustratorによって作成された
+虎の絵です. この絵もGhostscriptの配布アーカイブに含まれています. 
+取込み時のサイズを縦6cmにしました. 
+
+\begin{figure}[!htbp]
+\begin{center}
+\includegraphics*[height=6cm]{tiger}
+\end{center}
+\caption{EPSFサンプル(tiger.ps)}
+\label{fig:tiger}
+\end{figure}
+
+\subsection{取り込みに使うコマンド}
+\verb+graphicx.sty+を使っているので, 
+\begin{verbatim}
+\begin{figure}[!htbp]
+\begin{center}
+\includegraphics*[height=6cm]{tiger}
+\end{center}
+\caption{EPSFサンプル(tiger.ps)}
+\label{fig:tiger}
+\end{figure}
+\end{verbatim}
+のように記述しています.
+
+\verb+graphics.sty+を使う場合には,
+\begin{verbatim}
+\begin{figure}[!htbp]
+\begin{center}
+\resizebox{!}{6cm}{\includegraphics{tiger}}
+\end{center}
+\caption{EPSFサンプル(tiger.ps)}
+\label{fig:tiger}
+\end{figure}
+\end{verbatim}
+のように記述します.
+
+\verb+\includegraphics+と\verb+\includegraphics*+では,
+図を取り込むときの大きさの指定は, jdvi2kpsに添付されている
+epsbox.styとほぼ互換があります.
+このことは,
+
+\begin{verbatim}
+\documentclass{jarticle}
+\usepackage{epsbox}
+      :
+\begin{figure}[htbp]
+\begin{center}
+\psbox[height=6cm]{keyboard.epsf}
+\caption{Indyのキーボード}
+\label{fig:keyboard}
+\end{center}
+\end{figure}
+\end{verbatim}
+
+あるいは,
+
+\begin{verbatim}
+\documentstyle[epsbox]{jarticle}
+      :
+\begin{figure}[htbp]
+\begin{center}
+\psbox[height=6cm]{keyboard.epsf}
+\caption{Indyのキーボード}
+\label{fig:keyboard}
+\end{center}
+\end{figure}
+\end{verbatim}
+
+と記述していた部分を
+
+\begin{verbatim}
+\documentclass{jarticle}
+\usepackage{graphicx}
+      :
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics*[height=6cm]{keyboard.epsf}
+\caption{Indyのキーボード}
+\label{fig:keyboard}
+\end{center}
+\end{figure}
+\end{verbatim}
+              
+と記述できる, つまり\verb+\psbox+を\verb+\includegraphics*+に置換すれ
+ばよいことを意味します.
+
+図を差し込む位置を指定する\verb+!htbp+の\verb+!+は,
+float環境の制限を緩くするp\LaTeXe の拡張機能です.
+
+\subsection{クリッピング}
+\verb+\includegraphics*+は, BoundingBoxの値でクリッピングします.
+一方, アステリスクのない\verb+\includegraphics+は, クリッピングしませ
+ん. 
+
+MS-WindowsのPostScriptプリンタのドライバでEPSFを作成すると, 用紙全体を
+白で塗りつぶした後に図を描くPostScriptプログラムを生成します. 
+BoundingBoxの値は, 用紙サイズの矩形を描きますから, 正しい値です.
+このEPSFを取り込んだものを, 日本語PostScriptプリンタに印刷すると,
+用紙サイズの矩形を描いて白で塗りつぶすため, 手作業でBoundingBoxの値
+を修正しても, EPSFによって図のすぐ上の文章が消されてしまいます
+\footnote{正しいBoundigBoxではないので, EPSFが正しくない.}. 
+これを回避するためには, アステリスクが付加されている
+\verb+includegraphics*+を使用します. 
+\verb+includegraphics*+では, BoundingBoxでクリッピングされ, 正常に印刷
+されるようになります. 
+
+なお, dvioutでは, 図や文字は重ね合あわせて描かれるのがデフォルトで, 
+クリッピングを指定しなかった場合は, BoundingBoxの上下左右それぞれ1 inch外
+側までの図が取り込まれます.\footnote{この部分は SHIMA による補足です.}
+
+\section{おわりに}
+EPSFを処理するDVIOUTの機能は, 作者である大島氏により, 可能なかぎり
+PostScriptプリンタにdvipsで印刷する場合と一致するように改良が続けられ
+ていますが, 完全な互換性を提供するものではありません\footnote{この文書
+の著者は, Linux boxでこの文書を作成しており, MS-Windows版DVIOUTでの
+EPSFの取り込みを実際に動作確認してはいません.}.  
+graphics packageの詳細については, grfguide.tex を参照してください.
+
+\section{SHIMAによる補足}
+\subsection{dviout for Windowsでの制限}
+dviout for Windows Ver.3.06 以降は, カラー画像の取り込みのほか, 文字
+列や画像に対して\verb+graphicx.sty+で定義されている回転, 色付け, 拡大
+縮小などの機能に対応していますが, 以下の制限があります.
+
+\begin{itemize}
+\item カラー画像の回転は, PostScript画像の90度の整数倍の回転以外は無視され, 
+サポートされません. 
+
+\item 文字列の回転とスケール変換, および, 90度の整数倍以外の画像の回転
+とPostScript以外の画像のスケール変換は, スムージングの処理を行っていません. 
+場合によっては結果が奇麗になりません. 但し, dviprt機能を使わないデフォルト
+のモード(auto mode(p2))での印刷では, 回転あるいはスケール変換の一方のみを行った
+文字列は（下記の例では, `High'の部分のみ両者が同時に使われている）, 
+TrueTypeフォントを使う限り文字品質の劣化はありません.
+
+\item 取り込み画像は, その下に文字や画像があれば, それを残して描画されるのが
+デフォルトですが, \verb+-gow:+ オプションをONにすると, 下のものを消し
+て描かれます. このとき, EPSFは常にそのBoundingBoxでカットされます. 文字についてこれは, \verb+-cmode:+ をreplaceに設定するのに対応しています.
+
+\item \verb+\pagecolor+ の有効範囲は, それが定義されたページに限ります.
+
+\item {\tt gzip} で画像ファイルを圧縮したものも扱えます. たとえば
+\begin{verbatim}
+\includegraphics[height=10cm]{images/figure.ps.gz}
+\end{verbatim}
+ただしこのときは, {\tt gzip} あるいは, {\tt gunzip} が必要です.
+
+\item dviprt機能を使った印刷では, カラーに非対応で, さらに, LBPの内臓和文フォ
+ントやダウンロードフォントを使った場合, スケール変換などにも非対応です. これら
+のグラフィック機能を使う場合, Windowsのドライバを指定した印刷を行ってください. 
+
+\item dviout for Windows のツールバーの File メニューからの BMP画像出力は,
+カラー画像やgray scale画像の取り込み, および, カラーや白抜き文字に対応してい
+ません.
+\end{itemize}
+
+たとえば, 
+
+\bigskip
+\rotatebox{15}{15度回転}, \rotatebox[origin=c]{180}{180度回転},
+\scalebox{1}[.5]{Low}, \rotatebox[origin=c]{-15}{\scalebox{1}[2]{High}}, 
+\scalebox{1}[2]{\rotatebox[origin=c]{-15}{High}}, 
+\reflectbox{reflect} : reflect,
+\scalebox{.46}[1]{石}+\scalebox{.64}[1]{皮}=%
+\scalebox{.46}[1]{石}\hskip-.1zw\scalebox{.64}[1]{皮}=破,
+
+{\color{red}赤}, {\color{green}緑}, {\color{blue}青}, 
+\rotatebox[origin=c]{30}{\color{magenta}マゼンタ}, 
+\textcolor[rgb]{0.8,0.4,0.2}{茶色}, \textcolor[gray]{0.5}{灰色}, 
+\colorbox{black}{\color{white}白抜き},
+\rotatebox{15}{\fcolorbox{red}{yellow}{など}}
+\bigskip
+
+のような結果を得るには, 次のようなコマンドを使います.
+
+\begin{verbatim}
+\rotatebox{15}{15度回転}, \rotatebox[origin=c]{180}{180度回転},
+\scalebox{1}[.5]{Low},\rotatebox[origin=c]{-15}{\scalebox{1}[2]{High}}, 
+\scalebox{1}[2]{\rotatebox[origin=c]{-15}{High}}, 
+\reflectbox{reflect} : reflect,
+\scalebox{.45}[1]{石}+\scalebox{.6}[1]{皮}=%
+\scalebox{.45}[1]{石}\hskip-.1zw\scalebox{.6}[1]{皮}=破,
+
+{\color{red}赤}, {\color{green}緑}, {\color{blue}青}, 
+\rotatebox[origin=c]{30}{\color{magenta}マゼンタ}, 
+\textcolor[rgb]{0.8,0.4,0.2}{茶色}, \textcolor[gray]{0.6}{灰色}, 
+\colorbox{black}{\color{white}白抜き},
+\rotatebox{15}{\fcolorbox{red}{yellow}{など}}
+\end{verbatim}
+
+\subsection{PostScript以外の各種画像ファイルの取り込み}
+dviout for Windows Ver.3.08 以降では, EPSFのほかWindows標準のBMPや
+Windows (Enhanced) Metafile (EMF/WMF), そのほかPBMの画像, さらに
+DLL\footnote{Susieという画像表示プログラムのplug-inと呼ばれるDLLに
+対応しています. JPEG/TIFF/PNG/PCD/PPM などをはじめとして多くのものが提供
+されています.}を用いた各種の画像ファイルの取り込みが可能です.
+
+\LaTeXe のgraphics packageからPostScript以外の画像ファイルを取り込むため
+には dvips.def でなくて付属の dviout.def を用い, 縦横の画像のサイズ
+を \verb+\includegraphics+ で指定してください.
+このときは取り込み画像ファイルの拡張子を省略せずに,例えば次のように書き
+ます.
+
+\begin{verbatim}
+\documentclass{jarticle}
+\usepackage[dviout]{graphicx}
+      :
+\begin{figure}
+\begin{center}
+\includegraphics[width=6cm,height=4cm]{picture.bmp}
+\caption{My picture}
+\label{fig:picture}
+\end{center}
+\end{figure}
+\end{verbatim}
+
+これにより（必要なら）スケール変換され, 指定したサイズで取り込まれますが, 
+クリッピングや, \verb+\resizebox+ によるサイズ変換はできません. 
+
+なお, 付属の bmc.exe の \verb+-b+オプションで, たとえばコマンドラインから
+\begin{verbatim}
+  bmc -b foo.jpg
+\end{verbatim}
+のようにして, 拡張子 \verb+.bb+ をもつファイル(この例では,
+\verb+foo.bb+)を作成しておけば BoundingBox がそこに書かれているので,
+ 縦あるいは横のサイズの指定を省略できます. 縦横の一方のみ指定した場合は, 
+アスペクト比を保ったサイズ変換となります.
+
+縦横両方のサイズを省略するときは, \verb+-b=300+ のように出力ファイルの解
+像度を dpi の値で bmc.exe のオプションの \verb+-b=+ の後に指定し
+て BoundingBox が書かれたファイルを作成しておくと, デフォルトではもと
+の画像データがそのまま取り込まれます.
+
+上記の{\tt picture.bmp} の部分は, {\tt images/picture.bmp.gz} なども許され
+ます.
+
+\begin{itemize}
+\item
+dviout for Windows 以外では, このような各種画像の取り込みはサポートさ
+れていないと思われますので, dvipsなどのほかのDevice Driverを使う場合の
+互換性にご注意ください. このPostScript以外の画像取り込みを除いて
+dviout.def と dvips.def とは互換性がありますので, dvipsに対して dvips.def 
+の代わりに dviout.def を用いても支障ありません.
+
+\item
+DVIファイルとそれが取り込む画像をまとめてUNIXのtar形式ファイルにしたものや, 
+付属の dviadd を使って一つのDVIファイルにしたもの（付属の sample.dvi がこの
+例）, あるいはそれらを gzip で圧縮したもの（よって, ファイル名の末尾は 
+{\tt .tar.gz} または {\tt .dvi.gz} となる）をdviout for Windowsは直接読むこ
+とができます. 
+\end{itemize}
+
+\section{著作権に関する注意事項}
+epsbox.styと組み合せて使用されるjdvi2kpsと整
+合性を保つために, jdvi2kpsのepsbox.c内の一部の関数をそのまま引用してい
+ます. これについては, 松下電器産業(株)情報
+システム研究所に著作権がありますので, その取扱いについてはjdvi2kpsの
+copyrightファイルに記された内容に従ってください.
+
+
+\end{document}

@@ -1,0 +1,7 @@
+;#j 印刷ダイアログでdviprtのチェックにより，dvipdfmでPDFを生成できるようにする
+;# Enable the generation of a PDF by dvipdfm <- Check dviprt in Print Dialogue
+;`       Transform into a PDF file by dvipdfm
+;`  Paper size A3/4/5/6, B3/4/5/6, Letter, Legal, Landscape
+;`  Offset OX, OY
+;`  Pages to be transformed
+dviprt='dvipdfm.exe ^w -s ^a-^b ^X{-v} "^q"^Y{;"^d.pdf"}^z^{verbose&1}^{Show PDF &?}Make PDF by dvipdfm'

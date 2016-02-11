@@ -1,0 +1,149 @@
+                    Package of dviout for Windows
+
+dviout.exe   : Executable file of dviout for Windows
+dviout.hlp   : On line Help in Japanese
+dviout.cnt   : Index file for Help in Japanese
+dvioute.hlp  : On line Help in English
+dvioute.cnt  : Index file for Help in English
+
+00readme.txt : Please read this file (in English)
+install.txt  : How to install dviout for Windows (in English)
+readme.txt   : Please read this file
+history.txt  : History of dviout for Windows
+files.txt    : This file
+
+test_a4.dvi  : A DVI file to check the origin for the printer
+               (for A4 sheet, in English)
+test_a4x.dvi : Same as above but TrueType fonts are embedded
+test_b5.dvi  : A DVI file to check the origin for the printer
+               (for B5 sheet, in Japanese)
+test_b5x.dvi : Same as above with embedded TrueType fonts and initial.par
+               dviout can handle this under Non-Japanese Windows98/NT/2000/XP
+test_b5e.dvi : A DVI file to check the origin for the printer
+               (for Europian B5 sheet, in English)
+test_org.dvi : A DVI file to check the origin for the Printer (in English)
+
+chkfont.exe  : A utility to check font in DVI/TFM/JFM/FONT files
+chkfont.txt  : Document of chkfont.exe
+
+rawprt.exe   : A Win32 console program to do "> PRN:".
+rawprt.txt   : Document of rawprt.exe
+
+bmc.exe      : A utility for graphic files(BMC/BMP, EPSF, other graphic files)
+createBB.exe : A user interface to create *.bb files by using bmc.exe (by Otobe)
+
+dvispc.exe   : A utilty to correct the page-independence of DVI file using 
+               color specials or tpic specials and to transform between 
+               a DVI file and a text file
+dvispc.txt   : A document of dvispc.exe (in Japanese)
+dvispce.txt  : A document of dvispc.exe
+
+dviadd.exe   : Embed/extract any files into/from a DVI file
+
+srctex.exe   : A utility to insert source specials in TeX sources
+special\srctex.cfg  : A default configuration file of srctex.exe
+convedit.exe : A utility for srctex.exe to call an editor to edit a 
+               corresponding file by changing the extension from .tmp to .tex
+
+propw.exe    : A utility to make jfm files for Japanese proportional font
+propw0.txt   : Document of propw.exe (in Japanese)
+
+optcfg.exe   : A utility to generate Printer Configuration file from a source
+               file (by Asayama)
+               A printer not supported by Windows may use this
+
+ttindex.exe  : Make index file of Japanese TrueType Font (by Matsuda)
+               Usually not used
+               Used for the embedding of Japanes TrueType font or a bug of 
+               some versions of Windows NT)
+
+map\ttfonts.map     : default font map file for Windows TrueType fonts ([Font2] ftt:)
+    ttfexp.map      : a variation of ttfonts.map but fonts are expanded by dviout
+                      (useful for embedding of European TrueType fonts).
+    *.map           : used by ttfonts.map/ttfexp.map
+                      $user.map/$userexp.map are for users
+
+doc\cmode.html      : dviout as a DVIware (in Japanese)
+    dvioutQA.html   : shooting troubles on dviout (in Japanese)
+    dviouttips.html : Tips on dviout (in Japanese)
+    dviouttipse.html: Tips on dviout (in English)
+    tex_dviouw.html : installation of dviout and some advices to use it
+                      (in Japanese)
+    present.html    : A guide to use presentation mode (in Japanese)
+    tex_instchk.html: Check the unstallation of TeX system (in Japanese)
+    testtex.bat     : A program to check the installation of TeX system
+
+utility\template.*  : A template file for making font
+        test*.tex   : Source files of test*.dvi
+        dviout0.vfn : A sample file with explanation for setting TrueType fonts
+                     (dviout usually doesn't use this)
+        dvioute.vfn : A similar file as above (in English)
+        dviout1.vfn : A sample file using Japanese TrueType fonts under the 
+                      rendaring by dviout (can be used for a sample to embed
+                      Japanese TrueType fonts in a DVI file)
+        null.vfn    : null file for setting TrueType font
+        dviout0.par : A sample file of parameters (Usually not used)
+        dvi$pdf.bat : A batch file for the output of a rectangular region in
+                      a PDF file
+
+font\ReadMe.txt     : A document of the packages in this holder
+     winttf.zip     : A package to use Windows standard TrueType fonts
+	                  Times New Roman, Arial, Courier New, Japanese proportional 
+                      fonts (Tsume kumi) etc. by TeX (due to Otobe)
+     exjfonts.zip   : A package to use Japanese fonts in various styles
+                      flat/long fonts,  Burasage Kumi etc.
+
+sample\sample.dvi   : A sample dvi file for dviout (in English)
+       sample.tex   : source file of sample.tex
+       sample.txt   : A document to use dviadd for sample.dvi (in English)
+       slisampl.dvi : A sample dvi file for a presentation
+                      (automatic display, white letters with black background)
+       slisamp2.dvi : similar as above (colored background, proceed by 
+                      [Space] key or by the mouse movement with pressing its 
+                      left button)
+       slisamp3.dvi : white letter with blue background, a normal dvi file
+       slisamp4.dvi : a sample for presentaion using dviout specials `+<levels>
+       slisampl.tex : source file of slisampl.dvi
+
+hypertex\myhyper.sty: A style file to use HyperTeX in LaTeX
+         keyin.sty  : A style file to use \special{dviout `input ...}
+         hyper*.dvi : Samples of HyperTeX
+         hyper*.tex : Source files of hyper*.dvi
+         input.dvi  : A sample used by Help -> Help TeX
+         input.tex  : source file of input.dvi
+         input8.dvi : Used for MyHelp button in Help -> Help TeX
+         input8.tex : source file of input7.dvi
+         input9.dvi : A help of Xy-pic
+         input9.tex : source file of input9.dvi
+         inputxy.dvi: Tutorial for Xy-pic (in Japanese)
+         inputxy.tex: source file of inputxy.dvi
+
+ptex\naochan!.*     : A sample using ASCII pTeX in TATE mode
+
+graphic\latex2e     : Graphic driver for graphic packages of LaTeX2e 
+        color       : A sample of color specials
+        PS          : A sample and a document related to PostScript graphics
+        tpic        : A document and samples of tpic specials
+        bmc         : Utilities for graphic files in several formats
+        pbm         : A style file to include PBM file
+        pdl         : Related to a printer language to describe a page
+
+special\ophook.sty  : a style file to output a command at the top of every page
+                      (by Otobe)
+        dviout.sty  : a style file to output \special{dviout -y=A4P} at the top
+                      of every page by using ophook.sty
+        presen.sty  : a style file for Presentation Mode (by Otobe)
+        presen.txt  : A document of presen.sty
+        demo.tex/demo.dvi : A sample using presen.sty
+                     (in English, quit by [ALT] + [F4])
+        srcspecial.mac, src.mac : Macro of Hidemaru to use source specials
+
+cfg\prtcfg.zip      : Printer configuration files (Usually not used)
+    prtsrc.zip      : Source files of printer configuration files
+    newcfg.txt      : A document of the format of the source files
+    optcfg.dvi      : A document for printer configuration files
+
+par\*.par           : Some parameter files
+   \*.pas           : Hidden parameter files
+   \*.pgm           : Paging macros for printing
+   \*.pgn           : Hidden Paging macros for printing

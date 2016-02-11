@@ -1,0 +1,478 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD W3 HTML//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<title>dvi-format</title>
+</head>
+
+<body BGCOLOR="#eeffff">
+<hr align="left" noShade SIZE="4" width="75%">
+<h1 align="center">DVI format</h1>
+<hr align="right" noShade SIZE="4" width="75%">
+<p align="center">January 23, 2003</p>
+<pre>
+   <b>目 次</b>
+
+1. <a href="#format">DVIファイルのフォーマット</a>
+     <a href="#pre">プリアンブル</a>
+     <a href="#page">ページ数の個数のページ記述部</a>
+     <a href="#post">ポストアンブル</a>
+2. <a href="#font">フォントの定義とDVIware</a>
+3. <a href="#cmd">DVI命令</a>
+     <a href="#table">DVI命令一覧</a>
+4. <a href="#tate">pTeX における縦書きと横書きの切替</a>
+5. <a href="#text">DVIファイルと可読テキスト形式ファイルとの間の変換<a>
+     <a href="#ex-pre">例</a>
+</pre>
+
+&nbsp;&nbsp; 関連リンク<br>
+<a href="texinst98.html">Windows 95/98/Me/NT/2000/XP における TeX 
+システムのインストール<br>
+<a href="tex_dvioutw.html">dvioutのインストール</a><br>
+<a href="http://www.ascii.co.jp/pb/ptex/">TFMファイルとJFMファイル</a><p>
+<hr>
+<a name="format"><h2>1. DVIファイルのフォーマット</h2></a>
+<ul>
+<li>DVIファイルは，1 byte のDVI命令と，それに続く 0 byte以上の引数の繰り返しから成り立っています．</li>
+<li>引数は，整数や文字列などのデータからなります．</li>
+<li>引数の各整数は，1 byte, 2 byte, 3 byte, 4 byte のいずれかで記述され，符号付きのものと符号無しのものがあります．<br>
+最初の byte が最高位の bits を表し，最後の byte が最下位の bits を表します．<br>
+符号付きの場合，符号は最初の byte の最高位の bit に対応します．</li>
+<li>位置などを表す数は基本的にすべて 4 byte 整数を用いて十分な精度で表現されます．
+位置調整などの長さは小さな数になることが多いので，DVIファイルには 4 byte 以下の整数も導入することによって，DVIファイルのサイズを小さくする工夫がなされています．</li>
+<li>TeXでは，数として小数は用いず，整数とその間の計算のみが用いられます．従って，誤差の違いのため処理系で結果が異なる，というようなことは生じません．</li>
+<li>DVIファイルは，ファイルの先頭が <b>プリアンブル</b> で，その後 <b>ページ記述部</b> となり，最後に <b>ポストアンブル</b> があります．ページ記述部は各頁毎に分かれて独立した形になっています．</li>
+</ul>
+<pre>
+<a name="pre"><h3><font color=#800000>プリアンブル</h3></font></a>
+     <b>pre(247) で始まり，寸法の単位や，DVIを作成したTeXのコメント文がある</b>(<a href="#ex-pre">例</a>)
+  <font color="red">pre i[1] num[4] den[4] mag[4] k[1] x[k]</font>    (15+k) byte
+         i[i]    DVIのバージョン番号で現在 2
+         num[4]  スケールファクター（32bit符号無し整数）  通常  25400000
+         den[4]  デザインサイズ（32bit符号無し整数）      通常 473628672 = 7227x2<sup>16</sup>
+                 DVIファイルにおける寸法の単位を，num/den x 10<sup>-7</sup> m にする
+                 通常 1 sp（scaled point) = 2<sup>-16</sup> pt = 1.525...x10<sup>-5</sup> pt = 5.362...x10<sup>-9</sup> m = 0.0000053..mm
+                 2<sup>32</sup> (=4294967296) sp = 23.03...m
+                 1 inch = 2.54cm  = 72.27 pt
+         mag[4]  拡大率（32bit符号無し整数）
+                 上記で決めた寸法を mag/1000 倍して使用
+                 拡大縮小を行わないときは，mag = 1000
+         k[1]    コメント文の長さ（0 - 255）
+         x[k]    コメント文
+
+
+<a name="page"><h3><font color=#800000>ページ数の個数のページ記述部</font></h3></a>
+    <b>最初のページ</b>（<a href="#ex-pre">例</a>）
+      bop(149) で始まるヘッダ
+  <font color="red">bop c<sub>0</sub>[4] c<sub>1</sub>[4] c<sub>2</sub>[4] c<sub>3</sub>[4] c<sub>4</sub>[4] c<sub>5</sub>[4] c<sub>6</sub>[4] c<sub>7</sub>[4] c<sub>8</sub>[4] c<sub>9</sub>[4] p[4]</font> (45 byte)
+　　　   c<sub>0</sub>[4],... TeX において \shipout が実行されたときの \cout0,... の値のコピー
+                c<sub>0</sub> は，TeXにおける頁番号．c<sub>1</sub>,...,c<sub>9</sub> は通常 0
+         p[4]   直前のページのbopの位置
+                最初のページでは，NULLポインタを表す -1 の値が入っている
+
+      ページの内容の記述
+  <font color="red">移動命令，フォント定義命令，文字や箱の描画命令など</font>
+
+      eop(140) ページの終わり
+  <font color="red">eop</font> (1 byte)
+
+
+    <b>次のページ</b>（最初のページと同様）
+      bop(149) で始まるヘッダ
+  <font color="red">bop c<sub>0</sub>[4] c<sub>1</sub>[4] c<sub>2</sub>[4] c<sub>3</sub>[4] c<sub>4</sub>[4] c<sub>5</sub>[4] c<sub>6</sub>[4] c<sub>7</sub>[4] c<sub>8</sub>[4] c<sub>9</sub>[4] p[4]</font> (45 byte)
+
+      ページの内容の記述
+  <font color="red">移動命令，フォント定義命令，文字や箱の描画命令など</font>
+
+      eop(140) ページの終わり
+  <font color="red">eop</font> (1 byte)
+
+  ...
+
+
+    <b>最後のページ</b>
+      bop(149) 始まるヘッダ
+  <font color="red">bop c<sub>0</sub>[4] c<sub>1</sub>[4] c<sub>2</sub>[4] c<sub>3</sub>[4] c<sub>4</sub>[4] c<sub>5</sub>[4] c<sub>6</sub>[4] c<sub>7</sub>[4] c<sub>8</sub>[4] c<sub>9</sub>[4] p[4]</font> (45 byte)
+
+      ページの内容の記述
+  <font color="red">移動命令，フォント定義命令，文字や箱の描画命令など</font>
+
+      eop(140) ページの終わり
+  <font color="red">eop</font> (1 byte)
+
+
+<a name="post"><h3><font color=#800000>ポストアンブル</font></h3></a>
+    <b>post(248) で始まるヘッダ</b>（<a href="#ex-post">例</a>）
+  <font color="red">post p[4] num[4] den[4] mag[4] l[4] u[4] s[2] t[2]</font> (29 byte)
+         p[4]    最後のページの bop の位置
+         num[4], den[4], mag[4]  preamble におけるのと同じ値
+         l[4]    ページにおける高さと深さの最大値の和
+         u[4]    ページの幅の最大値
+         s[2]    スタックの最大レベル
+         t[2]    全ページ数（すなわち，bop命令の数）
+
+    <b>フォント定義命令</b>（これがフォントの数だけ並ぶ）
+        fntdef1(243), fntdef2(244), fntdef3(245), fntdef4(246) のいずれかで始まるフォント定義 
+  <font color="red">fntdef</font><font color="blue">x</font> <font color="red">k[</font><font color="blue">x</font><font color="red">] c[4] s[4] d[4] a[1] l[1] n[a+l]</font> (15+x+a+l byte）
+         k[</font><font color="blue">x</font>]    フォント番号
+         c[4]    フォント(TFMファイル）のチェックサム
+         s[4]    スケールファクター
+         d[4]    デザインサイズ
+         a[1]    フォントのディレクトリ名の部分の長さ（通常 0）
+         l[1]    フォントの名前の部分の長さ
+         n[a+l]  フォント名の文字列
+
+    ...
+
+    <b>フォント定義命令</b>
+  <font color="red">fntdef</font><font color="blue">x</font> <font color="red">k[</font><font color="blue">x</font><font color="red">] c[4] s[4] d[4] a[1] l[1] n[a+l]</font>
+
+    <b>post_post(249) で始まる末尾</b>
+  <font color="red">post_post q[4] i[1] 223,...,223</font> (10 - 13 byte)
+         q[4]    post の位置
+         i[1]    フォーマットの ID（通常 2 だが，pTeX の縦書きでは 3）
+         223 ... 223  DVIファイルサイズが 4 の倍数となるよう 4 - 7個の 223 を置く
+</pre>
+
+<a name="font"><h2>2. フォントの定義とDVIware</h2></font>
+<ul>
+<li>フォントの選択はフォントの番号でなされますが，番号と実際のフォントとの対応がフォントの定義です．この対応は，全頁を通して同じものでなければなりません．</li>
+<li>各ページ記述部には，そのページで使われるフォントの定義が含まれています．</li>
+<li>ポストアンブルの部分に，そのDVIファイルで用いられた全てのフォントの定義のリストがあります．
+DVIwareは，ポストアンブルを読むだけで，そのDVIファイルで使われているフォントの情報を得ることができます．</li>
+<li>TeX で通常使われているフォントの番号は，0 から 255 までです．</li>
+</ul>
+DVIファイルを読んで表示・印刷などを行う <b>DVIware</b> は，次のようにしてDVIファイルを解釈することができます．
+<ol>
+<li>DVIファイルの先頭の 1 byte が pre で，その次の 1 byte が 2 でないと通常のDVIファイルとは認められない．
+</li><li>
+DVIファイルを，末尾からさかのぼって 223 以外の値を得るまで，バイト単位で読みます．
+</li>
+<li>
+223 の個数が 4個から 7個までの間でないと不正
+</li><li>
+上記の 223 以外の値が 2 なら通常の DVI ファイル，3 なら縦書きを含む pTeX，それ以外ならばエラー
+</li><li>
+そこから前の 4 byte を読んで q[4] すなわち post の位置を得る．
+</li><li>
+その位置の 1 byte が post でなければエラー
+</li><li>
+post の次からの 28 byte を読んで p[4] num[4] den[4] mag[4] l[4] u[4] s[2] t[2] を得る．
+<br>
+・ num den mag から，DVIファイルでの長さの単位と拡大率を得る．<br>
+・ s からスタックのために確保すべき領域サイズを得る（4 x 6 x s byte）．<br>
+・ t は総ページ数<br>
+・ p は最後のページの bop の位置
+</li><li>
+post の 29 byte 後からはフォント定義命令が続いているので，フォント定義命令が終了するまで（すなわち post_post まで）読んで，DVIファイルで使われる全フォントの情報を得る．
+</li><li>
+各ページの bop から数えて 41 byte からの 4 byte の p[4] は，その前のページの bop の位置であるので，最終ページから逆にたどることによって，各ページの bop の位置が分かる．
+<br>
+・ 実際に bop が存在すること，最初のページに書かれた p[4] が -1 であることをチェックしておく．
+<br>
+・ bop の次の 4 byte c<sub>0</sub>[4] は TeX におけるページ番号として用いられているので，利用できる．
+</li>
+<li>
+必要なページを，そのページの bop の 45 byte 後から順に，ページの終わりの eop に出会うまで，解釈する（DVI命令を翻訳して出力する）．
+</li>
+</ol>
+
+<a name="cmd"><h2>3. DVI命令</h2></a>
+<table border="1" align="right">
+<tr>
+<th>
+  変数</th><th>役割
+</th></tr><tr><td align="center">
+  h</td><td>カレントポイントの水平位置
+</td></tr><tr><td align="center">
+  v</td><td>カレントポイントの垂直位置
+</td></tr><tr><td align="center">
+  w</td><td rowspan="2">水平移動量の変数
+</td></tr><tr><td align="center">
+  x
+</td></tr><tr><td align="center">
+  y</td><td rowspan="2">垂直移動量の変数
+</td></tr><tr><td align="center">
+  z
+</td></tr><tr><td align="center">
+  f</td><td>カレントフォント
+</td></tr>
+</table>
+1つのページ記述部は，bop 命令で始まり，eop 命令で終わります．</p><p>
+そこでは右の7つの変数 h, v, w, x, x, y, z, f が使用されますが，それらは f を除いて各ページの始まりで 0 に初期化されます．ただし，f のみは未定義，となります．</p><p>
+座標の原点は，用紙の左上端から右へ 1 inch， 下へ 1 inch の用紙内部にあり，座標 (h,v) の点とは，そこから右へ h，下へ v の位置の点を表します．</p><p>
+描画は，常にカレントポイント (h,v) という座標の点を基準になされ，
+「高さ a，幅 b の箱の描画」とは，
+「カレントポイントが箱の左下端となるような中の詰まった箱の描画」を表します．
+例えば罫線は，その太さを高さに，長さを幅に設定して描画されます．</p><p>
+以下に，DVI命令の一覧を載せます．そこでは，
+<br clear="all">
+<ul>
+<li>番号 f のフォントに属するコード番号が xx の文字を，ch(f,xx) と表しています．</li>
+<li>この文字 ch(f,xx) の幅を w(f, xx) と表しています．</li>
+<li>以下の，setchar<font color="blue">xx</font>，setrule，putrule，fntnum<font color="blue">yy</font>, fntdef<font color="blue">x</font> は，通常それぞれ，set_char_<font color="blue">xx</font></li>，set_rule，put_rule，fnt_num_<font color="blue">yy</font>，fnt_def_<font color="blue">x</font> と表記されます．</li>
+<li>文字幅 w(f, xx) の情報は <a href="http://www.ascii.co.jp/pb/ptex/">TFMファイル</a>（フォントメトリックファイル）に書かれていて，DVIファイルには書かれていません．従って，DVIファイルを解釈して実際に印刷をする場合には TFM ファイルなどから，この文字幅の情報を得る必要があります．
+<blockquote>
+この文字幅情報は，文字の画像データが入っている PKフォントファイルや，バーチャルフォントファイルにも TFM ファイルからコピーされて入っていますので，DVIware は，文字幅情報をこれらのファイルから得ることもできます．
+</bockquote>
+</ul>
+
+<a name="table"><table border="1" cellpadding="4">
+<caption><b>DVI命令一覧</b></caption></a>
+<tr>
+  <th>コード</th><th>命令</th><th>引数[<font color=#FF00FF>符号付</font>bytes] </th><th>意味
+</th></tr><tr><td>
+  &nbsp;&nbsp; 0</td><td>setchar0</td><td> &nbsp;&nbsp; なし </td><td>文字 ch(f,0) を (h,v) に描画，h ← h + w(f,0)
+</td></tr><tr><td>
+ &nbsp; ...</td><td>setchar<font color="blue">xx</font> </td><td> &nbsp;&nbsp; なし </td><td>文字 ch(f,<font color="blue">xx</font>) を (h,v) に描画，h ← h + w(f,<font color="blue">xx</font>)
+</td></tr><tr><td>
+    127</td><td>  setchar127</td><td> &nbsp;&nbsp; なし </td><td>文字 ch(f,127) を (h,v) に描画，h ← h + w(f,127)
+</td></tr><tr><td>
+    128 </td><td> set1 </td><td> c[1] </td><td rowspan="4">文字 ch(f,c) を (h,v) に描画，h ← h + w(f,c)
+</td></tr><tr><td>
+    129 </td><td> set2 </td><td> c[2] </td></tr><tr><td>
+    130 </td><td> set3 </td><td> c[3] </td></tr><tr><td>
+    131 </td><td> set4 </td><td> c[<font color=#FF00FF>4</font>] </td></tr><tr><td>
+    132 </td><td> setrule </td><td> a[<font color=#FF00FF>4</font>]  b[<font color=#FF00FF>4</font>] </td><td> 高さ a，幅 b で箱を (h,v) に描画，h ← h+b
+</td></tr><tr><td>
+    133 </td><td> put1 </td><td> c[1]  </td><td rowspan="4"> 文字 ch(f,c) を (h,v) に描画
+</td></tr><tr><td>
+    134 </td><td> put2 </td><td> c[2]  </td></tr><tr><td>
+    135  </td><td>put3 </td><td> c[3]  </td></tr><tr><td>
+    136 </td><td> put4 </td><td> c[<font color=#FF00FF>4</font>]  </td></tr><tr><td>
+    137 </td><td> putrule </td><td> a[<font color=#FF00FF>4</font>]  b[<font color=#FF00FF>4</font>] </td><td> 高さ a，幅 b で箱を (h,v) に描画
+</td></tr><tr><td>
+    138  </td><td>nop  </td><td> &nbsp;&nbsp; なし </td><td>何もしない
+</td></tr><tr><td>
+    139 </td><td> bop </td><td> c<sub>0</sub>[<font color=#FF00FF>4</font>]  ...  c<sub>9</sub>[<font color=#FF00FF>4</font>]  p[<font color=#FF00FF>4</font>]  </td><td>ページの始まり，(h,v,w,x,y) ← 0，スタックを空に
+</td></tr><tr><td>
+    140 </td><td> eop </td><td> &nbsp;&nbsp; なし </td><td> ページの終わり
+</td></tr><tr><td>
+    141 </td><td> push </td><td> &nbsp;&nbsp; なし </td><td>&nbsp; (h,v,w,x,y,z) をスタックに待避
+</td></tr><tr><td>
+    142 </td><td> pop </td><td> &nbsp;&nbsp; なし </td><td>&nbsp;  (h,v,w,x,y,z) をスタックから戻す
+</td></tr><tr><td>
+    143 </td><td> right1 </td><td> b[<font color=#FF00FF>1</font>]  </td><td rowspan="4">&nbsp; h ← h+b
+</td></tr><tr><td>
+    144  </td><td>right2 </td><td> b[<font color=#FF00FF>2</font>] 
+</td></tr><tr><td>
+    145  </td><td>right3 </td><td> b[<font color=#FF00FF>3</font>] 
+</td></tr><tr><td>
+    146  </td><td>right4 </td><td> b[<font color=#FF00FF>4</font>] 
+</td></tr><tr><td>
+    147 </td><td> w0 </td><td>  &nbsp;&nbsp; なし  </td><td>&nbsp;  h ← h+w
+</td></tr><tr><td>
+    148  </td><td>w1 </td><td> b[<font color=#FF00FF>1</font>]  </td><td rowspan="4">&nbsp;  h ← h+b，w ← b
+</td></tr><tr><td>
+    149  </td><td>w2 </td><td> b[<font color=#FF00FF>2</font>]  
+</td></tr><tr><td>
+    150  </td><td>w3 </td><td> b[<font color=#FF00FF>3</font>] 
+</td></tr><tr><td>
+    151  </td><td>w4 </td><td> b[<font color=#FF00FF>4</font>] 
+</td></tr><tr><td>
+    152  </td><td>x0     </td><td> &nbsp;&nbsp; なし  </td><td>&nbsp;  h ← h+x
+</td></tr><tr><td>
+    153  </td><td>x1 </td><td> b[<font color=#FF00FF>1</font>]  </td><td rowspan="4">&nbsp;  h ← h+b, x ← b
+</td></tr><tr><td>
+    154  </td><td>x2 </td><td> b[<font color=#FF00FF>2</font>] 
+</td></tr><tr><td>
+    155  </td><td>x3 </td><td> b[<font color=#FF00FF>3</font>] 
+</td></tr><tr><td>
+    156  </td><td>x4 </td><td> b[<font color=#FF00FF>4</font>] 
+</td></tr><tr><td>
+    157  </td><td>down1 </td><td> a[<font color=#FF00FF>1</font>]  </td><td rowspan="4">&nbsp;  v ← v+a
+</td></tr><tr><td>
+    158  </td><td>down2 </td><td> a[<font color=#FF00FF>2</font>] 
+</td></tr><tr><td>
+    159  </td><td>down3 </td><td> a[<font color=#FF00FF>3</font>] 
+</td></tr><tr><td>
+    160  </td><td>down4 </td><td> a[<font color=#FF00FF>4</font>]  
+</td></tr><tr><td>
+    161  </td><td>y0   </td><td>  &nbsp;&nbsp; なし   </td><td>&nbsp;  h ← h+y
+</td></tr><tr><td>
+    162  </td><td>y1 </td><td> a[<font color=#FF00FF>1</font>]  </td><td rowspan="4">&nbsp;  h ← h+a，y ← a
+</td></tr><tr><td>
+    163  </td><td>y2 </td><td> a[<font color=#FF00FF>2</font>]</td></tr><tr><td>
+    164  </td><td>y3 </td><td> a[<font color=#FF00FF>3</font>]</td></tr><tr><td>
+    165  </td><td>y4 </td><td> a[<font color=#FF00FF>4</font>] </td></tr><tr><td>
+    166  </td><td>z0  </td><td>  &nbsp;&nbsp; なし    </td><td>&nbsp;  h ← h+z
+</td></tr><tr><td>
+    167  </td><td>z1 </td><td> a[<font color=#FF00FF>1</font>]  </td><td rowspan="4">&nbsp;  h ← h+a，z ← a
+</td></tr><tr><td>
+    168  </td><td>z2 </td><td> a[<font color=#FF00FF>2</font>] </td></tr><tr><td>
+    169  </td><td>z3 </td><td> a[<font color=#FF00FF>3</font>]</td></tr><tr><td>
+    170  </td><td>z4 </td><td> a[<font color=#FF00FF>4</font>]</td></tr><tr><td>
+    171  </td><td>fntnum0  </td><td> &nbsp;&nbsp; なし </td><td>&nbsp;  f ← 0</td></tr><tr><td>
+   &nbsp; ... </td><td>fntnum<font color="blue">yy</font> </td><td> &nbsp;&nbsp; なし </td><td> &nbsp;   f ← <font color="blue">yy</font>
+</td></tr><tr><td>
+    234  </td><td>fntnum63 </td><td> &nbsp;&nbsp; なし </td><td>&nbsp;  f ← 63
+</td></tr><tr><td>
+    235  </td><td>fnt1 </td><td> k[1]   </td><td rowspan="4">&nbsp;  f ← k</td></tr><tr><td>
+    236  </td><td>fnt2 </td><td> k[2] </td></tr><tr><td>
+    237  </td><td>fnt3 </td><td> k[3] </td></tr><tr><td>
+    238  </td><td>fnt4 </td><td> k[<font color=#FF00FF>4</font>] </td></tr><tr><td>
+    239  </td><td>xxx1 </td><td> k[1]  x[k] </td><td rowspan="4">  special の文字列 x，意味は任意
+</td></tr><tr><td>
+    240  </td><td>xxx2 </td><td> k[2]  x[k]</td></tr><tr><td>
+    241  </td><td>xxx3 </td><td> k[3]  x[k]</td></tr><tr><td>
+    242  </td><td>xxx4 </td><td> k[4]  x[k]</td></tr><tr><td>
+    243  </td><td>fntdef1 </td><td colspan="2"> k[1] c[4] s[4] d[4] a[1] l[1] n[a+l] 
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+フォント k の定義
+</td></tr><tr><td>
+    244  </td><td>fntdef2 </td><td colspan="2"> k[2] c[4] s[4] d[4] a[1] l[1] n[a+l] 
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
+フォント k の定義
+</td></tr><tr><td>
+    245  </td><td>fntdef3 </td><td colspan="2"> k[3] c[4] s[4] d[4] a[1] l[1] n[a+l]  
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
+フォント k の定義
+</td></tr><tr><td>
+    246  </td><td>fntdef4 </td><td colspan="2"> k[<font color=#FF00FF>4</font>] c[4] s[4] d[4] a[1] l[1] n[a+l]  
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;  &nbsp;
+フォント k の定義
+</td></tr><tr><td>
+    247  </td><td>pre </td><td colspan="2"> i[1]  num[4]  den[4]  mag[4]  k[1]  x[k]  
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
+プリアンブル始まり
+</td></tr><tr><td>
+    248  </td><td>post </td><td colspan="2"> p[4] num[4] den[4] mag[4] l[4] u[4] s[2] t[2]
+&nbsp;&nbsp; 
+ポストアンブル始まり
+</td></tr><tr><td>
+    249  </td><td> post_post </td><td> q[4] i[1] 223 ... 223                     </td><td> ポストアンブル終わり
+</td></tr><tr><td>
+    250  </td><td>opcode</td><td> &nbsp;&nbsp; -</td><td rowspan="3">  未定義
+</td></tr><tr><td>
+    &nbsp; ...  </td><td>opcode</td><td> &nbsp;&nbsp; -</td></tr><tr><td>
+    254  </td><td>opcode</td><td> &nbsp;&nbsp; -</td></tr><tr><td>
+    255  </td><td>dir</td><td>o[1]</td><td>  横書き／縦書き切替（pTeX），元来は未定義
+</td></tr>
+</table>
+<a name="tate"><h2>4. pTeX における縦書きと横書きの切替</h2></tate>
+<ul>
+<li>
+dir(255) 命令は，ASCII の pTeX で縦書きを記述するために使われ<br>
+&nbsp;&nbsp; o[1] = 0 : 横書き
+<br>
+&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
+1 : 縦書き<br>
+という切替を表します．</li>
+<li>縦書きへの切替で，カレントポイントを基準に紙面を反時計回りに90度回転させて，以降の移動や描画を行います．</li>
+<li>縦書き用の和文の文字は，和文の（縦書き）文字を反時計回りに90度回転して定義されているので，縦書きでも，横書きと同じように文字や箱を描画し，印刷後に紙面を90度回転してもとに戻せば，通常の縦書きの和文の文書となります．</li>
+<li>縦書きでは，紙面を元に戻すと h の正の方向は下を，v の正の方向は左を表します．
+横書きも含めて，h は行の中で進む方向を，v は行送りの方向を表すことになります．</li>
+<li>縦書きから横書きへの切替では，カレントポイントを基準に時計回りに紙面を90度回転させて元来の向きに戻します．</li>
+</ul>
+<a name="text"><h2>5. DVIファイルと可読テキスト形式ファイルとの間の変換</h2><a>
+<ul>
+<li>
+TeX のパッケージに dvitools として付属しているものに，dvitype および pTeX にも対応した 
+<b>pdvitype</b> があり，これは DVIファイルを可読形式に変換します．<br>
+- これはカレントポイントの実際の移動量や文字の描写位置を表示するため，TFM（フォントメトリック）ファイルを読みます．これの出力した形式のテキストファイルをDVIファイルに変換するプログラムが存在するかどうかは知りません（フォントのチェックサム情報などが出力されないので，出力結果のみからの復元は無理）．</li>
+<li>DVIファイルと可読テキストファイル（<b>DTL</b>:DVI Text Language）との相互変換を行うプログラム <b>dv2dt</b>/<b>dt2dv</b> が存在します．pTeX には対応していません．</li>
+<li><b>dviout</b> のパッケージ(Ver.3.15以降）には，dvispc というプログラムが付属していて，これは pTeX も含め DVIファイルと可読テキストファイルの相互変換をサポートしています．
+</li>
+</ul>
+<h3 align="center">dvispc</h3>
+<li>dv2dt/dt2dv より読みやすいテキスト形式（3. DVI命令 で述べた形 --- pdvitype などと同じ --- に対応，さらに意味を示すコメントも付加可能）が用いられていますが，dv2dt/dt2dv の可読テキスト形式での入出力もでき，dv2dt/dt2dv よりも高速です．</p><p>
+<li>ソースをコンパイルすれば，Unix 等でも使用可能です．</p><p>
+<li>応用として，たとえば以下のようにすれば foo.dvi の 1ページ目と20ページ以降を抜き出した foo2.dvi が作成されます．
+<pre>
+   dvispc -atpT3/20-L foo.dvi | dvispc -x foo2.dvi
+</pre>
+ここで，-a: DVI → Text変換 &nbsp; -t: DTL形式（出力サイズが小さくなる） &nbsp; -pT3/20-L: 出力箇所の指定で，T はプリアンブル，3 20- は 3ページ目，20ページ目以降，L はポストアンブルを，それぞれ表し，-x: は TeX → DVI変換 の指定を表す．</p><p>
+awk スクリプトなどのフィルターを間に挟むと，様々な加工が可能です．
+例えば，foo.dvi の special を全て削除した foo2.dvi は以下のように作成できます．
+<pre>
+   dvispc -aj foo.dvi | grep -v ^xxx | dvispc -x foo2.dvi
+</pre>
+<li>以下に -avl というパラメータでの TeX → DVI変換 の一部を載せます（dviout のパッケージに付属の epsfdoc.dvi を用いた例）．
+<pre>
+<a name="ex-pre"><font color="red">プリアンブル</font></a>
+0: pre 2/id 25400000/num 473628672/den 1000/mag 27/len ' TeX output 2000.02.21:0054'
+
+<font color="red">上に引き続く最初のページ</font>
+ [1]
+42: bop 1/page 0 0 0 0 0 0 0 0 0 -1/former_bop
+87: down4 46202880
+92: push
+93: down4 -45613056
+98: push
+99: push
+100: right3 1114112
+104: xxx1 17/len 'color push  Black'
+123: right4 27394048
+128: xxx1 9/len 'color pop'
+139: pop
+140: pop
+141: down4 43646976
+146: push
+147: down4 -38549854
+152: push
+153: push
+154: push
+155: right4 9009997
+160: xxx1 17/len 'color push  Black'
+179: xxx1 9/len 'color pop'
+190: pop
+191: pop
+192: right4 9337677
+197: fntdef1 33 0x44D3ED74/c-sum 1132462/s-size 1132462/d-size 0/dir 5/name 'cmr17'
+218: fntnum33
+219: setchar68
+ "D"
+220: right2 -29583
+223: setchar86
+224: setchar73
+225: setchar79
+226: setchar85
+227: setchar84
+ "VIOUT"
+...
+465: fntdef1 49 0xE99FD0F6/c-sum 943718/s-size 655360/d-size 0/dir 6/name 'goth10'
+487: fntnum49
+488: set2 0x244f "は"
+491: set2 0x2438 "じ"
+494: set2 0x2461 "め"
+497: set2 0x244b "に"
+500: pop
+501: z3 1474560
+...
+5200: eop        <font color="red">最初のページ終わり</font>
+
+<font color="red">2ページ目</font>
+ [2]
+5201: bop 2/page 0 0 0 0 0 0 0 0 0 42/former_bop
+...
+
+...
+26001: eop       <font color="red">7ページ目の終わり</font>
+
+<font color="red">8ページ目（最後のページ）</font>
+ [8]
+26002: bop 8/page 0 0 0 0 0 0 0 0 0 21404/former_bop
+...
+26786: pop
+26787: right4 27394048
+26792: xxx1 9/len 'color pop'
+26803: pop
+26804: pop
+26805: eop       <font color="red">最後のページ終わり</font>
+
+<a name="ex-post"><font color="red">ポストアンブル</font></a>
+26806: post 26002/final_bop 25400000/num 473628672/den 1000/mag 46202880/h+d 28508160/w 13/stack 8/pages
+26835: fntdef1 54 0xC2D64EA0/c-sum 786432/s-size 786432/d-size 0/dir 6/name 'cmbx12'
+26857: fntdef1 53 0xDFEA3C78/c-sum 655360/s-size 655360/d-size 0/dir 6/name 'cmtt10'
+26879: fntdef1 51 0xC2D64EA0/c-sum 943718/s-size 786432/d-size 0/dir 6/name 'cmbx12'
+26901: fntdef1 49 0xE99FD0F6/c-sum 943718/s-size 655360/d-size 0/dir 6/name 'goth10'
+...
+27196: fntdef1 7 0x4BF16079/c-sum 655360/s-size 655360/d-size 0/dir 5/name 'cmr10'
+27217: fntdef1 6 0xD993A052/c-sum 458752/s-size 458752/d-size 0/dir 4/name 'cmr7'
+27237: post_post 26806/post 2/id 223 223 223 223 223            <font color="red">DVIファイルの終わり</font>
+</pre>
+<hr>
+誤りや補足すべき点があればお知らせ下さい --&gt; 
+<a href="mailto:ftp-admin@akagi.ms.u-tokyo.ac.jp">ftp-admin@akagi.ms.u-tokyo.ac.jp</a> </p>
+</body>
+</html>

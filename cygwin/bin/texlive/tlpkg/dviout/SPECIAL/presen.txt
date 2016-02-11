@@ -1,0 +1,77 @@
+1. usage
+	\usepackage[options]{presen}
+	(ophook.sty is required)
+
+2. options
+	cover: use cover sheet
+	uncover: not use coversheet (default)
+	whiteback:  same as menu
+	black back: same as menu
+	white: same as menu
+	black: same as menu (default)
+	bottom: same as menu (default)
+	left: same as menu
+	right: same as menu
+	bottomleft: same as menu
+	bottomright: same as menu
+	auto: auto processing mode
+	fit: use "fit" mode when \StartPresentation
+	full: use "full" mode when \StartPresentation
+	keepmargin: keep layout set by class file
+	adjustmargin: modify layout for presentation (default)
+
+	autoprocess mode will show all pages (with "paus"-ing)
+	and re-show from the top after reaching the bottom page.
+
+3. Commands
+	maybe you have only to master \SetTimer, \Pause and \Wait.
+	
+	\SetTimer
+		set the timer with unit is milli-seconds.
+		e.g., \SetTimer{2000} means internal timer is set to 2sec.
+		Only if you use \Pause with strictly positive timer interval,
+		\special{dviout `timer ...} will be embedded in every page.
+		The default value is 0.
+	\Pause
+		Embed \special{pause}.
+		More, \special{dviout `timer ...}, \special{dviout je}
+		and \special{dviout jt} will also be embedded if you 
+		specify positive timer interval by \SetTimer, or used
+		`auto' option.
+		Most appropriate specials will be automatically embedded
+		by this macro package.
+	\Wait
+		wait milli-seconds specified as the argument.
+		e.g., \Wait{10000} will wait 10sec.
+	\GoNext
+		go to next page immediately.
+	\GoTop
+		go to the top page immediately.
+	\StartPresentation
+		move to presentation mode.
+	\FinishPresentation
+		return to standard mode.
+
+	\UseCoverSheet
+		= \special{dviout NO}
+	\UnuseCoverSheet
+		= \special{dviout NF}
+	\PrepareCoverSheet
+		= \special{dviout NP}
+	\SuspendCoverSheet
+		= \special{dviout !S}
+	\ReturnCoverSheet
+		= \special{dviout !C}
+	
+4. TRY
+Try to show demo.dvi. After that,
+1. Comment out 
+	\usepackage[auto,full]{presen} (l.2)
+	\SetTimer{2000} (l.8)
+2. Comment in
+	\usepaclage[full]{presen} (l.3)
+	\StartPresentation (l.9)
+3. Compile it
+
+by Yoshiki OTOBE, The University of Tokyo,
+otobe@ms.u-tokyo.ac.jp

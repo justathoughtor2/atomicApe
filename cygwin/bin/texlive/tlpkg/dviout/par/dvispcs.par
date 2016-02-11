@@ -1,0 +1,5 @@
+;#j TeX ‚Ì specials ‚ğ‘S‚Ä”²‚«o‚·
+;# Get all TeX specials
+;;   Get all TeX specials and show them by notepad
+dviprt='dvispc -sp^a-^b "^d" ^t;notepad ^t^Z^Get all TeX specials'
+Set=fd

@@ -1,0 +1,26 @@
+name ifluatex
+category Package
+revision 26725
+shortdesc Provides the \ifluatex switch.
+longdesc The package looks for LuaTeX regardless of its mode and
+longdesc provides the switch \ifluatex; it works with Plain TeX or
+longdesc LaTeX. The package is part of the oberdiek bundle.
+containersize 2340
+containermd5 6c86219fc878045d31a668a3a518be59
+doccontainersize 124656
+doccontainermd5 5090381344f0ae38154adc739be39c74
+docfiles size=35
+ texmf-dist/doc/latex/oberdiek/ifluatex.pdf details="Package documentation"
+ texmf-dist/doc/latex/oberdiek/test/ifluatex-test1.tex
+ texmf-dist/doc/latex/oberdiek/test/ifluatex-test2.tex
+ texmf-dist/doc/latex/oberdiek/test/ifluatex-test3.tex
+srccontainersize 7392
+srccontainermd5 5d4b96b874bdd9ab1eeee84931d8934f
+srcfiles size=7
+ texmf-dist/source/latex/oberdiek/ifluatex.dtx
+runfiles size=2
+ texmf-dist/tex/generic/oberdiek/ifluatex.sty
+catalogue-ctan /macros/latex/contrib/oberdiek/ifluatex.dtx
+catalogue-date 2012-07-10 22:54:06 +0200
+catalogue-license lppl1.3
+catalogue-version 1.3

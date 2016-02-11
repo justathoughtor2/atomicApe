@@ -1,0 +1,36 @@
+name etex
+category Package
+revision 37057
+shortdesc An extended version of TeX, from the NTS project.
+longdesc An extended version of TeX (which is capable of running as if
+longdesc it were TeX unmodified). E-TeX has been specified by the LaTeX
+longdesc team as the engine for the development of LaTeX 2e, in the
+longdesc immediate future; as a result, LaTeX programmers may (in all
+longdesc current TeX distributions) assume e-TeX functionality.
+longdesc Development versions of e-TeX are to be found in the TeX live
+longdesc source repository.
+containersize 11440
+containermd5 e2d215ae7aa6052bef29771a3423464e
+doccontainersize 189800
+doccontainermd5 eea6909ca0ccfbee7f8a8608c2e34bbf
+docfiles size=129
+ texmf-dist/doc/etex/base/NTS-FAQ
+ texmf-dist/doc/etex/base/etex_gen.tex
+ texmf-dist/doc/etex/base/etex_man.pdf details="System documentation (v2.0)"
+ texmf-dist/doc/etex/base/etex_man.sty
+ texmf-dist/doc/etex/base/etex_man.tex
+ texmf-dist/doc/etex/base/etex_ref.html
+ texmf-dist/doc/etex/base/etex_src.html
+ texmf-dist/doc/etex/base/legal.html
+ texmf-dist/doc/etex/base/nts-group.html
+ texmf-dist/doc/etex/base/webmerge.tex
+ texmf-dist/doc/man/man1/etex.1
+ texmf-dist/doc/man/man1/etex.man1.pdf
+runfiles size=11
+ texmf-dist/fonts/source/public/etex/xbmc10.mf
+ texmf-dist/fonts/tfm/public/etex/xbmc10.tfm
+ texmf-dist/tex/plain/etex/etex.src
+ texmf-dist/tex/plain/etex/etexdefs.lib
+catalogue-ctan /systems/e-tex
+catalogue-date 2015-03-29 23:09:44 +0200
+catalogue-license knuth

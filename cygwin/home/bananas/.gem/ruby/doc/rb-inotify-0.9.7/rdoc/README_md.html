@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>README - rb-inotify-0.9.7 Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#label-rb-inotify">rb-inotify</a>
+    <li><a href="#label-Basic+Usage">Basic Usage</a>
+    <li><a href="#label-Advanced+Usage">Advanced Usage</a>
+  </ul>
+</div>
+
+
+  <div id="project-metadata">
+    <div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./README_md.html">README</a>
+  
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-label="Page README.md">
+
+<h1 id="label-rb-inotify">rb-inotify<span><a href="#label-rb-inotify">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>This is a simple wrapper over the <a
+href="http://en.wikipedia.org/wiki/Inotify">inotify</a> Linux kernel
+subsystem for monitoring changes to files and directories. It uses the <a
+href="http://wiki.github.com/ffi/ffi">FFI</a> gem to avoid having to
+compile a C extension.</p>
+
+<p><a href="http://rdoc.info/projects/nex3/rb-inotify">API documentation is
+available on rdoc.info</a>.</p>
+
+<h2 id="label-Basic+Usage">Basic Usage<span><a href="#label-Basic+Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>The API is similar to the inotify C API, but with a more Rubyish feel.
+First, create a notifier:</p>
+
+<pre class="ruby"><span class="ruby-identifier">notifier</span> = <span class="ruby-constant">INotify</span><span class="ruby-operator">::</span><span class="ruby-constant">Notifier</span>.<span class="ruby-identifier">new</span>
+</pre>
+
+<p>Then, tell it to watch the paths you&#39;re interested in for the events
+you care about:</p>
+
+<pre class="ruby"><span class="ruby-identifier">notifier</span>.<span class="ruby-identifier">watch</span>(<span class="ruby-string">&quot;path/to/foo.txt&quot;</span>, :<span class="ruby-identifier">modify</span>) {<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;foo.txt was modified!&quot;</span>}
+<span class="ruby-identifier">notifier</span>.<span class="ruby-identifier">watch</span>(<span class="ruby-string">&quot;path/to/bar&quot;</span>, :<span class="ruby-identifier">moved_to</span>, :<span class="ruby-identifier">create</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">event</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{event.name} is now in path/to/bar!&quot;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Inotify can watch directories or individual files. It can pay attention to
+all sorts of events; for a full list, see <a
+href="http://www.tin.org/bin/man.cgi?section=7&topic=inotify">the inotify
+man page</a>.</p>
+
+<p>Finally, you get at the events themselves:</p>
+
+<pre class="ruby"><span class="ruby-identifier">notifier</span>.<span class="ruby-identifier">run</span>
+</pre>
+
+<p>This will loop infinitely, calling the appropriate callbacks when the files
+are changed. If you don&#39;t want infinite looping, you can also block
+until there are available events, process them all at once, and then
+continue on your merry way:</p>
+
+<pre class="ruby"><span class="ruby-identifier">notifier</span>.<span class="ruby-identifier">process</span>
+</pre>
+
+<h2 id="label-Advanced+Usage">Advanced Usage<span><a href="#label-Advanced+Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Sometimes it&#39;s necessary to have finer control over the underlying IO
+operations than is provided by the simple callback API. The trick to this
+is that the {INotify::Notifier#to_io Notifier#to_io} method returns a
+fully-functional IO object, with a file descriptor and everything. This
+means, for example, that it can be passed to <code>IO#select</code>:</p>
+
+<pre class="ruby"> <span class="ruby-comment"># Wait 10 seconds for an event then give up</span>
+ <span class="ruby-keyword">if</span> <span class="ruby-constant">IO</span>.<span class="ruby-identifier">select</span>([<span class="ruby-identifier">notifier</span>.<span class="ruby-identifier">to_io</span>], [], [], <span class="ruby-value">10</span>)
+   <span class="ruby-identifier">notifier</span>.<span class="ruby-identifier">process</span>
+ <span class="ruby-keyword">end</span>
+</pre>
+
+<p>It can even be used with EventMachine:</p>
+
+<pre class="ruby"> <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;eventmachine&#39;</span>
+
+ <span class="ruby-constant">EM</span>.<span class="ruby-identifier">run</span> <span class="ruby-keyword">do</span>
+   <span class="ruby-constant">EM</span>.<span class="ruby-identifier">watch</span> <span class="ruby-identifier">notifier</span>.<span class="ruby-identifier">to_io</span> <span class="ruby-keyword">do</span>
+     <span class="ruby-identifier">notifier</span>.<span class="ruby-identifier">process</span>
+   <span class="ruby-keyword">end</span>
+ <span class="ruby-keyword">end</span>
+</pre>
+
+<p>Unfortunately, this currently doesn&#39;t work under JRuby. JRuby currently
+doesn&#39;t use native file descriptors for the IO object, so we can&#39;t
+use the notifier&#39;s file descriptor as a stand-in.</p>
+</main>
+
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

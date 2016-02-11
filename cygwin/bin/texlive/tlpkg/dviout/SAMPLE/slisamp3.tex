@@ -1,0 +1,78 @@
+\documentclass{slides}
+\usepackage{graphicx, color, myhyper}
+%\def\pause{\special{pause}}
+\def\pause{}
+
+\paperwidth=10.24in
+\paperheight=7.68in
+\textwidth=9in
+\textheight=6.6in
+\voffset=-.9in
+\hoffset=-.48in
+
+\title{Presentation with dviout%
+\special{dviout `keep cmode}%
+%  color(def), Draw Off, cover sheet Off, general screen, Presentation ;
+%  Screen: 1024 x 768, Reverse ;
+%  Draw On, Fit
+\special{dviout -cmode=2 !ANFN0!p; -e=0 -y=XGAP !v;!bdf}%
+\pagecolor{blue}%
+}
+\author{Toshio OSHIMA}
+\date{January 1, 2000}
+\pagestyle{plain}
+
+%%%%%%    TEXT START    %%%%%%
+\begin{document}
+\maketitle
+
+\begin{slide}
+\special{dviout `keep cmode}%%	for non Presentation Mode
+\special{dviout -cmode=2 !G}%%	for non Presentation Mode + ...
+\pagecolor{blue}%
+{\large \S0 Presentation by \TeX}
+
+Many technical documents including mathematical formulas are written by
+{\TeX} and they can be used for presentations by dviout for Windows.
+
+{\color{red} Use key ([Space] etc.) or mouse to scroll the screen!}
+
+\pause
+Study the solution $u(x)$ of the Shr\"odinger equation
+\[
+ \left(-\frac12\sum_{1\le j\le n}\frac{\partial^2}{\partial x_j^2} + U(x)\right)u(x) = \lambda u(x)
+\]
+
+with the potential function
+
+\pause
+\[
+ U(x) = \sum_{1\le i < j\le n}\frac{C}{\sinh^2(x_i - x_j)}.
+\]
+
+\pause
+It can be written by Gauss hypergeometric function when $n=2$.
+\end{slide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{slide}
+\special{dviout !G}%
+\pagecolor[rgb]{0,0.3,0}%% 	to see the hot spot in non-revese mode
+One may try to present this document by a key or mouse operation.
+If it is displayed under a cover sheet,
+\begin{itemize}
+\item
+push [Space] key to proceed step by step,
+\item
+move the mouse under pushing its left button.
+\end{itemize}
+For this purpose, open \href{file:slisamp2.dvi}{slisamp2.dvi} (a sample 
+with the slightly yellow background).
+
+Or open \href{file:slisamp3.dvi}{slisamp3.dvi} or \href{file:slisamp4.dvi}{slisamp4.dvi} (without the cover sheet).
+
+Otherwise jump to \href{file:sample.dvi}{sample.dvi}. % after 30 seconds. 
+
+Note that the [ESC] key is the toggle switch between the presentation mode and
+the normal mode.
+\end{slide}
+\end{document}

@@ -1,0 +1,73 @@
+                            Graphics Package
+
+            1. dviout.dtx -> dviout.def
+            2. ps2frag.ps (PSfrag) 
+
+
+1.                           dviout.def
+
+dviout.def is the graphic driver for "dviout for Windows" under the graphics 
+package of LaTeX2e.
+
+Copy dviout.def and dviout.cfg from this directory to texmf\tex\latex\config
+(or the directory where the graphics package exists if texmf\tex\latex\config
+does not exist).  
+
+LaTeX2e makes dviout.def from dviout.ins and also makes the manual of 
+dviout.def from dviout.dtx.
+
+- the graphic formats such as PBM, BMP, WMF, EPSF and others are supported.
+  Moreover compressed graphics files by gzip are also supported. 
+  But both of the width and the height of the graphic in a page should be 
+  explicitly indicated in the parameter of \includegraphics or the file with 
+  the extension .bb where the Bounding box is recorded should be created by 
+  bmc.exe with -b ootion if the format is not of EPSF nor PBM.
+
+- Ghostscript is necessay for the graphic file in EPSF and the suitable 
+  Susie plug-in (which is free software) is necessary for a graphic file 
+  in the format such as JPEG, TIFF, PCD, GIF etc. which is different from 
+  EPSF/PBM/BMP/BMC/WMF/EMF.
+
+  Some Susie plug-in are obtained from
+
+      http://www.digitalpad.co.jp/~takechin/
+
+  For other location see
+
+      http://akagi.ms.u-tokyo.ac.jp/dviout-ftp.html
+
+- dviout.def is in principle upper compatible to dvips.def but dviout with
+  dviout.def supports the graphics in the formats PBM/BMP/BMC/WMF/JPEG/TIFF
+  /PNG/PCD etc.
+
+- If psflag.sty is used, write the statement
+
+  \def\@tempa{dviout.def}\ifx\Gin@driver\@tempa\def\pfg@orient{-1}\fi%
+
+  after
+
+  \def\@tempa{dvips.def}\ifx\Gin@driver\@tempa\def\pfg@orient{-1}\fi%
+
+  in psflag.sty.  Then PSFLAG is not supported by dviout but the dvi file
+  processed by dviout.def can be handled by dvips as the one processed by
+  dvips.def
+
+
+
+2.                        ps2frag.ps
+
+dviout for Windows (Ver.3.11.4) supports  PSfrag  by Matsuda.
+
+The followings are necessary for the support.
+
+  1) Ghostscript (gswin32.exe) is able to be executed by dviout.
+     (See  Option -> Setup papameters... -> Graphic -> gsx: )
+
+  2) Put  psfrag.pro  from the PSfrag package (the current version is Ver.3.04
+     at the time when this is written) in a search path of Ghostscript which 
+     should be indicated the environment variable  GS_LIB.
+
+  3) Put  ps2frag.ps  from the PSfrag package  Ver.2.*  in the same directory
+     where  psfrag.pro  is put.
+
+It is necessary to set the environment variable  GS_LIB.

@@ -1,0 +1,11 @@
+name tetex.win32
+category TLCore
+revision 36770
+shortdesc win32 files of tetex
+containersize 748
+containermd5 8c207603e9dc6abdd94955d79ecd50f0
+binfiles arch=win32 size=4
+ bin/win32/fmtutil-sys.exe
+ bin/win32/fmtutil.exe
+ bin/win32/updmap-sys.exe
+ bin/win32/updmap.exe

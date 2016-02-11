@@ -1,0 +1,29 @@
+name url
+category Package
+revision 32528
+shortdesc Verbatim with URL-sensitive line breaks.
+longdesc The command \url is a form of verbatim command that allows
+longdesc linebreaks at certain characters or combinations of characters,
+longdesc accepts reconfiguration, and can usually be used in the
+longdesc argument to another command. (The \urldef command provides
+longdesc robust commands that serve in cases when \url doesn't work in
+longdesc an argument.) The command is intended for email addresses,
+longdesc hypertext links, directories/paths, etc., which normally have
+longdesc no spaces, so by default the package ignores spaces in its
+longdesc argument. However, a package option "allows spaces", which is
+longdesc useful for operating systems where spaces are a common part of
+longdesc file names.
+containersize 5512
+containermd5 e2a0f9da576170a6d429a1dcc0d83d5b
+doccontainersize 266856
+doccontainermd5 dc38d761cca9e8f2ee6615761a00d71f
+docfiles size=69
+ texmf-dist/doc/latex/url/miscdoc.sty
+ texmf-dist/doc/latex/url/url.pdf details="Package documentation"
+ texmf-dist/doc/latex/url/url.tex
+runfiles size=4
+ texmf-dist/tex/latex/url/url.sty
+catalogue-ctan /macros/latex/contrib/url
+catalogue-date 2013-12-31 15:02:54 +0100
+catalogue-license lppl
+catalogue-version 3.4

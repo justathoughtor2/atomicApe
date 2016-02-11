@@ -1,0 +1,1381 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD W3 HTML//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html">
+<title>Tips on dviout</title>
+</head>
+
+<body BGCOLOR="#eeffff">
+
+<hr NOSHADE ALIGN="left" WIDTH="65%">
+
+<h1 align="center">Tips on dviout</h1>
+
+<hr NOSHADE ALIGN="right" WIDTH="65%">
+
+<p align="center">March 18, 2005</p>
+
+<p><a HREF="http://akagi.ms.u-tokyo.ac.jp/ftp.html#TeX" name="contents">Go to a page on TeX</a><br>
+<a href="http://akagi.ms.u-tokyo.ac.jp/texinst98.html">Installation of TeX system (in Japanese)</a>,
+&nbsp;<a href="tex_dvioutw.html">Installation of dviout (in Japanese)</a><br>
+<a href="tex_instchk.html">Install check of TeX system in Windows95/98/Me/NT/2000/XP (in Japanese)</a><br>
+<a href="cmode.html">dviout as a DVIware (in Japanese)</a>,&nbsp;
+<a href="present.html">presentation by dviout (in Japanese)</a><br>
+<a href="http://akagi.ms.u-tokyo.ac.jp/dviouttipse.html">Newest version of this document</a><br>
+<hr>
+<h3>This document is depend on the default Key functions of dviout Ver.3.14.2(Dec. 5, 2002) or a later version.</h3>
+The key function starting with Alt+F, Alt+J, Alt+S, Alt+D, Alt+V, Alt+N, Alt+P, Alt+O or Alt+H corresponds to the selection in the Menu bar using the mouse (From Ver.3.14.2 these key functions are also valid when the shape of the mouse cursor is a hand).
+<p>
+* In this document L-click and R-click mean the clicking of the left button of the mouse and that of the right button, respectively.<br>
+* Ctrl+\ or <img SRC="option.bmp" WIDTH="16" HEIGHT="15"> or Alt+OS (Option-Setup parameters...) shows <a href="#prop">[Property of DVIOUT]</a>.
+</p>
+<ol>
+<li><a href="#start">Execution of dviout</a></li>
+<li><a href="#Fmenu">Selecting from File (Alt+F) in the Menu bar</a></li>
+<li><a href="#Youshi">Size of the paper</a></li>
+<li><a href="#Position">Arranging the offset position in a page</a></li>
+<li><a href="#Large">Magnification in the preview</a></li>
+<li><a href="#Contrast">Arranging the contrast in the preview</a></li>
+<li><a href="#Loupe">Arranging the Loupe</a></li>
+<li><a href="#Viewer">More region for the preview in the screen</a></li>
+<li><a href="#Tool">Arranging the Tool bar</a></li>
+<li><a href="#FormerPage">Move to the previous page</a></li>
+<li><a href="#NextPage">Move to the next page</a></li>
+<li><a href="#Mscroll">Functions to use the scroll button on the mouse</a></li>
+<li><a href="#Pages">Displaying several pages in the screen</a></li>
+<li><a href="#Length">Measuring the size and the position in the preview window</a></li>
+<li><a href="#Image">Cutting the preview window into an image data file and pasting it to an editor</a></li>
+<li><a href="#Wabun">Arranging characters in Japanese fonts</li>
+<li><a href="#OnOff">On/Off of special functions related fonts</a></li>
+<li><a href="#OnOff2">On/Off of other special functions</font></a></li>
+<li><a href="#Info">Showing/Saving/Printing of related informations</a></li>
+<li><a href="#Special">Informations related to specials</a></li>
+<li><a href="#presen">Presentation Mode</a></li>
+<li><a href="#search">String search</a></li>
+<li><a href="#srcspc">Jump between dviout and an editor -- source specials</a></li>
+<li><a href="#hypertex">Jump to a file in the Disk or a resource in Internet -- HyperTeX</a></li>
+<li><a href="#input">Help editing a source file -- HyperTeX + dviout specials</a></li>
+<li><a href="#print">Printing</a></li>
+<li><a href="#PDF">Transform into PDF</a></li>
+<li><a href="#Embed">Embedding Font/Image etc. to DVI file</a></li>
+<li><a href="#prop">Property of DVIOUT</a></li>
+<li><a href="#key">Key table (default)</a></li>
+</ol>
+<a href="tex_dvioutw.html#HintMenu">Other hints (in Japanese)</a>
+<hr>
+
+<ol>
+<font color="#800000"><a name="start"><li>Execution of dviout</a></font>
+<dl>
+<dt><b>Changing the filename dviout.exe</b></dt>
+<dd>*  dvioute.exe :  dviout starts in the mode of the non-Japanese Windows (Automatic selection in default)<br>
+    *  dvioutj.exe :  dviout starts in the mode of the Japanese Windows (Automatic selection in default)<br>
+    *  windvi.exe, windvi32.exe, wdvipro.exe, wdvipro32.exe : It may be used as a replacement of the previewer in TeX for Windows by Impress</dd>
+<dt><b>Execute dviout with the maximized window</b></ft>
+<dd>Execute dviout with the parameter -Set=!m  such as &nbsp; dviout &nbsp; -Set=!m &nbsp; ...</dd>
+<dt><b>Arrange the maximal number of dviout to be simultaneously executed</b></dt>
+<dd>Alt+\ [System][multi]</dd>
+<dt><b>dviout doesn't start even if the icon of dviout is double clicked</b></dt>
+<dd>Such fact has not been reported but if it happens, execute dviout by the command line <font color="blue">dviout -NULL</font> and uninstall it by Option -&gt; Uninstall and start it again and set the parameters</dd>
+<dt><b>dviout doesn't start even if the icon of DVI file is double clicked</b></dt>
+<dd>Do the initialization by Alt+OI [Next][Next][Finish]</b></dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="Fmenu"><li>Selecting from File (Alt+F) in the Menu bar</a></font>
+<dl>
+<dt><b>Start from the first page</b></dt>
+<dd>Ctrl+L-click</b></dd>
+<dt><b>Start from the last page</b></dt>
+<dd>Ctrl+Shift+L-click</dd>
+<dt><b>Open the folder where the file exists</b></dt>
+<dd>Shift+L-click</dd>
+<dt><b>Erase the file from the list in the Menu bar</b></dt>
+<dd>Alt+I, Select from the list and [Hide].  It has an effect from the next dviout</dd>
+<dt><b>Selection from the list with more files</b></dt>
+<dd>Select by Alt+I.  Then Ctrl/Shift are also valid</dd>
+</dl></li></p>
+
+<p>
+<font color="#800000"><a name="Youshi"><li>Size of the paper</a></font>
+<dl>
+<dt><b>Change the size of the paper</b></dt>
+<dd>Alt+PB5 means to change the size to B5.  Here A3,..,A8, B3,...,B6 etc. are possible</dd>
+<dt><b>Changing between Portrait and Landscape</b></dt>
+<dd>Alt+PL (Paper-Landscape)</dd>
+<dt><b>Cut spaces around the paper</b></dt>
+<dd>Alt+NE (preseN-cut Edge), the resulting space is arranged by Ctrl+\ [Paper][Cut Edge]</dd>
+<dt><b>Show the size to be displayed</b></dt>
+<dd>Alt+H I I (Help-Info-Info)  or Ctrl+\ [Paper] or Alt+VDO (to show grid, Alt+VDS to arrange it)</dd>
+<dt><b>Tell the size of the paper in LaTeX to dviout</b></dt>
+<dd>Write the following in the first page of TeX source text.  
+It is recognized also by dvipsk and dvipdfmx.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<font color="blue"><tt>\AtBeginDvi{\special{papersize=\the\paperwidth,\the\paperheight}}</tt></font></dd>
+</dl></li></p>
+
+<p>
+<font color="#800000"><a name="Position"><li>Arranging the offset position in a page</a></font>
+<dl>
+<dt><b>Detail arrangement of the position</b></dt>
+<dd>Ctrl+Shift+Arrow-key</dd>
+<dt><b>Show and arrange the position</b></dt>
+<dd>Ctrl+\ [Paper] OX: or OY:</dd>
+<dt><b>Return to the default offset in TeX</b></dt>
+<dd>Shift+F7</dd>
+<dt><b>Show Grid</b></dt>
+<dd>Alt+VDO (View-griD-On), Alt+VDS (View griD-Scale) to arrange Grid</dd>
+</dl></li></p>
+
+<p>
+<font color="#800000"><a name="Large"><li>Magnification in the preview</font>
+<dl>
+<dt><b>Magnify</b></dt>
+<dd><img SRC="lplus.bmp" WIDTH="16" HEIGHT="15"> or Alt+DZM (Display-siZe-Magnify) or Ctrl+Roll the scroll button of the mouse (downwards)</dd>
+<dt><b>Reduce</b></dt>
+<dd><img SRC="lminus.bmp" WIDTH="16" HEIGHT="15"> or Alt+DZR (Display-siZe-Reduce) or Ctrl+Roll the scroll button of the mouse (upwards)</dd>
+<dt><b>Maximal size under the condition that the whole page is shown</b></dt>
+<dd>5 or Alt+DZF (Display-siZe-Fit)<br>
+   - This arrangement is accurate in the presentation mode</dd>
+<dt><b>Maximal size under the condition that the whole page is shown by only one of the vertical and horizontal scrolls</b></dt>
+<dd>6 or Alt+DZL (Display-siZe-fuLL)<br>
+   - This arrangement is accurate in the presentation mode</dd>
+<dt><b>Indicate the default size</b></dt>
+<dd>The current size is set to the default by Ctrl+\ [Display][Size][Save]</dd>
+<dt><b>Range of the arrangement of the size</b></dt>
+<dd>If the resolution (dpi) is bigger, then the range becomes wider and has more varieties but dviout works more slowly</dd>
+<dt><b>Arrange the magnification of text relative to the paper</b></dt>
+<dd>Ctrl+\ [Resolution][e:] arrange it by the unit 0.1%<br>
+- This affects to the printing (Magnified/Reduced printing.  The main purpose of this arrangement is for the printing)<br>
+- If Ctrl+\ [Resolution][varf:] is On, the fixed size fonts such as PK fonts are also scaling by the inner routine of dviout</dd>
+</dl></li></p>
+
+<p>
+<font color="#800000"><a name="Contrast"><li>Arranging the contrast in the preview</a></font>
+<dl>
+<dt><b>Boundaries of characters or lines</b></dt>
+<dd>*  Successive Alt+DNB, Alt+DNW (Display-coNtrast-Black/White)<br>
+*  Ctrl+\ [Display] and [contrast] in the top.  [Save] to save the setting</dd>
+<dt><b>Brightness of the background of a page</b></dt>
+<dd>Ctrl+\ [Display][bright:]</dd>
+<dt><b>Interchanging White and Black</b></dt>
+<dd>Alt+DNV (Display-coNtrast-reVerse)</dd>
+</dl></li></p>
+
+<p>
+<font color="#800000"><a name="Loupe"><li>Arranging the Loupe</a></font>
+<dl>
+<dt><b>Change the magnification</b></dt>
+<dd>Alt+DLE (Magnify), Alt+DLA (Reduce) or use Ctrl+\ [Common]</dd>
+<dt><b>Change the size</b><dt>
+<dd>Alt+DLM (Bigger), Alt+DLD (Smaller) or use Ctrl+\ [Common]</dd>
+<dt><b>Show measure</b><dt>
+<dd>Alt+DLU or use Ctrl+\ [Common]</dd>
+<dt><b>Circle shape</b><dt>
+<dd>Ctrl+\ [Common][Shape][Circle], it works slower</dd>
+<dt><b>Erase the cursor in the Loupe</b><dt>
+<dd>Alt+DLR (Display-Loupe-Kill cursor)</dd>
+<dt><b>Arrange the loupe not to move outside the screen</b><dt>
+<dd>Ctrl+\ [Common][Edge view]</dd>
+<dt><b>Use another Loupe</b></dt>
+<dd>Ctrl+Left-Button gives another loupe<br>
+    The arrangement of this loupe is set by Ctrl+\ [Common]</dd>
+</dl></li></p>
+
+<p>
+<font color="#800000"><a name="Viewer"><li>More region for the preview in the screen</a></font>
+<dl>
+<dt><b>Show/Erase Scroll bar etc. in the frame of dviout</b></dt>
+<dd>*  Alt+VS (View-Status bar) : Status bar in the bottom frame<br>
+    *  Alt+VR (View-scRoll bar) : Scroll bar in the bottom/right frame<br>
+    *  Alt+VP (View-Page slider): Page slider in the right frame<br>
+    *  Alt+VT (View-Tool bar) &nbsp;   : Tool bar in the top frame<br>
+    *  Alt+VB (View-move Button): Moving page buttons in Tool bar</dd>
+<dt><b>Preview in the full screen without a frame</b></dt>
+<dd>[Esc] : Toggle switch to the normal window<br>
+    -  Pushing 6, the maximal magnification (the width of the paper coincides with that of screen if the height of the paper is relatively larger than its width)<br>
+    -  Pushing 5, the maximal magnification (the whole page is in the screen)<br>
+    -  By Alt+NY4 preceding to Presentation mode, the outside of the paper becomes black<br></dd>
+<dt><b>Preview on the screen of another computer</b></dt>
+<dd>DVI file can be previewed through LAN etc.  Alt+OW (Option-Continuous reneW) may be on in this case</dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="Tool"><li>Arranging the Tool bar</a></font>
+<dl>
+<dt><b>Narrower Tool bar</b></dt>
+<dd>Erase moving page button by Alt+VB (View-move Button)</dd>
+<dt><b>Direction to move by Move page button in Tool bar</b><dt>
+<dd>Alt+VV (View-reVerse)</dd>
+<dt><b>Change 6 buttons (right to the button for Change Settings) in Tool bar</b></dt>
+<dd>Alt+VC (View-Change tool button), 6 buttons including <img src="niko.bmp" WIDTH="16" HEIGHT="15">.  Functions can be attached to them by User</dd>
+<dt><b>Define functions to the buttons in the Tool bar</b></dt>
+<dd>By Ctrl+\ [Key][key:], functions can be defined to 6 buttons Button and User1-5
+(Select functions by [Function] and by [Define] define it to <img src="niko.bmp" WIDTH="16" HEIGHT="15"> and its left buttons, totally 6 buttons)</dd>
+<dt><b>Erase Tool bar</b></dt>
+<dd>Alt+VT (View-Tool bar)</dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="FormerPage"><li>Move to the previous page</a></font>
+<dl><dt>
+Similar as in [Move to the next page].<br>
+ <b>[Space]</b>, <b>[PgDn]</b>, <b>JE</b>, <b>JN</b>, <b>JD</b>, <b>Down-arrow</b>, <b>N</b>, <b>D</b>,[Top] ,<img SRC="fpage.bmp" WIDTH="16" HEIGHT="15"> should be replaced by <b>[BackSpace]</b>, <b>[PgUp]</b>, <b>JV</b>, <b>JP</b>, <b>JU</b>, <b>Up-arrow</b>, <b>P</b>, <b>U</b>, [Bottom], <img SRC="bpage.bmp" WIDTH="16" HEIGHT="15">
+</dt></dl></p>
+</p>
+
+<p>
+<font color="#800000"><a name="NextPage"><li>Move to the next page</a></font>
+<dl>
+<dt><b>[Space]</b> or <b>Alt+JE</b></dt>
+<dd>Top of the next page</dd>
+<dt><b>[PgDn]</b> or <b>N</b> or <b>Alt+JN</b></dt>
+<dd>Same position in the next page</dd>
+<dt><b>Shift+Down-arrow</b></dt>
+<dd>Same as [Space] .  Convenient when arrow keys are used for the scrolling</dd>
+<dt><b>Roll the scroll button of the mouse under pushing it</b></dt>
+<dd>Same as N.  It is not necessary to move the mouse</dd>
+<dt><b>L-click of the mouse by pointing some spot</b></dt>
+<dd>*  Lower space in Page scroll bar in the right frame<br>
+    *  Moving page button <img SRC="fpage.bmp" WIDTH="16" HEIGHT="15"> in Tool bar (the direction changes by Alt+VV)<br>
+    *  Arrow button to the right of the page-input windows in Tool bar<br>
+    *  Button in the popup Menu in Presentation mode (It only appears when the cursor moves to the location of the Menu)</dd>
+<dt><b>Alt+JD</b>, <b>Alt+JD</b> or <b>D</b>, <b>D</b></dt>
+<dd>Bottom of the page -&gt; Top of the next page<br>
+    -  In most cases, only successive pushing of the key D shows the entire document.<br>
+<dt><b>Button on the mouse in Presentation mode</b></dt>
+<dd>Alt+NBL(preseN-Button-Left) or Alt+NMR(preseN-Button-Right)<br>
+-  Convenient when the remote controller of the projector has the function of the buttons on the mouse</dd>
+</dl></li></p>
+
+<p>
+<font color="#800000"><a name="Mscroll"><li>Functions to use the scroll button on the mouse</a></font>
+<dl>
+<dt><b>Rolling</b></dt>
+<dd>Scroll vertically in a page</dd>
+<dt><b>Rolling under pushing it</b></dt>
+<dd>Scroll pages<br>
+-  Pushing Shift, every 5 pages<br>
+-  Pushing Ctrl, every 10pages<br>
+-  Pushing Ctrl+Shift, every 50pages</dd>
+<dt><b>Rolling under pushing Shift</b></dt>
+<dd>Scroll pages</dd>
+<dt><b>Rolling under pushing Ctrl</b></dt>
+<dd>Magnify/Reduce</dd>
+</dl></li></p>
+
+<p>
+<font color="#800000"><a name="Pages"><li>Displaying several pages in the screen</a></font>
+<dl>
+<dt><b>Connect horizontally every two pages from the current page</b></dt>
+<dd>Alt+DT (Display-Two) or 7(Left -&gt;Right) or Alt+DO(Right -&gt; Left)</dd>
+<dt><b>Connect vertically every two pages from the current page</b></dt>
+<dd>Alt+DY or 0(Up -&gt; Down).  <b>Whole pages are connected</b> in Presentation mode</dd>
+<dt><b>Display 4 pages in the screen by reducing their size</b></dt>
+<dd>Alt+DS (Display-croSs) or 8.  Scroll 4 pages together, Jump by R-click to the page</dd>
+<dt><b>Display thumbnail (16 pages) in the screen</b></dt>
+<dd>Alt+D6 (Display-16) or 9.  Scroll 16 pages together, Jump by R-click to the page</dd>
+</dl></li></p>
+
+<p>
+<font color="#800000"><a name="Length"><li>Measuring the size and the position in the preview window</a></font
+<dl>
+<dt><b>Position</b></dt>
+<dd>Ctrl+Shift+L-click</dd>
+<dt><b>Loupe with Measure</b></dt>
+<dd>Alt+DLU (Display-Loupe-measUre) or Ctrl+\ [Common][Shape][Measure], Measured by every 4 pixel</dd>
+<dt><b>Show the real length corresponding to 1 pixel</b></dt>
+<dd>Alt+H I I shows the length corresponding to 1000 pixel</dd>
+<dt><b>Show the distance of two points and the position and the size of the indicated square</b></dt>
+<dd>After Ctrl+[, Shift+L/R-click determines the square and Alt+H I I</dd>
+<dt><b>Show Grid</b></dt>
+<dd>Alt+VDO (View-griD-On), Alt+VDS (View griD-Scale) to arrange Grid</dd>
+<dt><b>Accurate measuring</b></dt>
+<dd>Measure after magnifying by Alt+DZM (Display-siZe-Magnify) etc.</dd></dl></li></p>
+
+<p><font color="#800000"><a name="Image"><li>Cutting the preview window into an image data file and pasting it to an editor (<a href="cmode.html#picture">details</a> in Japanese)</a></font>
+<dl>
+<dt><b>Copy in the format of BMP</b></dt>
+<dd>After Ctrl+[, Shift+L/R-click determines the square and Alt+FSB cuts the square into Clipboard</dd>
+<dt><b>Copy in the format of EMF</b></dt>
+<dd>After Ctrl+[, Shift+L/R-click determines the square and Alt+FSE cuts the square into Clipboard</dd>
+<dt><b>BMP vs EMF</b><dt>
+<dd>*  BMP : the image is just same as in the preview window.  But colored characters and included images are omitted
+<br>
+*  EMF : this fits for characters displayed by TrueType fonts.  Then it can be smoothly  magnified and reduced.  Colored characters and included images are valid</dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="#Wabun"><li>Arranging characters in Japanese fonts</font></a><br>
+<dl>
+<dt><b>Replace MS Mincho by other Japanese TrueType fonts</b><dt>
+<dd>*  Alt+OJ gives the menu.  This method is easy but only valid in the current dviout.<br>
+*  Ctrl+\ [WinJfont], check Japanese TT, select min(jis) in jfm and after [Change Font] select font in the dialog appeared, push [Ok] to quit the dialog and return to the preview window by [Define] [Ok]<br>
+*  One may indicate in the font mapping file.  If the value of -ftt: equals ^x\map\ttfonts.map, then the setting can be written in the file <font color="blue">$user.map</font> and it will not be overwritten by the version-up of dviout</dd>
+<dt><b>Arranging the size of Japanese characters</b></dt>
+<dd>Ctrl+\ [JFont2][Adjust size s:]  by the unit of 0.1%<br>
+-  To indicate different settings according to the fonts, define them by Ctrl+\ [WinJFont]</dd>
+<dt><b>Arranging the base line of Japanese fonts relative to that of European fonts</b></dt>
+<dd>Ctrl+\ [JFont2][base line J:], by the unit of 0.1% of the character size</dd>
+<dt><b>Replacing some Japanese characters by other Japanese characters</b></dt>
+<dd>Ctrl+\ [JFont2][JC:] and indicated the translation by character codes</dd>
+<dt><b>Keep the setting of the arrangement of Japanese TrueType fonts etc</b></dt>
+<dd>Setting in [Property of DVIOUT] by Ctrl+\  can be saved by Alt+OP [Save] with giving a title and comments<br>
+-  Later Alt+OP [Ok] reads and uses the setting</dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="OnOff"><li>On/Off of special functions related to fonts</font></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(On/Off in default)
+<dl>
+<dt><b>Vertical fonts</b></dt>(On)</dd>
+<dd>Ctrl+\ [Font2][virtual:]</dd>
+<dt><b>Use embedded fonts</b>(On)</dt>
+<dd>Alt+OF (Option-Font). To change the default see <a href="#KeepOnOff">here</a></dd>
+<dt><b>Use European TrueType fonts</b>(On)<dt>
+<dd>Ctrl+\ [Font2][ttf:] 1(On)/0(Off)</dd>
+<dt><b>Use inner jfm files</b>(On)</dt>
+<dd>Ctrl+\ [Font2][Use inner jfm].
+  Use Japanese font metric kept in dviout for min*, goth*, tmin*, tgoth*, jis, jisg, jis-v, jisg-v</dd>
+<dt><b>Keep the location of fonts</b>(On)</dt>
+<dd>Ctrl+\ [Font2][Keep Path]. Searching fonts takes time if this is Off</dd>
+<dt><b>On-demand fonts</b>(On)</dt>
+<dd>If Ctrl+\ [Font2][OnDemand] is Off, all the fonts used in a DVI file are searched when it is opened<br>
+-  If this is Off, it takes a time to show the first page but the page scroll may be faster.  Hence it may fit to a presentation using connected pages</dd>
+<dt><b>Substitution of Japanese fonts in NTTjTeX</b>(Off)</dt>
+<dd>Ctrl+\ [JFont2][ntt:].  Japanese fonts in NTTjTeX are replaced by those in pTeX by ASCII</dd>
+<dt><b>Scaling of non-scalable fonts</b>(Off)</dt>
+<dd>Ctrl+\ [Resolution][varf:]. This is used for PK fonts if necessary (ex. Fit/Full in Presentation mode)</dd>
+<dt><b>Check Font ID</b>(Off)</dt>
+<dd>Ctrl+\ [Font2][CheckFontID]. Check it between the DVI file and the installed TeX system</dd>
+<dt><b>Arrange the baseline by the jfm file</b>(On)</dt>
+<dd>Ctrl+\ [JFont2][Jbt:]. Arrange the baseline of the Japanese characters depending on the setting of depth/height in the corresponding jfm file</dd>
+<dt><b>Arrange the position by the jfm file</b>(Off)</dt>
+<dd>Ctrl+\ [JFont2][Jgt:]. Arrange the horizontal position of the Japanese characters according to the values of glue/plus of the corresponding jfm file</dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="OnOff2"><li>On/Off of other special functions</font></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(On/Off in default)
+<dl>
+<dt><b>Check renewal of DVI file</b>(On)</dt>
+<dd>Ctrl+\ [System][Auto renew]. Renew Preview according to the renewal of DVI file when dviout Windows changes active</dd>
+<dt><b>Continuous check on renewal of DVI file</b>(Off)</dt>
+<dd>Alt+OW (Continuous ReneW)ÅCcheck the renewal for every 0.5 sec and update the preview</dd>
+<dt><b>Graphics</b>(On)</dt>
+<dd>Alt+DG (Display-Graphics). If this is Off, the frames of included graphics are shown</dd>
+<dt><b>Colored characters or background</b>(On)</dt>
+<dd>Alt+DC (Display-Color). If this is Off, colored characters become black and the background color is ignored</dd>
+<dt><b>tpic specials</b>(On)</dt>
+<dd>Ctrl+\ [Graphic][tpic specials]</dd>
+<dt><b>Compatibility to dvips for tpic in tate mode of pTeX</b>(Off)</dt>
+<dd>Ctrl+\ [Graphic][tpic specials][tate].  The coordinate is rotated by 90 degree as in the case of dvips in tate mode</dd>
+<dt><b>dviout specials</b>(On)</dt>
+<dd>Alt+OV (Option-dViout). See <a href="#KeepOnOff">here</a> to change the default </dd>
+<dt><b>source specials</b>(On)</dt>
+<dd><img SRC="hyper.bmp" WIDTH="16" HEIGHT="15"> or Alt+OC (Option-sourCe).
+See <a href="#KeepOnOff">here</a></dd> to change the default 
+<dt><b>HyperTeX</b>(On)</dt>
+<dd><img SRC="hyper.bmp" WIDTH="16" HEIGHT="15"> or Alt+JJ (Jump-hyperJump) or Ctrl+\ [HyperTeX][Disable Hyperjump].  
+See <a href="#KeepOnOff">here</a></dd> to change the default
+<dt><b>Direct outer jump by HyperTeX</b>(Off)</dt>
+<dd>Ctrl+\ [HyperTeX][Direct outerjump]. No dialog appears for outer jumps except to executable files etc. </dd>
+<dt><b>Seamless jump by HyperTeX</b>(Off)</dt>
+<dd>Alt+NJ (preseN+Jump). No dialog appears for any jump by HyperTeX<br>
+- Used, for example, in Presentation mode.  Remark the security.  Not possible to be On in default</dd>
+<dt><b>Check page-independence of color specials</b>(On)</dt>
+<dd>Alt+OK (ChecK color specials)ÅCIf it is broken, DVI file can be re-written to recover it.</dd>
+<dt><b>Animation cursor</b>(On)</dt>
+<dd>Alt+VM (View-aniMation).  Jumps for HyperTeX/source specials</dd>
+<dt><b>Show baselines</b>(Off)</dt>
+<dd>Ctrl+\ [System][draw baseline].  Special purpose to check the type setting</dd>
+<dt><b>Type setting by boxes in place of characters</b>(Off)</dt>
+<dd>Ctrl+\ [System][draw box].  Special purpose to check the type setting</dd>
+<dt><b>Show the frame of the image input from a file</b>(Off)</dt>
+<dd>Alt+\ [Graphic][gbox:]</dd>
+<dt><b>Overwrite by the image input from a file</b>(Off)</dt>
+<dd>Alt+\ [Graphic][gow:], If it is Off, then the image is merged.  If it is On, then the image replaces the original.</dd>
+<dt><b>Clip the image input from a file</b>(On)</dt>
+<dd>Alt+\ [Graphic][gclip:]. Clip by the BoundingBox</dd>
+<dt><b>Call a graphic editor for an included graphic file</b>(On)</dt>
+<dd>Alt+JA (Jump grAphic), use Alt\ [Common][gsrc:] for the setting</dd>
+<dt><b>Generate an image data with the same dpi as in the preview</b>(On)</dt>
+<dd>Alt+\ [Graphic][gfit:].  If it is On, the preview is better and fast but the Loupe is not good in quality</dd>
+<dt><b>Size of the image includes mag or not</b>(Off)</dt>
+<dd>Alt+\ [Graphic][size includes mag].  It depends on Graphics packages</dd>
+<dt><b>Control display(dviout special `+&lt;levels&gt from Ver.3.17.4)</b>(On)</dt>
+<dd>Alt+DK (Kill stop level), Ctrl+U (valid), Ctrl+V (invalid), Ctrl+N (diplay)</dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="Info"><li>Showing/Saving/Printing of related informations</font></a>
+<dl>
+<dt><b>Reserve/Print the information</b></dt>
+<dd>Show the information and use [Copy] or the mouse (indicate the region, R-click to copy it and paste it to an editor and then reserve/print)</dd>
+<dt><b>Information Window</b></dt>
+<dd>Change its size by Alt+V I L/U/A.  The contents can be edited</dd>
+<dt><b>Version of dviout</b></dt>
+<dd>Ctrl+Q or Alt+HS (Help-System)</dd>
+<dt><b>Versions of TeX and Ghostscript</b></dt>
+<dd>Ctrl+Q or Alt+HS (Help-System)</dd>
+<dt><b>Information of the character at the mouse cursor</b><dt>
+<dd>Ctrl+Shift+L-click</dd>
+<dt><b>Information of the image at the mouse cursor</b><dt>
+<dd>Ctrl+Shift+L-click</dd>
+<dt><b>Information of the fonts</b><dt>
+<dd>Alt+HIF (Help-Info-Font)</dd>
+<dt><b>Information of the Mapping of fonts</b><dt>
+<dd>Alt+HIA (Help-Info-fontmAp)</dd>
+<dt><b>Information of key functions</b><dt>
+<dd>Alt+HIK (Help-Info-Key)</dd>
+<dt><b>Information of parameters</b><dt>
+<dd>Alt+HIP (Option-Info-Parameters)</dd>
+<dt><b>Information of the setting of parameters</b><dt>
+<dd>
+*  Alt+OD (Option-nonDefault) : the list of settings which are different from the default settings
+<br>
+*  Alt+OA (Option-All) : the list of all settings
+<br>
+The both format can be read by Alt+OR (Option-Read)</dd>
+<dt><b>Reserve and re-use the parameter settings</b></dt>
+<dd>Alt+OP [Save] (After Dec. 11, 2002)</dd>
+</dl>
+</li></p>
+
+<p><font color="#800000"><a name="Special"><li>Informations related to specials</font></a><dl>
+<dt><b>URL of HyperTeX</b></dt>
+<dd>Alt+HIL (Help-Info-urL): List of URL's in the current page</dd>
+<dt><b>Anchors of HyperTeX</b></dt>
+<dd>Alt+HIC (Help-Info-anChor): List of anchors in the current page (green cross in the preview window)</dd>
+<dt><b>source specials</b></dt>
+<dd>Alt+HIR (Help-Info-souRce): List of source specials in the current page (red cross in the preview window)</dd>
+<dt><b>Embedded fonts</b></dt>
+<dd>Alt+HIM (Help-Info-eMbed): List of embedded fonts in the current DVI file</dd>
+<dt><b>Embedded files</b></dt>
+<dd>Alt+HIB (Help-Info-Buffer): List of embedded files in the current DVI file<br>
+dviout.etf is the file of embedded fonts</dd>
+<dt><b>Precise information of embedded fonts</b></dt>
+<dd>Use the program etfdump in the package of dviout (eg. <font color="blue">etfdump &nbsp;test_b5x.dvi</font>)</dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="presen"><li>Presentation Mode</a></font>
+(<a href="present.html">details</a> in Japanese)<dl>
+<dt>The following functions attached to keys are depend on dviout after Dec. 14, 2002. </dt>
+<dt><b>Change to Presentation mode in a simple (standard) way</b></dt>
+<dd><b>Shift+F6</b> (Same as Alt+NE [Esc] 6), usually the width of the effective region (= the region where characters are written) becomes equal to the width of the screen<br>
+- Only vertical (or horizontal) scroll is necessary</dd>
+<dt><b>Quit from Presentation mode</b></dt>
+<dd>*  <b>Shift+F2</b>: Return to the original mode<br>
+    *  Alt+X or Alt+F4: Exit dviout<br>
+    *  Ctrl+L and choose from the list</dd>
+<dt><b>Change into Presentation mode so that the effective region of the page is within the screen</b></dt>
+<dd><b>Shift+F5</b> (Same as Alt+NE [Esc] 5),  it fits to the case when the shape of the paper (= the ratio of height and width) is close to that of the screen</dd>
+<dt><b>Change into Presentation mode with pages connected vertically</b></dt>
+<dd><b>Shift+F1</b> (Same as Alt+NE Alt+DY [Esc] 6),  the whole pages is vertically connected to one page</dd>
+<dt><b>Choose from the menu</b></dt>
+<dd>Edit the prototype shown by Ctrl+L and use it</dd>
+<dt><b>Reversing black and white (white characters in the black background)</b></dt>
+<dd>After Alt+NY2 (preseN-tYpe-2 black screen), change into Presentation mode</dd>
+<dt><b>Cut the header and the page number of the page</b></dt>
+<dd>After Ctrl+[, indicate the region to be shown by Shift+L/R-click, cut by Alt+DGC and changes into Presentation mode</dd>
+<dt><b>Page scroll by the button on the screen</b></dt>
+<dd>Presentation menu with the title move (which appears when the cursor moves to the left bottom corner of the screen)<br>
+-  Push <b>Shift+F12</b> if it doesn't appear or the title is different.  Push [-] if necessary<br>
+<dd>
+<dt><b>Draw lines with a menu</b></dt>
+<dd><b>Shift+F12</b>, [+] or [-] if necessary</dd>
+<dt><b>The validity of the menu when Presentation mode starts</b></dt>
+<dd>Alt+NM (preseN-Menu)</dd>
+<dt><b>Setting the default menu when Presentation mode starts</b></dt>
+<dd><a href="#KeepOnOff">Save the setting of the presentation mode and others</a></dd>
+<dt><b>Erase the menu</b><dt>
+<dd>*  Push [X] in System bar<br>
+    *  By R-click System bar and select from the list<br>
+    *  Click the menu and Alt+F4<br>
+    -  If the menu is recovered later, the position and the type is kept</dd>
+<dt><b>Detail arrangement of the offset position to display</b></dt>
+<dd>Ctrl+Shift+Arrow-key<dd>
+<dt><b>Move the cover sheet</b><dt>
+<dd>*  Under pushing the left button, move the mouse with the arrow cursor of two/four directions<br>
+    &nbsp;&nbsp;&nbsp;-   If the shape of the mouse is a hand, R-click under pushing the left button<br>
+    *  Next pause or page by [Space]</dd>
+<dt><b>Show thumbnail (16 pages)</b></dt>
+<dd>[9].  Scroll 16 pages at a time. Jump to the page by R-click</dd>
+<dt><b>Switch On/Off for display</b><dt>
+<dd>F5: On, F6: Off (this is cover sheet and it can be moved by the mouse or [Space])</dd>
+<dt><b>Control display (dviout special `+&lt;levels&gt from Ver.3.17.4)</b></dt>
+<dd>- Ctrl+U (valid)<br>
+- Ctrl+V (invalid)<br>
+- Ctrl+N (diplay)</dd>
+<dt><b>L/R-click represents the function corresponding to [Space]</b></dt>
+<dd>Alt+NBL(left button), Alt+NBR(right button)</dd>
+<dt><b>List of key functions in Presentation mode</b><dt>
+<dd><b>Shift+F1</b> in Presentation mode</dd>
+<dt><b><a name="KeepOnOff">Save the current setting of the presentation mode and others for the default of the later dviout</b></dt></a>
+<dd>Alt+NS (preseN-Save)<br>
+ - the settings of preseN-Presentation switch/Presentation Menu/Cover sheet/cover type/Use Mouse Button/status of the menu<br>
+ - the settings of switches for HyperTeX/dviout/source specials/embedding fonts are also saved<dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="search"><li>String search</a></font> <img src="search.bmp" WIDTH="15" HEIGHT="15"><dl>
+<dt><b>Indicate the string to be searched</b></dt>
+<dd>*  In the dialog appeared by <img src="search.bmp" WIDTH="16" HEIGHT="15"> or Ctrl+F, input the string and [Enter] or [search forward]<br>
+    *  Input the string in the edit box in Tool bar and [Enter]<br>
+    *  Click the arrow in the right of the edit box, select a string in the list/ [Enter]/Double clicking the left button<br>
+    -  Japanese string is only possible in pTeX by ASCII.
+</dd>
+<dt><b>Search the same string as the former search (the string is shown in the edit box in Tool bar)</b></dt>
+<dd><img src="serd.bmp" WIDTH="15" HEIGHT="15"> or F3(search forwards), <img src="seru.bmp" WIDTH="15" HEIGHT="15"> or Shift+F3(search backwards), or by Ctrl+F</dd>
+<dt><b>Search as words</b></dt>
+<dd>Set by Ctrl+F. Only valid for non-Japanese strings.  The search is more accurate if this is set</dd>
+<dt><b>Distinguish Capital and Small letters</b></dt>
+<dd>Set by Ctrl+F</dd>
+<dt><b>The way to show the string in the preview window</b></dt>
+<dd>Set by Ctrl+\ [Search]</dd>
+<dt><b>Move the cursor to the string in the preview window</b></dt>
+<dd>Ctrl+\ [Search][points targets]</dd>
+<dt><b>Show all the corresponding string in a page</b><dt>
+<dd>Ctrl+\ [Search][All targets]</dd>
+<dt><b>Accurate search</b></dt>
+<dd>*  Indicate longer string (may contain several words) and indicate the search by words<br>
+    *  Set Ctrl+\ [Search][sFont:] to avoid the special fonts such as symbols to be searched</dd>
+<dt><b>Search by HyperTeX</b></dt>
+<dd>Indicate the anchor string after a space and <font color="blue">#</font></dd>
+<dt><b>Search by the line number in the source file of TeX</b></dt>
+<dd>This is valid when source specials is effective.  Indicate  
+[a space, the line number, a space, the filename of the source]<br>
+-  For example, <font color="blue">_235_foo.tex</font> means the 235-th line in foo.tex
+( <font color="blue">_</font> represents a space)<br>
+-  If it is not necessary to indicate the filename, it is replaced by <font color="blue">*</font> (for example, <font color="blue">_235_*</font>) </dd>
+<dt><b>Search the string in the source file of TeX</b></dt>
+<dd>This is valid when source specials is effective.  Indicate 
+[a space, the line number/the string, a space, the filename]<br>
+For example, <font color="blue">_235/This_is_foo1.tex</font> means ( <font color="blue">_</font> represents a space) the string "This is" in the 235-th line of foo1.tex</dd>
+<dt><b>Search by the page number</b></dt>
+<dd>Indicate [a space, the page number] such as  <font color="blue">_23</font> ( <font color="blue">_</font> is a space)</dd>
+<dt><a name="srcurl"><b>Search URL</b></dt></a>
+<dd>Indicate [a space,=<font "blue">URL</font>] (such as <font color="blue">_=http://akagi.ms.u-tokyo.ac.jp</font>) in the same way as in <a href="#search">Indicate the string to be searched</a>( <font color="blue">_</font> represents a space)</dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="srcspc"><li>Jump between dviout and an editor -- source specials (<a href="tex_dvioutw.html#source">details</a> in Japanese)</font><dl>
+&nbsp;&nbsp;
+Here the setting in the editor and the parameter -src: of dviout should be correctly finished to use source specials and the DVI file is generated with the source special option (samples -src: for Hidemaru and WinShell are obtained by Alt+OP).
+<dt><b>Double clicking the left button at a character</b></dt>
+<dd>Jump to an editor.  
+(If the shape of the mouse cursor is not an arrow, it may fail.  In this case, it is can be changed into this by Ctrl+\)</dd>
+<dt><b>Double clicking the left button at an included graphic</b></dt>
+<dd>Jump to a graphic editor (according to the setting in Ctrl+\ [Common][-grsc:] where the correspondence between the extensions of graphic files and editors are defined).</dd>
+<dt><b>Shift+L-click at a character</b><dt>
+<dd>If Direct Jump to Editor (Alt+JC) is checked, jump directly to the editor and
+by [-&gt;src] otherwise</dd>
+<dt><b>Ctrl+Pushing-Left-button+R-click</b></dt>
+<dd>Jump to the editor.  It is not correct in some cases and not good for a multi-column document</dd>
+<dt><b>Jump from an editor</b></dt>
+<dd>- Usage of DDE is faster than the jump by the command line<br>
+    - Usage of the information of a string in the line gives a better result
+      (a sample for Hidemaru: special\srcspecial.mac)</dd>
+<dt><b>Clarify the resulting spot by the jump from an editor</b><dt>
+<dd>Use Animation cursor (by Alt+VM if necessary)</dd>
+<dt><b>Minimize dviout in the Task bar of Desktop after calling an editor</b></dt>
+<dd>Insert <font color="blue">&lt;</font> in top of the the setting of Ctrl+\ [Common][-src:]</dd>
+<dt><b>For TeX that doesn't support source specials</b><ct>
+<dd>It is possible to use source specials by the attached program srctex.exe</dd>
+<dt><b>Show the source specials</b></dt>
+<dd>Alt+HIR (Help-Info-souRce): List of source specials in the current page (red cross in the preview window)</dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="hypertex"><li>Jump to a file in the Disk or a resource in Internet -- HyperTeX</a></font><dl>
+<dt><b>Show the URL before the jump of HyperTeX</b></dt>
+<dd>*  Move cursor at the hot spot, then it is shown in Status bar in the lower frame.<br>
+*  L-click under pushing Ctrl<br>
+*  Control by Ctrl+\ [HyperTeX][Direct outerjump] to jump outside the DVI file<br>
+*  Alt+HIL (Help-Info-urL)  gives the list of URL's defined in the current page</dd>
+<dt><b>Jump directly by L-click without any dialog</b></dt>
+<dd>*  Control by Ctrl+\ [HyperTeX][Direct outerjump] to jump outside the DVI file<br>
+*  A dialog usually appears in case of the jump to executable files etc. for the security but even in this case, the dialog can be cancelled by Alt+NJ (preseN-Jump).  This may be useful in a presentation</dd>
+<dt><b>Clarify the resulting spot by the jump of HyperTeX in DVI file</b></dt>
+<dd>Alt+VM (View-aniMation), Animation cursor</dd>
+<dt><b>The way to show the hot spot</b></dt>
+<dd>Set by Ctrl+\ [HyperTeX].  The blue characters and underlines are default.
+-  It is possible to be secret (eg. choose black character)</dd>
+<dt><b>Jump to URL or an image data file in Preview which does not correspond to HyperTeX</b></dt>
+<dd>Get URL by Shift+L-crick, edit it if necessary and [Execute]</dd>
+<dt><b>Input URL and Jump</b></dt>
+<dd><a href="#srcurl">Search by URL</a></dd>
+<dt><b>URL of HyperTeX</b></dt>
+<dd>Alt+HIL (Help-Info-urL): List of URL's in the current page</dd>
+<dt><b>Anchors of HyperTeX</b></dt>
+<dd>Alt+HIC (Help-Info-anChor): List of anchors in the current page (green cross in the preview window)</dd>
+</dl></li></p>
+
+
+<p><font color="#800000"><a name="input"><li>Help editing a source file -- HyperTeX + dviout specials</a></font><dl>
+As in the case TeX -> TeX Help, a use of HyperTeX dviout special `in or `input
+helps editing a source of TeX etc. 
+<dt><b>Clicking the left button at a hotspot</b>(from Ver.3.17)</dt>
+<dd>A string predefined is copied to Clipboard.</dd>
+<dt><b>Click the left button at a hotspot under pressing ALT</b>(from Ver.3.17.3)</dt>
+<dd>A string predefined is appended to Clipboard.</dd>
+<dt><b>Click the left button at a hotspot under pressing CTRL</b>(from Ver.3.17.3)</dt>
+<dd>* At the first time, the string is copied to an editor by activating it
+within 5 sec.<br>
+    * At the second time or later, the string is copied to the editor and 
+     the editor is activated.<br>
+    * If CTRL+ALT is pressed at the click (or the corresponding editor is closed), a new editor can be redefined.<br>
+</dd>
+<dt><b>Convert the function of CTRL</b></dt>
+<dd>Alt+OE (Option -> Clipboard+Editor, from Ver.3.17.4) enables to copy also to an editor without pressing CTRL and not to copy to an editor with pressing CTRL.</dd>
+</dl></li></p>
+
+<p><font color="#800000"><a name="print"><li>Printing</a></font> <img SRC="print.bmp" WIDTH="16" HEIGHT="15"><dl>
+<dt><b>Print by indicating page numbers</b><dt>
+<dd>After Ctrl+PO , input page numbers to be printed<br>
+-  For example, <font color="blue"> 3 8-12 40- </font> means page 3, from 8 to 12, and from 40 to the end</dd>
+<dt><b>Print by indicating the region in the preview window</b><dt>
+<dd>Push [M] (Mark) in the start page, push [R] (Range) in the last page, then Ctrl+PS and Print them<br>
+-  If the region is not set, (push [S] if necessary) only the page displayed will be printed</dd>
+<dt><b>Print in the reverse order for paging</b><dt>
+<dd>Ctrl+PR</dd>
+<dt><b>Even pages or odd pages only</b><dt>
+<dd>Ctrl+P E (Even), or O (Odd)</dd>
+<dt><b>Magnified/Reduced printing</b><dt>
+<dd>Ctrl+P, change the value of <font color="blue">1000</font> at the bottom.  It can be arranged by the unit of 0.1%</dd>
+<dt><b>Reducing the size A4 to A5 for a page and printing two pages in one sheet</b><dt>
+<dd>Ctrl+P, check [Unite 2 pages as] and [A4-&gt;A5], push [Setup] and select the paper to be landscape and A4 and then print<br>
+ -  It is better to use TrueType fonts in place of PK fonts</dd>
+<dt><b>Overprint two pages in the same sheet</b><dt>
+<dd>Ctrl+P, check [Unite 2 pages as] and push the arrow button located in the right so that the value of W: changes into 0.00cmx2 and then Print</dd>
+<dt><b>Print huge letters</b></dt>
+<dd>There were an example printed a huge letter with size larger than 
+50cm x 50cm devided on severel sheets of papers by dviprt mode for LIPSIII 
+of dviout.</dd>
+<dt><b>Change resolution between printing and preview</b><dt>
+<dd>Alt+OI, set it in the first sheet (this way is easiest).</dd>
+<dt><b>print by a PostScript printer</b></dt>
+<dd>Because of the <a href="cmode.html#PSprinter">Bugs of PostScript printer driver</a> (in Japanese) etc. in Windows, it is better to set Ctrl+\, [Graphic], [automode(rep)] for -cmode:</dd>
+</dl></li>
+
+<p><font color="#800000"><a name="PDF"><li>Transform into PDF</a></font>
+<dl>
+<dt><b>Output to Acrobat Distiller from dviout</b></dt>
+<dd>Alt+FP [Setup] and select Acrobat Distiller and Print<br>
+-  Prefer to use TrueType fonts because the quality of PK fonts becomes worse when they are magnified<br>
+-  After displaying all the pages by dviout, in the font information by Alt+HIF, the font indicated by PK in the right end is PK font and that by WinAPI is the TrueType font
+(It is easy to see it under a wider width of the window of dviout) . 
+So it is expected that no font is of the former one<br>
+- BaKoMa CM/AMS TrueType fonts are installed by executing <a href="ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/font/bakoma/FixBKM.msi">FixBKM.msi</a><br>
+-  Expand winttf.zip or winttf.lzh in the package of dviout in the TeX system, then various Windows TrueType (European/Japanese) fonts can be used<br>
+-  This fits to use various Windows Japanese TrueType fonts<br>
+-  The image data files except for WMF/EMF are not good for magnification<br>
+-  HyperTeX is not supported<br>
+-  Acrobat Distiller is a product of Adobe.  See <a href="http://oku.edu.mie-u.ac.jp/~okumura/texfaq/pdf.html">here</a> (in Japanese) for the setting of Acrobat Distiller etc.
+</dd>
+<dt><b>Use dvipdfm(x)</b></dt>
+<dd>Alt+OP, select [Transform to a PDF by dvipdfm], push [Ok][Ok] and Print with checking [dviprt] <br>
+(It is sufficient only to check [dviprt] or push <img src="niko.bmp" WIDTH="16" HEIGHT="15"> after Ver.3.15.1)<br>
+-  Support the paper size, adjusting the origin, extracting pages etc.<br>
+-  If necessary,  edit the corresponding parameter file by Alt+OP and [Edit]<br>
+-  It can include EPS file.  Moreover JPEG/PNG files can be included as follows</p><p>
+&nbsp;&nbsp;&nbsp;&nbsp;
+   \usepackage[dvipdfm]{graphicx}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+   ...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+   \includegraphics[width=8cm]{foo.jpg}</p><p>
+Here it is necessary to make .bb file (foo.bb) by<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+   ebb &nbsp;foo.jpg<br>
+or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+   bmc &nbsp;foo.jpg<br>
+before making the DVI file.<br>
+-  Support HyperTeX<br>
+-  Alt+OP and select [Enable the generation of a PDF by dvipdfm <- Check dviprt in Print Dialogue], then the generation of a PDF by dvipdfm can be simply done through the Print dialog.<br>
+-  dvipdfmx can embed Japanese fonts (If they are embedded, the size of the file increases)<br>
+-  dvipdfm(x) is a free software (An old version doesn't support Japanese in pTeX.  A newer version is better)
+</dd>
+<dt><b>Use dvipsk and Acrobat Distiller</b></dt>
+<dd>Alt+OP, select [transform into a PDF by dvipsk and Acrobat Distiller], get it by [Ok][Ok] and Print with checking [dviprt]<br>
+-  By Alt+OP, select [Edit] and arrange the parameter file so that it corresponds to the environment<br>
+-  The image data files can be included only if they are in EPS and therefore other image data files should have been transformed into EPS<br>
+-  Support HyperTeX<br>
+-  Most reliable for including EPS files<br>
+-  Acrobat Distiller is a product of Adobe</dd>
+<dt><b>dvipsk and ps2pdf (Ghostscript)</b></dt>
+<dd>
+-  Use a new version of Ghostscript for Japanese fonts<br>
+-  dvipdfm(x) can not handle a DVI file with direct PostScript codes for dvips 
+but dvipsk+ps2pdf can do it.</dd>
+<dt><b>Transform a rectangular region into PDF</b></dt>
+<dd>After Ctrl+[, Shift+L/R-click determines the rectangular region and
+Alt+F [Save as image][File...] and then save the image using the filename with 
+the extension <b>.pdf</b><br>
+-  Require dviout 3.16 and dvipdfmx 20040205 or after them</dd></dl></li>
+
+<p><font color="#800000"><a name="Embed"><li>Embedding Font/Image eyc. into DVI file</a></font><dl>
+&nbsp;&nbsp;
+dviout can embed Image data and character data into DVI file and then it is possible to preview/print it by dviout without Image data and Font files.<br>
+&nbsp;&nbsp;
+DVIware different from dviout ignores this embedding and regards it as a usual DVI file.
+<dt><b>Embed Image data</b><dt>
+<dd>Alt+FI and check [Image File] and [Ok]<br>
+The list of Image data are shown.  Change it if necessary and push [Ok]</dd>
+<dt><b>Embed TrueType European font</b><dt>
+<dd>Alt+OP and select [Render truetype font by dviout]<br>
+Alt+FI and check [TrueType Font], [Font Map/tfm/jfm] and [Virtual Font] and push [Ok]
+<br>
+The list of fonts to be embedded is shown. 
+Change it if necessary and push [Ok]</dd>
+<dt><b>Embed TrueType Japanese font</b><dt>
+<dd>Alt+OP and select [Render MS Mincho and MS Gothic by dviout]<br>
+Alt+FI and check [TrueType Font(Japanese)], [Font Map/tfm/jfm] and [Virtual Font] and push [Ok]<br>
+The list of fonts to be embedded is shown. 
+Change it if necessary and push [Ok]
+-  In this way, Japanese DVI file in pTeX can be shown under non-Japanese Windows without Japanese fonts<br>
+</dd>
+<dt><b>Embed Image data and Font data  etc. </b><dt>
+<dd>Embed them as similar as the above. 
+Before the embedding,  TrueType fonts should have been expanded by dviout not by WinAPI<br>
+-  PK fonts can be embedded in various indicated resolutions (the best resolution is selected and scaled for preview and printing)<br>
+-  test_b5x.dvi (initial.par, BaKoMa fonts and GT fonts) and sample\sample.dvi are samples</dd>
+<dt><b>Embed initial parameters</b></dt>
+<dd>Alt+OP and [Ok].  In the next dialog, check [initial.par] and write as in the format of the value of <b>dviout specials `initial</b> and push [Ok]<br>
+-  One can embed the parameter file named initial.par into DVI file as follows<br>
+&nbsp;&nbsp;&nbsp;
+dviadd &nbsp;initial.par &nbsp;foo.dvi</dd>
+<dt><b>Embed a memo</b></dt>
+<dd>Together with writing of the initial parameter, if the line start with <font color="blue">#</font>, then the line is a comment line<br>
+-  One can write memo between the lines <font color="blue">#rem</font> and <font color="blue">#end</font></dd>
+<dt><b>Display the embedded memo</b></dt>
+<dd>Alt+HIN, (the contents of initial.par  are shown)</dd>
+<dt><b>Embed the supporting file for PSfrag</b></dt>
+<dd>In the use of PSfrag, a supporting file with the extension <font color="blue">.pfi</font> is created.  
+It is convenient to embed it in DVI file for later use or for a different environment</dd>
+<dt><b>Detail information for embedded files</b><dt>
+<dd>See <a href="#Special">here</a></dd>
+</dl>
+
+<p><font color="#800000"><a name="prop"><li>Property of DVIOUT</a></font> <img SRC="option.bmp" WIDTH="16" HEIGHT="15"><dl>
+&nbsp;&nbsp;
+Property sheet of dviout is appeared by Alt+OS (Option-Set), which is to show and set all the parameter values of dviout.
+<dt><b>Meaning of each sheet</b></dt>
+<dd>[Help] in the sheet</dd>
+<dt><b>Meaning of each item or button</b></dt>
+<dd>L-Click [<b>?</b>] and then L-click the item or button</dd>
+<dt><b>Apply the change of setting to the current dviout</b></dt>
+<dd>[Apply] or [Ok] ([Ok] means to quit the property sheets)</dd>
+<dt><b>Define the change of setting as the default setting of dviout</b></dt>
+<dd>[Save]</dd>
+<dt><b>Avoid to read the setting of the value of specified parameters at the start up of dviout</b></dt>
+<dd>In the sheet of [REGISTRY], select the corresponding parameter and push [Ignore] to erase the mark <b>+</b> and [Save]</dd>
+</dl></li>
+
+</p><p>
+<li><font color="#800000"><a name="key">Key table (default)</a></font><br>
+The two letters surrounded  by [&nbsp;&nbsp;] are a symbol of the corresponding function<br>
+The keys written in the right of the symbol can be changed or erased by the user.
+
+<pre>Next Page               : PgDn, Alt+J N [JN],  N,  n
+        +2              : Alt+JO6 [J6]
+        +5              : Shift+SP, Shift+PgDn, Alt+JO7 [J7]
+        +10             : Ctrl+SP, Ctrl+PgDn, Alt+JO8 [J8]
+        +20             : Alt+JO9 [J9]
+        +50             : Ctrl+Shift+SP, Ctrl+Shift+PgDn, Alt+JO0 [J0]
+Previous Page           : PgUp, Alt+J P [JP],  P,  p
+        -2              : Alt+JO5 [J5]
+        -5              : Shift+BS, Shift+PgUp, Alt+JO4 [J4]
+        -10             : Ctrl+BS, Ctrl+PgUp, Alt+JO3 [J3]
+        -20             : Alt+JO2 [J2]
+        -50             : Ctrl+Shift+BS, Ctrl+Shift+PgUp, Alt+JO1 [J1]
+
+Head of next page       : SP, Shift+DownArrow, Alt+J E [JE]
+Foot of previous page   : BS, Shift+UpArrow, Alt+J V [JV]
+Top Page                : Ctrl+Home, Alt+J T [JT],  Ctrl+T
+Bottom Page             : Ctrl+End, Alt+J B [JB],  Ctrl+B
+Down to next page       : Alt+J D [JD],  D,  d
+Up to previous page     : Alt+J U [JU],  U,  u
+
+Scroll                  : Arrow Keys, Left Mouse Botton
+ Scroll up              : Up    Arrow [!U]
+ Scroll down            : Down  Arrow [!D]
+ Scroll left            : Left  Arrow [!L]
+ Scroll right           : Right Arrow [!R]
+Head of a Page          : Home [!H]
+Foot of a Page          : End [!E]
+Left of a Page          : [!X]
+Right of a page         : [!Y]
+
+Input Page Number       : Alt+J I [JI],  /
+  absolute              :    &lt;number&gt;
+  relative              :    +&lt;number&gt;, -&lt;number&gt;
+  from the bottom       :    .[&lt;number&gt;]
+    by page number      :        Enter
+    by nombre           :        Ctrl+Enter, Shift+Enter
+
+Page History list       : Alt+J H [JH],  Ctrl+J
+Former History          : Alt+J F [JF],  <,  F,  f
+Latter History          : Alt+J L [JL],  >,  L,  l
+Quit History            : Alt+J Q [JQ],  Q,  q
+Mark page               : Alt+J M [JM],  M,  m
+Goto Mark               : Alt+J G [JG],  Ctrl+G
+Exchange Mark           : Alt+J X [JX],  Ctrl+X
+Mark range              : Alt+J R [JR],  R,  r
+File History list       : Alt+I, Alt+F H [FH]
+Last file               : Alt+J S [JS]
+
+Dialog for Search       : Alt+S F [SF],  Ctrl+F
+Upward Search           : Alt+S U [SU],  Ctrl+R,  SFn3
+Downward Search         : Alt+S D [SD],  Ctrl+S,  Fn3
+
+Size
+ Magnify                : Alt+DSM [DM]
+ Reduce                 : Alt+DSR [DR]
+ Fit                    : Alt+DSF [DF],  5
+ Full                   : Alt+DSL [DL],  6
+Maximize Window         : [!M]
+
+Preset
+ View 1                 : Alt+DR1 [D1],  1
+ View 2                 : Alt+DR2 [D2],  2
+ View 3                 : Alt+DR3 [D3],  3
+ View 4                 : Alt+DR4 [D4],  4
+
+Contrast
+ Blacker                : Alt+DTB [DB]
+ Whiter                 : Alt+DTW [DW]
+ Reverse                : Alt+DTV [DV]
+  To Reverse            : [!V]
+  To Normal             : [!W]
+
+Loupe                   : Right Mouse Botton
+ Magnify                : Alt+DLG [DG]
+ Reduce                 : Alt+DLD [DD]
+ Bigger                 : Alt+DLE [DE]
+ Smaller                : Alt+DLA [DA]
+ Measure                : Alt+DLU [DU]
+
+two pages               : Alt+D T [DT],  7
+rev-two pages           : Alt+D W [DW]
+Y-two pages             : Alt+D Y [DY],  0
+cross pages             : Alt+D S [DS],  8
+16 pages                : Alt+D 6 [D6],  9
+one page                : [!Q]
+
+Landscape               : Alt+P L [PL]
+Region                  : Alt+DGN [DN],  Ctrl+[
+Recover:                : Alt+DGX [DX]
+Change Mouse            : Alt+\, Alt+D H [DH]
+Graphics                : Alt+D I [DI]
+Color special           : Alt+D C [DC],  Ctrl+C
+Color replace           : Alt+D P [DP]
+Valid display control   : [!0], CTRL+U
+Invalid diplay control  : [!1], CTRL+V
+
+HyperJump ON/OFF        : Alt+J J [JJ]
+HyperJump               : Left Mouse Button
+     with inquiry       :     + Ctrl
+
+Open File               : Alt+F O [FO],  Ctrl+O
+Open last file          : Alt+F 1 [F1]
+reNew File              : Alt+F N [FN],  Ctrl+N
+reNew if necessary      : [!I]
+Print                   : Alt+F P [FP],  Ctrl+P
+Dviprt                  : Alt+F D [FD],  Ctrl+D
+Save as Image           : Alt+F S [FS]
+Exit & Save             : Alt+X, Alt+F4, Alt+F X [FX]
+Quit                    : Alt+F Q [FQ]
+
+View
+ Tool bar               : Alt+V T [VT]
+ Status bar             : Alt+V S [VS]
+ Page slider            : Alt+V P [VP]
+ Scroll bar             : Alt+V R [VR]
+ Erase bars             : [V0]
+ Reverse Move Button    : Alt+V V [VV]
+ Show Warning           : Alt+V W [VW]
+ Change Tool Buttons    : Alt+V C [VC]
+ Small Editor           : Alt+V E [VE]
+
+Presentation
+On/Off switch           : Alt+N N [NN]
+ Presentation On        : [!P]
+ Presentation Off       : [!N]
+Save settings           : Alt+N S [NS]
+ Stop Draw              : [!A]
+ Recover Draw           : [!B]
+Cut edge On/Off         : Alt+N E [NE]
+Cut edge On             : [!Z]
+Cut edge Off            : [!T]
+Quit Fit/Full           : [!F]
+
+Mouse Button to proceed
+ Use left button        : Alt+NBL [NL]
+ Use right button       : Alt+NBR [NR]
+
+Presentation type
+ general screen         : Alt+NY0 [N0]
+ white screen           : Alt+NY1 [N1]
+ black screen           : Alt+NY2 [N2]
+ white back             : Alt+NY3 [N3]
+ black back             : Alt+NY4 [N4]
+ renew background       : [!G]
+ Draw line              : Alt+NDI [NI]
+   box                  : Alt+NDX [NX]
+   erase                : Alt+NDC [NC]
+   red                  : Alt+NDD [ND]
+   black                : Alt+NDK [NK]
+   blue                 : Alt+NDB [NB]
+   green                : Alt+NDG [NG]
+   thick                : Alt+NDT [NT]
+
+Cover sheet
+ On                     : Fn5(Presentation) Alt+NCO [NO]
+ Off                    : Fn6(Presentation) Alt+NCF [NF]
+ On for Pause           : Fn9(Presentation) Alt+NCP [NP]
+ Suspend Cover sheet    : Fn7(Presentation) [!S]
+ Return to Cover sheet  : Fn8(Presentation) [!C]
+
+Cover type
+  bottom                : Alt+NV5 [N5]
+  right                 : Alt+NV6 [N6]
+  left                  : Alt+NV7 [N7]
+  bottom + right        : Alt+NV8 [N8]
+  bottom + left         : Alt+NV9 [N9]
+
+Macro 1                 : Alt+OC1 [O1],  SFn1
+Macro 2                 : Alt+OC2 [O2],  SFn2
+Macro 3                 : Alt+OC3 [O3],  SFn5
+Macro 4                 : Alt+OC4 [O4],  SFn6
+Macro 5                 : Alt+OC5 [O5],  SFn7
+
+dviout special ON/OFF   : Alt+O V [OV]
+source special ON/OFF   : Alt+O C [OC]
+Copy to Editor with CTRL    :     [!2]
+Copy to Editor without CTRL :     [!3]
+
+Online Help             : Alt+H H [HH],  Fn1
+Help TeX                : Alt+H X
+Troubles in dviout      : Alt+H D
+Tips on dviout          : Alt+H T
+Screen/File Info        : Alt+HII [HI]
+Font Info               : Alt+HIF [HF]
+Buffer Info             : Alt+HIB [HB]
+System Info             : Alt+H S [HS],  Ctrl+Q
+Parameter Info          : Alt+HIP [HP]
+Non-default Parameters  : Alt+O D [OD]
+Setup Parameters        : Alt+O S [OS],  Ctrl+\
+Choose Parameters       : Alt+O P [OP],  Ctrl+L
+Key table               : Alt+HIK [HK]
+About dviout            : Alt+H A [HA]</pre></ol>
+<table border="1">
+<caption><strong>Key Table (default)</strong></caption>
+<tr>
+ <td>Ctrl+@</td>
+ <td></td>
+ <td>Ctrl+A</td>
+ <td></td>
+ <td>Ctrl+B</td>
+ <td>Last page</td>
+ <td>Ctrl+C</td>
+ <td>Color special On/Off</td>
+</tr>
+<tr>
+ <td>Ctrl+D</td>
+ <td>Dviprt</td>
+ <td>Ctrl+E</td>
+ <td></td>
+ <td>Ctrl+F</td>
+ <td>Search string</td>
+ <td>Ctrl+G</td>
+ <td>Goto the marked page
+</td>
+</tr>
+<tr>
+ <td>Ctrl+H</td>
+ <td></td>
+ <td>Ctrl+I</td>
+ <td></td>
+ <td>Ctrl+J</td>
+ <td>History of pages</td>
+ <td>Ctrl+K</td>
+ <td></td>
+</tr>
+<tr>
+ <td>Ctrl+L</td>
+ <td>Choose Parameters</td>
+ <td>Ctrl+M</td>
+ <td></td>
+ <td>Ctrl+N</td>
+ <td>Reopen DVI file</td>
+ <td>Ctrl+O</td>
+ <td>Open DVI file</td>
+</tr>
+<tr>
+ <td>Ctrl+P</td>
+ <td>Print</td>
+ <td>Ctrl+Q</td>
+ <td>System Info.</td>
+ <td>Ctrl+R</td>
+ <td>Downward search</td>
+ <td>Ctrl+S</td>
+ <td>Upward search</td>
+</tr>
+<tr>
+ <td>Ctrl+T</td>
+ <td>The first page</td>
+ <td>Ctrl+U</td>
+ <td>Valid display control</td>
+ <td>Ctrl+V</td>
+ <td>Invalid display control</td>
+ <td>Ctrl+W</td>
+ <td></td>
+</tr>
+<tr>
+ <td>Ctrl+X</td>
+ <td>The end of the previous page</td>
+ <td>Ctrl+Y</td>
+ <td></td>
+ <td>Ctrl+Z</td>
+ <td></td>
+ <td>Ctrl+[</td>
+ <td>Define region of the sheet</td>
+</tr>
+<tr>
+ <td>Ctrl+\</td>
+ <td>Property of DVIOUT</td>
+ <td>Ctrl+[</td>
+ <td></td>
+ <td>Ctrl+^</td>
+ <td></td>
+ <td>Ctrl+_</td>
+ <td></td>
+</tr>
+<tr>
+ <td>Space</td>
+ <td>Top of the nest page</td>
+ <td>!</td>
+ <td></td>
+ <td>"</td>
+ <td></td>
+ <td>#</td>
+ <td></td>
+</tr>
+<tr>
+ <td>%</td>
+ <td></td>
+ <td>$</td>
+ <td></td>
+ <td>&</td>
+ <td></td>
+ <td>'</td>
+ <td></td>
+</tr>
+<tr>
+ <td>(</td>
+ <td></td>
+ <td>)</td>
+ <td></td>
+ <td>*</td>
+ <td></td>
+ <td>+</td>
+ <td></td>
+</tr>
+<tr>
+ <td>,</td>
+ <td></td>
+ <td>-</td>
+ <td></td>
+ <td>.</td>
+ <td></td>
+ <td>/</td>
+ <td>Input the page number</td>
+</tr>
+<tr>
+ <td>0</td>
+ <td>Show two pages vertically</td>
+ <td>1</td>
+ <td>View 1</td>
+ <td>2</td>
+ <td>View 2</td>
+ <td>3</td>
+ <td>View 3</td>
+</tr>
+<tr>
+ <td>4</td>
+ <td>View 4</td>
+ <td>5</td>
+ <td>Maximal size of the sheet in the screen</td>
+ <td>6</td>
+ <td>Maximal size of the screen in the sheet</td>
+ <td>7</td>
+ <td>Show two pages</td>
+</tr>
+<tr>
+ <td>8</td>
+ <td>Show 4 pages</td>
+ <td>9</td>
+ <td>Show 16 pages</td>
+ <td>*</td>
+ <td></td>
+ <td>;</td>
+ <td></td>
+</tr>
+<tr>
+ <td>&lt;</td>
+ <td>The former page in the history</td>
+ <td>=</td>
+ <td></td>
+ <td>&gt;</td>
+ <td>The latter page in the history</td>
+ <td>?</td>
+ <td></td>
+</tr>
+<tr>
+ <td>@</td>
+ <td></td>
+ <td>A</td>
+ <td></td>
+ <td>B</td>
+ <td></td>
+ <td>C</td>
+ <td></td>
+</tr>
+<tr>
+ <td>D</td>
+ <td>End of the page/Top of the next page</td>
+ <td>E</td>
+ <td></td>
+ <td>F</td>
+ <td>The former page in the history</td>
+ <td>G</td>
+ <td></td>
+</tr>
+<tr>
+ <td>H</td>
+ <td></td>
+ <td>I</td>
+ <td></td>
+ <td>J</td>
+ <td></td>
+ <td>K</td>
+ <td></td>
+</tr>
+<tr>
+ <td>L</td>
+ <td>The latter page in the history</td>
+ <td>M</td>
+ <td>Mark the page</td>
+ <td>N</td>
+ <td>Next page</td>
+ <td>O</td>
+ <td></td>
+</tr>
+<tr>
+ <td>P</td>
+ <td>Previous page</td>
+ <td>Q</td>
+ <td>Quit from the history of pages</td>
+ <td>R</td>
+ <td>Set the region of pages</td>
+ <td>S</td>
+ <td></td>
+</tr>
+<tr>
+ <td>T</td>
+ <td></td>
+ <td>U</td>
+ <td>Top of the page/End of the previous page</td>
+ <td>V</td>
+ <td></td>
+ <td>W</td>
+ <td></td>
+</tr>
+<tr>
+ <td>X</td>
+ <td></td>
+ <td>Y</td>
+ <td></td>
+ <td>Z</td>
+ <td></td>
+ <td>[</td>
+ <td></td>
+</tr>
+<tr>
+ <td>\</td>
+ <td></td>
+ <td>]</td>
+ <td></td>
+ <td>^</td>
+ <td></td>
+ <td>_</td>
+ <td></td>
+</tr>
+<tr>
+ <td>`</td>
+ <td></td>
+ <td>a</td>
+ <td></td>
+ <td>b</td>
+ <td></td>
+ <td>c</td>
+ <td></td>
+</tr>
+<tr>
+ <td>d</td>
+ <td>End of the page/Top of the next page</td>
+ <td>e</td>
+ <td></td>
+ <td>f</td>
+ <td>The former page of the history</td>
+ <td>g</td>
+ <td></td>
+</tr>
+<tr>
+ <td>h</td>
+ <td></td>
+ <td>i</td>
+ <td></td>
+ <td>j</td>
+ <td></td>
+ <td>k</td>
+ <td></td>
+</tr>
+<tr>
+ <td>l</td>
+ <td>The latter page of the history</td>
+ <td>m</td>
+ <td>Mark the page</td>
+ <td>n</td>
+ <td>Next page</td>
+ <td>o</td>
+ <td></td>
+</tr>
+<tr>
+ <td>p</td>
+ <td>The previous page</td>
+ <td>q</td>
+ <td>Quit from the history of pages</td>
+ <td>r</td>
+ <td>Set the region of pages</td>
+ <td>s</td>
+ <td></td>
+</tr>
+<tr>
+ <td>t</td>
+ <td></td>
+ <td>u</td>
+ <td>Top of the page/Enf of the previous page</td>
+ <td>v</td>
+ <td></td>
+ <td>w</td>
+ <td></td>
+</tr>
+<tr>
+ <td>x</td>
+ <td></td>
+ <td>y</td>
+ <td></td>
+ <td>z</td>
+ <td></td>
+ <td>{</td>
+ <td></td>
+</tr>
+<tr>
+ <td>|</td>
+ <td></td>
+ <td>}</td>
+ <td></td>
+ <td>~</td>
+ <td></td>
+ <td></td>
+ <td></td>
+</tr>
+<tr>
+ <td>F1</td>
+ <td>Online Help</td>
+ <td>F2</td>
+ <td></td>
+ <td>F3</td>
+ <td>Downward search</td>
+ <td>F4</td>
+ <td></td>
+</tr>
+<tr>
+ <td>F5</td>
+ <td></td>
+ <td>F6</td>
+ <td></td>
+ <td>F7</td>
+ <td></td>
+ <td>F8</td>
+ <td></td>
+</tr>
+<tr>
+ <td>F9</td>
+ <td></td>
+ <td>F10</td>
+ <td></td>
+ <td>F11</td>
+ <td></td>
+ <td>F12</td>
+ <td></td>
+</tr>
+<tr>
+ <td>SF1</td>
+ <td>Macro 1</td>
+ <td>SF2</td>
+ <td>Macro 2</td>
+ <td>SF3</td>
+ <td>Upward search</td>
+ <td>SF4</td>
+ <td></td>
+</tr>
+<tr>
+ <td>SF5</td>
+ <td>Macro 3</td>
+ <td>SF6</td>
+ <td>Macro 4</td>
+ <td>SF7</td>
+ <td>Macro 5</td>
+ <td>SF8</td>
+ <td></td>
+</tr>
+<tr>
+ <td>SF9</td>
+ <td></td>
+ <td>SF10</td>
+ <td></td>
+ <td>SF11</td>
+ <td></td>
+ <td>SF12</td>
+ <td></td>
+</tr>
+<tr>
+ <td>Button</td>
+ <td>Dviprt</td>
+ <td>User1</td>
+ <td>Redraw screen</td>
+ <td>User2</td>
+ <td>The former page of the history</td>
+ <td>User3</td>
+ <td>The latter page of the history</td>
+</tr>
+<tr>
+ <td>User4</td>
+ <td>Mark the page</td>
+ <td>User5</td>
+ <td>Goto the marked page</td>
+ <td>ESC</td>
+ <td>Presentation On/Off</td>
+ <td>Alt+\</td>
+ <td>Change the shape of the cursor</td>
+</tr>
+<tr>
+ <td>Alt+I</td>
+ <td>History of files</td>
+ <td>Alt+X</td>
+ <td>Quit dviout with keeping the setting</td>
+ <td>Alt+F4</td>
+ <td>Quit dviout with keeping the setting</td>
+ <td></td>
+ <td></td>
+</tr>
+</table>
+<hr>Please report to --&gt; <a href="mailto:ftp-admin@akagi.ms.u-tokyo.ac.jp">ftp-admin@akagi.ms.u-tokyo.ac.jp</a> for some errors or improvements.</p>
+</body>
+</html>

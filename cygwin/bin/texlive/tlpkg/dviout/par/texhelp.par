@@ -1,0 +1,7 @@
+;#j Help -> Help TeX ‚Ì•W€Ý’èiScreen: 1024x768 600 dpi)
+;# Standard setting for Help -> Help TeX iScreen: 1024x768, 600 dpi)
+;`  Setting for Help -> Help TeX
+;`
+;` Screen 1024 x 768 dots  Resolution: 600 dpi
+
+texhelp="-NULL=(555,-20)-(1027,737) -dpi=600 -BMP=6:6:800"

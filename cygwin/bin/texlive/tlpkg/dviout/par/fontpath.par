@@ -1,0 +1,13 @@
+;#j 環境変数 TEXMF(MAIN) に基づいた標準フォントパス
+;#  Standard Path of fonts when TEXMF(MAIN) exists.
+;`           Setting for standard path of fonts
+;`
+;`  Assume the environment variable TEXMF or TEXMFMAINis defined
+;`         ttfonts.map is in the directory where dviout.exe exists
+;`         TrueType fonts of Europian languages are used
+;`         Virtual fonts are used
+TEXROOT=^T\fonts
+TEXPK=^r\tfm\\^s^tfm;^r\pk\\^s.^dpk;^r\vf\\^s.vf;^r\ovf\\^s.ovf;^r\tfm\\^s.tfm
+TEXFONTS=^r\tfm\\
+TEXSUBF=^r\..\ttf2pk\\;^r\..\ttf2tfm\\
+ftt=^x\map\ttfonts.map

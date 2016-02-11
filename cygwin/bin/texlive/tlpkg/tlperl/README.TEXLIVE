@@ -1,0 +1,6 @@
+This directory contains Perl 5.20.2 compiled for Windows.
+
+The only purpose of this Perl is to provide support on Windows for
+Perl scripts shipped with TeX Live.  It's not intended for general use.
+
+The sources and notes on compilation can be found in source/tlperl.

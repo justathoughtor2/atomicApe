@@ -1,0 +1,475 @@
+:Base dviout.HLP
+:Title dviout
+1 目次=CONTENTS
+1 概要
+2 仕様=IDH_SHIYOU
+2 配布=IDH_HAIFU
+2 dviout User's 倶楽部=IDH_USERSCLUB
+2 知られている不都合箇所=IDH_BUGS
+2 付属のプログラム=IDH_FUZOKU
+2 補記=IDH_THANKS
+2 アンインストール=IDH_UNINSTALL
+2 プレビュー=IDH_PREVIEW
+2 HyperTeX=IDH_EHYPERTEX
+2 文字列コピー=IDH_PICKSTRING
+2 文字列サーチ=IDH_ESEARCH
+2 プレゼンテーション・モード
+3 プレゼンテーション・モード=IDH_PRESENTATION
+3 cover sheet=IDH_COVER
+3 pause special=IDH_PAUSE
+3 キー/マウス操作=IDH_PRESENKEY
+2 DVIファイルへの埋め込み
+3 DVIファイルへの埋め込み=IDH_IMBED
+3 拡張DVIファイル=IDH_DVIEXT
+3 tar形式=IDH_TAR
+3 dviout specials=IDH_DVIOUTSP
+3 source specials=IDH_SRCSPECIAL
+3 フォント/画像の埋めこみ=IDH_ETF
+2 移動
+3 ファイル内移動=IDH_MOVE
+3 他のファイルへの移動=IDH_FILES
+3 ページ番号指定ジャンプ=IDH_INPUTPAGE
+2 印刷
+2 印刷
+3 印刷ダイアログ=IDH_PRINT
+3 ページのSelection
+4 ページのSelection=IDH_PSELECTION
+3 印刷ページの指定オプション
+4 印刷ページの指定オプション=IDH_PAGEOPTION
+4 印刷ページの指定マクロ=IDH_PAGEMACRO
+3 コピー部数の指定
+4 コピー部数の指定=IDH_PCOPY
+3 袋綴じ印刷
+4 袋綴じ印刷=IDH_FUKUROPRT
+4 印刷オプションの使用例=IDH_OPTPRINT
+3 印刷のページの順番
+4 印刷のページの順番=IDH_PORDER
+3 縮小／拡大印刷
+4 縮小／拡大印刷=IDH_PREDUCE
+3 dviprtによる印刷
+4 dviprtによる印刷=IDH_USEDVIPRT
+4 -dviprt:の設定例=IDH_EXAMPRT
+4 CFGファイル=IDH_PRTCFG
+4 LBP用ドライバ=IDH_LBP
+4 プリンタ制御コードの取り込み=IDH_CTRPRT
+3 ファイルへの出力
+4 ファイルへの出力=IDH_PFILE
+3 ページ毎のポーズ
+4 ページ毎のポーズ=IDH_PPOSE
+3 ジョブの統一／分割
+4 ジョブの統一／分割=IDH_PJOB
+3 印刷データ出力中でのキャンセル
+4 印刷データ出力中でのキャンセル=IDH_POUTCANCEL
+2 起動と終了
+2 起動と終了
+3 起動と終了=IDH_STARTEND
+3 no more dviout=IDH_NOMORE
+2 他のプログラムとの連携
+2 他のプログラムとの連携
+3 他のプログラムとの連携=IDH_OTHERP
+3 DDE使用例=IDH_USEDDE
+2 インストール
+2 インストール
+3 インストールの手順=IDH_INSTALL
+3 解像度の設定
+4 解像度の設定=IDH_SETDPI
+3 フォントのパスの設定
+4 フォントのパスの設定=IDH_SETPK
+4 -TEXPK の設定例=IDH_SETTEXPK
+3 表示スケールの調整
+3 表示スケールの調整=IDH_DISPSCALE
+3 印字位置の調整
+3 印字位置の調整=IDH_SETLM
+3 dviファイルのdvioutへの関連付け
+3 dviファイルのdvioutへの関連付け=IDH_EXTDVI
+3 パラメータの自動インストール
+3 パラメータの自動インストール=IDH_PARAINST
+1 ユーザインタフェース
+1 ユーザインタフェース=IDH_USERINTERF
+2 メニューバー
+2 メニューバー
+3 メニューバー=IDH_MENU
+3 File Menu=IDH_FILEMENU
+3 Jump Menu=IDH_JUMPMENU
+3 Search Menu=IDH_SEARCHMENU
+3 Display Menu=IDH_DISPLAYMENU
+3 View Menu=IDH_VIEWMWNU
+3 Presentation Menu=IDH_PRESENTATIONMENU
+3 Paper Menu=IDH_PAPERMENU
+3 Option Menu=IDH_OPTIONMENU
+3 Help Menu=IDH_HELPMENU
+2 情報表示
+2 情報表示
+3 情報表示のメニュー=IDH_INFO
+3 ファイルと表示に関する情報=IDH_INFORMATION
+3 フォント情報=IDH_FONTINFO
+3 システム情報=IDH_SYSINFO
+3 バッファ情報=IDH_BUFERINFO
+3 キー機能一覧=IDH_KEYINFO
+3 パラメータ一覧=IDH_PARAINFO
+3 パラメータの設定値の出力=IDH_PARAOUT
+3 表示文字情報=IDH_CHARACTER
+1 Property Sheets
+1 Property Sheets
+2 Property Sheets=IDH_PPSHEETS
+2 [CONTENTS]
+3 [CONTENTS]=IDH_PCONTENTS
+3 [Save]=IDH_PSAVE
+3 [Restore]=IDH_RESTORE
+3 [OK]=IDH_POK
+3 [Cancel]=IDH_PCANCEL
+3 [Apply]=IDH_PAPPLY
+3 [Default]=IDH_Default
+3 [Help]=IDH_PHELP
+3 current mode=IDH_PCMODE
+2 [Resolution]
+2 [Resolution]
+3 [Resolution]=IDH_PRESOLUTION
+2 [Display]
+2 [Display]
+3 [Display]=IDH_PDISPLAY
+3 ガンマ補正=IDH_GAMMA
+3 gray scale=IDH_GRAYSCALE
+3 HVscale=IDH_HVSCALE
+3 reverse Display=IDH_REVDISPLAY
+2 [Font]
+2 [Font]
+3 [Font]=IDH_PFONT
+3 [Guess]=IDH_GUESS
+3 存在しないフォントへの対処=IDH_NOFONT
+3 フォントグリフファイル=IDH_FONTGRIPH
+3 フォントメトリックファイル=IDH_FONTMETRIC
+3 tfmファイル=IDH_TFM
+3 jfmファイル=IDH_JFM
+3 FLIフォントライブラリ=IDH_FLI
+3 欧文TrueTypeフォント=IDH_TRUETYPE
+3 GTHフォントライブラリ=IDH_DTH
+3 FARフォントライブラリ=IDH_FAR
+3 -F:の指定=IDH_FEXP
+3 フォントのチェック
+4 フォントのチェック=IDH_CHECKFONT
+4 cmr10=IDH_CMR10
+4 line10=IDH_LINE10
+4 msam10=IDH_MSAM10
+4 lcircle10=IDH_LCIRCLE10
+4 dcr10=IDH_DCR10
+4 eufm10=IDH_EUFM10
+4 min10=IDH_MIN10
+4 tmin10=IDH_TMIN10
+2 [Font2]
+2 [Font2]
+3 [Font2]=IDH_PFONT2
+3 フォントの自動生成
+4 フォントの自動生成=IDH_GENFONT
+4 フォント作成のテンプレート=IDH_GENFONTTMP
+2 [WinJFont]
+2 [WinJFont]
+3 [WinJFont]=IDH_PWINJFONT
+3 [WinJFont]のTrueTypeフォント=IDH_WJTRUETYPE
+3 [WinJFont]のH scale=IDH_WJHSCALE
+3 [WinJFont]のV scale=IDH_WJVSCALE
+3 [WinJFont]の[Define]=IDH_WJDEFINE
+3 [WinJFont]の[Remove]=IDH_WJREMOVE
+3 [Change Font]=IDH_CHANGEFONT
+3 [Add Font]=IDH_ADDFONT
+3 [WinJFont]のjfm/tfm=IDH_WJJFM
+3 [WinJFont]の平体=IDH_WJHEI
+3 [WinJFont]の斜体=IDH_WJSHA
+3 [WinJFont]の向き=IDH_WJMUKI
+3 [WinJFont]のH position=IDH_WJHPOSITION
+3 [WinJFont]のV position=IDH_WJVPOSITION
+2 [JFont2]
+2 [JFont2]
+3 [JFont2]=IDH_PJFONT2
+3 -ntt の指定=IDH_NTTEXP
+2 [Key]
+2 [Key]
+3 [Key]=IDH_PKEY
+3 [Key]のDefine=IDH_KEYDEFINE
+3 [Key]のClear=IDH_KEYCLEAR
+3 [Key]のSearch=IDH_KEYSEARCH
+3 [Key]のAll Clear=IDH_KEYALLCLEAR
+3 [Key]のFunction=IDH_KEYFUNCTION
+3 [Key]のKey=IDH_KEYKEY
+3 キーシンボル=IDH_KEYSYM
+2 [Search]
+2 [Search]=IDH_PSEARCH
+2 [HyperTeX]
+2 [HyperTeX]
+3 [HyperTeX]=IDH_PHYPERTEX
+3 HyperTeX specials=IDH_HYPERTEXSPECIAL
+2 [Common]
+2 [Common]=IDH_PLOUPE
+2 [Graphic]
+2 [Graphic]
+3 [Graphic]=IDH_PGRAPHIC
+3 tpic specials=IDH_TPICSPECIAL
+3 画像データファイル
+4 画像データファイル=IDH_GAZOUDATA
+4 画像データファイルのspeicials=IDH_GSPECIALS
+4 PostScript specialのパラメータ=IDH_PSPARAMETER
+4 PostScript specialの使用例=IDH_POSTSCRIPTEX
+4 Ghostscript=IDH_GHOSTSCRIPT
+4 BMPファイル=IDH_BMPFILE
+2 [Printer]
+2 [Printer]=IDH_PPRINTER
+2 [Paper]
+2 [Paper]=IDH_PPAPER
+2 [System]
+2 [System]=IDH_PSYSTEM
+2 [REGISTRY]
+2 [REGISTRY]
+3 [REGISTRY]=IDH_PREGISTRY
+3 Registry=IDH_REGISTRY
+3 [Auto Load]=IDH_RROAD
+3 [Ignore]=IDH_RIGNORE
+3 [REGISTRY]のリストボックス=IDH_REGLIST
+3 [REGISTRY]での[Save]=IDH_RSAVE
+3 [REGISTRY]での[Restore]=IDH_RRESTORE
+3 [REGISTRY]での[All Set]=IDH_ALLSET
+3 [REGISTRY]での[All Clear]=IDH_RCLEAR
+3 Selected mode
+4 Selected mode=IDH_REGMODE
+4 Current Name:=IDH_REGNAME
+4 Current mode:=IDH_REGCURRENT
+4 Default mode:=IDH_REGDEFAULT
+4 Current Print:=IDH_REGPRINT
+1 Q&A
+1 Q&A
+2 プレビュー画面関連
+3 最初のページの表示が遅い=IDH_QV1
+3 ページの移動が遅い=IDH_QV2
+3 ツールバーの矢印によるページ移動の向きを逆に=IDH_LUPDWN
+3 ツールバーのボタンでLandscape切り替えを行いたい=IDH_QV10
+3 表示のスケールが大き過ぎる／小さすぎる=IDH_QV3
+3 プレビュー画面で文字がぼける／薄い=IDH_QV4
+3 できるだけ大きくプレビュー画面を確保したい=IDH_QV5
+3 dviファイルの更新をチェックして画面を更新する=IDH_QV6
+3 ルーペの移動で残像やちらつきが目立つ=IDH_QV7
+3 表示の紙面が明るすぎる=IDH_BRIGHT
+3 Landscape文書なのにPortrait紙面が表示される=IDH_QO22
+3 拡大すると、Searchされた文字列に色がつかない=IDH_SDPI
+3 Searchで見つかった文字列の色が不明確、不変化=IDH_QV8
+3 文字列コピーで、記号などが文字に化けて切り取られる=IDH_SFONT
+3 色付けされた文字の輪郭がおかしい=IDH_QV9
+3 スクロールするとプレビュー画面がちらつく=IDH_QV15
+3 ページ全体のアウトラインを見たい=IDH_QV11
+3 プレビュー画面でのマウスボタンの機能は？=IDH_QV12
+3 プレビュー画面で、位置や長さを知るには？=IDH_QV13
+3 プレゼンテーション用のdviファイルは？=IDH_QPRESENT
+2 フォント関連
+3 フォントメトリックファイルとフォントグリフファイル=IDH_FONTGRIPH
+3 フォントの所在の自動設定=IDH_GUESS
+3 和文フォントのサイズの調整=IDH_QF1
+3 欧文フォントと和文フォントのベースライン位置の調整=IDH_QF2
+3 和文フォントの優先順位は？=IDH_QF11
+3 Times New Romanや市販の和文フォントを使うには？=IDH_QF14
+3 フォントをDVIファイルにうめこむ=IDH_DVIFONT
+3 斜体、平体、長体などのフォントを用いる=IDH_QF3
+3 使用しているフォントの情報を得るには？=IDH_QF13
+3 カラーの文字を使いたい=IDH_SCOLOR
+3 lcircle10などの長い名前のフォントが見つからない=IDH_QF4
+3 存在しない欧文フォントの自動生成をするには？=IDH_QF6
+3 存在しないフォントへの対処=IDH_NOFONT
+3 高解像度で大きなフォントを使う=IDH_QF8
+3 和文TrueTypeフォントと書体倶楽部フォントを併用したい=IDH_QF10
+3 日本語版以外のWindowsで和文TrueTypeフォントを使うには？=IDH_QF12
+3 NTTjTeXでWindowsの和文フォントを使う=IDH_QO3
+3 和文TrueTypeフォントの設定が消えてしまった=IDH_QF9
+3 欧文TrueTypeフォントを使った文字の表示がおかしい=IDH_QF5
+3 文字列を回転させて描画する=IDH_ROTPIC
+2 印刷関連
+3 印刷位置がおかしい、位置を調整したい=IDH_PPRINTER
+3 印刷のサイズがおかしい=IDH_QP1
+3 印刷に時間がかかる=IDH_QP2
+3 印刷ダイアログで部数指定のCopies:が無効になっている=IDH_PCOPY
+3 印刷の際はプレビューの際とパラメータを変えたい=IDH_QP6
+3 可能な印刷方式の種類とその違いは?=IDH_QP7
+3 プレビューの時に指定した範囲を印刷したい=IDH_QP4
+3 プレビューが正常なのに印刷がおかしい=IDH_QP10
+3 コンソール版dviprtやほかのプログラムで印刷したい=IDH_USEDVIPRT
+3 dviout内蔵ドライバでプリンタ制御コードを取り込む=IDH_CTRPRT
+3 dviout内蔵ドライバでの印刷がうまくいかない=IDH_QP9
+3 LBP用ドライバでの印刷で、和文TrueTypeフォントを用いたい=IDH_QP5
+3 LBPでの拡大／縮小印刷のときに用いる用紙のサイズは？=IDH_QP8
+3 LBPなどのページ記述言語を直接用いる=IDH_CTRPRT
+3 dvi文書をFAXで送るには？=IDH_FAX
+3 FAX送信転送で、ページ毎に複数回に分けて転送された=IDH_PJOB
+2 オプションパラメータ関連
+3 Property Sheetで変更したパラメータをデフォルトに=IDH_QS1
+3 印刷の際はプレビューの際とパラメータを変えたい=IDH_QP6
+3 起動時のmodeを使い分けたい=IDH_MODE
+3 パラメータの設定値をファイルに落としたい=IDH_PARAOUT
+3 パラメータの設定例=IDH_SAMPLPARA
+3 Registryに書き込まれた設定値を読み込まずに起動したい=IDH_STARTEND
+3 パラメータの設定値を他のコンピュータにもコピーしたい=IDH_QS2
+3 読み込み可能なパラメータの設定の書式は？=IDH_QS3
+3 ファイルに落としたパラメータを読み込みたい=IDH_QS4
+3 パラメータの設定や保存の際のエディット機能は？=IDH_QS5
+3 共有のマシンでパラメータを設定するには？=IDH_QS6
+3 複数のパラメータ設定値を使い分けたい=IDH_QS7
+3 パラメータを変更したが、思い通りにいかない=IDH_QS9
+3 デフォルトパラメータファイルでの設定がなされない=IDH_QS10
+3 レジストリに記録された内容を消去してdvioutを再インストールしたい=IDH_QS8
+3 パラメータの自動インストール=IDH_PARAINST
+2 画像データ関連
+3 画像データファイルを取り込む=IDH_GAZOUDATA
+3 画像データファイルのspeicials=IDH_GSPECIALS
+3 PostScriptを使った画像表示に失敗する=IDH_QO9
+3 画像データファイルの取り込みサイズがおかしい=IDH_QO1
+3 EPSF画像の取り込みで端が欠ける=IDH_GCLIP
+3 カラー画像データを扱うには？=IDH_QO2
+3 カラー画像データの表示の色がおかしい=IDH_QO17
+3 カラー画像データの表示が遅い=IDH_GFIT
+3 ルーペでのカラー画像拡大ができない、画像が荒い=IDH_GFIT
+3 プレビューで画像の線の一部が消える=IDH_QO16
+3 PostScriptカラー画像を白黒でも扱いたい=IDH_QO14
+3 LaTeX2eのgraphics packageを用いる=IDH_QO18
+3 PSfrag packageを用いる=IDH_PSFRAG
+3 tpic specialsを使う=IDH_TPICSPECIAL
+3 取り込んだWMFファイル中の文字や画像サイズがおかしい=IDH_QO29
+3 表示中のページをEMFまたはBMPファイルなどとしてセーブする=IDH_QO7
+2 Windows95/98/NT上での操作
+3 dvioutをデスクトップに登録する=IDH_QO5
+3 複数のdvioutが起動しないようにしたい=IDH_MULTI
+3 dviファイルに適当なアイコンを設定する=IDH_EXTDVI
+3 dviファイルのアイコンのダブルクリックでdvioutを起動させる=IDH_EXTDVI
+3 エディターなど他のプログラムとの連携でdvioutを用いる=IDH_OTHERP
+3 dviout for Windowsにとってのカレントディレクトリは?=IDH_CURDIR
+3 各種のファイル指定で、dvioutのディレクトリを規準にする=IDH_QO21
+3 dvioutのディレクトリ（フォルダ）を変更したい=IDH_QO26
+3 過去のファイルやフォルダの履歴は？=IDH_FOLDER
+3 選択したDVIファイルを最初／最後のページから表示するには？=IDH_FOLDER
+2 エラーメッセージ
+3 NO_FONT: ***=IDH_QE1
+3 Unpack_Error: ***=IDH_QE2
+3 Cannot resolve Fonts=IDH_QE10
+3 Warning: Cannot find cmr10.tfm for TT Font=IDH_QE3
+3 Ghostscriptの起動で、Unknown Deviceのエラー=IDH_QE4
+3 Not enough memory=IDH_QE8
+3 このプログラムは不正な処理を行ったので、強制終了されます=IDH_QE7
+3 Warningのメッセージウインドウがわずらわしい=IDH_QE9
+2 そのほかのトラブル
+3 文字列サーチの結果が正しくない=IDH_QE6
+3 知られている不都合箇所=IDH_BUGS
+3 フォントの自動生成やGhostscript起動の時に、止まってしまう=IDH_QO23
+3 dvioutの起動時にエラーが生じて、正常に立ち上がらない=IDH_QO25
+3 説明に書かれているように設定したが、うまくいかない=IDH_QO11
+3 Help Topics の表示がキーワードのみで、目次の項が出てこない=IDH_QO13
+2 そのほかの疑問
+3 ページジャンプなどを特定のキーやボタンに定義したい=IDH_QO10
+3 ツールバーのUserと表示されるボタンは？=IDH_QO4
+3 過去に扱ったdviファイルのリストから特定のものを消すには？=IDH_QO24
+3 インプレスのTeX for Windowsでdvioutを用いる=IDH_QO6
+3 HyperTeXとは？=IDH_EHYPERTEX
+3 インターネット上のdviファイルをdvioutで表示する=IDH_QO8
+3 プレビュー画面中の単語を辞書で調べたり、URLを実行する=IDH_QO27
+3 dvioutが参照するファイルや環境変数は？=IDH_QO19
+3 Option->Installを重複実行してもよい？=IDH_QO20
+3 A4, B5などの紙面サイズをdvioutが自動認識してほしい=IDH_QO22
+3 dviout独自の拡張機能は?=IDH_QO28
+3 パラメータなどのデバッグ用のオプションは?=IDH_QO15
+3 機能を拡張したい=IDH_QO12
+3 プレビューまでの内部動作は？=IDH_QO30
+3 dvioutのソースファイル=IDH_SOURCE
+1 パラメータ
+1 パラメータ
+2 パラメータのリスト=IDH_PARALIST
+2 起動時のパラメータの設定=IDH_PARAMETER
+2 パラメータの設定例=IDH_SAMPLPARA
+2 パラメータの設定値の出力=IDH_PARAOUT
+2 パラメータの自動インストール=IDH_PARAINST
+2 -A:=IDH_A
+2 -area:=IDH_AREA
+2 -base:=IDH_BASE
+2 -bb:=IDH_BB
+2 -bf:=IDH_BF
+2 -BM:=IDH_BM
+2 -BMP:=IDH_BMP
+2 -box:=IDH_BOX
+2 -br:=IDH_BR
+2 -bright:=IDH_BRIGHT
+2 -Browser:=IDH_BROWSER
+2 -button:=IDH_BUTTON
+2 -c:=IDH_C
+2 -cmode:=IDH_CMODE
+2 -color:=IDH_COLOR
+2 -dpi:=IDH_HDPI
+2 -dpiv:=IDH_VDPI
+2 -dviprt:=IDH_DVIPRT
+2 -e:=IDH_E
+2 -edge:=IDH_CUTEDGE
+2 -F:=IDH_F
+2 -FB:=IDH_FB
+2 -file:=IDH_FILE
+2 -Fkeep:=IDH_FKEEP
+2 -Fod:=IDH_FOD
+2 -ftt:=IDH_FTT
+2 -G:=IDH_GG
+2 -g:=IDH_G
+2 -gbox:=IDH_GBOX
+2 -gclip:=IDH_GCLIP
+2 -gdat:=IDH_GDAT
+2 -gen:=IDH_GEN
+2 -gfit:=IDH_GFIT
+2 -GIF:=IDH_GIF
+2 -gow:=IDH_GOW
+2 -GS:=IDH_GS
+2 -gsize:=IDH_GSIZE
+2 -gsrc:=IDH_GSRCSPECIAL
+2 -gsx:=IDH_GSX
+2 -hbuf:=IDH_HBUF
+2 -HC:=IDH_HC
+2 -hname:=IDH_HNAME
+2 -href:=IDH_HREF
+2 -HS:=IDH_HS
+2 -hyper:=IDH_HYPER
+2 -hyperoff:=IDH_HYPEROFF
+2 -isp:=IDH_ISP
+2 -J:=IDH_J
+2 -Jbt:=IDH_JBT
+2 -JC:=IDH_JC
+2 -Jgt:=IDH_JGT
+2 -Jfm:=IDH_IJFM
+2 -L:=IDH_PL
+2 -LM:=IDH_LM
+2 -log:=IDH_LOG
+2 -macro:=IDH_MACRO
+2 -mag:=IDH_MAG
+2 -mode:=IDH_MODE
+2 -multi:=IDH_MULTI
+2 -ntt:=IDH_NTT
+2 -nttF:=IDH_NTTF
+2 -OX:=IDH_OX
+2 -OY:=IDH_OY
+2 -renew:=IDH_RENEW
+2 -RM:=IDH_RM
+2 -S:=IDH_S
+2 -scale:=IDH_SCALE
+2 -sdpi:=IDH_SDPI
+2 -search:=IDH_SEARCH
+2 -Set:=IDH_SET
+2 -sFont:=IDH_SFONT
+2 -spi:=IDH_SPI
+2 -src:=IDH_SRC
+2 -t:=IDH_T
+2 -TEXFLI:=IDH_TEXFLI
+2 -TEXFONTS:=IDH_TEXFONTS
+2 -TEXKNJ:=IDH_TEXKNJ
+2 -TEXPK:=IDH_TEXPK
+2 -TEXPKD:=IDH_TEXPKD
+2 -TEXROOT:=IDH_PTEXROOT
+2 -TEXSUBF:=IDH_SUBFONT
+2 -texhelp:=IDH_TEXHELP
+2 -TM:=IDH_TM
+2 -tpic:=IDH_TPIC
+2 -ttf:=IDH_TTF
+2 -varf:=IDH_VARF
+2 -virtual:=IDH_VIRTUAL
+2 -VC:=IDH_VC
+2 -VS:=IDH_VS
+2 -vfn:=IDH_VFN
+2 -Wshow:=IDH_WSHOW
+2 -y:=IDH_Y
+1 用語集
+1 用語集=IDH_YOUGO

@@ -1,0 +1,21 @@
+name ltxmisc
+category Package
+revision 21927
+shortdesc Miscellaneous LaTeX packages, etc.
+containersize 15380
+containermd5 1d4fac5eac0536ef01b0c799c32b993d
+runfiles size=17
+ texmf-dist/tex/latex/ltxmisc/abstbook.cls
+ texmf-dist/tex/latex/ltxmisc/beletter.cls
+ texmf-dist/tex/latex/ltxmisc/bibcheck.sty
+ texmf-dist/tex/latex/ltxmisc/concrete.sty
+ texmf-dist/tex/latex/ltxmisc/flashcard.cls
+ texmf-dist/tex/latex/ltxmisc/iagproc.cls
+ texmf-dist/tex/latex/ltxmisc/linsys.sty
+ texmf-dist/tex/latex/ltxmisc/mitpress.sty
+ texmf-dist/tex/latex/ltxmisc/thrmappendix.sty
+ texmf-dist/tex/latex/ltxmisc/topcapt.sty
+ texmf-dist/tex/latex/ltxmisc/vrbexin.sty
+catalogue-ctan /macros/latex/contrib/misc
+catalogue-date 2012-07-10 13:36:48 +0200
+catalogue-license collection

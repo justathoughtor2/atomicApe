@@ -1,0 +1,125 @@
+% testpage.tex - created 20 July 1987
+% Copyright (C) 1987 by Leslie Lamport
+%
+% Test of how accurately printer reproduces dimensions specified
+% by LaTeX output.
+%
+% Revised by Stephen Gildea to:
+% make 10 tic marks instead of 9
+% add a long rule through the tics to show the exact edge of the paper
+% short tics on right-hand ruler positioned correctly
+% some comments added
+%
+% Modified by Kohsaku HOTTA for B5 size (182mm x 257mm) in  15 July 1995
+% Comments are in Japanese
+% The original file_name is "testpage.tex" is changed to "test_b5.tex" to avoid
+% confusion.
+
+\documentstyle{jarticle}
+\pagestyle{empty}
+
+\oddsidemargin  0pt
+\evensidemargin 0pt
+\marginparwidth 1in
+\marginparsep 0pt
+
+\topmargin 0pt
+\headheight 0pt
+\headsep 0pt
+\topskip 0pt
+
+\footheight 0pt
+\footskip 0pt
+
+%\textheight 8.0in
+\textheight 8.11811in
+%\textwidth 5.0in
+\textwidth 5.16535in
+
+\setlength{\unitlength}{1in}
+\newcounter{foo}
+
+\begin{document}
+
+\parindent 0pt
+\begin{picture}(0,0)
+\scriptsize
+
+%\put(0,-8.0){\framebox(5.0,8.0){}}
+\put(0,-8.11811){\framebox(5.16535,8.11811){}}
+
+% LEFT RULER
+%\put(0,-4.0){\line(-1,0){2.5}}
+\put(0,-4.05906){\line(-1,0){2.5}}
+%\multiput(-.1,-4.1)(-.1,0){10}{\line(0,1){.2}}
+\multiput(-.1,-4.15906)(-.1,0){10}{\line(0,1){.2}}
+%\multiput(-.05,-4.05)(-.1,0){10}{\line(0,1){.1}}
+\multiput(-.05,-4.10906)(-.1,0){10}{\line(0,1){.1}}
+%\setcounter{foo}{1}\multiput(-.1,-3.85)(-.1,0){9}{\makebox
+%                                 (0,0){\arabic{foo}}\addtocounter{foo}{1}}
+\setcounter{foo}{1}\multiput(-.1,-3.90906)(-.1,0){9}{\makebox
+                                 (0,0){\arabic{foo}}\addtocounter{foo}{1}}
+
+% RIGHT RULER
+%\put(5.0,-4.0){\line(1,0){2.5}}
+\put(5.16535,-4.05906){\line(1,0){2.5}}
+%\multiput(5.1,-4.1)(.1,0){10}{\line(0,1){.2}}
+\multiput(5.26535,-4.15906)(.1,0){10}{\line(0,1){.2}}
+%\multiput(5.05,-4.05)(.1,0){10}{\line(0,1){.1}} %fixed mit-erl!gildea 13Feb86
+\multiput(5.21535,-4.10906)(.1,0){10}{\line(0,1){.1}}
+%\multiput(5.05,-4.05)(.1,0){10}{\line(0,1){.1}}
+%\setcounter{foo}{1}\multiput(5.1,-3.85)(.1,0){9}{\makebox
+%                                 (0,0){\arabic{foo}}\addtocounter{foo}{1}}
+\multiput(5.21535,-4.10906)(.1,0){10}{\line(0,1){.1}}
+\setcounter{foo}{1}\multiput(5.26535,-3.90906)(.1,0){9}{\makebox
+                                 (0,0){\arabic{foo}}\addtocounter{foo}{1}}
+
+% TOP RULER
+%\put(2.5,0){\line(0,1){2.5}}
+\put(2.58268,0){\line(0,1){2.5}}
+%\multiput(2.4,.1)(0,.1){10}{\line(1,0){.2}}
+\multiput(2.48268,.1)(0,.1){10}{\line(1,0){.2}}
+%\multiput(2.45,.05)(0,.1){10}{\line(1,0){.1}}
+\multiput(2.53268,.05)(0,.1){10}{\line(1,0){.1}}
+%\setcounter{foo}{1}\multiput(2.65,.1)(0,.1){9}{\makebox
+%                                 (0,0){\arabic{foo}}\addtocounter{foo}{1}}
+\setcounter{foo}{1}\multiput(2.73268,.1)(0,.1){9}{\makebox
+                                 (0,0){\arabic{foo}}\addtocounter{foo}{1}}
+
+% BOTTOM RULER
+%\put(2.5,-8.0){\line(0,-1){2.5}}
+\put(2.58268,-8.11811){\line(0,-1){2.5}}
+%\multiput(2.4,-8.1)(0,-.1){10}{\line(1,0){.2}}
+\multiput(2.48268,-8.21811)(0,-.1){10}{\line(1,0){.2}}
+%\multiput(2.45,-8.05)(0,-.1){10}{\line(1,0){.1}}
+\multiput(2.53263,-8.16811)(0,-.1){10}{\line(1,0){.1}}
+%\setcounter{foo}{1}\multiput(2.65,-8.1)(0,-.1){9}{\makebox
+%                                 (0,0){\arabic{foo}}\addtocounter{foo}{1}}
+\setcounter{foo}{1}\multiput(2.73263,-8.21811)(0,-.1){9}{\makebox
+                                 (0,0){\arabic{foo}}\addtocounter{foo}{1}}
+
+\end{picture}
+
+\vfill
+\mbox{}\hfill
+\begin{minipage}{3in}
+
+%The frame on this page should be $6\frac{1}{2}'' \times 9''$.  When
+%printed on $8\frac{1}{2}'' \times 11''$ paper, the frame should be one
+%inch from each edge of the paper.\\[10pt]
+%The rulers at the four edges will indicate how much of the page is
+%useable.  The large ticks are $.1''$ apart.
+
+この枠のサイズは、$131.2{\rm mm}\ \times\ 206.2{\rm mm}$ であり、
+B5 サイズの用紙に印刷した場合、紙の各辺から \\
+ 1 inch = 25.4 mm 内側に枠が位置するはずです。 \\
+枠の左上端が、紙の左上端から、右に 1 inch、下に 1 inch の
+ところに来るよう調整して下さい。\\
+端の目盛りは、1 が 0.1 inch に対応します。
+
+\end{minipage}
+\hfill\mbox{}
+\vfill
+\mbox{}
+
+\end{document}

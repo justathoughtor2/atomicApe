@@ -1,0 +1,9 @@
+Thu, 11 Feb 2016 17:56:15 -0500
+lib/rb-inotify.rb	Thu, 11 Feb 2016 17:56:14 -0500
+lib/rb-inotify/errors.rb	Thu, 11 Feb 2016 17:56:14 -0500
+lib/rb-inotify/event.rb	Thu, 11 Feb 2016 17:56:14 -0500
+lib/rb-inotify/native.rb	Thu, 11 Feb 2016 17:56:14 -0500
+lib/rb-inotify/native/flags.rb	Thu, 11 Feb 2016 17:56:14 -0500
+lib/rb-inotify/notifier.rb	Thu, 11 Feb 2016 17:56:14 -0500
+lib/rb-inotify/watcher.rb	Thu, 11 Feb 2016 17:56:14 -0500
+README.md	Thu, 11 Feb 2016 17:56:14 -0500

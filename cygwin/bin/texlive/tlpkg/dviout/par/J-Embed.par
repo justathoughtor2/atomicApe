@@ -1,0 +1,10 @@
+;#j ‚l‚r –¾’©^‚l‚r ƒSƒVƒbƒN‚ğ“à•”‚Å“WŠJi–„‚ß‚İ‚É“Kj
+;# Render MS Mincho/MS Gothic TrueType fonts by dviout
+;;  Render MS Mincho/MS Gothic TrueType fonts by dviout
+;;
+;;  They should be in the subdirectory "fonts" of 
+;;    the system directory
+;;
+;;  Require jfm files  min*.tfm  or  jis*.tfm  etc.
+Jfm=-
+vfn=^x\utility\dviout1.vfn

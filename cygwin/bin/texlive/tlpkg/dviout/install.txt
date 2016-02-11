@@ -1,0 +1,296 @@
+                            Installation
+
+                                 of
+
+                     dviout for Windows Ver.3.18
+
+                    in Windows95/98/Me/NT/2000/XP
+
+                          January 15, 2006
+
+		by T.OSHIMA (oshima@ms.u-tokyo.ac.jp)
+
+  ----------------------------------------------------------------------
+Contents:
+   Installation of dviout
+   Installation of other packages
+      A package for Windows TrueType fonts
+      PSfrag
+      Image data files in various formats
+      Usage of Japanese TrueType fonts under non-Japanese Windows
+   URL's
+
+  --------------------    Installation of dviout   ---------------------
+
+0. Preceding the installation of dviout, install (some of) font files 
+   (including tfm files and PK files used by dviout) if possible. 
+   dviout will search the location of fonts in the installation procedure.
+
+   If MikTeX system is solely used, dviout reads its font setting and 
+   therefore this step is unnecesary.
+
+   If PostScript files (EPSF's) are used for figures, install Ghostscript 
+   and correctly set the environment variable GS_LIB.  
+
+   For example, suppose mktexpk is correctly supported and the default 
+   mode for the printer is set to execute METAFONT.  PK files for some 
+   basic fonts are created by the command
+
+       mktexpk cmr10      300 300 300/300
+       mktexpk cmr10      360 300 360/300
+
+       mktexpk line10     300 300 300/300
+       mktexpk line10     360 300 360/300
+       mktexpk lcircle10  300 300 300/300
+       mktexpk lcircle10  360 300 360/300
+
+       mktexpk msam10     300 300 300/300
+       mktexpk msam10     300 300 300/300
+       mktexpk eufm10     300 300 300/300
+       mktexpk eufm10     360 300 360/300
+
+   if the dpi of printer resolution equals 300.  Then dviout will find the
+   settings of the location of fonts (dviout will check the existence and 
+   the location of fonts cmr10, line10, lcircle10, msam10, eufm10, min10, 
+   tmin10).  According to the mktexpk, the above command should be changed
+   like
+
+       mktexpk --dpi 360 --bdpi 300 --mag 360/300 cmr10
+
+   In the system of MikTeX, makepk is a replacement of mktexpk.
+
+
+1. Execute tex316w.exe or make a directory (with any name as you like but 
+   c:\dviout is the default) for dviout and execute dviout.
+
+   For example, in a MS-DOS Window, type
+
+       mkdir c:\dviout
+       cd    c:\dviout
+       c:
+       unzip d:\tex316w.zip
+       dviout
+
+   if d:\tex316w.zip is the package of dviout.
+
+   Then you will be asked to install fundamental parameters.  If you push
+   [Yes] button,  you will be guide to the steps corresponding to the 
+   following 2, 3, 4 and others.  Otherwise you should do the following.
+
+   Remark: If your operating system does not support Japanese language and 
+           you are asked to use the original font at the start up of dviout, 
+           please answer "No" to continue. 
+
+
+2. Set the resolution of fonts by dpi(dots par inch).
+
+   We recommend to set the resolution matching to the printer usually used.
+   DVI files are previewed by shrinking size of fonts and using gray scale.
+
+      Select: Option (tool bar in dviout) -> Setup parameters -> Resolution
+      Set the correct number of resolution dpi:
+      push [Save],
+      push [OK].
+
+
+3. Suppose font griph files are PK fonts and they are installed with 
+   names such as cmr10.300pk or *300*\...\cmr10.pk.  Then it is easy to
+   set the parameter of dviout defining the location of fonts:
+
+      Select: Option (tool bar in dviout) -> Setup parameters -> Font
+      push [Guess],
+      push [Save],
+      push [OK].
+
+     If MikTeX will be solely used for TeX, then answer [Yes] for the
+   question "Do you use MikTeX?"
+
+     Note that -TEXPK: indicates the location of fonts (PK fonts).  
+   Use [Help] or "?" button to get more informations.
+
+     In the case of a standard configuration of directories for fonts,
+   for example, the setting such as
+
+       -TEXROOT:^T\fonts
+       -TEXPK:^r\tfm\\^s.^tfm;^r\pk\\^s.^dpk;^r\vf\\^s.vf;^r\tfm\\^s.tfm
+
+   will be automatically done.  Here "^r\pk\\^s.^dpk" is for PK fonts, 
+   "^r\tfm\\^s.^tfm" is for TrueType fonts and "^r\vf\\^s.vf" is for 
+   virtual fonts.  In some case, "^r\pk\\^s.^dpk" may be changed to
+   "^r\pk\cx\\^s.^dpk;^r\pk\modeless\\^s.^dpk".  Here "cx" may be 
+   replaced by mode for printer used by METAFONT.
+     The last ;^r\tfm\\^s.tfm is better to be removed if non Japanese
+   TrueType font is installed.
+
+     On the other hand, if TrueType fonts registered in Windows are solely
+   used, then the parameter setting is as follows:
+
+      Select: Option (tool bar in dviout) -> Setup parameters -> Font
+      and set the location of tfm files to -TEXPK: as follows
+
+       -TEXROOT:^T\fonts
+       -TEXPK:^r\tfm\\^s.^tfm
+
+     Similarly if TrueType fonts have priority than other fonts and morevoer 
+   Omega/lambda is used, the setting of -TEXPK: may be as follows
+
+       -TEXROOT:^T\fonts
+       -TEXPK:^r\tfm\\^s^tfm;^r\pk\\^s.^dpk;\r\vf\\^s.vf;\r\ovf\\^s.ovf
+
+     If a Japanese TruType font is installed, it is better to add  ;^r\tfm\\^s.tfm 
+   at the end of the definition of -TEXPK: 
+
+     Then validitate these settings:
+
+      push [Save],
+      push [OK].
+
+     Here "^r" in -TEXPK: is substituted by the setting of -TEXROOT:
+   "^s" and "^d" are substituted by the font name such as "cmr10" and
+   the resolution of the font under dpi, respectively, "^T" is substituted
+   by the value of environment variable TEXMFMAIN or TEXMF  and "\\" is 
+   any sequence of subdirectories as is similarly used in kpathsearch.
+   ^s^tfm indicates the location of tfm/jfm files to use the TrueType fonts
+   through the Windows system.
+   This setting should be arranged according to your system.
+
+     In case of MikTeX, PK fonts are stored as  ...\dpi300\cmr10.pk and those
+   parameters are, for example, one may set manually as
+
+     -TEXROOT:c:\Local TEXMF\fonts;c:\texmf\fonts
+     -TEXPK:^r\pk\\dpi^d\^s.pk;^r\tfm\\^s.^tfm;^r\vf\\^s.vf
+
+   Here  c:\Local TEXMF\fonts  and  c:\texm\fonts  depend on the installation
+   of MikTeX.  MikTeX supports  makepk.exe  and dviout can use it after the 
+   setting:
+
+      Select: Option (tool bar in dviout) -> Setup parameters -> Font2
+      push [gen:],
+      push [Save],
+      push [OK].
+
+  This is also valid if mktexpk or MakeTeXPK is supported.
+
+
+4. If Goshscript is installed and the environment variable GS_LIB is 
+  correctly set, 
+
+      Select: Option (tool bar in dviout) -> Setup parameters -> Graphic
+      push [gsx:],
+      push [Save],
+      push [OK].
+
+
+5. Now you are ready to preview and print DVI files.
+
+   The DVI file  test_org.dvi  and  sample\sample.dvi  in the package 
+   of dviout is good for the first test of the preview.
+
+      Select File -> Open a DVI file from Tool Bar.  Previewing the DVI file,
+
+      Select Display -> Size -> Magnify/Reduce, Display -> Contrast ->
+      Blacker/Whiter
+
+   to get a suitable result and
+
+      Select: Option -> Setup parameters -> Display
+      push [Save],
+      push [OK].
+
+   to reserve it.
+
+   The DVI file  graphic\color\color.dvi  is an another DVI file written 
+   in  English.
+
+
+6. Other options are also set from  Option -> Setup parameters.
+   Their explanation can be seen from On-line Help in English/Japanese.
+
+---
+7. You can get a precise information on dviout by On-line Help whose 
+   filename is dvioute.hlp (in English) or dviout.hlp (in Japanese).
+
+8. Uninstallation of dviout for Windows can be done by the menu in dviout.
+
+   ----------------  Installation of other packages  ------------------
+
+             ---  A package for Windows TrueType fonts ---
+
+font\winttf.zip  : A package to use Windows standard TrueType fonts (Times New 
+Roman, Arial, Courier New, proportional Japanese fonts etc.) written by Otobe 
+and Oshima
+
+font\exjfonts.zip: Japanese extended package.
+
+
+If the directories of TeX are standard, the package is installed as follows.
+
+  In a MS-DOS Window, move to the directory where the subdirectory texmf exist.
+
+  Unpack winttf.zip in the directory:
+
+       unzip winttf.zip 
+
+  In dviout for Windows, select
+
+       Option -> Setup Parameters... -> Font2 -> ttf:
+
+  and indicate the file  ^x\map\ttfonts.map  and push [Flush], [Apply] and [OK].
+
+  Moreover move to the sheet [Font] and indicate tfm and vf files in TEXPK.
+  For example:
+
+      TEXROOT: ^T\fonts
+      TEXPK: ^r\tfm\\^s.^tfm;^r\pk\cx\\^s.^dpk;^r\vf\\^s.vf
+
+  Then [Save] and [OK] to quit the property sheet.
+
+  To check the installation, preview the following sample file by dviout 
+  for Windows:
+
+      ....\texmf\tex\latex\ttnfss\test.dvi
+
+  See English.txt and the comments in ttfonts.map contained in the package 
+for more information.
+
+  To install exjfonts.zip, unpack it in the same way as in the case of 
+winttf.zip.
+
+
+                           ---  PSfrag ---
+
+  If PSfrag is used, psfrag.pro in PSfrag package and ps2frag.ps in PSfrag 
+package Ver.2.* should be placed in a search path of Ghostscript.
+(See the URL of dviout for Windows given below.) 
+
+
+             --- Image data files in various formats ---
+
+  To handle image data files other than EPS/PS/WMF/EMF/PBM/BMC such as JPEG/
+TIFF/GIF/PNG/PCD etc., the corresponding Susie plug-in's (with the extension
+.spi) should be placed in the directry which should be indicated in
+
+       Option -> Setup Parameters... -> Graphic -> spi:
+
+
+    ---  Usage of Japanese TrueType fonts under non-Japanese Windows ---
+
+  See On-line Help:
+
+    Help -> Help topics -> Q&A -> Font ->
+    ? Will TrueType Japanese fonts be used in non-Japanese Windows
+
+   ------------------------   URL's   ------------------------
+
+TeX system supporting pTeX (Windows95/98/Me/NT/2000/XP):
+    http://jupiter.fsci.fuk.kindai.ac.jp/~kakuto/win32-ptex/web2c75-e.html
+
+Susie plug-in:
+    http://www.digitalpad.co.jp/~takechin/
+    See also the following URL:
+
+dviout for Windows:
+    http://akagi.ms.u-tokyo.ac.jp/dviout-ftp.html
+
+ABC output plug-in:
+    http://www.asahi-net.or.jp/~kh4s-smz/spi/my_spi.html

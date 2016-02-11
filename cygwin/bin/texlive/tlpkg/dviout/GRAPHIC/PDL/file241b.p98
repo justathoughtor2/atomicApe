@@ -1,0 +1,56 @@
+   以下は、岩井氏のオリジナルの t241b.lzh に含まれていた files241b.p98 を収
+録しました。以下に述べられている readme.tex は、公開版の dviout/dviprt に合
+わせて若干修正し、ファイル名をpdldoc.tex と変更しました。
+
+					March 24, 1994   written by SHIMA
+-----------------------------------------------------------------------------
+　このアーカイブは　DVIOUT/PRT　ver.2.41 に対して、 Cannon LASERSHOT シリー
+ズを使っている場合、LIPS の 描画命令を直接出力する special command に対応さ
+せるためのソースの差分ファイル、及びサンプルファイルです。同様のことがEPSON 
+ESC/Page をサポートしているLBPでも出来るとようになってますが、そちらの機能の
+動作確認はしておりません。
+
+　この差分は筆者が勝手に作成したテスト用の物で、正式なdviout/prtの開発グルー
+プの出す差分ではありませんのでご注意下さい。
+
+　以下のファイルが含まれます。
+
+FILE241B P98       743 93-11-15  このファイルです。
+T241B    DIF      8581 93-11-14  t241srcからの差分です。diff -cで作成しました。
+                                 差分をあてた版はver.2.41bとなります。
+README   TEX      8083 93-11-15  概要が書かれたサンプルです。
+SPEC     LP3     14103 93-11-14  LIPS3のコードが書かれたサンプルファイルです。
+LASERSYS LP3      4118 93-11-14  　　同　上
+SPEC     TEX       258 93-11-14  上記の*.LP3ファイルをpicbox.texを使って
+LASERSYS TEX       261 93-11-14 　   　TeXに読み込むためのファイルです。
+
+LIPS3    GPD     12928 93-11-08  GPのLIPS3用ドライバーです。DVIPRTで出力する
+　　　　　　　　　　　　　　　　 ときはこのドライバーに差し替えて下さい。
+PICBOX   TEX      1833 93-05-28  GPに付属する読み込み用マクロです。plain TeX、
+                                 LaTeX、どちらでも使えます。
+
+　サンプルのreadme.texをコンパイルする場合には、同一ディレクトリにREADME.TEX, 
+SPEC.LP3, SPEC.TEX, LASERSYS.LP3, LASERSYS.TEX, PICBOX.TEXをおいてコンパイル
+して下さい（PICBOX.TEXはTeXのMACROのディレクトリにおいても構いません）。
+　出来たDVIファイルをプレビューするときは、差分をあてたDVIOUTでしたほうがいい
+でしょう。普通のDVIOUTだと、ghostscriptを起動しようとします。印刷はLIPS3をサ
+ポートしたプリンタで行って下さい。その他のプリンタでは図面が印刷されません。
+
+　LIPS3.GPDとpicbox.texに関する著作権は枝松圭一氏にあります。氏の御好意により
+同封させていただきました。
+
+
+                                              ＳＡＤＡ（岩井　貞之）
+
+	            e-mail    NIFTY-SERVE  GBF03356@niftyserve.or.jp
+
+・改編履歴
+
+[version 2.41b, November 15, 1993]
+*1ページを分割して印刷した時、複数回図のデータをLBPに送ってしまう致命的バグ
+ を取り除いた
+*ESC/Pageに対応したルーチンを付加。動作テストはしていない。
+
+[version 2.41a, November  8, 1993]
+*LIPS3のみに対応したテスト版。東北大~ftp/pub/msdos/gp/contrib/にver2.41からの
+ 差分として登録

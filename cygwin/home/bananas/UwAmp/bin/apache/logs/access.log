@@ -183,3 +183,12 @@
 ::1 - - [09/Feb/2016:12:31:31 -0500] "POST /wp-admin/admin-ajax.php HTTP/1.1" 200 47
 ::1 - - [09/Feb/2016:12:33:32 -0500] "POST /wp-admin/admin-ajax.php HTTP/1.1" 200 47
 ::1 - - [09/Feb/2016:12:35:33 -0500] "POST /wp-admin/admin-ajax.php HTTP/1.1" 200 47
+::1 - - [10/Feb/2016:17:50:14 -0500] "GET /mysql/ HTTP/1.1" 200 8092
+::1 - - [10/Feb/2016:17:50:14 -0500] "GET /mysql/themes/pmahomme/jquery/jquery-ui-1.9.2.custom.css HTTP/1.1" 200 32278
+::1 - - [10/Feb/2016:17:50:14 -0500] "GET /mysql/themes/pmahomme/img/logo_right.png HTTP/1.1" 200 4548
+::1 - - [10/Feb/2016:17:50:14 -0500] "GET /mysql/themes/dot.gif HTTP/1.1" 200 43
+::1 - - [10/Feb/2016:17:50:14 -0500] "GET /mysql/js/get_scripts.js.php?token=dae02260af40f70948ce10ce1408c376&scripts[]=jquery/jquery-1.8.3.min.js&scripts[]=ajax.js&scripts[]=keyhandler.js&scripts[]=jquery/jquery-ui-1.9.2.custom.min.js&scripts[]=jquery/jquery.sprintf.js&scripts[]=jquery/jquery.cookie.js&scripts[]=jquery/jquery.mousewheel.js&scripts[]=jquery/jquery.event.drag-2.2.js&scripts[]=jquery/jquery-ui-timepicker-addon.js&scripts[]=jquery/jquery.ba-hashchange-1.3.js&scripts[]=jquery/jquery.debounce-1.0.5.js&scripts[]=jquery/jquery.menuResizer-1.0.js&scripts[]=cross_framing_protection.js&scripts[]=rte.js&scripts[]=tracekit/tracekit.js&scripts[]=error_report.js&scripts[]=doclinks.js&scripts[]=functions.js&scripts[]=navigation.js&scripts[]=indexes.js&scripts[]=common.js&scripts[]=codemirror/lib/codemirror.js&scripts[]=codemirror/mode/sql/sql.js&scripts[]=codemirror/addon/runmode/runmode.js HTTP/1.1" 200 1046464
+::1 - - [10/Feb/2016:17:50:14 -0500] "GET /mysql/phpmyadmin.css.php?server=1&token=dae02260af40f70948ce10ce1408c376&nocache=4365326855ltr HTTP/1.1" 200 98150
+::1 - - [10/Feb/2016:17:50:14 -0500] "GET /mysql/js/get_image.js.php?theme=pmahomme HTTP/1.1" 200 6435
+::1 - - [10/Feb/2016:17:50:14 -0500] "GET /mysql/js/messages.php?lang=en&db=&token=dae02260af40f70948ce10ce1408c376 HTTP/1.1" 200 17826
+::1 - - [10/Feb/2016:17:50:15 -0500] "GET /mysql/themes/pmahomme/img/sprites.png HTTP/1.1" 200 42457

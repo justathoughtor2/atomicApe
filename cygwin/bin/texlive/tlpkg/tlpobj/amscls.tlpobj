@@ -1,0 +1,61 @@
+name amscls
+category Package
+revision 36804
+shortdesc AMS document classes for LaTeX.
+longdesc This bundle contains three AMS classes, amsart (for writing
+longdesc articles for the AMS), amsbook (for books) and amsproc (for
+longdesc proceedings), together with some supporting material. The
+longdesc material is made available as part of the AMS-LaTeX
+longdesc distribution.
+containersize 32732
+containermd5 d15bc0fe1c4461888fceb5d0bf3e030d
+doccontainersize 1186080
+doccontainermd5 ad3e19a61f11d4a51fd22aefd816fb60
+docfiles size=333
+ texmf-dist/doc/latex/amscls/00LICENSE.txt
+ texmf-dist/doc/latex/amscls/README details="Readme"
+ texmf-dist/doc/latex/amscls/amsart-template.tex
+ texmf-dist/doc/latex/amscls/amsbook-template.tex
+ texmf-dist/doc/latex/amscls/amsbooka.pdf
+ texmf-dist/doc/latex/amscls/amsclass.pdf details="Code with documentation"
+ texmf-dist/doc/latex/amscls/amsdtx.pdf
+ texmf-dist/doc/latex/amscls/amsmidx.pdf
+ texmf-dist/doc/latex/amscls/amsproc-template.tex
+ texmf-dist/doc/latex/amscls/amsthdoc.pdf
+ texmf-dist/doc/latex/amscls/diffs-c.txt
+ texmf-dist/doc/latex/amscls/instr-l.pdf details="Instructions to authors"
+ texmf-dist/doc/latex/amscls/manifest.txt
+ texmf-dist/doc/latex/amscls/thmtest.pdf
+ texmf-dist/doc/latex/amscls/upref.pdf
+srccontainersize 90148
+srccontainermd5 bb86d6cd10c840dea1f152ee9012474f
+srcfiles size=96
+ texmf-dist/source/latex/amscls/amsbooka.dtx
+ texmf-dist/source/latex/amscls/amsbooka.ins
+ texmf-dist/source/latex/amscls/amsclass.dtx
+ texmf-dist/source/latex/amscls/amsclass.ins
+ texmf-dist/source/latex/amscls/amsdtx.dtx
+ texmf-dist/source/latex/amscls/amsdtx.ins
+ texmf-dist/source/latex/amscls/amsmidx.dtx
+ texmf-dist/source/latex/amscls/amsmidx.ins
+ texmf-dist/source/latex/amscls/amsthdoc.tex
+ texmf-dist/source/latex/amscls/install.txt
+ texmf-dist/source/latex/amscls/instr-l.tex
+ texmf-dist/source/latex/amscls/thmtest.tex
+ texmf-dist/source/latex/amscls/upref.dtx
+ texmf-dist/source/latex/amscls/upref.ins
+runfiles size=76
+ texmf-dist/bibtex/bst/amscls/amsalpha.bst
+ texmf-dist/bibtex/bst/amscls/amsplain.bst
+ texmf-dist/tex/latex/amscls/amsart.cls
+ texmf-dist/tex/latex/amscls/amsbook.cls
+ texmf-dist/tex/latex/amscls/amsbooka.sty
+ texmf-dist/tex/latex/amscls/amsdtx.cls
+ texmf-dist/tex/latex/amscls/amsldoc.cls
+ texmf-dist/tex/latex/amscls/amsmidx.sty
+ texmf-dist/tex/latex/amscls/amsproc.cls
+ texmf-dist/tex/latex/amscls/amsthm.sty
+ texmf-dist/tex/latex/amscls/upref.sty
+catalogue-ctan /macros/latex/required/amslatex/amscls
+catalogue-date 2015-04-11 13:32:03 +0200
+catalogue-license lppl1.3

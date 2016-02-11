@@ -1,0 +1,5 @@
+;#j DVI ファイルの postamble の部分を表示する
+;# Showpostamble of DVI file
+;;   Show postamble of DVI file by notepad
+dviprt='dvispc -alpL "^d" ^X{-v} ^Y{-t} ^t;notepad ^t^Z^{verbose&1}^{DLT&?}Show postamble of DVI file; by notepad'
+Set=fd

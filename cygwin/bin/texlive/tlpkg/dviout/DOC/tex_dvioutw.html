@@ -1,0 +1,2158 @@
+<html>
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=SHIFT_JIS">
+<title>Installation of dviout (Windows95/98/Me/NT/2000/XP)</title>
+</head>
+
+<body bgcolor="#eeffff">
+
+<p><a name="HEAD"></a><a href="/index-j.html">Home Page へ</a><br>
+<a href="http://akagi.ms.u-tokyo.ac.jp/ftp-j.html#TeX">TeXのページへ</a>, 
+<a href="http://akagi.ms.u-tokyo.ac.jp/dvitest.html">dviout/dviprt開発室</a>,
+<a href="cmode.html">DVIwareとしてのdviout</a>, <a href="dvioutQA.html">dvioutにおけるトラブル</a>, <a href="present.html">dvioutでのプレゼンテーション</a><br>
+<a><a href="http://akagi.ms.u-tokyo.ac.jp/tex_dvioutw.html">このドキュメントの最新版</a></p>
+
+<hr align="left" noShade SIZE="4" width="75%">
+
+<h1 align="center">Windows95/98/Me/NT/2000/XP における</h1>
+<h1 align="center">dviout のインストール</h1>
+
+<hr align="right" noShade SIZE="4" width="75%">
+
+<p align="center">February 18, 2006</p>
+
+<p>誤りや補足すべき点があればお知らせ下さい --&gt; <a
+href="mailto:ftp-admin@akagi.ms.u-tokyo.ac.jp">ftp-admin@akagi.ms.u-tokyo.ac.jp</a> </p>
+
+<p>角藤氏によるパッケージ（Web2C 7.5.5+pTeX 3.1.9 -- またはそれ以降 -- に基づき、 <a
+href="#source">source special</a>をサポート）を使った <a
+href="http://akagi.ms.u-tokyo.ac.jp/texinst98.html">TeXのインストール手順 </a>を既に述べました。 
+それを行った後で、ここの dviout for Windows のインストール手順を踏むと良いでしょう。 </p>
+
+<blockquote>
+  <p>淺山和典氏によるパッケージ（ptx214-*.zip）を使って TeX 
+  をインストールする手順について、 <a
+  href="http://akagi.ms.u-tokyo.ac.jp/tex_dw.html">別の項</a>に述べました。 <br>
+  これは現在では古くなってしまった版で、現在ではより簡単にインストールできるようになっています。 
+  </p>
+</blockquote>
+
+<p>ここでは、これらの TeX のインストール後の dviout for Windows と 
+それで使われるフォントとのインストールについて述べます。</p>
+
+<p>次のものも参考にされるとよいでしょう。 
+
+<ul>
+  <li>旧@nifty TEXフォーラムの <a
+    href="http://www.nsknet.or.jp/~tony/TeX/install/">Windows用のDVIwareのインストール</a>（<b>推奨</b>）</li>
+  <li>奥村さんによる <a
+    href="http://oku.edu.mie-u.ac.jp/~okumura/texwiki/?%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%28Windows%29">角藤版pteXのWindowsへのインストールの解説</a> 
+    と <a href="http://oku.edu.mie-u.ac.jp/~okumura/texwiki/?dviout">dviout for Windowsのインストールの解説</a> 
+  </li>
+  <li>大石さんの<a href="http://www.grn.mmtr.or.jp/~ohishi/tex/index.html"> pLaTeX for 
+    Win32</a></li>
+  <li>大友さんの<a href="http://www.klavis.info/texindex.html">ワープロユーザのためのLaTeX入門</a></li>
+  <li>勇秀憲さんの <a href="http://www.ce.kochi-ct.ac.jp/~isami/home/int_texj.html">おもしろWWWサイト-TeX関連-</a></li>
+</ul>
+
+<p>その他 
+
+<ul>
+  <li>Ghostscriptのインストールについても、 <a
+    href="http://akagi.ms.u-tokyo.ac.jp/texinst98.html">TeXのインストール手順 </a>の項に述べました（Ver.8.00）。 
+    松田さんの <a href="http://itohws03.ee.noda.sut.ac.jp/~matsuda/gswinj/gswin5j.html">日本語対応gswin5.50ミニ情報</a>も参考になるでしょう</li>
+  <li>dviout for WindowsでのPostScriptフォントの利用については、堀田氏の <a
+    href="http://auemath.aichi-edu.ac.jp/~khotta/ghost/index.html">PostScriptフォントの利用</a>を御覧下さい</li>
+  <li>TrueTypeフォント使用に関しては <a
+    href="http://argent.shinshu-u.ac.jp/otobe/tex/docs/ttf.html">乙部氏の解説記事</a> (<a
+    href="http://argent.shinshu-u.ac.jp/otobe/tex/packages/fontproj.html"> 解説とパッケージ</a>)、上記の堀田氏の記事などをご覧下さい。</li>
+  <li>JIS漢字以外のTrueTypeフォントについては <a href="http://www.mojikyo.org/">文字鏡研究会</a> 
+    （<a href="http://www.mojikyo.org/html/download/tex/tex_list.html"> フォント</a>）、 
+    <a href="http://www.l.u-tokyo.ac.jp/GT/">GTプロジェクト</a>を御覧下さい。 </li>
+  <li>仮名文字には、<font size="3">日本語の文字と組版を考える会による </font><a
+    href="http://www.pot.co.jp/moji/">もじくみ仮名</a> があります。</li>
+</ul>
+
+<p><a name="otobe"></a> 以下に書かれた解説が分からない場合や、簡単にTeXのシステムとdviout 
+for Windowsとをインストールしたい場合は、下記の書籍をお薦めします。 
+
+<dl>
+  <dt><b><a href="http://argent.shinshu-u.ac.jp/otobe/tex/book/1999revise.html">「LaTeX2e for 
+    Windows Another Manual, vol.1 Basic Kit 1999」</a>, 乙部厳己, 江口庄英, 
+    ソフトバンク, 1998年</b></dt>
+  <dd>付属のCD-ROMでは、インストーラにより簡単に角藤版のTeXのシステムとdviout 
+    for Windowsなどがインストールできる。各種の関連プログラムなども収録されている。
+また、dviout for Windowsについての詳しい解説もある。</dd>
+  <dt>　</dt>
+  <dt><b><a href="http://oku.edu.mie-u.ac.jp/~okumura/texfaq/bibun3/">
+  「[改訂（第３）版]LaTeX2e 
+    美文書作成入門」</a>, 奥村晴彦, 技術評論社, 2000, 2001, 2002, 2004年</b></dt>
+  <dd>LaTeXの解説書として定評がある。dviout for WindowsやTeXのシステムを収録したCD-ROMが付属しており、インストールの解説がある。</dd>
+  <dt>　</dt>
+  <dt><b>「日本語LaTeX2eインストールキット」 中野賢, 淺山和典, 内山孝憲, 
+    アスキー出版局, 1997年</b></dt>
+  <dd>Windows95/NT用(TeXは淺山版), Macintosh用, UNIX(Intel CPU)用のbinaryなどを収録したCD-ROM（各1枚で、計3枚）が付属しており、これらをコンピュータにインストールすることが主目的の書籍。プログラムは発行時点のものなので、版が若干古いが、インストーラが付属している。</dd>
+  <dt>　</dt>
+  <dt><b>「LaTeX組版ハンドブック」　大友康寛，翔泳社，2005年</b>
+  <dd>EasyTeXおよび角藤版のTeXのシステムとdviout for Windowsなどがインストールできる（インストーラ付属）。</dd>
+</dl>
+<hr>
+
+<p><strong><a name="Contents">内容</a><br>
+</strong><br>
+０，<a href="#QUICK">まずインストールする</a><br>
+１. <a href="#FONT">dviout for Windowsが使うフォント</a><br>
+２. <a href="#FONT2">印刷方式とフォント</a><br>
+３. <a href="#FONT3">関連プログラムとフォントのインストール</a><br>
+４. <a href="#DVIOUT">dviout for Windowsのインストール</a><br>
+５. <a href="#DVIOUT1">dviout for Windowsを使う</a><br>
+６. <a href="#DVIOUT0">dviout for Windowsのアンインストール</a><br>
+７. <a href="#DVIOUT2">dviout for Windowsの機能</a><br>
+８. <a href="#EDIT">エディターとの連係</a><br>
+<a name="HintMenu">９. </a><a href="#HINT">いくつかのヒント</a> 
+
+<ul>
+  <li><a href="#GIMON">疑問点について</a></li>
+  <li><a href="#ttfonts">各種のWindows TrueTypeフォントを使う</a></li>
+  <li><a href="#ttjfonts">いろいろな和文TrueType/OpenTypeフォントを使う</a></li>
+  <li><a href="#Heitai">和文で平体・長体を使う</a></li>
+  <li><a href="#Burasage">和文のぶら下げ組版</a></li>
+  <li><a href="#newmin">min10の不具合（=従来のjarticleなどの組版の不具合）を修正する</a></li>
+  <li><a href="#newmin8">min8やgoth8の不具合修正版を作る</a></li>
+  <li><a href="#propw">和文をプロポーショナルフォントで組む（詰め組）</a></li>
+  <li><a href="#TeXforWin">ImpressのTeX for Windowsで dviout を用いる</a></li>
+  <li><a href="#WINTEX">ImpressのWinTeXのTrueTypeフォントを用いる</a></li>
+  <li><a href="#DAITAI">存在しない和文フォントの代替機能を優先しない</a></li>
+  <li><a href="#ETF">DVIファイルにフォントや画像を埋め込む</a></li>
+  <li><a href="#Comment">DVIファイルにメモを入れる</a></li>
+  <li><a href="#papersize">プレビューや印刷での用紙サイズを指定する</a></li>
+  <li><a href="#GraPack">Graphics Package</a></li>
+  <li><a href="#gdat">GhostScriptを使って作成されるPBM/BMP/BMCファイルのディレクトリを固定する</a></li>
+  <li><a href="#PSfrag">PSfrag</a> </li>
+  <li><a href="#PSTricks">PSTricks</a></li>
+  <li><a href="#source">エディターとの間で相互ジャンプする</a></li>
+  <li><a href="#clip">クリップボードを使ってエディターと連携する</a></li>
+  <li><a href="#modes">プレビューやプリンタの種類で異なる設定を使う</a></li>
+  <li><a href="#Vup">バージョンアップ</a></li>
+  <li><a href="#DualBoot">デュアルブートシステムへのインストール</a></li>
+  <li><a href="#MultiUser">ユーザが複数の場合の共通設定と個別設定</a></li>
+  <li><a href="#Control">dvioutの動作を制御する</a></li>
+  <li><a href="#Directory">インストールフォルダに関して注意することは？</a></li>
+  <li><a href="#Move">インストールフォルダやそのドライブ番号の変更</a></li>
+  <li><a href="#NoJ">日本語非対応システムで、pTeXのDVIファイルを取り込んでもdvioutが終了しないようにする</a></li>
+  <li><a href="#MicroSPELL">TeXに対応したスペルチェッカーMicroSPELLを使う</a></li>
+  <li><a href="#modeless">メタフォントとプリンタとTEXPK</a></li>
+</ul>
+<p><a href="dviouttips.html">dvioutにおける小ヒント集</a></p>
+<p><a href="present.html">dvioutでのプレゼンテーション</a></p>
+<p><a href="cmode.html">DVIwareとしてのdviout</a>より 
+
+<ul>
+  <li><a href="cmode.html#picture">プレビュー画面を切り出して、クリップボードにコピー、あるいは、各種の画像ファイルにする</a></li>
+  <li><a href="cmode.html#color2bw">カラー画像を白黒印刷する</a></li>
+  <li><a href="cmode.html#BMC">GhostScriptで自動生成された画像の再利用</a></li>
+  <li><a href="cmode.html#raw">他の dvipsk などのプリンタドライバを制御する</a></li>
+  <li><a href="cmode.html#CheckDriver">印刷の不具合の原因をチェックする</a></li>
+</ul>
+
+<p><a href="dvioutQA.html">dvioutにおけるトラブル</a> 
+
+<ul>
+  <li><a href="dvioutQA.html#CharInfo">表示している特定の文字の情報を知りたい</a></li>
+</ul>
+<p><a href="dvi.html">DVIファイルのフォーマット</a>
+<hr>
+<a name="QUICK">
+<h2>０．まずインストールする</a></h2>
+この節は、次節以降の１－４のインストールの解説を読まずにとにかく急いでインストールしたい方のためのものです。<br>
+<b>バージョンアップ</b>の場合も同じです。
+</p><p>
+<b>１.</b> <font color="#800000">角藤氏のパッケージによるTeXのシステムがインストールされているとします。</font>
+<ul>
+<li>ここの<a href="http://akagi.ms.u-tokyo.ac.jp/texinst98.html">TeXのインストール手順 </a>に従った場合や、上記の奥村氏や乙部氏の本に付属のCD-ROMからインストールされた場合がそれにあたります。</li>
+<li><a href="tex_instchk.html">ここ</a>をクリックして、<font color="#800000">TeXのシステムが正常にインストールされていることをチェック</font>してください。</li>
+</ul>
+<b>２.</b> <font color="#800000">自動インストール形式のdvioutのパッケージをダウンロードします。</font>
+<ul>
+ <li><b>tex???w.exe</b>（公開版）あるいは <b>t????w.exe</b>（テスト版）という名前のファイルです（<b>???</b> はバージョン番号を示す数字）。</li>
+<li><a href="ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/dviout/current_in_Japanese">ここ</a>（最新公開版）あるいは<a href="ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/dviout/test">ここ</a>（最新テスト版）をクリックして、<font color="#800000">そのファイル選び、ディスクの適当なフォルダにダウンロード</font>します。</li>
+</ul>
+<b>３.</b> <font color="#800000">ダウンロードしたファイル <b>tex???w.exe</b> または <b>t????w.exe</b> を実行します。</font>
+<ul><li>「マイコンピュータ」などから選んでそのアイコンをダブルクリックする、あるいは、「スタート→ファイル名を指定して実行する」などの方法により、起動します。</li>
+</ul>
+<b>４.</b> <font color="#800000">インストール先を指定するダイアログが表示されるので、<b>[OK]</b> を押してファイルを展開します。</font>
+<ul>
+<li>
+デフォルトのインストール先は <b>c:\dviout</b> になっていますので、このまま変更しないで <b>[OK]</b> を押すことを推奨します。</li>
+<li><b>dviout</b> の実行ファイルは、「インストール先」と指定したフォルダ（そのサブフォルダでない）に置かれます。</li>
+<li><b>dviout</b> はインストール・フォルダを選びませんが、TeX 関連プログラムは <b>Program Files</b> のように空白を含むフォルダにインストールすると、不具合を生じるものがあるので、そのようなものを避けるのが無難です。</li>
+<li><b>dviout</b>を独自のフォルダに入れておくと、<a href="#DVIOUT0">アンインストール</a>が簡単に行えます。</li>
+<li><b>バージョンアップ</b>の場合は、旧dviout.exeがインストールされているフォルダを指定します（上書きインストールを推奨）。</li></ul>
+<b>５.</b> <font color="#800000">以下の表示が出るので、「はい(Y)」を選びます。</font>
+<blockquote>
+Font Path is not set.<br>
+Install fundamental parameters?<br>
+</blockquote> 
+<ul><li>
+バージョンアップなどで以前の環境が残してある場合は、上記の表示が出ず、インストールは完了します。<br>
+バージョンによるデフォルト設定の変更などについては、<a href="#Vup">ここ</a>をご覧下さい。<br>
+引き続き通常のインストール作業を行いたい場合は、<b>dviout</b> のメニューバーから Option → Install を選択すると、以下の ６. 以下になります。
+</li>
+</ul>
+<b>６.</b> <font color="#800000">デフォルトの解像度と用紙タイプの設定画面になりますので、必要なら変更後 <b>[&gt;Next]</b> を押します。</font>
+<ul>
+<li>解像度はプリンタのdpi（dpi = 1 inch あたりのドット数）に合わせておくと便利です。
+<li>表示の解像度を 1000dpi 以上の大きな値にすると、dvioutの動作が重くなります(<a href="http://akagi.ms.u-tokyo.ac.jp/tex_dvioutw.html#modes">印刷と表示で解像度を変える</a>設定ができます)。</li>
+<li>解像度や用紙タイプのデフォルトは、インストール完了後、容易に変更できますので、デフォルトのままでも問題ありません。</li>
+<li>上部にデフォルトのプリンタと、場合によってはその解像度が表示されます。</li>
+<li>プリンタが実際にデータとして受けつけ可能な dpi の値は、????dpi相当などとカタログに書かれているものより小さいことが多いので、カタログを注意して見てください。</li>
+<li><b>Portrait</b> は用紙の縦置き、<b>Landscape</b> は横置きを意味します。
+</li></ul>
+<b>７.</b> <font color="#800000">次の <b>Register the location of Font Files</b> において、以下のようにフォントの所在を設定し、<b>[&gt;Next]</b> を押します。</font>
+<ol>
+<li><font color="#800000"><b>[Guess]</b> を押す</font>と
+<blockquote>
+標準的な日本語TeX環境が検知されました．<br>
+それにあった標準設定を選択します．
+</blockquote>
+と表示された場合は、<font color="red"><b>[はい(Y)]</b></font><font color="#800000">を選択</font>します。
+一方、以下のように表示された場合は、<font color="red"><b>[いいえ(N)]</b></font> <font color="#800000">を選択</font>します。</font>
+<blockquote>
+(Y)es: Guess TEXROOT/TEXPK/L from fonts in DISK<br>
+(N)o : Set default value for TEXROOT/TEXPK/L
+</blockquote>
+</li>
+<li>TEXROOT: および TEXPK: が設定されたことを<font color="#800000">確認します。</font>
+<ul>
+<li>標準的なTeXのインストールでは、たとえば以下のようになります。</li>
+<blockquote>
+<code>TEXROOT: c:\usr\local\share\texmf\fonts<br>
+TEXPK: &nbsp;   ^r\tfm\\^s^tfm;^r\\^s.^dpk;^r\vf\\^s.vf;^r\ovf\\^s.ovf;^r\tfm\\^s.tfm</code>
+</blockquote>
+<li>TEXROOT: の先頭が <font color="blue">^T</font> の場合は、環境変数 <b>TEXMFMAIN</b> または <b>TEXMF</b> が設定されていることを意味し、その値を表します。</li>
+</ul></ol>
+<b>８.</b> <font color="#800000">最後の <b>Register Programs</b> において、以下のようにフォントの生成プログラムなどを設定し、<b>[Finish]</b> を押します。</font>
+<ol>
+<li><font color="#800000"><b>[gen:]</b> を押し、以下に <b>[はい(Y)]</b> を選択する</font>と、フォントの生成プログラム <b>mktexpk</b> が設定されます。</p>
+<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+Automatic search?</p>
+<ul><li>
+たとえば、以下のように設定されます。設定に失敗する場合は、TeXのシステムのインストールミスです。
+<blockquote>
+<code>gen: `C:\usr\local\bin\mktexpk.exe --dpi ^d --bdpi ^D --mag ^M ^s</code>
+</blockquote>
+</li></ul>
+<li><font color="#800000"><b>Ghostscript</b> がインストールされている場合は、<b>[gsx:]</b> を押して、Automatic search? に <b>[はい(Y)]</b> を選択</font>し、<b>dviout</b>から<b>Ghostscript</b>が呼び出せるように設定します。
+</li></p><p>
+<li>以下の２つの項目にチェックがついていることを<font color="#800000">確認します。</li></font>
+<blockquote>
+Relate DVI file (.dvi) to dviout for Windows<br>
+Register dviout on Window's menu: Start-&gt;Program
+</blockquote>
+</ol>
+<a name="InstBKM"><b>９.</b> <font color="#800000">下部に注意書きが表示され、<b>dviout</b>のインストールは終了ですが、以下のようにBaKoMaのTrueTypeフォントをインストールすることを推奨します。</a></font>
+<ol>
+<li>
+BaKoMa TrueType フォントの自動インストールプログラム <a href="ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/font/bakoma/FixBKM.msi">FixBKM.msi</a> （乙部氏による）を、<font color="#800000">適当なフォルダにダウンロードします。</li></font>
+<li><font color="#800000">このプログラムを実行する</font>と、BaKoMa TrueType フォントのインストールが完了します(既存のBaKoMaフォントの削除と新規のインストールが行われます)。</li>
+</ol>
+<ul>
+<li>オリジナルの<a href="dvioutQA.html#WrongChar">BaKoMa TrueTypeフォントには不具合があり</a>、Windows XPやWindows 2000（SP4以降）では顕在化します。そのため、上のように既存のものを修正されたもので置き換える手続きをとります。</li>
+<li>BaKoMa TrueType フォントをインストールしておくと、TeX標準の欧文フォント Computer Modern や、AMS のフォントに対してこれらが使用でき、印刷の高速化や質の良い PDF の作成が期待できます。</li>
+<li>インストール完了後は、ダウンロードした <b>tex???.exe</b> や <b>bkmfix.exe</b> は不要で、削除可能です。</li>
+</ul>
+<a name="InstGRH"><b>１０.</b> <font color="#800000">EPS画像以外のBMP/JPG/PNG/EMFなどの画像を取り込むための設定</a></font>
+<ul>
+<li><b>dviout</b> は、EPS以外にも種々の画像の取り込みをサポートしています。その設定は以下のようにします。
+<ol>
+<li><b>dviout</b> のフォルダ（c:\dviout）からみて、<font color="#800000"><b>graphic\latex2e\dviout.def</b> というファイルを</font>、TeX のフォルダ（c:\usr\local\share\texmf）のサブディレクトリ <font color="#800000"><b>tex\latex\graphics</b>にコピー</font></li>
+</p><p>
+<li><b>dviout</b> のフォルダ（c:\dviout）からみて、<font color="#800000"><b>graphic\latex2e\color.cfg</b> および <b>graphic\latex2e\graphic.cfg</b> の２つファイルを</font>、TeX のフォルダ（c:\usr\local\share\texmf）のサブディレクトリ <font color="#800000"><b>tex\latex\config</b> にコピー</font>
+</li></ol></p><p>
+<li>
+EPS画像を表示するには Ghostscriptが、JPG, PNG など各種画像を取り込むには Susie plug-in
+という<a href="#Related">関連プログラムのインストール</a>が必要です。
+</li>
+</li></ul>
+<a name="InstSMPL"><b>１１.</b> <font color="#800000"><b>dviout</b> の機能や設定、疑問点については、
+<a href="#DVIOUT1">５節</a>以下やメニューバーの Help から [Help Topics], 
+<a href="dvioutQA.html">[Troubles in dviout]</a>, <a href="dviouttips.html">[Tips on dviout]</a> などを参照してください。</a></font>
+<ul>
+<li><b>dviout</b> を、コマンドラインから実行することがある場合は、<b>dviout</b> がインストールされたフォルダ（標準は c:\dviout ）にパスを通しておくとよいでしょう</li>
+<li><b>dviout</b> がインストールされたフォルダにあるDVIファイルを表示してインストールのチェックをするとよいでしょう。以下のものをこの順でテストするとよいでしょう。</li>
+<li>test_a4x.dvi, test_b5x.dvi, test_a4.dvi, test_b5.dvi, ptex\naochan!.dvi, graphic\tpic\tpicdoc.dvi, sample\samle.dvi<br>
+さらに、デスクトップの <b>スタート→すべてのプログラム→dviout→sample dvi file</b> から、いくつかの例にアクセスできます。</li>
+</ul>
+<b>１２.</b> <font color="#800000"><b>初期設定がうまく行かなかったり，変更したいとき</font></b>．
+<ul><li>
+Option→Uninstall から、設定されたパラメータを全て削除して初期状態に戻すことができます。</li>
+<li>Option→Install により、再度初期設定ができます。
+修正のため、Option→Uninstall を実行しないで、Option→Install のみを複数回行ってもかまいません。</li></ul>
+</ol>
+<a href="#HEAD">先頭に戻る</a></p><p>
+<hr>
+<a name="FONT"> 
+<h2>１．dviout for Windowsが使うフォント</a></h2>
+<b>
+
+<p>dviout for Windows</b>は、LaTeXやpLaTeXなどによって作成されたdviファイルを元に、出力するのに必要なフォントの文字の画像データをファイルなどから読んで、表示（preview）や印刷を行います。 
+</p>
+
+<p>一般に、表示には印刷より低解像度のフォントを用いますが、dviout 
+for Windowsは、高解像度のフォントを<a href="cmode.html#GrayScale"><b>gray 
+scale</b></a>を使って低解像度でも見やすく変換して表示することが出来ます。 
+そのため、フォントのインストールには、印刷にどのような解像度のフォントを用いるかが基本になり、それはプリンタの解像度と合致していなければなりません。 
+
+<ul>
+  <li>たとえば、300dpi(= 300 pixel/1 inch, pixel=dots)の解像度の文字データを、100dpi（この程度が適当）で表示する場合、9(= 
+    3 x 3) dots が 1 dot に変換されます。9個の点が白か黒であったとして、その中のいくつの点が黒であったかで、白から黒まで明るさを変えた（今の場合10段階の）灰色(gray)の1個の点として縮小して表示する方法を<b>gray 
+    scale</b>と言います。</li>
+  <li>中間の明るさをどの程度にするか、ということに関し、通常は<b>γ補正</b>を行います。これは表示装置の特性などに関連して見やすいように調整します。</li>
+  <li>カラー画像でも同様のテクニックが使えますが、これは<b>アンチエリアシング</b>（<b>antialiasing</b>）と呼ばれます。</li>
+  <li>dviout for Windowsでは表示の時に、gray scaleのほか、このγ補正やアンチエリアシングを使っています。 
+  </li>
+</ul>
+
+<p>dviout for Windowsは、各種のフォント形式をサポートしていますが、普通用いられる代表的なものについて述べます。 
+</p>
+
+<p>なお、dvioutとそれが使うフォントについては、詳しくは関連文書 
+
+<ul>
+  <li><a href="cmode.html">DVIwareとしてのdviout</a></li>
+  <li>乙部氏による<a href="http://argent.shinshu-u.ac.jp/otobe/tex/index.html">TeXの概要</a>, 
+    <a href="http://argent.shinshu-u.ac.jp/otobe/tex/files/min10.pdf">min10フォントについて</a>(PDF)</li>
+  <li>旧@nifty TEXフォーラム の <a
+    href="http://www.nsknet.or.jp/~tony/TeX/faq/dvifont3.pdf">dviout for Windows 
+    がフォントを表示する仕組み</a>（PDF）</li>
+</ul>
+
+<p>をご覧下さい。</p>
+
+<h3>1.1. PK形式フォント（各文字の画像イメージデータをPK形式に圧縮したもの）</h3>
+
+<p>TeXのシステムにはフォントの文字の画像データを生成するためのプログラム（<b>メタフォント</b>）が備わっていて、生成の仕方を記述したソースファイルを元に文字の画像データを作成することが出来ます。 
+</p>
+
+<p>Knuthが作成したComputer Modenシリーズ（CM）のフォントやLaTeXのフォント（斜めの線や円弧など）、それからAMS(American 
+Mathematical Society)のフォント（CMの若干の拡張、数学記号、ドイツ文字、ロシア文字）はこのメタフォントのソースで記述され、TeXでは最も標準的に使われています。 
+</p>
+
+<p>メタフォントから解像度に応じた文字データのビットマップ画像ファイル(<b>フォントグリフファイル</b>）を生成するには時間がかかるため、予め生成してPK形式に圧縮したものを通常用います。 
+ただし、dviファイルの出力に必要なPK形式フォントが無くても、対応するメタフォントソースとメタフォントプログラムがあれば、dviout 
+for Windowsは、その場でメタフォントを起動してPK形式フォントを作成することができ、作成したものを使用すると共に再度使うときのためにディスク上に置いておきます（<b>フォントの自動生成機能</b>）。 
+</p>
+
+<p>このようなPK形式のフォントグリフファイルは、たとえば<b>cmr10</b>（Computer 
+Modern 10 point）の300dpiのものは、通常 <b>cmr10.300pk</b> 
+というファイル名になっています。ただし、300dpiの解像度の場合でも、異なるサイズの文字も用いるため、cmr10.360pk 
+や cmr10.432pk なども、場合に応じて使われます。 </p>
+
+<p>解像度だけでなくて、プリンタの特性等に応じて変えられるパラメータも指定できるので、それぞれのプリンタに最適なパラメータでフォントグリフファイルは生成されています（たとえば、縦横の線と斜めの線との濃さの違い等）。 
+</p>
+
+<p><a name="tfm"></a> TeXによるdviファイルの作成は（フォントグリフファイルは必要有りませんが）各文字の大きさなどを記述した<b>フォントメトリックファイル</b>を元になされます。このフォントメトリックファイルは、メタフォントによってフォントグリフファイルと同時に作成されますが、解像度などに依らないものです。拡張子は 
+<b>.tfm</b> となっていて、cmr10の場合は、<b>cmr10.tfm</b> 
+がフォントメトリックファイルです。</p>
+
+<p>PKフォントファイルにも各文字の大きさなどが書かれてあるので、dviout 
+for Windowsでは<b>PK形式フォントを使う場合、対応するフォントメトリックファイルは必要としません</b>。 
+</p>
+
+<p>メタフォントのソースで記述されたフォントでなくても、フォントメトリックファイルとフォントグリフファイルがあれば、それをTeXで用いることが出来るので、<b>PostScriptフォント</b>（この場合は、フォントグリフデータを作るのに、メタフォントでなくGhostscriptが使われます）なども、dviout 
+for Windows で用いることが出来ます。<br>
+これらの仲介をするのは、<b>バーチャルフォント</b>の仕組み（Knuthによって仕様が決められたもの）といくつかの支援プログラムですが、ここではその説明を省略します。 
+</p>
+
+<h3><a name="TTFONT"></a> 1.2. TrueTypeフォント（Windows95/98/Me/NT/2000/XP 
+で通常用いられるフォントの形式）</h3>
+
+<p>TrueTypeフォントもフォントグリフファイルではなく、やはり文字のビットマップ画像データの生成のためのデータが記述されているものですが、メタフォントで生成するより高速に生成出来るので（よってより精度は低い）、普通は必要なときにフォントグリフを生成し、不要になればそのフォントグリフデータは残さず消してしまいます。 
+</p>
+
+<p>特に Windows95/98/Me/NT/2000/XP は TrueTypeフォントをサポートしており、文字のフォントグリフを得るのはWindows側に任せることができます。さらに、フォントグリフを処理しなくても、直接指定したサイズと位置で、画面やプリンタに出力できます。 
+</p>
+
+<p>Windowsでは文字には通常TrueTypeフォントを使用するため、Windows専用のプリンタでは、TrueTypeフォントの文字を直接出力すると、フォントグリフなどの画像データで出力するより、高品位で遙かに高速となることがあります。特に最近のカラー対応の<b>インクジェットプリンタ</b>ではこの傾向が見られます。 
+</p>
+
+<p>アスキーのTeXは、もともと既に存在していた和文フォントを元に設計され、それに対応するフォントメトリックファイル（欧文の場合のtfmファイルに対して<b>jfmファイル</b>と言われるが、拡張子は同じ 
+.tfm 
+である）が作成されました。欧文文字の場合はフォントのデザインや文字毎に各文字の大きさが異なっていますが、和文フォントでは漢字については文字の幅が一定である、などの違いからフォントのデザインが異なっても、同じ内容のフォントメトリックファイルを用いることが多くあります。 
+</p>
+
+<p>以上の理由で、dviout for Windowsでは、和文フォントにはWindowsのTrueTypeフォントを用いるのが普通です。TrueTypeフォントにも文字幅などのデータが書かれていますが、その精度は良くないので、dviout for Windows は対応する（拡張子が .tfm の）フォントメトリックファイルを必要とします。 </p>
+
+<p>Windowsでは、TrueTypeフォントの方が扱い易いので、CMなどのフォントをTrueTypeフォントに変換したものも存在します。こちらを用いれば、「解像度毎に異なったフォントグリフファイルを用意する必要がない」という利点もあります。ただし、「プリンタの特性に応じて文字の画像データを変える」というほど精巧な仕組みにはなっていません。 
+</p>
+
+<h3>1.3. プリンタ内蔵フォント（LIPS III/IV, ESC/Pageのレーザプリンタ）</h3>
+
+<p>LIPS III/IV あるいは ESC/Pageのレーザプリンタに特化し、最適化を行ったプリンタドライバをdviout 
+for Windowsは備えています。また、レーザプリンタ内蔵の和文フォントを印刷に使うことができます。</p>
+
+<p><a name="FONT2"></a> <a href="#HEAD">先頭に戻る</a> </p>
+
+<h2>２. 印刷方式とフォント</h2>
+
+<p>dviout for Windowsは様々な印刷方式をサポートしています。主に３つに分けられます。 
+</p>
+
+<h3><b>2.1. Windowsのプリンタドライバを用いる</b></h3>
+<b>
+
+<p>2.1.1. TrueTypeフォントのフォントグリフを得ず、Windowsのプリンタドライバに任せて出力</b> 
+</p>
+
+<p>dviout for Windowsのデフォルトの印刷方式（Option → Setup Parameters... 
+→ Graphic → color specials: <b>auto mode(p2)</b>）で、印刷の際に <b>patch2</b> 
+を指定するのと同等です。 </p>
+
+<p>Windowsに特化したプリンタの場合、TrueTypeフォントを用いると、高品位で高速な印刷が期待できます。 
+</p>
+
+<p><a name="inkjet"></a> 
+私が使用しているインクジェットのカラープリンタでは<br>
+
+<ul>
+  <li>TrueTypeフォントのみしか使っていないページの印刷は、<strong>2.1.2</strong> 
+    の方式に比べて数倍程度高速化されますが（カタログに書かれた最高速度になる）、PK形式のフォントを１文字でも使ったページは、画像データを張り付けたページと同様に高速化されません。</li>
+  <li>解像度が 1200dpi となっていますが、実際の受付可能なデータは 
+    300dpi 
+    です。しかし、フォントのグリフを得ないこの方式で印刷すると、プリンタドライバはTrueTypeフォントの文字を 
+    300dpi よりも高解像度で印刷するようです。</li>
+</ul>
+
+<p>となるので、なるべくTrueTypeフォントのみ用いるようにしています。 
+</p>
+
+<p>このとき、PK形式フォントの文字は、Windowsのプリンタドライバによって文字毎に張り付けられます。Windowsのドライバによっては、PKフォントの文字が多いと負担が大きくなります。 
+</p>
+
+<p>特に<b>PostScript用のプリンタドライバ</b>の場合はそのドライバーにバグが多いようなので、PKフォントの文字を使ったり、画像ファイルを張りこむ場合は、次の方式の方が無難です（「白抜き文字が印刷されない」「画像がうまく取り込めない」などの現象の回避のため）。 
+</p>
+
+<p><a name="autorep"></a> <b>2.1.2. 
+各文字のフォントグリフを用いて１ページの画像データを合成し、それをWindowsのプリンタドライバを用いて出力</b> 
+</p>
+
+<p>Option → Setup Parameters... → Graphic → color specials: <b>auto mode(rep)</b> 
+とすると（Ver.3.08.1以降）このような印刷方式になります。 </p>
+
+<p>印刷の際に <b>replace</b> を指定するのと同等です。 Ver.3.07までは、これがデフォルトでした。 
+</p>
+
+<h3><b>2.2. dviout for Windows内蔵のプリンタドライバを用いる</b></h3>
+<b>
+
+<p>2.2.1. ESC/Page および LIPS III/IV 
+に特化された内蔵のプリンタドライバ</b> </p>
+
+<p>これらのレーザプリンタの場合は 
+
+<ul>
+  <li>プリンタ内蔵の和文フォントを用いる</li>
+  <li>フォントのグリフデータを最初にダウンロードして文字コードで使う</li>
+  <li>プリンタへの転送データを圧縮する</li>
+</ul>
+
+<p>などの機能をサポートするとともに、多くのオプションパラメータを指定することができ、高速かつ高品位な印刷が可能です。 
+</p>
+
+<p>但し、プリンタ側のパネルでの設定がおかしいと正しく印刷されません。またプリンタの内蔵メモリーがその解像度と比較して少ない場合に問題が生じます（ページプリンタなので、プリンタ側に１ページの画像データを作成するのに足る十分なメモリーが必要）。 
+</p>
+
+<p><b>2.2.2. 外部のプリンタ設定ファイルを参照するdviout内蔵のドライバ</b> 
+</p>
+
+<p>プリンタのコントロールコードに応じた設定ファイル（拡張子のデフォルトは 
+<b>.CFG</b>）を参照して印刷するもので、MS-DOS版のdviprtからの印刷方式。ESC/P, 
+NEC PC-PR, NEC NMなどは設定ファイルを内蔵しているので、外部の設定ファイルを参照しなくてもよい。 
+</p>
+
+<h3><b>2.3. 他の印刷プログラムを呼び出す</b></h3>
+
+<p>コンソール版のdviprtや、dvipsk, dvi2ps などの TeX 
+の印刷プログラムを呼び出すことができます。印刷範囲などの種々のパラメータを渡すことができます。 
+</p>
+
+<p><a name="FONT3"></a> <a href="#HEAD">先頭に戻る</a> </p>
+
+<h2>３. 関連プログラムとフォントのインストール</h2>
+<b>
+
+<p>3.1. TrueTypeフォントのインストール</b> </p>
+
+<p>和文には通常 <a href="#TTFONT">TrueType フォント</a>を用いますが、既に述べたように、欧文フォントにもTrueType 
+フォントを用いると、良い点が沢山あります。 
+
+<ul>
+  <li>Windows専用のプリンタの場合、欧文も含め全てTrueTypeフォントを使うと、印刷が高品位かつ高速になることが期待される。</li>
+  <li>解像度毎のフォントグリフファイルを必要としないので、ディスクスペースの節約になる。</li>
+  <li>LIPS III/IV, ESC/Page のプリンタの場合は、dviout for Windows内蔵のプリンタドライバを使う方が高性能なので、PKフォントでもよい。</li>
+  <li>PDFへの変換やWindowsのPostScript printer driverによるPostScriptプリンタでの印刷の場合は、PKフォントを使わないのが望ましい。</li>
+</ul>
+
+<p>PKフォントを使ってWindowsのPostScript driverによって印刷する場合は、 
+デフォルトの印刷方式でなく <a href="#autorep">auto mode(rep)</a> 
+を使う方がよい。 </p>
+
+<p>必要な欧文フォントの全てがTrueTypeフォントで提供されているとは限りませんが、標準的に使われる 
+CMフォント と AMSフォント には、フリーに提供されている BaKoMaフォントがあります。<br>
+それは以下のようにしてインストール（すなわちWindowsのシステムへの登録）できますが、dviout 
+for Windowsのパラメータで、それを使うかどうかの指定をします。 </p>
+
+<p>まず、BaKoMaのTrueTypeフォントのパッケージ <a
+href="ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/font/bakoma/bakoma.lzh">bakoma.lzh</a>（WindowsXPなどでも正常にアクセス出来るように、コードテーブルのバグを修正したもの）を、lha などで適当なディレクトリに展開しておきます。 </p>
+
+<p>Windowsのデスクトップから </p>
+
+<blockquote>
+  <p>スタート → 設定 → コントロールパネル → フォント → 
+  ファイル → 新しいフォントのインストール </p>
+</blockquote>
+
+<p>で、展開したフォントのあるフォルダに移動し、<b>全てを選択</b>すれば登録されます。 
+</p>
+
+<p>このとき、「フォントフォルダーにコピーする」をチェックをしていた場合は、展開したフォントは全て削除してかまいません。チェックをはずしていた場合は、展開したフォルダーに置いたままで使うことになります。 
+</p>
+
+<p>より詳しくは <a href="http://argent.shinshu-u.ac.jp/otobe/tex/docs/ttf.html">乙部氏の解説記事</a> 
+をご覧ください。 <br>
+なお、自動インストールを行うプログラム（含フォント）<a href="ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/font/bakoma/FixBKM.msi">FixBKM.msi</a> があり、これを使うと簡単です。</p>
+
+<p><a name="inst-pk"></a> <b>3.2. PKフォントのインストール</b> </p>
+
+<p>TeXのシステムはメタフォントも含めて既にインストールされていて、フォント生成のプログラム<b>mktexpk</b>（古いものでは、<b>MaKeTeXPK</b>）が正常に動作する状態になっているとします。 
+</p>
+
+<p>欧文フォントに対して、TrueTypeフォントを用いる場合も、全てがTrueTypeとして存在しているかどうか分かりません。TrueTypeフォントまたは必要なPKフォントが存在しないフォントも 
+（対応するメタフォントのソースが有れば、あるいはVirtual fonts経由で適当な方法で）PKフォントを自動的に作成して使うことが出来るように設定することにします。 
+</p>
+
+<p>印刷のときの実際の解像度が 300dpi としましょう。 （<a
+href="#inkjet">プリンタの仕様</a>を注意深く調べて解像度を得てください）。 
+MS-DOSプロンプト（スタート → プログラム → MS-DOSプロンプト）から 
+</p>
+
+<blockquote>
+  <font color="red"><p>mktexpk cmr10 300 300 300/300</font> </p>
+</blockquote>
+
+<p>を実行します（解像度が 300dpi と異なるときは、上の 300 
+をその値に変えます）。 </p>
+
+<p>既にPKフォントが存在していれば </p>
+
+<blockquote>
+  <b><p>^r</b>/fonts/pk/cx/public/cm/cmr10.300pk exists. </p>
+</blockquote>
+
+<p>というように表示され（<b>^r</b> は、たとえば <b>c:/usr/local/share/texmf</b> 
+のようなフォルダ名です）、存在していない場合はPKフォント 
+cmr10.300pk が作成されます（なお、古いTeXのシステムでは mktexpk 
+でなく maketexpk 
+とします。これは以下も同様です）。これがうまくいかない場合は、以下を参照するほか、<a href="tex_instchk.html">TeXのインストールチェック</a>をしてみましょう。
+
+<ul>
+  <li>「コマンドまたはファイル名が違います」というエラーの時は、mktexpk.exe 
+    あるいは MaKeTeXPK.exe 
+    という実行ファイルが存在することを確かめ、存在しなければ、これを含むTeXのシステムをインストールしてください。存在していた場合は、それが存在するフォルダを実行ファイルのパスに含めてください（環境変数 
+    PATH です。autoexec.batで設定します。WindowsNT/2000/XP の場合はコントロールパネルを用います）。</li>
+  <p><a name="texmf"></a></p>
+  <li>MS-DOSプロンプトで、<b>set</b>を実行して、環境変数 TEXMFMAIN 
+    が設定されていることを確認してください。たとえば <p>TEXMFMAIN=c:/usr/local/share/texmf 
+    </p>
+    <p>のような表示があればOKです。そうでなければ、起動時に参照される 
+    autoexexc.bat でこの環境変数を設定してください（TeXのシステムのインストールの一環です。TEXMFMAINはTeXのシステムをインストールした基準となるフォルダーを表します。但し区切りは 
+    <b>\</b> でなく <b>/</b> で表します）。 <br>
+   ただし、<b>角籐氏のパッケージでWeb2C 7.3.7以降のもの</b>は、環境変数 TEXMFMAIN, TEXMF, TEXMFCNF の設定は不要になり、間違った設定をするとエラーになります。
+ <a name="mode"></a></p>
+  </li>
+  <li><b>MODE cannot be determined.</b>というエラーが出た場合は、 <b>^r</b>\web2c\texmf.cnf 
+    の中の <b>MAKE_TEX_MODE_300=</b> などに正しいMODEを設定してください（環境変数 
+    TEXMFMAIN で示されたフォルダを <b>^r</b> としました）。 私の設定は <blockquote>
+      <p>MAKETEXPK_MODE_118 = pcprevw<br>
+      MAKETEXPK_MODE_160 = nectzo<br>
+      MAKETEXPK_MODE_180 = lqlores<br>
+      MAKETEXPK_MODE_240 = canonlbp<br>
+      MAKETEXPK_MODE_300 = cx<br>
+      MAKETEXPK_MODE_320 = neclm<br>
+      MAKETEXPK_MODE_360 = bjtenex<br>
+      MAKETEXPK_MODE_400 = nexthi<br>
+      MAKETEXPK_MODE_600 = canonex<br>
+      </p>
+    </blockquote>
+    <p>となっています。 </p>
+  </li>
+</ul>
+
+<p>正常に終了した場合は、さらに </p>
+
+<blockquote>
+  <font color="red"><p>mktexpk cmr10 300 300 300/300<br>
+  mktexpk cmr10 360 300 360/300<br>
+  mktexpk lcircle10 300 300 300/300<br>
+  mktexpk lcircle10 360 300 360/300<br>
+  mktexpk msam10 300 300 300/300<br>
+  mktexpk msam10 360 300 360/300<br>
+  </font></p>
+</blockquote>
+
+<p>を実行します（なお、AMSのフォントを使用しない場合は、masm10 
+を含む最後の2行は必要有りません）。この 360 は 300 の<b>1.2倍の解像度</b>を表し、TeXではこのような解像度比のフォントをよく用います。 
+</p>
+
+<p>印刷の際の解像度が 300dpi でなくて、たとえば 400dpi 
+であったなら、上記の300を400に、その1.2倍の360を480に修正して実行してください。いま作成された（あるいは既に存在していた）フォントは、dviout 
+for Windowsのインストールの際に、フォントの所在を自動設定するのに参考にされますので、忘れず実行してください。 
+</p>
+
+<a name="Related"><p><b>3.3. 関連プログラムのインストール</b> </a>
+
+<dl>
+  <dt><b>Ghostscript</b></dt>
+  <dd>PostScript画像を取り込んだり、PostScriptフォントを用いる場合に必要です。 
+    <a href="http://akagi.ms.u-tokyo.ac.jp/texinst98.html">TeXのインストール手順 </a>の項に 
+    Ghostscript のインストール手順も書いてあります。 <p>インストールした場合、正常に動作するかどうかテストして下さい。<br>
+    スタート → プログラム → MS-DOS プロンプト から </p>
+    <blockquote>
+      <font color="red"><p>gswin32 article9.ps</font> </p>
+    </blockquote>
+    <p>を実行してみましょう（gsview ではありません）。 </p>
+    <p>gswin32.exeへ のパスが設定されていないか、あるいは、環境変数 <b>GS_LIB</b> 
+    が 設定されていないと動作しません。両者とも autoexec.bat あるいは 
+    WindowsNT/2000/XP ではコントロールパネルで設定し、環境変数 PATH 
+    や環境変数 GS_LIB に書きます。 </p>
+    <p><a name="JPGetc">PostScript以外</a>の BMP, WMF, JPEG, TIFF などの画像を 
+    LaTeX2eの グラフィックパッケージ で取り込むことがある場合は、dviout.exe 
+    をインストールしたディレクトリからみて <font color="red">Graphic\Latex2e\color.cfg 
+    </font><font color="#400040">と</font><font color="red"> Graphic\Latex2e\graphic.cfg</font> 
+    という２つのファイルを、 TeX をインストールした <font color="red">texmf\tex\latex\config</font> に、また 
+    <font color="red">Graphic\Latex2e\dviout.def</font> を <font color="red">texmf\tex\latex\graphics 
+    </font>にコピーします。これらは、デフォルトの dvips 
+    用のものに対して<a href="#GraPack">上位互換</a>です。 </p>
+  </dd>
+  <dt><a href="http://akagi.ms.u-tokyo.ac.jp/spi.html" name="SUSIE"><b>Susie plug-in</b></a></dt>
+  <dd>PostScript/BMP/WMF/PBM 
+    以外の種々の画像ファイルを取り込むときに必要です。<br>
+    これらを dviout for Windows 
+    のディレクトリ以外のディレクトリに入れた場合は、 （Option → 
+    Setup paranmeters → [Graphic] →） <b>spi:</b> 
+    に、そのディレクトリを指定します。 </dd>
+</dl>
+
+<p><a name="DVIOUT"></a></p>
+<a href="#HEAD">
+
+<p>先頭に戻る</a> </p>
+
+<h2>４. dviout for Windows のインストール</h2>
+
+<p>TeXのシステムがインストールされ、前項に書いたフォントのインストールも完了しているとします。 
+</p>
+
+<p><b>4.1.</b> dviout for Windowsはそれ自身をアンストールすることなども考慮すると、 
+独自の<b>フォルダを作ってそこにインストール</b>するのが良いでしょう。たとえば、 
+c:\dviout 
+というフォルダを作成して、そこにインストールすることにします。 
+</p>
+
+<p>dviout for Windowsのパッケージは、ここ <a
+href="ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/dviout/current_in_Japanese">Windows95/98/Me/NT/2000/XP 
+用の dviout</a> をクリックして取得できます。 <b>tex???w.zip</b> 
+という名前のファイル、または、実行形式の <b>tex???w.exe</b> です。 </p>
+
+<p>dviout for Windowsの実行ファイルのパッケージが tex315w.zip 
+であったとすると、tex315w.zip を c:\dviout に展開し、 MS-DOSプロンプトから、あるいは、「スタート 
+→ ファイル名を指定して実行」で c:\dviout にあるプログラム dviout 
+を実行します。 <br>
+実行形式の場合は、インストールディレクトリを確認の後、以下になります</p>
+
+<blockquote>
+  <b><p>Install fundamental parameters?</b> </p>
+</blockquote>
+
+<p>と尋ねられるので、<b>Yes</b> を選択します（<b>No</b> と答えた後、dviout 
+のメニューバーから Option → Install を選んでも同じです）。 </p>
+
+<p><b>4.2.</b> 最初のダイアログ(<b>Font resolution and Paper size</b>)では、解像度を正しく設定することが重要です。 
+</p>
+
+<p><a href="#inst-pk">PKフォントのインストール</a> 
+の項で使った解像度を <b>Resolution of font(dpi:)</b> に設定します（[Help] 
+を押すと、解説が表示されます）。 </p>
+
+<p>Paper size: は A4 で Portrait（用紙の縦置き）がデフォルトですが、このままで 
+差し支えないでしょう（必要なら後でデフォルトを変更できます）。 
+</p>
+
+<p><b>4.3. </b>解像度を正しく設定したら、<strong>[&gt; Next] </strong>を押して次の 
+<b>Register the location of Font Files</b> 
+に進み、フォントの所在の設定をします。 </p>
+
+<p>フォントの所在の推定機能を使うため、<strong>[Guess]</strong> 
+を押します。 <a href="#inst-pk">PKフォントのインストール</a>のステップが完了していれば、（設定した解像度を元に）ハードディスクを全て検索して、自動的に 
+TEXROOT: と TEXPK: とが設定されます。<br>
+<br>
+<blockquote>
+  <p>フォントが２カ所で見つかると、どちらを使うかが尋ねられますので、正しく答えてください。PKフォントファイルの存在するフォルダーのみが問題です。 
+  </p>
+</blockquote>
+
+<p>たとえば </p>
+
+<blockquote>
+  <p>TEXROOT: ^T\fonts<br>
+  TEXPK: ^r\pk\cx\\^s.^dpk;^r\tfm\ptex\^s.tfm;^r\vf\\^s.vf </p>
+</blockquote>
+<p>のようになります。</p>
+<ul>
+  <li>TEXPK: がフォントの所在を表します。その中の <b>^r</b> は TEXROOT: 
+    の内容に置き換わります。TEXROOT: を使うことで、TEXPK: 
+    の記述を短くする効果と、TEXPK: の記述がTeXのシステムをインストールしたフォルダーに依らない、という効果があります。 
+  </li>
+  <li><a href="#texmf">環境変数 TEXMFMAIN</a>が定義されていれば，多くの場合、TEXROOT: は 
+    環境変数 TEXMFMAINの示すフォルダ（<b>^T</b> で表す。例えば、c:\usr\local\share\texmf）に <b>\fonts</b> 
+    を付けたものになるでしょう。 また、TEXPK: の cx は、PKフォントの <a
+    href="#mode">MODE名</a> です。 </li>
+  <li><b>^s</b> は cmr10, lcircle10 などのフォント名、<b>^d</b> は 300, 360 
+    などの解像度(dpi)、<b>\\</b> は、任意のフォルダー名の列を表し、<b>;</b> 
+    で区切って複数を優先する順に指定します。詳しくは [Help] 
+    を参照してください。 </li>
+  <li><b>^r\vf\\^s.vf</b> は Virtual fonts 
+    の指定です。これを使わない場合は、その記述を削除してかまいません。</li>
+</ul>
+<p>
+なお、<font color="red">角藤氏によるTeXのパッケージをインストールした場合</font>は、<blockquote>
+標準的な日本語TeX環境が検知されました．<br>
+それにあった標準設定を選択します．
+</blockquote>
+と表示された場合は、<font color="red"><b>[はい(Y)]</b></font><font color="#800000">を選択</font>します。
+
+一方、以下のように表示された場合は、<font color="red"><b>[いいえ(N)]</b></font> <font color="#800000">を選択</font>します。</font>
+<blockquote>
+(Y)es: Guess TEXROOT/TEXPK/L from fonts in DISK<br>
+(N)o : Set default value for TEXROOT/TEXPK/L
+</blockquote>
+すると、検索はスキップされ標準的設定となりますので（Ver.3.13.1以降：<strong>推奨</strong>）、次の<b>4.4</b>に進みます。</p>
+
+<p>■ Virtual fonts で（PostScript のフォントを用いるときなどで）ps2pk 
+または gsftopk を使って PK フォントを生成する場合、modeless 
+というディレクトリの下に生成されたフォントが入るようになっていることがあります。この場合は 
+TEXPK の設定に </p>
+
+<p>TEXPK: ^r\pk\cx\\^s.^dpk;^r\tfm\ptex\^s.tfm;^r\pk\modeless\\^s.^dpk;^r\vf\\^s.vf </p>
+
+<p>のように <b>^r\pk\modeless\\^s.^dpk</b> を追加しておきます。 </p>
+
+<p>■ Windowsのシステムに登録されたTrueTypeフォントを使うには、その <a
+href="#tfm">フォントメトリックファイル</a> （拡張子は .tfm）を指定します。 
+<b>^r\tfm\ptex\^s.tfm</b> は和文のTrueTypeフォントの指定にあたります。 </p>
+
+<p>■ 欧文のTrueTypeフォントもインストールした場合、特にBaKoMaのTrueTypeフォントを 
+インストールした場合は、CM/AMSのフォントメトリックファイルの指定を優先するため、 
+その所在をたとえば </p>
+
+<p>TEXPK: 
+^r\tfm\public\cm\^s.tfm;^r\tfm\ams\\^s.tfm;\^r\pk\cx\\^s.^dpk;^r\tfm\ptex\^s.tfm;^r\vf\\^s.vf</p>
+
+<p>のように先頭に挿入します（1行に書きます）。面倒ならば </p>
+
+<p>TEXPK: ^r\tfm\\^s.tfm;\^r\pk\cx\\^s.^dpk;^r\vf\\^s.vf </p>
+
+<p>でもかまいません（後者は起動時のフォントサーチにより時間がかかりますが、dvioutを何度か使っているうちに、フォントの所在のキャッシュ機能が働いて、速度の差はなくなります）。<br>
+TrueTypeフォントとPKフォントが使用可能なとき、より前に該当する前者が優先されることになります。 
+</p>
+
+<blockquote>
+  <p>BaKoMa以外の欧文TrueTypeフォント、たとえば WinTeX 
+  に付属していたもの、あるいはそれらを併用して使う場合は、後から<a
+  href="#WINTEX">若干の変更</a>が必要です。 </p>
+</blockquote>
+<b>
+
+<p>4.4. </b>以上の設定の後、<strong>[&gt; Next]</strong> を押して次の <b>Register 
+Programs</b> に進みます。 </p>
+
+<blockquote>
+  <p>Relate DVI file (.dvi) to dviout for Windows<br>
+  Register dviout on Windows' menu: Start → Program </p>
+</blockquote>
+
+<p>にチェックがついています。前者は、DVIファイルをマウスの左ボタンでクリックしたときなどに 
+dviout for Windows を起動してそのDVIファイルを表示するための設定で、後者はスタートメニューに 
+dviout for Windows を入れるものです。 このままで良いでしょう。 </p>
+
+<p><b>[gen:]</b> 
+のボタンを押してください。足りないフォントがある時に、自動的にPKフォントを作成する設定をするため、mktexpk.exe 
+を探します。 </p>
+
+<blockquote>
+  <p>Automatic search? </p>
+</blockquote>
+
+<p>に <b>Yes</b> 
+と答えれば、ディスクをサーチして自動的に見つけてくれます（<b>No</b> 
+と答えて、フォルダを選択して指定することもできます）。 
+見つかると、たとえば </p>
+
+<blockquote>
+  <p>gen: `c:\usr\local\bin\mktexpk.exe --dpi ^d --bdpi ^D --mag ^M ^s </p>
+</blockquote>
+
+<p>のように設定されます。<b>`</b> の後は mktexpk.exe 
+のフルパス名で、その後の パラメータは、省略した <b>^s ^d ^D ^M</b> 
+という形式でもかまいません。 <a gref="#inst-pk">PKフォントのインストール</a>のステップが終了していれば、問題なく設定されるでしょう。 
+</p>
+
+<p>たとえば、c:\ptex\bin\MaKeTeXPK.exe を使う場合は、 </p>
+
+<blockquote>
+  <p>gen: `c:\ptex\bin\MaKeTeXPK.exe ^s ^d ^D ^M </p>
+</blockquote>
+
+<p>と直接書き込んでもかまいません。 </p>
+
+<p>Ghostscript がインストールされている場合は、<b>[gsx:]</b> 
+のボタンを押して、PostScript画像(EPSF)を取り込めるように設定しておきましょう。 
+</p>
+
+<p><b>4.5. </b>最後に <strong>[Finish]</strong> を押せば <b>基本設定は完了</b> 
+ですが、その前に <strong>[&lt; Back]</strong> 
+で直前の設定に戻ることができます。 分からない部分があれば <strong>[Help]</strong> 
+で調べてみてください。 </p>
+
+<p>ここで設定したパラメータは後から個別に変更が可能で、dviout 
+のメニューバーから <strong>Option → Install</strong> 
+を選択すれば、再度設定をやり直すこともできます。 
+また、最後に [Finish] でなくて <strong>[Cancel]</strong> 
+を押せば、何も設定は行われません。 </p>
+
+<p><a href="#TOP">先頭に戻る</a> <a name="DVIOUT1"></a> </p>
+
+<h2>５．dviout for Windowsを使う</h2>
+
+<p>前項の基本設定が終了すれば、dviout for Windowsを使うことができます。 
+</p>
+
+<p>なお、以下のテスト結果が正常でない場合は、dviout 
+のメニューバーから
+<blockquote>
+  <font color="red">Help → Troubles in dviout</font>
+</blockquote>
+あるいは
+<blockquote>
+  <font color="red">Help → Help Topics</font>
+</blockquote>
+を選んで、関係する項を参照してください。<b>Q&amp;Aの項</b>など役に立つでしょう。 
+</p>
+
+<p><b>5.1. 表示のテストと調整</b><br>
+dvioutのメニューバーから、File → Open を選んで、dviout 
+がインストールされたフォルダーにある HyperTeX 
+のフォルダーに移って、hyper2 というDVIファイルを選択してみます。 
+これは、dviout を終了し、デスクトップから </p>
+
+<blockquote>
+  <p>スタート → プログラム → dviout → sample dvi file </p>
+</blockquote>
+
+<p>を選択したのと同じです。 
+（必要なフォントが存在していない場合、自動生成が行われて）hyper2.dvi 
+をプレビューすることができます。 </p>
+
+<p><b>hyperdvi</b> 
+と下線付きの青色に（デフォルトの場合）表示されている部分を、 
+マウスの左ボタンでクリックすると、hyperdvi.dvi という別の dvi 
+ファイルに移動します。<b>HyperTeX</b> と呼ばれる機能です。 </p>
+
+<p>カーソルキーやマウス、スクロールバー（最も右にあるのはページスクロールバー）などを使って、紙面やページ間を移動することができます（<b>IntelliMouse</b>にも対応）。 
+</p>
+
+<p>dviout for WindowsのWindows内の紙面の大きさは、上部のルーペのボタンにより拡大/縮小できます（Display 
+→ Size → Magnify, Reduceでもよい）。また、Display → Contrast → 
+Blacker, Whiter で、紙面のコントラストを変えることができます。 </p>
+
+<p>紙面のサイズやコントラストを変更した場合 </p>
+
+<blockquote>
+  <font color="red"><p>Option → Setup Parameters → Display</font> </p>
+</blockquote>
+
+<p>を選択し（そこの Start: 
+が現在の状態の設定で、直接変更も可能です）、[Save] を押し [Ok] 
+で元に戻ると、現在の状態が次回の起動の時のデフォルトとなります。 
+
+<ul>
+  <li>マウスの右ボタンのクリックは<b>ルーペ機能</b>なので、試してみましょう。 
+  </li>
+  <li>上部の<b>手の形のボタン</b>を押すと、左のマウスボタンを押したままでマウスを動かすことにより、紙面をスクロールできるようになります。 
+  </li>
+</ul>
+
+<p>（hyperdvi から、その最後のページの hyper2.dvi 
+をクリックする、あるいは、上部の左から２つ目のボタンのクリック(or 
+File → History)からの選択で）最初の文書に戻れます。 
+そこにあるいくつかの文書に HyperTeX 
+の機能でジャンプしてみると良いでしょう。 </p>
+
+<p><b>5.2. 印刷のテストと調整</b> </p>
+
+<p>前項の最初の表示画面から test_a4.dvi をクリックし、test_a4.dvi 
+を表示させて 印刷のテストをします。WindowsにPrinterの登録が正しくなされていて、プリンタの電源が入っていることを確認してください（ネットワークプリンタも可）。 
+A4用紙でテストします。 </p>
+
+<p>dviout 上部の左から３つ目のボタン（or File → Print）を選ぶと、印刷のダイアログが出てきますので、（複数のプリンタを使っていて、表示されているプリンタが、dviout 
+からの印刷に使うものでない場合は、[Setup...]を選んで正しいものに変更した後） 
+[OK]を押してください。 </p>
+
+<p>正しい位置に印刷されていることを確認してください。位置がおかしい場合の修正については、dviout 
+の [Help] を見てください。 </p>
+
+<p><b>LIPSIII/IV, ESC/Page</b> のプリンタを使用している場合は、dviout for 
+Windows内蔵のドライバを使う方がよいでしょう。そのためには、メニューバーから 
+</p>
+
+<blockquote>
+  <font color="red"><p>Option → Setup Parameters → Printer</font> </p>
+</blockquote>
+
+<p>のダイアログの右下の欄から、対応するプリンタの形式を選択します。さらに 
+</p>
+
+<blockquote>
+  <p>dviprt is default. </p>
+</blockquote>
+
+<p>のチェックをつけておきます。その後、[Save] 次に [Ok] 
+を押し、先と同様に印刷を行います。印刷のダイアログで、dviprt 
+にチェックがついていることを確認してください（これは、Windowsのプリンタドライバを使わない、ということを意味します）。 
+</p>
+
+<p>この印刷で印刷位置がずれているときは、位置補正が必要です。 
+ずれを mm 単位で計って、 再び Option → Setup parameters → Printer 
+に移って、その10倍の値を Left: と Top: に設定し、[Save], [Ok] 
+を押します。再度テストすると良いでしょう。 </p>
+
+<blockquote>
+  <p>左に 5.12mm 上に 4.50mm 移動したいときは、Left: に 512、Up: に 450 
+  を設定します。 </p>
+</blockquote>
+
+<p><b>dvi2ps</b> などの他の印刷プログラムを使う場合の設定も、Option 
+→ Setup Parameters → Printer で行うことができます。そこで <b>?</b> 
+ボタンを押して、dviprt: 
+の欄をマウスの左ボタンでクリックしてください。詳しい設定方法を見ることができます。場合によっては、標準出力をプリンタに出力に変更する付属の 
+rawprt.exe が役に立ちます。 </p>
+
+<p><a href="#TOP">先頭に戻る</a> <a name="DVIOUT0"></a> </p>
+
+<h2>６. dviout for Windows のアンインストール</h2>
+<b>
+
+<p>6.1.</b> dviout for Windows（インストールした時のものとバージョンが異なっていても良い）を起動し、Option → Uninstall を選んで、Windows のシステム の registry に dviout が書き込んだデータを消去します（この過程では、ファイルの消去は一切行われません）。 </p>
+
+<p><b>6.2.</b> この後、dvioutを再度起動することなく、dviout for Windowsをインストールしたフォルダーごと中身を消し去ります（ゴミ箱に入れる）。 
+</p>
+
+<p><b>6.3. </b>dviout for Windowsは、Windows 
+のシステムディレクトリなどにファイルをコピーすることはないので、上記の後、ゴミ箱を空にすればアンインストールが完了します。 
+</p>
+
+<p>なお、dviout for Windowsのバージョンアップの場合は、単にプログラムやデータの上書きで済みますので、アンインストールの必要はありません（アンインストールすると、パラメータの再設定が必要です）。 
+他の操作が必要な場合は、ドキュメントに書いてあります。 </p>
+
+<p><a href="#TOP">先頭に戻る</a> <a name="DVIOUT2"></a> </p>
+
+<h2>７. dviout for Windows Ver.3.18 の機能</h2>
+<b>
+
+<p>7.1. 使用可能なTeX</b> 
+
+<ul>
+  <li>通常の欧文のTeX（含NTTjTeX, Omage(j), lambda(j)）</li>
+  <li>アスキーの日本語pTeX</li>
+</ul>
+<b>
+
+<p>7.2. 拡張機能</b> 
+
+<ul>
+  <li>tpic specials（文字や画像の一次変換や色づけなどの独自拡張を含む）</li>
+  <li>color specials（LaTeX2eのgraphics packageをサポート、push/pop のページ独立性検証・修正機能）</li>
+  <li>PostScript specials（カラー対応, LaTeX2eのgraphics packageをサポート, dvips用およびdvipdfm用のDVIファイルをサポート）</li>
+  <li>EPS/PS/WMF/EMF/PBM/BMPを含む各種形式（Susie plug-in により PNG/JPEG/TIF/PCDなども可）画像データファイルおよびそれらを 
+    gzip で圧縮したファイルの読み込み</li>
+  <li>これらの画像ファイルを含む任意のファイルのDVIファイルへの埋め込み</li>
+  <li>フォントファイルから文字データを抽出してのDVIファイルへの埋め込み</li>
+  <li>コメント文のDVIファイルへの埋め込み</li>
+  <li>画像ファイルなどとともに tar 形式にしたファイルや、gzip 
+    で圧縮したファイル を直接扱える</li>
+  <li>埋め込み画像ファイルに対応したグラフィック・エディタの呼び出し</li>
+  <li>HyperTeX specials（WWW browserとも連携）</li>
+  <li>dviout specials（dviout のキー操作、パラメータ変更やタイマーなどをDVIファイルに設定）</li>
+  <li>source specials（エディタとdvioutとの間の相互参照、文字列検索機能付き）</li>
+</ul>
+<b>
+
+<p>7.3. プレビュー機能</b> 
+
+<ul>
+  <li>gray scale（γ補正可能, 
+    カラーの文字の場合は、アンチエリアシング）表示</li>
+  <li>ルーペ機能（２つのルーペや目盛りつきルーペが定義できる）</li>
+  <li>グリッド線の表示</li>
+  <li>2/4/16ページ同時表示</li>
+  <li>プレゼンテーションモード（pause specials, cover sheet, continuous page, 描画機能, ポップアップメニュー）</li>
+</ul>
+<b>
+
+<p>7.4. 印刷機能</b> 
+
+<ul>
+  <li>Windows95/98/Me/NT/2000/XP 
+    のドライバがサポートしているプリンタでの印刷（カラー対応）やFAX送信、PDF変換</li>
+  <li>内蔵の独自のドライバによる印刷</li>
+  <li>dviout以外（特に dviprt, dvips, dvipdfm など）の印刷プログラムの制御</li>
+  <li>袋綴じ印刷</li>
+  <li>縮小／拡大印刷</li>
+  <li>ページ指定マクロ</li>
+</ul>
+<b>
+
+<p>7.5. 欧文フォント、および、NTTjTeXの和文フォント</b> 
+
+<ul>
+  <li>PK, PXL1001, PXL1002, PXL1003 フォーマット（GFは非対応）のフォント</li>
+  <li>TrueType font（独自展開ルーチンを持つので、日本語非対応Windowsでも使用可）</li>
+  <li>OpenType font</li>
+  <li>PostScript font（要 Ghostscript）</li>
+  <li>Virtual font（OmegaのVirtual fontにも対応）</li>
+  <li>subfont</li>
+  <li>METAFONTによる不足フォントの自動生成</li>
+</ul>
+<b>
+
+<p>7.6. フォントライブラリ</b> 
+
+<ul>
+  <li>FARフォントライブラリ（アスキー日本語MicroTeX）</li>
+  <li>GTHフォントライブラリ（MS-DOS版 dviout）</li>
+  <li>FLIフォントライブラリ（emTeX）</li>
+</ul>
+<b>
+
+<p>7.7. アスキーpTeX および NTTjTeX の和文フォント</b> 
+
+<ul>
+  <li>Windows 3.1 や Windows95/98/Me/NT/2000/XP のTrueType/OpenType和文フォント</li>
+  <li>プロポーショナル和文TrueTypeフォント対応（フォントメトリックファイル生成可）</li>
+  <li>LIPS III/IV, ESC/Pageで印刷する場合のプリンタ内蔵の和文フォント</li>
+  <li>JXL4フォント（アスキー日本語MicroTeX）</li>
+  <li>固定サイズのビットマップ和文フォントおよびそれを独自の形式に圧縮したもの</li>
+  <li>「書体倶楽部」形式のフォント</li>
+</ul>
+<b>
+
+<p>7.8. その他の機能</b> 
+
+<ul>
+  <li>文字列サーチ（NTTjTeX では日本語不可）</li>
+  <li>文字列コピー（クリップボードにコピー可、NTTjTeX 
+    では日本語不可）</li>
+  <li>キーに自由に機能を定義可能、キーマクロ機能</li>
+  <li>BMP/EMF/BMC/PDF（or PBM/G3FAX/EPSF の他, ABC出力プラグインにより PNG/EPS 
+    なども可）など各種形式での紙面画像の切り出し出力と
+    クリップボードへのコピー（BMP/EMF）</li>
+  <li>他のプログラムとの連携（DDEなどによる）</li>
+  <li>表示と印刷とで異なるパラメータへの自動切り替え機能</li>
+  <li>パラメータの設定状態を10種類まで名前をつけて登録・選択可能 </li>
+  <li>パラメータファイルの選択読み込み、編集機能
+  <li>設定パラメータのファイルへの書き出しと読み込みや自動インストール機能</li>
+  <li>DVI文書やdvioutや表示文字や取り込み画像に関する各種の詳細情報表示</li>
+  <li>TeXなどの文書作成支援機能（cf. Help→Help TeX）</li>
+  <li>和文／欧文切り替え可能な詳細な On line Help</li>
+</ul>
+
+<a name="utility"><p><b>7.9. 付属のユーティリティープログラム</b></a>
+<dl COMPACT>
+  <dt><b>chkfont</b></dt>
+   <dd>dvi/tfm/jfm/gf/pk/pkd/pxl/gth/far ファイルのフォント情報表示</dd>
+  <dt><b>bmc</b></dt>
+  <dd>BondingBox を記した *.bb ファイル生成（Suise plug-in対応）<br>
+    画像ファイル情報の表示（Suise plug-in対応）<br>
+    bmc を含む各種形式画像ファイルの相互変換（Suise plug-in, ABC output plug-in対応）<br>
+    EPSFファイルからバイナリヘッダの除去</dd>
+  <dt><b>createBB</b></dt>
+  <dd>bmc の *.bb ファイル作成機能に対するグラフィック・インタフェース</dd>
+  <dt><b>dvispc</b></dt><dd>color push/pop, background, tpic pn などの specials のページ独立性が守られるようにDVIファイルを修正<br>
+    DVIファイルの specials のリストアップ<br>
+    DVIファイルと可読なテキストファイルとの間の相互変換</dd>
+  <dt><b>dviadd</b></dt>
+  <dd>任意のファイルをDVIファイルへ埋め込み・抽出する</dd>
+　<dt><b>etfdump</b></dt>
+  <dd>DVIファイルへの埋め込みフォント（dviout独自機能）の詳細情報表示</dd>
+  <dt><b>srctex</b></dt>
+  <dd>source specials をサポートしていないTeXで、それを可能にする</dd>
+  <dt><b>convedit</b></dt>
+   <dd>srctex の補助プログラム</dd>
+  <dt><b>rawprt</b></dt>
+  <dd>標準入力のデータをプリンタに出力するWindowsコンソールプログラム</dd>
+  <dt><b>propw</b></dt>
+  <dd>和文プロポーショナルフォントを含む和文フォントメトリックファイルの（自動）生成</dd>
+  <dt><b>ttindex</b><dt>
+  <dd>和文TrueTypeフォントのインデックスファイル生成<br>
+   dviout内部でのTrueTypeフォント展開（和文フォント埋め込みなど）を用いる場合</dd>
+  <dt><b>optcfg</b></dt>
+  <dd>プリンタ・コンフィギュレーションファイル（Windows版では、通常使用しない）の生成</dd>
+</dl>
+
+<a href="#TOP">
+
+<p>先頭に戻る</a> <a name="EDIT"></a> </p>
+
+<h2>８. エディターとの連係</h2>
+
+<p>TeXによって文書を作成中は、エディターとpreviewerの両方を立ち上げ 
+</p>
+
+<blockquote>
+  <p>エディター → TeXを動かしてDVIファイルを作成 → preview → 
+  エディター </p>
+</blockquote>
+
+<p>を繰り返すことが多いと思われます。この時に便利な機能のいくつかを述べます。 
+</p>
+
+<h3><b>8.1. プレビューの自動更新機能</b></h3>
+
+<p>Option → Setup Parameters... → System → Auto Renew 
+がチェックされている と、dviout で表示中のDVIファイルの更新に応じて、表示も更新されます。<br>
+具体的には、表示中のDVIファイルのTeXファイルをエディターで修正し、TeXを動か 
+してDVIファイルを作成した後、dviout 
+のプレビュー画面をクリックすると、更新 されたDVIファイルによって、プレビュー画面も更新されます。 
+</p>
+<p>Option → Continuous Renew
+をチェックすると，0.5秒間隔でDVIファイルの更新を常に監視し、それに応じてプレビュー画面も更新します。 
+<a name="source">
+
+<h3><b>8.2. source special</b></h3>
+</a>
+
+<p>source special をサポートした TeX 
+コンパイラを用いると、エディターと dvioutとの間で相互ジャンプが出来ます（dviout 
+for Windows Ver.3.11から）。</p>
+
+<p><b>8.2.1 source special をサポートしたDVIファイル</b><br>
+TeX コンパイラによって DVIファイル を作成する時、-src 
+オプションを付加すれば source special のサポートされた DVIファイルが生成できます。たとえば 
+</p>
+
+<blockquote>
+  <font color="red"><p>platex -src foo.tex</font> </p>
+</blockquote>
+
+<p>あるいは </p>
+
+<blockquote>
+  <font color="red"><p>latex -src=par,math mypaper</font> </p>
+</blockquote>
+
+<p>などとします。このときTeXコンパイラが source special 
+非対応の場合は </p>
+
+<blockquote>
+  <p>platex: unrecognized option `-src' </p>
+</blockquote>
+
+<p>などというエラー表示がされて、DVIファイルは生成されません。 
+この場合でも付属のプログラムにより </p>
+
+<blockquote>
+  <font color="red"><p>srctex platex foo.tex</font> </p>
+</blockquote>
+
+<p>とすることにより、source special がサポートされたDVIファイルが生成 
+できます。 </p>
+
+<blockquote>
+  <p>source special とは、DVIファイル中の段落の初めなどに挿入されるTeX 
+  の special で、挿入位置に対応するTeXのソースファイル名とソースにおけ 
+  る先頭からの行番号との情報を記したものです。 </p>
+</blockquote>
+<b>
+
+<p>8.2.2 dviout からエディターへのジャンプ</b><br>
+dvioutからエディターを呼び出す手法は、 Option → Setup Parameters... 
+→ Common → src: に設定しておきます。 </p>
+
+<p>例えば、<b>秀丸エディター</b>の場合は </p>
+
+<blockquote>
+  <p>-src: <font color="red">c:\Program Files\Hidemaru\Hidemaru.exe^s/j%d &quot;%s&quot;</font> 
+  </p>
+</blockquote>
+
+<p>などとします（^s はパラメータとの区切り、%d は行番号、%s 
+はファイル名）。<br>
+このとき、秀丸エディターには、その他 → 動作環境 → 
+排他制御 で 
+「秀丸で同じファイルを開く場合、ファイルを読み直しする」を設定しておき 
+ます。 </p>
+
+<p><b>WinShell</b> (Ver. 3以降）の場合は、WinShell で [オプション] → [主なTeX関連プログラムの設定] から、
+右の [プログラム] のリストより「LaTeX」を選んで [コマンドライン] を
+
+<blockquote>
+<font color="red">-src "%s.tex"</font><p>
+</blockquote>
+とし、dviout の設定は
+<blockquote>
+  <p>-src: <font color="red">C:\Program Files\WinShell\WinShell.exe^s-c "%s" -l %d</font>
+  </p>
+</blockquote>
+などとします。
+
+
+<p><b>emacs, mule, meadow</b>の場合は、 <a
+href="ftp://ftp.st.ryukoku.ac.jp/pub3/ms-windows/win32/gnu/gnuserv.zip">gnucilent</a> 
+を動かしておき </p>
+
+<blockquote>
+  <p>-src: <font color="red">gnuclientw^s +%d %s</font> </p>
+</blockquote>
+
+<p>と設定します。 </p>
+
+<blockquote>
+  <p>なおgnuclientを動かすには、まずパッケージgnuserv.zipを展開して 
+  gnuclient.exe gnuclientw.exe gnudoit.exe gnuserv.exeを PATH の通った 
+  ディレクトリに、gnuserv.el は mule/meadow が探せる lisp ディレク 
+  トリにおき、M-x byte-compile-file などとして gnuserv.el を 
+  バイトコンパイルします。その後 $HOME/.emacs に </p>
+  <blockquote>
+    <font color="red"><p>(require 'gnuserv)<br>
+    (gnuserv-start) </font></p>
+  </blockquote>
+  <p>の二行を追加します。 </p>
+</blockquote>
+
+<p>上記のいずれの場合も、dviout のプレビュー画面で 
+
+<ul>
+  <li>矢印型のマウスカーソルで、マウスの左ボタンをダブルクリックする（Ver.3.14.3以降）</li>
+  <li>SHIFTボタンを押しながら 
+    マウスの左ボタンをクリックして文字列を拾い、[→src] ボタンを押す
+    （なお、Jump → DireCt Jump to Editor のチェックがついていれば、
+     [→src] ボタンを押す必要はありません）。</li>
+</ul>
+
+<p>あるいは 
+
+<ul>
+  <li>CTRL と 
+    マウスの左ボタンを押しながらマウスの右ボタンをクリックする
+<p>のうちのいずれかにより、マウスカーソルの位置に対応するTeXのソーステキストの箇所 
+    がエディタに表示されます（dviout 
+    からエディターへのジャンプ）。 
+    なお、前者の方がより正確なジャンプができます。 </p>
+  </li>
+</ul>
+
+<p>エディターがDDEサーバの機能を持っていれば、dvioutとのDDE交信 
+で、より快適にdvioutからエディターを呼び出すこともできます。 </p>
+
+<p><b>8.2.3. エディターからdvioutへのジャンプ</b><br>
+たとえばエディターから </p>
+
+<blockquote>
+  <font color="red"><p>dviout foo &quot;# 123 fo1.tex&quot; </font></p>
+</blockquote>
+または Ver.3.4.1 以降の場合は
+<blockquote>
+  <font color="red"><p>dviout -1 foo &quot;# 123 fo1.tex&quot; </font></p>
+</blockquote>
+
+<p>というコマンドで dviout を呼び出すと、foo.dvi において TeXのソース 
+テキストのうちの fo1.tex の 123行目付近に対応する部分が dviout のプ 
+レビュー画面に表示されます（最初のパラメータ <font color="red">-1</font> は、
+最初に起動された dviout に対するコマンドを示す）。
+さらに Ver.3.13.3 からは</p>
+
+<blockquote>
+    <font color="red"><p>dviout foo &quot;# 123/This book fo1.tex&quot; </font></p>
+</blockquote>
+
+とすると（Ver.3.14.1 以降では、パラメータ <font color="red">-1</font> をつけるとよい）、
+fo1.tex の123行目の文字列 <font color="red">This book</font> を探し、
+プレビュー画面でそれが含まれる部分を表示します。<font color="red">This book</font> 
+でなくて、<font color="red">この本</font> というような和文の文字列でもOKです。
+<br>
+View → Animation Cursor をチェックしておくと、該当箇所が明示されるので便利です。
+</p><p>
+このような呼び出しには DDEによる交信 がサポートされているので、エディターがDDEをサポートしている場合（たとえば秀丸）は、DDEを使う方が高速で快適です。 </p><p>
+なお、dviout Ver.3.14.3 からは、ファイル名の部分 <font color="red">fo1.tex</font> は、
+相対パス名の他、絶対パス名でも指定できるようになり、パスの区切り記号は 
+<font color="red">/</font> でなくて <font color="red">\</font> も使えるようになりました。空白が混ざる場合は、<font color="red">'c:\My Documents\fo1.tex'</font> のように、
+<font color="red">' &nbsp; '</font> で囲って指定します。
+</p><p>
+たとえば <b>WinShell</b> の場合は、[オプション] → [主なTeX関連プログラムの設定] から、右の [プログラム] のリストより「DVIView」を選び、[コマンドライン] を
+
+<blockquote>
+    <font color="red">-1 %s.dvi "# %l '%c.tex'" </font>
+</blockquote>
+と設定します。
+
+<h3><b>8.3. 画像エディター呼び出し機能</b></h3>
+<p>dviout for Windowsは、表示された取り込み画像をマウスの左ボタンでダブルクリックすると、その画像ファイルに対応したグラフィック・エディターを呼び出す機能をもっています。<br>
+画像ファイルとそのエディターとの対応は、画像ファイルの拡張子に基づきます。</p>
+対応は Option → Setup Parameters... → Common → gsrc: で設定します。<br>
+設定された拡張子のみが有効です。たとえば
+<blockquote>
+    -gsrc:
+    <font color="red">.ps.eps=Illustrator.exe^s"%s";.bmp=mpaint^s"%s"</font>
+</blockquote>
+とします。拡張子を最後の「.」の部分から書き（必要なら複数個並べる）、その後
+「=」で対応するエディターの呼び出し方を書きます（呼び出し方は，前項の -src: と
+同様の書式）。異なる呼び出し方のものは「;」で区切って書きます。
+
+<h3><b>8.4. クリップボードやエディターへのコピー機能</b> <a name="Clip"></a></h3>
+<dl>
+<dt><b>文字列のクリップボードへのコピー</b></dt>
+<dd>Shift+マウスの左ボタンクリックで、dviout のpreviewウインドウから文字列を
+拾い出し、[Add] で追加し、必要なら編集してから [Copy] でクリップボードにコピ
+ーして、エディターに貼り付けて用いることができます。
+ただし記号などには対応しておらず、
+文字の種類によってはうまく行かないこともあります。</dd>
+
+<dt><b>Help TeX</b></dt>
+<dd>
+<ul>
+<li>Help → Help TeX で表示されるホットスポットをクリックすると、
+対応する記号などに対する TeX のソースがクリップボードにコピー
+（Ver.3.17.3 以降では、ALT キーを押していると<b>追加</b>コピー）されるので、
+それをエディターに貼り付けて用いることができます。</li>
+<li>CTRLキーを押しながらクリックした場合は，さらにエディターに直接コピーすることができます。
+<ul><li>
+初回のクリック直後にエディター画面をアクティブにするとコピーされ、次回以降はそのエディターに自動的にコピーされる。</li>
+<li>コピーされるエディターを変更する場合は，CTRLの他にALTも押しながらクリックすればよい。</li>
+<li>Option → Clipboard+Editor をチェックしておけば，CTRLを押さないクリックの方がエディターへの直接コピーに変更される。</li>
+</ul>
+</li>
+<li>表示されるもののソースファイルとDVIファイルは、HyperTeX\input.tex と HyperTeX\input.dvi
+ですので、自由に変更・追加して用いることができます。<br>
+複数の記号などを合わせて使う場合は、View → Small Editor で開かれるエディターにペーストして簡単に編集してから 
+[Copy] で再度クリップボードにコピーしてもよいでしょう。</li>
+<li>
+Option → Setup Parameters... → System → texhelp: で
+表示するDVIファイル（デフォルトは ^x\HyperTeX\input.dvi）と（dviout起動の）パラメータを指定できます。
+たとえば
+<blockquote>
+ -texhelp:-NULL=(555,-20)-(1027,737)
+</blockquote>
+</li></ul></dd>
+
+<dt><b>keyin.sty</b></dt>
+<dd>dviout Ver.3.17 以降では、クリップボードに指定した文字列をコピーする 
+dviout special がサポートされました。
+.\HyperTeX にある keyin.sty を用いると、\keyin{......}{......} や 
+\K{......\K} のコマンドが LaTeX のソースファイルで使用可能になります。
+<blockquote>
+ \keyin{<font color="red">&lt;string1&gt;</font>}{<font color="red">&lt;string2&gt;</font>}
+</blockquote>
+では <font color="red">&lt;string2&gt; </font> がホットスポットとなり、
+クリックすると <font color="red">&lt;string1&gt;</font> がクリップボードにコピーされます。
+<font color="red">&lt;string1&gt;</font> の中で空白を入れて"&nbsp;0d&nbsp;0a"のように書くと、改行が定義されます。
+<blockquote>
+ \K{<font color="red">&lt;string&gt;</font>\K}
+</blockquote>
+では <font color="red">&lt;string&gt;</font>
+に対応するホットスポットのクリックで、
+<font color="red">&lt;string&gt;</font> がクリップボードにコピーされますが、
+<b>Kfalse</b> というオプションをつけると、
+\K{<font color="red">&lt;string&gt;</font>\K} 
+は単に <font color="red">&lt;string&gt;</font> と解釈されます。<br>
+一方 <b>Kverb</b> というオプションをつけると、
+タブや改行などもそのままクリップボードにコピー可能です。<br>
+たとえば
+<blockquote>
+  ...<br>
+  \usepackage{keyin}<br>
+  ...<br>
+  \begin{document}<br>
+  ...<br>
+  \keyin{\begin{equation}&nbsp; 0d&nbsp; 0a\end{equation}}{Equation}<br>
+  ...<br>
+  \[<br>
+  &nbsp;&nbsp;\K{x_1+\cdots+x_n\K} = 1<br>
+  \]<br>
+  \end{document}
+</blockquote>
+などとして使います。
+<blockquote>
+  \usepackage[Kfalse]{keyin}
+</blockquote>
+とすれば、\K{x_1+\cdots+x_n} = 1 は単に {x_1+\cdots+x_n} = 1 と書いたのと同じことになります。<br>
+原稿作成中は \usepackage{keyin} として Help → Help TeX と同様の使い方で用い、
+最終的には \usepackage[Kfalse]{keyin} とする
+（あるいは、最終原稿は <font color="blue">\K{</font> と  <font color="blue">\K}</font> を共に空白に置換する）と便利でしょう。
+</dd>
+<dt><b><a href="http://www.la.takushoku-u.ac.jp/~hoda/misc/refcheckl.html">refcheckl.sty</a></b></dt>
+<dd>Oleg Motygin 氏によるLaTeX2eパッケージ refcheck.sty (v1.9) を織田氏が改良したもの。dviout のクリップボードへのコピー機能に対応している。
+LaTeX2e の参照ラベルが欄外に表示され、dviout のプレビュー画面でマウスの左ボタンクリックすると、その参照用のキーが {&nbsp;} で囲ってクリップボードへコピーされる。</dd>
+</dl>
+
+<h3><b>8.5. DDE交信機能</b></h3>
+<p>dviout for Windows は、DDEのサーバ機能を持っていて、それによってエディタ 
+からdvioutのパラメータを変更したり、dviout をコントロールしてdvioutのほ 
+とんどすべての機能を使うことができます。詳しくは、dviout の 
+On-line Help などを御覧下さい。 </p>
+
+<p><a href="#TOP">先頭に戻る</a> <a name="HINT"></a> </p>
+
+<h2>９. いくつかのヒント</h2>
+<a name="GIMON">
+
+<dl>
+  <dt><b>疑問点について</b></a></dt>
+  <dd>dviout for Windowsの <strong>On-line Help</strong>（<strong>Help → Help Topics</strong>）に数多くの情報があります。そのなかの 
+    <b>Q&amp;A</b> 
+    は、今まで寄せられた質問などを参考に書かれています。まず、これらを参照してください。 
+  </dd>
+  <dt>　</dt>
+  <dd>また、付属の文書も参考になるかも知れません（たとえば、<strong>epsfdoc.dvi</strong> 
+    は、PostScriptなどの画像取り込みに関する例を含んだ解説文書です。<strong>sample.dvi</strong> 
+    は、主に dviout 固有の機能について、<strong>cmode.html</strong>（<a
+    href="cmode.html">DVIwareとしてのdviout</a>）<strong> </strong>は dviout 
+    の基本的動作について解説してあります）。 <p>不具合については、<a
+    href="dvioutQA.html">dvioutにおけるトラブル</a>も参照してください。</p>
+    <p>解決できない部分や、問題点などがありましたら <a
+    href="http://akagi.ms.u-tokyo.ac.jp/dvioutML.html">dviout Mailing List</a> 
+    を通じて質問してください。その際の情報として、Ver.3.12.2以降のdvioutで、<strong>Help 
+    → System Info.</strong> で表示される情報を、<strong>[Copy]</strong> 
+    でクリップボードにコピーしたものを添えてください。</p>
+  </dd>
+  <dt><strong><a name="ttfonts">各種のWindows TrueTypeフォントを使う。</a></strong></dt>
+  <dd>cmr10などのCMフォントやAMSフォントについて、BaKoMaのTrueTypeフォントを用いる方法は既に述べました。Windows上の各種TrueTypeフォントをTeXおよびdvioutで使えるように設定するため、乙部氏のパッケージ winttf.zip（古い版では、winttf.lzh）を用います。
+これにより、Times New Romanなどの各種欧文フォント、各種（Windows付属、市販品、文字鏡、GT）和文フォントやMS 
+    P明朝をはじめとする各種和文プロポーショナルフォント（詰め組）が使えるようになります。インストール方法は、<br>
+    <br>
+    MS-DOS Window（コマンド Window)で、TEXMF 
+    の上のディレクトリに移動します。<br>
+    環境変数 TEXMFMAIN（それが存在しないときは TEXMF）が、c:/usr/local/share/texmf 
+    のときは<br>
+    <br>
+    &nbsp;&nbsp; <font color="#FF0000">cd c:\usr\local\share<br>
+    &nbsp;&nbsp; c:</font><blockquote>
+      <p>古い winttf.lzh 
+      がインストールされていれば、それをすべて削除します。それは、<br>
+      &nbsp;&nbsp; texmf\fonts\tfm\windows<br>
+      &nbsp;&nbsp; texmf\fonts\vf\windows<br>
+      &nbsp;&nbsp; texmf\tex\latex\ttnfss<br>
+      以下の全てのファイルです（フォルダごとゴミ箱に捨てる）。<br>
+      </p>
+    </blockquote>
+    <p>dviout のパッケージ付属の font\winttf.zip を展開します。
+    それが、c:\dviout\font\winttf.zip であったなら<br>
+    <br>
+    &nbsp;&nbsp; <font color="#FF0000">unzip c:\dviout\font\winttf</font><br>
+    <br>
+    とします（<strong>.\texmf\</strong> 
+    以下に多くのものが展開されます）。
+    なお、和文の詰め組みやぶら下げ用、あるいは、min10.tfm の不具合を修正した 
+    newmin.tfm などを用いるには（次項参照）、付属のパッケージ exjfonts.zip をここで
+    インストールしておきます。<br>
+    <br>
+    &nbsp;&nbsp; <font color="#FF0000">unzip c:\dviout\font\exjfonts</font><br>
+    <br>
+    dviout を起動して、Option → Setup Parameters... → [Font2] の [ftt:] 
+    ボタンを押して ftt: を以下のように設定します（^x は dviout のフォルダを表す）。<br>
+    </p>
+  </dd>
+  <dd>&nbsp;&nbsp; <font color="#FF0000">^x\map\ttfonts.map</font><br>
+    <br>
+    [Save] で設定を保存し、dviout 
+    を再起動すれば、インストールしたものが使用可能になります。<br>
+    詳細は、texmf\doc\ttnfss 以下のファイルやサンプルをご覧下さい。</dd>
+    <dt><strong><br>
+   <a name="#ttjfonts">いろいろな和文TrueType/OpenTypeフォントを使う</a></strong></dt>
+  <dd>OpenTypeフォントは、Windows2000SP2，またはWindowsXP以降で用いてください。
+   <br>
+   アスキーのpTeXでは、デフォルトで ＭＳ 明朝とＭＳ ゴシックのTrueTypeフォントが用いられます。
+   <ul>
+   <li><strong>最も簡便に和文フォントの割り当てを変える</strong>には<br>
+    メニューバーの Option  → Change Japanese fonts（Ver.3.15以降）のメニューを使ってフォントを割り当てて [OK] を押します。
+    <ul><li>
+    これは、現在起動中のdvioutに対してのみ有効です。</li>
+    <li>変更後の dviout のフォント割り当ての設定は、Help  → Other Info   → Map Info.
+   で見ることができ、この内容は、-ftt: で読み込まれるフォントマップ形式なので、
+   それをファイルにコピーしてマップファイルとして読み込むようにすれば、
+   この設定を再度使うこともできます。
+    </li></ul></li></p><p>
+   <li><strong>ＭＳ 明朝とＭＳ ゴシックの代わりに、他のTrueType/OpenType フォントを一時的に割り当てて用いる</strong><br>
+    TeXのソースやDVIファイルに手を加えずに、これを簡単に行うには次のようにします
+  （サイズや文字の変形などの微調整が可能）。
+    </p><p>
+    和文に使われているフォントは、min* と goth* あるいは、jis と jisg であるとします
+   （Help → Font Info. で分かります）。<br>
+    <b>1.</b> Option → Setup Parameters... → WinJFont と選びます。</p><p>
+    <b>2.</b> <b>Japanese TT</b> のチェックを確認し、jfm(omit pt)/tfm で、
+    対応する和文フォント min/goth/jis/jisg を選び（このとき、上部 TrueType Font 
+    の覧には、それに対して当てられるTrueType/OpenTypeフォント名が表示されます）、
+    次に <b>[Change Font]</b> ボタンを押します。</p><p>
+    <b>3.</b> 表示されたダイアログ上部のリストWindowの矢印ボタンを押して、
+     リストの中から割り当てたいTrueTypeフォントを選択します（先頭に @ 
+     が付いているのは、縦書き用フォントです）。
+     <b>OpenTypeフォント</b>を選択するときは、<b>[TrueType] のチェックをはずします。</b>
+     下部に、そのフォントの文字のサンプルが表示されます。</p><p>
+    <b>4.</b> それでよければ [OK] を押して、WinJFont のダイアログに戻り、<b>[Define]</b> を
+     押します。</p><p>
+    <b>5.</b> 他にも割り当てたいものがあれば、同様のことを行います。なお、文字サイズ
+    を調整するには、<b>4.</b> の [Define] ボタンを押す前に H scale（縦方向）, 
+    V scale（横方向）の値を変えます。</p><p>
+    <b>6.</b> この変更は、現在操作中の dviout に限るとして、WinJFont を <b>[OK]</b> ボタンを
+    押して抜け出します
+   （次回以降も引き継ぐときは、[OK] の前に [Save] を押しておきます）。</li></p><p>
+    なお、縦書きの場合は tmin/tgoth などが用いられます。</p><p>
+   <li><strong>ＭＳ 明朝とＭＳ ゴシックなどの標準のフォントの他に、いくつかの和文フォントを用いる</strong><br>
+   <b>1.</b> TeXで用いるフォント名を設定し、
+   和文TrueType/OpenTypeフォント名との対応を設定する必要があります。<br>
+   それには、前項のように[WinJFont]で設定する方法と、map file に書いて設定する方法が
+   あります。
+   <ul><li><strong>[WinJFont]で設定する場合</strong><br>
+   そのフォントの文字サイズや位置などの微調整や、長体／平体／斜体などの設定が可能です。<br>
+   <u>具体的な設定方法</u>：最初に jfm(omit pt)/tfm に TeX で使うフォント名
+　（たとえば、hgrgysj などという欧文の文字列）を記入し、Japanese TT をチェックして 
+   <b>[Add Font]</b> で和文TrueType/OpenTypeフォントを選ぶ他は、前項と同様です。
+   設定を記録しておく場合は、<b>[Ok]</b> を押す前に <b>[Save]</b> を押しておきます。
+   </li>
+   <li><strong>map file で設定する場合</strong><br>
+   <a href="#ttfonts">前項</a>にあるように winttf.zip を展開し、ftt: に ttfonts.map 
+   を設定しておきます。<br>
+   pttfonts.map に多くの和文TrueTypeフォントが登録されているので、
+   既に登録されているものを使う場合はそれを利用すると良いでしょう。たとえば
+   <blockquote>
+   <font color="blue">hgrgysj &nbsp;&nbsp; &nbsp;&nbsp;"HG行書体"</font>
+   </blockquote>
+   という行は、hgrgysj には、和文TrueTypeフォント「HG行書体」を割り当てることを意味します。<br>
+   新たなものを定義するには、TeXにおけるフォント名と、
+   対応する和文TrueTypeフォント名（[WinjFont]のタブで、[Change Font]を選んだとき、
+   上部のリストWindowで表示される名前）とを書いた行を、
+   例にならって pttfonts.map の最後に付け加えます。
+   </li></ul></p><p>
+   <b>2.</b> 和文フォントの jfm ファイルの作成<br>
+   <ul><li>
+   <b>プロポーショナルでない通常の和文フォントの場合</b><br>
+   min10.tfm, tmin10.tfm, newmin.tfm, jis.tfm, 
+   jis-v.tfm などを名前を変えてコピーして使います（tmin10.tfm, jis-v.tfm は縦書き用）。
+   たとえば、コマンドプロンプトを開いて jis.tfm のあるフォルダーで
+   <blockquote>
+   <font color="red">copy&nbsp;&nbsp;jis.tfm&nbsp;&nbsp;hgrgysj.tfm</font>
+   </blockquote>
+   などとします。
+   <blockquote>
+   jis.tfm と jisg.tfm の差はないので、どちらを用いても同じです。min10.tfm と 
+   goth10.tfm についても同様です。
+   </blockquote>
+   <li><b>プロポーショナル和文TrueTypeフォントの場合</b></br>
+   dvioutパッケージに付属のpropw を使って作成することができます。
+   たとえば、pttfonts.map の
+   <blockquote>
+   <font color="blue">hgprtgysj&nbsp;&nbsp; &nbsp;&nbsp;"@HGP行書体"</font>
+   </blockquote>
+   は、TeXのフォント hgprtgysj に縦書きのプロポーショナル和文フォント
+  「@HGP行書体」を対応づけています。
+   pttfonts.map がこのような行を含んでいて、この和文フォントが存在していれば、
+   pttfonts.map が存在するフォルダで
+   <blockquote>
+    <font color="red">propw &nbsp;&nbsp; -u &nbsp;&nbsp; pttfonts.map</font>
+   </blockquote>
+   とすれば、対応する jfmファイル hgprtgysj.tfm が作成されますので、
+   それを所定のフォルダ（たとえば、TeX のフォルダの texmf\fonts\tfm\ptex）
+   にコピーしておきます。</li></p><p>
+   <li><b>特殊なフォントの場合</b><br>
+   縦横比が普通でない場合や、細かな調整が必要なフォントの場合、propw を使うか
+   pl ファイルを書くことによって、jfmファイルを作成します。
+  詳しくは、それらの説明を参照してください。
+   </li></ul></p><p>
+   <b>3.</b> TeX での使用<br>
+   いくつかの方法があり、詳しくは TeX の概説書に譲りますが、
+   たとえば最も簡単には、以下のようにすると使えます。<br>
+   <pre><font color="blue">
+    ...
+    \font\gyou=hgrgysj
+    \font\gyoub=hgrgysj at 12pt
+    ...
+    {\gyoub 山下}
+
+    名前は「{\gyou 山上}」です。
+    ...</font></pre></ul>
+   </dd>
+  <dt><strong><br>
+   <a name="Heitai">和文で平体・長体を使う</a></strong></dt>
+  <dd>Ver.3.12.1 以降の dviout のパッケージの font\winttf.zip 
+    をインストールした後（<a href="#ttfonts">前項参照</a>）、同様に 
+    font\exjfont.zip をTeX のインストールディレクトリの texmf 
+    の上で展開します。例えば<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; <font color="#FF0000">cd c:\usr\local\share<br>
+    &nbsp;&nbsp;&nbsp; unzip c:\dviout\font\exjfont</font><br>
+    <br>
+    となります（texmf\ 以下に多くのものが展開されます）。<br>
+    texmf\doc\exjfonts\ にあるドキュメントをご覧下さい。</dd>
+  <dd>　</dd>
+  <dt><a name="Burasage"><strong>和文のぶら下げ組版</strong></a></dt>
+  <dd>行末に和文の句読点がある場合、それを行末からはみ出させる組版です（関連する不具合が修正された 
+    <strong>pTeX 2.1.10以降</strong> が必要です）。<br>
+    前項のように winttf.zip と exjfont.zip をインストールすると使用可能になります。<br>
+    texmf\doc\exjfonts\burasage.txt を参照してください。</p><p>
+    <img src="hung.png"></a>
+    </dd>
+  <dd>　</dd>
+  <dt><a name="newmin"><strong>min10やjarticleの不具合を修正する</strong></a></dt>
+  <dd><a href="http://argent.shinshu-u.ac.jp/otobe/tex/files/min10.pdf">min10を使った場合の和文フォントにおける空きの異常</a>、たとえば、「ちゃった」の「ゃ」と「っ」の詰まりすぎや、「‘国’」や「国）．」の空き、などの不具合を解消します。<br>
+    前々項のように winttf.zip と exjfont.zip をインストールすると、
+    これらの不具合を修正した min10 の修正版 newmin などが使えるようになります。
+    </p><p>
+    <img src="newmin.png">
+    </p><p>
+</dd><dt>
+<ul><li>たとえば、以下のように乙部氏の <b>newmin.sty</b> を用いると newmin 
+    を使うことができます。
+    <pre><font color="blue">
+    \documentclass[a4j,10pt]{jarticle}
+    \usepackage{newmin}
+    ...</font></pre>
+</li><li>一方、newmin は、<b>各文字間の空きの不具合を修正するのみで各文字のサイズは 
+    min10 と同一</b>になっていますので、
+    DVIファイルを作成する側で従来の min10 の代わりに 
+    newmin を min10 という名前で使って作成されたDVIファイルを用いるならば、
+    出力側で使う jfm ファイルは従来の min10 でも、
+    修正版の newmin でそれを置き換えたものでも、
+    不具合が修正された同一の結果が得られる、という特長があります
+   （互換性あり --- すなわち、出力側は従来の min10 のままでもよい ---。
+    この点では、文字サイズが  min10 と異っている jis とは違います。
+    たとえば、 min10 を newmin で置き換えると、「ちゃった」の場合は、従来のmin10 
+    のもとで「ちゃ{ }った」とソースに書いた場合と同じDVIファイルが生成されます）。
+    </p><p>
+    texmf\doc\exjfonts\ にあるドキュメントをご覧下さい。
+    </p><p>
+    従来の jarticle などをそのまま（<font color="blue">\usepackage{newmin}</font> 
+    などを書かずに）使った場合には、従来の min10 が使われることになるので、
+    上記のような空きの不具合が発生します。
+    これを修正するにはフォーマットファイルの再生成が必要で、以下のようにします。
+</p><p>
+</li><li>次項を参照して、min*.tfm, goth*.tfm, tmin*.tfm, tgoth*.tfm を newmin.tfm, 
+    newgoth.tfm, newtmin.tfm, newtgoth.tfm から作成します。* は、5, 6, 7, 8, 9, 10 
+    です。作成したものを不具合のある従来のものと置き換えます（texmf\fonts\tfm\ptex 
+    などに入っている）。
+    作成したものと置き換えのためのバッチファイルが<a href="ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/win32-new/newmin.lzh">newmin.lzh</a>
+    または<a href="ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/win32-new/newmin.zip">newmin.zip</a>にあります．
+    <br>この後<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; <font color="#FF0000">fmtutil --all</font><br>
+    <br>
+    としてフォーマットファイルなどを更新します。これがサポートされていない場合は<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; <font color="#FF0000">ptex -ini ptex.ini<br>
+    &nbsp;&nbsp;&nbsp; ptex -ini platex.ini</font><br>
+    <br>
+    を実行し、作成された新しい ptex.fmt と platex.fmt で従来のもの（texmf\web2c 
+    などに入っている）を置き換えます。<br>
+    これらのフォーマットファイルを newptex.fmt, newplatex.fmt というファイル名に変更したものが 
+    <a href="ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/win32-new/newfmt.lzh">
+    newfmt.lzh</a> を展開すると得られます（角藤氏のパッケージに基づくもの）。
+</li></ul></dt>
+  <dd>　</dd>
+  <dt><a name="newmin8"><strong>min8やgoth8などの不具合修正版を作る</strong></a></dt>
+  <dd>newmin.tfm と newgoth.tfm は、それぞれ min10.tfm と goth10.tfm 
+    の不具合を修正したもので、min10.tfm, goth10.tfm 
+    と名前を付け替えて使用することができます。min8.tfm 
+    の不具合修正版を作るのは以下のようにします。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color="#FF0000">tftopl newmin.tfm &gt; min8.pl</font><br>
+    <br>
+    として、修正版 min8.tfm の元になる PLファイル min8.pl 
+    を作ります。この min8.pl の先頭から 5 行目あたりの (DESIGNSIZE R 10.0) 
+    の 10.0 の部分をエディタで、変更するポイントサイズに修正します。8 point の場合は<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp; <font color="#0000FF">(DESIGNSIZE R 10.0)&nbsp;&nbsp;&nbsp; →&nbsp; 
+    (DESIGNSIZE R 8.0)</font><br>
+    <br>
+    とします。最後に以下のようにすると、PLファイル min8.pl 
+    から修正版の min8.tfm が作成されます。修正版 goth8.tfm 
+    なども同様にして newgoth.tfm から作成できます。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp; <font color="#FF0000">pltotf min8.pl</font><br>
+    <br>
+    min*.tfm や goth*.tfm 
+    の修正版を従来のものと置き換えて使うためには、フォーマットファイル（texmf\web2c 
+    にある ptex.fmt や platex.fmt 
+    など）をこれらを使って再生成しておく必要があります。これによって 
+    DVIファイルを作成した場合、dviout や dvipsk などのDVIwareで出力する際は、修正版の 
+    min*.tfm や goth*.tfm 
+    でなくて、従来のものを使っていても同一の出力となるため（=出力段階での互換性）、出力の段階では従来の環境のままあっても、不具合が修正されたものが得られます。</p><p>
+    なお、<a href="ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/win32-new/newmin.lzh">
+    newmin.lzh</a> 
+    または<a href="ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/win32-new/newmin.zip">
+    newmin.zip</a> を利用すれば，上記は不要です。</dd>
+  <dt><br>
+    <strong><a name="propw">和文をプロポーショナルフォントで組む（詰め組）</a></strong></dt>
+  <dd>付属の winttf.zip をインストールしてあれば、ＭＳ Ｐ明朝やＭＳ 
+    Ｐゴシックなどのプロポーショナルフォントで組むことが出来ます（関連する不具合が修正された 
+    <strong>pTeX 2.1.11 以降</strong> が必要です）。乙部氏の <strong>tumegumi.sty</strong> 
+    を使って、たとえば<blockquote>
+      <p><font color="#0000FF">\documentclass[a4paper,10pt]{jarticle}<br>
+      \usepackage{tumegumi}<br>
+      \begin{document} </font></p>
+    </blockquote>
+    <p>としておけば、大きな文字を使った部分、\texttume{......} 
+    の中、および \tumeshape 命令によって、ＭＳ P明朝やＭＳ Pゴシックを使って組まれます（cf. 
+    texmf\doc\ttnfss の tumegumi.tex, tumegumi.dvi）。<br>
+    <br>
+    なお、詰めのメトリックはフォント毎に異なるので、詰め組用の tfm 
+    ファイルは使うフォントに応じて作成したものを使わなくてはなりません。 
+    tumegumi.sty は、そのままでは ＭＳ Ｐ明朝（mspmin.tfm）やＭＳ 
+    Ｐゴシック（mspgoth.tfm）専用です。<br>
+    <img src="mspmin.png">
+    <br>
+    propw.exe を使うと、Windowsに登録された任意の和文プロポーショナルフォントの 
+    tfm ファイルを作成することが出来ます。pttfonts.map 
+    には多くの和文プロポーショナルフォントが登録されており、pttfonts.map が 
+    c:\dviout\map にインストールされていれば、texmf 
+    の上のディレクトリから </p>
+    <blockquote>
+      <p><font color="#FF0000">cd texmf\fonts\tfm\windows\wabun<br>
+      propw c:\dviout\map\pttfonts.map </font></p>
+    </blockquote>
+    <p>とすると、pttfonts.map に書かれていてWindowsに登録されている全ての和文の 
+    tfm ファイルが作成されます（propw.exe や pltotf.exe 
+    にパスが取っている必要があります）。pttfonts.map 
+    に新たなフォントを書き加えておけば、それに対応する和文 tfm 
+    も作成されます。 </p>
+  </dd>
+  <dt><a name="TEXforWin"><b>ImpressのTeX for Windowsで dviout を用いる</b>。</a></dt>
+  <dd>WinDvi.exe の代わりに dviout.exe を用いるには、dviout 
+     が動作する環境にしておいて、dviout.exe の名前を WinDvi.exe と変え、もともとの
+     WinDvi.exe と置き換えます。次項も参照。</p><p>
+  </dd>
+  <dt><a name="WINTEX"><b>ImpressのWinTeXのTrueTypeフォントを用いる</b>。</a>
+<ul><li>Option → Setup Parameters... → WinJFont において、tfm: に edefault 
+    を選択し、 Japanese TT のチェックをはずし、code type: WinTeX 
+    を選んで、[Save], [OK] を押す。<br>
+    <b>dviout Ver.3.15 以降</b>では、Option → Choose Parameters... で、
+    「WinTeXのTrueTypeを使う設定」を選んで、[Ok][はい(Y)]を選択すればよい。
+</li><li>BaKoMaのTrueTypeと混在させて使う場合、edefault 
+    に主として使う方を登録し、 それ以外は WinJFont 
+    でフォント毎に個別に設定すればよい。
+</li><li>Ver.3.09以降には、 BaKoMaのTrueTypeフォントと共に、WinTeXのTrueTypeフォントline10, 
+    linew10, lcircle10, lcirclew10 を使うという設定のパラメータファイル（bakoma.par）が付属している。 
+</li><li>両者の違いなども含めて、<a
+    href="http://argent.shinshu-u.ac.jp/otobe/tex/docs/ttf.html">乙部氏の解説</a>がある。</li></ul></dt>
+  <dd>　</dd>
+  <dt><a name="DAITAI"><b>存在しない和文フォントの代替機能を優先しない</b>。</a>
+<ul><li>TEXPK: の指定で、<b>^s.tfm</b>の代わりに <b>^s^tfm</b>と書くと、存在する和文TrueType/OpenTypeフォントのみを 
+    指すことになります。jfmファイルが存在する和文フォントで、Virtual 
+    font 
+    を使いたい場合などに用います。（デフォルトでは、存在しない和文フォントは斜体で代替されます）。
+</li><li>さらに、Virtual fontの指定の後に <b>^r.tfm</b>を書いておけば、この代替機能も有効に出来ます。 
+    たとえば <blockquote>
+      <p><font color="#FF0000">^r\tfm\\^s^tfm;^r\pk\\^s.^dpk;^r\vf\\^s.vf;^r\ovf\\^s.ovf;^r\tfm\\^s.tfm</font> 
+      </p>
+    </blockquote>
+    <p>とすると </p>
+    <blockquote>
+      <p>TrueTypeフォント → PKフォント → Virtualフォント → OmegaのVirtualフォント 
+      → 和文TrueTypeフォントの代替 </p>
+    </blockquote>
+    <p>という順でフォントが探されて使われます。 </p>
+</li></ul></dt>
+  <dt><a name="ETF"><strong>DVIファイルにフォントや画像を埋め込む</strong></a></dt>
+  <dd>Ver.3.12では、画像の他、フォントをDVIファイルに埋め込んでそれが利用できるようになりました。埋め込んだフォントは、<strong>TEXPK</strong> 
+    では、<font color="#0000FF">^F/</font> によって指定できます。例えば、<font
+    color="#0000FF">^F/^s.^dpk</font> 
+    などとします。埋め込んだ画像は、自動的に利用されます。<br>
+    <br>
+    さらに、Ver.3.12.3 からは、<strong>文字単位でのフォント埋め込み</strong>機能が使えるようになります（<strong>File 
+    → Font/Image Embedding</strong>）。必要な画像やフォントが（文字単位で）埋め込まれたDVIファイルを自動作成し、dvioutがそれを自動的に利用する機能です。文字表示もより高速になります。詳しくは 
+    On-line Helpなどを参照してください。埋め込み可能なデータは、以下のファイルから自動的に抽出されます。<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp; 和文／欧文Windows TrueTypeフォント/tfm/jfm/vf/ovf/フォントマッピングファイル<br>
+    <br>
+    たとえば、欧文フォントにBaKoMaのTrueTypeフォントを使って埋め込んでおくと、dvioutで表示や印刷のときに、欧文フォントが不要になります。PKフォントは、複数の解像度を与えて同時に埋め込むことができ、表示の際はその中から最適なものが選択されて、必要ならスケール変換されます。<br>
+    <br>
+    和文TrueTypeフォントを埋め込んでおけば、そのようなフォントを持たない非日本語Windowsのもとでdvioutによって扱えます。<br>
+    <br>
+    Windows標準の欧文TrueTypeフォントファイルやプロポーショナルTrueType和文フォントなどをVirtualフォントやtfm/jfmを用いて扱っている場合、Virtualフォントやtfm/jfmファイルの必要なデータのみ埋め込み、TrueTypeフォントは埋め込まないようにしておくと、DVIファイルのサイズの問題や埋め込みTrueTypeフォントの配布の問題を避けることができます。</dd>
+  <dd><br>
+    この機能を利用すると、TeXのシステムやフォントの無い環境でも 
+    dviout のみあれば、DVIファイルの表示や印刷が可能になります（画像ファイルも埋め込めます）。<br>
+    <br>
+    なお、dviout以外のDVIwareでは、画像やフォントが埋め込まれたDVIファイルを、従来通り（埋め込みは無視されて）扱えます。<br>
+    <br>
+    関連して、<strong>initial.par</strong> というファイル名で、dvioutの初期化情報を<strong>dviadd</strong>を使ってDVIファイルに埋め込む機能を利用すると便利です。</dd>
+  <dt><br>
+    <a name="Comment"><strong>DVIファイルにメモを入れる</strong></a></dt>
+  <dd>Ver.3.12.4 以降では、（DVIwareの動作に影響を及ぼさずに）DVIファイルにメモなどのコメントを書き込むことが出来ます。dvioutのメニューバーからFile 
+    → Font/Image EmbeddingでOKを押し、List of Embedding Fonts/Images 
+    の下部のエディットボックスの最初の行に #rem 
+    と、その後にコメントを書き、OK押すと、書いたメモが埋め込まれます。例えば<br>
+    <br>
+    <font color="#0000FF">#rem<br>
+    これは、草稿です。<br>
+    Aug. 24, 2001</font><br>
+    <br>
+    と書いて、OK を押します。<br>
+    <br>
+    Help → initial.par 
+    を選択すると、書いたメモが表示されます。詳しくは、On-line Helpの「DVIファイルへの埋め込み」を参照してください。</dd>
+  <dd>　</dd>
+  <dt><a name="papersize"><strong>プレビューや印刷での用紙サイズを指定する</strong></a></dt>
+  <dd>紙面の横と縦のサイズを、以下のようにTeXのソースのはじめのページに書いておきます。<br>
+    &nbsp;&nbsp;&nbsp;&nbsp; <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code><font color="#0000FF">\AtBeginDVI{\special{papersize=36.4cm,25.7cm}}</code><br>
+    </font><br>
+    あるいは、より一般に<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code><font color="#0000FF">\AtBeginDVI{\special{papersize=\the\paperwidth,\the\paperheight}}</font></code><br>
+    <br>
+    こうすると、dvioutのプレビューが途中ページからでも、実際の紙面サイズで初期化されます。また、この様式は 
+    dvips 互換です。dviout では、papaersize=A4L 
+    などと書くこともできますが、dvips 
+    では無効です。また、上記の前に 
+    <code><font color="#0000FF">\AtBeginDVI{\special{dviout `keep y}}</font></code>
+    と書いておけば、この文書を抜け出すと、元の紙面サイズに戻ります（詳しくは、On-line 
+    Help の <strong>dviout special</strong> を参照してください）。</dd>
+  <dt>　</dt>
+  <dt><strong><a name="GraPack">Graphics Package</a></strong>
+<ul><li>dvioutのパッケージ内の <a href="#JPGetc">dviout.def と graphic.cfg, color.cfg 
+    をインストール</a>し、LaTeX2eのgraphics package で使うと、WMF, BMP 
+    の他、<a href="#SUSIE">Susie plug-in を利用</a>して、PNG, JPG, TIFF 
+    をはじめとする種々の画像ファイルの取り込みが可能になります。<br>
+</li><li>このときは、<strong>bmc.exe</strong> 
+    や <strong>CreateBB.exe</strong> を利用して、画像のサイズを記述する <strong>*.bb</strong> 
+    ファイルを作成しておくとよいでしょう。<br>
+</li><li>なお、デフォルトの dvips 用の graphic.cfg に対し、作成されるDVIファイルは
+     <strong>上位互換</strong>になります（すなわち、WMFなどの画像取り込みがない 
+    dvips で処理可能な TeX の原稿を処理した場合、<u>作成されるDVIファイルは同一</u>で、
+    dvips用のものとなる）。
+</li></ul></dt></p><p>
+  <dt><a name="gdat"><b>GhostScriptを使って作成されるPBM/BMP/BMCファイルのディレクトリを固定する</b></a></dt>
+  <dd>デフォルトでは、読み込むPostScriptファイルと同じディレクトリに作成されますが、Option 
+    → Setup Paramereters ... → [Graphic] の <strong>-gdat:</strong> 
+    にディレクトリ名を指定しておけば、そこに作成されます。複数のディレクトリ名を指定した場合など、より詳しくは 
+    On-line Helpの -gdat: の項を参照してください。 </dd>
+  <dd>　</dd>
+  <dt><b><a name="PSfrag">PSfrag</a></b></dt>
+  <dd>dviout for Windows Ver.3.11.4以降、PSfragに自動対応しました。そのためには 
+    環境変数<b>GS_LIB</b>で指定されたGhostscriptのサーチパスに <b>psfrag.pro</b>（<a
+    href="ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/macros/PSfrag/psfrag.tar.gz">PSfrag package 
+    Ver.3.04 </a>に含まれています）と <a
+    href="ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/macros/PSfrag/ps2frag.tar.gz"><b>ps2frag.ps</b></a> 
+    を入れておく必要があります。このファイル等に関しては <a
+    href="http://itohws03.ee.noda.sut.ac.jp/~matsuda/dviout/psfrag.html">松田さんの解説</a>を参照して下さい（予め 
+    <b>*.pfi</b> を作成しておく必要は ありません）。</p><p>
+    なお、このとき作成された <b>*.pfi</b> （たとえば、foo.pfi とします）を
+    <blockquote>
+        <font color="#FF0000">dviadd foo.pfi dvi_file</font>
+    </blockquote>
+    として dvi_file に埋め込んでおけば、<b>psfrag.pro</b> のない環境でも、dviout による表示が可能です。</dd>
+  <dd>　</dd>
+  <dt><b><a name="PSTricks">PSTriks</a></b></dt>
+  <dd>PSTricks は dvips用のものであり、一部のコマンドを除いて dviout は対応していません</dd></p><p>
+  <dt><b><a name="modes"><strong>プレビューやプリンターの種類で異なる設定を使う</strong></a></b>
+<ul><li>Option → Setup Paramereters ... → [REGISTRY] で設定される <strong>mode</strong> の機能を用います。
+  10種類までの設定を名前をつけて保存でき、Option → Mode ... で異なった設定に移ることができます（[REGISTRY] では、その mode に移ったときに変更したいパラメータにのみ <strong>+</strong> の印をつけます）。</li>
+<li>また、印刷時に自動的にプレビューのときと異なる mode にすることができます。
+ 詳しくは [REGISTRY] の [Help] および、Help の Q&A → 印刷関連 → <strong>印刷の際はプレビューの際とパラメータを変えたい</strong> などを参照してください。</li>
+<li>PostScript画像を異なる設定で生成する場合（カラープリンタと白黒プリンタを使い分けるなどのため）に、中間ファイルを上書きせずに残しておくには、[Graphic] の <a href="#gdat">-gdat: のパラメータで、ファイルの保存されるディレクトリーをそれぞれ異なるものに設定</a>します。あるいは、[Graphic] の <strong>-GIF:</strong> で raw PBM と BMP というようにして中間ファイルが異なるファイル名になるように使い分けることもできます。
+</li></ul></dt></p><p>
+<dt><a name="Vup"><strong>バージョンアップ</strong></a></dt>
+  <dd>dviout for Windowsは、上書きすることにより最新のものにバージョンアップできます。<a
+    href="#DVIOUT0">アンインストール</a>すると、 
+    設定済みのパラメータが引き継がれません。
+    通常は、単純に全てをそのまま上書きしてください
+   （最小限 <strong>dviout.exe</strong>, 
+    <strong>dviout.hlp</strong>, <strong>dviout.cnt </strong>（and/or <strong>dvioute.hlp</strong>, 
+    <strong>dvioute.cnt</strong>）を置き換えれば、新しい版を使うことが可能）。</p><p>
+    一方、TeXのシステムの大幅な変更があって、再度dvioutの初期設定を行いたいときは、上書き後、メニューバーから、Option → Install を選びます。</p><p>
+    Ver.3.02 以降のデフォルトの変更は、以下の通りです。詳しくは、パッケージに付属の文書 readme.txt の「７．Ver.3.0 以降からのバージョンアップ」をご覧ください。</dd>
+  <dd><br>
+    <strong>Ver.3.06</strong>: dviprt機能でのLIPS III/IV 
+    での印刷の印字位置を若干ずらした。<br>
+    <strong>Ver.3.08</strong>: Windowsのプリンタドライバを用いる印刷がデフォルトになった（従来の版は、 
+    Option → Setup Parameters → [Graphic] の <strong>auto mode (rep)</strong> 
+    に対応）。<br>
+    <strong>Ver.3.12</strong>: 
+    不足フォントの自動生成がオンデマンドになった（従来の版は、 
+    Option → Setup Parameters → [Font2] の <strong>OnDemand(Fod:)</strong> が OFF 
+    に対応）。 <br>
+    <strong>Ver.3.15</strong>:
+    ttfonts.map などのフォントマップファイルのデフォルトのフォルダが、
+    <font color="blue">^x</font> から <font color="blue">^x\map</font> に変更された
+    （<font color="blue">^x</font> は、dviout.exe の存在するフォルダ）。<br>
+    <strong>Ver.3.16</strong>:
+    パラメータ dviprt が未定義の場合のdviprt機能のデフォルトを、
+   「dvipdfm による PDF への変換」に変更した。</dd>
+  <dd>　</dd>
+  <dt><strong><a name="DualBoot">デュアルブートシステムへのインストール</a></strong></dt>
+  <dd>Windows95/98/Me系とWindowsNT/2000/XP系のデュアルブートシステムの場合、両方のOSから見えるディレクトリに 
+    dviout をインストールすれば、両方のOSから使うことが出来ます。両者のOSから見たときのドライブ番号が異なっていても問題ありません。dvioutの各種パラメータは、両者のOSで異なった場所（registry)に記録されるので、その設定は独立して行うことになります。</dd>
+  <dt><br>
+    <strong><a name="MultiUser">ユーザが複数の場合の共通設定と個別設定</a></strong></dt>
+  <dd>Windows NT/2000/XP などで一箇所にインストールした dviout 
+    を複数のユーザが使う場合の設定です。このときは、共通の基本的設定を 
+    <strong>dviout.par</strong> というファイル名で、dviout 
+    をインストールしたディレクトリに入れておきます（Option →　Non-default 
+    Parameters の出力が利用できる）。個人の設定は、個別の registry 
+    に記録され、dviout を起動すると dviout.par の読み込みの後、個人の 
+    registry の設定が上書きされます。</p><p>
+    共通で使われるPKフォントを、ユーザから読み込みのみ可能なディレクトリに作成しておき、
+    それ以外のPKフォントが各ユーザ毎に個別の書き込み可能なディレクトリ場所に
+    自動作成されるようにするには、たとえば次のようにします。<br>
+    <a href="http://akagi.ms.u-tokyo.ac.jp/texinst98.html">角藤氏のTeXのパッケージ</a>
+    を使い <font color="blue">d:\usera\pk</font> に個人のPKフォントを作成する場合</p><p>
+    <b>1.</b> dviout の <strong>gen:</strong> で、以下のように destination directory を指定します。
+　　<pre>
+    <font color="blue">`C:\usr\local\bin\mktexpk.exe --dpi ^d --bdpi ^D --mag ^M --destdir d:/usera/pk ^s</font>
+    </pre>
+    <b>2.</b> dviout の <strong>TEXPK:</strong> に次を追加します。
+    <pre>
+    <font color="blue">d:\usera\pk\\^s.^dpk</font>
+    </pre>
+    <b>3.</b> <strong>dvips</strong>などで各ユーザが作成したPKフォントを使うため、
+     環境変数 <strong>PKFONTS</strong> を次のように設定します。
+     最後のセミコロンを忘れてはいけません。
+    <pre>
+    <font color="blue">PKFONTS=d:/usera/pk//;</font>
+    </pre>
+    </dd>
+<dt><a name="Control"><strong>dvioutの動作を制御する</strong></a><dt>
+<dd>dvioutの動作を制御するには、以下の方法があります。</dd>
+<dt><ul>
+    <li><b>パラメータの設定</b><br>
+        設定状況の確認や変更は、Option→Setup Parameters... より<br>
+        パラメータのリストは、Help (→Other Info) →Parameters より<br>
+        各パラメータに関するドキュメントは、Help→目次→パラメータ より
+    </li><li>
+        <b>メニューバーからの選択やキー入力</b>（ex. [Space], [ESC]）<br>
+    </li><li>
+        <b>dvioutの外から制御する</b><br>
+        <ul><li>コマンドラインから</li>
+            <li>DDE を使う</li>
+　　　　</ul>
+        複数のdvioutを起動していて、そのいずれを制御するかを指定するには<br>
+        コマンドラインの場合、パラメータの最初に <font color="blue">-2</font>
+        のように、何番目の dviout へのコマンドかを指定する。<br>
+        DDE の場合、トピック名を <font color="blue">dviout2</font> のようにして
+        何番目の dviout かを指定するか（Nov. 4, 2005以降の版）、あるいは、
+        トピック名に表示中の dvi ファイルのフルパス名（タイトルバーに表示されるもの）
+        を書きます。 
+         <p>
+           多くの制御コマンドは、２文字のシンボルで表され、それは Help 
+          (→Other Info) →Key table （あるいは、Option→Setup Parameters...→[Key]）
+          とすると <a href="dviouttips.html#Key"><b>[&nbsp;]</b> で囲って示されます</a>。<br>
+          &nbsp;&nbsp; 最初の文字は、F, J, S, D, V, N, P, O, H, ! で、アルファベットはメニューバー
+          の項目に（[Alt+アルファベット]で選択されるものに対応）、
+          ! はそれ以外のものに対応します。
+<ul>
+<li>
+キー入力などを表すシンボルの２文字は、通常それの解釈時に実行されますが、一方、あるいは両方を小文字で書くと、解釈後に処理すべきコマンド列の最後にそのコマンドを付け加えます。
+</li>
+<li>
+シンボルの２文字の組は複数個並べて書くことができますが、２文字の間に <code><font color="blue">;</font></code> を挟むと、それ以前の部分の実行が完了するまで、それ以下の部分の解釈が保留されます。
+</li>
+<li>
+シンボルの２文字の組の解釈において、途中でページ変更などの表示の変更があると、それ以降の部分は通常無視されます。
+</li>
+<li>
+シンボルの２文字の組の列による制御は、dvioutの内部動作に深く関わるため、必ずしも予期した結果になるとは限りません。あるシンボルの解釈中には、その処理を即座に行わずに、処理すべきコマンド列の最後に付け加える、という制御を伴うものもあります。複雑な組み合わせの場合は、小文字を使う、間に <code><font color="blue">;</font></code> を挟む、なども用いて結果を試してから使ってください。
+</li>
+</ul></li></ul></dt><dd></p><p>
+例えば
+<pre>
+-y=B5P      : 用紙サイズのパラメータ y の値を B5用紙でPortraitに設定
+-OY=-1.5cm  : 縦方向の位置補正オフセットパラメータ OY の値を -1.5cm に設定
+FP          : Alt+FP (メニューバーの File→Print: 印刷ダイアログへ）に対応
+DV          : Alt+DNV（メニューバーの Display→conTrast→reVerse：画面反転）に対応
+DL          : Alt+DSF（メニューバーの Display→Size→fuLl：画面フル表示）に対応
+!P          : プレゼンテーションモードへ
+
+-mode=<font color="blue">n</font>     : mode を <font color="blue">n</font> に変更（<font color="blue">n</font> は、0 から 9 まで）
+-wait=<font color="blue">n</font>     : <font color="blue">n</font> 1: 標準 0: テンポラリファイルを残す 2, 3: 警告を無視 
+</pre>
+<dl>
+<dt>-y=B5P &nbsp; -OY=-1.5cm &nbsp; DV &nbsp; !P &nbsp; DL</dt>
+<dd>： B5の縦置き用紙で縦方向に -1.5cm ずらし、白黒反転のプレゼンテーションモードで横幅いっぱいに表示する。
+</dd></dl></p><p>
+このように組み合わせたものを設定するには、以下のような方法があります。
+</dd></p><p>
+<dt><ol>
+    <li>キーマクロに定義する<br>
+  &nbsp;&nbsp; <code><font color="blue">"-y=B5P&nbsp;-OY=-1.5cm&nbsp;DV!PDL"</font></code> &nbsp; をパラメータ -macro: に設定
+　（5個のセットまで可能）</li>
+    <li>dviout specials によって、DVIファイルに埋め込む<br>
+　&nbsp;&nbsp; <code><font color="blue">\special{dviout -y=B5P&nbsp;-OY=-1.5cm&nbsp;DV!PDL}</font></code> &nbsp; のようにTeXのソースに書く</li>
+    <li><a href="dviouttips.html#HyperTeX">HyperTeX</a> として、DVIファイルに埋め込む<br>
+  　&nbsp;&nbsp; <code><font color="blue">\special{html:&lt;a href="dviout:&nbsp;-y=B5P&nbsp;-OY=-1.5cm&nbsp;DV!PDL"&gt;}</font><font color="red">hot spot</font><font color="blue">\special{html:&lt;/a&gt;}</font></code> &nbsp; とTeXのソースに書く</li>
+    <li>パラメータファイルを用いる（Option→Choose Paramaters など）<br>
+    &nbsp;&nbsp;&nbsp; <code><font color="blue">y=B5P&nbsp;OY=-1.5cm&nbsp;Set=DV!PDL</font></code> &nbsp; とファイルに書く（キー入力などを表すシンボルの２文字の組の列は Set= に続けて書きます）</li>
+    <li>DDE によって、他のプログラムから制御する<br>
+     &nbsp;&nbsp;&nbsp; <code><font color="blue">[Function(-y=B5P&nbsp;-OY=-1.5cm&nbsp;DV!PDL)]</font></code> &nbsp; というXTYP_EXECUTEトランザクションコマンドを送る</li>
+    </ol></dt></p><p>
+<dd>Ver.3.14.3 のデフォルトのキーマクロは、以下のように5個が定義されています。<br>
+&nbsp;&nbsp; <code><font color="blue">
+!A!Zdy!pdl !A!N!Q!F;!A!T;!ADX;fn!b !A!Z!pdf !A!Z!pdl "-OX=0mm -OY=0mm !I"
+</font></code></dd>
+</p><p>
+  <dt><a name="Directory"><strong>インストールフォルダに関して注意することは？</strong></a><dt>
+   <dd>
+    dvioutをインストールするフォルダを作成して、その中でdvioutのパッケージを展開するのがよいでしょう。
+    <a href="#Vup">バージョンアップ</a>や<a href="#DVIOUT0">dvioutのアンインストール</a>が容易に行えます。
+    </p><p>
+dvioutは、そのパス名に空白や全角文字の入った名前のフォルダにインストールしても正常に動作します。
+しかし、dvioutを他のプログラムから呼び出す場合や、関連する他のプログラムで問題が生じる可能性がありますので、それを避けるのが無難でしょう。
+</p><p>
+dvioutのフォルダにパス（環境変数の<strong>PATH</PATH></strong>で与えられる）を通さなくても dviout自身は正常に動作します。
+しかし、コマンドラインからの起動や他のプログラムから呼び出されることを考えると、パスを通しておくのがよいでしょう。
+</dd>
+  </p><p>
+  <dt><a name="Move"><strong>インストールフォルダやそのドライブ番号の変更</strong></a></dt>
+  <dd>
+    dviout自身は、そのインストール場所を移動してもそのまま動作します。
+    関連ファイルがありますので、dvioutのインストールフォルダごと移動すれば問題ありません   （最小限 dviout.exe, 
+    dviout.hlp, dviout..cnt, dvioute.hlp, dvioute.cnt 
+    は同じフォルダに入れて下さい。<strong>ftt:</strong>は設定によっては要修正）。 
+    </p><p>
+    OSからのリンク（DVIファイルのダブルクリックからのdvioutの起動と、スタート 
+    → プログラム からのdvioutの起動）を直す必要がありますが、dvioutを起動後 
+    Option → Install で設定を変更せずに進んで最後の[Finish]ボタンを押せば、これらも修正されます。</p><p>
+    TeXのシステムやＧhostscriptなど関連するプログラムに移動があった場合は、
+    dvioutの対応するパラメータの修正が必要でしょう。具体的には</p><p>
+    <strong>TEXROOT: TEXPK:</strong> （TeXのシステムの移動、<strong>^T</strong> 
+    を使ったデフォルト設定ならば修正不要）や <strong>gen:</strong>（フォント生成プログラム）
+    <strong>ftt:</strong>（フォントマップファイル） 
+    <strong>gsx:</strong>（Ghostscript) <strong>spi:</strong>（Susie plug-in）&nbsp; <strong>src:</strong> 
+    （エディタ）</p><p> などです。<strong>^T</strong> や <strong>^x</strong> 
+    を使った指定ならば変更不要でしょう。Option → Setup Parameters... 
+    で各シートをチェックしてみましょう。</dd>
+  <dt>　</dt>
+  <dt><strong><a name="NoJ">非日本語対応のシステムでpTeXのDVIファイルを取り込んでも、dvioutが終了しないようにする</a></strong></dt>
+  <dd><strong>TEXPK:</strong> のパラメータで、<font color="#0000FF">^s.tfm</font>
+   という項があれば、それを <font color="#0000FF">^s^tfm</font> に変更してください。
+   </dd>
+  <dt>　</dt>
+  <dt><strong><a name="MicroSPELL">TeXに対応したスペルチェッカーMicroSPELLを使う</a></strong></dt>
+  <dd><a href="ftp://akagi.ms.u-tokyo.ac.jp/pub/dos/mspell/">MicroSPELL</a>は、MS-DOS上で動作する欧文用の汎用スペルチェッカーです(1991-1992に作成）。
+MS-DOS上のエディター Vz, Mifes, Demax などと連携すると便利に使うことができましたが、MS Windows 上でも、付属のスペル修正プログラムから使用することができます。
+<p>たとえば、Windows NT/2000/XP 上で使うには、Windows のシステムディレクトリの system32
+にある <strong>config.nt</strong> および <strong>config.wow</strong> に
+<blockquote><font color="#0000FF">device=ansi.sys</font></blockquote>
+の一行を書き加えてエスケープ sequence が使用可能なようにしておき
+<blockquote><pre>
+  <font color="#FF0000">spell -- [parameters] TEX_source_file</font>
+</pre></blockquote>
+のように起動します（dmerge でインデックスファイルを作成しておく必要があり、付属の <strong>spell.doc</strong> の最初の部分を参照のこと）。
+TeX向けの最も簡単な [parameters] としては、<font color="#0000FF">-i\</font> （TeX のキーワードを辞書に含めていれば、<font color="#0000FF">-t\</font>）。
+<p>TeXの原稿に対して、以下の機能をもつMicroSPELLに匹敵するスペルチェッカーはみあたらないようなので、いずれ各種エディータとも連携するWindows版を作成したいと思っています（MS-DOS版よりは簡単に作成できるはず）。
+<p>詳しいドキュメントが付属していますが、TeXのソースのスペルチェックに関連して、いくつかの特長を挙げます。</p>
+  <ul>
+  <li>和文中の欧文のスペルをチェックできます。辞書は、英語用（約4万3千語）、仏語用(約16万語強)、独語用（約8万語強）の3種が提供されています。<p>
+  <li>辞書は３分の１から４分の１程度のサイズに圧縮されているので、ディスク・スペースが節約できます。<p>
+  <li>数学の専門用語とTeXのキーワードを集めたものが付属しており、これらを辞書に追加することができます。<p>
+  <li>プログラムとそのソース、および辞書データは全てフリーに公開されています。<p>
+  <li>正しいスペルの推測機能を持っており、スペルの修正が容易に行えます。<p>
+  <li>大文字と小文字は区別されて辞書に登録されており、スペルのチェックや推測の際には、大文字・小文字の適切な変換が自動的に行われます。<P>
+  <li>単語は通常のやり方で切り出されますが、単語の先頭を定義する特殊文字を定義できます（オプション -t）。<br>
+<font color="#0000FF">-t\</font> と指定すると、"My \LaTeX\bf も LaTeX" から切り出される単語は、"My", "\LaTeX", "\bf", "LaTeX" の3語です。\LaTeX, \bf はそのまま"\"がついた形で辞書に登録されているので、大文字・小文字の区別付きでチェックされます。<br>
+\Bf と書いてあれば、辞書に無いということで、候補に \bf が出るでしょう。<br>
+My は辞書にあると判断されます（辞書中の my から判断される）。<br>
+LaTeX は LATeX と書くと辞書に無いと判断されます（辞書には、\LaTeX と LaTeX が存在）。<p>
+一方、特定の文字で始まるものを無視することも出来ます（オプション -i）。<font color="#0000FF"><tt>-i\</tt></font> と指定すると、先の文でチェックされる単語は "My", "LaTeX" のみになります。
+これらの指定がないときに切り出される単語は、"My", "LaTeX", "bf", "LaTeX" となります。<p>
+<blockquote><pre>
+  <font color="#0000FF">spell --  -i\{  -l3 TEX_source_file</font>
+</pre></blockquote>
+とすると、\ や {&nbsp に続く語はチェックされません。さらに <font color=#0000FF><tt>-l3</tt></font> によって，3文字以下の単語は無視されます。<p>
+  <li>新たなコードを大文字・小文字の組と定義することができます（オプション -a および -y）。英語圏以外への欧文のコード対応が主目的です。<P>
+  <li>任意のコードの文字を、単語の区切り記号に指定できます。<P>
+  <li>任意の文字列を単語中の一文字に指定できます（-C の後に区切り記号を書いてその後に指定）。TeX では、たとえば以下のような指定が考えられます。
+<blockquote><font color="#0000FF"><pre>
+  -C:\`:\':\^:\":\=:\c{c}:\c{C}:{\ss}
+</pre></font></blockquote>
+    辞書には、H\"order などと登録されています。<p>
+  <li>テキストの中の単語の修正中に、そこを飛ばして後から再チェックするよう指定したり、エディタ用のタグジャンプ・ファイルを書き出することができます。また修正を途中で止めて、後日に続行することもできます。<p>
+  <li>単語のコードの変換プログラムが提供されており、たとえば TeX の \"o に対し unicode や欧文のドイツ語用のコードなどとの間の相互変換が出来ます。<p>
+  <li>単語の登録や改編などの辞書のメンテナンス機能があります。<p>
+  <li>付属のスペル修正プログラム中でのカラー表示、カーソルのコントロール、編集機能などのエスケープ sequence を任意に指定できます。<p>
+  <li>MS-DOS上では、エディータとの連携で、ソース入力中のリアルタイム単語補完機能やリアルタイムスペルチェック機能が実現されていました。<p>
+  <li>次のような使い方が一例です。
+<blockquote><font color="#FF0000"><pre>
+  spell -- -fc:\bin\spell.cfg -l3 %1 %2 %3
+</pre></font></blockquote>
+と書かれた spellc.bat というバッチファイルとMicroSPELL一式をパスの通った
+フォルダ（ここでは，c:\bin）に入れ，
+さらに以下のパラメータを書いた（最後に改行か空白が必要） spell.cfg というファイルを c:\bin に入れておきます。
+<blockquote><font color="#0000FF"><pre>
+  -C:\`:\':\^:\":\=:\c{c}:\c{C}:{\ss}:{\o}:{\O}:{\i}:{\j}:\u{\i}:{\aa}:\v{C}:{\l}
+  -uc:\bin\add.txt -i\{ -l3 
+</pre></font></blockquote>
+TeX のソースファイルのスペルチェックは、たとえば foo.tex というソースファイルならば
+<blockquote><font color="#FF0000"><pre>
+  spellc foo.tex
+</pre></font></blockquote>
+とします。c:\bin\add.txt は、自分で追加登録した単語を、一行に一語づつ並べて書いたファイルです。
+スペルチェック中で追加登録したい単語があれば、それを抜き出すことができますので、それを編集して追加します。
+  </ul>
+   </dd>
+  <dt>　</dt>
+  <dt><strong><a name="modeless">メタフォントとプリンタとTEXPK</a></strong></dt>
+  <dd>TeXを作ったKnuthは、組版システムTeXと共に、そこで使われるフォントの作成システムとして<strong>METAFONT</strong>、および、具体的なフォントとして 
+    <strong>Computer Modern Font Series</strong>を提供しました。METAFONTでは、フォントの各文字の描き方が記述され、プリンタに対応したビットマップ画像のフォントを作成します（具体的には、 
+    cmr10.300pk などのような、PKフォントファイルの形のものに変換されてDVIwareで使われます）。<br>
+    <br>
+    METAFONTシステムは、大変精巧に出来ており、プリンタの解像度だけでなく、その特徴に応じた調整が出来るようになっています。DVIファイル(DeVice 
+    Independent file)からの印刷結果もプリンタ依存性を出来るだけ無くすよう工夫されている、という訳です。<br>
+    <br>
+    例えば、1 dot 
+    が円で描かれているとして、あるプリンタでは円の境界がはっきりしているが、別のプリンタではぼやけているとしましょう。1 
+    dot 幅の横線に対し、両者が同じ太さ（= 
+    濃さ）に見えるよう円の直径が調整されていたとすると、1 dot 
+    幅の斜め線では後者の方がより太く見えるでしょう。METAFONTは、このようなプリンタによる差を吸収するため、横線と斜線との濃さを調整するパラメータを持っている、というのがその一例です。<br>
+    <br>
+    現在提供されているMETAFONTのソースには、多くのプリンタ用のパラメータファイルが入っていて、実際にはどのプリンタ用のパラメータでフォントを作成するかを指定してフォントを作成することになります。解像度が最も重要ですが、現在のTeXのシステムでは、そのデフォルトのパラメータ指定が<strong> 
+    texmf.cnf</strong> の <strong>MAKETEX_PK_MODE</strong> の項です。<br>
+    <br>
+    <font color="#0000FF">&nbsp;&nbsp;&nbsp; MAKETEXPK_MODE_300 = cx<br>
+    &nbsp;&nbsp;&nbsp; MAKETEXPK_MODE_360 = bjtenex</font><br>
+    <br>
+    とあると、300 dpi 基準のフォントの場合、<font color="#0000FF">cx</font> 
+    と名前がついたパラメータがデフォルトになります。通常cmr10のMETAFONTソースは、^T\fonts\source\public\cm\cmr10.mf 
+    となりますが、これを 300 dpi で 12 point (1.2倍のサイズ）で作成すると、それは 
+    ^T\fonts\pk\<font color="#0000FF">cx</font>\public\cm\cmr10.720pk というPKファイルにする、というのが最近のやりかたです。360 
+    dpi 基準で cmr10 の 10 point のフォントが、cmr10.360pk 
+    という同じ名前としても、^T\fonts\pk\<font color="#0000FF">bjtenex</font>\public\cm\cmr10.720pk 
+    となるので区別できる、という仕組みです。<br>
+    <br>
+    一方、PostScriptフォントから GhostScript や pstopk 
+    などを通じて作成されたフォントは、解像度の差しかないので、^T\fonts\pk\<font
+    color="#0000FF">modeless</font>\public\txr\rtxr.300pk というように、<font
+    color="#0000FF">modeless</font> というディレクトリの下に拡張されます。<br>
+    <br>
+    このような細かな設定に TEXPK を対応させる場合は、デフォルトの 
+    TEXPK における <strong>^r\pk\\^s.^dpk</strong> の部分を <strong>^r\pk\cx\\^s.^dpk;^r\pk\modeless\\^s.^pk 
+    </strong>のように変えればよいことが分かります。<br>
+    <br>
+    なお、プリンタの解像度が大きくなると、プリンタに依存した差は少なくなるので、METAFONTが設計された頃ほどはプリンタによる差を（高精度な印刷を除いては）、最近は区別しなくてよいのかも知れません。</dd>
+</dl>
+
+<p><a href="#TOP">先頭に戻る</a> </p>
+
+<hr>
+
+<p>以上です。 <a href="mailto:ftp-admin@akagi.ms.u-tokyo.ac.jp">ftp-admin@akagi.ms.u-tokyo.ac.jp</a> 
+</p>
+</body>
+</html>

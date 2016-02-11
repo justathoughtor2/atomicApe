@@ -1,0 +1,13 @@
+         rawprt:  output data to printer (same as  > PRN:  in MS-DOS)
+                  Win32 Console application
+                  Ver 0.1, written by SHIMA, July 1998
+
+Usage:  rawprt [-p<printer>] [<file>]
+
+default input : stdin
+default output: stdprn
+
+Output <file> to <printer>
+
+Example:   dvips ....... | rawprt
+           rawprt <file>

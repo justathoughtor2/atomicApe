@@ -1,0 +1,724 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD W3 HTML//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<title>dviout-presentation</title>
+</head>
+
+<body BGCOLOR="#eeffff">
+
+<hr NOSHADE ALIGN="left" WIDTH="65%">
+
+<h1 align="center">dvioutでのプレゼンテーション</h1>
+
+<hr NOSHADE ALIGN="right" WIDTH="65%">
+
+<p align="center">August 30, 2002 - February 11, 2006</p>
+
+<p><a HREF="http://akagi.ms.u-tokyo.ac.jp/ftp-j.html#TeX" name="contents">TeX 
+のページへ </a><br>
+<a href="tex_dvioutw.html">dvioutのインストール</a><br>
+<a href="dviouttips.html#presen">dvioutにおける小ヒント集 --- プレゼンテーションモード</a><br>
+<a href="http://akagi.ms.u-tokyo.ac.jp/present.html">このドキュメントの最新版</a></p>
+
+<b>目次</b>
+<pre>
+ 0. <a href="#start">はじめに</a>
+
+ 1. <a href="#try">プレゼンテーションモードを試してみましょう</a>
+    1.1.  <a href="#goto">プレゼンテーションモードへ</a>
+    1.2.  <a href="#draw">線画機能</a>
+    1.3.  <a href="#sumnail">サムネール機能</a>
+    1.4.  <a href="#connect">連結スクロール</a>
+    1.5.  <a href="#reverse">反転表示</a>
+    1.6.  <a href="#quit">終了</a>
+    1.7.  <a href="#nonscrol">非スクロール</a>
+    1.8.  <a href="#auto">自動表示</a>
+    1.9.  <a href="#space">順次段階表示</a>
+    1.10. <a href="#cover">Cover Sheet</a>
+
+ 2. <a href="#DVI">プレゼンテーション用のDVIファイル</a>
+    2.1.  <a href="#toconnect">ソースの流用</a>
+    2.2.  <a href="#slide">文字を見易く (SliTeX)</a>
+    例：  <a href="#Exconnect">連結スクロール</a>, <a href="#Excover">Cover Sheet</a>, <a href="#dvisp+">表示制御</a>, <a href="#Exauto">自動表示</a>
+    2.3.  <a href="#Embed">フォントや画像の埋め込み</a>
+    2.4.  <a href="#Style">プレゼンテーション用スタイルファイル</a>
+
+ 3. <a href="#OP">プレゼンテーション中の操作</a>
+    3.1  <a href="#key">キー・マウスの操作</a>
+    3.2  <a href="#jump">移動</a>
+    3.3  <a href="#2OHP">OHP２台に代わるもの</a>
+</pre>
+
+<a name="start"><h2>0. はじめに</h2></a>
+1999年12月に米国でのバークレイの<a href="http://www.msri.org/"><ACRONYM TITLE="Mathematical Sciences Reserch Institutes">MSRI</ACRONYM></a>
+で開催された Workshop 
+"<a href="http://www.msri.org/publications/video/index1.html">The Future of Mathematical Communication:1999</a>" では、多くの講演者がプレゼンテーション・プログラムを使っていました。
+</p><p>
+数式の取り込みに苦労している様子だったので、<b>dviout</b>の側でプレゼンテーションに対応しようと思い立ち、Ver.3.11(February 2000) からプレゼンテーションモードを設けました。
+</p><p>
+<b>dviout</b>のプレゼンテーションモードは、比較的新しい機能であり、その後も、実際の講演などで使用しながら改良を行っています。</p><p>
+ここには、<b>dviout</b>のプレゼンテーション機能を使う場合のヒントを記します。
+</p><p>
+ここに書かれた機能を使う場合は、標準的にインストールされた<b>dviout</b>の<font color="#FF0000">August 28, 2002 以降の日付</font>の版をお使いください。
+
+<a name="try"><h2>1. プレゼンテーションモードを試してみましょう</h2></a>
+<p><b>dviout</b>を使ってのプレゼンテーションは、大きく分けて
+<ol>
+<li>ページ毎に、各ページを一方向に（通常は縦に）スクロールして表示</li>
+<li>全てのページを縦に連結させて、仮想的に一つのページにして縦方向に連続スクロールして表示</li>
+<li>各ページを表示画面に一致させ、ページ毎に表示</li>
+</ol>
+の3種類考えられ、それぞれ<b>dviout</b>のプレゼンテーション向け機能を含む様々な機能を使って、目的に応じていろいろな工夫が可能です。このとき
+<ol type="A">
+<li>TeX のソース/DVIファイル作成にどの程度労力を割くか？</li>
+<li>プレゼンテーションの際にどの程度自動化するか？</li>
+</ol>
+がポイントとなります。
+</p><p>
+例えば、プレゼンテーションの<a href="#auto">完全自動化</a>も可能です（<b>dviout special</b>
+を使って、タイマー機能や、プレゼンテーションを見ている人のキー入力を待っての条件ジャ
+ンプなどの機能が使える）。
+</p>
+<ul><font color="#800000">
+<li><b>[ESC]</b> がプレゼンテーション・モードと通常のモードとの切り替えスイッチです。<br>
+ただし，通常は各種設定を行ってからプレゼンテーション・モードへ移行するキーや
+マクロを用います。</li>
+<li>プレゼンテーション・モードを抜け出すには、<b>[Shift]+[F2]</b> を用いるとよいでしょう（Ver.3.15以降）。</li>
+<li>プレゼンテーション・モードに自動的に入るマクロが書かれてあるページにおいては、[ESC] などではプレゼンテーション・モードから抜け出せないことがありますが、
+次項のようにして dviout から抜け出せます。</li>
+<li>プレゼンテーション・モードでは、dviout の画面の上部の枠にあるメニューバーなどが表示されませんが、
+通常と同じように <b>[Alt]+[X]</b> で dviout を終了できます。</li>
+<li>プレゼンテーション・モードの中では、<b>[Shift]+[F1]</b>でキー操作が表示されます（Ver.3.15以降）。</li>
+</font>
+</ul>
+<a name="goto"><h3 align="center">1.1. プレゼンテーションモードへ</h3></a>
+ここでは、既にあるDVIファイルを流用して、プレゼンテーションモードを体験してみることにします。
+</p><p>
+そこで、既に作成済みの適当なDVIファイルを用意しましょう。
+通常の A4 などのサイズの縦長用紙の横書きで、複数ページに渡る文書とします。
+それを普通に<b>dviout</b>で表示してから、次の操作を行います。</p>
+<p>
+以下の<b>1-1</b>から書かれているように順に行うのを薦めますが、Ver.3.15 以降でとりあえず試してみるには、
+<ul><font color="#800000">
+<li><b>[Shift]+[F6]</b> でプレゼンテーション・モードに入る。</li>
+<li>カーソルを画面右下に持ってると、<b>メニュー</b>が表示される。<b>メニュー</b>を引き出して、<b>[+]</b>や<b>[-]</b>ボタンなどを押して、いろいろ試してみるとよい。<b>メニュー</b>が表示されないときは、<b>[Shift]+[F12]</b> を押す。</li>
+<li>プレゼンテーション・モードを <b>[Shift]+[F2]</b> で抜け出る。</li></font>
+</ul>
+<font color="#FF0000"><b>1-1.</b></font>
+上部のメニューバーから Presentation → Cut edge を選び、紙面の周囲の余白をカットします。<br>
+<font color="#FF0000"><b>1-2.</b></font>
+まず [Esc] 続いて [6] のキーを押します。<br>
+なお、dviout Ver.3.14.3以降では、この2つの操作は、<b>[Shift]+[F6]</b> で実現されます。</p>
+<p>
+これによって、紙面の周囲の余白を除いた部分が、Windowsの枠などを取り払って、画面の横幅いっぱいに表示されます。
+<blockquote>
+[Esc] は、プレゼンテーションモードと通常のモードとの切り替えスイッチで、[6] (Full) は表示画面いっぱいに紙面を表示するスイッチ（すなわち、「縦または横の一方のスクロールのみで紙面全体が表示できる」 という条件下で最も大きく表示する、というスイッチ）にあたります（<b>dviout</b>のデフォルトのキー設定）。
+</blockquote>
+通常の時と同じように紙面の上部・下部は矢印キーやマウスによる縦スクロールで移動できます。<br>
+たとえば、[Space] で次のページへ、[Back space] で前のページへ、というのも通常と同様です。<br>
+ルーペ機能なども使えます。
+<ul>
+<li>Cut edge 機能では、文書の全ページに渡って（ページ領域を指定しているとき --- 始まりのページで [M] を、終わりのページで [R] を押すと指定できます --- は、その範囲で）、表示されている部分中の周囲の削ることの出来る幅を調べます。
+残される周囲の余白は、Option → Setup Parameters... → Paper → CutEdge 
+で調整できます。</li>
+<li>プレゼンテーションモードでは、マウスカーソルを右下端に移動すると<b>メニュー</b>が現れて、
+ページ移動や各種設定ができます。<b>メニュー</b>を起動したり、種類を変えるのに <b>[Shift]+[F12]</b> や [+], [-] などのボタンが使えます（Ver.3.14.3以降）。<br>
+左上端に<b>メニュー</b>を置いたとき([-] ボタンが便利）を除き、カーソルが<b>メニュー</b>の位置に来たとき以外は<b>メニュー</b>が消えます。<br>
+プレゼンテーションモード起動時の状態は、Presentation → Presentation Menu, Save Presentation settings で設定できます。</li>
+<li>プレゼンテーションモードでは、<b>[Shift]+[F1]</b> でキー操作が表示されます。</li>
+<li>プレゼンテーションモード中で表示位置を微調整するには、[Ctrl]+[Shift] のキーを押しながら、矢印キーを使います。</li>
+</ul>
+</p>
+
+<p><a name="draw"><h3 align="center">1.2. 線画機能</a></h3>
+上記のプレゼンテーションモードで、線画機能を使ってみましょう。</p><p>
+<font color="#FF0000"><b>1-3. </b></font>
+[F12] を押すと、線画機能が有効になります（トグルスイッチ）。</p><p>
+<font color="#FF0000"><b>1-4. </b></font>
+[Shift] を押しながらのマウスの左ボタンクリックで始点を指定し（小さな十字が表示されます）、[Shift] を押しながらの右ボタンクリックで終点または通過点を指定します。マウスカーソルを移動して、順次 [Shift] を押しながら右ボタンクリックを行うと、折れ線が描けます。</p><p>
+<font color="#FF0000"><b>1-5. </b></font>
+[SHIFT]+[F11] を押すと、以降、指定した２点を結ぶ線分でなくて、２点を対角線とする矩形の枠が描かれます。試してみましょう。</p>
+
+<p>
+Dec. 14, 2002以降の版の dviout では、上記でなくて <b>[Shift]+[F12]</b> を利用するのもよいでしょう。 [line] の<b>メニュー</b>にします。</p><p>
+線画はページを変更すると消去されます。<br>
+デフォルトの線の色は赤ですが、それの変更や、線画の修正・消去などの機能は以下の通りです
+<blockquote>
+<pre>
+F12:       線画機能のON/OFF（トグルスイッチ）
+SHIFT+マウスの左ボタン: 始点の定義
+SHIFT+マウスの右ボタン: 終点、端点の定義
+CTRL+SHIFT+マウスの左ボタン: 最後の始点の変更
+CTRL+SHIFT+マウスの右ボタン: 最後の終点、端点の変更
+Delete:    最後の点、または線の削除
+F11:       線の描画（デフォルト）
+SHIFT+F11: 矩形の描画
+SHIFT+F5:  赤（デフォルト）, なお、色は始点で定義される。
+SHIFT+F6:  黒
+SHIFT+F7:  青
+SHIFT+F8:  緑
+SHIFT+F9:  線を太く、または細くする。
+</pre></blockquote>
+
+<a name="sumnail">
+<h3 align="center">1.3. サムネール機能</a></h3>
+<font color="#FF0000"><b>1-6. </b></font>
+ここで、[9] のキーを押すと、16ページが縮小して表示されます。
+<ul>
+<li>縦スクロールのほか、前や後ろの別の16ページ表示に移動することができます（通常の表示の時と同様なキー操作）。</li></p><p>
+<li>[9] でなくて [8] を押すと、4ページが縮小して表示されます。</li>
+</ul>
+</blockquote>
+<font color="#FF0000"><b>1-7. </b></font>
+表示したいページにマウスカーソルを移動して、マウスの右ボタンをクリックしましょう（Ver.3.17.4 以降は、左ボタンのダブルクリックでも OK です）。<br>
+その結果、そのページのプレゼンテーションモードでの表示に戻ります。</p><p>
+<font color="#FF0000"><b>1-8. </b></font>
+[5] のキーを押すと、（FULLのモード から FITのモードに変わり）ページがスクロールせずに表示される最大の大きさに変わります。[6] で元に戻ります。
+</pre>
+
+<a name="connect"><h3 align="center">1.4. 連結スクロール</h3></a>
+ページ連結縦スクロールを体験するため、上のプレゼンテーションモードを [Esc] を押して抜け出ます。さらに、Presentation → Cut edge を選択して、そこのチェックをはずし、通常の表示に戻します。<br>
+Ver.3.14.3 以降では、<b>[Shift]+[F2]</b> でこの操作がなされます。</p>
+
+<p>縦にページを連結して、文書全体を仮想的に一つのページのみからなるようにします。<br>
+そのため、以下のようにして、各ページのヘッダやページ番号の部分などを表示から削ることにします。
+</p><p>
+<font color="#FF0000"><b>2-1.</b></font>
+Display → Region → On で領域指定モードに入ります。<br>
+<font color="#FF0000"><b>2-2.</b></font>
+[Shift] を押しながらのマウスの左ボタンと右ボタンのクリックで、表示すべき領域を指定します。<br>
+<font color="#FF0000"><b>2-3.</b></font>
+Display → Region → Cut で、領域を切り出します。
+</p><p>
+<font color="#FF0000"><b>2-4.</b></font>
+Display → Y-two pages （または、[0] ）で、２ページを縦に連結します。<br>
+<font color="#FF0000"><b>2-5.</b></font>
+[Esc] でプレゼンテーションモードに入り、[6] を押して表示を横一杯に広げます。 </p><p>
+Ver.3.14.3 以降では、<b>[Shift]+[F1]</b> でこの一連の操作がなされます。<br>
+このあとは、矢印キーやマウスによって縦スクロールを行うと、全頁が縦に繋がった<b>仮想１ページ</b>として表示していくことが出来ます。線画機能も有効です（２ページの間は、線画が保持されます）。
+<ul>
+<li>上記 2-2 で、[Shift] を押しながらマウスの左または右ボタンを再度クリックすれば、領域の修正ができます。</li></p><p>
+<li>2-2 において枠が表示された状態でページを移動すると、各ページでの切り取られる範囲が確かめられます。</li>
+</ul>
+<a name="reverse"><h3 align="center">1.5. 反転表示</h3></a>
+次に、白黒の反転表示をするため、[Esc] (or [Shift]+[F2]) でプレゼンテーションモードを抜け
+</p><p>
+<font color="#FF0000"><b>2-6.</b></font>
+Presentation → Presentation type  → black screen を選びます。<br>
+<font color="#FF0000"><b>2-7.</b></font>
+[Esc], [6] （or [Shift]+[F6]) でプレゼンテーションモードに入ります。
+</p><p>
+<a name="quit"><h3 align="center">1.6. 終了</h3></a>
+プレゼンテーションモードから、<b>dviout</b>を終了させるには、
+<ul>
+<li>[Esc] （or [Shift]+[F2]）で通常のモードに戻ってから終了する。</li>
+<li>[Alt]+[X] or [Alt]+[F4] を押すと、直ちに終了する。</li>
+</ul>
+などがあります。ここでは、前者で終了してみましょう。</p>
+<p>
+<a name="nonscrol"><h3 align="center">1.7. 非スクロール</h3></a>
+他の多くのプレゼンテーションプログラムのように、スクロールを行わず、表示画面を紙面に一致させ、ページ単位で表示する。</p><p>
+そのためには、画面と縦横比が等しい紙面を用意し、[Esc] でプレゼンテーションモードに入って、[5] を押して、紙面全体を表示するようにすればよい。
+<blockquote>
+[5] （Fit）は、「紙面全体が表示画面に入る」という条件で、紙面を最も大きく表示するスイッチです。
+</blockquote>
+ここでは、添付されたDVIファイルでのプレゼンテーションを試してみます。画面は、1024 x 768 dot の XGA の解像度にしておきます（不可能なときは、横のドット数と縦のドット数の比が、4:3 になるような画面を用いる）。
+</p><p>
+<a name="auto"><h3 align="center">1.8. 自動表示</h3></a>
+<font color="#FF0000"><b>3-1.</font> dviout</b>
+のディレクトリの下の <b>sample\slisampl.dvi</b> のアイコンをダブルクリックする。<br>
+<font color="#FF0000"><b>3-2. </b></font>そのまま待っていれば、2ページの最後まで表示される。<br>
+<font color="#FF0000"><b>3-3. </b></font>[Alt]+[X] で抜け出る。
+<blockquote>
+最後のページを表示してから、適当な時間後に先頭（あるいは、別のDVIファイル）へジャンプするように書いておけば、自動表示をループさせることができる。</p><p>
+そのような例 <b>special\demo.dvi</b> があるので、そのアイコンのダブルクリックで表示してみよう。[Alt]+[X] で終了します。
+</blockquote>
+<a name="space"><h3 align="center">1.9. 順次段階表示</h3></a>
+<font color="#FF0000"><b>3-4.</font> dviout</b>
+のディレクトリの下の <b>sample\slisamp2.dvi</b> のアイコンをダブルクリックする。<br>
+<font color="#FF0000"><b>3-5. </b></font>[Space] を押すことにより、一段階毎に表示が進行する。<br>
+<font color="#FF0000"><b>3-6. </b></font>最後まで来たら、[Alt]+[X] で抜け出る。<br>
+<font color="#FF0000"><b>3-7. </b></font>同様のことを <b>sample\slisamp4.dvi</b> でやってみる。
+</p><p>
+<a name="cover"><h3 align="center">1.10. Cover Sheet</h3></a>
+<font color="#FF0000"><b>3-8.</font> dviout</b>
+のディレクトリの下の <b>sample\slisamp3.dvi</b> のアイコンをダブルクリックする。<br>
+<font color="#FF0000"><b>3-9. </b></font>[Space] を押すことにより、一ページ毎に表示される。<br>
+<font color="#FF0000"><b>3-10. </b></font>最後まで来たら、[Esc] でプレゼンテーションモードを抜け出る。</p><p>
+<font color="#FF0000"><b>3-11. </b></font>最初のページまで戻る（自動的にプレゼンテーションモードへ移行）。<br>
+<font color="#FF0000"><b>3-12. </b></font> [F5] を押して、Cover sheet で覆う。</p><p>
+<font color="#FF0000"><b>3-13. </b></font> マウスの左ボタンを押し下げると、上下矢印のカーソルがcover sheet の位置に現れるので、それをマウスで下に動かして、cover sheet を下げ、表題のページを全て表示する。<br>
+<font color="#FF0000"><b>3-14. </b></font> [Space]キーを一回、それで画面の文字が消えないときはもう一回押して、画面の文字を消す（次のページが cover sheet で覆われて表示されている）。<br>
+<font color="#FF0000"><b>3-15. </b></font> マウスの左ボタンを押し下げて、cover sheet を上下に動かしてみる。<br>
+<font color="#FF0000"><b>3-16. </b></font> [Space]キーによってcover sheetで覆われた最後のページへ移動し、マウスを使ってcover sheetを動かして最後のページを全て表示させる。</p><p>
+<font color="#FF0000"><b>3-16.</b></font> 表示された <b>sample.dvi</b> の部分をクリックして、別の文書表示に移動する（自動的に、プレゼンテーションモードから抜け出る）。
+<ul>
+<li><b>sample.dvi</b>には、プレゼンテーションモードの解説がありますので、読んでみるとよいでしょう。</li></p><p>
+<li>Cover sheet で覆うのは、下部（デフォルト）、右部、左部、右下部、左下部の5種のモードがあります。</li>
+</ul>
+なお、縦長紙面を <b>Cover sheet と縦スクロールとで表示</b>するには以下の手順がよいでしょう。
+<ol>
+<li>（Alt+NCO で) Cover sheet <b>On</b> とし、さらに、Alt+NC(R) で、<b>On for Pause</b> のチェックを外しておく。Alt+NV の Cover type は、デフォルトの <b>bottom</b> であるとする。</li>
+<li><b>[Shift]+[F6]</b>（= [Alt]+[D][G][N], [Esc], [6]）でプレゼンテーションモードへ入る。</li>
+<li>画面は cover sheet で覆われた状態なので、<b>マウスの左ボタンを押し下げた状態で、右ボタンクリック後（両矢印のカーソルで）、そのまま下にマウスを動かすことにより</b> cover sheet を除いていく。</li>
+<li>スクリーン全体から cover sheetが除かれたら、<b>[Space]</b> を押し（これにより、スクリーンから見えない先の部分からもカバーシートが取り除かれる）、<b>スクロール</b>（矢印キーやマウスによる）によって、そのページの最後まで表示する。</li>
+<li>[Space] を押すと、画面が消されるので（= 次のページ先頭が cover sheet で覆われた状態）、以下上記のように<br>
+&nbsp;&nbsp;<b>cover sheet の移動</b> → <b>[Space]</b> → <b>スクロール</b> → <b>[Space]</b> → ... と繰り返す。</li>
+<li>最後のページの表示が終わったら、<b>[Alt]+[X]</b> または <b>[Shift]+[F2]</b> で抜け出す。</li>
+</ol>
+なお、上記 [Shift]+[F6], [Shift]+[F2] は、Ver.3.14.3 以降のキー機能のデフォルトです。
+</p><p>
+<a name="DVI"><h2> 2. プレゼンテーション用のDVIファイル</h2></a>
+プレゼンテーション用のDVIファイルを作成するにあたって、以下のことがポイントとなるでしょう。
+<ul>
+<li>プレゼンテーション用の初期設定の自動化</li>
+<li>プレゼンテーション中の操作が簡単になるようにする</li>
+<li>文字を適当な大きさで綺麗に表示する</li>
+</ul>
+たとえば、1.4. <a href="#connect">連結スクロール</a>などのほとんどの初期設定は、
+DVIファイルに埋め込んでおくことができます。</p>
+<p>
+<a name="toconnect"><h3 align="center">2.1. ソースの流用</h3></a>
+論文や報告書のLaTeX2εのソースをプレゼンテーション用に流用することを考えてみます。<br>
+以下の例のようにすると、自動的に<a href="#connect">連結スクロール</a>で使えるようになります。
+<pre>
+  \documentclass[...]{...}
+  \usepackage{....}
+  <font color="#FF0000">\AtBeginDvi{\special{dviout !A!zdy!pdl;!b}}
+  \pagestyle{empty}</font>
+  ...
+  \begin{document}
+  \maketitle<font color="#FF0000">\thispagestyle{empty}</font>
+  ...
+</pre>
+上記の <font color="#FF0000"><code>\pagestyle{empty}</code></font> は、ページのヘッダやページ番号をつけないことを意味します。<br>
+<font color="#FF0000"><code>\thispagestyle{empty}</code></font> は、タイトルページも同様の設定をすることを意味します。</p><p>
+<font color="#FF0000"><code>\AtBeginDvi{...}</code></font> は、DVIファイルの先頭に
+<font color="#FF0000"><code>{...}</code></font> を置くことを意味し、<a href="#specials"><b>dviout specials</b> の中身の意味</a>は
+<blockquote><dl COMPACT>
+ <dt><font color="#FF0000">!A</font></dt><dd>画面の書き換えの表示への反映を止める</dd>
+ <dt><font color="#FF0000">!z</font></dt><dd>Display → Cut edge</dd>
+ <dt><font color="#FF0000">dy</font></dt><dd>Display → Y-two pages</dd>
+ <dt><font color="#FF0000">!p</font></dt><dd>プレゼンテーション・モードへ移行</dd>
+ <dt><font color="#FF0000">dl</font></dt><dd>[6] (Full)</dd>
+ <dt><font color="#FF0000">; </font></dt><dd>上記の処理が終了するまで待つ</dd>
+ <dt><font color="#FF0000">!b</font></dt><dd>書き換えた画面の表示を再開する</dd>
+</dl></blockquote>
+より詳しくは、<b>dviout</b>のOn-line Help の<b>dviout specials</b>の項や、
+Help → Key table を参照してください。</p><p>
+Cut edge機能を使わず、切り取る位置を直接指定するには、たとえば
+<pre>
+  <font color="#FF0000">\AtBeginDvi{\special{dviout -y=F18.6cm:26.5cmP -OX=2cm -OY=2.5cm !Ady!pdl;!b}}</font>
+</pre>
+などのようにします。
+<ul>
+<li>切り取り位置については、Display → Region → On を使って実際に切り取ってテストし、適当な値を　Setup Papameters... →　Paper または Option → Non-default Parameters から得るのがよいでしょう。<br>
+このテストのときは、プレゼンテーションモードに自動的に入らないように、Option → dviout specials のチェックを外しておくか、あるいは、上記の <font color="#FF0000"><code>\AtBeginDvi{...}</code></font>
+の部分をコメントアウトして生成したDVIファイルを使います。
+</li></p><p>
+<li><font color="#FF0000"><code>-y=</code></font> では、（切り取られた）紙面の縦と横のサイズを定義し、<font color="#FF0000"><code>-OX=</code></font>, <font color="#FF0000"><code>-OY=</code></font> では、紙面の横と縦の位置の補正（= 切り取る左上の位置）を定義します。長さの単位は、cm, mm, in, dot/dpi などが使えます。
+</li></p><p>
+<li>使用するフォントは、拡大・縮小が自由に出来るWindows のTrueTypeフォントがよいでしょう。</li></p><p>
+<li><b>dviout specials</b> の中で、<font color="#FF0000"><code>-t=2</code></font> などと指定することによって、矢印キーによるスクロールの滑らかさが変更できます。</li>
+</ul>
+<a name="slide"><h3 align="center">2.2. 文字を見易く (SliTeX)</h3></a>
+OHPの原稿作成用のSliTeXは、LaTeX2εにおいて <b>slides</b> クラスとして実現されていて、OHP の原稿作成などに用いられています。SliTeXでは、サンセリフ体でなくて線が太い独自のフォントが使用され、標準のフォントのサイズも20ポイント、と見易さを主眼として作成されています。</p><p>
+これを<b>dviout</b>のプレゼンテーションモードで使用する場合、SliTeXの標準のフォントに対して、WindowsのTrueTypeでない<b>PKフォント</b>を使用するとすると想定されるので、縮小が整数分の１になるように工夫すると、より綺麗な<a href="cmode.html#GrayScale">gray scale</a>表示が得られます。これは以下のことに関連します。
+<ul>
+<li><b>dviout</b>におけるpreviewは、元の解像度を整数分の１に縮めるgray scale表示を用いて、画面の本来の解像度での白黒２値の場合より綺麗に表示しています。<br>
+Help → Information で
+<pre>
+  dpi: 300/4 x 300/4
+</pre>
+となっていたら、4x4=16 dots を明るさの異なる一つの点として 300dpi の紙面の画像の縦横を 1/4 に縮めて 75 dpi (= 75 dots/inch) の解像度で表示していることを意味します。
+</li></p><p>
+<li>プレゼンテーションモードでは、以下のように、整数倍とは限らない拡大・縮小を行って、紙面の表示画面への調節を行います。</p><p>
+たとえば、1/2.7 に縮める必要があるとすると、1/0.9 に拡大した文字画像を用いて、縦横 1/3 
+に縮めた gray scale 表示を行います（<b>dviout</b>では、高速性などの理由から、整数分の１の gray scale のみが可能です）。<br>
+同様に 1/4.2 に縮める必要があるときは、1/1.05 に縮小した文字画像を用いて、縦横 1/4 の gray scale 表示となります。<br>
+具体的には、<b>dviout</b>の <b><code>-bmp</code></b>, <b><code>-e</code></b>, <b><code>-varf</code></b> の3つのパラメータを用います（プレゼンテーションモード中で、[Ctrl]+[Q] で示される）。</p><p>
+1/0.9 に拡大、あるいは、1/1.05 に縮小した文字画像は、Windows の TrueType フォントを使う場合は、直接そのサイズの文字画像を取得して用います。それに比べてPKフォントなどの固定サイズフォントの場合は、元の文字画像を<b>dviout</b>内部で拡大・縮小したものとなりますので、品質が多少劣ります。
+</li></ul>
+<a name="Exconnect"><p align="center"><b>slidesクラス</b></a>を用いて、<a href="#connect">連結スクロール</a>を使う例</p>
+<pre>
+  \documentclass[leqno]{slides}
+  \usepackage{graphicx, color, amsmath, amssymb, amsfonts}
+  <font color="#FF0000">\AtBeginDvi{\special{dviout -dpi=180 -y=F1024dot/90dpi:30in !Ady!pdl;!b}}
+  \textwidth=11.2in    \textheight=29.6in
+  \hoffset=-0.8in      \voffset=-1.2in
+  \pagestyle{empty}</font>
+  \title{...}
+  \author{...}
+  \date{...}
+  ...
+  \begin{document}
+  \maketitle<font color="#FF0000">\thispagestyle{empty}</font>  % 表紙
+  %\begin{slide}
+  ...                              % 本文
+  %\end{slide}
+  \end{document}
+</pre>
+上記は、XGA (1024 x 768 dot) の画面での表示を念頭においています。
+<ul>
+<li>横幅は画面サイズに合わせるので、300dpi の元の紙面を縦横 1/2 倍した gray scale
+表示となります（横幅、<code>2048dot/180dpi</code> を半分に縮小して、<code>1024dot/90dpi</code> としている）。
+</p><p>
+紙面の縦サイズ <code>30in</code> は、（縦スクロールを用いるので）
+適当な値で問題ありません。<br>
+大きい方が、ページ中の行間の調整が取り易い、スクロールがより滑らか
+（表示では２ページ毎に管理する）というメリットがありますが、余り大きくすると
+コンピュータの負担が重くなります。</li><p><p>
+<li>上の指定で、<code>1024dot/90dpi</code> は長さを表すので、<code>11.378in</code> と書いたものと等価です。</li>
+</p><p>
+<li>全ページを縦に連結して表示するので、（<b>slides クラス</b>において）
+ページを定義する <code>\begin{slide}</code>, <code>\end{slide}</code> は不要です。
+</li></ul>
+指定を変更して
+<pre>
+  <font color="#FF0000">\AtBeginDvi{\special{dviout -dpi=360 -y=F1024dot/90dpi:30in !Ady!pdl;!b}}</font>
+</pre>
+とすると、1/4 x 1/4 の gray scale になります。また
+<pre>
+  <font color="#FF0000">\AtBeginDvi{\special{dviout -dpi=300 -y=F1024dot/100dpi:27in !Ady!pdl;!b}}</font>
+</pre>
+とすると、(1024/90 &gt; 1024/100 なので）表示される文字が大きくなり、１行の文字数が変わります。このときは、\textwidth などの値も変更が必要です。
+<ul>
+<li>PKフォントを使う上記の場合、<font color="#FF0000"><code>-dpi=</code></font> で指定した解像度のPKフォントが生成されます。</li></p><p>
+<li><font color="#FF0000"><code>\hoffset</code></font>, <font color="#FF0000"><code>\voffset</code></font> で表示位置を調整し、<font color="#FF0000"><code>\textwidth</code></font>, <font color="#FF0000"><code>\textheight</code></font> で紙面サイズを調整します。</li></p><p>
+<li>プレゼンテーションモードの（特に仮想１ページを使う）場合、いくつかの（<b>dviout specials</b>を含む）<b>dviout</b>の機能と両立しないことがあります。<b>dviout</b>では多くの機能をユーザに解放し、組み合わせによっては不具合の可能性がある場合も<b>dviout</b>側からは禁止していないことがあり、望み通りの結果にならないこともありますのでご了解下さい。
+</li></ul>
+<a name="Excover"><p align="center"><b>Cover Sheet</b></a>を使う例</p>
+一方、紙面を表示画面に一致させる場合は
+<pre>
+  ...
+  <font color="#FF0000">\AtBeginDvi{\special{dviout -dpi=300 -y=F1024dot/100dpi:768dot/100dpi !AN5NO!pdndf;!b}}</font>
+  ...
+  \begin{document}
+  ...
+  <font color="#FF0000">\begin{slide}</font>          % ページの始まり
+  ...
+  <font color="#FF0000">\end{slide}</font>            % ページの終わり
+  <font color="#FF0000">\begin{slide}</font>          % ページの始まり
+  ...
+  <font color="#FF0000">\end{slide}</font>            % ページの終わり
+  \end{document}
+</pre>
+などと上の例を修正し、各ページを <code><font color="#FF0000">\begin{slide}</font></code> と <code><font color="#FF0000">\end{slide}</font></code> で囲って定義します。
+</p><p>
+ここでは、各ページが cover sheet で覆われた状態で表示され、マウスの右ボタンを押し、マウスカーソルを使って cover sheet を下方に動かし、その後 [Space] キーで次のページへ進む、というプレゼンテーションを想定しています。<b>dviout specials</b>には
+<blockquote><dl COMPACT>
+<dt><font color="#FF0000">N5</font></dt><dd>cover type : bottom（下部を覆う．横書き用）</dd>
+<dt><font color="#FF0000">N7</font></dt><dd>cover type : left（左部を覆う．縦書き用）</dd>
+<dt><font color="#FF0000">N0</font></dt><dd>general screen</dd>
+<dt><font color="#FF0000">NO</font></dt><dd>cover sheet ON</dd>
+<dt><font color="#FF0000">NP</font></dt><dd>ON for pause（= 区切りの無いページは、cover sheet を開いた状態で始める）</dd>
+<dt><font color="#FF0000">dn</font></dt><dd>線画機能 ON</dd>
+<dt><font color="#FF0000">df</font></dt><dd>[5] (Fill)</dd>
+</dl></blockquote>
+などを使います。</p><p>
+<a name="prepsp">ページを定義し、その途中に区切りをつけて、[Space]キーで区切り毎に表示を進行させていくには
+</a><pre>
+  ...
+  <font color="#FF0000">\AtBeginDvi{\special{dviout -dpi=300 -y=F1024dot/100dpi:768dot/100dpi !AN5NP!pdf;!b}}
+  \def\pause{\special{pause}}</font>
+  ...
+  \begin{document}
+  <font color="#FF0000">\begin{slide}</font>          % ページの始まり
+  ...
+  <font color="#FF0000">\pause</font>          　　   % 区切りの挿入
+  ...
+  <font color="#FF0000">\end{slide}</font>            % ページの終わり
+  <font color="#FF0000">\begin{slide}</font>          % ページの始まり
+  ...
+  \end{document}
+</pre>
+のように、 <code><font color="#FF0000">\begin{slide}</font></code> と <code><font color="#FF0000">\end{slide}</font></code> で囲って定義した各ページの中の適当な（段落の）切れ目の部分に <font color="#FF0000"><code>\pause</code></font> を挿入します。
+<blockquote>
+一般に、<b>紙面の縦横比を表示画面の縦横比と一致</b>させて、プレゼンテーションモードで[5]（Fit) を押せば、紙面が表示画面と一致する。</p><p>
+Windows の TrueType フォントのみを用いているときは、整数分の１で縮小を行わなくても、文字品質が落ちることはないので、作成される文書の紙面の縦横比のみに注意すればよい。</p><p>
+この場合、例えば XGA (1024 x 768), SVGA (800 x 600) などでは 4:3 なので
+<pre>
+  <font color="#FF0000">-y=F16cm:12cmP</font>
+</pre>
+などの指定でよい（<font color="#FF0000"><code>-y=XGAP</code></font> などでもよい）。なお、SXGA(1280 x 1024) では、5:4 となる。
+</blockquote>
+<a name="Exauto"><b><p align="center">自動表示</b></a>の例</p>
+cover sheet を使った上記の例において、[Space] を押すキー操作を<b>dviout special</b>によってDVIファイルに埋め込むと、自動表示が可能になります。例えば、
+<pre>
+  \documentclass{slides}
+  ...
+  <font color="#FF0000">\AtBeginDvi{\special{dviout -dpi=300 -y=F1024dot/100dpi:768dot/100dpi !AN5NP!pdf;!b}}</font>
+  <font color="#FF0000">\def\pause{\special{pause}}</font>
+  ...
+  \begin{document}
+  \begin{slide} % 最初のページ（この例では2つの \pauseを含む）の始まり
+  ...
+  <font color="#FF0000">\pause</font>  % 区切りの挿入
+  ...
+  <font color="#FF0000">\pause</font>  % 区切りの挿入
+  ...
+  <font color="#FF0000">\special{dviout `timer 5000 je}</font> % 最初の \pause で5秒待つ
+  <font color="#FF0000">\special{dviout `timer 5000 je}</font> % 次の \pause で5秒待つ
+  <font color="#FF0000">\special{dviout `timer 10000 je}</font>% さらに10秒待って次のページへ
+  \end{slide}   % 最初のページの終わり
+  ...
+  \begin{slide} % 最後のページ（この例では、\pause なし）の始まり
+  ...
+  <font color="#FF0000">\special{dviout `timer 20000 jt}</font>% 20秒待って最初のページへ
+  \end{slide}   % 最後のページの終わり
+  \end{document}
+</pre>
+ここでは、さらに以下の<b>dviout specials</b>が参考になります。
+<blockquote><dl COMPACT>
+ <dt><font color="#FF0000"><code>je</code></font></dt>
+  <dd>[Space]</dd>
+ <dt><font color="#FF0000"><code>jt</font></code></dt>
+  <dd>[Ctrl]+[Home], 最初のページへジャンプ</dd> <dt><code><font color="#FF0000">`timer </font> <font color="#00B000">xx</font></code></dt>
+  <dd>次の<b>dviout specials</b>を実行するまで <code><font color="#00B00">xx</font></code>/1000 秒待つ</dd>
+ <dt><font color="#FF0000"><code>`href</font> <font color="#00B000">yy:zz</font></code></dt>
+  <dd>HyperTeX special の <code><font color="#FF0000">\special{html:&lt;a href="</font><font color="#00B00">yy:zz</font></font><font color="#FF0000">"&gt;}</font></code> を実行する
+</dl>
+</blockquote>
+各ページで <code>\pause</code> の個数とおなじ回数 [Space]キーを押すとそのページが全て表示され、さらにもう一度 [Space]キーを押すと次のページに進みますが、それを自動的に行っています。
+<blockquote>
+<ul>
+<a name="specials"><li>各ページで定義された<b>dviout specials</b>は、定義された順に解釈され、
+ページ移動が起きるとクリアーされます。</li></a></p><p>
+<li><b>dviout specials</b>のコマンドで、2文字で先頭文字がアルファベットか <code><font color="#FF0000">!</font></code> のものはキー操作に対応し、その表は Help → Key table で得られます（[&nbsp;&nbsp;]の中の2文字）。<br>
+大文字で記述したものは解釈時に実行され、小文字で書いたものは、順に実行すべき操作のリストの最後に付け加えられます。</p><p>
+一方、先頭が <code><font color="#FF0000">-</font></code> のものはパラメータの設定を、
+<code><font color="#FF0000">`</font></code> のものは特殊なコマンドのキーワードを示します。
+</blockquote>
+たとえば、以下のように定義を工夫すると、ソースはより簡単に書けるでしょう。
+<pre>
+  \documentclass{slides}
+  ...
+  <font color="#FF0000">\def\pause{\special{pause}\special{dviout `timer 5000 je}}</font> % 各\pauseで5秒待ち
+  <font color="#FF0000">\def\startpages{\begin{slide}}
+  \def\nextpage{\special{dviout `timer 8000 je}\end{slide}\begin{slide}}</font> % 8秒待って次ページへ
+  <font color="#FF0000">\def\endpages{\special{dviout `timer 10000 jt}\end{slide}}</font> % 10秒待って最初のページへ
+  ...
+  \begin{document}
+  <font color="#FF0000">\startpages</font>   % 最初のページの始まり
+  ....
+  <font color="#FF0000">\pause</font>
+  ....
+  <font color="#FF0000">\nextpage</font>     % 次のページへ
+  ...
+  <font color="#FF0000">\pause</font>
+  ...
+  <font color="#FF0000">\endpages</font>     % 最後のページの終わり
+  \end{document}
+</pre>
+また HyperTeX と併用すれば
+<pre>
+  <font color="#FF0000">\special{dviout `href file:foo.mid}</font>
+</pre>
+は、<code>foo.mid</code> という音楽を鳴らすこと
+<pre>
+  <font color="#FF0000">\special{dviout `href file:foo.dvi}</font>
+</pre>
+は、<code>foo.dvi</code> の表示に移ること、というような指定ができます。</p><p>
+この機能を使うと、「解説の音声」を入れた自動プレゼンテーションや、「英語の文章を表示しながらそれを読み上げる」というようなプレゼンテーションも簡単に実現できます。
+</p><p>
+
+なお
+<pre>
+  <font color="#FF0000">\def\nextpage{\end{slide}\begin{slide}}
+  \def\endpages{\end{slide}}</font>
+</pre>
+と変更すると、自動表示ではないものが、一方
+<pre>
+  <font color="#FF0000">\def\pause{}
+  \def\startpages{}
+  \def\nextpage{}
+  \def\endpages{}</font>
+</pre>
+として、<code><font color="#FF0000">\AtBeginDvi{...}</font></code> も修正すれば、
+連結スクロール用のものが作成されます。
+</p><p>
+<a name="#dvisp+"><b><p align="center">表示制御</b>（dviout special `+&nbsp;）を使う例</p>
+表示の各ページの中身に対して、その時のレベルに応じて表示、非表示を切り替える
+dviout special `+ を用いて、[Space]キーによって順次表示していくプレゼンテーションです。
+<ul>
+<li>
+レベル 0 から始まり、[Space]を押していくと、そのページのレベルが一つずつ増える
+</li>
+<li>
+そのページで定義された最大のレベルに達したあと、[Space]をさらに押すと、次のページが レベル 0 で表示される
+</li>
+<li>
+前に戻ったり、離れたページにジャンプした場合、そのページを十分大きいレベルで表示する
+</li>
+<li><font color="#FF0000">\special{dviout `+</font><font color="#0000FF">levels</font><font color="#FF0000">}</font> とによって、そのページのそれ以降を表示するレベルを指定する（Ver.3.17.4以降）。<font color="#0000FF">levels</font>は、例えば以下のように書く<br>
+<blockquote><dl COMPACT>
+<dt><font color="#FF0000">1, 3</font></dt><dd>1 と 3</dd>
+<dt><font color="#FF0000">1-3</font></dt><dd>1 から 3 まで</dd>
+<dt><font color="#FF0000">3-</font></dt><dd>3 以上</dd>
+<dt><font color="#FF0000">-3</font></dt><dd>0 以上 3 まで</dd>
+<dt><font color="#FF0000">M</font></dt><dd>それまでそのページに現れた最大のレベル＋1</dd>
+<dt><font color="#FF0000">MM</font></dt><dd>それまでそのページに現れた最大のレベル＋2</dd>
+<dt><font color="#FF0000">m</font></dt><dd>それまでそのページに現れた最大のレベル</dd>
+<dt><font color="#FF0000">mm</font></dt><dd>それまでそのページに現れた最大のレベル－1</dd></dl>
+</blockquote>
+<font color="#FF0000">M</font> や <font color="#FF0000">m</font> を複数個並べたものも同様に定める。</ul>
+よって、TeX のソースに
+<pre>
+  ....
+  <font color="#FF0000">\special{dviout `+M-}</font>
+  ....
+  <font color="#FF0000">\special{dviout `+M-}</font>
+  ...
+</pre>
+とあれば、<font color="#FF0000">\special{dviout `+M-}</font> を
+<font color="#FF0000">\special{pause}</font> としたものと [Space] を押していくとき、ほぼ同様の表示をする。ただし前者は画面上である部分以下を隠すが、後者はソース上のそれ以下の部分を無視するという違いがある。
+<pre>
+  ...
+  <font color="#FF0000">\special{dviout `+1-}</font>
+  ...
+  <font color="#FF0000">\special{dviout `+0-}</font>
+  ...
+</pre>
+とあれば、最初表示されなかった真ん中の . . . の部分が、[Space] を押すと現れる。
+<pre>
+ I am a <font color="#FF0000">\special{dviout `+0}</font>dog.%
+ \llap{<font color="#FF0000">\special{dviout `+1-}</font>cat.}<font color="#FF0000">\special{dviout `+0-}</font>
+</pre>
+とすると、「I am a dog.」 と表示されていたものが [Space] を押すとレベルが 0 から
+1 になって 「I am a cat.」 に変わる。
+<pre>
+  \documentclass{slides}
+  ...
+  <font color="#FF0000">\AtBeginDvi{\special{dviout -dpi=300 -y=F1024dot/100dpi:768dot/100dpi !AN0!w!p;!b!0df}}</font>
+　...
+  \begin{document}
+　...
+</pre>
+などとすればよい。関連する<b>dviout specials</b>は
+<blockquote><dl COMPACT>
+<dt><font color="#FF0000">!0</font></dt><dd>dviout special `+[levels] を有効にし、レベルは 0 にリセットする。</dd>
+<dt><font color="#FF0000">!1</font></dt><dd>dviout special `+[levels] を無効にし、レベルは 0 にリセットする。</dd>
+</dl></blockquote>
+関連するキー操作は
+<blockquote><dl COMPACT>
+<dt>[Space]</dt><dd>１ステップ進む</dd>
+<dt>CTRL+N</dt><dd>reNew: level を 0 に戻してそのページを再表示する</dd>
+<dt>CTRL+U</dt><dd>dviout special `+[levels] を有効にする（つぎの再表示から有効）</dd>
+<dt>CTRL+V</dt><dd>dviout special `+[levels] を無効にする（つぎの再表示から有効）</dd>
+</dl></blockquote>
+なお、<b>メニュー</b>の <b>Stop CTRL</b> で、この表示制御の有効／無効を変更できます（CTRL+U/CTRL+V CTRL+N）。
+
+<a name="Embed"><h3 align="center">2.3. フォントや画像の埋め込み</h3></a>
+画像や特殊なフォントを使う場合、それらをDVIファイルに埋め込んでおけば、それらがない
+環境においても、dvioutを用いたプレゼンテーションを行うことができます。詳しくは、
+<a href="http:tex_dvioutw.html#ETF">DVIファイルにフォントや画像を埋め込む</a>や、On-line Help の「目次 → DVIファイルへの埋め込み → フォント／画像の埋め込み」を参照してください。PKフォント、TrueTypeフォントのどちらも埋め込むことができます。
+
+<a name="Style"><h3 align="center">2.4. プレゼンテーション用スタイルファイル</h3></a>
+LaTeX2e では，slideクラスによってプレゼンテーション用に1ページずつ表示画面を作ることができます．
+<pre>
+  \documentclass{slides}
+</pre>
+これを拡張し，背景画面の設定や dviout での段階表示などの特殊機能を取り入れた
+<a href="http://argent.shinshu-u.ac.jp/otobe/tex/packages/jslides.html">jslidesパッケージ</a>が乙部氏により作成され公開されています。<br>
+
+これを利用すると美しいプレゼンテーション用のファイルが容易に作成できます。
+
+<h2><a name="OP"> 3. プレゼンテーション中の操作</a></h2>
+<a name="key"><h3 align="center">3.1. キー・マウスの操作</h3></a>
+・ プレゼンテーションは、キーまたはマウスの単純な操作で進行できるようにしておくことが望まれます。
+プレゼンテーションモードでは、[Shift]+[F1] でキー操作の一覧が表示されます。
+</p><p>
+・ Option → Setup Parameters... → Key で、任意のキーにコマンドなどの操作が定義できます。
+マクロ機能を使うと、パラメータ変更などの一連の機能も一つのキーに定義できます。
+</p><p>
+・ <a href="#prepsp">[Space]キーのみで進行するように準備</a>されてあったとしましょう。<br>
+[Space]キーの役割を、マウスの右、または左ボタンに割り当てることができます（Presentation → Use Mouse Button → Left/Right あるいは <b>dviout specials</b>では、TL/TR に対応）。
+<blockquote>
+マウスボタンの機能は、プロジェクターのリモートコントローラで代替できるものが多いので、
+この設定を使うと、プロジェクターのリモートコントローラの操作のみでプレゼンテーションを進めることができます。
+</blockquote>
+（デフォルトでは）マウスを画面の左下端に動かしたときに現れる<b>メニュー</b>の [ &gt; ] ボタンをクリックして、プレゼンテーションを進めることができます。一方、[ &lt; ] ボタンによって前のページに戻ります。
+</p><p>
+・ 矢印のマウスカーソルは、OHPを使ったプレゼンテーションにおけるレーザポインタの役割をします。マウスをしばらく(= 2 sec)動かさないままにしておくと、矢印カーソルは消えますが、マウスを動かしたときに再表示されます。</p><p>
+・ Cover sheet 用の両（or 四方）矢印カーソルは、マウスの左ボタンを押すと、あるいは、左を押しながら右をクリックすると表示されます。前者は、紙面全体が表示されている場合です。
+<blockquote>
+紙面全体が表示されていない場合は、マウスの左ボタンのみを押すと手の形のカーソルになり、紙面の表示部分のスクロールができます。
+</blockquote>
+・ プレゼンテーション・モードでのメニュー・ダイアログは、[Shift]+[F12] や<b>メニュー</b>の[+] ボタンで変えられます。左上端にあるとき以外は通常消えていて、カーソルがその位置に来たときのみ現れ、邪魔になりません。<br>
+Presentation → Presentation Menu のチェックが On になっていれば、プレゼンテーション・モード起動時に<b>メニュー</b>が有効です。<br>
+Presnetation → Save Presetation settings により、このチェックの On/Off および<b>メニュー</b>の形状や位置などの現在の状況を次回以降のdviout起動時のデフォルトに設定できます。
+
+<a name="jump"><h3 align="center">3.2. 移動</h3></a>
+・ <b>ページを指定した移動</b>をするには<br>
+<a href="#OP">[Space]キーなどで次ページ</a>、[Back space] で前ページ、[Ctrl]+[Home] で先頭ページ、[Ctrl]+[End] で最終ページへ、などという移動は通常と同じです。
+同様に、[/] に続いてページ番号を入力して [Enter] を押すページ番号指定の移動機能が使えます。たとえば、
+<pre>
+  / + 3 [Enter]
+</pre>
+とすると、2ページスキップして3ページ後のページへの相対ジャンプができます（上記で + をつけないと、先頭から3ページ目を意味します）。
+</p><p>
+・ <b>あらかじめ決まっている箇所や文書に移動</b>するには、
+<b>HyperTeX</b> の機能を使うと便利です。<br>
+添付の<b>myhyper.sty</b>を使った場合は
+<pre>
+  ...
+  <font color="#FF0000">\usepackage{myhyper}</font>
+  ...
+  \name{thm1}{Theorem~1}
+  ...
+  It follows from the preceeding \goto{thm1}{theorem} that
+  ...
+  ... \href{foo.dvi}{FOO} ...
+  ...
+  ... \href{<font color="#00B000">reference.doc</font>}{reference} ...
+  ...
+</pre>
+などとすると</p><p>
+<font color="#0000FF">theorem</font> と表示された部分を
+マウスの左ボタンでクリックすると、"Theorem 1" の部分にジャンプします。<br>
+その後、[Shift]+[F] を押すと、もとの <font color="#0000FF">theorem</font> の部分に戻ります。
+</p><p>
+<font color="#0000FF">FOO</font> と表示された部分を同様にクリックすると、
+<b>foo.dvi</b> の表示に移ります。その後、[Shift]+[F] を押すと、
+元のファイルの元の位置に戻ります。
+</p><p>
+<font color="#0000FF">reference</font> と表示された部分をクリックすると、Microsoft Word が起動されて、Microsoft Word の文書 <b>reference.doc</b> が表示されます。 
+<blockquote>
+[Shift]+[F] の代わりとして、[&lt;] でも同じです。</p><p>
+<font color="#00B000">reference.doc</font> の部分は、拡張子がシステムに登録されているファイル（*.avi, *.wma, *.exe など、実行ファイルも可、アクセス可能なインタネット上にあってもよい）を指定できます。
+</blockquote>
+</p><p>
+・ <b>表示中のドキュメントの離れたページに移動する</b>には<br>
+プレゼンテーション中に質問を受けて、以前のページを参照しなければならないことがあります。ページ数の多い文書ではその箇所を捜すのが大変なことがあります。<br>
+このようなときは [9] を押して、<b>16ページずつの同時表示画面</b>（<a href="#sumnail">サムネール機能</a>）に移り、該当のページをマウスの右ボタンでクリックすればそのページに移動できます。戻るのも同様な方法で可能です。
+戻るには、マークを付けておく以下の方法も使えます。
+</p><p>
+・ <b>位置をマークしておいて、後からそこに移動する</b>には<br>
+[M] で位置をマークしておき、後から [Ctrl]+[G] でマークした位置にジャンプします。
+ジャンプ前の位置に戻るには、[Shift]+[F] を押します。
+</p><p>
+・ <b>別のページに移動して戻って来る</b>には<br>
+[M] で現在の位置をマークし、移動後 [Ctrl]+[X] によって元の位置に戻り、移動した先とマークを交換します。再度の [Ctrl]+[X] で、両者間での移動となります。
+</p><p>
+・ <b>別のDVIファイルに移動して戻って来る</b>には<br>
+HyperTeX や [Alt]+I, [Ctrl]+[O] などから別の DVIファイルを表示します。その後、[Shift]+[F] (または、[&lt;])で元のDVIファイルに戻ります。[Shift]+[L]（または、[&gt;]）では、再度そのファイルへ移り、[Shift]+[F] (または、[&lt;]) で戻ります。
+</p><p>
+・ <b>移動後の初期化や再設定</b><br>
+他のファイルに移っての移動などで、プレゼンテーションの設定の初期化や再設定が必要なことがあります。<br>
+これらはキー操作で可能ですが、マウスを右下端に移動したときに現れる<b>メニュー</b>から行うこともできます。<br>
+キー操作を忘れたときは、[Shift]+[F1] でその一覧が表示されます。
+
+<a name="2OHP"><h3 align="center">3.3. OHP２台に代わるもの</h3></a>
+OHPを使うプレゼンテーションでは、OHPを2台使用して、一つ前のシートも表示しておくことがあります。</p><p>
+コンピュータからのプロジェクターによるプレゼンテーションとOHPによる表示とを同時に使うことが出来る場合は、両者を同時に使って同様のことが可能でしょう。
+OHPのシートの内容は、プレゼンテーション用に作成したものが流用できるでしょう。
+<hr>
+<a href="#contents">目次へ</a><br>
+<a HREF="http://akagi.ms.u-tokyo.ac.jp/ftp-j.html#TeX">TeXのページへ</a><br>
+<br>
+誤りや補足すべき点があればお知らせ下さい --&gt; <a
+href="mailto:ftp-admin@akagi.ms.u-tokyo.ac.jp">ftp-admin@akagi.ms.u-tokyo.ac.jp</a><br>
+</p>
+</body>
+</html>

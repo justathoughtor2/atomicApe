@@ -1,0 +1,16 @@
+name hyphen-base
+category TLCore
+revision 34525
+containersize 22184
+containermd5 1bd297c99ea61bda6ef2dfa18c29b982
+runfiles size=24
+ texmf-dist/tex/generic/config/language.dat
+ texmf-dist/tex/generic/config/language.dat.lua
+ texmf-dist/tex/generic/config/language.def
+ texmf-dist/tex/generic/config/language.us
+ texmf-dist/tex/generic/config/language.us.def
+ texmf-dist/tex/generic/config/language.us.lua
+ texmf-dist/tex/generic/hyphen/dumyhyph.tex
+ texmf-dist/tex/generic/hyphen/hyphen.tex
+ texmf-dist/tex/generic/hyphen/hypht1.tex
+ texmf-dist/tex/generic/hyphen/zerohyph.tex

@@ -1,0 +1,14 @@
+name pdftex-def
+category Package
+revision 22653
+shortdesc Colour and Graphics support for PDFTeX.
+longdesc The file pdftex.def provides device-specific definitions for
+longdesc colour and graphics support when running pdf(La)TeX.
+containersize 13540
+containermd5 1e2619d849d057d6fb4b2f1d070fb639
+runfiles size=14
+ texmf-dist/tex/latex/pdftex-def/pdftex.def
+catalogue-ctan /macros/latex/contrib/pdftex-def/pdftex.def
+catalogue-date 2013-09-22 01:11:41 +0200
+catalogue-license lppl1.3
+catalogue-version 0.06d

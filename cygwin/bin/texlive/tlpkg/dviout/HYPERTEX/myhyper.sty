@@ -1,0 +1,47 @@
+%  This is a LaTeX style file for HyperTeX
+%       1996     written  by Okumura
+%       1996     modified by SHIMA
+%	1997/99  modified by Ohishi
+%
+% \href
+% \name
+% \img
+% \base
+%
+% \goto   % 1996 added by SHIMA
+%
+%%%%%%  Example  %%%%%%
+%
+%   If you click \href{#foo}{here}, 
+%   you will jump to \name{foo}{this place}.
+%
+%   The above is equavalent to 
+%
+%   If you click \goto{foo}{here},
+%   ...
+%
+%   If you click \href{http://xxx.toto-u.ac.jp/ftp.html}{here}, 
+%   you will jump to http://xxx.toto-u.ac.jp/ftp.html.
+
+\edef\hypert@mp{\catcode`\noexpand\#=\the\catcode`\#}%
+\catcode`\#=12
+\def\hyper@sh{#}%
+\hypert@mp
+\let\hypert@mp=\relax
+
+\def\goto{\leavevmode\begingroup\@sanitize\@goto}
+\def\@goto#1{\special{html:<a href="\hyper@sh#1">}\endgroup \@@href}
+
+\def\href{\leavevmode\begingroup\@sanitize\@href}
+\def\@href#1{\special{html:<a href="#1">}\endgroup \@@href}
+\def\@@href#1{#1\special{html:</a>}}
+
+\def\base{\leavevmode\begingroup\@sanitize\@base}
+\def\@base#1{\special{html:<base href="#1">}\endgroup}
+
+\def\img{\leavevmode\begingroup\@sanitize\@img}
+\def\@img#1{\special{html:<img src="#1">}\endgroup}
+
+\def\name{\leavevmode\begingroup\@sanitize\@name}
+\def\@name#1{\special{html:<a name="#1">}\endgroup \@@name}
+\def\@@name#1{#1\special{html:</a>}}

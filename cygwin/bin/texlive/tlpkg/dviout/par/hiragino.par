@@ -1,0 +1,24 @@
+;#j  ƒqƒ‰ƒMƒm: –¾’© Pro W3 + ŠÛƒSƒVƒbƒN Pro W4 / @ŠpƒSƒVƒbƒN Pro W3
+;;    Default setting for TrueType fonts using Japanese
+;;
+;;  CM/AMS fonts:   BaKoMa;;  CM/AMS fonts:   BaKoMa
+;;  Japanese fonts: HIRAGINO Minchou/MaruGoth/@KakuGoth
+vfn='
+%version=2
+%vfont_list
+1,"ƒqƒ‰ƒMƒm–¾’© Pro W3"
+2,"ƒqƒ‰ƒMƒmŠÛƒS Pro W4"
+3,"@ƒqƒ‰ƒMƒm–¾’© Pro W3"
+4,"@ƒqƒ‰ƒMƒmŠpƒS Pro W3"
+5,"cmr10"
+%jfm_list
+min,1,a,a,n,0;0;0,,1,0
+goth,2,a,a,n,0;0;0,,1,0
+tmin,3,a,a,n,0;0;0,,1,1
+tgoth,4,a,a,n,0;0;0,,1,1
+jis,1,a,a,n,0;0;0,,1,0
+jisg,2,a,a,n,0;0;0,,1,0
+default,1,a,b,n,0;0;0,,1,0
+tdefault,3,a,b,n,0;0;0,,1,1
+edefault,5,a,a,n,0;0;0,,1,0
+'

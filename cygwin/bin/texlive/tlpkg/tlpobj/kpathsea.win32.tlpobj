@@ -1,0 +1,22 @@
+name kpathsea.win32
+category TLCore
+revision 37608
+shortdesc win32 files of kpathsea
+containersize 389668
+containermd5 5d5565f90bd4e7b733182911dafefee5
+binfiles arch=win32 size=252
+ bin/win32/kpathsea621.dll
+ bin/win32/kpseaccess.exe
+ bin/win32/kpsereadlink.exe
+ bin/win32/kpsestat.exe
+ bin/win32/kpsewhich.exe
+ bin/win32/mkocp.exe
+ bin/win32/mkofm.exe
+ bin/win32/mktexfmt.exe
+ bin/win32/mktexlsr.exe
+ bin/win32/mktexmf.exe
+ bin/win32/mktexpk.exe
+ bin/win32/mktextfm.exe
+ bin/win32/mktexupd.exe
+ bin/win32/msvcr100.dll
+ bin/win32/texhash.exe

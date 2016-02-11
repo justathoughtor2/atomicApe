@@ -1,0 +1,3 @@
+ddeinitiate "dviout", "dviout";
+ddeexecute "[PageOpen(# "+str(lineno)+" *)]";
+ddeexecute "[FileOpen("+leftstr(filename,strlen(filename)-3)+"dvi)]";

@@ -1,0 +1,7 @@
+;#j dvipsk -Pbi  によって PS ファイルに変換（dviprt 機能での印刷）
+;# Transform into a PS file by dvipsk -Pbi
+;;       Transform into a PS file by dvipsk -Pbi
+;;  Paper size , Landscape, Offset OX, OY,
+;;  Pages to be transformed, odd/even/reverse
+dviprt='+dvipsk.exe -Pbi ^W -p=^a -l=^b ^X{-z} "^q";^z^10^{Hyper PS&1}Transform info PS file;by dvipsk -Pbi'
+Set=fd

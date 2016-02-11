@@ -1,0 +1,36 @@
+#x This is for standard JFM.
+%jis		"‚l‚r –¾’©"
+%jisg		"‚l‚r ƒSƒVƒbƒN"
+jiso		"‚l‚r –¾’©/I"
+jisgo		"‚l‚r ƒSƒVƒbƒN/I"
+jisn		"‚l‚r –¾’©"
+jisgn		"‚l‚r ƒSƒVƒbƒN"
+%jis-v		"@‚l‚r –¾’©"
+%jisg-v		"@‚l‚r ƒSƒVƒbƒN"
+jisn-v		"@‚l‚r –¾’©"
+jisgn-v		"@‚l‚r ƒSƒVƒbƒN"
+min			"‚l‚r –¾’©"
+tmin		"@‚l‚r –¾’©"
+nmin		"‚l‚r –¾’©"
+ngoth		"‚l‚r ƒSƒVƒbƒN"
+newmin		"‚l‚r –¾’©"
+newtmin		"@‚l‚r –¾’©"
+newgoth		"‚l‚r ƒSƒVƒbƒN"
+newtgoth	"@‚l‚r ƒSƒVƒbƒN"
+tbmin		"@‚l‚r –¾’©"
+beta		"‚l‚r –¾’©"
+tbeta		"@‚l‚r –¾’©"
+% unicode is supported by Windows2000/XP
+unimin		"‚l‚r –¾’©"     unicode
+unigoth		"‚l‚r ƒSƒVƒbƒN" unicode
+unijmin-h    "‚l‚r –¾’©"      unicode
+unijgoth-h   "‚l‚r ƒSƒVƒbƒN"  unicode
+unijmin-v    "@‚l‚r –¾’©"     unicode
+unijgoth-v   "@‚l‚r ƒSƒVƒbƒN" unicode
+cidmin-h	"‚l‚r –¾’©"		cid2uni
+cidmin-v	"@‚l‚r –¾’©"	cid2uni
+cidgoth-h	"‚l‚r ƒSƒVƒbƒN"	cid2uni
+cidgoth-v	"@‚l‚r ƒSƒVƒbƒN"  cid2uni
+% The following are for the usage of msminxx/msgothxx by subfonts
+msmin@Unicode@	"‚l‚r –¾’©"	unicode,japanese
+msgoth@Unicode@	"‚l‚r ƒSƒVƒbƒN"	unicode,japanese

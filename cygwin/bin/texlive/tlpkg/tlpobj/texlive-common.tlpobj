@@ -1,0 +1,25 @@
+name texlive-common
+category TLCore
+revision 37183
+shortdesc TeX Live documentation (common elements)
+postaction shortcut type=menu name="TeX Live documentation" 	cmd=TEXDIR/texmf-dist/doc/texlive/index.html
+containersize 348
+containermd5 25b1fada2eae461d5cdd6b0c7100c354
+doccontainersize 265668
+doccontainermd5 fb6d6ef217825a85a41235d572eedf0f
+docfiles size=84
+ texmf-dist/doc/texlive/index.html
+ texmf-dist/doc/texlive/texlive-common/examples/ex5.tex
+ texmf-dist/doc/texlive/texlive-common/examples/ex6.tex
+ texmf-dist/doc/texlive/texlive-common/examples/ex6a.tex
+ texmf-dist/doc/texlive/texlive-common/examples/ex6b.tex
+ texmf-dist/doc/texlive/texlive-common/examples/ex6c.tex
+ texmf-dist/doc/texlive/texlive-common/install-lnx-main.png
+ texmf-dist/doc/texlive/texlive-common/nsis_installer.png
+ texmf-dist/doc/texlive/texlive-common/psview.png
+ texmf-dist/doc/texlive/texlive-common/stdcoll.png
+ texmf-dist/doc/texlive/texlive-common/tlmgr-general-options.png
+ texmf-dist/doc/texlive/texlive-common/tlmgr-gui.png
+ texmf-dist/doc/texlive/texlive-common/tlmgr-paper-options.png
+ texmf-dist/doc/texlive/texlive-common/tray-menu.png
+ texmf-dist/doc/texlive/texlive-common/wizard-w32.png

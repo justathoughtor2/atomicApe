@@ -22,14 +22,18 @@
 # Registers:
 
 # File marks:
-'0  20  40  /cygdrive/d/atomicApe/.git/COMMIT_EDITMSG
-'1  17  0  /cygdrive/d/atomicApe/.git/COMMIT_EDITMSG
-'2  2  0  /cygdrive/d/atomicApe/.git/COMMIT_EDITMSG
-'3  1  0  /cygdrive/d/atomicApe/.git/COMMIT_EDITMSG
-'4  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
-'5  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
+'0  1  9  ~/workspace/dwarvensmithy/build/.git/COMMIT_EDITMSG
+'1  1  37  ~/workspace/dwarvensmithy/.git/COMMIT_EDITMSG
+'2  20  40  /cygdrive/d/atomicApe/.git/COMMIT_EDITMSG
+'3  17  0  /cygdrive/d/atomicApe/.git/COMMIT_EDITMSG
+'4  2  0  /cygdrive/d/atomicApe/.git/COMMIT_EDITMSG
+'5  1  0  /cygdrive/d/atomicApe/.git/COMMIT_EDITMSG
+'6  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
+'7  3  34  /cygdrive/f/atomicApe/.git/COMMIT_EDITMSG
 
 # Jumplist (newest first):
+-'  1  9  ~/workspace/dwarvensmithy/build/.git/COMMIT_EDITMSG
+-'  1  37  ~/workspace/dwarvensmithy/.git/COMMIT_EDITMSG
 -'  20  40  /cygdrive/d/atomicApe/.git/COMMIT_EDITMSG
 -'  17  0  /cygdrive/d/atomicApe/.git/COMMIT_EDITMSG
 -'  2  0  /cygdrive/d/atomicApe/.git/COMMIT_EDITMSG
@@ -127,6 +131,18 @@
 -'  1  58  /cygdrive/d/atomicApe/.git/MERGE_MSG
 
 # History of marks within files (newest to oldest):
+
+> ~/workspace/dwarvensmithy/build/.git/COMMIT_EDITMSG
+	"	1	9
+	^	1	10
+	.	1	9
+	+	1	9
+
+> ~/workspace/dwarvensmithy/.git/COMMIT_EDITMSG
+	"	1	37
+	^	1	38
+	.	1	37
+	+	1	37
 
 > /cygdrive/d/atomicApe/.git/COMMIT_EDITMSG
 	"	20	40

@@ -1,0 +1,4537 @@
+\documentclass[12pt]{jarticle}
+\usepackage{myhyper,keyin,amsmath,amssymb,amsfonts,amscd,amsxtra,array,bar,alltt}
+\usepackage[dviout]{graphicx,color}
+\AtBeginDvi{\special{dviout -hyper=144 -hyperoff=0 v0}}
+% -hyper=144 : Blue letters without underline (hot spot)
+% -hyperoff=0: HyperTeX is valid
+% v0         : Minimal bars
+% v0vs       : Minimal bars + Status bar
+\AtBeginDvi{\special{papersize=4.6in,7.07in}}
+\hoffset=-2.3cm
+\voffset=-4.55cm
+\paperwidth=4.6in
+\paperheight=7in
+\textwidth=4.4in
+\textheight=7.0in
+\renewcommand\baselinestretch{0.92}
+%\paraindent=0cm
+\setlength{\oddsidemargin}{0cm}
+\setlength{\parindent}{0cm}
+\def\BK{\texttt{\symbol{'134}}}
+\def\E#1{\keyin{\string#1}{#1}}
+\def\Q#1{\keyin{\string#1}{$#1$}}
+\def\R#1{\keyin{\noexpand#1}{$#1$}}
+\def\F#1{\special{html:<a href="dviout:`in .5c#1">}\BK#1\special{html:</a>}}
+\def\G#1{\special{html:<a href="dviout:`in .5c#1=">}\BK#1\special{html:</a>}}
+\def\Goto#1#2{\goto{#1}{\colorbox{green}{\tiny\sf #2}}}
+\def\gotop#1{\makebox[0mm]{\hspace{#1}\Goto{top}{Top}}}
+\def\RED#1{{\it\color{red}#1}}
+\def\red#1{{\color{red}#1}}
+\def\MGNT#1{{\it\color{magenta}#1}}
+\def\ops#1{\{\MGNT{#1}\}}
+\def\Ops#1{[\MGNT{#1}]}
+\def\opt#1{\{\RED{#1}\}}
+\def\Opt#1{[\RED{#1}]}
+\def\ST{\hspace{-.1em}\raisebox{-0.25em}*}
+\def\Ref#1{\goto{#1}{\colorbox{cyan}{\tiny$\Rightarrow$}}}
+\def\Fer#1{\goto{#1}{\colorbox{cyan}{\tiny$\Leftarrow$}}}
+\def\Ky#1{\keyin{ 5c\string#1}{\tt\BK #1}}
+%
+\pagestyle{empty}
+%%%
+\newlength{\minitwocolumn}
+\newenvironment{z2col}[1][0pt]%
+{\def\kaidan{\end{minipage}%
+             \hspace{\columnsep}%
+             \addtolength{\minitwocolumn}{-#1}%
+             \begin{minipage}[t]{\minitwocolumn}}%
+ \setlength{\minitwocolumn}{0.48\textwidth}%
+ \addtolength{\minitwocolumn}{-0.5\columnsep}%
+ \addtolength{\minitwocolumn}{#1}%
+ \begin{minipage}[t]{\minitwocolumn}}%
+{\end{minipage}}
+%%%
+\makeatletter
+\def\slantbox#1#2{% #1: angle (|#1| <= 30 degree), #2: text
+%%% tau := tan(angle)
+  \leavevmode
+  \begingroup
+  \setbox\@tempboxa\hbox{#2}%
+  \dimen@#1\p@
+  \ifdim\dimen@<\z@
+   \def\@tempa{-#1}%
+   \def\@hcorr{\the\@tempdima}%
+  \else
+   \def\@tempa{#1}%
+   \def\@hcorr{\z@}%
+  \fi
+  \expandafter\CalculateTan\expandafter{\@tempa}%
+  \@tempdima\ht\@tempboxa \@tempdima \UseTan\@tempa \@tempdima
+  \edef\@hcorr{\@hcorr}%
+  \advance\@tempdima\wd\@tempboxa
+  \@tempdimb\ht\@tempboxa \@tempdimc\dp\@tempboxa
+  \CalculateTan{#1}%
+  \dimen@ \UseTan{#1}\p@ \divide\dimen@\tw@
+  \edef\@x{\strip@pt\dimen@}%%% \@x = tau / 2
+  \dimen@\@x\p@ \dimen@\@x\dimen@
+  \edef\@xx{\strip@pt\dimen@}%%% \@xx = (tau / 2)^2
+  \setbox\z@\hbox{%
+   \@find@rotate@angle
+   \@find@scaling@factor
+   \wd\@tempboxa\z@ \ht\@tempboxa\z@ \dp\@tempboxa\z@%%% (*)
+   \hskip\@hcorr
+   \rotatebox{\@angleii}%
+     {\scalebox{\@factori}[\@factorii]%
+      {\rotatebox{\@anglei}{\box\@tempboxa}}}}%
+  \wd\z@\@tempdima \ht\z@\@tempdimb \dp\z@\@tempdimc%%% (*)
+  \box\z@
+  \endgroup}
+\def\@find@rotate@angle{%
+  \@tempdima\@x\p@ \@tempdimb\@x\p@ \count@\@ne
+  \def\@tempsign{+}%
+  \@whilenum9>\count@\do{%
+   \advance\count@\tw@
+   \edef\@tempsign{\if+\@tempsign -\else +\fi}%
+   \@tempdimb\@xx\@tempdimb
+   \dimen@\@tempdimb \divide\dimen@\count@
+   \advance\@tempdima\@tempsign\dimen@}%
+  \@tempdima-28.64789\@tempdima \advance\@tempdima 45\p@
+  \edef\@anglei{\strip@pt\@tempdima}%%% pi / 4 - (arctan (tau / 2)) / 2
+  \advance\@tempdima-90\p@
+  \edef\@angleii{\strip@pt\@tempdima}}%%% \@angleii = \@anglei - (pi/2)
+\def\@find@scaling@factor{%
+  \@tempdima\p@ \@tempdimb\p@
+  \@tempdimb \@xx\@tempdimb
+  \dimen@\@tempdimb \divide\dimen@\tw@
+  \advance\@tempdima \dimen@
+  \@tempdimb \@xx\@tempdimb
+  \dimen@\@tempdimb \divide\dimen@ 8
+  \advance\@tempdima-\dimen@
+  \@tempdimb \@xx\@tempdimb
+  \dimen@\@tempdimb \divide\dimen@ 16
+  \advance\@tempdima \dimen@
+  \@tempdimb \@xx\@tempdimb
+  \dimen@\@tempdimb \multiply\dimen@ 5 \divide\dimen@ 128
+  \advance\@tempdima-\dimen@
+  \dimen@\@tempdima \advance\dimen@-\@x\p@
+  \edef\@factori{\strip@pt\dimen@}%%% sqrt((tau/2)^2 + 1) - (tau/2)
+  \dimen@\@tempdima \advance\dimen@\@x\p@
+  \edef\@factorii{\strip@pt\dimen@}}%%% sqrt((tau/2)^2 + 1) + (tau/2)
+\makeatother
+%%%
+\makeatletter
+\providecommand{\rubyfamily}{}
+\def\kanjistrut{\vrule \@height0.88zw \@depth0.12zw \@width\z@}
+\newcommand{\ruby}[3][0zw]{%
+  \leavevmode
+  \dimen1=#1\relax
+  \dimen3=\f@size\p@
+  \setbox1=\hbox{#2}%
+  \setbox3=\hbox{\rubyfamily\fontsize{0.5\dimen3}{0pt}\selectfont #3}%
+  \ifdim\dimen1=\z@
+    \ifdim\wd1>\wd3 \dimen1=\wd1 \else \dimen1=\wd3 \fi
+  \fi
+  \hbox{%
+    \kanjiskip=0pt plus 2fil
+    \xkanjiskip=0pt plus 2fil
+    \vbox{%
+      \hbox to \dimen1{\rubyfamily
+        \fontsize{0.5\dimen3}{0pt}\selectfont \kanjistrut
+        \ifdim\dimen1<\wd3
+          \hss\unhbox3\hss
+        \else
+          \hfil\unhbox3\hfil
+        \fi
+      }%
+      \nointerlineskip
+      \hbox to \dimen1{\kanjistrut\hfil\unhbox1\hfil}}}}
+\makeatother
+%%%
+\makeatletter
+\def\kenten#1{%
+  \ifvmode\leavevmode\else\hskip\kanjiskip\fi
+  \setbox1=\hbox to \z@{E\hss}%
+  \ht1=.63zw
+  \@kenten#1\end}
+\def\@kenten#1{%
+  \ifx#1\end \let\next=\relax \else
+    \raise.63zw\copy1\nobreak #1\hskip\kanjiskip\relax
+    \let\next=\@kenten
+  \fi\next}
+\makeatother
+%%%
+\newcommand{\kintou}[2]{%
+  \leavevmode
+  \hbox to #1{%
+    \kanjiskip=0pt plus 1fil minus 1fil
+    \xkanjiskip=\kanjiskip
+    #2}}
+%%%}
+\def\newbar{\mathaccent\string"\noexpand016 }
+\newenvironment{Alltt}{%
+\renewcommand{\\}{\char`\\}
+\begin{alltt}%
+}{%
+\end{alltt}%
+}
+%%%
+\DeclareMathOperator*{\esssup}{ess\,sup}
+\DeclareMathOperator{\Hom}{Hom}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\sf
+\tolerance=10000
+\name{top}{}%
+%\makebox[\textwidth][s]{
+\Goto{pre}{Pre}
+\Goto{env}{Env}
+\Goto{Eq}{Eq}
+\Goto{Mat}{Mat}
+\Goto{Frac}{Frac}
+\Goto{marg}{Margin}
+\Goto{Ind}{Indent}
+\Goto{Size}{Size}
+\Goto{Chap}{\S}
+\Goto{A4}{A4}
+\Goto{list}{List}
+\Goto{Brk}{Brk}
+\Goto{Tab}{Tab}
+\Goto{Sp}{Space}
+\Goto{Box}{Box}
+\Goto{count}{Count}
+%}
+%\makebox[\textwidth][s]{
+\Goto{Pic}{Pic}
+\Goto{Fig}{Fig}
+\Goto{Verb}{Verb}
+\Goto{Foot}{Footnote}
+\Goto{Ref}{Ref}
+\Goto{Idx}{Idx}
+\Goto{Graph}{Graph}
+\Goto{Color}{Color}
+\Goto{Face}{Face}
+\Goto{frak}{$\mathcal C\,\mathbb C\,\mathfrak C$}
+\Goto{Ex}{Ex}
+\href{file:input?.dvi}{\colorbox{cyan}{\tiny\sf MyHelp}}
+\goto{Help}{\colorbox{cyan}{\tiny\sf Help}}
+%\Goto{Help}{Help}
+%}
+%\vspace{4pt}
+
+{\rm
+\E{\#}
+\E{\$}
+\E{\%}
+\E{\_}
+\E{\{}
+\E{\}}
+\E{\S}
+\E{\P}
+\E{\dag}
+\E{\ddag}
+\E{\copyright}
+\E{\pounds}
+\E{\oe}
+\E{\OE}
+\E{\ae}
+\E{\AE}
+\E{\o}
+\E{\O}
+\E{\l}
+\E{\L}
+\E{\ss}
+\E{?`}
+\E{!`}
+\E{\i}
+\E{\j}
+\E{\textregistered}
+\E{\texttrademark}
+\E{\textasciitilde}
+\E{\textasciicircum}
+%\E{\LaTeXe}
+%\keyin{\k{}}{\k{a}}
+
+\E{\TeX}}
+\E{\textvisiblespace}
+\E{\textbackslash}
+\ 
+\keyin{\`{}}{\`{o}}
+\keyin{\'{}}{\'{o}}
+\keyin{\^{}}{\^{o}}
+\keyin{\"{}}{\"{o}}
+\keyin{\~{}}{\~{o}}
+\keyin{\={}}{\={o}}
+\keyin{\.{}}{\.{o}}
+\keyin{\u{}}{\u{o}}
+\keyin{\v{}}{\v{o}}
+\keyin{\H{}}{\H{o}}
+\keyin{\t{}}{\t{oo}}
+\keyin{\c{}}{\c{o}}
+\keyin{\d{}}{\d{o}}
+\keyin{\b{}}{\b{o}}
+\keyin{\r{}}{\r{a}}
+\ 
+\keyin{\textbf{}}{\textbf{Aa}}
+\keyin{\textit{}}{\textit{Aa}}
+\keyin{\textsl{}}{\textsl{Aa}}
+\keyin{\textsf{}}{\textsf{Aa}}
+\keyin{\texttt{}}{\texttt{Aa}}
+\keyin{\textsc{}}{\textsc{Aa}}
+
+
+\centerline{\E{\LaTeX} Symbols}
+\Q{\alpha}
+\Q{\beta}
+\Q{\gamma}
+\Q{\delta}
+\Q{\epsilon}
+\Q{\zeta}
+\Q{\eta}
+\Q{\theta}
+\Q{\iota}
+\Q{\kappa}
+\Q{\lambda}
+\Q{\mu}
+\Q{\nu}
+\Q{\xi}
+\Q{\pi}
+\Q{\rho}
+\Q{\sigma}
+\Q{\tau}
+\Q{\upsilon}
+\Q{\phi}
+\Q{\chi}
+\Q{\psi}
+\Q{\omega}
+\quad
+\Q{\varepsilon}
+\Q{\vartheta}
+\Q{\varpi}
+\Q{\varrho}
+\Q{\varsigma}
+\Q{\varphi}
+
+\Q{\Gamma}
+\Q{\Delta}
+\Q{\Theta}
+\Q{\Lambda}
+\Q{\Xi}
+\Q{\Pi}
+\Q{\Sigma}
+\Q{\Upsilon}
+\Q{\Phi}
+\Q{\Psi}
+\Q{\Omega}
+
+\Q{\{}
+\Q{\}}
+\Q{\lfloor}
+\Q{\rfloor}
+\Q{\lceil}
+\Q{\rceil}
+\Q{\langle}
+\Q{\rangle}
+\quad
+\Q{\backslash}
+\Q{\|}
+\Q{\uparrow}
+\Q{\Uparrow}
+\Q{\downarrow}
+\Q{\Downarrow}
+\Q{\updownarrow}
+\Q{\Updownarrow}
+\quad
+\Q{\pm}
+\Q{\mp}
+\Q{\times}
+\Q{\div}
+\Q{\ast}
+\Q{\star}
+\Q{\circ}
+\Q{\bullet}
+\Q{\cdot}
+\Q{\cap}
+\Q{\cup}
+\Q{\uplus}
+\Q{\sqcap}
+\Q{\sqcup}
+\Q{\vee}
+\Q{\wedge}
+\Q{\setminus}
+\Q{\wr}
+\Q{\diamond}
+\Q{\bigtriangleup}
+\Q{\bigtriangledown}
+\Q{\triangleleft}
+\Q{\triangleright}
+%\Q{\lhd}
+%\Q{\rhd}
+%\Q{\unlhd}
+%\Q{\unrhd}
+\Q{\oplus}
+\Q{\ominus}
+\Q{\otimes}
+\Q{\oslash}
+\Q{\odot}
+\Q{\bigcirc}
+\Q{\dagger}
+\Q{\ddagger}
+\Q{\amalg}
+
+\Q{\le}
+%\Q{\leq}
+\Q{\ge}
+%\Q{\geq}
+\Q{\prec}
+\Q{\succ}
+\Q{\preceq}
+\Q{\succeq}
+\Q{\ll}
+\Q{\gg}
+\Q{\subset}
+\Q{\supset}
+\Q{\subseteq}
+\Q{\supseteq}
+\Q{\sqsubset}
+\Q{\sqsupset}
+\Q{\sqsubseteq}
+\Q{\sqsupseteq}
+\Q{\vdash}
+\Q{\dashv}
+\Q{\in}
+\Q{\ni}
+\Q{\notin}
+
+\Q{\equiv}
+\Q{\sim}
+\Q{\simeq}
+\Q{\asymp}
+\Q{\approx}
+\Q{\cong}
+\Q{\neq}
+\Q{\doteq}
+\Q{\propto}
+\Q{\models}
+\Q{\perp}
+\Q{\mid}
+\Q{\parallel}
+\Q{\bowtie}
+\Q{\Join}
+\Q{\smile}
+\Q{\frown}
+\quad
+\keyin{\not\equiv}{$\not\equiv$}
+
+\Q{\leftarrow}
+%\Q{\gets}
+\Q{\to}
+%\Q{\rightarrow}
+\Q{\longleftarrow}
+\Q{\longrightarrow}
+\Q{\Leftarrow}
+\Q{\Rightarrow}
+\Q{\Longleftarrow}
+\Q{\Longrightarrow}
+\Q{\leftharpoonup}
+\Q{\rightharpoonup}
+\Q{\leftharpoondown}
+\Q{\rightharpoondown}
+\Q{\hookleftarrow}
+\Q{\hookrightarrow}
+\Q{\mapsto}
+\Q{\longmapsto}
+\Q{\leftrightarrow}
+\Q{\longleftrightarrow}
+\Q{\Leftrightarrow}
+\Q{\Longleftrightarrow}
+\Q{\leadsto}
+\quad
+\Q{\nearrow}
+\Q{\searrow}
+\Q{\swarrow}
+\Q{\nwarrow}
+
+
+\Q{\sum}
+\Q{\prod}
+\Q{\coprod}
+\Q{\int}
+\Q{\oint}
+\Q{\bigcap}
+\Q{\bigcup}
+\Q{\bigsqcup}
+\Q{\bigvee}
+\Q{\bigwedge}
+\Q{\bigodot}
+\Q{\bigotimes}
+\Q{\bigoplus}
+\Q{\biguplus}
+%\ \ 
+%\Q{\rmoustache}
+%\Q{\lmoustache}
+%\Q{\rgroup}
+%\Q{\lgroup}
+%\Q{\arrowvert}
+%\Q{\Arrowvert}
+%\Q{\bracevert}
+
+\Q{\aleph}
+\Q{\hbar}
+\Q{\imath}
+\Q{\jmath}
+\Q{\ell}
+\Q{\wp}
+\Q{\Re}
+\Q{\Im}
+\Q{\partial}
+\Q{\infty}
+\Q{\prime}
+\Q{\emptyset}
+\Q{\nabla}
+\Q{\surd}
+\Q{\top}
+\Q{\bot}
+\Q{\angle}
+\Q{\triangle}
+\Q{\forall}
+\Q{\exists}
+\Q{\neg}
+\Q{\lnot}
+\Q{\flat}
+\Q{\natural}
+\Q{\sharp}
+\Q{\clubsuit}
+\Q{\diamondsuit}
+\Q{\heartsuit}
+\Q{\spadesuit}
+
+
+\Q{\arccos}
+\Q{\arcsin}
+\Q{\arctan}
+\Q{\arg}
+\Q{\cos}
+\Q{\cosh}
+\Q{\cot}
+\Q{\coth}
+\Q{\csc}
+\Q{\deg}
+\Q{\det}
+\Q{\dim}
+\Q{\exp}
+\Q{\gcd}
+\Q{\hom}
+\Q{\inf}
+\Q{\ker}
+\Q{\lg}
+\Q{\lim}
+\Q{\liminf}
+\Q{\limsup}
+\Q{\ln}
+\Q{\log}
+\Q{\max}
+\Q{\min}
+\Q{\Pr}
+\Q{\sec}
+\Q{\sin}
+\Q{\sinh}
+\Q{\sup}
+\Q{\tan}
+\Q{\tanh}
+
+\keyin{\mathrm}{$\mathrm A$}
+\keyin{\mathsf}{$\mathsf A$}
+\keyin{\mathit}{$\mathit A$}
+\keyin{\mathtt}{$\mathtt A$}
+\keyin{\mathcal}{$\mathcal A$}
+\keyin{\mathbb}{$\mathbb A$}
+\keyin{\mathfrak}{$\mathfrak A$}
+\keyin{\mathbf}{$\mathbf{x}$}
+\quad
+\keyin{\hat}{$\hat a$}
+\keyin{\check}{$\check a$}
+\keyin{\breve}{$\breve a$}
+\keyin{\acute}{$\acute a$}
+\keyin{\grave}{$\grave a$}
+\keyin{\tilde}{$\tilde a$}
+\keyin{\bar}{$\newbar a$}
+\keyin{\vec}{$\vec a$}
+\keyin{\dot}{$\dot a$}
+\keyin{\ddot}{$\ddot a$}
+\quad
+\Q{\imath}
+\Q{\jmath}
+
+\keyin{\overline{}}{$\overline{x+y}$}\hfill
+\keyin{\underline{}}{$\underline{x+y}$}\hfill
+\keyin{\widehat{}}{$\widehat{x+y}$}\hfill
+\keyin{\widetilde{}}{$\widetilde{x+y}$}\hfill
+\keyin{\overbrace{}}{$\overbrace{x+y}$}\hfill
+\keyin{\underbrace{}}{$\underbrace{x+y}$}\hfill
+\keyin{\overrightarrow{}}{$\overrightarrow{x+y}$}\hfill
+\keyin{\overleftarrow{}}{$\overleftarrow{x+y}$}
+
+\smallskip
+\centerline{AMS Symbols
+\qquad
+(Text:
+\E{\checkmark}
+\E{\circledR}
+\E{\yen}
+\E{\maltese})}
+\Q{\boxdot}
+\Q{\boxplus}
+\Q{\boxtimes}
+\Q{\centerdot}
+\Q{\boxminus}
+\Q{\veebar}
+\Q{\barwedge}
+\Q{\doublebarwedge}
+\Q{\Cup}
+\Q{\Cap}
+\Q{\curlywedge}
+\Q{\curlyvee}
+\Q{\leftthreetimes}
+\Q{\rightthreetimes}
+\Q{\dotplus}
+\Q{\intercal}
+\Q{\circledcirc}
+\Q{\circledast}
+\Q{\circleddash}
+\Q{\divideontimes}
+\Q{\lessdot}
+\Q{\gtrdot}
+\Q{\ltimes}
+\Q{\rtimes}
+\Q{\smallsetminus}
+\Q{\mho}
+
+\Q{\square}
+\Q{\blacksquare}
+\Q{\lozenge}
+\Q{\blacklozenge}
+\Q{\backprime}
+\Q{\bigstar}
+\Q{\blacktriangledown}
+\Q{\blacktriangle}
+\Q{\triangledown}
+\Q{\measuredangle}
+\Q{\sphericalangle}
+\Q{\circledS}
+\Q{\complement}
+\Q{\diagup}
+\Q{\diagdown}
+\Q{\varnothing}
+\Q{\nexists}
+\Q{\Finv}
+\Q{\Game}
+\Q{\eth}
+\Q{\beth}
+\Q{\gimel}
+\Q{\daleth}
+\Q{\digamma}
+\Q{\varkappa}
+\Q{\Bbbk}
+\Q{\hslash}
+%%\Q{\hbar}
+
+\Q{\circlearrowright}
+\Q{\circlearrowleft}
+%% In amsfonts.sty:
+\Q{\rightleftharpoons}
+\Q{\leftrightharpoons}
+\Q{\Vdash}
+\Q{\Vvdash}
+\Q{\vDash}
+\Q{\twoheadrightarrow}
+\Q{\twoheadleftarrow}
+\Q{\leftleftarrows}
+\Q{\rightrightarrows}
+\Q{\upuparrows}
+\Q{\downdownarrows}
+\Q{\upharpoonright}
+% \global\let\restriction\upharpoonright
+\Q{\downharpoonright}
+\Q{\upharpoonleft}
+\Q{\downharpoonleft}
+\Q{\rightarrowtail}
+\Q{\leftarrowtail}
+\Q{\leftrightarrows}
+\Q{\rightleftarrows}
+\Q{\Lsh}
+\Q{\Rsh}
+\Q{\rightsquigarrow}
+\Q{\leftrightsquigarrow}
+\Q{\looparrowleft}
+\Q{\looparrowright}
+\Q{\circeq}
+\Q{\succsim}
+\Q{\gtrsim}
+\Q{\gtrapprox}
+\Q{\multimap}
+\Q{\therefore}
+\Q{\because}
+\Q{\doteqdot}
+% \global\let\Doteq\doteqdot
+\Q{\triangleq}
+\Q{\precsim}
+\Q{\lesssim}
+\Q{\lessapprox}
+\Q{\eqslantless}
+\Q{\eqslantgtr}
+\Q{\curlyeqprec}
+\Q{\curlyeqsucc}
+\Q{\preccurlyeq}
+\Q{\leqq}
+\Q{\leqslant}
+\Q{\lessgtr}
+\Q{\risingdotseq}
+\Q{\fallingdotseq}
+\Q{\succcurlyeq}
+\Q{\geqq}
+\Q{\geqslant}
+\Q{\gtrless}
+%% in amsfonts.sty
+%% \Q{\sqsubset}    {"40}
+%% \Q{\sqsupset}    {"41}
+\Q{\vartriangleright}
+\Q{\vartriangleleft}
+\Q{\trianglerighteq}
+\Q{\trianglelefteq}
+\Q{\between}
+\Q{\blacktriangleright}
+\Q{\blacktriangleleft}
+\Q{\vartriangle}
+\Q{\eqcirc}
+\Q{\lesseqgtr}
+\Q{\gtreqless}
+\Q{\lesseqqgtr}
+\Q{\gtreqqless}
+\Q{\Rrightarrow}
+\Q{\Lleftarrow}
+%% In amsfonts.sty
+%%\Q{\angle}        {\mathord}{"5C}
+\Q{\varpropto}
+\Q{\smallsmile}
+\Q{\smallfrown}
+\Q{\Subset}
+\Q{\Supset}
+% \global\let\doublecup\Cup
+\Q{\subseteqq}
+\Q{\supseteqq}
+\Q{\bumpeq}
+\Q{\Bumpeq}
+\Q{\lll}
+% \global\let\llless\lll
+\Q{\ggg}
+% \global\let\gggtr\ggg
+\Q{\pitchfork}
+\Q{\backsim}
+\Q{\backsimeq} 
+\Q{\eqsim}
+\Q{\shortmid}
+\Q{\shortparallel}
+\Q{\thicksim}
+\Q{\thickapprox}
+\Q{\approxeq}
+\Q{\succapprox}
+\Q{\precapprox}
+\Q{\curvearrowleft}
+\Q{\curvearrowright}
+%% In amsfonts.sty:
+\Q{\backepsilon}
+\ \ 
+\Q{\ulcorner}
+\Q{\urcorner}
+\Q{\llcorner}
+\Q{\lrcorner}
+
+%%   Begin AMSb declarations
+\Q{\lvertneqq}
+\Q{\gvertneqq}
+\Q{\nleq}
+\Q{\ngeq}
+\Q{\nless}
+\Q{\ngtr}
+\Q{\nprec}
+\Q{\nsucc}
+\Q{\lneqq}
+\Q{\gneqq}
+\Q{\nleqslant}
+\Q{\ngeqslant}
+\Q{\lneq}
+\Q{\gneq}
+\Q{\npreceq}
+\Q{\nsucceq}
+\Q{\precnsim}
+\Q{\succnsim}
+\Q{\lnsim}
+\Q{\gnsim}
+\Q{\nleqq}
+\Q{\ngeqq}
+\Q{\precneqq}
+\Q{\succneqq}
+\Q{\precnapprox}
+\Q{\succnapprox}
+\Q{\lnapprox}
+\Q{\gnapprox}
+\Q{\nsim}
+\Q{\ncong}
+\Q{\varsubsetneq}
+\Q{\varsupsetneq}
+\Q{\nsubseteqq}
+\Q{\nsupseteqq}
+\Q{\subsetneqq}
+\Q{\supsetneqq}
+\Q{\varsubsetneqq}
+\Q{\varsupsetneqq}
+\Q{\subsetneq}
+\Q{\supsetneq}
+\Q{\nsubseteq}
+\Q{\nsupseteq}
+\Q{\nparallel}
+\Q{\nmid}
+\Q{\nshortmid}
+\Q{\nshortparallel}
+\Q{\nvdash}
+\Q{\nVdash}
+\Q{\nvDash}
+\Q{\nVDash}
+\Q{\ntrianglerighteq}
+\Q{\ntrianglelefteq}
+\Q{\ntriangleleft}
+\Q{\ntriangleright}
+\Q{\nleftarrow}
+\Q{\nrightarrow}
+\Q{\nLeftarrow}
+\Q{\nRightarrow}
+\Q{\nLeftrightarrow}
+\Q{\nleftrightarrow}
+\ \ 
+\Q{\dashleftarrow}\ \ 
+\Q{\dashrightarrow}\ \ \ 
+%\Q{\rmoustache}
+%\Q{\lmoustache}
+%\Q{\rgroup}
+%\Q{\lgroup}
+%\Q{\arrowvert}
+%\Q{\Arrowvert}
+%\Q{\bracevert}
+%% In amsfonts.sty:
+\keyin{\underleftarrow{}}{$\underleftarrow{x+y}$}
+\keyin{\underrightarrow{}}{$\underrightarrow{x+y}$}
+\keyin{\overleftrightarrow{}}{$\overleftrightarrow{x+y}$}
+\keyin{\underleftrightarrow{}}{$\underleftrightarrow{x+y}$}
+
+\Q{\varGamma}
+\Q{\varDelta}
+\Q{\varTheta}
+\Q{\varDelta}
+\Q{\varXi}
+\Q{\varPi}
+\Q{\varSigma}
+\Q{\varUpsilon}
+\Q{\varPhi}
+\Q{\varPsi}
+\Q{\varOmega}
+\ 
+\Q{\iint}
+\ 
+\Q{\iiint}
+\ 
+\Q{\idotsint}
+\ 
+\Q{\varlimsup}
+\Q{\varliminf}
+\Q{\varinjlim}
+\Q{\varprojlim}
+\vspace{-2pt}
+
+\keyin{\Hat{}}{$\Hat A$}
+\keyin{\Check{}}{$\Check A$}
+\keyin{\Tilde{}}{$\Tilde A$}
+\keyin{\Acute{}}{$\Acute A$}
+\keyin{\Grave{}}{$\Grave A$}
+\keyin{\Dot{}}{$\Dot A$}
+\keyin{\Ddot{}}{$\Ddot A$}
+\keyin{\Breve{}}{$\Breve A$}
+\keyin{\Bar{}}{$\newbar A$}
+\keyin{\Vec{}}{$\Vec A$}
+\keyin{\sphat}{$A\sphat$}
+\keyin{\sptilde}{$A\sptilde$}
+\keyin{\spbreve}{$A\spbreve$}
+\keyin{\spcheck}{$A\spcheck$}
+\keyin{\spdot}{$A\spdot$}
+\keyin{\spddot}{$A\spddot$}
+\keyin{\dddot{}}{$\dddot{x}$}
+\keyin{\ddddot{}}{$\ddddot{x}$}
+\Q{\cdots}
+\Q{\ldots}
+\Q{\ddots}
+\Q{\vdots}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centerline{\name{pre}{Preamble}\gotop{8.5cm}}
+
+{class:} \keyin{\documentclass[]{article}%[a4paper,12pt]}{article}
+\keyin{\documentclass[]{report}%[a4paper,12pt]}{report}
+\keyin{\documentclass[]{book}%[a4paper,12pt]}{book}
+\keyin{\documentclass[]{slides}}{slides}
+\keyin{\documentclass[]{letter}}{letter}
+
+\qquad
+\keyin{\documentclass[]{jarticle}%[a4paper,12pt]}{jarticle}
+\keyin{\documentclass[]{jreport}%[a4paper,12pt]}{jreport}
+\keyin{\documentclass[]{jbook}%[a4paper,12pt]}{jbook}
+\keyin{\documentclass[]{tarticle}%[a4paper,12pt]}{tarticle}
+\keyin{\documentclass[]{treport}%[a4paper,12pt]}{treport}
+\keyin{\documentclass[]{tbook}%[a4paper,12pt]}{tbook}
+\keyin{\documentclass[]{jsarticle}%[a4paper,9-12/14/17/21/25/30/36/43pt]}{jsarticle}
+\keyin{\documentclass[]{jsbook}%[a4paper,9-12/14/17/21/25/30/36/43pt]}{jsbook}
+
+\ [{\small \E{10pt} \E{11pt} \E{12pt} \E{a4paper} \E{a5paper} \E{b4paper} \E{b5paper} \E{a4j} \E{a5j} \E{b4j} \E{b5j}
+
+\ \E{landscape} \E{onecolumn} \E{twocolumn} \E{oneside} \E{twoside} \E{notitlepage} 
+
+\ \E{titlepage} \E{fleqn} \E{leqno}
+\E{final} \E{draft} \E{tate}
+\E{openbib}
+\E{openright} \E{openany}}]
+\smallskip
+
+{packages:}
+\keyin{\usepackage{amsmath,amsthm,amssymb}%amscd, amsthm 0d 0a}{AMS}
+\keyin{\usepackage{amscd} 0d 0a}{amscd}
+\keyin{\usepackage{amsthm} 0d 0a}{amsthm}
+\keyin{\usepackages[]{graphicx}}{graphicx}
+\keyin{\usepackages[]{color}}{color}
+\keyin{\usepackage{hyperref} 0d 0a}{hyperref}
+\quad
+\keyin{\usepackage[dvipdfm]{graphicx} 0d 0a\usepackage[dvipdfm]{color} 0d 0a\usepackage[dvipdfm,bookmarks=true,bookmarksnumbered=true,bookmarkstype=toc]{hyperref} 0d 0a}{dvipdfm}
+
+
+\keyin{\AtBeginDvi{\special{papersize=\the\paperwidth,\the\paperheight}} 0d 0a}{PapersizeSpecial}
+\keyin{%\paperwidth= 0d 0a%\paperheight= 0d 0a%\textwidth= 0d 0a%\textheight= 0d 0a}{pagesize}
+\keyin{%\hoffset= 0d 0a%\voffset= 0d 0a%\setlength{\oddsidemargin}{} 0d 0a%\setlength{\evensidemargin}{} 0d 0a}{offset}
+
+{pagestyle:}
+\keyin{\pagestyle{plain} 0d 0a}{plain}
+\keyin{\pagestyle{empty} 0d 0a}{empty}
+\keyin{\pagestyle{headings} 0d 0a}{headings}
+\keyin{\pagestyle{myheadings} 0d 0a}{myheadings}
+\keyin{\thispagestyle{}}{{\small\BK thispagestyle\opt{pstyle}}}%
+
+\keyin{\title{}% \title[running heads]{} \\ for multiline 0d 0a\author{}% \author[running head]{} \and \thanks{} 0d 0a%%\address{} % \\ for multline 0d 0a%%\curraddr{} \email{} \urladdr{} %\textasciitilde 0d 0a%\author{} 0d 0a%\date{} 0d 0a%%\thanks{} \dedicatory{} \translator{} \keywords{} \subclass{} 0d 0a}{title}
+\vspace{-10pt}
+\keyin{\newtheorem[]{} %[Name]{Title}[section] 0d 0a%\newtheorem{otherName}[Name]{otherTitle}% <- unified numbering under Name 0d 0a%\renewcommand{\theName}{\Roman{Name}}% \arabic, \alph, \Alph, \roman, \Roman 0d 0a}{newtheorem}
+
+\hfill\hfill\name{env}{Environment}\hfill\quad
+\keyin{\begin{document} 0d 0a%\maketitle 0d 0a%\tableofcontents 0d 0a 0d 0a\end{document}}{\textsl{document}}\\
+\keyin{\begin{abstract} 0d 0a 0d 0a\end{abstract}}{\textsl{abstract}}
+\keyin{\begin{itemize} 0d 0a \item   0d 0a\end{itemize} 0d 0a}{\textsl{itemize}}
+\keyin{\begin{enumerate} 0d 0a \item   0d 0a\end{enumerate} 0d 0a}{\textsl{enumarate}}
+\keyin{\begin{description} 0d 0a \item[]   0d 0a\end{description} 0d 0a}{\textsl{description}}
+\keyin{\begin{quotation} 0d 0a   0d 0a\end{quotaion} 0d 0a}{\textsl{quotation}}
+\keyin{\begin{quote} 0d 0a   0d 0a\end{quote} 0d 0a}{\textsl{quote}}
+\keyin{\begin{center} \end{center}}{\textsl{center}}
+\keyin{\begin{verbatim}   0d 0a 0d 0a\end{verbatim} 0d 0a}{\textsl{verbatim}}
+\keyin{\begin{tabular}{} 0d 0a  &  &  \\ 0d 0a  &  & 0d 0a\end{tabular} 0d 0a}{\textsl{tabular}}
+\keyin{\begin{equation} 0d 0a   0d 0a\end{equation} 0d 0a}{\textsl{equation}}
+\keyin{\begin{equation*} 0d 0a   0d 0a\end{equation*} 0d 0a}{\textsl{equation\ST}}
+\keyin{\begin{array}{} 0d 0a  &  &  \\ 0d 0a  &  & 0d 0a\end{array} 0d 0a}{\textbf{array}}
+\keyin{\begin{slide} 0d 0a 0d 0a\end{slide} 0d 0a}{\textsl{slide}}
+\keyin{\begin{thebibliography}{SHIMA} 0d 0a\bibitem[]{} 0d 0a 0d 0a\bibitem[]{} 0d 0a 0d 0a\end{thebibliography} 0d 0a}{\textsl{bibliography}}
+
+{\small \keyin{\newenvironment{}[][] 09%[narg][default] are optional 0d 0a{} 09%bigdef 0d 0a{} 09%enddef}%
+{\BK newenvironment\opt{name}\Ops{narg}\Ops{default}\opt{bigdef}\opt{enddef}
+}}
+
+{\small \keyin{\renewenvironment{}[] 09%[narg] is optional 0d 0a{} 09%bigdef 0d 0a{} 09%enddef}%
+{\BK renewenvironment\opt{name}\Ops{narg}\opt{bigdef}\opt{enddef}%
+}}
+
+%%%%
+\centerline{\name{Eq}{AMS \LaTeX}}
+\keyin{\begin{align} 0d 0a  \\ 0d 0a   0d 0a\end{align} 0d 0a}{\textsl{align}}
+\keyin{\begin{align*} 0d 0a  \\ 0d 0a   0d 0a\end{align*} 0d 0a}{\textsl{align\ST}}
+\keyin{\begin{falign} 0d 0a  \\ 0d 0a   0d 0a\end{falign} 0d 0a}{\textsl{falign}}
+\keyin{\begin{falign*} 0d 0a  \\ 0d 0a   0d 0a\end{falign*} 0d 0a}{\textsl{falign\ST}}
+\keyin{\begin{alignat}[] 09%(1+#&)/2 0d 0a  \\ 0d 0a   0d 0a\end{alignat} 0d 0a}{\textsl{alignat}}
+\keyin{\begin{alignat*}[] 09%(1+#&)/2 0d 0a  \\ 0d 0a   0d 0a\end{alignat*} 0d 0a}{\textsl{alignat\ST}}
+\keyin{\begin{xalignat}[] 09%(1+#&)/2 0d 0a  \\ 0d 0a   0d 0a\end{xalignat} 0d 0a}{\textsl{xalignat}}
+\keyin{\begin{xalignat*}[] 0d 0a  \\ 0d 0a   0d 0a\end{xalignat*} 0d 0a}{\textsl{xalignat\ST}}
+\keyin{\begin{xxalignat}[] 0d 0a  \\ 0d 0a   0d 0a\end{xxalignat} 0d 0a}{\textsl{xxalignat}}
+\keyin{\begin{gather} 0d 0a  \\ 0d 0a   0d 0a\end{gather} 0d 0a}{\textsl{gather}}
+\keyin{\begin{gather*} 0d 0a  \\ 0d 0a   0d 0a\end{gather*} 0d 0a}{\textsl{gather\ST}}
+\keyin{\begin{multline} 0d 0a  \\ 0d 0a   0d 0a\end{multline} 0d 0a}{\textsl{multline}}
+\keyin{\begin{multline*} 0d 0a  \\ 0d 0a   0d 0a\end{multline*} 0d 0a}{\textsl{multline\ST}}\hfill\Ref{H:Eq}
+
+\keyin{\begin{subequation} 0d 0a  \\ 0d 0a   0d 0a\end{subequation} 0d 0a}{\textsl{subequation}}
+\keyin{\begin{split} 0d 0a  \\ 0d 0a   0d 0a\end{split} 0d 0a}{\textbf{split}}
+\keyin{\begin{aligned} 0d 0a  \\ 0d 0a   0d 0a\end{aligned} 0d 0a}{\textbf{aligned}}
+\keyin{\begin{alignedat} 0d 0a  \\ 0d 0a   0d 0a\end{alignedat} 0d 0a}{\textbf{alignedat}}
+\keyin{\begin{gathered} 0d 0a  \\ 0d 0a   0d 0a\end{gathred} 0d 0a}{\textbf{gathered}}
+\keyin{\text{}}{\textit{text}}
+\keyin{\intertext{}}{\textit{intertext}}
+
+{\small \keyin{\numberwithin{equation}{section}}%
+{\BK numberwithin\{equation\}\{section\}}}
+\quad (in Preamble)\hfill\Ref{H:tag}
+
+{\small
+\F{notag}\hfill
+\keyin{\tag{ }}{\BK tag\{ \}}\hfill
+\keyin{\tag*{ }}{\BK tag\ST\{ \}}\hfill
+\keyin{\eqref{ }}{\BK eqref\{ \}}\hfill
+\keyin{\\[]}{\BK\BK\Ops{len}}\hfill
+\F{theparentequation}}
+
+
+{\small\keyin{\renewcommand{\theequation}{}}%
+{\BK theequation }
+$\Leftarrow$ \{\verb|\arabic{section},\arabic{equation}|\}}
+\ \ \Goto{count}{Count}
+
+\keyin{\boxed{}}{$\boxed{x+y}$}
+\ \ 
+\keyin{\boldsymbol{}}{$\boldsymbol{f(x)}$}
+\ \ 
+\keyin{\xleftarrow[]{}}{$\xleftarrow[\text{1st}]{\text{2nd}}$}
+\ \ 
+\keyin{\xrightarrow[]{}}{$\xrightarrow[\text{1st}]{\text{2nd}}$}
+\ \ 
+\keyin{\overset{}}{$\overset{a}X$}
+\ \ 
+\keyin{\underset{}}{$\underset{a}X$}
+\ \
+\keyin{\begin{subarray}{} 0d 0a\\ 0d 0a\end{subarray}}{$\displaystyle\sum_{\begin{subarray}{l}1\\234\end{subarray}}$}
+\ \ 
+\keyin{\substack{ \\ }}{$\displaystyle\sum_{\substack{1\\234}}$}
+\ \ 
+\keyin{\sideset{}{}}{$\displaystyle\sideset{_1^2}{_3^4}\prod_5^6$}
+
+\vspace{-16pt}
+{\small
+\keyin{\operatorname{}% \operatorname* for subscripts as limit 0d 0a}{\BK mathop\MGNT\ST}
+\keyin{\DeclareMathOperator{\}{}% \DeclareMathOperator* for subscrips as limit 0d 0a}{\BK DeclareMathOperator\MGNT\ST}
+}\hfill\raisebox{2ex}{\Ref{HMathOp}}\\[-2pt]
+%\smallskip
+\name{Mat}{Matrix}:
+\keyin{\begin{pmatrix} 0d 0a  &  &  \\ 0d 0a  &  & 0d 0a\end{pmatrix} 0d 0a}{$(
+{\cdots\atop\cdots})$}
+\ \ 
+\keyin{\begin{bmatrix} 0d 0a  &  &  \\ 0d 0a  &  & 0d 0a\end{bmatrix} 0d 0a}{$[{\cdots\atop\cdots}]$}
+\ \ 
+\keyin{\begin{Bmatrix} 0d 0a  &  &  \\ 0d 0a  &  & 0d 0a\end{Bmatrix} 0d 0a}{$\{{\cdots\atop\cdots}\}$}
+\ \ 
+\keyin{\begin{vmatrix} 0d 0a  &  &  \\ 0d 0a  &  & 0d 0a\end{vmatrix} 0d 0a}{$|{\cdots\atop\cdots}|$}
+\ \ 
+\keyin{\begin{Vmatrix} 0d 0a  &  &  \\ 0d 0a  &  & 0d 0a\end{Vmatrix} 0d 0a}{$\|{\cdots\atop\cdots}\|$}
+\ \ 
+\keyin{\begin{matrix} 0d 0a  &  &  \\ 0d 0a  &  & 0d 0a\end{matrix} 0d 0a}{${\cdots\atop\cdots}$}
+\ \ 
+{\tiny \keyin{\begin{smallmatrix} 0d 0a  &  &  \\ 0d 0a  &  & 0d 0a\end{smallmatrix} 0d 0a}{$(
+{\cdots\atop\cdots})$}}
+\ \ 
+\keyin{\bordermatrix{ 0d 0a & & \cr 0d 0a & & \cr 0d 0a & & \cr}}{$
+%\keyin{\begin{pmatrix} 0d 0a  &  &  \\ 0d 0a  &  & 0d 0a\end{pmatrix} 0d 0a}{$
+\raisebox{-2pt}{\vdots}\overset{\cdots}{({\cdots\atop\cdots})}
+$}
+
+%\keyin{\bordermatrix{ 0d 0a & & \cr 0d 0a & & \cr 0d 0a & & \cr}}
+%{\textit{bordermatrix}}
+\quad
+\keyin{\setcounter{MaxMatrixCols}{}}{\textit{MaxMatrixCols}}
+\keyin{\hdotsfor{}}{\textit{hdotsfor}}
+\ \ 
+\keyin{\begin{cases} 0d 0a \\ 0d 0a\end{cases}}{\textbf{cases}}
+\hfill\Ref{HCD}
+
+\vspace{-18pt}
+\[
+\keyin{\frac{}{}}{\frac{a}{b}}\quad 
+\keyin{\binom{}{}}{\binom{n}{k}}\quad 
+\keyin{\sqrt[]{}}{\sqrt[3]{4}}\qquad\text{amscd: 	}
+\keyin{\begin{CD} 0d 0a A 09 09@>{up}>{down}> 09B\\ 0d 0a @V{l}V{r}V 09 09 09@AAA\\ % @| @. 0d 0a C 09 09@= 09 09D 0d 0a\end{CD} 0d 0a}{\begin{CD}A@>{up}>{down}>B\\ @V{l}V{r}V   @AAA\\C@=D\end{CD}}
+\]
+\vspace{-8pt}
+
+\name{Frac}{Frac}: 
+{\small \F{frac} \F{tfrac} \F{dfrac} \F{cfrac}\Ops{pos}
+(\MGNT{pos}: l or r)}
+
+\ 
+\keyin{\genfrac{}{}{}{} 09%ldelim rdelim  thick style0-3 0d 0a{}{} 09%num  denom}%
+{{\small\BK genfrac\opt{ldelim}%
+\opt{rdelim}%
+\opt{thick}%
+\opt{style}%
+\opt{num}%
+\opt{denom}}}
+
+\ {\small{\color{red}\it style}: 0 $\sim$ 3
+ (\keyin{\displaystyle}{\BK displaystyle}, 
+\keyin{\textstyle}{\BK textstyle},
+\keyin{\scriptstyle}{\BK scriptstyle},
+\keyin{\scriptscriptstyle}{\BK scriptscriptstyle})}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  page 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace*{.1cm}
+%WinTpicVersion3.08
+\unitlength 0.1in
+\qquad
+\begin{picture}( 28.0000, 36.3000)(  0.0000,-36.0000)
+% BOX 2 0 3 0
+% 2 0 0 2800 3600
+% 
+\special{pn 12}%
+\special{pa 0 0}%
+\special{pa 2800 0}%
+\special{fp}%
+\special{pa 2800 0}%
+\special{pa 2800 3600}%
+\special{pa 0 3600}%
+\special{pa 0 0}%
+\special{fp}%
+% BOX 2 2 3 0
+% 2 200 200 2600 3400
+% 
+\special{pn 8}%
+\special{sh 0.1}%
+\special{pa 200 200}%
+\special{pa 2800 200}%
+\special{pa 2800 3600}%
+\special{pa 200 3600}%
+\special{pa 200 200}%
+\special{dt 0.045}%
+%\special{fp}%
+%\special{dt 0.045}%
+% BOX 2 0 1 0
+% 2 400 400 2200 600
+% 
+\special{pn 8}%
+\special{sh 0.300}%
+\special{pa 400 400}%
+\special{pa 2200 400}%
+\special{pa 2200 600}%
+\special{pa 400 600}%
+\special{pa 400 400}%
+\special{fp}%
+% BOX 2 0 1 0
+% 2 400 800 2210 2900
+% 
+\special{pn 8}%
+\special{sh 0.300}%
+\special{pa 400 800}%
+\special{pa 2210 800}%
+\special{pa 2210 2900}%
+\special{pa 400 2900}%
+\special{pa 400 800}%
+\special{fp}%
+% BOX 2 0 1 0
+% 2 400 3100 2200 3310
+% 
+\special{pn 8}%
+\special{sh 0.300}%
+\special{pa 400 3100}%
+\special{pa 2200 3100}%
+\special{pa 2200 3310}%
+\special{pa 400 3310}%
+\special{pa 400 3100}%
+\special{fp}%
+% BOX 2 0 1 0
+% 2 2320 1000 2520 1300
+% 
+\special{pn 8}%
+\special{sh 0.300}%
+\special{pa 2320 1000}%
+\special{pa 2520 1000}%
+\special{pa 2520 1300}%
+\special{pa 2320 1300}%
+\special{pa 2320 1000}%
+\special{fp}%
+% BOX 2 0 1 0
+% 2 2320 1480 2520 1700
+% 
+\special{pn 8}%
+\special{sh 0.300}%
+\special{pa 2320 1480}%
+\special{pa 2520 1480}%
+\special{pa 2520 1700}%
+\special{pa 2320 1700}%
+\special{pa 2320 1480}%
+\special{fp}%
+% LINE 2 0 3 0
+% 2 400 1500 2200 1500
+% 
+\special{pn 8}%
+\special{pa 400 1500}%
+\special{pa 2200 1500}%
+\special{fp}%
+%
+%\special{pn 10}%
+%\special{sh 1}%
+%\special{ar 200 200 20 20 0.0 6.28318530717959}%
+%
+\special{pn 8}%
+\special{sh 1}%
+\special{pa 200 400}%
+\special{pa 220 334}%
+\special{pa 200 348}%
+\special{pa 180 334}%
+\special{pa 200 400}%
+\special{fp}%
+\special{pa 200 200}%
+\special{pa 200 400}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 400 200}%
+\special{pa 334 220}%
+\special{pa 348 200}%
+\special{pa 334 180}%
+\special{pa 400 200}%
+\special{fp}%
+\special{pa 200 200}%
+\special{pa 400 200}%
+\special{fp}%
+% BOX 2 2 2 0
+% 2 400 1500 580 1580
+% 
+\special{pn 8}%
+\special{sh 0}%
+\special{pa 400 1500}%
+\special{pa 580 1500}%
+\special{pa 580 1580}%
+\special{pa 400 1580}%
+\special{pa 400 1500}%
+\special{fp}%
+%\special{dt 0.045}%
+% BOX 2 2 2 0
+% 2 400 800 580 880
+% 
+\special{pn 8}%
+\special{sh 0}%
+\special{pa 400 800}%
+\special{pa 580 800}%
+\special{pa 580 880}%
+\special{pa 400 880}%
+\special{pa 400 800}%
+\special{fp}%
+%
+\special{pn 20}%
+\special{sh 1}%
+\special{ar 580 880 10 10 0.0 6.28318530717959}%
+%
+%\special{dt 0.045}%
+% VECTOR 2 2 3 0
+% 2 2560 200 2560 3400
+% \textheight
+\special{pn 8}%
+\special{pa 2560 0}%
+\special{pa 2560 3600}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 2560 3600}%
+\special{pa 2580 3534}%
+\special{pa 2560 3548}%
+\special{pa 2540 3534}%
+\special{pa 2560 3600}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 2560 0}%
+\special{pa 2580 66}%
+\special{pa 2560 52}%
+\special{pa 2540 66}%
+\special{pa 2560 0}%
+\special{fp}%
+% VECTOR 2 2 3 0
+% 8 200 2700 2600 2700 250 2700 200 2700 400 2500 2200 2500 450 2500 400 2500
+% \paperwidth
+\special{pn 8}%
+\special{pa 0 2700}%
+\special{pa 2800 2700}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 2800 2700}%
+\special{pa 2734 2680}%
+\special{pa 2748 2700}%
+\special{pa 2734 2720}%
+\special{pa 2800 2700}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 0 2700}%
+\special{pa 68 2720}%
+\special{pa 54 2700}%
+\special{pa 68 2680}%
+\special{pa 0 2700}%
+\special{fp}%
+% \textwidth
+\special{pa 400 2500}%
+\special{pa 2200 2500}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 2200 2500}%
+\special{pa 2134 2480}%
+\special{pa 2148 2500}%
+\special{pa 2134 2520}%
+\special{pa 2200 2500}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 400 2500}%
+\special{pa 468 2520}%
+\special{pa 454 2500}%
+\special{pa 468 2480}%
+\special{pa 400 2500}%
+\special{fp}%
+% VECTOR 2 2 3 0
+% 4 1600 800 1600 2900 1600 850 1600 800
+% %textheight
+\special{pn 8}%
+\special{pa 1600 800}%
+\special{pa 1600 2900}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1600 2900}%
+\special{pa 1620 2834}%
+\special{pa 1600 2848}%
+\special{pa 1580 2834}%
+\special{pa 1600 2900}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1600 800}%
+\special{pa 1580 868}%
+\special{pa 1600 854}%
+\special{pa 1620 868}%
+\special{pa 1600 800}%
+\special{fp}%
+% VECTOR 2 2 3 0
+% 4 450 3100 450 3300 450 3150 450 3100
+% \footheight
+\special{pn 8}%
+\special{pa 450 3100}%
+\special{pa 450 3300}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 450 3300}%
+\special{pa 470 3234}%
+\special{pa 450 3248}%
+\special{pa 430 3234}%
+\special{pa 450 3300}%
+\special{fp}%
+\special{pa 450 3150}%
+\special{pa 450 3100}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 450 3100}%
+\special{pa 430 3168}%
+\special{pa 450 3154}%
+\special{pa 470 3168}%
+\special{pa 450 3100}%
+\special{fp}%
+% VECTOR 2 2 3 0
+% 4 200 2100 400 2100 250 2100 200 2100
+% 
+\special{pn 8}%
+\special{pa 200 2100}%
+\special{pa 400 2100}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 400 2100}%
+\special{pa 334 2080}%
+\special{pa 348 2100}%
+\special{pa 334 2120}%
+\special{pa 400 2100}%
+\special{fp}%
+\special{pa 250 2100}%
+\special{pa 200 2100}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 200 2100}%
+\special{pa 268 2120}%
+\special{pa 254 2100}%
+\special{pa 268 2080}%
+\special{pa 200 2100}%
+\special{fp}%
+% VECTOR 2 2 3 0
+% 4 650 600 650 880 650 650 650 600
+% \topskip
+\special{pn 8}%
+\special{pa 650 1000}%
+\special{pa 650 880}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 650 800}%
+\special{pa 670 734}%
+\special{pa 650 748}%
+\special{pa 630 734}%
+\special{pa 650 800}%
+\special{fp}%
+\special{pa 650 800}%
+\special{pa 650 680}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 650 880}%
+\special{pa 630 948}%
+\special{pa 650 934}%
+\special{pa 670 948}%
+\special{pa 650 880}%
+\special{fp}%
+% VECTOR 2 2 3 0
+% 4 400 1650 580 1650 450 1650 400 1650
+% \parindent
+\special{pn 8}%
+\special{pa 400 1650}%
+\special{pa 580 1650}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 580 1650}%
+\special{pa 514 1630}%
+\special{pa 528 1650}%
+\special{pa 514 1670}%
+\special{pa 580 1650}%
+\special{fp}%
+\special{pa 450 1650}%
+\special{pa 400 1650}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 400 1650}%
+\special{pa 468 1670}%
+\special{pa 454 1650}%
+\special{pa 468 1630}%
+\special{pa 400 1650}%
+\special{fp}%
+% VECTOR 2 0 3 0
+% 4 650 200 650 400 650 250 650 200
+% \headheight
+\special{pn 8}%
+\special{pa 650 200}%
+\special{pa 650 400}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 650 400}%
+\special{pa 670 334}%
+\special{pa 650 348}%
+\special{pa 630 334}%
+\special{pa 650 400}%
+\special{fp}%
+\special{pa 650 250}%
+\special{pa 650 200}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 650 200}%
+\special{pa 630 268}%
+\special{pa 650 254}%
+\special{pa 670 268}%
+\special{pa 650 200}%
+\special{fp}%
+% VECTOR 2 0 3 0
+% 8 1600 400 1600 600 1600 450 1600 400 2400 1300 2400 1480 2400 1350 2400 1300
+% \headsep
+\special{pn 8}%
+\special{pa 1600 400}%
+\special{pa 1600 600}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1600 600}%
+\special{pa 1620 534}%
+\special{pa 1600 548}%
+\special{pa 1580 534}%
+\special{pa 1600 600}%
+\special{fp}%
+\special{pa 1600 450}%
+\special{pa 1600 400}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1600 400}%
+\special{pa 1580 468}%
+\special{pa 1600 454}%
+\special{pa 1620 468}%
+\special{pa 1600 400}%
+\special{fp}%
+\special{pa 2400 1300}%
+\special{pa 2400 1480}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 2400 1480}%
+\special{pa 2420 1414}%
+\special{pa 2400 1428}%
+\special{pa 2380 1414}%
+\special{pa 2400 1480}%
+\special{fp}%
+\special{pa 2400 1350}%
+\special{pa 2400 1300}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 2400 1300}%
+\special{pa 2380 1368}%
+\special{pa 2400 1354}%
+\special{pa 2420 1368}%
+\special{pa 2400 1300}%
+\special{fp}%
+% VECTOR 2 0 3 0
+% 4 2200 1700 2320 1700 2250 1700 2200 1700
+% 
+\special{pn 8}%
+\special{pa 2200 1700}%
+\special{pa 2320 1700}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 2320 1700}%
+\special{pa 2254 1680}%
+\special{pa 2268 1700}%
+\special{pa 2254 1720}%
+\special{pa 2320 1700}%
+\special{fp}%
+\special{pa 2250 1700}%
+\special{pa 2200 1700}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 2200 1700}%
+\special{pa 2268 1720}%
+\special{pa 2254 1700}%
+\special{pa 2268 1680}%
+\special{pa 2200 1700}%
+\special{fp}%
+% VECTOR 2 0 3 0
+% 4 2320 950 2520 950 2370 950 2320 950
+% 
+\special{pn 8}%
+\special{pa 2320 950}%
+\special{pa 2520 950}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 2520 950}%
+\special{pa 2454 930}%
+\special{pa 2468 950}%
+\special{pa 2454 970}%
+\special{pa 2520 950}%
+\special{fp}%
+\special{pa 2370 950}%
+\special{pa 2320 950}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 2320 950}%
+\special{pa 2388 970}%
+\special{pa 2374 950}%
+\special{pa 2388 930}%
+\special{pa 2320 950}%
+\special{fp}%
+% VECTOR 2 0 3 0
+% 4 1600 200 1600 0 1600 150 1600 200
+% 
+\special{pn 8}%
+\special{pa 1350 200}%
+\special{pa 1350 0}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1350 0}%
+\special{pa 1330 68}%
+\special{pa 1350 54}%
+\special{pa 1370 68}%
+\special{pa 1350 0}%
+\special{fp}%
+%\special{pa 1350 150}%
+%\special{pa 1350 200}%
+%\special{fp}%
+\special{sh 1}%
+\special{pa 1350 200}%
+\special{pa 1370 134}%
+\special{pa 1350 148}%
+\special{pa 1330 134}%
+\special{pa 1350 200}%
+\special{fp}%
+% VECTOR 2 0 3 0
+% 4 0 1350 200 1350 50 1350 0 1350
+% 1 inch
+\special{pn 8}%
+\special{pa 0 1350}%
+\special{pa 200 1350}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 200 1350}%
+\special{pa 134 1330}%
+\special{pa 148 1350}%
+\special{pa 134 1370}%
+\special{pa 200 1350}%
+\special{fp}%
+\special{pa 50 1350}%
+\special{pa 0 1350}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 0 1350}%
+\special{pa 68 1370}%
+\special{pa 54 1350}%
+\special{pa 68 1330}%
+\special{pa 0 1350}%
+\special{fp}%
+% STR 2 0 3 0
+% 3 1630 40 1630 140 2 0
+% 1 inch
+\put(38.000,0.0){\makebox(0,0)[lb]{\Goto{top}{Top}}}%
+\put(13.8000,-2.0000){\makebox(0,0)[lb]{$1$ inch$+$\G{voffset}}}%
+\put(28.800,-29.500){\makebox(0,0)[lb]{em ex zw zh}}%
+\put(28.800,-31.800){\makebox(0,0)[lb]{$1$ mm=$2.845$pt}}%
+\put(28.800,-34.0000){\makebox(0,0)[lb]{$1$ pt=$0.35146$mm}}%
+\put(28.800,-36.0000){\makebox(0,0)[lb]{$1$ inch=$25.4$mm}}%
+\put(11.5,0.4){\makebox(0,0)[lb]{\name{marg}{Margin}}}%
+% STR 2 0 3 0
+% 3 30 1180 30 1280 2 0
+% $1$ inch
+\put(0.2000,-13.2000){\makebox(0,0)[lb]{$1$ inch$+$\G{hoffset}}}%
+% STR 2 0 3 0
+% 3 680 250 680 350 2 0
+% \E{\topmargin
+\put(6.8000,-3.8000){\makebox(0,0)[lb]{\G{topmargin}}}%
+% STR 2 0 3 0
+% 3 1630 450 1630 550 2 0
+% \E{headheight}
+\put(16.3000,-5.8000){\makebox(0,0)[lb]{\G{headheight}}}%
+% VECTOR 2 2 3 0
+% 4 1350 600 1350 800 1350 650 1350 600
+% 
+\special{pn 8}%
+\special{pa 1350 600}%
+\special{pa 1350 800}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1350 800}%
+\special{pa 1370 734}%
+\special{pa 1350 748}%
+\special{pa 1330 734}%
+\special{pa 1350 800}%
+\special{fp}%
+\special{pa 1350 650}%
+\special{pa 1350 600}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1350 600}%
+\special{pa 1330 668}%
+\special{pa 1350 654}%
+\special{pa 1370 668}%
+\special{pa 1350 600}%
+\special{fp}%
+%
+%\put(1.900,-1.8000){\makebox(0,0)[lb]{\G{hoffset}}}%
+%\put(-3.700,-3.600){\makebox(0,0)[lb]{\G{voffset}}}%
+% STR 2 0 3 0
+% 3 1380 630 1380 730 2 0
+% \E{\headsep}
+\put(13.8000,-7.9000){\makebox(0,0)[lb]{\G{headsep}}}%
+% STR 2 0 3 0
+% 3 620 2360 620 2460 2 0
+% \E{\textwidth}
+\put(6.2000,-24.8000){\makebox(0,0)[lb]{\G{textwidth}}}%
+% STR 2 0 3 0
+% 3 470 2570 470 2670 2 0
+% \E{\paperwidth}
+\put(4.7000,-27.0000){\makebox(0,0)[lb]{\G{paperwidth}}}%
+\put(16.0000,-20.7000){\makebox(0,0)[lb]{\G{textheight}}}%
+% STR 2 0 3 0
+% 3 2580 2200 2580 2300 2 0
+% \E{\paperheigth}
+\put(24.8000,-23.0000){\makebox(0,0)[lb]{\G{paperheight}}}%
+% STR 2 0 3 0
+% 3 430 1940 430 2040 2 0
+% \E{\oddsidemargin}
+\put(4.3000,-20.9000){\makebox(0,0)[lb]{\G{oddsidemargin}}}%
+% STR 2 0 3 0
+% 3 440 2100 440 2200 2 0
+% \E{\evensidemargin}
+\put(4.4000,-22.5000){\makebox(0,0)[lb]{\G{evensidemargin}}}%
+% STR 2 0 3 0
+% 3 610 1610 610 1710 2 0
+% \E{\parindent}
+\put(6.1000,-17.1000){\makebox(0,0)[lb]{\G{parindent}}}%
+% STR 2 0 3 0
+% 3 2320 800 2320 900 2 0
+% \E{\marginparwidth}
+\put(23.2000,-9.2000){\makebox(0,0)[lb]{\G{marginparwidth}}}%
+% STR 2 0 3 0
+% 3 2450 1340 2450 1440 2 0
+% \E{marginparpush}
+\put(24.5000,-14.7000){\makebox(0,0)[lb]{\G{marginparpush}}}%
+% STR 2 0 3 0
+% 3 2230 1710 2230 1810 2 0
+% \E{marginparsep}
+\put(22.3000,-18.7000){\makebox(0,0)[lb]{\G{marginparsep}}}%
+% VECTOR 2 2 3 0
+% 4 1800 2900 1800 3300 1800 2950 1800 2900
+% 
+\special{pn 8}%
+\special{pa 1800 2900}%
+\special{pa 1800 3300}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1800 3300}%
+\special{pa 1820 3234}%
+\special{pa 1800 3248}%
+\special{pa 1780 3234}%
+\special{pa 1800 3300}%
+\special{fp}%
+\special{pa 1800 2950}%
+\special{pa 1800 2900}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1800 2900}%
+\special{pa 1780 2968}%
+\special{pa 1800 2954}%
+\special{pa 1820 2968}%
+\special{pa 1800 2900}%
+\special{fp}%
+% STR 2 0 3 0
+% 3 1840 2970 1840 3070 2 0
+% \E{footskip}
+\put(18.4000,-31.0000){\makebox(0,0)[lb]{\G{footskip}}}%
+% STR 2 0 3 0
+% 3 500 3160 500 3260 2 0
+% \E{footheight}
+\put(5.0000,-32.9000){\makebox(0,0)[lb]{\G{footheight}}}%
+% STR 2 0 3 0
+% 3 690 820 690 920 2 0
+% \E{topskip}
+\put(6.9000,-9.7000){\makebox(0,0)[lb]{\G{topskip}}}%
+\end{picture}%
+\smallskip
+
+{\small$\bullet$ starting reference point:\newline
+$x$-position = 1 inch+\BK hoffset+\BK odd(enen)sidemargin
+\newline
+$y$-position = 1 inch +\BK voffset+\BK topmargin+\BK headheight+\BK headsep\newline 
+\qquad+\BK topskip
+
+\BK textheight$\,\fallingdotseq\,$\BK baselineskip\,$\times$
+  $\bigl($\#(lines/page)$-1\bigr)$+\BK topskip
+
+line space = 
+\BK baselineskip\,$\times$\keyin{\renewcommand{\baselinestretch}{} %default 1}{{\normalsize\BK baselinestretch}}
+\ (=1\ default value)}
+
+
+\begin{z2col}[1em]
+
+\keyin{\parskip= % 0pt plus 1pt}{\BK parskip}
+{\small = 0pt plus 1pt}
+\smallskip
+
+{\small
+\hspace*{\fill}\name{Ind}{Indent}\hfill\phantom{.}
+
+\keyin{\leftline{}}{\BK leftline}\hfill
+\keyin{\centerline{}}{\BK centerline}\hfill
+\keyin{\rightline{}}{\BK rightline}
+
+\keyin{\begin{flushleft} 0d 0a 0d 0a\end{flushleft}}{\textsl{flushleft}}\hfill
+\keyin{\begin{center} 0d 0a 0d 0a\end{center}}{\textsl{center}}\hfill
+\keyin{\begin{flushright} 0d 0a 0d 0a\end{flushright}}{\textsl{flushright}}
+
+\keyin{\hangafter= 09% #lines, neg -> from the top}%
+{\BK hangafter={\it\color{red}\#lines}}
+
+\keyin{\hangindent= 09% length}%
+{\BK hangindent={\it\color{red}len}}
+
+\quad{\small after {\it\color{red}\#lines} or top {\it\color{red}$-$\#lines}}
+\smallskip
+
+\centerline{\name{Size}{Size}}
+}
+\kaidan
+
+\ \vspace{-1.5ex}\\
+%WinTpicVersion3.08
+\unitlength 0.1in
+\begin{picture}( 14.0000, 14.0000)(  0.0000,-14.0000)
+% BOX 2 0 1 0
+% 2 0 0 600 1400
+% 
+\special{pn 8}%
+\special{sh 0.300}%
+\special{pa 0 0}%
+\special{pa 600 0}%
+\special{pa 600 1400}%
+\special{pa 0 1400}%
+\special{pa 0 0}%
+\special{fp}%
+% BOX 2 0 1 0
+% 2 800 0 1400 1400
+% 
+\special{pn 8}%
+\special{sh 0.300}%
+\special{pa 800 0}%
+\special{pa 1400 0}%
+\special{pa 1400 1400}%
+\special{pa 800 1400}%
+\special{pa 800 0}%
+\special{fp}%
+% LINE 0 0 3 0
+% 2 700 0 700 1400
+% 
+\special{pn 20}%
+\special{pa 700 0}%
+\special{pa 700 1400}%
+\special{fp}%
+% BOX 2 5 2 0
+% 2 0 0 140 80
+% 
+\special{pn 8}%
+\special{sh 0}%
+\special{pa 0 0}%
+\special{pa 140 0}%
+\special{pa 140 80}%
+\special{pa 0 80}%
+\special{pa 0 0}%
+\special{fp}%
+% VECTOR 2 0 3 0
+% 4 0 1250 1400 1250 50 1250 0 1250
+% 
+\special{pn 8}%
+\special{pa 0 1250}%
+\special{pa 1400 1250}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1400 1250}%
+\special{pa 1334 1230}%
+\special{pa 1348 1250}%
+\special{pa 1334 1270}%
+\special{pa 1400 1250}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 0 1250}%
+\special{pa 68 1270}%
+\special{pa 54 1250}%
+\special{pa 68 1230}%
+\special{pa 0 1250}%
+\special{fp}%
+% VECTOR 2 0 3 0
+% 4 1250 1400 1250 0 1250 1350 1250 1400
+% 
+\special{pn 8}%
+\special{pa 1250 1400}%
+\special{pa 1250 0}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1250 0}%
+\special{pa 1230 68}%
+\special{pa 1250 54}%
+\special{pa 1270 68}%
+\special{pa 1250 0}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1250 1400}%
+\special{pa 1270 1334}%
+\special{pa 1250 1348}%
+\special{pa 1230 1334}%
+\special{pa 1250 1400}%
+\special{fp}%
+% VECTOR 2 0 3 0
+% 4 800 700 1400 700 850 700 800 700
+% 
+\special{pn 8}%
+\special{pa 800 700}%
+\special{pa 1400 700}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1400 700}%
+\special{pa 1334 680}%
+\special{pa 1348 700}%
+\special{pa 1334 720}%
+\special{pa 1400 700}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 800 700}%
+\special{pa 868 720}%
+\special{pa 854 700}%
+\special{pa 868 680}%
+\special{pa 800 700}%
+\special{fp}%
+% STR 2 0 3 0
+% 3 470 1410 470 1510 2 0
+% \F{columnseprule}
+\put(4.7000,-15.8000){\makebox(0,0)[lb]{\G{columnseprule}}}%
+% STR 2 0 3 0
+% 3 100 1090 100 1190 2 0
+% \F{textwidth}
+\put(0.4000,-12.4000){\makebox(0,0)[lb]{\G{textwidth}}}%
+% STR 2 0 3 0
+% 3 1300 900 1300 1000 2 0
+% \F{textheight}
+\put(12.6000,-10.0000){\makebox(0,0)[lb]{\G{textheight}}}%
+% STR 2 0 3 0
+% 3 850 540 850 640 2 0
+% \F{columnwidth}
+\put(8.5000,-6.8000){\makebox(0,0)[lb]{\G{columnwidth}}}%
+% VECTOR 2 0 3 0
+% 4 600 300 800 300 650 300 600 300
+% 
+\special{pn 8}%
+\special{pa 600 300}%
+\special{pa 800 300}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 800 300}%
+\special{pa 734 280}%
+\special{pa 748 300}%
+\special{pa 734 320}%
+\special{pa 800 300}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 600 300}%
+\special{pa 668 320}%
+\special{pa 654 300}%
+\special{pa 668 280}%
+\special{pa 600 300}%
+\special{fp}%
+% STR 2 0 3 0
+% 3 830 280 830 380 2 0
+% \F{columnsep}
+\put(8.3000,-3.8000){\makebox(0,0)[lb]{\G{columnsep}}}%
+\end{picture}%
+\end{z2col}
+\F{scrptstyle}
+\F{scritpscriptstyle}
+(disp.)
+
+\F{tiny}
+\F{scriptsize}
+\F{footnotesize}
+\F{small}
+\F{normalsize}
+
+\F{large}
+\F{Large}
+\F{LARGE}
+\F{huge}
+\F{Huge}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%   LIST  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%WinTpicVersion3.08
+\centerline{\name{list}{List}\gotop{9.8cm}}
+{\small\keyin{\begin{list}{}{} 0d 0a\item[] 0d 0a\end{list}}
+{\BK begin\{list\}\opt{\it default\_label}\opt{decls}
+{\color{red}{\it item\_list}}\ \BK end\{list\}}}
+
+\unitlength 0.1in
+\begin{picture}(22.0000, 21.0000)(-3.0000,-20.5000)
+% POLYLINE 2 2 3 0
+% 4 0 100 2400 100 2400 0 2400 0
+% 
+\special{pn 12}%
+\special{pa 0 0}%
+\special{pa 0 100}%
+\special{pa 2400 100}%
+\special{pa 2400 0}%
+\special{fp}%
+% BOX 2 0 0 0
+% 2 150 300 400 400
+% 
+\special{pn 8}%
+\special{pa 0 100}%
+\special{pa 0 2000}%
+\special{dt 0.045}%
+\special{pa 2400 100}%
+\special{pa 2400 2000}%
+\special{dt 0.045}%
+%
+\special{pn 8}%
+\special{sh 0.600}%
+\special{pa 150 300}%
+\special{pa 400 300}%
+\special{pa 400 400}%
+\special{pa 150 400}%
+\special{pa 150 300}%
+\special{fp}%
+% BOX 2 0 1 0
+% 2 600 300 2200 600
+% 
+\special{pn 8}%
+\special{sh 0.300}%
+\special{pa 600 300}%
+\special{pa 2200 300}%
+\special{pa 2200 600}%
+\special{pa 600 600}%
+\special{pa 600 300}%
+\special{fp}%
+% BOX 2 0 1 0
+% 2 600 800 2200 1200
+% 
+\special{pn 8}%
+\special{sh 0.300}%
+\special{pa 600 800}%
+\special{pa 2200 800}%
+\special{pa 2200 1200}%
+\special{pa 600 1200}%
+\special{pa 600 800}%
+\special{fp}%
+% BOX 2 0 2 0
+% 2 600 800 850 900
+% 
+\special{pn 8}%
+\special{sh 0}%
+\special{pa 600 800}%
+\special{pa 850 800}%
+\special{pa 850 900}%
+\special{pa 600 900}%
+\special{pa 600 800}%
+\special{fp}%
+%
+\special{pn 8}%
+\special{sh 0}%
+\special{pa 600 300}%
+\special{pa 750 300}%
+\special{pa 750 400}%
+\special{pa 600 400}%
+\special{pa 600 300}%
+\special{fp}%
+% BOX 2 0 0 0
+% 2 150 1400 400 1500
+% 
+\special{pn 8}%
+\special{sh 0.600}%
+\special{pa 150 1400}%
+\special{pa 400 1400}%
+\special{pa 400 1500}%
+\special{pa 150 1500}%
+\special{pa 150 1400}%
+\special{fp}%
+% BOX 2 0 1 0
+% 2 600 1400 2200 1800
+% 
+\special{pn 8}%
+\special{sh 0.300}%
+\special{pa 600 1400}%
+\special{pa 2200 1400}%
+\special{pa 2200 1800}%
+\special{pa 600 1800}%
+\special{pa 600 1400}%
+\special{fp}%
+% POLYLINE 2 2 3 0
+% 5 0 2100 0 2000 2400 2000 2400 2100 2400 2100
+% 
+\special{pn 12}%
+\special{pa 0 2100}%
+\special{pa 0 2000}%
+\special{pa 2400 2000}%
+\special{pa 2400 2100}%
+\special{pa 2400 2100}%
+\special{fp}%
+%
+\special{pn 8}%
+\special{sh 0}%
+\special{pa 600 1400}%
+\special{pa 750 1400}%
+\special{pa 750 1500}%
+\special{pa 600 1500}%
+\special{pa 600 1400}%
+\special{fp}%
+% VECTOR 2 2 3 0
+% 16 1400 100 1400 300 1400 150 1400 100 1400 600 1400 800 1400 650 1400 600 1400 1200 1400 1400 1400 1250 1400 1200 1400 1800 1400 2000 1400 1850 1400 1800
+% 
+\special{pn 8}%
+\special{pa 1400 100}%
+\special{pa 1400 300}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1400 300}%
+\special{pa 1420 234}%
+\special{pa 1400 248}%
+\special{pa 1380 234}%
+\special{pa 1400 300}%
+\special{fp}%
+\special{pa 1400 150}%
+\special{pa 1400 100}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1400 100}%
+\special{pa 1380 168}%
+\special{pa 1400 154}%
+\special{pa 1420 168}%
+\special{pa 1400 100}%
+\special{fp}%
+\special{pa 1400 600}%
+\special{pa 1400 800}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1400 800}%
+\special{pa 1420 734}%
+\special{pa 1400 748}%
+\special{pa 1380 734}%
+\special{pa 1400 800}%
+\special{fp}%
+\special{pa 1400 650}%
+\special{pa 1400 600}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1400 600}%
+\special{pa 1380 668}%
+\special{pa 1400 654}%
+\special{pa 1420 668}%
+\special{pa 1400 600}%
+\special{fp}%
+\special{pa 1400 1200}%
+\special{pa 1400 1400}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1400 1400}%
+\special{pa 1420 1334}%
+\special{pa 1400 1348}%
+\special{pa 1380 1334}%
+\special{pa 1400 1400}%
+\special{fp}%
+\special{pa 1400 1250}%
+\special{pa 1400 1200}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1400 1200}%
+\special{pa 1380 1268}%
+\special{pa 1400 1254}%
+\special{pa 1420 1268}%
+\special{pa 1400 1200}%
+\special{fp}%
+\special{pa 1400 1800}%
+\special{pa 1400 2000}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1400 2000}%
+\special{pa 1420 1934}%
+\special{pa 1400 1948}%
+\special{pa 1380 1934}%
+\special{pa 1400 2000}%
+\special{fp}%
+\special{pa 1400 1850}%
+\special{pa 1400 1800}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1400 1800}%
+\special{pa 1380 1868}%
+\special{pa 1400 1854}%
+\special{pa 1420 1868}%
+\special{pa 1400 1800}%
+\special{fp}%
+% STR 2 0 3 0
+% 3 1450 140 1450 240 2 0
+% \F{topsep}+\F{parskip}+\F{partopsep}
+\put(14.5000,-2.8000){\makebox(0,0)[lb]{\G{topsep}+\G{parskip}+\G{partopsep}}}%
+% STR 2 0 3 0
+% 3 1450 660 1450 760 2 0
+% \F{parsep}
+\put(14.5000,-7.9000){\makebox(0,0)[lb]{\G{parsep}}}%
+% STR 2 0 3 0
+% 3 1460 1270 1460 1370 2 0
+% \F{itemsep}+\F{parsep}
+\put(14.6000,-14.0000){\makebox(0,0)[lb]{\G{itemsep}+\G{parsep}}}%
+% STR 2 0 3 0
+% 3 1460 1880 1460 1980 2 0
+% \F{topsep}+\F{parskip}+\F{partopsep}
+\put(14.6000,-19.8000){\makebox(0,0)[lb]{\G{topsep}+\G{parskip}+\G{partopsep}}}%
+%%%
+\special{pn 8}%
+\special{pa 600 800}%
+\special{pa 850 800}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 850 800}%
+\special{pa 784 780}%
+\special{pa 798 800}%
+\special{pa 784 820}%
+\special{pa 850 800}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 600 800}%
+\special{pa 668 820}%
+\special{pa 654 800}%
+\special{pa 668 780}%
+\special{pa 600 800}%
+\special{fp}%
+\put(3.7000,-7.7000){\makebox(0,0)[lb]{\G{listparindent}}}%
+%%%
+% VECTOR 2 0 3 0
+% 2 600 800 850 800
+% 
+\special{pn 8}%
+\special{pa 600 440}%
+\special{pa 750 440}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 750 440}%
+\special{pa 684 420}%
+\special{pa 698 440}%
+\special{pa 684 460}%
+\special{pa 750 440}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 600 440}%
+\special{pa 668 460}%
+\special{pa 654 440}%
+\special{pa 668 420}%
+\special{pa 600 440}%
+\special{fp}%
+% STR 2 0 3 0
+% 3 470 670 470 770 2 0
+% \F{listparindent}
+\put(7.5000,-4.8000){\makebox(0,0)[lb]{\G{itemindent}}}%
+%
+% VECTOR 2 0 3 0
+% 4 0 1100 600 1100 50 1100 0 1100
+% 
+\special{pn 8}%
+\special{pa 0 1100}%
+\special{pa 600 1100}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 600 1100}%
+\special{pa 534 1080}%
+\special{pa 548 1100}%
+\special{pa 534 1120}%
+\special{pa 600 1100}%
+\special{fp}%
+\special{pa 50 1100}%
+\special{pa 0 1100}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 0 1100}%
+\special{pa 68 1120}%
+\special{pa 54 1100}%
+\special{pa 68 1080}%
+\special{pa 0 1100}%
+\special{fp}%
+% STR 2 0 3 0
+% 3 0 950 0 1050 2 0
+% \F{leftmargin}
+\put(0.0000,-10.5000){\makebox(0,0)[lb]{\G{leftmargin}}}%
+\special{pn 8}%
+\special{pa 2200 1100}%
+\special{pa 2400 1100}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 2400 1100}%
+\special{pa 2334 1080}%
+\special{pa 2348 1100}%
+\special{pa 2334 1120}%
+\special{pa 2400 1100}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 2200 1100}%
+\special{pa 2268 1120}%
+\special{pa 2254 1100}%
+\special{pa 2268 1080}%
+\special{pa 2200 1100}%
+\special{fp}%
+% STR 2 0 3 0
+% 3 0 950 0 1050 2 0
+% \F{leftmargin}
+\put(22.0000,-10.9000){\makebox(0,0)[lb]{\G{rightmargin}}}%
+% VECTOR 2 0 3 0
+% 4 150 250 400 250 200 250 150 250
+% 
+\special{pn 8}%
+\special{pa 150 250}%
+\special{pa 400 250}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 400 250}%
+\special{pa 334 230}%
+\special{pa 348 250}%
+\special{pa 334 270}%
+\special{pa 400 250}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 150 250}%
+\special{pa 218 270}%
+\special{pa 204 250}%
+\special{pa 218 230}%
+\special{pa 150 250}%
+\special{fp}%
+% STR 2 0 3 0
+% 3 120 110 120 210 2 0
+% \F{labelwidth}
+\put(1.2000,-2.4000){\makebox(0,0)[lb]{\G{labelwidth}}}%
+% VECTOR 2 0 3 0
+% 4 0 1400 150 1400 50 1400 0 1400
+% 
+\special{pn 12}%
+\special{pa 600 1400}%
+\special{pa 750 1400}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 750 1400}%
+\special{pa 684 1380}%
+\special{pa 698 1400}%
+\special{pa 684 1420}%
+\special{pa 750 1400}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 600 1400}%
+\special{pa 668 1420}%
+\special{pa 654 1400}%
+\special{pa 668 1380}%
+\special{pa 600 1400}%
+\special{fp}%
+% STR 2 0 3 0
+% 3 0 1270 0 1370 2 0
+% \F{itemindent}
+\put(5.0000,-13.8000){\makebox(0,0)[lb]{\G{itemindent}}}%
+% VECTOR 2 0 3 0
+% 4 400 1500 600 1500 450 1500 400 1500
+% 
+\special{pn 8}%
+\special{pa 400 1460}%
+\special{pa 750 1460}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 750 1460}%
+\special{pa 684 1440}%
+\special{pa 698 1460}%
+\special{pa 684 1480}%
+\special{pa 750 1460}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 400 1460}%
+\special{pa 468 1480}%
+\special{pa 454 1460}%
+\special{pa 468 1440}%
+\special{pa 400 1460}%
+\special{fp}%
+% STR 2 0 3 0
+% 3 350 1500 350 1600 2 0
+% \F{labelsep}
+\put(3.0000,-17.0000){\makebox(0,0)[lb]{\G{labelsep}}}%
+\end{picture}%
+\medskip
+
+\small{
+indent of label:
+\BK leftmargin$-$\BK labelwidth$-$\BK labelsep$+$\BK itemindent
+
+default:
+\BK rightmargin = \BK listparindent = \BK itemindent = 0 pt\newline
+\qquad\qquad\!\!\BK labelsep = 0.5 em
+
+
+\keyin{\begin{trivlist} 0d 0a\item   0d 0a\end{trivlist}}%
+{\BK begin\{trivlist\} {\color{red}\it item\_list}  \BK end\{trivlist\}}
+
+\qquad \BK leftmargin = \BK labelwidth = 0 pt,\ 
+       \BK parsep = \BK parskip
+
+\keyin{\begin{enumerate} 0d 0a\item   0d 0a\end{enumarate}}%
+{\BK begin\{enumarate\} {\color{red}\it item\_list}  \BK end\{enumarate\}}
+
+{\rm \qquad 1 $\to$ (a) $\to$ i $\to$ A}\quad
+\keyin{\renewcommand{\labelenumi}{}}{\BK labelenumi}
+\keyin{\renewcommand{\labelenumii}{}}{\BK labelenumii}
+\keyin{\renewcommand{\labelenumiii}{}}{\BK labelenumiii}
+
+\qquad\keyin{\renewcommand{\labelenumiv}{}}{\BK labelenumiv}
+$\Leftarrow$
+Ex.~\{\verb|[\bfseries\arabic{enumiv}]|\}
+\hfill\Goto{count}{Count}
+
+
+\keyin{\begin{itemize} 0d 0a\item   0d 0a\end{itemize}}%
+{\BK begin\{itemize\} {\color{red}\it item\_list}  \BK end\{itemize\}}
+
+\qquad $\bullet$ $\to$ -- $\to$ $*$ $\to$ $\cdot$\quad
+\keyin{\renewcommand{\labelitemi}{}}{\BK labelitemi}
+\keyin{\renewcommand{\labelitemii}{}}{\BK labelitemii}
+\keyin{\renewcommand{\labelitemiii}{}}{\BK labelitemiii}
+
+\keyin{\begin{description} 0d 0a\item[]   0d 0a\end{description}}%
+{\BK begin\{description\} {\color{red}\it item\_list}  \BK end\{description\}}
+
+\qquad
+\keyin{\renewcommand{\descriptionlabel}[1]% 0d 0a{#1}}%
+{\BK descritionlabel}
+$\Leftarrow$ Ex.~\{\verb|\hspace{\labelsep}\textsf{#1}|\}
+}
+\smallskip
+
+\centerline{\name{Sp}{Space}}
+\vspace{-13pt}
+
+\begin{tabbing}
+\keyin{\vspace{}}{\BK vspace\opt{len}}\qquad\qquad\ 
+\=\keyin{\vspace*{}}{\BK vspace\ST\{{\it\color{red}len}\}}\qquad\qquad\ 
+\=\F{vfill}=\BK vspace\{\BK fill\}\\
+%
+\keyin{\hspace{}}{\BK hspace\{{\it\color{red}len}\}}%\hfill
+\>\keyin{\hspace*{}}{\BK hspace\ST\{{\it\color{red}len}\}}%\hfill
+\>\F{hfill}=\BK hspace\{\BK fill\}\\
+%
+\F{fill}=\BK stretch\{1\}
+\>\keyin{\stretch{}}{\BK stretch\{{\it\color{red}value}\}}\\
+%
+\F{dotfill}
+\>\F{hrulefill}\\
+%
+\F{smallskip} 3pt$\pm$1pt%\hfill
+\>\F{medskip} 6pt$\pm$2pt%\hfill
+\>\F{bigskip} 12pt$\pm$4pt
+\end{tabbing}
+\vspace{-10pt}
+
+\F{!} $-\frac3{18}$\hfill
+\F{,} $\frac3{18}$\hfill
+\keyin{\>}{$\backslash\!\!>$} $\frac4{18}$\hfill
+\F{;} $\frac5{18}$\hfill
+\keyin{ }{\BK \textvisiblespace} $\frac9{18}$\hfill
+\F{quad} 1\hfill
+\F{qquad} 2 em
+\smallskip
+
+\centerline{\name{Brk}{Break}}
+\vspace{-5pt}
+
+\F{par}\hfill
+\F{fussy}\quad
+\F{sloppy}\hfill
+\G{parskip}\quad
+\G{parindent}
+
+\keyin{\\ 0d 0a}{\BK\BK\Ops{len}}\quad
+\F{newline}\quad
+\keyin{\linebreak[ ]}{\BK linebreak\Ops{lev}}
+\keyin{\nolinebreak[ ]}{\BK nolinebreak\Ops{lev}} \ 
+\MGNT{lev}:0--4 (default)
+
+\F{newpage}\hfill \F{clearpage}\hfill \F{cleardoublepage}
+\hfill\hfill
+\F{samepage}
+
+\keyin{\pagebreak[ ]}{\BK pagebreak\Ops{lev}}
+\keyin{\nopagebreak[ ]}{\BK nopagebreak\Ops{lev}}\qquad
+\keyin{\enlargethispage{}}{\BK enlargethispage\opt{len}}
+
+\F{raggedbottom} \F{flushbottom}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  page 3 %%%%%%%%%%%%%%%%%%%%%%%%%%
+\centerline{\name{Box}{Box}\gotop{9.8cm}}
+\keyin{\makebox[][]{}}{\BK makebox\Ops{width}\Ops{pos}\opt{text}}\hfill
+\keyin{\framebox[][]{}}{\BK framebox\Ops{width}\Ops{pos}\opt{text}}
+
+\keyin{\mbox{}}{\BK mbox\opt{text}}\hfill
+\keyin{\fbox{}}{\BK fbox\opt{text}}\quad\ 
+\keyin{\frame{}}{\BK frame\opt{text}}
+
+\keyin{\raisebox{}[][]{}}%
+{\BK raisebox\opt{lift}\Ops{height}\Ops{depth}\opt{text}}
+
+\F{width}\hfill \F{height}\hfill \F{depth}\hfill \F{totalheight}\hfill
+\keyin{\fboxrule=}{\BK fboxrule}=0.4pt\hfill
+\keyin{\fboxsep=}{\BK fboxsep}=3pt
+
+\F{thinlines}\quad
+\F{thicklines}\quad
+\keyin{\linethickness{}}{\BK linethickness\opt{len}}
+
+
+\G{unitlength}\hfill
+\keyin{\makebox( , )[]{}}%
+{\BK makebox({\color{red}w},{\color{red}h})\Ops{ipos}\opt{text}}\hfill
+\keyin{\framebox( , )[]{}}%
+{\BK framebox({\color{red}w},{\color{red}h})\Ops{ipos}\opt{text}}
+
+\keyin{\begin{minipage}[][][]{} 0d 0a\end{minipage}}%
+{\BK begin\{minipage\}\Ops{pos}\Ops{height}\Ops{inner\_pos}\opt{width}{\it\color{red}text}\BK end\{minipage\}}
+
+\keyin{\parbox[][][]{}{}}%
+{\BK parbox\Ops{pos}\Ops{height}\Ops{inner\_pos}\opt{width}\opt{text}}
+
+{\color{magenta}pos}: c l r s\qquad\qquad
+{\it\color{magenta}inner\_pos}: c t b s
+
+\keyin{\shortstack[]{ \\ }}%
+{\BK shortstack\Ops{pos}\{{\color{red}text}\BK\BK{\color{red}$\cdots$text}\}}
+
+\keyin{\rule[]{}{}}%
+{\BK rule\Ops{lift}\opt{width}\opt{total\_height}}
+
+%WinTpicVersion3.08
+\unitlength 0.1in
+%\begin{picture}(  7.0000,  4.0000)(  1.0000, -4.0000)
+\begin{picture}(  7.0000,  0.0000)(-33.0000, -8.0000)
+% BOX 2 0 1 0
+% 2 100 100 800 400
+% 
+\special{pn 8}%
+\special{sh 0.300}%
+\special{pa 100 100}%
+\special{pa 800 100}%
+\special{pa 800 400}%
+\special{pa 100 400}%
+\special{pa 100 100}%
+\special{fp}%
+% STR 2 0 3 0
+% 3 390 190 390 290 2 0
+% c
+\put(4.0000,-2.8000){\makebox(0,0)[lb]{c}}%
+% STR 2 0 3 0
+% 3 400 300 400 400 2 0
+% b
+\put(4.0000,-3.9000){\makebox(0,0)[lb]{b}}%
+% STR 2 0 3 0
+% 3 400 70 400 170 2 0
+% t
+\put(4.0000,-1.9000){\makebox(0,0)[lb]{t}}%
+% STR 2 0 3 0
+% 3 100 210 100 310 2 0
+% l
+\put(1.2000,-2.8000){\makebox(0,0)[lb]{l}}%
+\put(0.5000,-0.8000){\makebox(0,0)[lb]{lt}}%
+\put(0.5000,-5.0000){\makebox(0,0)[lb]{lb}}%
+% STR 2 0 3 0
+% 3 710 180 710 280 2 0
+% r
+\put(7.1000,-2.8000){\makebox(0,0)[lb]{r}}%
+\put(7.6000,-0.8000){\makebox(0,0)[lb]{rt}}%
+\put(7.6000,-5.0000){\makebox(0,0)[lb]{rb}}%
+\end{picture}%
+\vspace{-20pt}
+
+\begin{tabbing}
+\keyin{\newsavebox{\ }}{\BK newsavebox\opt{cmd}}\hspace{9em}
+\=declare box\\
+%
+\keyin{\savebox{\ }[][]{}}{\BK savebox\opt{cmd}\Ops{width}\Ops{pos}\opt{text}}
+\>fill box\\
+%
+\keyin{\sbox{\ }{}}{\BK sbox\opt{cmd}\opt{text}}
+\>fill box\\
+%
+\keyin{\begin{lrbox}{\ } 0d 0a 0d 0a\end{lrbox}}%
+{\BK begin\{lrbox\}\opt{cmd}{ \it\color{red}text }\BK end\{lrbox\}}
+\>fill box\\
+%
+\keyin{\usebox{\ }}{\BK usebox\opt{cmd}}
+\>use contents
+\end{tabbing}
+
+%\vspace*{-18pt}
+\vspace*{-28pt}
+\phantom{\tiny longtable}\hfill{\name{Tab}{Tab}}\hfill{\Goto{Hlt}{longtable}}
+
+%%%%%%%%%%%%%
+\keyin{\begin{tabbing} 0d 0a \= \\ 09% \\ -> \kill 0d 0a \> \\ 0d 0a\end{tabbing}}{\textsl{tabbing}}
+\hfill\quad\F{kill}\qquad\F{pushtabs}\quad\F{poptabs}\hfill\Ref{tabbing}
+
+\quad
+indent: \F{+} \F{$-$}\hfill
+this indent: \F{$<$}\hfill
+left col:  \F{'}\hfill
+right most: \F{`}\\[-8pt]
+
+\parbox{0.8\textwidth}{{\tiny
+\quad\BK begin\{tabbing\}\\[-6pt]
+\quad\quad$\cdots$\quad \BK= \quad$\cdots$\quad \BK= \quad$\cdots$\quad \quad\BK= \quad$\cdots$\quad\BK kill\\[-6pt]
+\quad\quad$\cdots$\quad \BK$>$ \quad$\cdots$\quad \BK$>$ \quad$\cdots$\quad \quad\BK$>$ \quad$\cdots$\quad\BK\BK\\[-6pt]
+\quad\quad$\cdots$\quad \BK$>$ \quad$\cdots$\quad \BK$>$ \quad$\cdots $\BK'\quad \BK$>$ \quad$\cdots$\quad
+\BK+\quad\BK\BK\\[-6pt]
+\quad\quad$\cdots$\quad \BK$>$ \quad \BK` $\cdots$\qquad\BK\BK\\[-6pt]
+\quad\BK end\{tabbing\}
+}}
+\smallskip
+
+%%%%%%%%%%%%
+\keyin{\begin{tabular}[]{} 0d 0a & \\ 0d 0a & 0d 0a\end{tabular}}%
+{\textsl{tabular}\Ops{pos}\opt{cols}}\qquad{\color{magenta}pos}: t b
+\hfill\Ref{Htab}
+
+\quad
+\RED{cols} = \RED{column}: l c r p\opt{width}\qquad
+\RED{separator}: $|$ $||$ \string@\opt{decl.}
+
+\quad\keyin{\tabcolsep=%6pt}{\BK tabcolsep}={\it\color{red}len}\qquad
+\keyin{\doublerulesep=%2pt}{\BK doublerulesep}={\it\color{red}len}\qquad
+\F{hline}
+
+\keyin{\begin{tabular*}{}[]{} 0d 0a & \\ 0d 0a & 0d 0a\end{tabular*}}%
+{\textsl{tabular\ST}\opt{width}\Ops{pos}\opt{cols}}\qquad
+\keyin{\extracolsep{\fill}}{\BK extracolsep\{\BK fill\}}
+\vspace{5pt}
+
+\parbox{0.5\textwidth}
+{\tiny
+\quad\BK begin\{tabular\}\{$|$ c $ | $ l $|$ l $|$ r $|$\}\BK hline\\
+\quad\quad$\cdots$\quad \& \quad$\cdots$\quad \& \quad$\cdots$\quad \& \quad$\cdots$\quad\BK\BK\quad\BK hline\\
+\quad\quad$\cdots$\quad \& \quad$\cdots$\quad \& \quad$\cdots$\quad \& \quad$\cdots$\quad\BK\BK\quad\BK hline\\
+\quad\BK end\{tabular\}
+}
+
+\vspace{-30pt}
+
+\hspace*{0.51\textwidth}
+\parbox{0.5\textwidth}
+{\tiny\BK[
+\BK begin\{array\}\{$|$ c $ | $ l $|$ r \string@\{.\} l $|$\}\BK hline\\
+\qquad$\cdots$\quad \& \quad$\cdots$\quad \& \quad$\cdots$\quad \& \quad$\cdots\quad$\BK\BK\quad\BK hline\\
+\qquad$\cdots$\quad \& \quad$\cdots$\quad \& \quad$\cdots$\quad \& \quad$\cdots$\quad\BK\BK\\
+\qquad$\cdots$\quad \& \ \BK multicolumn\{2\}\{c $|$\}\{$\cdots$\} \BK\BK\quad\BK hline\\
+\quad\ \BK end\{array\} \BK]
+}
+
+%%%%%%%%%%%%%
+\BK [
+\keyin{\begin{array}[]{} 0d 0a & \\ 0d 0a & 0d 0a\end{array}}%
+{\textsl{array}\Ops{pos}\opt{cols}} \BK]
+
+\quad
+\keyin{\arrayrulewidth=%0.4pt}{\BK arrayrulewidth}=\RED{len}\quad
+\keyin{\extrarowheight=}{\BK extrarowheight}=\RED{len}\quad
+\keyin{\renewcommand{\arraystretch}{}}%
+{\BK arraystretch}{$\Leftarrow$\RED{val}}
+
+\quad
+\keyin{\cline{ - }}{\BK cline\opt{m--n}}
+\quad \BK hline from the \RED{m}-th column to the \RED{n}-th\hfill
+\F{vline}
+
+\quad
+\keyin{\multicolumn{}{}[]}%
+{\BK multicolumn\opt{ncol}\opt{col}\opt{text}}
+\qquad\RED{col}=\RED{column} \RED{separator}
+
+\ more \RED{column}: 
+\keyin{p{ } % top}%
+{p\opt{width}} = \BK parbox[t]\opt{width}\hfill\Ref{array}\\\hspace{6em} 
+\keyin{m{ } % center}%
+{m\opt{width}} $\fallingdotseq$ \BK parbox\opt{width}\\\hspace{6.2em}
+\keyin{b{ } % bottom}%
+{b\opt{width}} = \BK parbox[b]\opt{width}\\
+\ \RED{separator}: 
+\keyin{>{ }}{$>$\opt{decl.}} (pre-col.)\hfill
+\keyin{<{ }}{$<$\opt{decl.}} (post-col.)\hfill
+\keyin{!{ }}{$!$\opt{decl.}} (any)
+
+\ 
+\RED{cols}: $|$c$||$r\string @\{.\}l$|$%\{\BK vrule width 3pt\}%
+$>$\{\BK parindent=5mm\}m\{2cm\}$|>$\{\$\}c$<$\{\$\}$|$\\
+$\Rightarrow$ $|$ \RED{col1} $||$ \RED{col2}.\RED{col3} $|$\BK parabox\{2cm\}\{\BK paraindent=5mm \RED{col4}\}$|$\$\RED{col5}\$$|$
+%%%
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hspace{10pt}\hfill\name{Pic}{Picture}\hfill\Goto{top}{Top}\\
+\begin{z2col}[4em]
+\keyin{\begin{picture}( , )( , ) 0d 0a 0d 0a\end{picture}}%
+{\textsl{picture}(\RED{Dx},\RED{Dy})(\MGNT{x,y})}\quad\G{unitlength}=
+
+\keyin{\put( , ){ }}{\BK put(\RED x,\RED y)\opt{object}}
+
+\keyin{\multiput( , )( , ){ }{ }}{\BK multiput(\RED x,\RED y)%
+(\RED{Dx},\RED{Dy})\opt{num}\opt{object}}
+%WinTpicVersion3.08
+\unitlength 0.1in
+
+\kaidan
+
+\ \vspace{-1.5ex}\\
+\begin{picture}(2.9000, 0.000)(-30.9000, -5.0300)%(-6.9000, -4.0300)
+% BOX 2 0 3 0
+% 2 400 0 1000 300
+% 
+\special{pn 8}%
+\special{pa 400 0}%
+\special{pa 1000 0}%
+\special{pa 1000 300}%
+\special{pa 400 300}%
+\special{pa 400 0}%
+\special{fp}%
+% BOX 2 2 3 0
+% 2 100 100 700 400
+% 
+\special{pn 8}%
+\special{pa 100 100}%
+\special{pa 700 100}%
+\special{pa 700 400}%
+\special{pa 100 400}%
+\special{pa 100 100}%
+\special{dt 0.045}%
+% DOT 1 0 3 0
+% 1 400 300
+% 
+\special{pn 13}%
+\special{sh 1}%
+\special{ar 400 300 10 10 0  6.28318530717959}%
+% DOT 1 0 3 0
+% 1 100 400
+% 
+\special{pn 13}%
+\special{sh 1}%
+\special{ar 100 400 10 10 0  6.28318530717959}%
+% VECTOR 2 0 3 0
+% 2 400 300 100 400
+% 
+\special{pn 8}%
+\special{pa 400 300}%
+\special{pa 100 400}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 100 400}%
+\special{pa 170 398}%
+\special{pa 152 384}%
+\special{pa 158 360}%
+\special{pa 100 400}%
+\special{fp}%
+% STR 2 0 3 0
+% 3 90 400 90 500 2 0
+% $(0,0)$
+\put(0.9000,-5.8000){\makebox(0,0)[lb]{$(0,0)$}}%
+% STR 2 0 3 0
+% 3 430 170 430 270 2 0
+% $(x,y)$
+\put(4.3000,-2.7000){\makebox(0,0)[lb]{$(x,y)$}}%
+% VECTOR 2 0 3 0
+% 2 1050 0 1050 300
+% 
+\special{pn 8}%
+\special{pa 1050 0}%
+\special{pa 1050 300}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1050 300}%
+\special{pa 1070 234}%
+\special{pa 1050 248}%
+\special{pa 1030 234}%
+\special{pa 1050 300}%
+\special{fp}%
+% VECTOR 2 0 3 0
+% 2 1050 50 1050 0
+% 
+\special{pn 8}%
+\special{pa 1050 50}%
+\special{pa 1050 0}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1050 0}%
+\special{pa 1030 68}%
+\special{pa 1050 54}%
+\special{pa 1070 68}%
+\special{pa 1050 0}%
+\special{fp}%
+% STR 2 0 3 0
+% 3 1080 110 1080 210 2 0
+% $Dy$
+\put(10.8000,-2.1000){\makebox(0,0)[lb]{$Dy$}}%
+% VECTOR 2 0 3 0
+% 4 400 50 1000 50 450 50 400 50
+% 
+\special{pn 8}%
+\special{pa 400 -50}%
+\special{pa 1000 -50}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 1000 -50}%
+\special{pa 934 -70}%
+\special{pa 948 -50}%
+\special{pa 934 -30}%
+\special{pa 1000 -50}%
+\special{fp}%
+\special{sh 1}%
+\special{pa 400 -50}%
+\special{pa 468 -30}%
+\special{pa 454 -50}%
+\special{pa 468 -70}%
+\special{pa 400 -50}%
+\special{fp}%
+% STR 2 0 3 0
+% 3 540 -90 540 10 2 0
+% $Dx$
+\put(5.800,0.800){\makebox(0,0)[lb]{$Dx$}}%
+\end{picture}%
+\end{z2col}\\[-4pt]
+\RED{object}:\\
+\qquad
+\keyin{\line( , ){ }}{\BK line(\RED{Dx},\RED{Dy})\opt L}
+\quad\ \ \,
+$-6\le$\RED{Dx}$,\,$\RED{Dy}$\le 6$, $\RED{Dx}$, $\RED{Dy}$: integer\\
+\qquad
+\keyin{\vector( , ){ }}{\BK vector(\RED{Dx},\RED{Dy})\opt L}
+\quad $-4\le$\RED{Dx}$,\,$\RED{Dy}$\le 4$, $\RED{Dx}$, $\RED{Dy}$: integer\\
+\qquad
+\keyin{\circle{ }}{\BK circle\opt{diam}}\hfill
+\keyin{\circle*{ }}{\BK circle\ST\opt{diam}} (fill circle)
+\\
+\qquad
+\keyin{\oval( , )}{\BK oval(\RED{Dx},\RED{Dy})\Ops{pos}}\qquad
+\MGNT{pos}: l c r t u b
+\smallskip
+
+\rightline{\href{file:input9.dvi}{\colorbox{green}{\tiny\sf Xy-pic}}%
+\quad\href{file:input8.dvi#young}{\colorbox{green}{\tiny\sf Young}}%
+\quad \Goto{bar}{bar}}
+
+\vspace*{-2ex}
+\centerline{\name{Fig}{Figure}}
+\keyin{\begin{figure} 0d 0a 0d 0a\end{figure}}%
+{\textsl{figure}\Ops{pos}}
+\qquad
+\keyin{\begin{table} 0d 0a 0d 0a\end{table}}%
+{\textsl{table}\Ops{pos}}
+\qquad
+\keyin{\begin{figure*} 0d 0a 0d 0a\end{figure*}}%
+{\textsl{figure\ST}\Ops{pos}}
+\qquad
+\keyin{\begin{table*} 0d 0a 0d 0a\end{table*}}%
+{\textsl{table\ST}\Ops{pos}}
+
+\quad
+\keyin{\renewcommand{\figurename}{ }}{\BK figurename}\qquad
+\keyin{\renewcommand{\tablename}{ }}{\BK tablename}
+
+\MGNT{pos}: h (here)\quad t (top)\quad b (bottom)\quad p (last page)
+\quad(h$>$t$>$b$>$p)
+
+\RED{ratio} (0$\le$\RED{ratio}$\le$1):\qquad
+\keyin{\renewcomamnd{\topflaction}{}}{\BK topflaction}
+\keyin{\renewcomamnd{\bottomfraction}{}}{\BK bottomfraction}
+\keyin{\renewcomamnd{\textflaction}{}}{\BK textflaction}\\
+\quad
+\keyin{\renewcomamnd{\dbltopflaction}{}}{\BK dbltopflaction}
+\keyin{\renewcomamnd{\dblfloatpagefraction}{}}{\BK dblfloatpagefraction}
+
+\RED{len}: 
+\keyin{\floatsep=}{\BK floatsep}
+\keyin{\textfloatsep=}{\BK textfloatsep}
+\keyin{\intextsep=}{\BK intextsep}
+\keyin{\dblfloatsep=}{\BK dblfloatsep}
+\keyin{\dbltextfloatsep=}{\BK dbltextfloatsep}
+
+\smallskip
+\keyin{\usepackage{floatfig}}{\BK usepackage\{floatfig\}}
+\qquad
+\keyin{\begin{floatingfigre}{} % {width}
+
+\end{floatingfigre}
+}{\textsl{floatingfigure}\Ops{width}}
+
+\keyin{\usepackage{wrapfig}}{\BK usepackage\{wrapfig\}}
+\qquad
+\keyin{\begin{wrapfigure}{}{} % {rl}{width}
+
+\end{wrapfigure}
+}{\textsl{wrapfigure}\Ops{nlines}\opt{rl}\opt{width}}
+
+\smallskip
+\centerline{\name{Verb}{Verb}}
+\keyin{\verb| |}{\BK verb\textcolor{red}{$|$}\RED{text}\textcolor{red}{$|$}}
+\hfill
+\keyin{\begin{verbatim} 0d 0a\end{verbatim}}{\textsl{verbatim}}
+\hfill
+\keyin{\verb*| |}{\BK verb\ST\textcolor{red}{$|$}\RED{text}\textcolor{red}{$|$}}\hfill
+\keyin{\begin{verbatim*} 0d 0a\end{verbatim*}}{\textsl{verbatim}\ST}
+\ (\,$\textvisiblespace$ \ for a space)
+
+\smallskip
+\hspace*{2em}\hfill\name{Foot}{Footnote}\hfill\Goto{count}{Count}
+
+\keyin{\footnote{}}{\BK footnote\Ops{count}\opt{text}}
+
+\keyin{\footnotemark[ ]}%
+{\BK footnotemark\Opt{count}}\hfill
+\keyin{\footnotetext[ ]{ }}%
+{\BK footnotetext\Ops{count}\opt{text}}
+
+\G{footnotesep}=\qquad
+\keyin{\renewcommand{\footnoterule}}%
+{\BK renewcommand\{\BK footnoterule\}}\opt{rule}
+
+\quad
+\RED{rule}: \keyin{\noindent\rule{130mm}{0.5mm}\vspace{1mm}}%
+{\BK noindent\BK rule\{130mm\}\{0.5mm\}\BK vspace\{1mm\}}
+\smallskip
+
+\centerline{\name{Ref}{Reference}}
+\keyin{\label{}}{\BK label\opt{label}}
+\quad
+\keyin{\ref{}}{\BK ref\opt{label}}
+\keyin{\eqref{}}{\BK eqref\opt{label}}
+\keyin{\pageref{}}{\BK pageref\opt{label}}
+
+\keyin{\begin{thebibliography}{ } % widest entry 0d 0a 0d 0a 0d 0a\end{bibliography}}%
+{\textsl{thebibliography}\opt{widest\_entry}}
+\quad
+\keyin{\bibitem[ ]{ }}%
+{\BK bibitem\Ops{label}\opt{cite\_key}}\RED{contents}
+
+\keyin{\cite{ }}{\BK cite\Ops{text}\opt{cite\_key\_list}}
+\smallskip
+
+\centerline{\name{Idx}{Index}}
+\F{makeindex}
+\hfill$\Rightarrow$\hfill 
+\keyin{\usepackage{makeidx}}{\BK usepackage\{makeidx\}}
+\hfill$\Rightarrow$\hfill
+\F{printindex}
+
+\keyin{\index{}}%
+{\BK index\{\RED{key}\MGNT{\string@visual\,!%
+\,key${}_2$@visual${}_2$\,!\,$\cdots|${\sl see}\{text\}}\} }
+
+\qquad
+\keyin{|(}{$|$(} (top of pages)\qquad
+\keyin{|)}{$|$)} (end of pages)
+
+\qquad
+\keyin{\renewcommand{\seename}{ }}{\BK seename} (see)\quad
+\keyin{\renewcommand{\indexname}{ }}{\BK indexname} (Index)
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centerline{\name{count}{Counter}\gotop{9cm}}
+
+{\small\ 
+\keyin{\setcounter{part}{}}{part}\hfill
+\keyin{\setcounter{section}{}}{section}\hfill
+\keyin{\setcounter{subsection}{}}{subsection}\hfill
+\keyin{\setcounter{subsubsection}{}}{subsubsection}\hfill
+\keyin{\setcounter{paragraph}{}}{paragraph}\hfill
+\keyin{\setcounter{subparagraph}{}}{subparagraph}
+
+\ 
+\keyin{\setcounter{equation}{}}{equation}\hfill
+\keyin{\setcounter{figure}{}}{figure}\hfill
+\keyin{\setcounter{table}{}}{table}\hfill
+\keyin{\setcounter{page}{}}{page}\hfill
+\keyin{\setcounter{footnote}{}}{footnote}\hfill
+\keyin{\setcounter{mpfootnot}{}}{mpfootnote}
+
+\ 
+\keyin{\setcounter{enumi}{}}{enumi}\hfill
+\keyin{\setcounter{enumii}{}}{enumii}\hfill
+\keyin{\setcounter{enumiii}{}}{enumiii}\hfill
+\keyin{\setcounter{enumiv}{}}{enumiv}\qquad(List)
+
+\keyin{\newcounter{}}{\BK newcounter\{{\color{red}counter}\}}
+\hfill
+\keyin{\value{}}{\BK value\{{\color{red}counter}\}}
+
+\keyin{\setcounter{}{}}{\BK setcounter\{{\color{red}counter}\}%
+\{{\color{red}value}\}}
+\hfill
+\keyin{\addtocounter{}{}}{\BK addtocounter\{{\color{red}counter}\}%
+\{{\color{red}value}\}}
+
+\keyin{\advance\value{ } by }{\BK advance\BK value%
+\{{\color{red}counter}\} by {\color{red}value}}
+
+\keyin{\multiply\value{ } by }{\BK multiply\BK value%
+\{{\color{red}counter}\} by {\color{red}value}}
+
+\keyin{\divide\value{ } by }{\BK divide\BK value%
+\{{\color{red}counter}\} by {\color{red}value}}
+
+
+\keyin{\renewcommand{\the }{ }}{\BK renewcommand\{\BK %
+the{\color{red}counter}$\}\{${\color{red}format}$\}$}
+\hfill\Ref{HCt}
+
+\quad
+\F{arabic}
+\F{alph}
+\F{Alph}
+\F{roman}
+\F{Roman}
+\F{fnsymbol}
+
+Ex: \verb|\renewcommand{\thepage}{--\arabic{page}--}|
+
+\qquad
+\verb|\setcounter{page}{12}|}
+\small{
+
+\centerline{\name{Chap}{Chapter}}
+\keyin{\part{}}{\BK part}
+\keyin{\chapter{}}{\BK chapter}
+\keyin{\section{}}{\BK section}
+\keyin{\subsection{}}{\BK subsection}
+\keyin{\subsubsection{}}{\BK subsubsection}
+\keyin{\paragraph{}}{\BK paragraph}
+\keyin{\subparagraph{}}{\BK subparagraph}
+\keyin{\appendix}{\BK appendix}
+
+\keyin{\renewcommand{\partname}{}}{\BK partname}
+\keyin{\renewcommand{\chaptername}{}}{\BK chaptername}
+\hfill{\Ref{HCp}}
+
+\keyin{\renewcommand{\prepartname}{}}{\BK prepartname}
+\keyin{\renewcommand{\postpartname}{}}{\BK postpartname}
+\keyin{\renewcommand{\prechaptername}{}}{\BK prechaptername}
+\keyin{\renewcommand{\postchaptername}{}}{\BK postchaptername}
+\keyin{\renewcommand{\abstractname}{}}{\BK abstractname}
+\keyin{\renewcommand{\appendixname}{}}{\BK appendixname}
+\keyin{\renewcommand{\contentsname}{}}{\BK contentsname}
+\keyin{\renewcommand{\figurename}{}}{\BK figurename}
+\keyin{\renewcommand{\tablename}{}}{\BK tablename}
+\keyin{\renewcommand{\listfigurename}{}}{\BK listfigurename}
+\keyin{\renewcommand{\listtablename}{}}{\BK listtablename}
+\keyin{\renewcommand{\refname}{}}{\BK refname}
+\keyin{\renewcommand{\bibname}{}}{\BK bibname}
+\medskip
+
+{\small 1 inch = 72.27 pt = 25.4 mm,\quad 1 pt = 0.35146 mm
+
+\name{A4}{A4}: $
+   \begin{cases}
+    \text{\BK paperwidth = 210 mm = 597 pt}\\
+    \text{\BK paperheight = 297mm = 845 pt} 
+   \end{cases}$
+\begin{tabbing}
+\hspace{2.5cm}\keyin{\documentclass[a4paper]{article} 0d 0a}%
+{\BK documentclass[a4paper]\{article\}}\\
+\BK textwidth=345pt=121.25mm
+\qquad
+\=\BK textheight=598pt=210.2mm\\
+
+\BK oddsidemargin=53pt=18.6mm
+\> 
+\BK topmargin=17pt=6.0mm\\
+
+\BK headheight=12pt=4.2mm
+\>
+\BK headsep=25pt=8.8mm\\
+
+\BK marginparwidth=57pt=20.0mm
+\>
+\BK marginparsep=11pt=3.9mm\\[2pt]
+
+\hspace{2.5cm}\keyin{\documentclass[a4j]{jarticle} 0d 0a}%
+{\BK documentclass[a4j]\{jarticle\}}\\
+
+\BK textwidth=418pt=146.9mm
+\>
+\BK textheight=641pt=225.3mm\\
+
+\BK oddsidemargin=17pt=6.0mm
+\>
+\BK topmargin=$-$3pt=$-$1.1mm\\
+
+\BK headheight=12pt=4.2mm
+\>
+\BK headsep=25pt=8.8mm\\
+
+\BK marginparwidth=60pt=21.1mm
+\>
+\BK marginparsep=10pt=3.5mm\\[2pt]
+
+\hspace{2.5cm}\keyin{\documentclass[a4j]{jsarticle} 0d 0a}%
+{\BK documentclass[a4j]\{jsarticle\}}\\
+
+\BK textwidth=453pt=159.2mm
+\>
+\BK textheight=634pt=222.8mm\\
+
+\BK oddsidemargin=0pt=0mm
+\>
+\BK topmargin=4pt=1.4mm\\
+
+\BK headheight=20pt=7.0mm
+\>
+\BK headsep=18pt=6.3mm\\
+
+\BK marginparwidth=18pt=6.3mm
+\>
+\BK marginparsep=18pt=6.3mm\\
+\end{tabbing}}
+}
+\newpage
+\centerline{\name{Graph}{Graphics}\gotop{9cm}}
+\keyin{\usepackage[]{graphicx}}{\BK usepackage\Ops{opt}\{graphicx\}}\qquad
+\keyin{\usepackage[]{graphicx,color}}%
+{\BK usepackage\Ops{opt}\{graphicx,color\}}\\
+\ \MGNT{opt}: dvips dviout dvipdfm xdvi pdftex draft final hiresbb
+
+\keyin{\includegraphics[]{ }}%
+{\BK includegraphics\Ops{para}\{file\_name\}}\\
+\ \MGNT{para}: width=\RED{len}, height=\RED{len},  
+scale=\RED{value}, keepaspectratio, clip\\
+\quad bb=\RED{$x_1\ y_1\ x_2\ y_2$} (ex.~bb=0 0 640 480), hiresbb, draft\\
+\quad trim=\RED{l b r t}\quad(by 1/72 inch, ex.~trim=0 0 5 0)\\
+\quad angle=\RED{value}\quad(by degree)\\[-8pt]
+\keyin{\rotatebox[]{}{}}%
+{\BK rotatebox\Ops{opt}\opt{angle}\opt{text}}\quad
+\RED{angle}: counterclockwise by \rotatebox{30}{degree}\\
+\ \MGNT{opt}: origin=lrctbB (B:Baseline),
+ x=\RED{len}, y=\RED{len}\\
+\quad units=6.2832 (by radian)\\
+\keyin{\scalebox{}[]{}}%
+{\BK saclebox\opt{scale}\Ops{vscale}\opt{text}}
+\quad\scalebox{0.8}[1.6]{scalebox}\\
+\keyin{\reflectbox{}}{\BK reflectbox\opt{text}}
+\quad\reflectbox{reflectbox}\\
+\keyin{\resizebox{}{}{}}%
+{\BK resizebox\opt{width}\opt{height}\opt{text}}\ \ 
+\BK width \BK height \BK hsize !\MGNT{=keep ratio}\\
+\quad ex: \BK resizebox\{0.9\BK hsize\}\{!\}\{$\cdots$\}\\
+\keyin{\resizebox*{}{}{}}%
+{\BK resizebox\ST\opt{width}\opt{height$+$depth}\opt{text}}\\[-5pt]
+
+\name{Color}{}
+\keyin{{\color{} }}%
+{\{\BK color\Ops{opt}\opt{col}\RED{text}\}}\qquad
+\keyin{\textcolor{}{ }}%
+{\BK textcolor\Ops{opt}\opt{col}\opt{text}}\\
+\ \RED{col}: 
+{\color{black}black} {\colorbox{black}{\color{white}white}} {\color{red}red}
+{\color{green}green} {\color{blue}blue} {\color{cyan}cyan}
+{\color{magenta}magenta} {\color{yellow}yellow}\\
+\ \Ops{opt}\opt{col}: [gray]\opt{val} [rgb]\{\RED{r},\RED{g},\RED{b}\}
+[cmyk]\{\RED{c},\RED{m},\RED{y},\RED{k}\} [named]\opt{color}\\
+\keyin{\colorbox{}{}}{\BK colorbox\Ops{opt}\opt{col}\opt{text}}
+\qquad
+\colorbox[gray]{0.8}{colorbox}\\
+\keyin{\fcolorbox{}{}{ }}%
+{\BK fcolorbox\Ops{opt}\opt{frame\_col}\opt{fill\_col}\opt{text}}\qquad
+{\fboxrule=0.8mm \fcolorbox{red}{yellow}{fcolorbox}}\\
+\qquad\G{fboxrule}=\RED{len} \G{fboxsep}=\RED{len}\quad
+\keyin{\definecolor{}{}{}}%
+{\BK definecolor\opt{name}\opt{opt}\opt{value}} \\[-5pt]
+
+\colorbox[named]{GreenYellow}{GreenYellow}
+\colorbox[named]{Yellow}{Yellow}
+\colorbox[named]{Goldenrod}{Goldenrod}
+\colorbox[named]{Dandelion}{Dandelion}
+\colorbox[named]{Apricot}{Apricot}
+\colorbox[named]{Peach}{Peach}
+\colorbox[named]{Melon}{Melon}
+\colorbox[named]{YellowOrange}{YellowOrange}
+\colorbox[named]{Orange}{Orange}
+\colorbox[named]{BurntOrange}{BurntOrange}
+\colorbox[named]{Bittersweet}{Bittersweet}
+\colorbox[named]{RedOrange}{RedOrange}
+\colorbox[named]{Mahogany}{Mahogany}
+\colorbox[named]{Maroon}{Maroon}
+\colorbox[named]{BrickRed}{BrickRed}
+\colorbox[named]{Red}{Red}
+\colorbox[named]{OrangeRed}{OrangeRed}
+\colorbox[named]{RubineRed}{RubineRed}
+\colorbox[named]{WildStrawberry}{WildStrawberry}
+\colorbox[named]{Salmon}{Salmon}
+\colorbox[named]{CarnationPink}{CarnationPink}
+\colorbox[named]{Magenta}{Magenta}
+\colorbox[named]{VioletRed}{VioletRed}
+\colorbox[named]{Rhodamine}{Rhodamine}
+\colorbox[named]{Mulberry}{Mulberry}
+\colorbox[named]{RedViolet}{RedViolet}
+\colorbox[named]{Fuchsia}{Fuchsia}
+\colorbox[named]{Lavender}{Lavender}
+\colorbox[named]{Thistle}{Thistle}
+\colorbox[named]{Orchid}{Orchid}
+\colorbox[named]{DarkOrchid}{DarkOrchid}
+\colorbox[named]{Purple}{Purple}
+\colorbox[named]{Plum}{Plum}
+\colorbox[named]{Violet}{Violet}
+\colorbox[named]{RoyalPurple}{RoyalPurple}
+\colorbox[named]{BlueViolet}{\textcolor{white}{BlueViolet}}
+\colorbox[named]{Periwinkle}{\textcolor{white}{Periwinkle}}
+\colorbox[named]{CadetBlue}{\textcolor{white}{CadetBlue}}
+\colorbox[named]{CornflowerBlue}{CornflowerBlue}\hfill
+\colorbox[named]{MidnightBlue}{\textcolor{white}{MidnightBlue}}
+
+\colorbox[named]{NavyBlue}{NavyBlue}
+\hfill
+\colorbox[named]{RoyalBlue}{RoyalBlue}
+\hfill
+\colorbox[named]{Blue}{\textcolor{white}{Blue}}
+\hfill
+\colorbox[named]{Cerulean}{Cerulean}
+\hfill
+\colorbox[named]{Cyan}{Cyan}
+\hfill
+\colorbox[named]{ProcessBlue}{ProcessBlue}
+
+\colorbox[named]{SkyBlue}{SkyBlue}
+\hfill
+\colorbox[named]{Turquoise}{Turquoise}
+\hfill
+\colorbox[named]{TealBlue}{TealBlue}
+\hfill
+\colorbox[named]{Aquamarine}{Aquamarine}
+\hfill
+\colorbox[named]{BlueGreen}{BlueGreen}
+\hfill
+\colorbox[named]{Emerald}{Emerald}
+
+\colorbox[named]{JungleGreen}{JungleGreen}\!
+\colorbox[named]{SeaGreen}{SeaGreen}\!
+\colorbox[named]{Green}{Green}\!
+\colorbox[named]{ForestGreen}{ForestGreen}\!
+\colorbox[named]{PineGreen}{PineGreen}\!
+\colorbox[named]{LimeGreen}{LimeGreen}
+\colorbox[named]{YellowGreen}{YellowGreen}
+\colorbox[named]{SpringGreen}{SpringGreen}
+\colorbox[named]{OliveGreen}{OliveGreen}
+\colorbox[named]{RawSienna}{RawSienna}
+\colorbox[named]{Sepia}{\textcolor{white}{Sepia}}
+\colorbox[named]{Brown}{\textcolor{white}{Brown}}
+\colorbox[named]{Tan}{Tan}
+\colorbox[named]{Gray}{Gray}
+\colorbox[named]{Black}{\color[named]{White}Black}
+{\fboxrule=0.7mm\fcolorbox[named]{Black}{White}
+{\special{color push Black}White\special{color pop}}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%  Sample %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centerline{\name{Ex}{Sample}\gotop{9cm}}
+
+\name{Face}{}{\verb|\text|\textcolor{red}{$\cdot\cdot$}\verb|{ }|\quad:
+\rm\keyin{\textrm{}}{\textrm{Roman}}
+\keyin{\textbf{}}{\textbf{Boldface}}
+\keyin{\textit{}}{\textit{Italic}}
+\keyin{\textsl{}}{\textsl{Slanted}}
+\keyin{\textsf{}}{\textsf{Sans\_Serif}}
+\keyin{\texttt{}}{\texttt{Typewriter}}
+\keyin{\textsc{}}{\textsc{Small\_Caps}}}
+
+\F{normalfont}
+\quad
+\F{rmfamily}
+\F{sffamily}
+\F{ttfamily}
+\quad
+\F{mcfamily}
+\F{gtfamily}
+
+\F{bfseries}
+\F{mdseries}
+\qquad
+\F{upshape}
+\F{itshape}
+\F{slshape}
+\F{scshape}
+
+\name{frak}{}%
+\makebox[\textwidth][s]{
+\R{\mathfrak A}
+\R{\mathfrak B}
+\R{\mathfrak C}
+\R{\mathfrak D}
+\R{\mathfrak E}
+\R{\mathfrak F}
+\R{\mathfrak G}
+\R{\mathfrak H}
+\R{\mathfrak I}
+\R{\mathfrak J}
+\R{\mathfrak K}
+\R{\mathfrak L}
+\R{\mathfrak M}
+\R{\mathfrak N}
+\R{\mathfrak O}
+\R{\mathfrak P}
+\R{\mathfrak Q}
+\R{\mathfrak R}
+\R{\mathfrak S}
+\R{\mathfrak T}
+\R{\mathfrak U}
+\R{\mathfrak V}
+\R{\mathfrak W}
+\R{\mathfrak X}
+\R{\mathfrak Y}
+\R{\mathfrak Z}
+}
+\makebox[\textwidth][s]{
+\R{\mathfrak a}
+\R{\mathfrak b}
+\R{\mathfrak c}
+\R{\mathfrak d}
+\R{\mathfrak e}
+\R{\mathfrak f}
+\R{\mathfrak g}
+\R{\mathfrak h}
+\R{\mathfrak i}
+\R{\mathfrak j}
+\R{\mathfrak k}
+\R{\mathfrak l}
+\R{\mathfrak m}
+\R{\mathfrak n}
+\R{\mathfrak o}
+\R{\mathfrak p}
+\R{\mathfrak q}
+\R{\mathfrak r}
+\R{\mathfrak s}
+\R{\mathfrak t}
+\R{\mathfrak u}
+\R{\mathfrak v}
+\R{\mathfrak w}
+\R{\mathfrak x}
+\R{\mathfrak y}
+\R{\mathfrak z}
+}
+\makebox[\textwidth][s]{
+\R{\mathcal A}
+\R{\mathcal B}
+\R{\mathcal C}
+\R{\mathcal D}
+\R{\mathcal E}
+\R{\mathcal F}
+\R{\mathcal G}
+\R{\mathcal H}
+\R{\mathcal I}
+\R{\mathcal J}
+\R{\mathcal K}
+\R{\mathcal L}
+\R{\mathcal M}
+\R{\mathcal N}
+\R{\mathcal O}
+\R{\mathcal P}
+\R{\mathcal Q}
+\R{\mathcal R}
+\R{\mathcal S}
+\R{\mathcal T}
+\R{\mathcal U}
+\R{\mathcal V}
+\R{\mathcal W}
+\R{\mathcal X}
+\R{\mathcal Y}
+\R{\mathcal Z}
+}
+\makebox[\textwidth][s]{
+\R{\mathbb A}
+\R{\mathbb B}
+\R{\mathbb C}
+\R{\mathbb D}
+\R{\mathbb E}
+\R{\mathbb F}
+\R{\mathbb G}
+\R{\mathbb H}
+\R{\mathbb I}
+\R{\mathbb J}
+\R{\mathbb K}
+\R{\mathbb L}
+\R{\mathbb M}
+\R{\mathbb N}
+\R{\mathbb O}
+\R{\mathbb P}
+\R{\mathbb Q}
+\R{\mathbb R}
+\R{\mathbb S}
+\R{\mathbb T}
+\R{\mathbb U}
+\R{\mathbb V}
+\R{\mathbb W}
+\R{\mathbb X}
+\R{\mathbb Y}
+\R{\mathbb Z}
+}
+
+\F{sideset}
+\F{mathop}
+\F{overset}
+\F{stackrel}
+\F{atop}
+\F{atopwithdelims}
+
+$\keyin{\sideset{_a^b}{_c^d}\sum}%
+{\sideset{_a^b}{_c^d}\sum}$\hfill
+$\keyin{\mathop{\Phi}_{n=1}^\infty}{\mathop{\Phi}_{n=1}^\infty}$\hfill
+abc\hfill
+$\keyin{\overset c{ab}}{\overset c{ab}}$\hfill
+$\keyin{\stackrel{\stackrel{c}{bb}}{aaa}}{\stackrel{\stackrel{c}{bb}}{aaa}}$%
+\hfill
+$\keyin{c\atop  ab}{c\atop ab}$\hfill
+$\keyin{\displaystyle c\atop\displaystyle  ab}%
+{\displaystyle c\atop\displaystyle ab}$\hfill
+$\keyin{b\atopwithdelims<>a}{b\atopwithdelims<>a}$\hfill
+$\keyin{\displaystyle b\atopwithdelims.\ 7d\displaystyle a}%
+{\displaystyle b\atopwithdelims.\}\displaystyle a}$\hfill
+abc
+
+$\keyin{(\overbrace{0,\ldots,0,1,\ldots,1}^{p+q},2,\ldots,2 0d 0a\llap{$\underbrace{\phantom{1,\ldots,1,2,\ldots,2}}_{q+r}$})}{%
+(\overbrace{0,\ldots,0,1,\ldots,1}^{p+q},2,\ldots,2
+\llap{$\underbrace{\phantom{1,\ldots,1,2,\ldots,2}}_{q+r}$})}$
+
+\centerline{\name{Macro}{Macros}\gotop{9cm}}
+\keyin{\ensuremath{}}{\BK ensuremath\opt{math-text}}
+
+\keyin{\newif\if }{\BK newif\BK if\RED{name}}\qquad
+\BK\RED{name}true \BK\RED{name}false
+
+\quad\keyin{\if  %name
+
+\else
+
+\fi
+}{\BK if\RED{name} \RED{true-case} \BK else \RED{false-case} \BK fi}
+
+\keyin{\ifFileExists{ }
+ { }
+ { }}{\BK IfFileExists\opt{filename}\opt{true-case}\opt{false-case}}
+
+\medskip
+\centerline{\name{Ex}{Sample Macros}\gotop{7.7cm}}
+\keyin{\makeatletter
+\newcommand{\ruby}[3][0zw]{% okumura
+  \leavevmode
+  \dimen1=#1\relax
+  \dimen3=\f@size\p@
+  \setbox1=\hbox{#2}%
+  \setbox3=\hbox{\rubyfamily\fontsize{0.5\dimen3}{0pt}\selectfont #3}%
+  \ifdim\dimen1=\z@
+    \ifdim\wd1>\wd3 \dimen1=\wd1 \else \dimen1=\wd3 \fi
+  \fi
+  \hbox{%
+    \kanjiskip=0pt plus 2fil
+    \xkanjiskip=0pt plus 2fil
+    \vbox{%
+      \hbox to \dimen1{\rubyfamily
+        \fontsize{0.5\dimen3}{0pt}\selectfont \kanjistrut
+        \ifdim\dimen1<\wd3
+          \hss\unhbox3\hss
+        \else
+          \hfil\unhbox3\hfil
+        \fi
+      }%
+      \nointerlineskip
+      \hbox to \dimen1{\kanjistrut\hfil\unhbox1\hfil}}}}
+\makeatother
+}{\BK ruby\opt{text}\opt{ruby}\ops{font}}: p\LaTeX
+%\hfill$\overset{\RED{ruby}}{\RED{text}}$
+\quad{\BK ruby% okumura
+\raisebox{-3.5pt}{\includegraphics[width=2.8em, bb=0 0 246 102]{jouge.bmc}}%
+\raisebox{-4pt}{\includegraphics[width=4.63em, bb=0 0 407 100]{ueshita.bmc}}%
+\hfill
+\raisebox{-3.2pt}{\includegraphics[width=2.02em, bb=0 0 177 131]{rubi.bmc}}
+
+\keyin{\makeatletter
+\def\kenten#1{% okumura
+  \ifvmode\leavevmode\else\hskip\kanjiskip\fi
+  \setbox1=\hbox to \z@{E\hss}%
+  \ht1=.63zw
+  \@kenten#1\end}
+\def\@kenten#1{%
+  \ifx#1\end \let\next=\relax \else
+    \raise.63zw\copy1\nobreak #1\hskip\kanjiskip\relax
+    \let\next=\@kenten
+  \fi\next}
+\makeatother
+}%
+{\BK kenten\opt{text}}: \qquad p\LaTeX\qquad
+\BK kenten%
+\raisebox{-3.5pt}{\includegraphics[width=2.8em, bb=0 0 246 102]{jouge.bmc}}
+\hfill
+\raisebox{-3.2pt}{\includegraphics[width=1.95em, bb=0 0 171 108]{kenten.bmc}}
+
+\keyin{\newcommand{\kintou}[2]{%
+  \leavevmode
+  \hbox to #1{%
+    \kanjiskip=0pt plus  1fil minus  1fil
+    \xkanjiskip=\kanjiskip
+    #2}}
+}%
+{\BK kintou\opt{len}\opt{text}}: p\LaTeX\qquad
+\BK kintou\{1cm\}%
+\raisebox{-3.5pt}{\includegraphics[width=2.8em, bb=0 0 246 102]{jouge.bmc}}
+\hfill
+\raisebox{-3pt}{\includegraphics[width=2.66em, bb=0 0 234 84]{kintou.bmc}}
+
+\keyin{\makeatletter
+\def\slantbox#1#2{% #1: angle (|#1| <=  30  degree), #2: text (by misc)
+%%% tau := tan(angle)
+   \leavevmode
+   \begingroup
+   \setbox\@tempboxa\hbox{#2}%
+   \dimen@#1\p@
+   \ifdim\dimen@<\z@
+      \def\@tempa{-#1}%
+      \def\@hcorr{\the\@tempdima}%
+   \else
+      \def\@tempa{#1}%
+      \def\@hcorr{\z@}%
+   \fi
+   \expandafter\CalculateTan\expandafter{\@tempa}%
+   \@tempdima\ht\@tempboxa \@tempdima \UseTan\@tempa \@tempdima
+   \edef\@hcorr{\@hcorr}%
+   \advance\@tempdima\wd\@tempboxa
+   \@tempdimb\ht\@tempboxa \@tempdimc\dp\@tempboxa
+   \CalculateTan{#1}%
+   \dimen@ \UseTan{#1}\p@ \divide\dimen@\tw@
+   \edef\@x{\strip@pt\dimen@}%%% \@x = tau / 2
+   \dimen@\@x\p@ \dimen@\@x\dimen@
+   \edef\@xx{\strip@pt\dimen@}%%% \@xx = (tau / 2)^2
+   \setbox\z@\hbox{%
+      \@find@rotate@angle
+      \@find@scaling@factor
+      \wd\@tempboxa\z@ \ht\@tempboxa\z@ \dp\@tempboxa\z@%%% (*)
+      \hskip\@hcorr
+      \rotatebox{\@angleii}%
+         {\scalebox{\@factori}[\@factorii]%
+            {\rotatebox{\@anglei}{\box\@tempboxa}}}}%
+   \wd\z@\@tempdima \ht\z@\@tempdimb \dp\z@\@tempdimc%%% (*)
+   \box\z@
+   \endgroup}
+\def\@find@rotate@angle{%
+   \@tempdima\@x\p@ \@tempdimb\@x\p@ \count@\@ne
+   \def\@tempsign{+}%
+   \@whilenum9>\count@\do{%
+      \advance\count@\tw@
+      \edef\@tempsign{\if+\@tempsign -\else +\fi}%
+      \@tempdimb\@xx\@tempdimb
+      \dimen@\@tempdimb \divide\dimen@\count@
+      \advance\@tempdima\@tempsign\dimen@}%
+   \@tempdima-28.64789\@tempdima \advance\@tempdima  45\p@
+   \edef\@anglei{\strip@pt\@tempdima}%%% pi / 4 - (arctan (tau / 2)) / 2
+   \advance\@tempdima-90\p@
+   \edef\@angleii{\strip@pt\@tempdima}}%%% \@angleii = \@anglei - (pi/2)
+\def\@find@scaling@factor{%
+   \@tempdima\p@ \@tempdimb\p@
+   \@tempdimb \@xx\@tempdimb
+   \dimen@\@tempdimb \divide\dimen@\tw@
+   \advance\@tempdima \dimen@
+   \@tempdimb \@xx\@tempdimb
+   \dimen@\@tempdimb \divide\dimen@ 8
+   \advance\@tempdima-\dimen@
+   \@tempdimb \@xx\@tempdimb
+   \dimen@\@tempdimb \divide\dimen@  16
+   \advance\@tempdima \dimen@
+   \@tempdimb \@xx\@tempdimb
+   \dimen@\@tempdimb \multiply\dimen@ 5 \divide\dimen@  128
+   \advance\@tempdima-\dimen@
+   \dimen@\@tempdima \advance\dimen@-\@x\p@
+   \edef\@factori{\strip@pt\dimen@}%%% sqrt((tau/2)^2 + 1) - (tau/2)
+   \dimen@\@tempdima \advance\dimen@\@x\p@
+   \edef\@factorii{\strip@pt\dimen@}}%%% sqrt((tau/2)^2 + 1) + (tau/2)
+\makeatother
+}{\BK slantbox\opt{angle}\opt{text}}:\hfill $-30\le$\RED{\,angle\,}$\le30$ (by degree, use graphicx)
+
+\quad
+\verb|\slantbox{-12}{slant} \slantbox{30}|\raisebox{-3.5pt}{\includegraphics[width=2.8em, bb=0 0 246 102]{jouge.bmc}}
+\hfill
+\slantbox{-12}{slant} \raisebox{-1.5pt}{\includegraphics[width=2.38em, bb=0 0 209 83]{slant.bmc}}
+
+\keyin{\def\coord#1#2#3{{\left(#1_{#2},\ldots,#1_{#3}\right)}} 0d 0a}
+{\BK coord\{\#1\}\{\#2\}\{\#3\}}:\hfill
+$\left({\color{red}\#1_{\#2}},\ldots,{\color{red}\#1_{\#3}}\right)$
+
+\quad
+\verb|\coord x1n|:\hfill $\left(x_1,\ldots,x_n\right)$
+
+\keyin{\def\set#1#2#3{{\left\{#1_{#2},\ldots,#1_{#3}\right\}}} 0d 0a}
+{\BK set\{\#1\}\{\#2\}\{\#3\}}:\hfill
+$\left\{{\color{red}\#1_{\#2}},\ldots,{\color{red}\#1_{\#3}}\right\}$
+
+\quad
+\verb|\set a1n|:\hfill$\left\{a_1,\ldots,a_n\right\}$
+
+\keyin{\newcommand{\setdef}[3][;]{{\left\{#2\,#1\,#3\right\}}} 0d 0a}
+{\BK setdef\{\#1\}\{\#2\}}:\hfill
+$\left\{{\color{red}\#1}\MGNT{;}{\color{red}\#2}\right\}$
+
+\quad
+\verb|\setdef{(x,y)}{x^2+y^2=1}|:\hfill$\left\{(x,y)\,;\,x^2+y^2=1\right\}$
+
+\quad
+\verb/\setdef[|]{(x,y)}{x^2+y^2=1}/:\hfill$\left\{(x,y)\,|\,x^2+y^2=1\right\}$
+
+\keyin{\newcommand{\ang}[3][,]{{\left\langle#2#1#3\right\rangle}} 0d 0a}
+{\BK ang\{\#1\}\{\#2\}}:\hfill
+$\langle{\color{red}\#1}\MGNT{,}{\color{red}\#2}\rangle$
+
+\quad
+\verb|\ang\alpha\beta|:\hfill $\left\langle\alpha,\beta\right\rangle$
+
+\quad
+\verb/\ang[|]\alpha\beta/:\hfill $\left\langle\alpha|\beta\right\rangle$
+%%%%%%%%%%  equations  %%%%%%%%%%%
+\newpage
+{\small\name{H:Eq}{}%
+%
+\begin{minipage}{0.5\textwidth}
+\begin{Alltt}\\begin\{equation\}
+\\begin\{\red{split}\}
+ a\red{&} =b+c-d\red{\\\\[-3pt]}
+  \red{&} \\quad +e-f\red{\\\\}
+  \red{&} =g+h
+\\end\{split\}
+\\end\{equation\}\end{Alltt}
+\end{minipage}
+
+\vspace*{-16.1ex}
+\hspace*{0.5\textwidth}
+\begin{minipage}{0.5\textwidth}
+\rightline{\Fer{Eq}}
+\vspace*{-4ex}
+\begin{equation}
+\begin{split}
+ a& =b+c-d\\[-3pt]
+  & \quad +e-f\\
+  & =g+h
+\end{split}
+\end{equation}
+\end{minipage}
+%%
+
+\vspace*{2.9ex}
+\begin{Alltt}\\begin\{\red{multline}\}
+ a+b+c+d+e+f\red{\\\\}
+ +i+j+k+l+m+n
+\\end\{multline\}\end{Alltt}
+
+\vspace*{-14.1ex}
+\hspace*{0.5\textwidth}
+\begin{minipage}{0.5\textwidth}
+\begin{multline}
+ a+b+c+d+e+f\\
+ +i+j+k+l+m+n
+\end{multline}
+\end{minipage}
+
+%\vspace*{1ex}
+\begin{Alltt}\\begin\{\red{gather}\}
+ a_1=b_1+c_1\red{\\label\{}eq1\red{\}}\red{\\\\}
+ a_2=b_2+c_2-d_2+e_2
+\\end\{gather\}\end{Alltt}
+
+\vspace*{-14.1ex}
+\hspace*{0.5\textwidth}
+\begin{minipage}{0.5\textwidth}
+\begin{gather}
+ a_1=b_1+c_1\label{eq1}\\
+ a_2=b_2+c_2-d_2+e_2
+\end{gather}
+\end{minipage}
+
+\vspace*{.9ex}
+\begin{Alltt}\\begin\{\red{align}\}
+ a_\{11\}\red{&} =b_\{11\}\red{&} 
+  a_\{12\}\red{&} =b_\{12\}\red{\\\\}
+ a_\{21\}\red{&} =b_\{21\}\red{&}
+  a_\{22\}\red{&} =b_\{22\}+c_\{22\}
+\\end\{align\}\end{Alltt}
+
+\vspace*{-17.1ex}
+\hspace*{0.5\textwidth}
+\begin{minipage}{0.5\textwidth}
+\begin{align}
+ a_{11}& =b_{11}& a_{12}& =b_{12}\\
+ a_{21}& =b_{21}& a_{22}& =b_{22}+c_{22}
+\end{align}
+\end{minipage}
+
+\vspace*{3.9ex}
+\begin{Alltt}\\begin\{\red{align*}\}
+ x\red{&} = y_1-y_2-\\cdots
+  \red{&&} \red{\\text\{}by Lemma\red{\}}\red{\\\\}
+  \red{&} = y'\\circ y^*
+  \red{&&} \red{\\text\{}by \red{\\eqref\{}eq1\red{\}\}}
+\\end\{align*\}\end{Alltt}
+
+\vspace*{-17.1ex}
+\hspace*{0.5\textwidth}
+\begin{minipage}{0.5\textwidth}
+\begin{align*}
+ x& = y_1-y_2-\cdots
+  && \text{\rm by Lemma}\\
+  & = y'\circ y^*
+  && \text{\rm by \eqref{eq1}}
+\end{align*}
+\end{minipage}
+
+\vspace*{2.9ex}
+\begin{Alltt}\\begin\{\red{alignat*}\}\{\red{2}\}
+ x\red{&} = y_1-y_2-\\cdots
+  \red{&}\\qquad\red{&} \\text\{by Lemma\}\red{\\\\}
+  \red{&} = y'\\circ y^*
+  \red{&&} \\text\{by \\eqref\{eq1\}\}
+\\end\{alignat*\}\end{Alltt}
+
+\vspace*{-17.1ex}
+\hspace*{0.5\textwidth}
+\begin{minipage}{0.5\textwidth}
+\begin{alignat*}{2}
+ x& = y_1-y_2-\cdots
+  &\qquad& \text{\rm by Lemma}\\
+  & = y'\circ y^*
+  && \text{\rm by \eqref{eq1}}
+\end{alignat*}
+\end{minipage}
+
+\vspace*{2.9ex}
+\begin{Alltt}\\begin\{\red{flalign}\}
+ a_\{11\}\red{&} =b_\{11\}\red{&} 
+  a_\{12\}\red{&} =b_\{12\}\red{\\\\}
+ a_\{21\}\red{&} =b_\{21\}\red{&}
+  a_\{22\}\red{&} =b_\{22\}+c_\{22\}
+\\end\{flalign\}\end{Alltt}
+
+\vspace*{-18ex}
+\hspace*{0.5\textwidth}
+\begin{minipage}{0.5\textwidth}
+\begin{flalign}
+ a_{11}& =b_{11}& a_{12}& =b_{12}\\
+ a_{21}& =b_{21}& a_{22}& =b_{22}+c_{22}
+\end{flalign}
+\end{minipage}
+}
+%%%%%%%%%  more equations %%%%%%%
+\newpage%
+\small{\name{H:tag}{}%
+\begin{minipage}{0.5\textwidth}
+\begin{Alltt}
+\\begin\{\red{align}\}
+ x^2+y^2 &= z^2 \red{\\label\{}eqx\red{\}}\\\\
+ x^3+y^3 &= z^3 \red{\\notag}\\\\
+ x^4+y^4 &= z^4 \red{\\tag*\{}[4th]\red{\}}\\\\
+ x^5+y^5 &= z^5 \red{\\tag\{}\\ref\{eqx\}'\red{\}}
+\\end\{align\}
+\end{Alltt}
+\end{minipage}
+
+\vspace*{-15ex}
+\hspace*{0.5\textwidth}
+\begin{minipage}{0.5\textwidth}
+\rightline{\Fer{Eq}}
+\vspace*{-5ex}
+\begin{align}
+ x^2+y^2 &= z^2 \label{eq:xy}\\
+ x^3+y^3 &= z^3 \notag\\
+ x^4+y^4 &= z^4 \tag*{[4th]}\\
+ x^5+y^5 &= z^5 \tag{\ref{eq:xy}'}
+\end{align}
+\end{minipage}
+
+%\vspace*{-1ex}
+\begin{Alltt}
+\\begin\{\red{subequations}\}
+\\begin\{align\}
+ x^6+y^6 &= z^6\\\\
+ x^7+y^7 &= z^7
+\\end\{align\}
+\\end\{subequations\}
+\end{Alltt}
+
+\vspace*{-16ex}
+\hspace*{0.5\textwidth}
+\begin{minipage}{0.5\textwidth}
+\begin{subequations}
+\begin{align}
+ x^6+y^6 &= z^6\\
+ x^7+y^7 &= z^7
+\end{align}
+\end{subequations}
+\end{minipage}
+
+\vspace*{5ex}
+\begin{Alltt}
+\\[\\begin\{\red{gathered}\}\red{[b]}
+ xy = c\\\\ x + y = b
+\\end\{gathered\}    \\qquad
+\\begin\{\red{aligned}\}\red{[t]}
+ c &= x(b-x)\\\\ &= -x^2+bx
+\\end\{aligned\}     \\]
+\end{Alltt}
+
+\vspace*{-16ex}
+\hspace*{0.5\textwidth}
+\begin{minipage}{0.5\textwidth}
+\begin{equation*}
+\begin{gathered}[b]
+x + y = b\\
+xy = c
+\end{gathered}    \qquad
+\begin{aligned}[t]
+ c &= x(b-x)\\ 
+   &= bx-x^2
+\end{aligned}
+\end{equation*}
+\end{minipage}
+
+\vspace*{3ex}
+\begin{Alltt}
+\\begin\{equation\}
+ \red{\\overset}\{*\}U=\red{\\underset}\{*\}X+\\overset\{a\}\{\\underset\{b\}Z\}
+  \\quad \red{\\xleftarrow[}\\xi\red{]\{}b\\to\\infty\red{\}} \\quad
+ \\sum\red{\\nolimits}' a_n = \red{\\sideset\{}_1^2\red{\}\{}_3^4\red{\}}\\prod_k b_k
+  + \\sideset\{\}\{'\}\\sum
+     _\{\red{\\substack\{}0\\le m\\le n\red{\\\\}0\\le n\\le\\infty\red{\}}\}c_n^m
+\\end\{equation\}
+\end{Alltt}
+
+\vspace*{-3.5ex}
+\begin{equation}
+ \overset{*}U = \underset{*}X+\overset{a}{\underset{b}Z}
+  \quad \xrightarrow[\xi]{b\to\infty} \quad
+ \sum\nolimits' a_n = \sideset{_1^2}{_3^4}\prod_k b_k
+  + \sideset{}{'}\sum
+     _{\substack{0\le m\le n\\0\le n\le\infty}}c_n^m
+\end{equation}
+
+\smallskip
+\name{HMathOp}{}%
+\keyin{\DeclareMathOperator*{\esssup}{ess\,sup}}
+{\tt\BK DeclareMathOperator*\{\BK esssup\}\{ess\BK ,sup\}} \% Preamble
+
+\keyin{\DeclareMathOperator{\Hom}{Hom}}
+{\tt\BK DeclareMathOperator\{\BK Hom\}\{Hom\}} \% Preamble
+
+\keyin{\newcommand{\abs}[1]{\lvert#1\rvert}}
+{\tt\BK newcommand\{\BK abs\}[1]\{\BK lvert\#1\BK rvert\}}
+
+\keyin{\newcommand{\norm}[1]{\lVert#1\rVert}}
+{\tt\BK newcommand\{\BK norm\}[1]\{\BK lVert\#1\BK rVert\}}
+\vspace*{-1ex}\rm
+\begin{Alltt}
+\\begin\{equation\}
+ \red{\\norm\{}f\red{\}}_\\infty = \red{\\esssup}_\{x\\in\\mathbb R^n\}\red{\\abs\{}f(x)\red{\}}
+ \\text\{ and \} \red{\\Hom}_R(A,B)^* = \red{\\Hom}_R(B^*,A^*)
+\\end\{equation\}
+\end{Alltt}
+%%
+\vspace*{-1ex}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\begin{equation}
+\norm{f}_\infty = \esssup_{x\in\mathbb R^n}\abs{f(x)}
+\text{ and } \Hom_R(A,B)^* = \Hom_R(B^*,A^*)
+\end{equation}
+%%%%%%%%%%%  AMS LaTeX %%%%%%%%%%
+\newpage
+\rightline{\Fer{Mat}}
+
+\vspace*{-6.8ex}\name{HCD}{}
+\begin{Alltt}
+\\[\\begin\{\red{CD}\}
+ A \red{@>\{}up\red{\}>\{}d\red{\}>} B \red{@>>>} C \red{\\\\}
+ \red{@V\{}l\red{\}V\{}r\red{\}V}    \red{@.}  \red{@AAA} \red{\\\\}
+ D \red{@=}          D \red{@>>>} E
+\\end\{CD\}\\]
+\end{Alltt}
+
+\vspace*{-16ex}
+\hspace*{0.5\textwidth}
+\begin{minipage}{0.5\textwidth}
+\[\begin{CD}
+ A	    @>{up}>d>	B @>>> C\\
+ @V{l}V{r}V	  @.   @AAA \\ % @| @.
+ D		@=    D   @>>> E
+\end{CD}\]
+\end{minipage}
+
+\begin{Alltt}
+\\begin\{align\}
+ u & \\equiv v+1 \red{\\pmod}\{n^2\} \\\\
+ u & \\equiv v+1 \red{\\mod}\{n^2\}  \\\\
+ u & \\equiv v+1 \red{\\pod}\{n^2\}
+\\end\{align\}
+\end{Alltt}
+
+\vspace*{-17.5ex}
+\hspace*{0.5\textwidth}
+\begin{minipage}{0.5\textwidth}
+\begin{align}
+ u & \equiv v+1 \pmod{n^2} \\
+ u & \equiv v+1 \mod{n^2}  \\
+ u & \equiv v+1 \pod{n^2}
+\end{align}
+\end{minipage}
+
+\begin{Alltt}
+\\begin\{equation\}
+ \red{\\cfrac} 1\red{\{}2+
+   \red{\\cfrac} 3\red{\{}4+
+    \red{\\cfrac[r]}5\red{\{}6+\\cdots
+ \red{\}\}\}}
+\\end\{equation\}
+\end{Alltt}
+
+\vspace*{-17.5ex}
+\hspace*{0.5\textwidth}
+\begin{minipage}{0.5\textwidth}
+\begin{equation}
+ \cfrac 1{2+
+   \cfrac 3{4+
+    \cfrac[r]5{6+\cdots
+ }}}
+\end{equation}
+\end{minipage}
+
+\vspace*{1ex}
+\begin{Alltt}
+\\begin\{equation\}
+\red{\\genfrac\{}[\red{\}\{}]\red{\}\{}1pt\red{\}\{\}\{}n-3\red{\}\{}m\red{\}}
+\\end\{equation\}
+\end{Alltt}
+
+\vspace*{-10ex}
+\hspace*{0.5\textwidth}
+\begin{minipage}{0.5\textwidth}
+\begin{equation}
+\genfrac{[}{]}{1pt}{}{n-3}{m}
+\end{equation}
+\end{minipage}
+
+\begin{Alltt}
+\\[\\begin\{\red{vmatrix}\}
+ a & \red{\\cdots} & b & \red{\\cdots} & d \\\\
+ \red{\\vdots}&\red{\\ddots}&\red{\\vdots}&%
+        \red{\\ddots}&\red{\\vdots}\\\\
+ e & \red{\\cdots} & f & \red{\\cdots} & g \\\\
+ m & \red{\\hdotsfor\{}3\red{\}} & n
+\\end\{vmatrix\}\\]
+\end{Alltt}
+
+\vspace*{-18ex}
+\hspace*{0.55\textwidth}
+\begin{minipage}{0.5\textwidth}
+\[\begin{vmatrix}
+ a & \cdots & b & \cdots & d\\
+ \vdots&\ddots&\vdots&\ddots&\vdots\\
+ e & \cdots & f & \cdots & g\\
+ m & \hdotsfor{3} & n
+\end{vmatrix}\]
+\end{minipage}
+
+\bigskip
+\begin{Alltt}
+\\[E_\{ij\}=\red{\\bordermatrix\{}
+  \red{&}      \red{&}i\red{&}                 \red{\\cr}
+  \red{&&}\\vdots\red{&}                  \red{\\cr}
+j \red{&}\\cdots\red{&}1\red{&}\\phantom\{\\cdots\} \red{\\cr}
+  \red{&}      \red{&}\\phantom\{\\vdots\}\red{\}}  \\]
+\end{Alltt}
+
+\vspace*{-18.5ex}
+\hspace*{0.56\textwidth}
+\begin{minipage}{0.5\textwidth}
+\[E_{ij}=\bordermatrix{
+  &      &i&                \cr
+  &&\vdots&                 \cr
+j &\cdots&1&\phantom{\cdots}\cr
+  &      &\phantom{\vdots}
+}\]
+\end{minipage}
+\begin{Alltt}
+\\[ Y(x)= \\begin\{\red{cases}\}
+   1 \red{&}\\text\{if $x>0$,\}\red{\\\\}
+  -1 \red{&}\\text\{if $x<0$\}
+         \\end\{cases\}  \\]
+\end{Alltt}
+
+\vspace*{-12ex}
+\hspace*{0.54\textwidth}
+\begin{minipage}{0.5\textwidth}
+\[ Y(x)=\begin{cases}
+   1 &\text{if $x>0$,}\\
+  -1 &\text{if $x<0$}
+      \end{cases}     \]
+\end{minipage}
+
+\vspace*{3ex}
+\verb|$\sqrt{\mathstrut{a}}+\sqrt{\mathstrut{f}}$|\hfill
+$\sqrt{\mathstrut{a}}+\sqrt{\mathstrut{f}}$
+
+\smallskip
+\verb|$\sqrt{a}+\sqrt{f}$|\hfill$\sqrt{a}+\sqrt{f}$
+%%%%%%%%%%%  tabular  %%%%%%%%%%%%
+\newpage\rightline{\Fer{Tab}}
+
+\vspace*{-7.5ex}
+\small{\name{Htab}{}%
+\begin{Alltt}
+\\begin\{\red{tabular}\}\red{\{}|c||l|r|\red{\}}        \\hline
+\red{\\multicolumn\{}3\red{\}}\red{\{}|c|\red{\}\{}Rooms\red{\}}\\\\    \\hline
+\\multicolumn\{1\}\{|c||\}\{Floor\} & Name &
+  \\multicolumn\{1\}\{c|\}\{Area\}\\\\    \\hline\\hline
+ 1 & kitchen &  $42 m^2$\\\\       \\hline
+   & study   &  $57 m^2$\\\\       \red{\\cline\{}2-3\red{\}}
+ 2 & living  & $120 m^2$\\\\       \\hline
+\\end\{tabular\}\end{Alltt}
+
+\vspace*{-2ex}
+\hspace*{50pt}
+\begin{tabular}{|c||l|r|}
+\hline
+\multicolumn{3}{|c|}{Rooms}\\
+\hline
+\multicolumn{1}{|c||}{Floor} &
+Name &
+\multicolumn{1}{c|}{Area}\\
+\hline\hline
+ 1 & kitchen & $42 m^2$\\
+\cline{2-3}
+   & study   & $57 m^2$\\
+\hline
+ 2 & living & $120 m^2$\\
+\hline
+\end{tabular}
+
+\vspace*{1ex}
+\newcommand{\topsp}[1]{\vbox{\vbox to#1{}\vbox to1em{}}}
+\newcommand{\tbsp}[2]{\rule{0pt}{#1}\rule[-#2]{0pt}{0pt}}
+%%
+\keyin{\newcommand{\topsp}[1]{\vbox{\vbox to#1{}\vbox to1em{}}}}%
+{\texttt{\BK newcommand\{\BK topsp\}[1]\{\BK vbox\{\BK vbox~to\#1\{\}\BK~vbox~to1em\{\}\}\}}}\\
+\keyin{\newcommand{\tbsp}[2]{\rule{0pt}{#1}\rule[-#2]{0pt}{0pt}}}
+{\texttt{\BK newcommand\{\BK tbsp\}[2]\{\BK rule\{0pt\}\{\#1\}\BK rule[$-$\#2]\{0pt\}\{0pt\}\}}}
+
+\vspace*{-3ex}
+\begin{Alltt}
+\\begin\{\red{tabular}\}\{|l\red{@\{}\\ \\vrule width 2pt\\ \red{\}}c|r|\}
+\\hline\\topsp\{2mm\}%
+ 1 & 2 & 3\\\\[2mm]           \\hline
+ A & B & C\\tbsp\{8mm\}\{4mm\}\\\\ \\hline
+ a-1 & b-2 & c-3\\\\          \\hline
+\\end\{tabular\}\end{Alltt}
+
+\vspace*{-16ex}
+\hspace*{0.7\textwidth}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{|l@{\ \vrule width 2pt\ }c|r|}
+\hline\topsp{1mm}%
+ 1 & 2 & 3\\[1mm]           \hline
+ A & B & C\tbsp{8mm}{4mm}\\ \hline
+ a-1 & b-2 & c-3\\          \hline
+\end{tabular}\end{minipage}
+\keyin{\tabcolsep=%6pt}{{\BK\tt tabcolsep=}}{\tt 10mm}
+\vspace*{-2ex}
+\begin{Alltt}
+\\begin\{\red{tabular}\}\{|l|\red{p\{}40mm\red{\}}|\}                    \\hline
+ tabular & This is used for text.            \\\\ \\hline
+ array   & This is mainly used for equations.\\\\ \\hline
+\\end\{tabular\}
+\end{Alltt}
+
+\vspace*{-1.8ex}
+\hspace*{50pt}
+{\tabcolsep=10mm
+\begin{tabular}{|l|p{40mm}|}\hline
+ tabular & This is used for text.\\ \hline
+ array   & This is mainly used for equations.\\ \hline
+\end{tabular}}
+
+\vspace*{-1ex}
+\begin{Alltt}\\begin\{\red{tabular}\}\{r\red{@\{}.\red{\}}l\}
+     3 & 14259\\\\
+$-$\\ 2 & 71828\\\\ \\hline
+     0 & 42431
+\\end\{tabular\}\end{Alltt}
+
+\vspace*{-12.8ex}
+\hspace*{0.7\textwidth}
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{r@{.}l}
+     3 & 14259\\
+$-$\ 2 & 71828\\
+\hline
+     0 & 42431
+\end{tabular}
+\end{minipage}
+
+%\smallskip
+\begin{Alltt}
+\\begin\{\red{tabular*}\}\{0.5\\textwidth\}%
+\{\red{@\{\\extracolsep\{\\fill\}\}}|l|c|r|\}\\hline
+ 1234 & A & B\\\\ \\hline
+\\end\{tabular*\}
+\end{Alltt}
+
+\vspace*{-7ex}
+\hspace*{0.48\textwidth}
+\begin{tabular*}{0.5\textwidth}{@{\extracolsep{\fill}}|l|c|r|}\hline
+1234 & A & B\\ \hline
+\end{tabular*}
+}
+%%%%%%% array, tabbing %%%%%
+\newpage
+\name{tabbing}{}{\rightline{\Fer{Tab}}
+
+\vspace*{-5.5ex}
+\begin{Alltt}
+\\begin\{\red{tabbing}\}
+ aaa \red{\\=} \\hspace\{10mm\} \red{\\=} cccc\red{\\kill}
+ aa  \red{\\>} bb  \red{\\>} cc\red{\\\\}
+ aaa \red{\\>} bbb \red{\\>} c
+\\end\{tabbing\}
+\end{Alltt}
+
+\vspace*{-10ex}
+\hspace*{0.65\textwidth}
+\begin{minipage}{0.5\textwidth}
+\begin{tabbing}
+ aaa \= \hspace{10mm} \= cccc\kill
+ aa  \> bb  \> cc\\
+ aaa \> bbb \> c
+\end{tabbing}
+\end{minipage}
+
+\smallskip
+\begin{Alltt}
+\\begin\{\red{tabbing}\}
+AA\red{\\=}BB\red{\\=}CC\red{\\=}DD\red{\\=}EE       \red{\\kill}
+ a\red{\\>} b\red{\\>} c\red{\\>} d\red{\\>} e\red{\\+\\+\\+ \\\\}
+             a\red{\\>} b       \red{\\\\}
+\red{\\<\\<} a\red{\\>} b               \red{\\\\}
+             a\red{\\>} b \red{\\`}g\red{\\- \\\\}
+         a\red{\\>} b   \red{\\`}ggg   \red{\\\\}
+         a\red{\\>} b\red{\\>} y\red{\\'} c   \red{\\\\}
+\red{\\pushtabs}
+ A\red{\\=}A\red{\\=}A\red{\\=\\kill \\\\ \\\\}
+ 1\red{\\>}2\red{\\>}3\red{\\\\}
+ 4\red{\\>}5\red{\\>}6\red{\\\\         \\\\}
+\red{\\poptabs}
+ \red{\\a=}\{O\}\red{\\>} \red{\\a'}\{a\}\red{\\>} \red{\\a`}\{e\}\red{\\\\}
+\\end\{tabbing\}
+\end{Alltt}
+
+\vspace*{-37.2ex}
+\hspace*{0.58\textwidth}
+\begin{minipage}{0.4\textwidth}
+\begin{tabbing}
+AA \=BB \=CC \=DD\= EE\kill
+ a \> b \>  c\> d \> e \+\+\+\\
+                a \> b       \\
+\<\<  a \> b                 \\
+                a \> b \`g \-\\
+           a \> b \` ggg     \\
+           a \> b \> y\' c   \\
+\pushtabs
+ A\=A\=A\=\kill\\ \\
+ 1\>2\>3\\
+ 4\>5\>6\\        \\
+\poptabs
+ \a={O} \> \a'{a} \> \a`{e}  \\
+\end{tabbing}
+\end{minipage}
+
+\medskip
+\name{array}{}%
+\keyin{\usepackage{array}}{{\tt\BK usepackage\{array\}}}
+
+\vspace*{-3ex}
+\begin{Alltt}
+\\begin\{\red{tabular}\}\{\red{!\{}\\vrule width 2pt\red{\}>\{}\\bfseries\red{\}}c\red{!}|%
+   \red{>\{}$\red{\}}c\red{<\{}$\red{\}}|\red{>\{}\\setlength\{\\parindent\}\{5mm\}\red{\}m\{}2cm\red{\}}%
+   \red{!\{}\\vrule width 2pt\red{\}}\}
+\red{\\noalign\{}\\hrule height 2pt\red{\}}
+ Differential & (x^3)' = 3x^2 
+   & Study in this week.\\par Review!\\\\    \\hline
+ Integral & \\int x^2\\,dx = \\frac23x^3 + C
+   & Study in this month.           \\\\
+\red{\\noalign\{}\\hrule height 2pt\red{\}}
+\\end\{tabular\}
+\end{Alltt}
+\hspace*{0.1\textwidth}
+\begin{tabular}{!{\vrule width 2pt}>{\bfseries}c|%
+   >{$}c<{$}|>{\setlength{\parindent}{5mm}}m{2cm}%
+   !{\vrule width 2pt}}
+\noalign{\hrule height 2pt}
+ Differential & (x^3)'=3x^2 & Study in this week.\par Review!\\ \hline
+ Integral & \int x^2\,dx=\frac23x^3+C &Study in this month.\\
+\noalign{\hrule height 2pt}
+\end{tabular}
+%%%%%%%%% longtable %%%%%%%%%%%
+\newpage
+\quad\hfill{\textcolor{green}{\tt longtable \ dcolumn multirow}}\hfill\name{Hlt}{\Fer{Tab}}
+
+\keyin{\usepackage{longtable}}{{\tt\BK usepackage\{longtable\}}}
+
+\medskip
+{\color{magenta}\verb|%\setlongtable|}\\
+\keyin{%\setlongtable
+\begin{longtable}[]{}               % [clr] <- option
+%%\setlength{\LTleft}{}           % \fill
+%%\setlength{\LTright}{}          % \fill
+%%\setlength{\LTpre}{}             % \bigskipamount
+%%\setlength{\LTpost}{}           % \bigskipamount
+%%\setlength{\LTcapwidth}{}   % 4in
+%\caption{}                    % \caption*{title}  \caption[]{}
+%\\ \hline
+%%%
+%%\multicolumn{}{}{} \\ \hline
+%% & &                              \\ \hline
+%%\endfirsthead            %  first page
+%%%
+%\hline
+%\multicolumn{}{}{}    \\ \hline
+% & &                               \\ \hline
+%\endhead                        %  each page
+%%%
+%%\hline
+%%\multicolumn{}{}{} \\ \hline
+%%\endfoot                     %  each page
+%%%
+%%\hline
+%%\multicolumn{}{}{} \\ \hline
+%%\endlastfoot             % last page
+% & &                                \kill
+   & &                                \\
+   & &                                \\
+%\newpage
+   & &                                \\
+\end{longtable}
+}{\tt\BK begin\{longtable\}}\Ops{pos}\opt{cols} \,\% \MGNT{pos}:\MGNT{c l r}
+
+\vspace*{-3ex}
+{\color{magenta}%
+\begin{Alltt}
+%%\\setlength\{\\LTleft\}\{\}     % \\fill
+%%\\setlength\{\\LTright\}\{\}    % \\fill
+%%\\setlength\{\\LTpre\}\{\}      % \\bigskipamount
+%%\\setlength\{\\LTpost\}\{\}     % \\bigskipamount
+%%\\setlength\{\\LTcapwidth\}\{\} % 4in
+%\\caption\{\}          % \\caption*\{title\}
+%\\\\ \\hline           % \\caption[short title]\{long title\}
+%%%
+%%\\multicolumn\{\}\{\}\{\} \\\\ \\hline
+%% & &               \\\\ \\hline
+%%\\endfirsthead      % first page
+%%%
+%\\hline
+%\\multicolumn\{\}\{\}\{\}  \\\\ \\hline
+% & &                \\\\ \\hline
+%\\endhead            % each page
+%%%
+%%\\hline
+%%\\multicolumn\{\}\{\}\{\} \\\\ \\hline
+%%\\endfoot           % each page
+%%%
+%%\\hline
+%%\\multicolumn\{\}\{\}\{\} \\\\ \\hline
+%%\\endlastfoot       % last page
+% & &                \\kill
+\end{Alltt}}
+
+\vspace*{-3ex}
+\verb|  & &                \\|\\
+\verb|  & &                \\|\\
+{\color{magenta}\verb|%\newpage|}\\
+\verb|  & &                \\|\\
+\verb|\end{longtable}|\\
+
+\keyin{\usepackage{dcolumn}}{\BK usepackage\{dcolumn\}}
+\ \RED{decimal places}=-1:\ no limit
+
+\qquad
+\keyin{D{}{}{}}{D\opt{inputsep}\opt{outputsep}\opt{decimal places}}
+
+\medskip
+\keyin{\usepackage{multirow}}{\BK usepackage\{multirow\}}
+
+\qquad
+\keyin{\multirow{}{}{}}{\BK multirow\opt{nrow}\Ops{njot}\opt{width}\Ops{vmove$\uparrow$}\opt{text}}
+
+%%%%%%% counter %%%%%
+\newpage
+\rightline{\name{HCt}{\Fer{count}}}
+
+\vspace*{-1ex}
+\def\Kyd#1{\keyin{ 5crenewcommand{ 5c#1}{}}{\tt\BK #1}}%
+\def\Ct#1{\keyin{ 5csetcounter{#1}{}}{#1}&\Kyd{the#1}}
+\def\Cta#1{\Ct{#1}&\keyin{ 5carabic{}}{\tt\BK arabic}\\ \hline}
+\def\Ctr#1{\Ct{#1}&\keyin{ 5cRoman{}}{\tt\BK Roman}\\ \hline}
+\small{
+\centerline{\begin{tabular}{|l|l|l|}\hline
+\multicolumn{1}{|c|}{Counter} & \multicolumn{1}{c|}{Value} &
+\multicolumn{1}{c|}{Type} \\ \hline
+\Ctr{part}
+\Cta{chapter}
+\Cta{section}
+\Cta{subsection}
+\Cta{subsubsection}
+\Cta{paragraph}
+\Cta{subparagraph}
+\Cta{equation}
+\Cta{figure}
+\Cta{table}
+\Cta{page}
+\Cta{footnote}
+\Cta{mpfootnote}
+\Cta{enumi}
+\Ct{enumii}  & \keyin{ 5calph{}}{\tt\BK alph}   \\ \hline
+\Ct{enumiii} & \keyin{ 5croman{}}{\tt\BK roman} \\ \hline
+\Ct{enumiv}  & \keyin{ 5cAlph{}}{\tt\BK Alph}   \\ \hline
+\end{tabular}}
+
+\vspace*{4ex}
+\rightline{\name{HCp}{\Fer{Chap}}}
+\vspace*{-2ex}
+%%%
+\centerline{\begin{tabular}{|l|l|}\hline
+\multicolumn{1}{|c|}{Name} & \multicolumn{1}{c|}{Definition}\\ \hline
+\Kyd{partname} & Part\\ \hline
+\Kyd{prepartname} & 
+ \raisebox{-3pt}{\includegraphics[width=1em, bb=0 0 82 84]{dai.bmc}}%
+\\ \hline
+\Kyd{postpartname} &
+ \raisebox{-3pt}{\includegraphics[width=1em, bb=0 0 82 80]{bu.bmc}}%
+ \\ \hline
+\Kyd{chaptername} & Chapter\\ \hline
+\Kyd{prechaptername} &
+  \raisebox{-3pt}{\includegraphics[width=1em, bb=0 0 82 84]{dai.bmc}}%
+  \\ \hline
+\Kyd{postchaptername} &
+  \raisebox{-3pt}{\includegraphics[width=0.97em, bb=0 0 79 84]{shou.bmc}}%
+  \\ \hline
+\Kyd{abstractname} & Abstract\\ \hline
+\Kyd{appendixname} & Appendix\\ \hline
+\Kyd{contentsname} & Contents\\ \hline
+\Kyd{figurename} & Figure\\ \hline
+\Kyd{tablename} & Table\\ \hline
+\Kyd{listfigurename} & List of Figures\\ \hline
+\Kyd{listtablename} & List of Tables\\ \hline
+\Kyd{refname} & References\\ \hline
+\Kyd{bibname} & Bibliography\\ \hline
+\Kyd{indexname} & Index\\ \hline
+\Kyd{seename} & see\\ \hline
+\end{tabular}}
+}
+%%%%%%% bar  %%%%%%%%
+\newpage
+\rightline{\Goto{top}{Top}}
+
+\vspace*{-2ex}
+\centerline{\name{bar}{\textcolor{green}{bar}}}
+
+\keyin{\usepackage{bar}}{\BK usepackage\{bar\}}
+
+\keyin{\begin{barenv}
+%\setwidth{}           % width of a  bar by point
+%%\setstyle{}         % font
+%\setxaxis[]{}{}{}% [offset]{origin}{end}{step}
+%\setxname{}           % text
+%%\setstyle{}         % font
+%\setyaxis[]{}{}{}% [offset]{origin}{end}{step}
+%\setyname{}           % text
+%\setstretch{}
+%\setlinestyle{}    % dotted or solid
+%\hlineon                 % horizontal line
+%\setdepth{10}        % 3 dimensional >=  10
+%\sethspace{0}        % space  between  bar 0 - 1
+%\setnumberpos{}    % axis, down, up, inside, outside, up
+ \bar{}{}[]              % {height}{idx}[text]
+ \bar{}{}
+\end{barenv}
+%\legend {}
+}{\texttt{\BK begin\{barenv\}}}\\
+{\color{magenta}%
+\verb| \setwidth{32}               %| \RED{width} of a bar by point\\
+\verb| \setstyle{\small\bfseries}  %| font\\
+\verb| \setxaxis{1998}{2005}{1}|\\
+\verb| \setxname{year}|\\
+\verb| \setstyle{\small\rmfamily}|\\
+\verb| \setyaxis[10]{0}{63}{10}    %| \Ops{offset}\opt{origin}\opt{end}\opt{step}\\
+\verb| \setyname{total \%}|\\
+\verb|%\setprecision|\opt{digits}\\
+\verb| \setstretch{1.5}            %| vertical stretch\\
+\verb| \setlinestyle{dotted}       %| \red{\tt solid} or \red{\tt dotted}\\
+\verb| \hlineon                    %| horizontal line\\
+\verb| \setdepth{10}               %| 3 dimensional $\ge$10\\
+\verb|%\sethspace|\opt{val}\ \verb|             %| \RED{val}:0$\sim$1\\
+\verb| \setnumberpos{down}|\\
+\verb|   % |\red{\tt empty}, 
+\red{\tt axis}, \red{\tt down}, \red{\tt inside}, \red{\tt outside}, 
+\red{\tt up}}\\
+\verb| \bar{22}{1}   \bar{32.5}{2} % \bar|\opt{height}\opt{idx}\Ops{text}\\
+\verb| \bar{42}{3}   \bar{51.2}{4} %  |\RED{idx}:0$\sim$8\\
+\verb| \bar{46.4}{5} \bar{55.6}{8}|\\
+\verb| \bar{40.4}{7} \bar{34.5}{6}|\\
+\verb|\end{barenv}|\\
+\verb| |\\
+{\color{magenta}%
+\verb|\centerline{\legend8{2003(max)} % \legend|\RED{idx}\opt{text}}\\
+
+\if0
+\begin{Alltt}
+\\begin\{barenv\}
+ \\setstretch\{1.5\}
+ \\setwidth\{32\}
+ \\setstyle\{\\small\\rmfamily\\bfseries\}
+ \\setxaxis\{1998\}\{2005\}\{1\}\\setxname\{\\textrm\{year\}\}
+ \\setstyle{\\small\\rmfamily\}
+ \\setyaxis[10]{0}{63}{10}\\setyname\{\\textrm\{total \%\}\}
+ \\setlinestyle\{dotted\}
+ \\hlineon
+ \\setdepth\{15\}
+% \\sethspace\{0\}
+ \\setnumberpos\{down\}
+ \\bar\{22\}\{1\}   \\bar\{32.5\}\{2\}
+ \\bar\{42\}\{3\}   \\bar\{51.2\}\{4\}
+ \\bar\{46.4\}\{5\} \\bar\{55.6\}\{8\}
+ \\bar\{40.4\}\{7\} \\bar\{34.5\}\{6\}
+\\end\{barenv\}
+\end{Alltt}
+\fi
+
+\centerline{\begin{barenv}
+ \setstretch{1.5}
+ \setwidth{32}
+ \setstyle{\small\rmfamily\bfseries}
+ \setxaxis{1998}{2005}{1}\setxname{\textrm{year}}
+ \setstyle{\small\rmfamily}
+ \setyaxis[10]{0}{63}{10}\setyname{\textrm{total \%}}
+ \setlinestyle{dotted}
+ \hlineon
+ \setdepth{15}
+% \sethspace{0}
+ \setnumberpos{down}
+ \bar{22}{1}   \bar{32.5}{2}
+ \bar{42}{3}   \bar{51.2}{4}
+ \bar{46.4}{5} \bar{55.6}{8}
+ \bar{40.4}{7} \bar{34.5}{6}
+\end{barenv}}
+
+\vspace*{4ex}
+\centerline{\rule{20pt}{10pt}\ \rm2003(max)}
+%%%%%%% help %%%%%%%%
+\newpage
+\hspace*{2em}\hfill\name{Help}{Help in this note}\hfill\Goto{top}{Top}
+
+\rm
+%%%
+{\sf L-Click}:\\
+\hspace{.8cm} Clik the left button on the mouse at the hot spot.
+
+{\sf L-Click} at \colorbox{green}{\tiny\sf green box} or \colorbox{cyan}{\tiny\sf cyan box} :\\
+\hspace{.8cm} HyperJump to the corresponding spot.
+
+{\sf L-Click} at \textcolor{blue}{\sf blue letters}:\\
+\hspace{.8cm} Copy {\sf\color{red} command string} to
+Clipboard.
+
+{\sf L-Click} with [{\sf ALT}] at \textcolor{blue}{\sf blue letters}:\\
+\hspace{.8cm} Append {\sf\color{red} command string} to
+Clipboard.
+
+{\sf L-Click} with [{\sf CTRL}] at \textcolor{blue}{\sf blue letters}:\\
+\hspace{.8cm} Copy {\sf\color{red} command string} to Clipboard and
+an Editor.
+
+{\sf L-Click} with [{\sf CTRL}]+[{\sf ALT}] at \textcolor{blue}{\sf blue letters}:
+\\
+\hspace{.8cm} Copy {\sf\color{red} command string} to Clipboard and
+a new Editor.
+
+{\sf R-Click}:\\
+\hspace{.8cm} Click the right button on the mouse to enlarge the area.
+
+In the above {\sf L-Click} at \textcolor{blue}{\sf blue letters}, the functions
+with/without [{\sf CTRL}] are inverted if {\sf Option $\to$ Clipboard+Editor} 
+is checked.
+
+\begin{tabbing}{ll}
+\string[{\sf PgDn}] o [{\sf N}]:\=Go to the Next page.\kill
+\string[{\sf PgDn}] or [{\sf N}]:\>Go to the Next page.\\
+\string[{\sf PgUp}] or [{\sf P}]:\>Go to the Previous page.\\ 
+\string[{\sf CTRL}]+[{\sf T}]:\>Go to the Top page.\\ 
+\string[{\sf CTRL}]+[{\sf B}]:\>Go to the Bottom page.\\ 
+\string[{\sf ALT}]+[{\sf X}]:\>Terminate Help TeX.
+\end{tabbing}
+\bigskip
+
+\centerline{\sf Character Codes}
+\medskip
+
+\tt
+\quad\ \ 
+0 1 2 3 4 5 6 7 8 9 a b c d e f
+
+20\quad
+\keyin{  }{\textvisiblespace}
+\E{!}\!\!\!
+\E{"}
+\keyin{#}{\#}
+\keyin{$}{\$}
+\keyin{%}{\%}
+\keyin{$}{\$}
+\E{'}
+\E{(}
+\E{)}
+\E{*}
+\E{+}
+\E{,}
+\E{-}
+\E{.}\!\!\!
+\E{/}
+\quad
+09 \keyin{ 09}{TAB}
+
+30\quad
+\E{0}
+\E{1}
+\E{2}
+\E{3}
+\E{4}
+\E{5}
+\E{6}
+\E{7}
+\E{8}
+\E{9}
+\E{:}\!\!\!
+\E{;}
+\E{<}
+\E{=}
+\E{>}
+\E{?}
+\ 
+0d \keyin{ 0d}{CR}
+
+40\quad
+\keyin{@}{@}
+\E{A}
+\E{B}
+\E{C}
+\E{D}
+\E{E}
+\E{F}
+\E{G}
+\E{H}
+\E{I}
+\E{J}
+\E{K}
+\E{L}
+\E{M}
+\E{N}
+\E{O}
+\quad
+0a \keyin{ 0a}{LF}
+
+50\quad
+\E{P}
+\E{Q}
+\E{R}
+\E{S}
+\E{T}
+\E{U}
+\E{V}
+\E{W}
+\E{X}
+\E{Y}
+\E{Z}
+\E{[}
+\keyin{\}{$\backslash$}
+\E{]}
+\keyin{^}{$\,\,\hat{}\,$}
+\keyin{_}{\_}
+
+60\quad
+\E{`}
+\E{a}
+\E{b}
+\E{c}
+\E{d}
+\E{e}
+\E{f}
+\E{g}
+\E{h}
+\E{i}
+\E{j}
+\E{k}
+\E{l}
+\E{m}
+\E{n}
+\E{o}
+
+70\quad
+\E{p}
+\E{q}
+\E{r}
+\E{s}
+\E{t}
+\E{u}
+\E{v}
+\E{w}
+\E{x}
+\E{y}
+\E{z}
+\keyin{ 7b}{$\{$}
+\keyin{ 7c}{$|$}
+\keyin{ 7d}{$\}$}
+\keyin{ 7e}{$\sim$}
+\end{document}

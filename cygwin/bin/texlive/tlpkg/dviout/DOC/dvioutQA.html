@@ -1,0 +1,994 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD W3 HTML//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<title>Error on dviout</title>
+</head>
+
+<body BGCOLOR="#eeffff">
+
+<hr NOSHADE ALIGN="left" WIDTH="65%">
+
+<h1 align="center">dvioutにおけるトラブル</h1>
+
+<hr NOSHADE ALIGN="right" WIDTH="65%">
+
+<p align="center">February 1, 2006</p>
+
+<p><a HREF="http://akagi.ms.u-tokyo.ac.jp/ftp-j.html#TeX" name="contents">TeX 
+のページへ </a><br>
+<a href="http://akagi.ms.u-tokyo.ac.jp/texinst98.html">TeXシステムのインストール</a><br>
+<a href="http://akagi.ms.u-tokyo.ac.jp/dvitest.html">dviout/dviprt開発室</a><br>
+<a href="tex_dvioutw.html">dvioutのインストール</a>&nbsp; ---&nbsp; <a
+href="tex_dvioutw.html#HintMenu">いくつかのヒント</a><br>
+<a href="dviouttips.html">dvioutにおける小ヒント集</a><br>
+<a href="tex_instchk.html">Windows95/98/Me/NT/2000/XP における日本語TeX 
+のインストールのチェック</a><br>
+<a href="cmode.html">DVIwareとしてのdviout</a><br>
+<a href="present.html">dvioutでのプレゼンテーション</a><br>
+<a href="http://akagi.ms.u-tokyo.ac.jp/dvioutQA.html">このドキュメントの最新版</a><br>
+</p>
+
+<p>最新のdvioutのパッケージは、以下をクリックすると取得できます。dvioutの入っているフォルダで展開すれば、最新のものにバージョンアップされます（より詳しくは、 
+<a href="tex_dvioutw.html#Vup">ここ</a>を参照）。<br>
+<a href="ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/dviout/current_in_Japanese/tex318w.exe">tex318w.exe</a>: 
+公開版 dviout for Windows Ver.3.18<br>
+<a href="ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/dviout/test/">最新テスト版</a> （更新が度々あります） <br>
+上記のリンクが切れているときは、<a
+href="http://akagi.ms.u-tokyo.ac.jp/dvitest.html">ここ</a>へ。</p>
+<strong>
+
+<p>目次</strong><br>
+<br>
+1. はじめに<font color="#FF0000">（必読）</font><br>
+2. 代表的なトラブルとメッセージ<font color="#FF0000">（ここから調べます）</font><br>
+3. Cannot resolve Fonts<br>
+4. Ghostscriptを使ったPostScript画像表示に失敗する<br>
+5. いくつかのトラブルの例と原因<br>
+6. 基本動作環境の情報の出力例</p>
+
+<p>誤りや補足すべき点があればお知らせ下さい --&gt; <a
+href="mailto:ftp-admin@akagi.ms.u-tokyo.ac.jp">ftp-admin@akagi.ms.u-tokyo.ac.jp</a> </p>
+
+<hr>
+
+<p align="center"><big><strong>1. はじめに</strong></big></p>
+
+<p>dvioutを使っていて起きるトラブルの代表的なものについて、これはその解決のためのガイドです。<br>
+まず全般的な注意です。
+
+<ol>
+  <li>トラブルの原因で最も多いものは、<strong>環境変数やパラメータの設定ミス</strong>です。<br>
+    特に<strong>スペルミス</strong>、あるいは、思い違いによる設定ミスです（インストール時のトラブルの大半を占めますので、再度チェックを）。<br>
+  </li>
+  <li>多くのヒントが dviout の <strong>On-line Help</strong>（Help → Help Topics 
+    → ...） から得られます。<br>
+    特に、<strong>Q&amp;A</strong>の部分は、該当するトラブルについての解説が載っている可能性が大なのでチェックが必要です。<br>
+  </li>
+  <li>自分で解決できずに <a href="dvioutML.html">dviout Mailing List</a> や TeX 
+    関連の掲示板などで質問をする事になった場合、動作環境の正確な情報が必要です<font
+    color="#FF0000">（設定パラメータを手でタイプして書き写したりしては、二重のミスにも成りかねませんので避けてください）</font>。<br>
+    Ver.3.12.1 から <strong>Help → System Info. → [Copy]</strong> で、<a
+    href="#Fundamental">dviout の基本動作環境</a>の（<b>基本的な環境変数</b>を含む）
+   情報がクリップボードにコピーできるようになりました。
+    質問の際は、<strong>起こったトラブルやそれに関連する情報</strong>（以下の<font
+    color="#FF0000">重要データ</font>など）の他に、この<font color="#FF0000">（最も重要で基本的なデータの）</font><strong>基本動作環境の情報</strong>も合わせて報告してください。<br>
+  </li>
+  <li><a href="dvioutML.html">dviout Mailing List</a> や TeX 
+    関連の掲示板での質問は、<font color="#FF0000">上に書いたような基本事項を守っている限り</font>歓迎されるでしょう。<br>
+    質問後、アドバイスが得られて、あるいは、自分で解決してしまった場合も、多くの人が関心を持って経過を見ています。質問者以外にその解決の理由が分かるように<strong>結果の報告</strong>がなされることが要望されます（間違った設定に気づいて修正した場合は、その<strong>間違っていた設定</strong>の報告です）。<br>
+  </li>
+  <li><a href="#resolveFont">フォントの自動作成の失敗</a>(Cannot resolve Fonts)、<a href="#PS">取り込みPostScript画像の表示の失敗</a>、が次項と合わせて、問い合わせの多い<strong><font
+    color="#FF0000">三大トラブル</font></strong>です。<br>
+    最初の二つにおいては、dvioutが他のプログラムを動かしているので、原因の切り分けが解決の第一歩です。この失敗時に、原因の切り分けのためにやるべき事やチェック事項、および、その主な原因が書かれたHelpが、通常は表示されます。原因が不明ならば必ずそのチェック事項（ここにも、より詳しく書いてあります）を確かめてください。<br>
+    dviout Mailing List や TeX 
+    関連の掲示板などでトラブルの質問を受けた場合、これらの<strong>チェック事項の結果の報告</strong>が無いと、（チェック事項を確かめてください、ということになり）無駄な手順がかかります。<br>
+  </li>
+  <li><a href="#DispvsPrint">表示には問題ないが印刷がおかしい</a>というトラブル。これもプリンタやそのドライバが絡むので、原因の切り分けが必要です。<a
+    href="#DispvsPrint">チェック事項</a>があり、対処方法もいく 
+    つかありますので注意。</li>
+</ol>
+
+<hr>
+
+<p align="center"><big><strong>2. 代表的なトラブルとエラーメッセージ</strong></big></p>
+
+<dl>
+  <p align="center"><strong>2.1. 一般的な注意点</strong></p>
+  <dt><strong>WindowsNT/2000/XPの場合の注意</strong></dt>
+  <dd>設定したユーザ(Administratorなど）と実際のユーザとが異なっているのが原因で、環境変数やディレクトリの読み書き権限が意図したものになっていなかった。</dd>
+  <dt>　</dt>
+  <dt><strong>標準でないシェルを使っている場合の注意</strong></dt>
+  <dd>フォントの自動生成などでdviout 
+    が他のプログラムを起動したときの環境変数が意図したものになっていなかった。
+    <br><b>Cygwin</b>などを使っている場合に要注意。</dd>
+  <dt>　</dt>
+  <dt><strong>パラメータの設定に関する注意</strong></dt>
+  <dd>Option →　Setup Parameters.....　の各シートで書き換えたパラメータは、<strong>[Ok]</strong> 
+    または <strong>[適用]</strong>を押さないと有効になりません。また、<strong>[Save]</strong> 
+    を押さないと、記録されず、次回のdviout起動時に無効になります。さらに、<strong>[Registry]</strong>のシートでの対応するパラメータに 
+    <strong>+</strong> 
+    のチェックがついていないと、記録された値を、（次回以降の）dvioutで適用しないことを意味します。</dd>
+  <dt>　</dt>
+  <dt><strong>TeXのパッケージ・システムが正しくインストールされているか？</strong></dt>
+  <dd>簡単なTeXファイルをDVIファイルに変換してみましょう。
+  <a href="tex_instchk.html">このように</a>テストをするのがよいでしょう。<br>
+  従来使っていたTeXのシステムを削除して、新たにTeXのパッケージを導入する場合、元のTeX
+  のシステムを正しくアンインストールしないと導入に失敗する場合があります。
+  アンインストールとはTeXのシステムを削除することをいうのではありません。最も重要なのは、様々な環境、たとえば環境変数（たとえば、<strong>TEXMF</strong>, <strong>TEXMFMAIN</strong>, <strong>TEXMFCNF</strong>）などを定義していたら、それを元に戻す（未定義にする）ことです。<br>
+従来のTeXのシステム関するドキュメントと新たなTeXのシステムに関するドキュメントの両方を参照する必要があります。</dd>
+  <dt>　</dt>
+　<dt><strong>環境変数が意図したものになっているか？</strong></dt>
+  <dd>Help → System Info で表示される環境変数の値（"　" で囲まれている）に注意しましょう（[Copy]を押してクリップボードにコピーし、エディタなどに貼り付けてから見るとよいでしょう） 。<br>
+たとえば、末尾に<b>不要な空白</b>が着いていて、
+エラーの原因となることがあります。<br>
+上の表示に環境変数 <b>TMP</b> や <b>TEMP</b> が表示される場合は、それらの設定が原因で問題が起きる可能性が高いことを示しています（<b>全角文字</b>や<b>空白</b>が含まれている場合は修正しましょう）。
+  </dd>  <dt>　</dt>
+  <dt><strong>意図したDVIファイルであるか？</strong></dt>
+  <dd>誤りのあるTeXのソースを用いたり、インストールが不完全などの理由で、dvioutで表示しようとするDVIファイルが意図したものでないことがあります。DVIファイルへの変換時の<strong>ログファイルをチェック</strong>してみましょう。</dd>
+　<p align="center"><strong>2.2. フォントに関するトラブル</strong></p>
+  <dt><font color="#FF0000">Terminate Automatic Font Generation?</font></dt>
+  <dd>これは、作成して表示しようとして失敗したフォントが何個か（4つ程度）あると表示され、以降見つからないフォントがあってもフォント生成を試みなくて良いか、
+を尋ねるダイアログです（設定が間違っている場合が多く、
+全てのフォントの自動生成の失敗の終了を待つと時間がかかるからです）。No 
+    &nbsp; 
+    と答えたあと、また何個か失敗すると同じダイアログが出ます。<br>
+  </dd>
+  <dt><font color="#FF0000">(A)bort Automatic Font Generation for this file?</font></dt>
+  <dt><font color="#FF0000">(R)etry it for the investigation by executing GEN_TMP.BAT?<br>
+    (I)gnore this font?</font></dt>
+  <dd>Retryの選択は（July 8, 2001以降サポート）、フォントの自動作成失敗の原因を知るための重要なステップです。次項を参照してください。Abort/Ignoreの選択は、前項の 
+    Yes/No の選択と同じです。<br>
+  </dd>
+  <dt><a href="#resolveFont">Cannot resolve Fonts</a></dt>
+  <dd>必要なフォントを得られなかったのでプレビューが出来ません（Ver.3.12より前）。見つからなかったフォントの文字は表示されません（Ver.3.12以降）。</dd>
+  <dt>　</dt>
+  <dt><a href="#ChangeFont">フォントをインストールしたのに反映されない</a><br>
+    <a href="#WinTeX">「fi」などの合字や「-」等、一部の特殊文字が「□」などになって正常に表示されない</a><br>
+    <a href="#WrongChar">正常に表示されない文字や記号がある</a><br>
+    <a href="#mingoth">明朝の文字がゴシックで表示される</a><br>
+    <a href="#somegoth">ある和文フォントの文字がゴシックで表示される</a><br>
+    <a href="#itamin">ある和文フォントの文字が明朝の斜体で表示される</a></p><p>
+    <a href="#itamin">Cannot find font file for ...! A default FONT will be used!</a><br>
+    <a href="#Mismatch">Font Mismatch</a><br>
+    <a href="#readFont">fail to read FONT</a><br>
+    <a href="#corrupt">Corrupt font ...</a><br>
+    <a href="#unpack">Unpack Error ...</a><br>
+    <a href="#checksum">check sum doesn't match in Font </a><br>
+  </dt>
+  <p align="center"><strong>2.3. プレビューにおけるトラブル</strong></p>
+  <a href="#Land2Port"><p>Landscape文書（横置き紙面）なのに、Portrait（縦置き）紙面が表示される</a><br>
+  <a href="#papersize">作成した文書サイズと異なる紙面サイズとなる</a><br>
+  <a href="#colorbry">色づけをした文字の輪郭の色がおかしく、汚い表示になる</a><br>
+  <a href="#vanishcolor">拡大して見ると、文字列検索やHyperTeXでの色づけが消える</a><br>
+  <a href="#Cut">文字列コピーで、記号などが化けて切り取られる</a><br>
+  <a href="#sFont">間違った文字列が検索される</a><br>
+  <a href="#click">表示画面の文字をクリックしても所定の動作をしない</a><br>
+  <a href="#patch">cmodeをpatch2 あるいは patch とすると、表示の文字などが綺麗でない</a><br>
+  <a href="#colorView">小さなカラー文字のベースラインが揃っていない</a><br>
+  <a href="#EditCopy">エディターへの直接コピー機能が動作しない</a>
+  </p><p>
+  <a href="#RBuf">Raster buffer size -br: 400 K in [System] is too small.</a><br>
+  <a href="#tmpbat">Can't make tmp-batch file.</a><br>
+  </p>
+  <p align="center"><strong>2.4. 画像取り込みや出力およびカラー文字におけるトラブル</strong></p>
+  <a href="#MakeBMP"><p>Failed to make &lt;file-name&gt;.bmp by the command</a><br>
+  <a href="#MakeBMP">Failed to make &lt;file-name&gt;.pbm by the command</a> </p>
+  <dt><a href="#PS">Ghostscriptによる画像生成に失敗する</a><br>
+    <a href="#whitePS">PostScript画像の表示がおかしい</a><br>
+    <a href="#HWgraph">取り込まれた画像の縦横比がおかしい</a><br>
+    <a href="#tategraph">縦書きのとき、取り込んだ画像が回転してしまう</a><br>
+    <a href="#nocolorPS">カラーのPostScript画像が白黒で表示される</a><br>
+    <a href="#ReUseGra">Ghostscriptで生成された画像が再利用されない</a><br>
+    <a href="#DisColor">解像度を上げたり拡大によってカラーの取り込み画像が消える</a><br>
+    <a href="#overwrite">画像の重ね合わせが望み通りの結果にならない</a><br>
+    <a href="#jpg">BMP/JPG/TIFF/WMF/EMF/PNGなどのグラフィックファイルが取り込めない</a><br>
+    <br>
+    <a href="#bb">Bounding Boxを記した *.bb ファイルが作成できない</a><br>
+    <a href="#png">PNG画像での出力ができない</a><br>
+    <a href="#Graout">画像出力で、カラー文字やカラー画像が消えてしまう</a><br>
+    <a href="#ChkColor">複数ページに続いた文字の色づけが有効でない</a><br>
+    <a href="#ChkColor">複数ページに続いた紙面の背景色が有効にならない</a><br>
+    <a href="#tpictate">縦書きでの tpic specials で、dvips と互換にしたい</a><br>
+    <br>
+  </dt>
+  <p align="center"><strong>2.5. 印刷におけるトラブル</strong></p>
+  <a name="DispvsPrint"><strong><p>表示は問題ないが、印刷がおかしい</strong></a> 
+  </p>
+  <dd>Windowsのプリンタドライバを使っている場合（印刷のダイアログで 
+    dviprt にチェックをつけないデフォルトの印刷方法）、Option → Setup 
+    Parameters...&nbsp; → [Graphic] の color&nbsp; specials: の右の欄(<strong>cmode</strong>)が、 
+    auto mode(p2) になっていたら <strong>patch2</strong> 
+    に変更し、表示を最大に拡大する（Display → Size → Magnify 
+    を拡大しなくなるまで複数回選択）。この状態で表示と印刷とを比べることによって、<a
+    href="cmode.html#CheckDriver">プリンタドライバのチェック</a>をし（cmode 
+    については、<a href="cmode.html">DVIwareとしてのdviout</a> 
+    を参照）、次の３項のうち該当するものを参照して下さい。</dd>
+</dl>
+
+<p><a href="#p2Print">cmode を patch2 
+としたテストで、表示は問題ないが、印刷がおかしい</a><strong> </strong><br>
+<a href="#p2view">cmode を auto mode(p2) としたときの表示は正常だが、patch2 
+としたときの表示がおかしい</a><br>
+<a href="#repPrint">cmode を auto mode(rep)としたときの表示は正常だが、印刷がおかしい</a></p>
+
+<p><a href="#color2bw">カラー画像の白黒での印刷がおかしい</a><br>
+<a href="#slowPrint">印刷が遅い</a><br>
+<a href="#PrinterRes">Use Printer resolution to print?</a><br>
+<a href="#RetryPrint">Retry the print setting?</a><br>
+<a href="#PrintSize">印刷された文字と紙面のサイズが異常に小さい／大きい</a><br>
+<a href="#ESCPage">dviprt機能をつかった ESC/Page での印刷に失敗する</a><br>
+<a href="#Ujob">プリンタの設定を両面印刷にしたが，両面印刷にならない</a><br>
+<a href="#Ujob">dvioutから複数ページをFAX送信したが，1ページ毎に別に送られてしまう</a><br>
+<a href="#Psize">自動的に解像度を変える印刷のあと，ページサイズなどがおかしくなる</a></p>
+
+<p align="center"><strong>2.6. 起動におけるトラブル</strong></p>
+
+<p><a href="#safe">dviout が正常に立ち上がらない</a><br>
+
+<a href="#DBLCLK">DVIファイルのアイコンのダブルクリックでdvioutが起動しない</a><br>
+<a href="#badmag">bad parameter -mag=-3</a></p>
+
+<hr>
+
+<p align="center"><strong><big>3. <a name="resolveFont">Cannot resolve Fonts</a></big> <br>
+</strong></p>
+
+<pre><strong>「どのようなフォントが必要であったか」</strong>の情報に注意しましょう（cf.<strong> </strong>[4]）
+
+     <font
+color="#0000FF">cmr17</font><font color="#FF0000">.360(1800)
+     Searched c:\usr\local\share\texmf\tfm\\</font><font
+color="#0000FF">cmr17</font><font color="#FF0000">.tfm
+     Searched c:\usr\local\share\texmf\pk\\</font><font
+color="#0000FF">cmr17</font><font color="#FF0000">.360pk
+     Searched c:\usr\local\share\texmf\pk\\</font><font
+color="#0000FF">cmr17</font><font color="#FF0000">.361pk
+     Searched c:\usr\local\share\texmf\pk\\</font><font
+color="#0000FF">cmr17</font><font color="#FF0000">.359pk
+     Searched c:\usr\local\share\texmf\vf\\</font><font
+color="#0000FF">cmr17</font><font color="#FF0000">.vf
+</font>
+のような表示<font
+color="#FF0000">(重要データ0.1)</font>は、dvioutがサーチしたファイルを示しています。<font
+color="#FF0000">\\</font> は <font color="#FF0000">\</font>...<font color="#FF0000">\</font>...<font
+color="#FF0000">\</font> のよ
+うに間が省略されていると考えることができます（間が無くてもよい）。</pre>
+
+<dl COMPACT>
+ <dt>注意:</dt><dd> 拡張子が<font color="#0000FF">cmr17</font>.tfm のように<strong> tfm</strong> となっているTFMファイルは、TrueTypeフォントを表示するために用いられるメトリックファイルです。
+よって、dviout が TEXPK に基づいてフォントをサーチして <font color="#0000FF">cmr17</font>.tfm を見つけても、
+対応するTrueTypeフォントがWindowsに登録されていなければ「見つからな かった」とみなされ、TEXPK の指定に従ってサーチを続けます（cf. <a href="tex_dvioutw.html#Font">dviout for Windowsが使うフォント</a>、 乙部さんによる<a href="http://argent.shinshu-u.ac.jp/otobe/tex/docs/ttf.html">TrueTypeフォント利用に関する考察</a>）。</dd>
+</dl>
+この例では、<font color="#0000FF"><strong>cmr17</strong></font> 
+という名前の解像度 <strong>360dpi</strong>(= dots/inch) 
+のフォントが実際には必要でした。
+必要であったのはPKフォントで、ファイル名は、この場合 
+<font color="#0000FF">cmr17</font>.360pk です（末尾が <strong>pk</strong> 
+の最初のものであることが多い）。
+計算の丸め誤差を考慮して、その前後の解像度のフォントも検索されています。</p>
+原因は、次の <strong>1. 2.</strong> のいずれかです。
+<dl>
+<dt><strong>1. フォントは生成されたが、フォントのサーチパスの設定が違っていて見つけることが出来ない</strong> </dt>
+<dd>・<strong> -TEXROOT: -TEXPK: の設定ミス</strong> </dd>
+</p><p>
+<dt><strong>2. フォント生成に失敗した</strong>（以下の原因が主なもの）</dt>
+<ol><dd><dt>1. <strong>TeX のパッケージのインストールのミス</strong></dt>
+       <dd><a href="tex_instchk.html">ここ</a>からTeXのインストールの基本的なチェックができます。
+<dl COMPACT>
+        <dt>例：</dt><dd>上書きインストールを行ったが、インストールを忘れたパッケージがあった</dd>
+        <dt>例：</dt><dd>times.sty や txfonts などの標準でないフォント（たとえば、<strong>ptmr</strong>... という名前のフォント）を使っていて、その設定が不十分（cf. <a
+href="http://oku.edu.mie-u.ac.jp/~okumura/texwiki/?TXFonts">奥村さんによるtxfontsのガイド</a>）。<br>
+&nbsp;&nbsp; この場合は、必要なパッケージのインストールのほか、ps2pk/gsftopk によるフォント作成が可能になっていること、Ghostscriptにパスが通っていて、環境変数 GS_LIB が正しく設定されていること（Ghostscript が Ver.8.11 またはそれ以降ならば、設定しなくてもよい）などが要請されます。</dd></dl>
+</dd>
+<dt>    2. <strong>PATH の設定ミス</strong></dt>
+<dd>
+<dl COMPACT><dt>例：</dt><dd>正しく設定したと思ったが、スペルミスがあった</dd>
+<dt>例：</dt><dd>別のTeXのシステム（eg. <strong>Cygwin</strong>）の方に先にパスが通っていた</dd><dt>例：</dt><dd>TeXに関連するフォルダの名前に原因があった（和文文字や空白を含んだり，あるいは8文字より長いと問題が生じる可能性があります）。</dd></dl></dd>
+<dt>    3. <strong>環境変数 TEXMFMAIN, TEXMFCNF の設定ミス</strong></dt>
+<dd><dl COMPACT>
+     <dt>例：</dt><dd>旧来の環境変数 TEXMF を消していなかった(TEXMFMAIN と矛盾)</dd>
+     <dt>例：</dt><dd>mule/meadow からdvioutを動かしていて、角藤版中の sh.exe を使ったため、METAFONT動作時の環境変数が正しくなかった（この sh.exe は Windows95/98/Me では使用不可）</dd>>
+      <dt>例：</dt><dd>WindowsNT/2000/XPでAdministratorと実際のユーザとで環境変数が異なっていた</dd></dl></dd>
+<dt>    4. <strong>環境変数 TEMP または TMP の（設定）ミス</strong></dt>
+<dd><dl COMPACT><dt>例：</dt><dd>両方設定されていたが、一方が存在しない、あるいは書き込めないディレクトリになっていた</dd>
+<dt>例：</dt><dd>環境変数 TMP の設定文字列に空白が入っていた</dd></dl></dd>
+<dt>    5. <strong>-gen: の設定ミス</strong></dt>
+<dd><dl COMPACT>
+    <dt>例：</dt><dd>mktexpk.exe が２ヶ所にあって、正しくない方を設定していた</dd>
+    <dt>例：</dt><dd>パス名に空白が入っているときは、ショートパス名に直してください</dd>
+</dl></dd>
+<dt>    6. <strong>texmf.cnf の設定ミス</strong>（普通はデフォルトで問題なし）</dd>
+<dd><dl COMPACT>
+     <dt>例： </dt><dd>texmf.cnf は存在しますか（存在しない → インストールミス） </dd>
+     <dt>例： </dt><dd>$TEXMF を間違って変更してしまった</br>
+      この項の意味が分からなければ、オリジナルのままのはず。
+       オリジナルから変えていたならオリジナルの texmf.cnf との差分<font
+color="#FF0000">(重要データ0.2)</font>を（例えば、fc を使って）調べてみましょう<br>
+        オリジナルの texmf.cnf のバックアップを取っていなかった場合は、再インストールしましょう</dd></dl></dd>
+<dt>    7. <strong>解像度(dpi)の設定ミス</strong></dt>
+<dd><dl COMPACT>
+       <dt>例： </dt><dd>解像度 <font color="#0000FF">96</font> dpi で出力しようとしたが、そのための設定がされていないtexmf.cnf に <br>
+&nbsp;&nbsp; &nbsp;&nbsp; $MAKETEXPK_MODE_<font color="#0000FF">96</font> = <font color="#0000FF">atarins</font><br> 
+のような mode の定義が欠けている、あるいは、
+        場合によっては -gen: の定義で、--mfmode の設定を書く、などの対処もあります</dd></dl></dd>
+<dt>    8. <strong>作成できないフォントであった</dt>
+</strong>        
+<dd><dl COMPACT><dt>例：</dt><dd>METAFONT のソースが無い、などの理由で作成不可能なフォントの場合、フォント代替機能を使って、別のフォントで代用することが可能です</dd></dl></dd>
+</dl>
+原因の突き止め方は On-line Help ([Cannot resolve Fonts])にあるので、それを実行してみましょう。<br>
+具体的には、
+<dl COMPACT>
+<a name="GEN_TMP"><dt>[1]</dt><dd>環境変数 TMP または TEMP </a>で示されたディレクトリに <strong>GEN_TMP.BAT</strong> <u>が存在するならばそれを実行し、フォントが正しく作成されるか、あるいはどのようなエラーになるかを調べる</u>。
+なお、July 12, 2001以降の版の dviout では、エラー発生時に<font color="red"><b>[再試行]</b>ボタンでこのテストが実行できます。</font>
+</p><p>
+Cannot resolve Fonts のメッセージが表示されている時点で、dviout を抜けないで実行するの
+がよい。
+なお、GEN_TMP.BAT は、dviout がフォント作成に用いたコマンドのコピーです。
+ <ol>
+  <li>具体的には、システムから スタート → プログラム → （アクセサリー → ）MS-DOS プロンプト（Windows95/98/Me）／コマンドプロンプト（WindowsNT/2000/XP）または スタート → 
+ファイル名を指定して実行で command (Windows95/98/Me) または cmd (WindowsNT/2000/XP) 
+を実行するとコマンドが入力できるWindowが開きます。</li>
+</p><p>
+   <li>set と入力すると、全ての環境変数とその値が表示されます。</li>
+</p><p>
+   <li>環境変数 TMP および TEMP が、c:\windows\temp であると、c:\windows\temp\GEN_TMP.BATを実行します。
+具体的には、次のように入力します。
+<pre>
+    c:\windows\temp\GEN_TMP
+</pre></li>
+<li>実行後に表示されたメッセージなどは、<u>クリップボードにコピー</u>できます（Windowのボタン、または、マウスボタンを使う）ので、エディター（メモ帳など）を開いておいて、結果をそこに貼り付けておきます。</li></ol>
+</p><p>
+<strong>GEN_TMP.BAT が存在しない</strong>
+<ul><li>
+環境変数 TMP と TEMP の設定で定義されたディレクトリが書き込み可能になっていますか？
+</li>
+<li>-gen: が正しく設定されていますか？　[5] へ</li></ul>
+</p><p>
+<strong>バッチファイルを動かすと、フォントが生成された、あるいは既に存在している、と表示された</strong><br>
+&nbsp;&nbsp; 再度同じ DVI ファイルを dviout で表示してみましょう
+<ul><li>同じフォントに関し同じエラーが起きた<br>
+        TEXROOT, TEXPK の設定ミスと思われます。以下の[3] → [6] → [7]へ</li>
+    <li>そのフォントはエラーにならず、DVI で処理された<br>
+     UNIX類似環境などの独自SHELLを使っていませんか？ その際の環境変数などをチェックしましょう（さらに、[7]へ）</li></ul>
+</p><p>
+<strong>バッチファイルを動かしたが、エラーメッセージ</strong><font
+color="#FF0000">(<u>最重要データ</u>1)</font><strong>が出てフォントが生成されない</strong>
+<ul><li>「コマンドまたはファイル名が違います」 → [5] へ</li>
+<li>その他のエラー → [2] → [5] → [4] → [7] へ
+<pre>  ・Cannot determine the mode              2.7(解像度設定ミス), 2.5, 2.6 等</li>
+  ・Cannot find the program &quot;mf.exe&quot;.      2.2(パスの設定ミス), 2.1(インストールミス)等
+    The value of PATH is:
+    <font
+color="#0000FF">C:\WINDOWS;C:\WINDOWS\COMMAND;C:\BIN</font>
+  ・Cannot find <font
+color="#0000FF">cmrr10.mf</font>                  2.1(インストールミス), 2.6, 2.8 など
+    I try ps2pk --&gt; gsftopk --&gt; ttf2pk.
+  ・Argument error.                        2.5(-gen: の設定ミス cf.[5])
+  ・Define the variable MAKETEXPK_STYLE    2.6(texmf.cnfの設定ミス）</pre>
+</li></ul></dd>
+<dt>[2]</dt><dd> Help → Other Info. → Font Info. の表示<font color="#FF0000">(重要データ2)</font>において、作成できなかったフォントは Virtual Font で使われているものか（このときは、そのフォント名がインデントされた表示となり、その上のインデントされていないフォント名の右端に Virtual と表示される）、そうでない（通常の）フォントかをチェックする（dviout Ver.3.12以降）。
+<ul>
+    <li>後者の場合は、PKフォントがMETAFONT(mf.exe)を使って作成されるものが多い(cm で始まるフォントは、この可能性が大）。</li>
+    <li>前者の場合は、PKフォントが ps2pk/gsftopk, Ghostscript などを使って作成されるものが多く、インストールパッケージやインストール方法が正しくないと、作成に失敗することがある。</li></ul></dd>
+</p><p>
+<dt>[3]</dt><dd> 実際にフォントがどこに作成されているか、あるいは作成されていないかを調べる。<br>
+    Windows の検索機能を用いましょう。今の例では、<font color="#0000FF">cmr17</font>.360pk を検索（タイムスタンプに注意）。</dd>
+</p><p>
+<dt>[4]</dt><dd>プログラム <strong>kpsewhich</strong> でフォントを調べる。<br>
+作成されるはずのものが、<font
+color="#0000FF">cmr17</font>.360pk であったなら（&quot;Cannot resolve Fonts&quot; という情報Windowsで、トップが <font color="#0000FF">cmr17</font>.360(1800) となっていれば、それを意味します。1800は360の5倍にあたります）
+<pre>
+      kpsewhich <font
+color="#0000FF">cmr17</font>.360pk
+</pre>
+をコマンドラインから実行してみる(結果は、<font
+color="#FF0000">重要データ4.1</font>)。<u>kpsewhich にパスが通っていること</u>
+をチェックし、以下を実行して表示される内容を記録しておく。
+<pre>
+      kpsewhich --expand-braces $TEXMF
+      kpsewhich --expand-braces $MFINPUTS
+      kpsewhich --expand-braces $MAKETEX_MODE
+      kpsewhich --expand-braces $PKFONTS
+</pre>
+    最後に以下を cmr10 のままで実行してみる（エラーの場合は、そのメッセージは<font
+color="#FF0000">重要データ4.2</font>）
+<pre>
+      mktexpk cmr10 305 300 305/300
+</pre>
+正しく生成出来た場合は、作成されたファイル cmr10.305pk は不要なので、（次回のチェックのため）<u>削除します</u>
+（作成されたファイル名がフルパスで表示されますが、フォルダの区切り記号が
+ \ でなくて / になっているので注意）。<br>
+最初から存在していた場合は、削除または名前を一時別のものに変えてから生成する。</dd>
+</p><p>
+<dt>[5]</dt><dd>パラメータ <strong>-gen:</strong> の設定のチェック<br>
+Option → Setup Papameters... → [Font2] で [gen:] のボタンを押して自動設定したものと比較
+  <dl COMPACT>
+    <dt>例：</dt><dd>自動設定出来ない<br>
+          mktexpk.exe（あるいは MakeTeXPK.exe）は、固定ディスク内のみサーチされます。</dd>
+    <dt>例：</dt><dd>複数箇所に mktexpk.exe があると、正しくない方が設定される可能性があります。<br>
+    異なったものに自動設定された場合、[Ok]で抜け、再度表示してみる（[Save]を押さない限り、次回起動する dviout に設定が引き継がれず、元に戻る。正常になれば、[Font2]に戻って[Save]）。</dd></dl></dd>
+</p><p>
+<dt>[6]</dt><dd>パラメータ <strong>-TEXROOT:</strong> <strong>-TEXPK:</strong> のチェック（cf. On-line Help）<br>
+Help → System Info.（があれば、それ）を選択して [Copy] を押し、エディター（メモ帳など）に張り付けておく（<font color="#FF0000">重要データ6</font>:現在の dviout の<a href="#Fundamental">基本的な動作環境情報</a>が記されている）。
+</p><p>
+June 16, 2001 以降の日付の dviout として、Option → Setup Papameters... → [Font] で[Guess] ボタンを押します。<br>
+<pre>[6-0]
+       環境変数 TEXMF と TEXMFMAIN の両方が定義されています!
+</pre>
+と表示された場合は、上の <b>2.</b>3 を参照してください（→ 環境変数 TEXMF の定義を消してチェックしてみる）。
+<pre>[6-1]
+  　  標準的な日本語TeX環境が検知されました．
+　    それにあった標準設定を選択します．
+</pre>
+と表示された場合は、<b>[はい(Y)]</b> を選択</font>し、[Ok] を押して再度表示をチェックしてみる。</p><p>
+[6-2] &nbsp; 一方、タイトルが「パラメータ TEXROOT/TEXPK/L の推測」または
+「Examine Fonts」のダイアログが現れた場合は、<strong>(N)</strong> を選ぶと
+デフォルト値が設定されるので、[Ok] を押して再度表示をチェックしてみる。</p><p>
+[6-3] &nbsp; 
+そうでない場合は、
+<pre>
+      TEXROOT: ^T\fonts
+      TEXPK:   ^r\tfm\\^s.tfm;^r\pk\\^s.^dpk;^r\vf\\^s.vf
+</pre>
+と設定して、[Ok] を押し、表示をチェックする。</p><p>
+<b>注意</b>．<u>環境変数 TEXMFMAIN（または TEXMF）が定義されていない場合</u>は、TEXROOT: が設定されない場合があるので、上記 ^T の部分は TeX がインストールされているディレクトリを直接指定して下さい。たとえば
+<pre>
+      TEXROOT: c:\usr\local\share\texmf\fonts
+</pre>
+    などとなります。
+</p><p>
+[6-1], [6-2], [6-3] の各場合、[Guess] ボタンを押して、デフォルト値を用いず、TEXROOT と TEXPK とを推測設定したものでチェックし、元の設定値との差を比べる。</dd>
+</p><p>
+<dt>[7]</dt><dd> Option → Setup Parameters... → [System] の show child Windows のチェックをつけて、[Ok]で抜け、再度表示を行ってみる。</dd></dl>
+
+<hr>
+<div align="center"><center>
+
+<pre><big><strong>4. <a name="PS">Ghostscriptを使ったPostScript画像表示に失敗する</a></strong></big></pre>
+</center></div>
+<dl COMPACT>
+<dt>[1]</dt>
+<dd>Optinon → Setup papameters... → [Graphic] の <strong>Ghostscript</strong> のところで On がチェックされていますか？ また、Display → Graphic もチェックされていますか？
+</dd></dl>
+問題なければ、以下の該当するものをチェックして下さい。なお、この項は、jpeg/bmpなどの 
+<a
+href="#jpg">PostScript以外の画像読み込み</a>とは無関係です。
+<dl COMPACT>
+<dt>[2]</dt><dd>表示 <font color="#FF0000">Unknown special:...</font> が出る場合<br>
+dviout でサポートしている <strong>\special</strong> を用いてください（cf. On-line Help）</dd>
+</p><p>
+<dt>[3]</dt><dd>表示 <font
+color="#FF0000">unable to open foo.ps(PS)</font> が出る場合<br>
+    読み込むべきPostScriptファイルが見つかりません。
+</p><p>
+DVIファイルと同じディレクトリに存在しますか？（拡張子を含めたファイル名やフォルダに注意）<br>
+別のディレクトリからも探すように設定している場合は、Optinon → Setup papameters... 
+ → [Graphic] → <strong>-gdat:</strong> の設定に注意
+</p><p>
+<dt>[4]</dt><dd>表示 <font
+color="#FF0000">Cannot execute gswin32c(2)</font> などが出て、Ghostscriptが実行できない場合<br>
+<strong>-gsx:</strong> の指定をチェックしてください（以下の [5] の 2. も参照）。</dd>
+</p><p>
+<dt>[5]</dt><dd>次のような表示が出る場合（ただし [3], [4]に該当する場合は、そちらを参照）</p><p>
+<strong> </strong><a
+name="MakeBMP"><font color="#FF0000">Failed to make </font><font color="#0000FF">foo</font><font color="#FF0000">.bmp</font></a> (または<strong> </strong><font color="#0000FF">foo</font><font color="#FF0000">.pbm</font>)<font color="#FF0000"> by the command</font><br>
+<font color="#0000FF">C:\GS\GS7.00\BIN</font><font color="#FF0000">\gswin32c.exe @tmp$.@@@<br>
+The file tmp$.@@@ is a parameter file</font></p><p>
+</p><p>
+
+    Ghostscriptを使って、PostScriptファイルから、画像のデータファイルが作成できなかったこと
+    を示しています。Ghostscript側の設定に問題がある可能性が大ですが、原因は...</dd>
+</dl>
+<blockquote>
+<dl COMPACT>
+<dt>例：</dt><dd>Ghostscript用のライブラリのパスが正しく設定されていなかった<br>
+Ghostscriptのマニュアルを参照し、環境変数の設定などに注意してください。</dd>
+<dt>例：</dt><dd>Ghostscriptが処理できないパラメータ、あるいはPostScriptファイルであった。<br>
+多くの画像ソフトやWindowsのPostScriptドライバーは正しくないEPSFファイルを出力します。<br>
+また、プレビュー画像などのバイナリデータを先頭につけているEPSFファイルは、正しく処理できないことがあります。
+このときは付属のプログラム <strong>bmc</strong> を使って先頭のバイナリデータの削除ができます（bmc -p foo.ps のように、コマンドプロンプトから使います）。<br>
+PSTricks などの特殊なパッケージを用いた場合にも処理できないことがあります。</dd>
+<dt>例：</dt><dd>上記エラーメッセージの<font color="#0000FF">foo</font>の部分が、<font color="#FF0000">tmpps</font><font color="#0000FF">xx</font> で<font color="#0000FF">xx</font> の部分が数字の時<br>
+閉じた画像描画生成ではないPostScriptのコードがそのままDVIファイルに埋め込まれている可能性があります（前の例と同じです）。dviout Ver.3.15 以降では、Alt+OS [Graphic] で Direct PS のチェックをはずすと、これを無視できます。<br>
+- 例えば、hyperref.sty の dvips オプションを使ってPDFを生成する途中段階のDVIファイルを作成すると、HyperTeX の既定にないdvips専用のPostScriptコードに変換されるため、このようなことが起こります。dviout での表示で、以下の Warning が出ることが多い。<br>
+&nbsp;&nbsp; Unknown special:! /DvipsToPDF {72.27 mul Resolution dvi } def
+</dd>
+<dt>例：</dt><dd>パラメータ <strong>-GIF:</strong>で指定したraw PBMファイル（または、BMPファイル）の出力をサポートしていないGhostscriptを用いたため、そのファイルの作成ができなかった</dd>
+<dt>例：</dt><dd>DVIファイルのあるディレクトリ、または<strong> -gdat:</strong> の設定に注意。<br>
+<strong>-gdat:</strong> のパスの指定は、空白を含んではいけません（含む場合は、ショートパス名）設定した場合、最初のパス名のディレクトリは書き込みが出来なくてはなりません。</dd>
+<dt>例：</dt><dd>パラメータ <strong>-gsx:</strong> でのGhostscriptのパスの指定は、空白を含んではいけません（含む場合は、ショートパス名）。</dd>
+<dt>例：</dt><dd>PostScript以外の<a href="#jpg">jpeg 画像など</a>を取り込もうとしてこのエラーが出た。<br>
+jpegファイルをそのまま扱えないdvips用の設定になっているため、jpegファイルをPostScriptファイルとして処理するようにDVIファイルに書かれてしまっています。
+dvioutのパッケージに付属のdviout.def, graphics.cfg, color.cfg を正しくインストールし直し、DVIファイルも作り直してください。</dd>
+</dl></blockquote>
+<ol>
+<li>たとえば、parameter file が tmp$.@@@ で、<font color="#0000FF">C:\GS\GS7.00\BIN</font>\gswin32c.exe が実行ファイルであった上記のような場合、<strong>エラーで中断した状態からMS-DOS Windowを開き、DVIファイルの存在するディレクトリに移って以下を実行してみて下さい</strong>（tmp$.@@@ の先頭に</strong><fontcolor="#FF0000"> @</font> を付けます）。<br>
+表示されるエラーメッセージ<font color="#FF0000">（重要データ1）</font>は、原因解明に役立つでしょう。
+やり方は、<a href="#GEN_TMP">このとき</a>と同様です。
+<pre>
+    <font color="#0000FF">C:\GS\GS7.00\BIN</font>\gswin32c @tmp$.@@@
+</pre>
+もし正常に終了するならば、dviout が Ghostscript を呼ぶときの環境設定（シェル、
+リソース状況、環境変数など）に問題があるでしょう。 
+</li></p><p>
+<li>
+Optinon → Setup papameters... → [Graphic] でボタン [gsx:] を押して、元の設定との違い
+があるかどうかをチェック（Ghostscriptが二つ以上存在する場合は注意）。<br>
+ファイルのパス名の後に、ライブラリのパラメータがついた場合は、Ghostscript が Ver.8.11 より前のものか、あるいは環境変数<strong>GS_LIB</strong>が未設定</li></p><p>
+<li>
+Ghostscript（GhostViewではありません）が正常に実行されるか、チェック。具体的には、
+Ghostscript のディレクトリにある tiger.ps （最近は、tiger.eps と名前が変わりました）などのPSファイルをコマンドラインから表示してみる。<br>
+エラーの時のメッセージ<font color="#FF0000">（重要データ3）</font>は有益。上の例では、以下を実行
+<pre>
+   gswin32 <font color="#0000FF">C:\GS\GS7.00</font>\examples\tiger.ps
+   gswin32 <font color="#0000FF">C:\GS\GS7.00</font>\kanji\article9.ps
+</pre>
+<li>tiger.ps などの表示に異常がなければ、dviout 付属のファイル epsfdoc.dvi のある場所に、上のtige.ps および、同じディレクトリにあるgolfer.ps の両方をコピーして（拡張子は .ps となるようにする）、dviout で GRAPHIC\PS\epsfdoc.dviを表示してみる。</li>
+</p><p>
+<li>前項がうまくいかないならば、dviout.exe のある場所からみて、GRAPHI\PS\pssample.dviの1ページ目を表示してみる。</li>
+</p><p>
+<li>Option → Setup Parameters... → [System] の show child Windows のチェックをつけて、[Ok]で抜け、再度表示を行ってみる。</li>
+</ol>
+
+<hr>
+<div align="center"><center>
+<big><strong>5. いくつかのトラブルの例と原因</strong></big>
+</center></div>
+
+<dl>
+<dt><font color="#FF0000"><a name="Mismatch">Font Mismatch</a></font></dt>
+   <dd><font
+color="#FF0000">Illegal font_code xx</font>:<br>
+    &nbsp;&nbsp;DVIファイルが壊れています。 <br>
+   <font
+color="#FF0000">2:rtxr-&gt;e:\usr\local\share\texmf\fonts\pk\modeless\public\txr\rtxr.300pk(.... 3CH)</font> <br>
+      &nbsp;&nbsp;上記のエラーは、フォントファイル rtxr.300pk にDVIファイルで使われている 3CH のコード
+      の文字が存在しないこと（PKファイルが正常でない可能性が大きい）を意味します。<br> 
+      例：txfonts と mftools, dvipks などのパッケージの更新ミス（cf.<a
+href="http://oku.edu.mie-u.ac.jp/~okumura/texwiki/?TXFonts">奥村さんによるtxfontsのガイド</a>）</dd>
+</p><p>
+<dt><font
+color="#FF0000"><a name="corrupt">Corrupt font ...</a></font></dt>
+   <dd>次項を見てください。</dd>
+</p><p>
+<dt><font
+color="#FF0000"><a name="readFont">fail to read FONT</a></font></dt>
+<ul><li>例：フォントファイルが壊れている。 ディスクのハード的なエラー。 </li>
+  <li>例：TEXPK で、0 byte のファイル、あるいは フォルダを指定していた。<br>
+   対処については、次項も参照してください。</li></ul></p><p>
+<dt><font color="#FF0000"><a name="unpack">Unpack Error ...</a></font></dt>
+<dd>PKフォントが壊れています。該当PKフォントを削除して再生成するのがよいでしょう。</dd>
+</p><p>
+<dt><strong><a name="ChangeFont">フォントをインストールしたのに反映されない</a></strong><br></dt>
+<dd>
+たとえば「BaKoMaのTrueTypeフォントをインストールしたのに使われない」など。<br>
+フォントサーチを高速にするため、dviout はフォントの所在をキャッシュし、可能ならそれを用いるので、それが原因のことがあります。
+Option → Setup parameters...  → [Font2]  → [Flush] によって、その情報をクリアーしてください。
+</dd></p><p>
+<dt><strong><a
+name="WinTeX">「fi」などの合字や「-」等、一部の特殊文字が「□」になって正常に表示されない</a></strong></dt>
+<ul><li>Windows2000/XP でBaKoMaのTrueTypeフォント使用の場合は、次項も参照してください。</li>
+<li>インプレスのTeX for Windowsを使っていた場合に起こることがあります。<br>
+それに付属していたTrueTypeフォントを使うか、BaKoMaなどのTrueTypeフォントを使うか、PKフォントを使うかで、対処方法が異なります（<a
+href="http://akagi.ms.u-tokyo.ac.jp/tex_dvioutw.html#WINTEX">ImpressのWinTeXのTrueTypeフォントを用いる</a> や
+   Option → Setup Parameters... → [WinJFont] の[ヘルプ] の <strong>code type</strong> の項、Online Help の -TEXPK: の説明、<a href="http://argent.shinshu-u.ac.jp/otobe/tex/docs/ttf.html">乙部さんによる解説</a> などを参照してください）。</li></ul>
+</p><p>
+<dt><a
+name="WrongChar"><strong>正常に表示されない文字や記号がある</strong></a></dt>
+<dd> <strong>BaKoMa</strong>のTrueTypeフォントのバグのため、<strong>WindowsXP</strong>や<strong>Windows2000</strong>(SP4以降)では TeX におけるコードが 14H の文字（TeX で、<img src="kappa.bmp"> (\kappa)や <img src="le.bmp"> (\le) の文字や、やや大きめの<font size="4"> [ </font>などで、
+BaKoMaフォントでは B4H にマッピングされているもの）が正しく表示できません。<br>
+オリジナルのBaKoMaフォントをアンインストールした後、バグを修正したBaKoMaのTrueTypeフォント（<a href="ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/font/bakoma/bakoma.lzh">ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/font/bakoma.lzh</a>）をインストールしてください。
+乙部氏による<a href="http://argent.shinshu-u.ac.jp/otobe/tex/book/WinXP.html">詳しい解説</a>と<a href="ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/font/bakoma/FixBKM.msi">自動インストール機能付きの FixBKM.msi</a>もあります。</p>
+<p>
+   古い版のBaKoMaフォントにはバグがあり，あるサイズのルート記号などがおかしくなることがあります．インストールしたプログラムがフォントを変更することがあるので注意（例：TexPoint のインストールで，バグ付きの旧版に置き換わる）．
+</p><p>
+   前項や上記に該当しない場合、次項のやり方で<strong>表示されている文字がどのような由来のものかを調
+   べてみましょう。</strong></p>
+<p>
+<dt><a name="CharInfo"><strong>表示されている文字の情報</strong></a></dt>
+<dd>CTRL+SHIFT を押しながら、該当の文字をマウスの左ボタンでクリックする（難しいときは拡大して）と、
+   以下のような情報が得られます（回転表示された文字には非対応、最後の行は<a href="tex_dvioutw.html#source">source special</a>使用時）。
+<pre>
+   <font
+color="#0000FF">P (50H)
+   Size:              25 x 25 ? in (760, 2939)-(784, 2963)
+   Font #68:          pcrr7t
+   Location:          c:\usr\local\share\texmf\fonts\vf\adobe\courier\pcrr7t.vf
+   s-size/d-size:     655360/655360
+   location in DVI:   140364(2244CH)
+   line in foo.tex:   665 - 669</font>
+</pre>
+   さらに、Help → Other Info. → Font Info. の該当フォント（フォント番号 -- この例では 68）を
+   参照します。
+</p><p>
+<font
+color="#0000FF">68 pcrr7t(300)  c:\usr\local\share\texmf\fonts\vf\adobe\courier\pcrr7t.vf  Virtual<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 pcrr8r(300)  c:\usr\local\share\texmf\fonts\pk\modeless\adobe\courier\pcrr8r.300pk  PK</font>
+</p><p>
+該当の文字は、TeX では pcrr7t というフォントの 50H というコードの文字で、DVI ファイルの 2244CH バイト目に書かれています。
+また、それは foo.tex の 665行目から669行目の間にあると想定されます
+（source specialsを使っているときにのみこの情報が表示される）。さらにそれは、上記の 
+pcrr7t.vf という Virtualフォントを通じて、上記の pcrr8r.300pk という PKフォントを使っ
+て表示しています。
+なお、25 x 25 というのは、文字の pixelサイズにあたるものですが、Virtual フォント使用の際は、その値は正確な情報でないので、目安を表示して ? がついています。
+</p><p>
+例：Windows95/98/Me の場合、Windowsのフォントキャッシュ（ttfCache）が壊れていると、本来のフォントでない別のフォントが選択され、正しくない文字が表示されることがあります。
+この疑いがあるときは、WindowsをSafeモード（cf. スタート → ヘルプ で Windows のヘルプで Safeを検索）で立ち上げてみてください。
+なお、Windows95/98/Me で登録可能なフォントの総数は1000程度です。</dd>
+</p><p>
+<dt><a name="mingoth"><strong>明朝の文字がゴシックで表示される</strong></a></dt>
+<dd>前項、特に例：を参照してください。dviout以外でも明朝がゴシックになる場合は、フォントキャッシュが壊れている疑いが強いです。</dd>
+</p><p>
+<dt><a name="somegoth"><strong>ある和文フォントの文字がゴシックで表示される</strong></a></dt>
+<dd>Windows のシステムは、（-ftt: で指定されたフォントマッピングでの対応などから）要求された和文フォントが見つからないと、ＭＳ ゴシックのフォントで代用するのがデフォルトになっています。<br>そのフォントが Windows のシステムに登録されているかどうか確認してください。
+また、前項と前々項も参照してください。</dd>
+</p><p>
+<dt><a name="itamin"><strong>ある和文フォントの文字が明朝の斜体で表示される</a><br>
+Cannot find font file for ...!<br>
+A default FONT will be used!</strong></dt>
+<dd>DVIファイル中の和文フォントに標準でない名前を使っていて、それにどのフォントを使うかの設定がされていない場合、dviout のデフォルト設定（[WinJFont] のdefault/tdefault）では、ＭＳ 明朝の斜体が使われます。
+プロパティーシートの[WinJFont] か、[JFont2] の -ftt: で指定されたマップファイルで正しく設定をする必要があります。<a href="#CharInfo">表示されている文字の情報</a>をみてチェックしましょう。</dd>
+</p><p>
+<dt><aname="papersize"><strong>作成した文書サイズと異なる紙面サイズとなる</strong></a></dt>
+<dd>次の参照箇所と同じ所を見てください。</dd>
+</p><p>
+<dt><strong><a
+name="Land2Port">Landscape文書なのに、Portrait紙面が表示される</a></strong></dt>
+<dd>On-line Help の Q&amp;A → プレビュー画面関連 の該当箇所、および<a
+href="tex_dvioutw.html#papersize">ここ</a>をご覧下さい。</dd>
+</p><p>
+<dt><a name="colorbry"><strong>色づけをした文字の輪郭の色がおかしく、汚い表示になる</strong></a></dt>
+<dd>Optinon → Setup papameters... → [Graphic] の color specials の右の欄（cmode)を変更し、auto mode(p2), auto mode(def), auto mode(bak) などでチェックして比べる（<a
+href="cmode.html#DefBak">ここ</a>を参照）。<br>
+   例：LaTeX2eのgraphics packageのcolor specialsを使ったとき、色の push の後、正しく pop されていない。</dd>
+</p><p>
+<dt><a name="vanishcolor"><strong>拡大して見ると、文字列検索やHyperTeXでの色づけが消える</strong></a></dt>
+<dd>On-line Help の Q&amp;A → プレビュー画面関連 → 「拡大すると、サーチされた文字列に色がつかない」をご覧下さい。<br>
+なおルーペは、この色づけには対応していません。</dd>
+</p><p>
+<dt><strong><a
+name="Cut">文字列コピーで、記号などが化けて切り取られる</a></strong></dt>
+<dd>On-line Help の Q&amp;A → プレビュー画面関連 → 「文字列コピーで、記号などが文字列に化けて切り取られる」を参照。<br>
+基本的には、記号やギリシャ文字などに非対応です。</dd>
+</p><p>
+<dt><a name="sFont"><strong>間違った文字列が検索される</strong></a></dt>
+<dd>dviout の文字列検索機能は、信頼性が高くはありません。長い文字列を指定した方が、信頼性が上がります。<br>
+必要なら、On-line Help の Q&amp;A → プレビュー画面関連 → 「文字列コピーで、記号などが文字列に化けて切り取られる」も参照して <strong>sFont:</strong> を調整します。<br>
+なお、NTT JTEXにおける日本語文字列には対応していません。<br>
+</p><p>
+<dt><strong><a
+name="click">表示画面の文字をクリックしても所定の動作をしない</a></strong></dt>
+<ul>
+<li>文字情報表示、文字列コピー、HyperTeX などは文字列の回転に対応していません
+。</li>
+<li>
+Help → Help TeX で CTRL を押してクリックすると，クリップボードにはコマンド文字列がコピーされるがエディターへ自動入力されない場合があります．
+エディターへのクリップボードからの張り込みは，標準的な CTRL+V の動作を用いていますのでそれ以外には対応していません（Ver.3.17.3）．どのようなキー入力で貼り付けができるかの情報をいただければ，今後対応の可能性があります．
+</li></ul>
+</p><p>
+<dt><strong><a name="patch">cmodeをpatch2 あるいは patch とすると、表示の文字などが綺麗でない</a></strong></dt><dd>
+patch2 や patch は gray scale に対応していないので、表示が綺麗ではありませんが、印刷には問題ありません。
+最大に拡大して表示したものが印刷に対応します。<a href="cmode.html">DVIwareとしてのdviout</a>を参照してください。
+</dd></p><p><dt>
+<strong><a name="colorView">小さなカラー文字のベースラインが揃っていない</a></strong></dt><dd>
+表示の際の1dotのずれは原理的に避けられません。白黒の通常の文字は，紙面を作成してからgray scaleで縮小するので，もとの1dotの誤差が目立たなくなりますが，カラー文字の場合は文字毎にgray scaleで縮小したものを貼り付けるので，1dotのずれがより目立ちます。<br>
+プレビューのみのことで，最大に拡大して（たとえばルーペで）見た場合や，解像度の高い印刷では，通常問題にならないでしょう。
+</dd></p><p><dt>
+<strong><a name="EditCopy">エディターへの直接コピー機能が動作しない</a></strong></dt><dd>
+Help → Help TeX などでのエディターへの直接コピーは，Windows での標準機能であるクリップボードから CTRL+V によるエディタへのペースト機能を用いています．
+これに対応していないエディタではこの機能は使えないので，エディタ上でクリップボードからペーストしてください．
+</dd></p><p><dt>
+<a
+name="checksum"><font color="#FF0000">check sum doesn't match in Font </font><font
+color="#0000FF">68</font><font color="#FF0000">: dvi(</font><font color="#0000FF">44D3ED74</font><font
+color="#FF0000">) font(</font><font color="#0000FF">D993A052</font><font color="#FF0000">)</font></a></dt>
+<dd>DVIファイルを作成するときに使われたフォント（tfmファイル）と実際に使ったフォント(PKフォント）またはjfmファイル（和文フォントメトリックファイル）のチェックサムIDが不一致です。<br>
+フォント番号と両者のチェックサムが示されます。Help → Other Info.  → Font Info. より、そのフォントの情報を得られます。
+</p><p>
+同一名のフォントであるが、バージョンが異なるときにこのWarningが出ます（但し、チェックサムが 0 のフォントはチェックサムIDを無視することになっているので、チェックしません）。<br>
+Option → Setup Parameters ... → [Font2] の CheckFont ID のチェックをはずすと、このチェックを行いません。
+</dd></p><p><dt>
+<strong>
+<a name="whitePS">PostScript画像の表示がおかしい</a></strong></dt><dd>
+特にエラーやWarningの表示が出ないのに、画像の一部が欠けたり、空白になってしまう場合、いくつかの原因が考えられます（エラーが表示される場合は、<a href="#PS">ここ</a>を参照）。
+</p><p>
+生成された *.bmc ファイル、または、*.pbm ファイルなどの画像が正常であるか、グラフィックの表示ソフトを使って確かめてみましょう。
+</p><p></dd>
+<dt><ol>
+<strong><li></strong> 解像度（dpi）が高い状態で多くの画像を取り込むと、Windowsのシステムの制約（バグ）で表示や印刷がうまくいかず、空白となってしまうことがあります。
+新しいWindowsのシステムでは、このエラーは余り聞かなくなりましたので、新しいシステムを使うと改善されるかもしれません。
+</p><p>
+<strong><li></strong> EPSファイルに問題があって、正しい画像ファイルと異なる場合
+<dl COMPACT>
+   <dt>2-1.</dt><dd>EPSファイル の BoundingBox が正しく設定されていないと、正しい部分が切り出されません。<br>
+   &nbsp;&nbsp; 画像の空白部分が表示されている、ということが起こり得ます。</dd>
+   <dt>2-2.</dt><dd>正常でない EPSF である。<br>
+   &nbsp;&nbsp; 正しくない EPSファイルを生成してしまうソフトは沢山あります。GhostscriptでBMPなどの画像ファイルに変換して調べてみましょう。</li>
+</p><p>
+たとえば、gnuplot → tgif で作成した EPSF では問題が生じ、
+<pre>
+   %%BeginPaperSize: a4 
+   a4 
+   %%EndPaperSize 
+</pre>
+   という部分を<br>
+<pre>
+   %%BeginPaperSize: a4 
+   %%EndPaperSize
+</pre>
+   と修正する必要があります（Ghostscriptでは問題が生じるが、dvipsk によってはエラーが生じない）。</dd></dl></li></ol></p><p><dt>
+<strong>
+<a name="HWgraph">取り込まれた画像の縦横比がおかしい</a></strong></dt>
+<dd>LaTeX2e の graphics package で、EPSF以外の画像を取り込む場合、画像の縦横サイズを記した拡張子 <strong>.bb</strong> のファイルがないと、1 inch x 1 inch の画像と見なします
+（このとき、Warningのメッセージが出る）。
+WMF/EMF以外のファイルの場合は、<strong>bmc</strong>.exe（CUI版）か<strong>CreateBB</strong>.exe（GUI版）でそのファイルが作成されます。
+あるいは、縦横共に取り込みサイズを指定します。
+</dd></p><p><dt>
+<a
+name="tategraph"><strong>縦書きのとき、取り込んだ画像が回転してしまう</strong></a></dt><dd>
+LaTeX2eのgraphics packageをつかって画像を取り込むと、縦書きでは、画像が90度時計回りに回
+転してしまう、という仕様になっています。
+例えば、以下のように横書きのモードで取り込めば、回転しません。
+<pre>
+     <font
+color="#0000FF"> \hbox{\yoko\includegraphics{...   }}</font>
+</pre>
+</dd></p><p><dt>
+<a name="ReUseGra"><strong>Ghostscriptで生成された画像が再利用されない</strong></a></dt><dd>
+PostScript言語を直接DVIファイルに埋め込んだ場合は、テンポラリな画像ファイルとなるので、再利用されません。<br>
+そのほか、EPSFファイルの画像を回転して取り込んだ場合などは、画像ファイルからその情報を得ることが出来ない
+（別のページやDVIファイルで回転せず取り込んでいたとすると、生成された両者の画像ファイルの区別は困難で、間違った画像を取り込む可能性がある）ため、やはり再利用されません。
+また、別のページなどで異なったサイズで同じEPSF画像を取り込むと、サイズの異なった画像ファイルによって上書きされるので、もとのページに戻ったとき、求める画像が再生成されます。<br>
+再利用してよい画像ファイルかどうかは、画像ファイルから読み取るこのとできる「ファイル名、縦横サイズ、タイムスタンプ」の３つの情報から判断されます。
+</dd></p><p><dt>
+<strong>
+<a
+name="nocolorPS">カラーのPostScript画像が白黒で表示される</a></strong></dt><dd>
+   Option → Setup Papameters... → [Graphic] → GIF: を BMP(16 color), BMP(256 color),
+   BMP(full color) のいずれかにする。
+</dd></p><p><dt>
+<strong><a
+name="DisColor">解像度を上げたり拡大によってカラーの取り込み画像が消える</a></strong>
+</dt><dd>
+   Windowsのシステムの問題です。メモリーやリソース状況が関係するかもしれません。
+</dd></p><p><dt>
+<strong><a name="bb">Bounding Boxを記した *.bb ファイルが作成できない</a></strong></dt><dd>
+付属の bmc.exe を使って
+<pre>
+      <font color="#0000FF">bmc -b mypicture.bmp</font>
+</pre>
+のようにコマンドラインから作成します。
+付属の CreateBB.exe という Windows インタフェースも存在します。
+JPGファイルなどに関しては、次々項の3つ目の○以下の記述も参照してください。
+</dd></p><p><dt>
+<a name="overwrite"><strong>画像の重ね合わせが望みの結果にならない</strong></a></dt><dd>
+   画像の重ね合わせで、重ね塗りをするのか、あるいは、下の画像を消すか？ 
+また、どの画像を下の画像と考えるか、など関連する以下の設定項目などがあります。
+詳しくは、それぞれの項目の On-line Helpや<a href="cmode.html">DVIwareとしてのdviout</a>を参照のこと。</dd>
+<dt>
+<ul>
+<li>Option → Setup Parameters → [Graphic] における color specials の右側の項（<strong>cmode</strong>）の設定のmerge, replace,} patch などによる違い</li>
+<li>同じところの -gow: -clip: などの項</li>
+<li>白や黒でなく、限りなくそれに近い色で置き換えてみる。</li>
+</ul></dt>
+</p><p><dt>
+<a name="jpg"><strong>BMP/JPG/TIFF/WMF/EMF/PNGなどのグラフィックファイルが取り込めない</strong></a></dt>
+<dd>
+   以下の手順をチェックしてください。
+</dd><dt><ul>
+<li>dviout付属の GRAPHIC\latex2e\graphics.cfg, GRAPHIC\latex2e\color.cfg を texmf\tex\latex\config があれば、そこに置いてください。
+GRAPHIC\latex2e\dviout.def（および、上記のディレクトリがなければ GRAPHIC\latex2e\graphics.cfg, GRAPHIC\latex2e\color.cfg も）
+graphics packageのディレクトリ（たとえば、TeX のフォルダの texmf\tex\latex\graphics）に置いてください。
+これは、LaTeX2e の graphics package を使って画像を取り込むときに必要です。
+</li><li>
+JPG/TIFF/PNG など EPSF(PostScript)/EMF/WMF/BMP/BMC 以外の画像の取り込みには、その画像形式に対応した <a
+href="http://akagi.ms.u-tokyo.ac.jp/spi.html">Susie plug-in</a> が必要です。
+拡張子 *.spi の Susie plug-in は、Susie をインストールしたディレクトリ、または、dviout の存在するディレクトリに置いてください。
+*.spi の存在するディレクトリを Option → Setup Parameters → [Graphic] → <strong>spi:</strong> に指定してください。
+</li><li>
+LaTeX2eのgraphics packageを使って画像を取り込むとき、<a href="#HWgraph">元の画像と縦横比を等しくする</a>ためには、EPSF以外の場合、<strong>*.bb</strong> ファイルが必要です。
+BMP/BMC/EMF/WMF 以外のファイルの場合は対応する Susie plug-in がインストールされている必要がありますが、TeX ファイルと画像ファイルが存在するディレクトリ上で、たとえば
+<pre>
+      <font color="#0000FF">bmc -b foo.jpg</font>
+</pre>
+   とすることにより、foo.bb が作成されます。
+</li><li>
+LaTeX2e の graphics package を用いるときは
+<pre>
+      <font color="#0000FF">\usepackage{graphicx}
+      ...
+      \includegraphics*[height=12cm,keepaspectratio]{foo.jpg}</font>
+</pre>
+   などとして取り込むことができます。
+</p><p>
+DVIファイルを作成する際に、<font color="#FF0000">インストールした dviout のパッケージ付属の graphics.cfg</font>（同名のファイルが別のディレクトリに存在する可能性有り）や<font
+color="#FF0000"> dviout.def が読み込まれる</font>ことを表示されるメッセージで確認し、またWarningなどの表示される情報に注意しましょう（<font color="#FF0000">logファイル</font>で、より正確に確認できる）。 
+</p><p>
+<li>直接 \special を利用して取り込むには
+<pre>
+     <font color="#0000FF"> \special{bmpfile=foo.jpg height=8cm}
+      \vskip 8.5cm</font>
+</pre>
+などとすればよい（画像のための空きは直接指定する)ので、上記のやり方でうまくいかない場合は原因を確かめるため、こちらのやり方も試してみましょう。こちらでのみうまくいく場合は前項をチェックし、こちらでもうまくいかない場合は、Susie plug-in を使う設定を確かめてみましょう。
+</li></ul>
+</dt></p><p><dt>
+<a name="png"><strong>PNG画像による出力ができない</strong></a></dt><dd>
+<dd><font color="#FF0000"> Cannot save as a png file(No plug-in: expng.xpi)</font>
+と表示されるときは、ABC export library の expng.xpi が dviout から見つからないことを示しています。
+<a href="cmode.html#png">PNG等の画像出力の説明</a>を参照してください。
+</dd></p><p><dt>
+<strong><a name="Graout">画像出力で、カラー文字やカラー画像が消えてしまう</a></strong>
+</dt><dd>
+BMPやPNG、および dviprt 機能を使った EPSF画像出力などは、カラー文字やカラー画像をサポートしていません。<strong>EMF画像形式</strong>を用いるかWindowsのPostScriptプリンタドライバを用いてください。
+</dd></p><p><dt>
+<strong><a name="ChkColor">複数ページに続いた文字の色づけが有効でない</a><br>
+    複数ページに続いた紙面の背景色が有効にならない</strong></dt>
+<dd>作成されたDVIファイルのページ独立性が失われているためです。付属の 
+<a href="ftp://akagi.ms.u-tokyo.ac.jp/pub/TeX/dviout/test/dvispc.zip">dvispc.exe</a> を使うことにより、修正されたDVIファイルに変換することができます。
+</dd></p><p>
+<dt><strong><a name="tpictate">縦書きでのtpic specialsで、dvips互換にしたい</a></strong></dt><dd>
+dvipsでは、縦書きでtpic specialsにおける座標を90度回転します。Option → Setup Parameters → [Graphic] → <strong>tate</strong> をチェックすると、dvioutでも同様な座標回転に対応します。
+</dd></p><p><dt>
+<font color="#FF0000"><a name="RBuf">Raster buffer size -br: 400 K in [System] is too small.<br>
+Not an error but it is better to increase the size!</a></font></dt><dd>
+フォントの展開のためのバッファが小さくて非効率になっています。エラーではありませんが、
+      Option → Setup Parameters... → [System] → Raster Buffer Size (br:)
+   の値を増やしておくとよいでしょう。そのあとの、[Save]を忘れずに。
+</dd></p><p><dt>
+<font color="#FF0000"><a name="tmpbat">Can't make tmp-batch file.</a></font>
+</dt><dd>
+存在しないフォントの作成や、画像表示のため環境変数 TEMP または TMP で示されたフォルダにバッチファイルを作成しようとして失敗したことを意味します。
+環境変数 TEMP または TMP で示されたフォルダが存在してファイルが書き込めるようになっているかどうかをチェックしてください。
+</dd></p><p><dt>
+<strong><a name="p2Print">patch2での表示は正常で、印刷は不具合</a></dt></strong>
+<ul>
+<li>Windows98には、MS 明朝などでいくつかの記号をある大きな大きさで印字すると、プリンタによっては、1文字幅程度印字位置がおかしくなるバグがある（cf. On-line Help の<strong>知られている不都合箇所</strong>）<br>
+これは、以下の対処方法も有効。</li>
+<li><a href="cmode.html#PSprinter">PostScriptプリンターのとき</a>の不具合</li>
+<li>プリンタまたはそのドライバの不具合<br>
+ドライバの設定の調整や、Option → Setup Papameters... → [Graphic] → color specials:
+の右の欄を <strong>auto mode(rep)</strong> や <strong>merge</strong> にして印刷を試みる。ドライバのバージョンをチェック。<br>
+      <a href="cmode.html#PSprinter">こちら</a>も参照。</li>
+</ul></p><p><dt>
+<strong>
+<a name="p2view">auto mode(p2)としたときの表示は正常だが、patch2 としたときの表示がおかしい</a></strong></dt><ul>
+<li><strong>取り込みの画像の表示がおかしい</strong><br>
+　　 例：90度の整数倍以外の画像回転は、auto mode(p2) での印刷や patch, pacth2 以外で、かつ<a href="cmode.html#BWvsColor">白黒画像</a>に限る。</li>
+<li> なお、patch2 での表示の文字が汚く見えるのは <a
+href="cmode.html#GrayScale">gray scale</a> を行っていないからで、最大に拡大表示
+   すれば、<a href="#patch">問題ない</a>はずです。</li>
+<li>高解像度でのカラー画像取り込みやtpic specialsにおいてカラーでの塗りつぶしなどは、処理が重くWindows systemが対応しきれない場合があるようです
+。印刷に対しては、Option → Setup Papameters... → [Graphic] → color specials: の右の欄を <strong>auto mode(rep)</strong> や <strong>merge</strong> にして試みてください。
+</li></ul></p><p><dt>
+<a name="repPrint"><strong>cmode を auto mode(rep)としたときの表示は正常だが、印刷がおかしい</strong></a></dt>
+<dd>dviprt機能を使っていないとします（印刷ダイアログの dviprt にチェックをつけないで印刷）。</dd>
+<dt>
+<ul><li>カラー文字やカラー画像を使っていない場合は、プリンタ側に問題がありますが、余り起こらないエラーです。
+スプール用にDISKの空きが十分にあるか、チェックしてみましょう。プリンタドライバのバージョンアップとか、プリンタとの接続をチェックしましょう。</li><li>
+カラー要素を使っている部分がおかしくなるのは、プリンタドライバの問題であると考えられます。
+その設定や、バージョンアップなどをチェックしましょう。</li><li>
+印刷ダイアログで、Unite job のチェックをはずすと、改善されるかもしれません。</li><li>
+cmode を <strong>merge</strong> とした場合も同様かどうかチェックしてみましょう。
+</li></ul></dt></p><p><dt>
+<strong><a
+name="color2bw">カラー画像の白黒での印刷がおかしい</a></strong>
+<ul><li><a
+href="cmode.html#color2BW">PostScript画像のとき</a></li><li>
+PostScript画像以外のときは、Windowsのプリンタドライバの設定を調整します。ドライバのバージョンアップが有効なこともあります。
+</li></ul></p><p><dt>
+<strong><a
+name="slowPrint">印刷が遅い</a></strong></dt>
+<ul><li>例：ネットワークでつながっているプリンタとの間の設定の不具合（直接接続と比較してみる）</li>
+<li>
+例：Windows専用プリンタなどのとき、Option → Setup Paramereters ... → [Graphic] の colorspeicals: の右側で設定される -cmode: を automode(p2) にする。<br>
+さらに、フォントを全てWindowsのTrueTypeにする</li><li>
+例：LIPS III/IV, ESC/Page プリンタのとき、<a href="cmode.html#LBP">dviprt機能のLBP専用ドライバ</a>を使うと改善
+</li></ul></p><p><dt>
+<strong>
+<a
+name="PrintSize">印刷された文字と紙面のサイズが異常に小さい／大きい</a></strong></dt>
+<dd>dvioutで設定した解像度（dpi:）が、プリンタドライバに設定した解像度と大幅に異なっていると、印刷された文字や紙面が異常に縮小されるか、または拡大される。
+dviprt機能を使わない印刷ならば印刷前に、以下のようなWarningが出る。
+<pre>
+<font
+color="#FF0000"><a name="PrinterRes">Printer resolution</a>: </font><font color="#0000FF">360</font><font
+color="#FF0000">dpi
+Current resolution: </font><font color="#0000FF">300</font><font
+color="#FF0000">dpi
+Use Printer resolution to Print?</font>
+</pre>
+現在Windowsのプリンタドライバの解像度（360 dpi）とdvioutで作成した紙面の解像度（300 dpi）とが異なっている。
+プリンタドライバの解像度で紙面を再生成して印刷するか、このまま印刷するか、
+取り止めか、が選択可能。このまま印刷すると、実際の紙面とは異なるサイズで印刷されることになる。
+</dd></p><p><dt>
+<a name="RetryPrint"><font color="#FF0000">Desired paper size for text: </font><font
+color="#0000FF">29.70 x 21.00</font><font color="#FF0000"> cm</a><br>
+Supposed by printer driver: </font><font color="#0000FF">21.00 x 29.69</font><font color="#FF0000"> cm</br>
+Retry the print setting?</font>
+</dt><dd>
+<font
+color="#FF0000">   </font>dvioutが作成した紙面の横と縦のサイズと、プリンタドライバに設定した紙面のサイズとが異なっている。
+プリンタドライバの設定ミス（用紙サイズや縦置き、横置きなど）の可能性がある。
+無視して印刷することも可能。
+</dd></p><p><dt>
+<a
+name="ESCPage"><strong>dviprt機能をつかった ESC/Page での印刷に失敗する</strong></a>
+</dt><dd>
+プリンタ側（のパネル）で ESC/Page のコードを受けるモードにしてください（ESC/P では駄目）</dd></p><p><dt>
+<a name="Ujob"><strong>dvioutから複数ページをFAX送信したが，1ページ毎に別に送られてしまう<br>
+プリンタの設定を両面印刷にしたが，両面印刷にならない</a></strong>
+</dt><dd>
+印刷ダイアルログで、Unite job のチェックをはずしてしまうと上記の問題が起こります。<br>
+また（印刷ページ数に比べて）ハードディスクの空きが十分あることをチェックしてください
+</dd></p><p><dt>
+<a name="Psize"><strong>自動的に解像度を変える印刷のあと，ページサイズなどがおかしくなる</a></strong></dt><dd>
+印刷前にデフォルトとページサイズを変えていた場合，デフォルトのページサイズに戻そうとするために起こります．<br>
+Ver.3.17.1またはそれ以降に変更するか，Option → Setup Parameters... → [REGISTRY] の y の「＋」をはずして [Save] します．
+</dd></p><p><dt>
+<a name="safe"><strong>dviout が正常に立ち上がらない</strong></a></dt><dd>
+コマンドラインから <strong>dviout -NULL</strong> として立ち上げ、Option → Setup papameters... → [Font2]で [Flush] ボタンを押し、dviout を終了して再び立ち上げる。
+</p><p>
+うまくいかない場合は、dviout -NULL で立ち上げたあと、Option → Uninstall を行う。
+その後dviout を立ち上げてパラメータをインストールするか、dviout自身を再インストールする。
+</dd></p><p><dt>
+<a name="DBLCLK"><strong>DVIファイルのアイコンのダブルクリックでdvioutが起動しない</strong></a></dt><dd>
+dvioutのメニューバーから Option → Install → [Next] → [Next] として，Relate DVI file (.dvi) to dviout for Windows の項にチェックが付いているのを確認して [Finish] を押す。
+</dd></p><p><dt>
+<font color="#FF0000"><a name="badmag">bad parameter -mag=-3</a></font></dt><dd>
+dviout Ver.3.13 の初期公開版（October 21, 2001）のエラーで、無視してかまいません。より新しい版で修正されています。</dd></dl>
+<hr>
+<div align="center"><center>
+
+<pre><big><strong>6. <a name="Fundamental">基本動作環境の情報の出力例</a></strong></big></pre>
+</center></div><div align="left">
+
+<pre>Help → System Info. の出力例です（Ver.3.12.1, June 10, 2001以降）：
+Environment は、
+    dviout のフルパス
+    Help → Information (or Other Info.  → Screen/File Info) で表示される情報の一部
+    デフォルトのプリンタ
+    TeX, pTeX, dvipsk, dvipdfmx, Ghostscript のバージョン
+    環境変数 TEXMF, TEXMFMAIN, TEXMFCNF, GS_LIB, PATH （必要に応じて TMP, TEMP も）
+parameters 以下は、Option → Non-default Parameters で表示されるものと同じ内容です。</pre>
+</div><div align="left">
+
+<pre><font color="#0000FF"> --- Environment ---
+C:\dviout\dviout.exe
+
+dviout          : Ver 3.17 (October 10, 2004)
+OS              : WindowsXP  Version 5.1 (4 日本語)
+comctl32.dll    : Version 5.82
+shell32.dll     : Version 6.0
+printer         : Canon LBP-2050(600dpi)
+TeX 3.141592 (Web2C 7.5.3)
+pTeX 3.141592-p3.1.4 (SJIS) (Web2C 7.5.3)
+dvips(k) 5.94b p1.6a 
+dvipdfmx-20040924(cvs) 
+AFPL Ghostscript 8.14 (2004-02-20)
+TEXMF=""
+TEXMFMAIN=""
+TEXMFCNF=""
+GS_LIB=""
+PATH="C:\WINDOWS;C:\WINDOWS\SYSTEM32;c:\usr\local\bin;c:\dos;c:\dviout;C:\gs\gs8.14\bin;C:\gs\gs8.14\lib"
+ --- parameters ---
+button=+
+dpi=600
+GIF=5
+gsx=C:\gs\gs8.14\bin\gswin32c.exe
+gen="`C:\USR\LOCAL\BIN\mktexpk.exe --dpi ^d --bdpi ^D --mag ^M ^s"
+BMP=6:6:800
+TEXROOT=c:\usr\local\share\texmf\fonts
+TEXPK=^r\tfm\\^s^tfm;^r\pk\\^s.^dpk;^r\vf\\^s.vf;^r\ovf\\^s.ovf;^r\tfm\\^s.tfm
+src='C:\Program Files\Hidemaru\Hidemaru.exe^s/j%d &quot;%s&quot;'
+isp=pdf:
+
+ --- End ---</font></pre>
+</div>
+
+<hr>
+
+<p>誤りや補足すべき点があればお知らせ下さい --&gt; <a
+href="mailto:ftp-admin@akagi.ms.u-tokyo.ac.jp">ftp-admin@akagi.ms.u-tokyo.ac.jp</a> </p>
+</body>
+</html>

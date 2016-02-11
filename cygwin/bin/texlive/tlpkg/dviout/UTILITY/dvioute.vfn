@@ -1,0 +1,137 @@
+########################################################################
+#  A sample of the definition of vector fonts
+########################################################################
+#
+#  The lines starting by # are ignored
+#
+%version = 2
+#  Versiong number of .vfn file
+#
+%vfont_list
+#  Definition of Vector Fonts
+#    1) Font No. : From 1 up to 256(max)
+#    2) Path of vector fonts without extension
+#       If WinAPI of Japanese Windows95/NT is used, indicate font name by
+#       using the double quatations " " and moreover put  @  at the top of
+#      the font name for vertical writing
+#    3) w_adj  Adjusting ratio is w_adj/1000 for width (may be omitted)
+#        200 - 2000(deault: 1000)
+#    4) h_adj  Adjusting ratio is h_adj/1000 for height (may be omitted)
+#        200 - 2000(default: 1000)
+#    5) Set 1 if the characters in the second level are not used (may be 
+#        omitted, default 0)
+#
+#    ','is used for separations between items
+#
+# Vec Font No.   Vector Font Name                 w_adj h_adj no vf2
+#-------------+----------------------------------+-----+-----+------
+# 1,            b:\vector\ñæí©,                    1000, 1000,   0
+# 2,            b:\vector\ÉSÉVÉbÉN,                1000, 1000,   0
+# 3,
+# 4,
+# 5,
+#
+# JG Font
+# 1,            b:\vector\zmin0by,                 1000, 1000,   0
+# 2,            b:\vector\zkgo0by,                 1000, 1000,   0
+#
+# Microsoft Windows TrueType Font under non-Japanese Windows95/NT
+#   ^w: Windows system directory
+#   ^x: directory of dviout
+# 1,            c:\windows\fonts\msmincho,	   1060, 1120,   0
+  2,            c:\windows\fonts\msgothic,	   1060, 1120,   0
+#
+# Microsoft Windows TrueType Font under Japanese Windows95/NT WinAPI
+# 1,            "ÇlÇr ñæí©", 		           1000, 1000,   0
+# 2,            "ÇlÇr ÉSÉVÉbÉN", 		   1000, 1000,   0
+# 3,            "@ÇlÇr ñæí©", 		           1000, 1000,   0
+# 4,            "@ÇlÇr ÉSÉVÉbÉN", 		   1000, 1000,   0
+#
+#
+# TrueType Fonts for European Languages
+  1,		"cmr10"
+# 2,		"cmr8"
+#
+%jfm_list
+#  Definiton of JFM files and the parameters to use them
+#
+#    1) JFM name
+#       Filename of JFM file excluding point number at the tail
+#       ex.  min10.tfm -> min   goth10.tfm -> goth
+#    2) Vec Font
+#       Number of vector font to use
+#    3) Long face/Flat face
+#    4) Slanted face
+#    5) Draw sw
+#       Way of drawing
+#        [Nomal mode][Fine mode]
+#         f -> "fill edge"
+#         o -> "trace outline"
+#         n -> f + o
+#        [Fine mode]
+#          If a number is indicated after n,f, the fonts with the width by 
+#          smaller than the number will be created under File mode
+#           ex. n24   1 - 24 dot  => Fine mode
+#                      >= 25 dot  => Normal mode
+#    6) thin:
+#             tpic normal mode & fine mode : adjustment to fill edge
+#             not tpic normal mode : adjustment of the width of lines
+#       xfat : adjustment of the width of lines in horizontal direction
+#       yfat : adjustment of the width of lines in vertical direction
+#       The separater is ';'
+#    7) novec
+#       If fonts with some size are not used by the definition here, indicate
+#       their size by dots separated by ';'
+#    8) f_goth
+#       poor man's gothic
+#       0 or void: Use it for the fonts goth or the ones indicated by -G:
+#       1: stop using poor man's gothic
+#       2: use poor man's gothic
+#    9) rot
+#       rotation of fonts
+#        0 or void: up    1: right   2: down   3: left
+#
+#
+#       5), 6), 7) have no meaning for fonts using WinAPI under Windows95/NT
+#       They have different meaning as follows
+#       xfat: adjusting the position parallel to baseline
+#       yfat: adjusting the position of baseline
+#             1000 corresponds to the box size of a character(possible from
+#             -2000 to 2000)
+#       thin: code table
+#	      0: BaKoMa fonts  1: Impress's Fonts for WinTeX  2: same as in TeX
+#
+#         Vec  long         thin
+#  JFM    Font Å^slant Draw xfat
+#  name    No. flat   sw    yfat    novec  f_goth  rot
+#--------+----+--+--+----+--------+-------+------+-----
+  min,      2,  a, a, n200, 100;0;0,      ,     ,     0
+  goth,     2,  a, a, n200, 100;0;0,      ,    1,     0
+  tmin,     2,  a, a, n200, 100;0;0,      ,     ,     1
+  tgoth,    2,  a, a, n200, 100;0;0,      ,    1,     1
+# ztminmaa, 1,  a, a, n200, 100;0;0,      ,     ,     0
+# ztminmba, 1,  b, a, n200, 100;0;0,      ,     ,     0
+# ztminmca, 1,  c, a, n200, 100;0;0,      ,     ,     0
+# ztminmda, 1,  d, a, n200, 100;0;0,      ,     ,     0
+# ztminmea, 1,  e, a, n200, 100;0;0,      ,     ,     0
+# ztminmga, 1,  g, a, n200, 100;0;0,      ,     ,     0
+# ztminmha, 1,  h, a, n200, 100;0;0,      ,     ,     0
+# ztminmia, 1,  i, a, n200, 100;0;0,      ,     ,     0
+# ztminmja, 1,  j, a, n200, 100;0;0,      ,     ,     0
+# ztminmab, 1,  a, b, n200, 100;0;0,      ,     ,     0
+# ztminmac, 1,  a, c, n200, 100;0;0,      ,     ,     0
+# ztminmad, 1,  a, d, n200, 100;0;0,      ,     ,     0
+# ztminmae, 1,  a, e, n200, 100;0;0,      ,     ,     0
+# ztminmaf, 1,  a, f, n200, 100;0;0,      ,     ,     0
+# ztminmag, 1,  a, g, n200, 100;0;0,      ,     ,     0
+# ztminmah, 1,  a, h, n200, 100;0;0,      ,     ,     0
+# ztminmai, 1,  a, i, n200, 100;0;0,      ,     ,     0
+# ztminmaj, 1,  a, j, n200, 100;0;0,      ,     ,     0
+# ztminmak, 1,  a, k, n200, 100;0;0,      ,     ,     0
+# ztminmal, 1,  a, l, n200, 100;0;0,      ,     ,     0
+# ztminmam, 1,  a, m, n200, 100;0;0,      ,     ,     0
+#
+# Europian Language TrueType font
+  edefault, 2,  a, a,  n,     0;0;0,      ,     1,    0
+#
+#end of dvioute.vfn

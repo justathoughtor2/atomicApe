@@ -1,0 +1,28 @@
+;#j  HGs‘‘Ì + HGºŞ¼¯¸M
+;;    Default setting for TrueType fonts using Japanese
+;;
+;;  CM/AMS fonts:   BaKoMa
+;;  Japanese fonts: HG GyoushoTai/HG Gothic M
+vfn='
+%version=2
+%vfont_list
+1,"HGs‘‘Ì"
+2,"HGºŞ¼¯¸M"
+3,"@HGs‘‘Ì"
+4,"@HGºŞ¼¯¸M"
+5,"cmr10"
+6,"‚l‚r –¾’©"
+7,"@‚l‚r –¾’©"
+%jfm_list
+min,1,a,a,n,1;0;0,,1,0
+goth,2,a,a,n,0;0;0,,1,0
+tmin,3,a,a,n,0;0;0,,1,1
+tgoth,4,a,a,n,0;0;0,,1,1
+jis,1,a,a,n,1;0;0,,1,0
+jisg,2,a,a,n,0;0;0,,1,0
+jis-v,3,a,a,n,0;0;0,,1,1
+jisg-v,4,a,a,n,0;0;0,,1,1
+default,6,a,b,n,0;0;0,,1,0
+tdefault,7,a,b,n,0;0;0,,1,1
+edefault,5,a,a,n,0;0;0,,1,0
+'

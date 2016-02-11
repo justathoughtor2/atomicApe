@@ -1,0 +1,7 @@
+;#j dvipsk によるPostScriptプリンタで印刷の例（dviprt 機能での印刷）
+;# A sample to print by PostScript printer (standard printer) by dvipsk
+;;  Print by PostScript printer (standard printer) by dvipsk
+;;  Paper size, Landscape, Offset OX, OY,
+;;  Pages to be printed, odd/even/reverse
+dviprt='+dvipsk.exe -Pbi ^W -p=^a -l=^b -f ^X{-z} "^q" | rawprt^Z^10^{Hyper PS&1}Print by dvipsk -Pbi with rawprt'
+Set=fp

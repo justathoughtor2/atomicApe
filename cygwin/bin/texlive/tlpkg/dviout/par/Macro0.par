@@ -1,0 +1,9 @@
+;#j デフォルトのキーマクロ
+;# Default Key macros
+;;  Shift+F1: CutEdge, vertically connected, fit, Presentation Mode
+;;  Shift+F2: Return to the original normal mode
+;;  Shift+F5: CutEdge, fit, Presentation Mode
+;;  Shift+F6: CutEdge, full, Presentation Mode
+;;  Shift+F7: Exact origin (OX=OY=0)
+macro='!A!Zdy!pdl !A!N!Q!F;!A!T;!ADX;fn!b !A!Z!pdf !A!Z!pdl "-OX=0mm -OY=0mm !I"'
+key=O1=\8c:O2=\8d:O3=\90:O4=\91:O5=\92

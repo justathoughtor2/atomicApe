@@ -1,0 +1,12 @@
+;#j dvipdfmx+hyperref によって PDF ファイルに変換（日本語しおりつき）
+;;       Transform into a PDF file by dvipdfmx+hyperref
+;;  Paper size A3/4/5/6, B3/4/5/6, Letter, Legal, Landscape
+;;  Offset OX, OY
+;;  Pages to be transformed
+;;  
+;;  \usepackage[dvipdfm]{color}
+;;  \usepackage[dvipdfm,bookmarks=true,bookmarksnumbered=true,%
+;;  colorlinks=true,bookmarkstype=toc]{hyperref}
+;;  ...
+dviprt='platex "^D";out2uni "^d";platex "^D";dvipdfmx ^w -s ^a-^b  ^X{-v} "^q"^Y{;"^d.pdf"}^z^{verbose&1}^{View PDF &?}Make PDF by dvipdfmx with hyperref'
+Set=fd

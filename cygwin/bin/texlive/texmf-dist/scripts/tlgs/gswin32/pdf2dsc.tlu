@@ -1,0 +1,70 @@
+#!/usr/bin/env texlua
+--*-Lua-*-
+-- $Id: pdf2dsc.tlu 37204 2015-05-05 21:26:28Z reinhardk $
+
+-- Copyright (C) 2007 Reinhard Kotucha.
+-- You may freely use, modify and/or distribute this file.
+
+-- Replacement for pdf2dsc.bat.
+-- Convert PDF to DSC
+
+function fixwin (args_unix)
+   if os.type == 'windows' then
+      local args_win={}  -- new table
+      args_win[0]=args_unix[1]
+      for i=1, #args_unix do  
+	 args_win[i]='"'..args_unix[i]..'"'
+      end
+      return args_win
+   else
+      return args_unix
+   end
+end
+
+
+local function push (t, ...)
+   local args={...}
+   for _,v in ipairs(args) do
+      if type(v) == 'table' then
+	 for _,x in ipairs(v) do
+	    t[#t+1]=x
+	 end
+      else
+	 t[#t+1]=v
+      end
+   end
+end
+
+
+if #arg ~= 2 then
+   io.stderr:write('Usage: pdf2dsc input.pdf [output.dsc]\n')
+   os.exit(1)
+end
+
+pdffile=arg[1]
+if #arg==2 then
+   dscfile=arg[2]
+else
+   dscfile=string.gsub(pdffile, '%.%a+$', '.dsc')
+end
+
+-- setup command
+
+local command={}
+if os.type == 'unix' then command={'gs'} else command={'gswin32c'} end
+
+push(command, '-q', '-dNODISPLAY', '-dSAFER', '-dDELAYSAFER',
+     '-sPDFname='..pdffile, '-sDSCname='..dscfile, 'pdf2dsc.ps',
+     '-c', 'quit')
+
+command=fixwin(command)
+
+--[[ prepend an additional hyphen to activate this code
+for i=0, #command do
+   print (command[i])
+end
+os.exit(0)
+--]]
+
+ret=os.spawn(command)
+os.exit(ret)

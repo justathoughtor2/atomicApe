@@ -1,0 +1,52 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%BoundingBox: 2 19 478 492
+
+/GNU {
+1 dict begin
+
+/R 1.0 def
+/NotUnix (GNU's not UNIX) def
+gsave
+1.2 1.2 rmoveto
+gsave
+/Courier findfont [ 0.7 0 0 0.8 0 0 ] makefont setfont
+(UNIX) dup stringwidth pop 2 div neg -0.25 rmoveto show
+grestore
+
+gsave
+0.2 setlinewidth
+1 0 0 setrgbcolor
+gsave
+currentpoint newpath R 0 370 arc stroke
+grestore
+gsave
+135 cos R mul 135 sin R mul rmoveto
+R 2 sqrt mul dup neg rlineto stroke
+grestore
+grestore
+
+gsave
+0 1 NotUnix length 1 sub {
+	gsave
+	dup 10 mul 65 sub /Rol exch def
+	/Courier findfont
+	[ 1 0 0 1 -0.3 0 ] makefont
+	[ Rol cos Rol sin neg Rol sin Rol cos 0 0 ] makefont
+	0.25 scalefont setfont
+	Rol neg 90 add dup cos 1.15 mul exch sin 1.15 mul rmoveto
+	NotUnix exch 1 getinterval show
+	grestore
+} for
+grestore
+
+grestore
+end
+} def
+
+0 0 moveto
+gsave
+200 200 scale
+GNU
+grestore
+
+showpage

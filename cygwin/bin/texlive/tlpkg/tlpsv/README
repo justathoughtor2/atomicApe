@@ -1,0 +1,87 @@
+PS_View README
+
+This is PS_View (a previewing utility for Ghostscript interpreter)
+version 5.12. It is TeX-Live 2009 release -- it is fully
+functional and needs through testing. It can be used as a basic
+PostScript viewer, but it still probably has bugs.
+
+It is written using wxWidgets, wxLua and wxGhostscript libriares.
+Curently, it works under Windows and Linux. It should work also
+under Mac OS X. It would be marvellous if the bold Mac OS X-ers
+could verify it.
+
+Sources needed to recompile the program are in a separate zip file
+(note that it doesn't contain the Lua and PostScript scripts needed
+to run the program).
+
+Package consists of:
+  README       -- this file
+  gswxluas     -- wxLuaGhostscript executable (ELF) file
+  gswxlua.exe  -- wxLuaGhostscript executable (WIN32) file
+  psv.wx.lua   -- wxLua part of PS_View program
+  psv_view.ps  -- PostScript part of PS_View program
+  psv          -- bash script for linux
+  psv.bat      -- batch script for windows
+  psv.desktop  -- info file for Xwindow users
+  psv.xpm      -- icon for Xwindow
+  psv_about*.ps      -- about info files
+  psv_help*.htb      -- help files
+  psv_usage*.pdf     -- usage help files
+  pl/, de/, en/, nl/ -- locale messages
+  
+
+Usage: psv[.bat] [Postscript/PDF file]
+  or
+Usage: gswxlua [-h|--help] [-c|--console] [-l|--lua] psv.wx.lua [options] [-p|--ps] psv_view.ps [-- [more options]]
+  -h, --help      help on command line arguments;
+  -c, --console   show message console;
+  -l, --lua       wxLua script to construct application;
+  -q, --quiet     turn off most of messages;
+  -v, --verbose   turn on verbose/debug mode;
+  -n, --new       open new window for document;
+  -g, --gsdll     path to Ghostscript dll/so file;
+  -i, --gslib     paths to Ghostscript init files;
+  -s, --gsset     Ghostscript parameter (-s equivalent);
+  -d, --gsdef     Ghostscript parameter (-d equivalent);
+  -p, --ps        PostScript program to run;
+  --              all following argument will be passed to Ghostscript;
+
+Some paths are discovered automatically:
+
+1) first, all the relevant files are searched along the path given
+   in the command line (absolute or relative with respect to the
+   current directory)
+2) next, the files are searched in the directories defined in the config
+   file [TODO: editing of the config file]
+3) the Lua file is additionaly searched in the directory
+   where the executable file has been found
+3a) in turn, the PostScript file is searched in the directory
+    where the Lua file was found
+3b) if the search described in the points 3, 3a was needed, the resulting
+    path is added to the search path of the Ghostscript input files
+4) the Ghostscript library file (.dll or .so) is searched along the path
+   given in the command line (-g option)
+4a) then it is searched along the path defined by the GS_DLL environment
+    variable
+4b) if all attempts so far fail, the last resort in Unix is the
+    standard library directory (/usr/local/lib, /usr/lib) and in
+    Windows is the register key (HKEY_LOCAL_MACHINE/SOFTWARE/GPL_Ghostscript)
+4c) if the the Ghostscript library file was found in the points 2 or 4,
+    the subdirectory lib/ of the relevant Ghostscript tree is also added
+    to the search path of the Ghostscript input files
+
+Contact: BOP s.c., ul. T. Bora-Komorowskiego 24, 80-377 Gda\'nsk, Poland
+         bop@bop.com.pl
+	
+Copyright 1993-2009  P. Strzelczyk, P. Pianowski, B. Jackowski
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version. It has been released in the hope
+that it will be useful, but WITHOUT ANY WARRANTY; without even
+the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE. See the GNU General Public License for more details.
+		
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.

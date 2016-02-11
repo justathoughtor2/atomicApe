@@ -1,0 +1,31 @@
+% $Id: pdftexconfig.tex 38623 2015-10-12 22:45:39Z karl $
+% Set pdfTeX parameters for pdf mode (replacing pdftex.cfg file).
+% Thomas Esser, 2004. public domain.
+\pdfoutput=1
+%
+% In 2015, a new luatex replaced \pdfpage{width,height} with just
+% \page{width,height}, and it might be prefixed with \luatex.  So set
+% any that may be defined.
+\ifx\luatexpagewidth\undefined\else \luatexpagewidth=8.5 true in \fi
+\ifx\pdfpagewidth\undefined\else \pdfpagewidth=8.5 true in \fi
+\ifx\pagewidth\undefined\else \pagewidth=8.5 true in \fi
+%
+\ifx\luatexpageheight\undefined\else \luatexpageheight=11 true in \fi
+\ifx\pdfpageheight\undefined\else \pdfpageheight=11 true in \fi
+\ifx\pageheight\undefined\else \pageheight=11 true in \fi
+%
+% Other settings.
+\pdfcompresslevel=9
+\pdfdecimaldigits=3
+\pdfhorigin=1 true in
+\pdfvorigin=1 true in
+\pdfpkresolution=600
+% 
+% As of TeX Live 2010, we output PDF 1.5 by default, so we can enable
+% more compression.  To change this for the installation, comment out or
+% delete these lines and remake the formats.  To change it for a
+% particular LaTeX document, \RequirePackage{pdf14} early.
+% 
+\pdfminorversion=5
+\pdfobjcompresslevel=2
+\endinput

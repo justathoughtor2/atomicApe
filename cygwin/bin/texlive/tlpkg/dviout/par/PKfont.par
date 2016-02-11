@@ -1,0 +1,4 @@
+;#j PKフォントをTrueTypeフォントより優先
+;# Give priority to PK fonts over TrueType fonts
+;;  Give priority to PK fonts over TrueType fonts
+TEXPK=^r\pk\\^s.^dpk;^r\tfm\\^s^tfm;^r\vf\\^s.vf;^r\ovf\\^s.ovf;^r\tfm\\^s.tfm
